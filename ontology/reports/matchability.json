@@ -1,0 +1,6158 @@
+{
+  "summary": {
+    "processes_with_requirements": 448,
+    "routable": 60,
+    "coverage_gaps": 388,
+    "fleet_size": 12
+  },
+  "fleet_gaps_no_agent_bears": {
+    "capability": [
+      "ex:AnalystRelationsManagementCapability",
+      "ex:AnalyticsCapability",
+      "ex:ApplicantDataManagementCapability",
+      "ex:AssetConstructionCapability",
+      "ex:AssetDispositionCapability",
+      "ex:AssetMaintenanceCapability",
+      "ex:BenchmarkingCapability",
+      "ex:BusinessModelGovernanceCapability",
+      "ex:BusinessProcessManagementCapability",
+      "ex:BusinessResiliencyCapability",
+      "ex:ChangeManagementCapability",
+      "ex:ChannelManagementCapability",
+      "ex:CompensationAndBenefitsCapability",
+      "ex:ComplianceManagementCapability",
+      "ex:CustomerComplaintManagementCapability",
+      "ex:CustomerExperienceManagementCapability",
+      "ex:CustomerInquiryManagementCapability",
+      "ex:CustomerServiceManagementCapability",
+      "ex:CustomerServiceWorkforceManagementCapability",
+      "ex:DefaultAccountManagementCapability",
+      "ex:DemandForecastingCapability",
+      "ex:DevelopAndManageServicesSolutionsCapability",
+      "ex:EHSManagementCapability",
+      "ex:EmployeeCareerDevelopmentCapability",
+      "ex:EmployeeCommunicationCapability",
+      "ex:EmployeeDevelopmentCapability",
+      "ex:EmployeeOrientationAndDeploymentCapability",
+      "ex:EmployeePerformanceManagementCapability",
+      "ex:EmployeeReferralProgramCapability",
+      "ex:EmployeeRelationsCapability",
+      "ex:EmployeeTrainingCapability",
+      "ex:EnterpriseQualityManagementCapability",
+      "ex:FacilityManagementCapability",
+      "ex:FinancialPolicyManagementCapability",
+      "ex:FixedAssetProjectAccountingCapability",
+      "ex:FleetManagementCapability",
+      "ex:HumanResourcesInformationSystemCapability",
+      "ex:ITCustomerRelationshipManagementCapability",
+      "ex:ITInterdependencyManagementCapability",
+      "ex:ITRiskManagementCapability",
+      "ex:ITRollBackManagementCapability",
+      "ex:ITServiceManagementCapability",
+      "ex:ITStrategicAlignmentMaintenanceCapability",
+      "ex:ITStrategicIntelligenceCapability",
+      "ex:ITSupportCapability",
+      "ex:ImportExportControlCapability",
+      "ex:InformationManagementCapability",
+      "ex:IntellectualPropertyManagementCapability",
+      "ex:InternalAuditManagementCapability",
+      "ex:InternalControlCapability",
+      "ex:InternationalFundsManagementCapability",
+      "ex:InvestorRelationsCapability",
+      "ex:KnowledgeManagementCapability",
+      "ex:LaborRelationsCapability",
+      "ex:LegalAndComplianceCapability",
+      "ex:LenderRelationsManagementCapability",
+      "ex:LogisticsManagementCapability",
+      "ex:MarketIntelligenceCapability",
+      "ex:PartnerManagementCapability",
+      "ex:PortfolioManagementCapability",
+      "ex:PortfolioProgramProjectManagementCapability",
+      "ex:PricingCapability",
+      "ex:ProcurementCapability",
+      "ex:ProductDataManagementCapability",
+      "ex:ProductServiceLifecycleManagementCapability",
+      "ex:ProductServicePortfolioManagementCapability",
+      "ex:ProductionCapability",
+      "ex:ProgramManagementCapability",
+      "ex:ProjectManagementCapability",
+      "ex:PublicRelationsCapability",
+      "ex:RawMaterialInventoryManagementCapability",
+      "ex:RecallManagementCapability",
+      "ex:RecruitmentChannelManagementCapability",
+      "ex:RecruitmentVendorManagementCapability",
+      "ex:RegulatoryComplianceManagementCapability",
+      "ex:RemediationManagementCapability",
+      "ex:ResourceManagementCapability",
+      "ex:RestitutionManagementCapability",
+      "ex:ServiceDeliveryCapability",
+      "ex:ServiceDeliveryDevelopmentManagementCapability",
+      "ex:ServiceDeliveryGovernanceCapability",
+      "ex:ServiceDeliveryPerformanceManagementCapability",
+      "ex:StakeholderRelationshipManagementCapability",
+      "ex:SupplyChainPlanningCapability",
+      "ex:SustainabilityManagementCapability",
+      "ex:TalentAcquisitionCapability",
+      "ex:TaxManagementCapability",
+      "ex:TimeAndAttendanceManagementCapability",
+      "ex:TreasuryManagementCapability",
+      "ex:WarrantyManagementCapability",
+      "ex:WorkforceAnalyticsCapability",
+      "ex:WorkforceDeploymentCapability",
+      "ex:WorkforcePlanningCapability"
+    ],
+    "role": [
+      "ex:AdvisorRole",
+      "ex:AuditorRole",
+      "ex:BPMGovernanceLeaderRole",
+      "ex:BankingPartnerRole",
+      "ex:CarrierRole",
+      "ex:CertificationAuthorityRole",
+      "ex:ChangeChampionRole",
+      "ex:ChangeManagerRole",
+      "ex:CommunityRole",
+      "ex:ComplianceOfficerRole",
+      "ex:ConstructionContractorRole",
+      "ex:CustomerRole",
+      "ex:DeliveryPartnerRole",
+      "ex:EmployeeRole",
+      "ex:ExecutiveRole",
+      "ex:FacilityManagerRole",
+      "ex:FieldServiceAgentRole",
+      "ex:FinancialAnalystRole",
+      "ex:GovernmentBodyRole",
+      "ex:HiringManagerRole",
+      "ex:ITCustomerRole",
+      "ex:ITServiceProviderRole",
+      "ex:ITUserRole",
+      "ex:JobCandidateRole",
+      "ex:JournalistRole",
+      "ex:LenderRole",
+      "ex:MediaOutletRole",
+      "ex:OutsideCounselRole",
+      "ex:ProcessOwnerRole",
+      "ex:ProductManagerRole",
+      "ex:ProgramManagerRole",
+      "ex:QuasiGovernmentBodyRole",
+      "ex:RegulatorRole",
+      "ex:RegulatoryAuthorityRole",
+      "ex:SalesAgentRole",
+      "ex:SalesPartnerRole",
+      "ex:SeniorManagementRole",
+      "ex:ServiceDeliveryPersonnelRole",
+      "ex:ShareholderRole",
+      "ex:StakeholderRole",
+      "ex:SubjectMatterExpertRole",
+      "ex:SubsidiaryRole",
+      "ex:SupplierRole",
+      "ex:SupplyChainPartnerRole",
+      "ex:TradeOrIndustryGroupRole",
+      "ex:TraineeRole"
+    ]
+  },
+  "routable": [
+    {
+      "process": "ex:P10020",
+      "requires": {
+        "capability": [
+          "ex:StrategicPlanningCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10024",
+      "requires": {
+        "role": [
+          "ex:SeniorManagerRole"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10030",
+      "requires": {
+        "role": [
+          "ex:SeniorManagerRole"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10035",
+      "requires": {
+        "role": [
+          "ex:StrategyPersonnelRole"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10036",
+      "requires": {
+        "role": [
+          "ex:StrategyPersonnelRole"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10037",
+      "requires": {
+        "capability": [
+          "ex:StrategicPlanningCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10039",
+      "requires": {
+        "capability": [
+          "ex:StrategicPlanningCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10043",
+      "requires": {
+        "capability": [
+          "ex:StrategicPlanningCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10045",
+      "requires": {
+        "capability": [
+          "ex:StrategicPlanningCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10052",
+      "requires": {
+        "role": [
+          "ex:StrategyPersonnelRole"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10059",
+      "requires": {
+        "role": [
+          "ex:SeniorManagerRole"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P10070",
+      "requires": {
+        "capability": [
+          "ex:ResearchAndDevelopmentCapability"
+        ],
+        "role": [
+          "ex:ResearchAndDevelopmentRole"
+        ]
+      },
+      "routable_via": [
+        "agent.product_designer.v1"
+      ]
+    },
+    {
+      "process": "ex:P10071",
+      "requires": {
+        "capability": [
+          "ex:ResearchAndDevelopmentCapability"
+        ],
+        "role": [
+          "ex:ResearchAndDevelopmentRole"
+        ]
+      },
+      "routable_via": [
+        "agent.product_designer.v1"
+      ]
+    },
+    {
+      "process": "ex:P10085",
+      "requires": {
+        "role": [
+          "ex:DesignStaffRole"
+        ]
+      },
+      "routable_via": [
+        "agent.product_designer.v1"
+      ]
+    },
+    {
+      "process": "ex:P10088",
+      "requires": {
+        "role": [
+          "ex:DesignStaffRole"
+        ]
+      },
+      "routable_via": [
+        "agent.product_designer.v1"
+      ]
+    },
+    {
+      "process": "ex:P10102",
+      "requires": {
+        "role": [
+          "ex:MarketingProfessionalRole"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10159",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10160",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10167",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10168",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10169",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10170",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10171",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10172",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10178",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10179",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10180",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10181",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P10190",
+      "requires": {
+        "role": [
+          "ex:SalesProfessionalRole"
+        ]
+      },
+      "routable_via": [
+        "agent.sales.v1"
+      ]
+    },
+    {
+      "process": "ex:P10237",
+      "requires": {
+        "role": [
+          "ex:ManagerRole"
+        ]
+      },
+      "routable_via": [
+        "agent.supply_chain.v1"
+      ]
+    },
+    {
+      "process": "ex:P10319",
+      "requires": {
+        "role": [
+          "ex:ManagerRole"
+        ]
+      },
+      "routable_via": [
+        "agent.supply_chain.v1"
+      ]
+    },
+    {
+      "process": "ex:P10419",
+      "requires": {
+        "role": [
+          "ex:HumanResourcesProfessionalRole"
+        ]
+      },
+      "routable_via": [
+        "agent.hr.v1"
+      ]
+    },
+    {
+      "process": "ex:P10522",
+      "requires": {
+        "role": [
+          "ex:HumanResourcesProfessionalRole"
+        ]
+      },
+      "routable_via": [
+        "agent.hr.v1"
+      ]
+    },
+    {
+      "process": "ex:P10729",
+      "requires": {
+        "capability": [
+          "ex:AccountingCapability",
+          "ex:FinancialManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.finance.v1"
+      ]
+    },
+    {
+      "process": "ex:P10730",
+      "requires": {
+        "capability": [
+          "ex:AccountingCapability",
+          "ex:FinancialManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.finance.v1"
+      ]
+    },
+    {
+      "process": "ex:P10732",
+      "requires": {
+        "capability": [
+          "ex:FinancialManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.finance.v1"
+      ]
+    },
+    {
+      "process": "ex:P10733",
+      "requires": {
+        "capability": [
+          "ex:FinancialManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.finance.v1"
+      ]
+    },
+    {
+      "process": "ex:P16439",
+      "requires": {
+        "capability": [
+          "ex:EnterpriseRiskManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.risk.v1"
+      ]
+    },
+    {
+      "process": "ex:P16445",
+      "requires": {
+        "capability": [
+          "ex:EnterpriseRiskManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.risk.v1"
+      ]
+    },
+    {
+      "process": "ex:P16630",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P17462",
+      "requires": {
+        "capability": [
+          "ex:EnterpriseRiskManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.risk.v1"
+      ]
+    },
+    {
+      "process": "ex:P18130",
+      "requires": {
+        "capability": [
+          "ex:MarketingManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.marketing.v1"
+      ]
+    },
+    {
+      "process": "ex:P19945",
+      "requires": {
+        "capability": [
+          "ex:CompetitiveAnalysisCapability"
+        ],
+        "role": [
+          "ex:CompetitiveIntelligenceAnalystRole"
+        ]
+      },
+      "routable_via": [
+        "agent.market_analysis.v1"
+      ]
+    },
+    {
+      "process": "ex:P19949",
+      "requires": {
+        "capability": [
+          "ex:StrategicPlanningCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.strategy_lead.v1"
+      ]
+    },
+    {
+      "process": "ex:P19995",
+      "requires": {
+        "capability": [
+          "ex:DesignCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.product_designer.v1"
+      ]
+    },
+    {
+      "process": "ex:P20012",
+      "requires": {
+        "role": [
+          "ex:SalesProfessionalRole"
+        ]
+      },
+      "routable_via": [
+        "agent.sales.v1"
+      ]
+    },
+    {
+      "process": "ex:P20670",
+      "requires": {
+        "role": [
+          "ex:EnterpriseArchitectRole"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20671",
+      "requires": {
+        "role": [
+          "ex:EnterpriseArchitectRole"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20888",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20889",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20890",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20891",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20892",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20893",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20915",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20916",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20917",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20918",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20919",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    },
+    {
+      "process": "ex:P20920",
+      "requires": {
+        "capability": [
+          "ex:ITInfrastructureManagementCapability"
+        ]
+      },
+      "routable_via": [
+        "agent.it_ops.v1"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "process": "ex:ActOfAdministration",
+      "requires": {
+        "capability": [
+          "ex:HumanResourcesInformationSystemCapability",
+          "ex:TimeAndAttendanceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:HumanResourcesInformationSystemCapability",
+          "ex:TimeAndAttendanceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:CultivateAnalystRelations",
+      "requires": {
+        "role": [
+          "ex:FinancialAnalystRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:FinancialAnalystRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:CultivateLenderRelations",
+      "requires": {
+        "role": [
+          "ex:LenderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:LenderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:ManageCustomerRelationships",
+      "requires": {
+        "capability": [
+          "ex:SalesManagementCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10046",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10063",
+      "requires": {
+        "capability": [
+          "ex:ProductServicePortfolioManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ProductServicePortfolioManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10066",
+      "requires": {
+        "role": [
+          "ex:SeniorManagementRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SeniorManagementRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10072",
+      "requires": {
+        "capability": [
+          "ex:ResearchAndDevelopmentCapability"
+        ],
+        "role": [
+          "ex:SeniorManagementRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SeniorManagementRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10073",
+      "requires": {
+        "role": [
+          "ex:SeniorManagementRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SeniorManagementRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10074",
+      "requires": {
+        "capability": [
+          "ex:ProductServicePortfolioManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ProductServicePortfolioManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10077",
+      "requires": {
+        "capability": [
+          "ex:ProductServiceLifecycleManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ProductServiceLifecycleManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10078",
+      "requires": {
+        "capability": [
+          "ex:ProductServiceLifecycleManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ProductServiceLifecycleManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10087",
+      "requires": {
+        "role": [
+          "ex:RegulatoryAuthorityRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:RegulatoryAuthorityRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10092",
+      "requires": {
+        "role": [
+          "ex:SupplyChainPartnerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SupplyChainPartnerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10094",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10099",
+      "requires": {
+        "role": [
+          "ex:SupplyChainPartnerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SupplyChainPartnerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10101",
+      "requires": {
+        "capability": [
+          "ex:MarketIntelligenceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:MarketIntelligenceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10106",
+      "requires": {
+        "capability": [
+          "ex:MarketIntelligenceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:MarketIntelligenceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10107",
+      "requires": {
+        "capability": [
+          "ex:MarketIntelligenceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:MarketIntelligenceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10130",
+      "requires": {
+        "capability": [
+          "ex:PartnerManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PartnerManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10163",
+      "requires": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10164",
+      "requires": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10165",
+      "requires": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10166",
+      "requires": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10187",
+      "requires": {
+        "capability": [
+          "ex:PartnerManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PartnerManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10211",
+      "requires": {
+        "role": [
+          "ex:SalesPartnerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SalesPartnerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10215",
+      "requires": {
+        "capability": [
+          "ex:SupplyChainManagementCapability",
+          "ex:SupplyChainPlanningCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:SupplyChainPlanningCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10216",
+      "requires": {
+        "capability": [
+          "ex:ProcurementCapability",
+          "ex:SupplyChainManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ProcurementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10217",
+      "requires": {
+        "capability": [
+          "ex:ProductionCapability",
+          "ex:SupplyChainManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ProductionCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10236",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10243",
+      "requires": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10265",
+      "requires": {
+        "role": [
+          "ex:CarrierRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CarrierRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10287",
+      "requires": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10290",
+      "requires": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10304",
+      "requires": {
+        "capability": [
+          "ex:RawMaterialInventoryManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RawMaterialInventoryManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10331",
+      "requires": {
+        "role": [
+          "ex:FieldServiceAgentRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:FieldServiceAgentRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10336",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10338",
+      "requires": {
+        "capability": [
+          "ex:LogisticsManagementCapability",
+          "ex:SupplyChainManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:LogisticsManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10340",
+      "requires": {
+        "capability": [
+          "ex:LogisticsManagementCapability",
+          "ex:SupplyChainManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:LogisticsManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10341",
+      "requires": {
+        "capability": [
+          "ex:FleetManagementCapability",
+          "ex:LogisticsManagementCapability",
+          "ex:SupplyChainManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:FleetManagementCapability",
+          "ex:LogisticsManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10390",
+      "requires": {
+        "capability": [
+          "ex:CustomerServiceWorkforceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerServiceWorkforceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10391",
+      "requires": {
+        "capability": [
+          "ex:CustomerServiceWorkforceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerServiceWorkforceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10392",
+      "requires": {
+        "capability": [
+          "ex:CustomerServiceWorkforceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerServiceWorkforceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10393",
+      "requires": {
+        "capability": [
+          "ex:CustomerServiceWorkforceManagementCapability"
+        ],
+        "role": [
+          "ex:CustomerServiceRepresentativeRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerServiceWorkforceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10394",
+      "requires": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability",
+          "ex:CustomerServiceCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10395",
+      "requires": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability",
+          "ex:CustomerServiceCapability"
+        ],
+        "role": [
+          "ex:CustomerServiceRepresentativeRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10396",
+      "requires": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability",
+          "ex:CustomerServiceCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10397",
+      "requires": {
+        "capability": [
+          "ex:CustomerComplaintManagementCapability",
+          "ex:CustomerServiceCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerComplaintManagementCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10398",
+      "requires": {
+        "capability": [
+          "ex:CustomerComplaintManagementCapability",
+          "ex:CustomerServiceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerComplaintManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10399",
+      "requires": {
+        "capability": [
+          "ex:CustomerComplaintManagementCapability",
+          "ex:CustomerServiceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerComplaintManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10400",
+      "requires": {
+        "capability": [
+          "ex:CustomerComplaintManagementCapability",
+          "ex:CustomerServiceCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerComplaintManagementCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10410",
+      "requires": {
+        "capability": [
+          "ex:HumanCapitalManagementCapability",
+          "ex:TalentAcquisitionCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:TalentAcquisitionCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10413",
+      "requires": {
+        "capability": [
+          "ex:HumanCapitalManagementCapability",
+          "ex:WorkforceDeploymentCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:WorkforceDeploymentCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10417",
+      "requires": {
+        "capability": [
+          "ex:HumanCapitalManagementCapability",
+          "ex:WorkforcePlanningCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:WorkforcePlanningCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10422",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole",
+          "ex:ManagerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10436",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10440",
+      "requires": {
+        "capability": [
+          "ex:EmployeeReferralProgramCapability",
+          "ex:RecruitmentChannelManagementCapability",
+          "ex:RecruitmentVendorManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeReferralProgramCapability",
+          "ex:RecruitmentChannelManagementCapability",
+          "ex:RecruitmentVendorManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10451",
+      "requires": {
+        "role": [
+          "ex:HiringManagerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:HiringManagerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10457",
+      "requires": {
+        "role": [
+          "ex:JobCandidateRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:JobCandidateRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10458",
+      "requires": {
+        "role": [
+          "ex:JobCandidateRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:JobCandidateRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10460",
+      "requires": {
+        "role": [
+          "ex:JobCandidateRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:JobCandidateRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10464",
+      "requires": {
+        "role": [
+          "ex:JobCandidateRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:JobCandidateRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10465",
+      "requires": {
+        "role": [
+          "ex:JobCandidateRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:JobCandidateRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10474",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeOrientationAndDeploymentCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeOrientationAndDeploymentCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10479",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeePerformanceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeePerformanceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10481",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeePerformanceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeePerformanceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10484",
+      "requires": {
+        "capability": [
+          "ex:EmployeeRelationsCapability",
+          "ex:LaborRelationsCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole",
+          "ex:ManagerRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeRelationsCapability",
+          "ex:LaborRelationsCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10487",
+      "requires": {
+        "capability": [
+          "ex:EmployeeCareerDevelopmentCapability",
+          "ex:EmployeeDevelopmentCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeCareerDevelopmentCapability",
+          "ex:EmployeeDevelopmentCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10488",
+      "requires": {
+        "capability": [
+          "ex:EmployeeCareerDevelopmentCapability",
+          "ex:EmployeeDevelopmentCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeCareerDevelopmentCapability",
+          "ex:EmployeeDevelopmentCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10490",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10491",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10492",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10493",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10495",
+      "requires": {
+        "capability": [
+          "ex:CompensationAndBenefitsCapability"
+        ],
+        "role": [
+          "ex:HumanResourcesProfessionalRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CompensationAndBenefitsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10497",
+      "requires": {
+        "capability": [
+          "ex:CompensationAndBenefitsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CompensationAndBenefitsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10503",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10504",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10505",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10508",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10512",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10513",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10514",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10515",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10516",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10517",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10520",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10523",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10529",
+      "requires": {
+        "capability": [
+          "ex:EmployeeCommunicationCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeCommunicationCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10530",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10531",
+      "requires": {
+        "capability": [
+          "ex:EmployeeRelationsCapability",
+          "ex:LaborRelationsCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeRelationsCapability",
+          "ex:LaborRelationsCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10532",
+      "requires": {
+        "capability": [
+          "ex:EmployeeCommunicationCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeCommunicationCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10751",
+      "requires": {
+        "capability": [
+          "ex:FixedAssetProjectAccountingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:FixedAssetProjectAccountingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10752",
+      "requires": {
+        "capability": [
+          "ex:FixedAssetProjectAccountingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:FixedAssetProjectAccountingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10757",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10762",
+      "requires": {
+        "capability": [
+          "ex:InternalControlCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InternalControlCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10764",
+      "requires": {
+        "capability": [
+          "ex:InternalControlCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InternalControlCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10767",
+      "requires": {
+        "capability": [
+          "ex:InternationalFundsManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InternationalFundsManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10768",
+      "requires": {
+        "capability": [
+          "ex:InternationalFundsManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InternationalFundsManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10769",
+      "requires": {
+        "capability": [
+          "ex:InternationalFundsManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InternationalFundsManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10770",
+      "requires": {
+        "capability": [
+          "ex:InternationalFundsManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InternationalFundsManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10796",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10798",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10801",
+      "requires": {
+        "role": [
+          "ex:BankingPartnerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:BankingPartnerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10806",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10811",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10813",
+      "requires": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10816",
+      "requires": {
+        "capability": [
+          "ex:FinancialPolicyManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:FinancialPolicyManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10817",
+      "requires": {
+        "capability": [
+          "ex:FinancialPolicyManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:FinancialPolicyManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10818",
+      "requires": {
+        "capability": [
+          "ex:FinancialPolicyManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:FinancialPolicyManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10862",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10865",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10866",
+      "requires": {
+        "capability": [
+          "ex:TaxManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:TaxManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10867",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10868",
+      "requires": {
+        "role": [
+          "ex:RegulatorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:RegulatorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10871",
+      "requires": {
+        "capability": [
+          "ex:InternalAuditManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InternalAuditManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10876",
+      "requires": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10877",
+      "requires": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10882",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10883",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10885",
+      "requires": {
+        "capability": [
+          "ex:TreasuryManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:TreasuryManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10889",
+      "requires": {
+        "capability": [
+          "ex:InternalAuditManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InternalAuditManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10893",
+      "requires": {
+        "capability": [
+          "ex:TreasuryManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:TreasuryManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10902",
+      "requires": {
+        "role": [
+          "ex:SubsidiaryRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SubsidiaryRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10903",
+      "requires": {
+        "role": [
+          "ex:SubsidiaryRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SubsidiaryRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10904",
+      "requires": {
+        "role": [
+          "ex:SubsidiaryRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SubsidiaryRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10907",
+      "requires": {
+        "role": [
+          "ex:SubsidiaryRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SubsidiaryRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10923",
+      "requires": {
+        "role": [
+          "ex:AuditorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:AuditorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10924",
+      "requires": {
+        "role": [
+          "ex:RegulatorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:RegulatorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10925",
+      "requires": {
+        "role": [
+          "ex:CustomerRole",
+          "ex:SupplierRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole",
+          "ex:SupplierRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10926",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10936",
+      "requires": {
+        "role": [
+          "ex:RegulatorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:RegulatorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10962",
+      "requires": {
+        "role": [
+          "ex:ConstructionContractorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ConstructionContractorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10965",
+      "requires": {
+        "capability": [
+          "ex:FacilityManagementCapability"
+        ],
+        "role": [
+          "ex:FacilityManagerRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:FacilityManagementCapability"
+        ],
+        "role": [
+          "ex:FacilityManagerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P10966",
+      "requires": {
+        "capability": [
+          "ex:FacilityManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:FacilityManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11010",
+      "requires": {
+        "capability": [
+          "ex:InvestorRelationsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InvestorRelationsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11012",
+      "requires": {
+        "capability": [
+          "ex:StakeholderRelationshipManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:StakeholderRelationshipManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11013",
+      "requires": {
+        "capability": [
+          "ex:LegalAndComplianceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:LegalAndComplianceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11035",
+      "requires": {
+        "capability": [
+          "ex:LenderRelationsManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:LenderRelationsManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11036",
+      "requires": {
+        "capability": [
+          "ex:AnalystRelationsManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalystRelationsManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11037",
+      "requires": {
+        "role": [
+          "ex:ShareholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ShareholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11038",
+      "requires": {
+        "capability": [
+          "ex:StakeholderRelationshipManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:StakeholderRelationshipManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11039",
+      "requires": {
+        "capability": [
+          "ex:StakeholderRelationshipManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:StakeholderRelationshipManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11040",
+      "requires": {
+        "capability": [
+          "ex:StakeholderRelationshipManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:StakeholderRelationshipManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11041",
+      "requires": {
+        "capability": [
+          "ex:StakeholderRelationshipManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:StakeholderRelationshipManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11045",
+      "requires": {
+        "capability": [
+          "ex:LegalAndComplianceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:LegalAndComplianceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11047",
+      "requires": {
+        "capability": [
+          "ex:LegalAndComplianceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:LegalAndComplianceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11048",
+      "requires": {
+        "capability": [
+          "ex:LegalAndComplianceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:LegalAndComplianceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11049",
+      "requires": {
+        "capability": [
+          "ex:IntellectualPropertyManagementCapability",
+          "ex:LegalAndComplianceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:IntellectualPropertyManagementCapability",
+          "ex:LegalAndComplianceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11051",
+      "requires": {
+        "role": [
+          "ex:AdvisorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:AdvisorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11054",
+      "requires": {
+        "role": [
+          "ex:ComplianceOfficerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ComplianceOfficerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11057",
+      "requires": {
+        "role": [
+          "ex:OutsideCounselRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:OutsideCounselRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11059",
+      "requires": {
+        "role": [
+          "ex:OutsideCounselRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:OutsideCounselRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11060",
+      "requires": {
+        "role": [
+          "ex:AdvisorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:AdvisorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11066",
+      "requires": {
+        "capability": [
+          "ex:PublicRelationsCapability"
+        ],
+        "role": [
+          "ex:CommunityRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PublicRelationsCapability"
+        ],
+        "role": [
+          "ex:CommunityRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11067",
+      "requires": {
+        "capability": [
+          "ex:PublicRelationsCapability"
+        ],
+        "role": [
+          "ex:JournalistRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PublicRelationsCapability"
+        ],
+        "role": [
+          "ex:JournalistRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11068",
+      "requires": {
+        "capability": [
+          "ex:PublicRelationsCapability"
+        ],
+        "role": [
+          "ex:GovernmentBodyRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PublicRelationsCapability"
+        ],
+        "role": [
+          "ex:GovernmentBodyRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11069",
+      "requires": {
+        "capability": [
+          "ex:PublicRelationsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PublicRelationsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11070",
+      "requires": {
+        "capability": [
+          "ex:PublicRelationsCapability"
+        ],
+        "role": [
+          "ex:MediaOutletRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PublicRelationsCapability"
+        ],
+        "role": [
+          "ex:MediaOutletRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11095",
+      "requires": {
+        "capability": [
+          "ex:KnowledgeManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:KnowledgeManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11096",
+      "requires": {
+        "capability": [
+          "ex:KnowledgeManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:KnowledgeManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11119",
+      "requires": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11132",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11135",
+      "requires": {
+        "capability": [
+          "ex:ChangeManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ChangeManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11136",
+      "requires": {
+        "capability": [
+          "ex:ChangeManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ChangeManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11137",
+      "requires": {
+        "capability": [
+          "ex:ChangeManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ChangeManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11140",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11141",
+      "requires": {
+        "role": [
+          "ex:ChangeChampionRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ChangeChampionRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11148",
+      "requires": {
+        "role": [
+          "ex:ChangeManagerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ChangeManagerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11180",
+      "requires": {
+        "capability": [
+          "ex:EHSManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EHSManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11181",
+      "requires": {
+        "capability": [
+          "ex:EHSManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EHSManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11182",
+      "requires": {
+        "role": [
+          "ex:TraineeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:TraineeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11195",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11201",
+      "requires": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11202",
+      "requires": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ],
+        "role": [
+          "ex:SubjectMatterExpertRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ],
+        "role": [
+          "ex:SubjectMatterExpertRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11203",
+      "requires": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11204",
+      "requires": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11205",
+      "requires": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11206",
+      "requires": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RemediationManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11221",
+      "requires": {
+        "capability": [
+          "ex:BusinessResiliencyCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessResiliencyCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11222",
+      "requires": {
+        "capability": [
+          "ex:BusinessResiliencyCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessResiliencyCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11223",
+      "requires": {
+        "capability": [
+          "ex:BusinessResiliencyCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessResiliencyCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11224",
+      "requires": {
+        "capability": [
+          "ex:BusinessResiliencyCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessResiliencyCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11236",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11238",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11239",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11241",
+      "requires": {
+        "role": [
+          "ex:ProductManagerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ProductManagerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11243",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeOrientationAndDeploymentCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeOrientationAndDeploymentCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11495",
+      "requires": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11496",
+      "requires": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11497",
+      "requires": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11687",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11741",
+      "requires": {
+        "capability": [
+          "ex:ProductDataManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ProductDataManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P11750",
+      "requires": {
+        "capability": [
+          "ex:ProductDataManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ProductDataManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12132",
+      "requires": {
+        "role": [
+          "ex:ServiceDeliveryPersonnelRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ServiceDeliveryPersonnelRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12133",
+      "requires": {
+        "role": [
+          "ex:ServiceDeliveryPersonnelRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ServiceDeliveryPersonnelRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12669",
+      "requires": {
+        "capability": [
+          "ex:WarrantyManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:WarrantyManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12672",
+      "requires": {
+        "capability": [
+          "ex:WarrantyManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:WarrantyManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12677",
+      "requires": {
+        "role": [
+          "ex:FieldServiceAgentRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:FieldServiceAgentRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12722",
+      "requires": {
+        "role": [
+          "ex:RegulatoryAuthorityRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:RegulatoryAuthorityRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12771",
+      "requires": {
+        "capability": [
+          "ex:IntellectualPropertyManagementCapability"
+        ],
+        "role": [
+          "ex:RegulatoryAuthorityRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:IntellectualPropertyManagementCapability"
+        ],
+        "role": [
+          "ex:RegulatoryAuthorityRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12870",
+      "requires": {
+        "role": [
+          "ex:ExecutiveRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ExecutiveRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12872",
+      "requires": {
+        "role": [
+          "ex:AdvisorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:AdvisorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12873",
+      "requires": {
+        "role": [
+          "ex:AdvisorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:AdvisorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12874",
+      "requires": {
+        "role": [
+          "ex:GovernmentBodyRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:GovernmentBodyRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12875",
+      "requires": {
+        "role": [
+          "ex:RegulatoryAuthorityRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:RegulatoryAuthorityRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12876",
+      "requires": {
+        "role": [
+          "ex:AuditorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:AuditorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12878",
+      "requires": {
+        "role": [
+          "ex:QuasiGovernmentBodyRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:QuasiGovernmentBodyRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12879",
+      "requires": {
+        "role": [
+          "ex:TradeOrIndustryGroupRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:TradeOrIndustryGroupRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12881",
+      "requires": {
+        "role": [
+          "ex:TradeOrIndustryGroupRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:TradeOrIndustryGroupRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P12974",
+      "requires": {
+        "capability": [
+          "ex:TreasuryManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:TreasuryManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P13482",
+      "requires": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability",
+          "ex:CustomerServiceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P14007",
+      "requires": {
+        "capability": [
+          "ex:DefaultAccountManagementCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:DefaultAccountManagementCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P14079",
+      "requires": {
+        "capability": [
+          "ex:TreasuryManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:TreasuryManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P14094",
+      "requires": {
+        "role": [
+          "ex:RegulatorRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:RegulatorRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16379",
+      "requires": {
+        "capability": [
+          "ex:BusinessProcessManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessProcessManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16380",
+      "requires": {
+        "role": [
+          "ex:BPMGovernanceLeaderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:BPMGovernanceLeaderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16382",
+      "requires": {
+        "role": [
+          "ex:ProcessOwnerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ProcessOwnerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16384",
+      "requires": {
+        "capability": [
+          "ex:BusinessProcessManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessProcessManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16387",
+      "requires": {
+        "capability": [
+          "ex:BusinessProcessManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessProcessManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16391",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16392",
+      "requires": {
+        "capability": [
+          "ex:BusinessProcessManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessProcessManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16393",
+      "requires": {
+        "role": [
+          "ex:ProcessOwnerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ProcessOwnerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16397",
+      "requires": {
+        "role": [
+          "ex:ProcessOwnerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ProcessOwnerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16402",
+      "requires": {
+        "capability": [
+          "ex:PortfolioManagementCapability",
+          "ex:PortfolioProgramProjectManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioManagementCapability",
+          "ex:PortfolioProgramProjectManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16403",
+      "requires": {
+        "capability": [
+          "ex:PortfolioManagementCapability",
+          "ex:PortfolioProgramProjectManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioManagementCapability",
+          "ex:PortfolioProgramProjectManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16404",
+      "requires": {
+        "capability": [
+          "ex:PortfolioManagementCapability",
+          "ex:PortfolioProgramProjectManagementCapability"
+        ],
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioManagementCapability",
+          "ex:PortfolioProgramProjectManagementCapability"
+        ],
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16406",
+      "requires": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProgramManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProgramManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16407",
+      "requires": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProgramManagementCapability"
+        ],
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProgramManagementCapability"
+        ],
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16408",
+      "requires": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProgramManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProgramManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16409",
+      "requires": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProgramManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProgramManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16411",
+      "requires": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16413",
+      "requires": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16414",
+      "requires": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16417",
+      "requires": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ],
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ],
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16418",
+      "requires": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PortfolioProgramProjectManagementCapability",
+          "ex:ProjectManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16464",
+      "requires": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16465",
+      "requires": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16466",
+      "requires": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16467",
+      "requires": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16468",
+      "requires": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16469",
+      "requires": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16471",
+      "requires": {
+        "capability": [
+          "ex:BusinessResiliencyCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessResiliencyCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16500",
+      "requires": {
+        "capability": [
+          "ex:ChannelManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ChannelManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16501",
+      "requires": {
+        "capability": [
+          "ex:ChannelManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ChannelManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16573",
+      "requires": {
+        "capability": [
+          "ex:ChannelManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ChannelManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16574",
+      "requires": {
+        "capability": [
+          "ex:ChannelManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ChannelManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16575",
+      "requires": {
+        "capability": [
+          "ex:ChannelManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ChannelManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16826",
+      "requires": {
+        "capability": [
+          "ex:IntellectualPropertyManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:IntellectualPropertyManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16928",
+      "requires": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability",
+          "ex:CustomerServiceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16937",
+      "requires": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability"
+        ],
+        "role": [
+          "ex:SalesAgentRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerInquiryManagementCapability"
+        ],
+        "role": [
+          "ex:SalesAgentRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16940",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P16944",
+      "requires": {
+        "capability": [
+          "ex:EmployeeCommunicationCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeCommunicationCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17045",
+      "requires": {
+        "capability": [
+          "ex:HumanCapitalManagementCapability",
+          "ex:WorkforcePlanningCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:WorkforcePlanningCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17046",
+      "requires": {
+        "capability": [
+          "ex:HumanCapitalManagementCapability",
+          "ex:WorkforcePlanningCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:WorkforcePlanningCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17050",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeOrientationAndDeploymentCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeOrientationAndDeploymentCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17051",
+      "requires": {
+        "capability": [
+          "ex:EmployeeCareerDevelopmentCapability",
+          "ex:EmployeeDevelopmentCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeCareerDevelopmentCapability",
+          "ex:EmployeeDevelopmentCapability"
+        ],
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17055",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17059",
+      "requires": {
+        "capability": [
+          "ex:ImportExportControlCapability",
+          "ex:RestitutionManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ImportExportControlCapability",
+          "ex:RestitutionManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17468",
+      "requires": {
+        "capability": [
+          "ex:ComplianceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ComplianceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17472",
+      "requires": {
+        "capability": [
+          "ex:EnterpriseQualityManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EnterpriseQualityManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17482",
+      "requires": {
+        "capability": [
+          "ex:EnterpriseQualityManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EnterpriseQualityManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17492",
+      "requires": {
+        "capability": [
+          "ex:EnterpriseQualityManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EnterpriseQualityManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17498",
+      "requires": {
+        "capability": [
+          "ex:EnterpriseQualityManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EnterpriseQualityManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17505",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17507",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17509",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P17684",
+      "requires": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P18126",
+      "requires": {
+        "role": [
+          "ex:ProductManagerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ProductManagerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P18641",
+      "requires": {
+        "role": [
+          "ex:SalesPartnerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SalesPartnerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P18916",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P18925",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P18926",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P18948",
+      "requires": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19072",
+      "requires": {
+        "capability": [
+          "ex:CustomerComplaintManagementCapability",
+          "ex:CustomerServiceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerComplaintManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19209",
+      "requires": {
+        "capability": [
+          "ex:AssetConstructionCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetConstructionCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19221",
+      "requires": {
+        "role": [
+          "ex:RegulatoryAuthorityRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:RegulatoryAuthorityRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19224",
+      "requires": {
+        "capability": [
+          "ex:AssetConstructionCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetConstructionCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19229",
+      "requires": {
+        "capability": [
+          "ex:AssetConstructionCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetConstructionCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19239",
+      "requires": {
+        "capability": [
+          "ex:AssetMaintenanceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetMaintenanceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19245",
+      "requires": {
+        "capability": [
+          "ex:AssetMaintenanceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetMaintenanceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19253",
+      "requires": {
+        "capability": [
+          "ex:AssetMaintenanceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetMaintenanceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19258",
+      "requires": {
+        "capability": [
+          "ex:AssetDispositionCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetDispositionCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19586",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19587",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19595",
+      "requires": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19596",
+      "requires": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RegulatoryComplianceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19959",
+      "requires": {
+        "capability": [
+          "ex:CustomerExperienceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerExperienceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19960",
+      "requires": {
+        "capability": [
+          "ex:CustomerExperienceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerExperienceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19964",
+      "requires": {
+        "capability": [
+          "ex:CustomerExperienceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerExperienceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19971",
+      "requires": {
+        "capability": [
+          "ex:CustomerExperienceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerExperienceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P19977",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20009",
+      "requires": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:PricingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20021",
+      "requires": {
+        "role": [
+          "ex:SalesPartnerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SalesPartnerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20026",
+      "requires": {
+        "capability": [
+          "ex:ServiceDeliveryGovernanceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ServiceDeliveryGovernanceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20027",
+      "requires": {
+        "capability": [
+          "ex:ServiceDeliveryDevelopmentManagementCapability",
+          "ex:ServiceDeliveryGovernanceCapability",
+          "ex:ServiceDeliveryPerformanceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ServiceDeliveryDevelopmentManagementCapability",
+          "ex:ServiceDeliveryGovernanceCapability",
+          "ex:ServiceDeliveryPerformanceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20031",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20041",
+      "requires": {
+        "capability": [
+          "ex:DemandForecastingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:DemandForecastingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20043",
+      "requires": {
+        "capability": [
+          "ex:DemandForecastingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:DemandForecastingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20044",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20045",
+      "requires": {
+        "capability": [
+          "ex:DemandForecastingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:DemandForecastingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20050",
+      "requires": {
+        "capability": [
+          "ex:ResourceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ResourceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20054",
+      "requires": {
+        "role": [
+          "ex:DeliveryPartnerRole",
+          "ex:SupplierRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:DeliveryPartnerRole",
+          "ex:SupplierRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20056",
+      "requires": {
+        "capability": [
+          "ex:ResourceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ResourceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20057",
+      "requires": {
+        "role": [
+          "ex:ServiceDeliveryPersonnelRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ServiceDeliveryPersonnelRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20058",
+      "requires": {
+        "capability": [
+          "ex:ServiceDeliveryCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ServiceDeliveryCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20059",
+      "requires": {
+        "capability": [
+          "ex:ServiceDeliveryCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ServiceDeliveryCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20060",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20065",
+      "requires": {
+        "role": [
+          "ex:ServiceDeliveryPersonnelRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ServiceDeliveryPersonnelRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20069",
+      "requires": {
+        "capability": [
+          "ex:ServiceDeliveryCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ServiceDeliveryCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20076",
+      "requires": {
+        "capability": [
+          "ex:ServiceDeliveryCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ServiceDeliveryCapability"
+        ],
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20077",
+      "requires": {
+        "capability": [
+          "ex:ServiceDeliveryCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ServiceDeliveryCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20081",
+      "requires": {
+        "role": [
+          "ex:ServiceDeliveryPersonnelRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ServiceDeliveryPersonnelRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20091",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20103",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20108",
+      "requires": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:SupplierRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20110",
+      "requires": {
+        "capability": [
+          "ex:RecallManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:RecallManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20117",
+      "requires": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20124",
+      "requires": {
+        "capability": [
+          "ex:ApplicantDataManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ApplicantDataManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20125",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20126",
+      "requires": {
+        "role": [
+          "ex:CertificationAuthorityRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:CertificationAuthorityRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20139",
+      "requires": {
+        "capability": [
+          "ex:AssetConstructionCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetConstructionCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20145",
+      "requires": {
+        "role": [
+          "ex:ChangeChampionRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ChangeChampionRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20595",
+      "requires": {
+        "capability": [
+          "ex:CustomerServiceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CustomerServiceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20604",
+      "requires": {
+        "capability": [
+          "ex:FinancialPolicyManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:FinancialPolicyManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20608",
+      "requires": {
+        "capability": [
+          "ex:ITCustomerRelationshipManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ITCustomerRelationshipManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20610",
+      "requires": {
+        "role": [
+          "ex:ITCustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ITCustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20632",
+      "requires": {
+        "capability": [
+          "ex:ITServiceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ITServiceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20638",
+      "requires": {
+        "role": [
+          "ex:ITCustomerRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ITCustomerRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20655",
+      "requires": {
+        "capability": [
+          "ex:ITStrategicIntelligenceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ITStrategicIntelligenceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20657",
+      "requires": {
+        "capability": [
+          "ex:ITStrategicAlignmentMaintenanceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ITStrategicAlignmentMaintenanceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20690",
+      "requires": {
+        "capability": [
+          "ex:ITInterdependencyManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ITInterdependencyManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20706",
+      "requires": {
+        "capability": [
+          "ex:ITRiskManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ITRiskManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20721",
+      "requires": {
+        "capability": [
+          "ex:ITRiskManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ITRiskManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20753",
+      "requires": {
+        "role": [
+          "ex:ITServiceProviderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ITServiceProviderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20755",
+      "requires": {
+        "role": [
+          "ex:ITServiceProviderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ITServiceProviderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20756",
+      "requires": {
+        "role": [
+          "ex:ITUserRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ITUserRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20759",
+      "requires": {
+        "role": [
+          "ex:ITUserRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ITUserRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20766",
+      "requires": {
+        "capability": [
+          "ex:InformationManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InformationManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20770",
+      "requires": {
+        "capability": [
+          "ex:InformationManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InformationManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20776",
+      "requires": {
+        "capability": [
+          "ex:InformationManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InformationManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20779",
+      "requires": {
+        "capability": [
+          "ex:InformationManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InformationManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20782",
+      "requires": {
+        "capability": [
+          "ex:InternalAuditManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InternalAuditManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20785",
+      "requires": {
+        "capability": [
+          "ex:DevelopAndManageServicesSolutionsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:DevelopAndManageServicesSolutionsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20808",
+      "requires": {
+        "capability": [
+          "ex:DevelopAndManageServicesSolutionsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:DevelopAndManageServicesSolutionsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20817",
+      "requires": {
+        "capability": [
+          "ex:DevelopAndManageServicesSolutionsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:DevelopAndManageServicesSolutionsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20857",
+      "requires": {
+        "capability": [
+          "ex:ITRollBackManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ITRollBackManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20902",
+      "requires": {
+        "role": [
+          "ex:ITServiceProviderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ITServiceProviderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20921",
+      "requires": {
+        "capability": [
+          "ex:ITSupportCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ITSupportCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20923",
+      "requires": {
+        "capability": [
+          "ex:ITSupportCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ITSupportCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20936",
+      "requires": {
+        "capability": [
+          "ex:LogisticsManagementCapability",
+          "ex:SupplyChainManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:LogisticsManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20955",
+      "requires": {
+        "capability": [
+          "ex:BusinessModelGovernanceCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessModelGovernanceCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20958",
+      "requires": {
+        "capability": [
+          "ex:HumanCapitalManagementCapability",
+          "ex:WorkforcePlanningCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:WorkforcePlanningCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20960",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20961",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20962",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20963",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20964",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20965",
+      "requires": {
+        "capability": [
+          "ex:KnowledgeManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:KnowledgeManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20969",
+      "requires": {
+        "capability": [
+          "ex:KnowledgeManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:KnowledgeManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P20970",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21434",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeePerformanceManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeePerformanceManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21436",
+      "requires": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeDevelopmentCapability",
+          "ex:EmployeeTrainingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21437",
+      "requires": {
+        "capability": [
+          "ex:EmployeeRelationsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EmployeeRelationsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21438",
+      "requires": {
+        "capability": [
+          "ex:CompensationAndBenefitsCapability"
+        ],
+        "role": [
+          "ex:HumanResourcesProfessionalRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CompensationAndBenefitsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21439",
+      "requires": {
+        "capability": [
+          "ex:CompensationAndBenefitsCapability"
+        ],
+        "role": [
+          "ex:HumanResourcesProfessionalRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:CompensationAndBenefitsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21440",
+      "requires": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:EmployeeRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21441",
+      "requires": {
+        "capability": [
+          "ex:WorkforceAnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:WorkforceAnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21442",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21447",
+      "requires": {
+        "capability": [
+          "ex:WorkforceAnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:WorkforceAnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21450",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21453",
+      "requires": {
+        "capability": [
+          "ex:BusinessProcessManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BusinessProcessManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21455",
+      "requires": {
+        "role": [
+          "ex:ProgramManagerRole",
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:ProgramManagerRole",
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21457",
+      "requires": {
+        "capability": [
+          "ex:ChangeManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:ChangeManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21459",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ],
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ],
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21460",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21461",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21462",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21463",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ],
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ],
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21464",
+      "requires": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AnalyticsCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21574",
+      "requires": {
+        "capability": [
+          "ex:InternalControlCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:InternalControlCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21579",
+      "requires": {
+        "capability": [
+          "ex:AssetDispositionCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetDispositionCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21581",
+      "requires": {
+        "capability": [
+          "ex:AssetDispositionCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetDispositionCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21582",
+      "requires": {
+        "capability": [
+          "ex:AssetDispositionCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:AssetDispositionCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21584",
+      "requires": {
+        "capability": [
+          "ex:BenchmarkingCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:BenchmarkingCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21587",
+      "requires": {
+        "capability": [
+          "ex:EHSManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:EHSManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21589",
+      "requires": {
+        "capability": [
+          "ex:SustainabilityManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:SustainabilityManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21598",
+      "requires": {
+        "capability": [
+          "ex:SustainabilityManagementCapability"
+        ]
+      },
+      "unmet": {
+        "capability": [
+          "ex:SustainabilityManagementCapability"
+        ]
+      }
+    },
+    {
+      "process": "ex:P21599",
+      "requires": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      },
+      "unmet": {
+        "role": [
+          "ex:StakeholderRole"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+@prefix ex:   <http://example.org/apqc#> .
+@prefix cco:  <https://www.commoncoreontologies.org/> .
+@prefix obo:  <http://purl.obolibrary.org/obo/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+# =====================================================================
+# delivery_processes.ttl  (v0.1.0)
+#
+# Home for the DELIVERY-PROCESS universals the capability layer references
+# but that are NOT APQC PCF rows (grep-confirmed absent from the corpus):
+# the authoring acts a planning/delivery agent performs. These have no
+# ex:pcfID / ex:hierarchyID / ex:apqcSourceText (they are not catalog-
+# derived); they carry the reality-layer act pattern (genus + Directive
+# output) so ex:enablesProcess / ex:requiresCapability can resolve.
+#
+# Genus: authoring a roadmap or an implementation plan COMPOSES a Directive
+# ICE (a plan), so the act is an ex:ActOfFormulation (⊑ cco:ont00000511
+# Act of Planning -- its CCO definition explicitly lists "roadmap" among
+# the directive products). The genus is INLINED here (mirrored verbatim
+# from ontology/apqc-ext.ttl) to keep this module self-validating against
+# the pinned CCO closure, matching the slice self-containment convention.
+#
+# SCOPE NOTE: PHASE1 §6b also names "the agile-loop processes from spec §8."
+# No such loop is specified anywhere in apqc_to_bfo_cco_methodology.md
+# (which ends at §12; there is no §8 agile loop). Rather than invent a
+# speculative framework, this module defines only the two authoring acts
+# the v0.1.0 seed actually references, plus the approval-gate act its
+# permission stub regulates. Extend here when a delivery-loop spec exists.
+#
+# CCO pin: v2.0 (2024-11-06). ADR-001 two-layer model.
+# =====================================================================
+
+<http://example.org/apqc/delivery> a owl:Ontology ;
+    dct:title "APQC Phase 1: Delivery-process universals + Process-Contract participants" ;
+    owl:versionInfo "0.2.0" ;
+    rdfs:comment "Delivery-process universals (authoring / implement / evaluate / approval-gate acts) referenced by the capability/role layer but absent from the APQC PCF. Now also hosts the FNSR Process-Contract participant processes (architect / developer / evaluator) per the Process-Team request. Merge-only shared layer; no slice imports it. CCO pin v2.0 (2024-11-06)." .
+
+# ---- ex:routable: the Process-Contract facet marking a process as dispatchable (FNSR-side) ----
+ex:routable a owl:AnnotationProperty ;
+    rdfs:label "routable" ;
+    rdfs:comment "Process Contract facet: marks a process universal as one the composer may route to a registered agent. Asserted alongside ex:requiresCapability/ex:requiresRole so the compiled graph is maximally queryable without inference." .
+
+# ---- inlined act genera (mirror of ontology/apqc-ext.ttl; D9 source of truth) ----
+
+ex:ActOfFormulation a owl:Class ;
+    rdfs:subClassOf cco:ont00000511 ;   # Act of Planning
+    rdfs:label "Act of Formulation" ;
+    skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." ;
+    rdfs:comment "Inlined from apqc-ext.ttl (D9) for self-containment; same IRI/definition, so the merge with the corpus is idempotent." .
+
+ex:ActOfDevelopment a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Development" ;
+    skos:definition "A Planned Act in which an Agent brings a novel product, service, solution, technology, component, prototype, or process from a specification or concept into an existent realized state." ;
+    rdfs:comment "Inlined from apqc-ext.ttl (D9). Genus for ex:ImplementPhase: implementing a planned module into a working change set is bringing a software component from a specification into a realized state; its comment in apqc-ext explicitly covers software/informational outputs. Reused (reuse-before-mint) in preference to the request's bare cco:ont00000366." .
+
+ex:ActOfVerification a owl:Class ;
+    rdfs:subClassOf cco:ont00000636 ;   # Act of Appraisal
+    rdfs:label "Act of Verification" ;
+    skos:definition "An Act of Appraisal in which an Agent subjects a product, service, solution, system, plan, control, or process to a test, audit, trial, or review against specified requirements and produces a Descriptive Information Content Entity that records whether and to what extent the requirements are met." ;
+    rdfs:comment "Inlined from apqc-ext.ttl (D9). Genus for ex:EvaluateOutput (the determination the Process Team handed us): evaluating an artifact against acceptance criteria IS appraisal-against-requirements. Verified cco:ont00000636 reaches Planned Act cco:ont00000228 (via cco:ont00000345)." .
+
+# =====================================================================
+# OUTPUT ICEs  (each anchored at its precise archetype)
+#   Roadmap / ImplementationPlan -> Directive ICE 965 (reused as-is, A2)
+#   ArchitecturePlan -> Plan 974 (⊑ 965, the more specific archetype)
+#   CodeChangeSet -> ICE 958 (generic; directive/descriptive status not over-claimed)
+#   JudgeVerdict -> Descriptive ICE 853 (a verdict describes an outcome; appraisal->descriptive)
+# =====================================================================
+
+ex:RoadmapPlan a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;   # Directive ICE
+    rdfs:label "Roadmap" ;
+    skos:definition "A Directive Information Content Entity that lays out, in phases over time, the intended sequence of outcomes and the work to reach them." .
+
+ex:ImplementationPlanArtifact a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;   # Directive ICE
+    rdfs:label "Implementation plan" ;
+    skos:definition "A Directive Information Content Entity that prescribes the concrete tasks, owners, and falsifiable acceptance criteria by which a roadmap phase is to be delivered." .
+
+ex:ArchitecturePlan a owl:Class ;
+    rdfs:subClassOf cco:ont00000974 ;   # Plan (⊑ Directive ICE 965)
+    rdfs:label "Architecture plan" ;
+    skos:definition "A Plan that specifies a build's structure - its module boundaries, exported interfaces, and layering - to be realized by downstream implementation." .
+
+ex:CodeChangeSet a owl:Class ;
+    rdfs:subClassOf cco:ont00000958 ;   # Information Content Entity
+    rdfs:label "Code change set" ;
+    skos:definition "An Information Content Entity comprising a set of file changes that together implement a planned module." .
+
+ex:JudgeVerdict a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;   # Descriptive ICE
+    rdfs:label "Judge verdict" ;
+    skos:definition "A Descriptive Information Content Entity that records the outcome of an evaluation of an artifact against its acceptance criteria." .
+
+# =====================================================================
+# DELIVERY PROCESSES  (authoring acts; ex:ActOfFormulation)
+# =====================================================================
+
+ex:AuthorRoadmap a owl:Class ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RoadmapPlan ] ;   # has output
+    rdfs:label "Author roadmap" ;
+    skos:definition "An Act of Formulation in which a planning agent composes a phased roadmap from a normative specification." ;
+    ex:routable true ;
+    ex:requiresCapability ex:PlanAuthoringCapability ;
+    ex:requiresRole ex:PlannerRole .
+
+ex:AuthorImplementationPlan a owl:Class ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ImplementationPlanArtifact ] ;   # has output
+    rdfs:label "Author implementation plan" ;
+    skos:definition "An Act of Formulation in which a planning agent composes a tactical implementation plan, with falsifiable acceptance criteria, for a roadmap phase." ;
+    ex:routable true ;
+    ex:requiresCapability ex:PlanAuthoringCapability ;
+    ex:requiresRole ex:PlannerRole .
+
+# ---- approval-gate act (the Process the role's Action Permission regulates) ----
+
+ex:ApproveImplementationPlan a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Approve implementation plan" ;
+    skos:definition "A Planned Act in which an authority-bearing agent authorizes passage of an implementation plan beyond its review gate." ;
+    rdfs:comment "Anchored at the generic cco:ont00000228 (Planned Act): an authorization/passage decision, neutral on ICE output. This is the Process that ex:ApproveImplementationPlanPermission (capabilities_roles.ttl) permits and onto which ex:requiresPermission would be derived once RDM/IEE populates the permission catalogue." .
+
+# =====================================================================
+# PROCESS-CONTRACT PARTICIPANT PROCESSES  (architect / developer / evaluator)
+# Authored per the Process-Team request. Each is routable and carries both
+# wiring directions (enablesProcess on the capability + requiresCapability/
+# requiresRole here) for maximal queryability (A5).
+# =====================================================================
+
+ex:AuthorArchitecture a owl:Class ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ArchitecturePlan ] ;   # has output
+    rdfs:label "Author architecture" ;
+    skos:definition "An Act of Formulation in which an architect agent composes a build's structural plan - its module boundaries, exported interfaces, and layering - from a normative specification." ;
+    ex:routable true ;
+    ex:requiresCapability ex:ArchitectureCapability ;
+    ex:requiresRole ex:ArchitectRole .
+
+ex:ImplementPhase a owl:Class ;
+    rdfs:subClassOf ex:ActOfDevelopment ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CodeChangeSet ] ;   # has output
+    rdfs:label "Implement phase" ;
+    skos:definition "An Act of Development in which a developer agent brings a planned module from its implementation plan into an existent working code change set." ;
+    ex:routable true ;
+    ex:requiresCapability ex:CodeImplementationCapability ;
+    ex:requiresRole ex:DeveloperRole .
+
+ex:EvaluateOutput a owl:Class ;
+    rdfs:subClassOf ex:ActOfVerification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:JudgeVerdict ] ;   # has output
+    rdfs:label "Evaluate output" ;
+    skos:definition "An Act of Verification in which an evaluator agent appraises an artifact against its acceptance criteria and records a verdict." ;
+    ex:routable true ;
+    ex:requiresCapability ex:EvaluationCapability ;
+    ex:requiresRole ex:EvaluatorRole .

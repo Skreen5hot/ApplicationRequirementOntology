@@ -1,0 +1,30 @@
+{
+  "module": "ontology\\slices\\apqc_11_0.ttl",
+  "results": [
+    {
+      "gate": "A Syntax",
+      "status": "PASS",
+      "detail": "1264 triples",
+      "mandatory": true
+    },
+    {
+      "gate": "B IRI resolution",
+      "status": "PASS",
+      "detail": "23 CCO/OBO IRIs resolve",
+      "mandatory": true
+    },
+    {
+      "gate": "C SHACL",
+      "status": "PASS",
+      "detail": "zero violations",
+      "mandatory": true
+    },
+    {
+      "gate": "D Reasoner",
+      "status": "PASS",
+      "detail": "consistent; no unsatisfiable classes (ELK)",
+      "mandatory": true
+    }
+  ],
+  "failed_mandatory": false
+}

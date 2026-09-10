@@ -1,0 +1,89 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix ex:   <http://example.org/apqc#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# capabilities_roles_shapes.ttl (v0.1.0)
+# Run with CCO+BFO loaded into the data graph (transitive subClassOf needs the closure).
+# Structural shapes catch malformed capability/role classes;
+# coherence shapes catch mis-wired requiresCapability/Role/Permission on processes.
+
+# ---------- STRUCTURAL (this module) ----------
+
+# C1: every declared capability (subject of enablesProcess OR subClassOf ex:Capability)
+#     reaches Agent Capability, and has a label + definition.
+ex:CapabilityWellFormedShape a sh:NodeShape ;
+    sh:target [ a sh:SPARQLTarget ;
+        sh:select """SELECT ?this WHERE {
+          { ?this <http://example.org/apqc#enablesProcess> ?p }
+          UNION
+          { ?this <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://example.org/apqc#Capability> } }""" ] ;
+    sh:sparql
+      [ a sh:SPARQLConstraint ;
+        sh:message "Capability must reach cco:Agent Capability (ont00001379) via subClassOf+." ;
+        sh:select """SELECT $this WHERE { FILTER NOT EXISTS {
+          $this <http://www.w3.org/2000/01/rdf-schema#subClassOf>* <https://www.commoncoreontologies.org/ont00001379> } }""" ] ,
+      [ a sh:SPARQLConstraint ;
+        sh:message "Capability must have rdfs:label and skos:definition." ;
+        sh:select """SELECT $this WHERE { FILTER (
+          NOT EXISTS { $this <http://www.w3.org/2000/01/rdf-schema#label> ?l } ||
+          NOT EXISTS { $this <http://www.w3.org/2004/02/skos/core#definition> ?d } ) }""" ] .
+
+# C2: every ex:Role subclass reaches bfo:Role, with label + definition.
+ex:RoleWellFormedShape a sh:NodeShape ;
+    sh:target [ a sh:SPARQLTarget ;
+        sh:select """SELECT ?this WHERE {
+          ?this <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://example.org/apqc#Role> }""" ] ;
+    sh:sparql
+      [ a sh:SPARQLConstraint ;
+        sh:message "Role must reach bfo:Role (BFO_0000023) via subClassOf+." ;
+        sh:select """SELECT $this WHERE { FILTER NOT EXISTS {
+          $this <http://www.w3.org/2000/01/rdf-schema#subClassOf>* <http://purl.obolibrary.org/obo/BFO_0000023> } }""" ] ,
+      [ a sh:SPARQLConstraint ;
+        sh:message "Role must have rdfs:label and skos:definition." ;
+        sh:select """SELECT $this WHERE { FILTER (
+          NOT EXISTS { $this <http://www.w3.org/2000/01/rdf-schema#label> ?l } ||
+          NOT EXISTS { $this <http://www.w3.org/2004/02/skos/core#definition> ?d } ) }""" ] .
+
+# C3: capability and role are disjoint — no class reaches BOTH anchors.
+ex:CapRoleDisjointShape a sh:NodeShape ;
+    sh:target [ a sh:SPARQLTarget ;
+        sh:select """SELECT ?this WHERE { ?this a <http://www.w3.org/2002/07/owl#Class> }""" ] ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+        sh:message "A class must not be both a Capability and a Role." ;
+        sh:select """SELECT $this WHERE {
+          $this <http://www.w3.org/2000/01/rdf-schema#subClassOf>* <https://www.commoncoreontologies.org/ont00001379> .
+          $this <http://www.w3.org/2000/01/rdf-schema#subClassOf>* <http://purl.obolibrary.org/obo/BFO_0000023> }""" ] .
+
+# C4: bearsPermission must target an Action Permission.
+ex:BearsPermissionTargetShape a sh:NodeShape ;
+    sh:targetObjectsOf ex:bearsPermission ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+        sh:message "ex:bearsPermission must target a class reaching cco:Action Permission (ont00000751)." ;
+        sh:select """SELECT $this WHERE { FILTER NOT EXISTS {
+          $this <http://www.w3.org/2000/01/rdf-schema#subClassOf>* <https://www.commoncoreontologies.org/ont00000751> } }""" ] .
+
+# ---------- COHERENCE (process graph loaded) ----------
+
+# C5: requiresCapability must point at a Capability (not a Role, not dangling).
+ex:RequiresCapabilityTargetShape a sh:NodeShape ;
+    sh:targetObjectsOf ex:requiresCapability ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+        sh:message "ex:requiresCapability must target a class reaching cco:Agent Capability (ont00001379)." ;
+        sh:select """SELECT $this WHERE { FILTER NOT EXISTS {
+          $this <http://www.w3.org/2000/01/rdf-schema#subClassOf>* <https://www.commoncoreontologies.org/ont00001379> } }""" ] .
+
+# C6: requiresRole must point at a Role.
+ex:RequiresRoleTargetShape a sh:NodeShape ;
+    sh:targetObjectsOf ex:requiresRole ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+        sh:message "ex:requiresRole must target a class reaching bfo:Role (BFO_0000023)." ;
+        sh:select """SELECT $this WHERE { FILTER NOT EXISTS {
+          $this <http://www.w3.org/2000/01/rdf-schema#subClassOf>* <http://purl.obolibrary.org/obo/BFO_0000023> } }""" ] .
+
+# C7: requiresPermission must point at an Action Permission.
+ex:RequiresPermissionTargetShape a sh:NodeShape ;
+    sh:targetObjectsOf ex:requiresPermission ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+        sh:message "ex:requiresPermission must target a class reaching cco:Action Permission (ont00000751)." ;
+        sh:select """SELECT $this WHERE { FILTER NOT EXISTS {
+          $this <http://www.w3.org/2000/01/rdf-schema#subClassOf>* <https://www.commoncoreontologies.org/ont00000751> } }""" ] .

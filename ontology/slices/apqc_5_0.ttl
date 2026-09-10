@@ -1,0 +1,1492 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix obo:   <http://purl.obolibrary.org/obo/> .
+@prefix cco:   <https://www.commoncoreontologies.org/> .
+@prefix ex:    <http://example.org/apqc#> .
+@prefix apqc:  <http://example.org/apqc/scheme#> .
+
+####################################################################
+# APQC reality-layer slice 5.0 "Deliver Services"
+# BFO 2020 / CCO 2.0 module (ex:P<pcfID> process classes; partonomy
+# via cco:ont00001777 has process part; no rdfs:subClassOf between
+# processes). Composed from group modules 5.1, 5.2, 5.3 over ONE
+# shared supporting vocabulary, with duplicate IRIs reconciled to a
+# single coherent definition.
+#
+# by the validator; the live example.org import is commented out so it
+# does not break ROBOT). Per ADR-001.
+#
+#   ex:ActOfAnalysis, ex:ActOfIdentification, ex:ActOfFormulation,
+#   ex:ActOfSelection, ex:ActOfAcquisition.
+# New recurring genera proposed for promotion are marked # PROPOSE-EXT
+# and minted ONCE here: ex:ActOfServiceProvision, ex:ActOfMonitoring.
+#
+# Every cco:ont... IRI below was verified against
+# CommonCoreOntologiesMerged v2.0 (2024-11-06) by reading its
+# definition (not just its label):
+#   Planned Act                cco:ont00000228
+#   Act of Information Proc.    cco:ont00000366
+#   Act of Appraisal            cco:ont00000636
+#   Act of Planning             cco:ont00000511
+#   Act of Training Instruction cco:ont00001075
+#   Descriptive ICE             cco:ont00000853
+#   Prescriptive (Directive)ICE cco:ont00000965
+#   Agent                       cco:ont00001017
+#   Organization                cco:ont00001180
+#   Agent Capability            cco:ont00001379
+#   Organization Capability     cco:ont00000568
+#   has capability              cco:ont00001954
+#   is about                    cco:ont00001808
+#   has input / has output      cco:ont00001921 / cco:ont00001986
+#   has process part            cco:ont00001777
+#   role / bearer of / realized in / has participant
+#       obo:BFO_0000023 / 0000196 / 0000054 / 0000057
+#   material entity             obo:BFO_0000040
+####################################################################
+
+<http://example.org/apqc/slice/5.0> a owl:Ontology ;
+    dct:title "APQC reality-layer slice 5.0: Deliver Services" ;
+    owl:versionInfo "0.3.0" ;
+    rdfs:comment "Reality-layer BFO 2020 / CCO 2.0 module for APQC section 5.0 'Deliver Services'. CCO pin v2.0 (2024-11-06); modeled per ADR-001 (two-layer model, R5 bounded-occurrent test, GOLDEN PRINCIPLE genus<->output agreement). Self-contained: the shared act genera it uses are inlined from the apqc-ext.ttl registry, so it validates standalone against the pinned CCO/BFO closure with no extension merge." .
+
+####################################################################
+# ACT GENERA -- SELF-CONTAINED (canonical defs mirrored from
+# apqc-ext.ttl, the D9 shared registry). Inlined so this module
+# validates standalone against CCO without merging the extension.
+####################################################################
+
+ex:ActOfAcquisition a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Acquisition" ;
+    skos:definition "A Planned Act in which an Agent obtains from some authority or supplier an entity (such as an authorization, license, or resource) that the Agent did not previously hold." ;
+    rdfs:comment "Local extension (D9). Rejected cco:ont00000950 'Act of Maintenance' (modifying Material Artifacts) and cco:ont00000402 'Act of Communication' (mere ICE transfer). Securing/obtaining a held entity anchors at the generic Planned Act. Expected to recur in procurement/asset-acquisition categories (4.0, 10.0)." .
+
+ex:ActOfAnalysis a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Analysis" ;
+    skos:definition "An Act of Information Processing in which an Agent examines one or more input Information Content Entities and produces an Information Content Entity that represents an understanding of their subject matter." ;
+    rdfs:comment "Local extension (D9). CCO 2.0 has no generic analysis class; analysis is information processing, so it is anchored under cco:ont00000366." .
+
+ex:ActOfForecasting a owl:Class ;
+    rdfs:subClassOf cco:ont00000371 ,   # Act of Prediction
+        cco:ont00000228 ;               # Planned Act (explicit; Act of Prediction subClassOf Planned Act in CCO, asserted so standalone SHACL S2 resolves)
+    rdfs:label "Act of Forecasting" ;
+    skos:definition "An Act of Prediction in which an Agent extrapolates from historical and current Information Content Entities to produce a Predictive Information Content Entity that estimates a future quantity such as demand, volume, revenue, or value." ;
+    rdfs:comment "Inlined canonical shared genus (apqc-ext.ttl registry). Anchored under cco:ont00000371 (Act of Prediction; parent cco:ont00000228), whose definitional output is a Predictive ICE (cco:ont00000626 subClassOf cco:ont00000853) -- exactly the genus of a demand/sales/volume forecast. Recurs in 3.0 and 6.0." .
+
+ex:ActOfFormulation a owl:Class ;
+    rdfs:subClassOf cco:ont00000511 ;   # Act of Planning
+    rdfs:label "Act of Formulation" ;
+    skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." ;
+    rdfs:comment "Local extension (D9). Anchored under cco:ont00000511 (Act of Planning) because formulating a strategy/mission/design is making a plan to achieve an objective; its output is a Directive ICE. Recurs across develop/define/compose-a-directive processes corpus-wide." .
+
+ex:ActOfIdentification a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Identification (discernment sense)" ;
+    skos:definition "An Act of Information Processing in which an Agent discerns and enumerates entities of a given kind and produces an Information Content Entity that registers them." ;
+    rdfs:comment "Local extension (D9). NOT cco:ont00001261 'Act of Identifying' (a communication act). APQC 'Identify ...' denotes discernment, i.e. information processing." .
+
+ex:ActOfMonitoring a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Monitoring" ;
+    skos:definition "An Act of Information Processing in which an Agent repeatedly or continuously observes the state, progress, or performance of some process, system, or quantity over time and produces a Descriptive Information Content Entity that represents its tracked status against expected conditions, targets, or requirements." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic monitoring/tracking class. Anchored under cco:ont00000366 (Act of Information Processing) because monitoring ingests repeated observations (including electronic records, not only senses) and yields a descriptive status/deviation ICE -- the GOLDEN PRINCIPLE (descriptive output => information-processing genus) holds. Rejected cco:ont00000037 (Act of Observation: a single sense-based acquisition, too narrow -- monitoring also processes ICEs and is sustained); cco:ont00000636 (Act of Appraisal: renders a single bounded value/quality judgement rather than tracking status over time); and cco:ont00000345 (Act of Measuring: a single quantification against a standard at one time -- at most a method sub-step of the monitoring cycle; a node that is purely one quantification, e.g. Calculate performance measures, anchors to cco:ont00000345 directly, not here). Distinct from ex:ActOfAnalysis (one-shot examination of a fixed input set) by its continuous, longitudinal character. A standing 'Manage/Monitor X' function with no natural end is an Organization Capability (cco:ont00000568) realized in such acts, not itself a process. Recurs corpus-wide (slices 3.0/4.0/5.0/6.0/8.0/9.0/10.0/11.0/12.0/13.0). Reconciled from 10 divergent slice restatements to one definition." .
+
+ex:ActOfSelection a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Selection" ;
+    skos:definition "An Act of Information Processing in which an Agent chooses one or more options from a set of candidates and produces a Directive Information Content Entity that prescribes the chosen option(s)." ;
+    rdfs:comment "Local extension (D9). Anchored under cco:ont00000366 (Act of Information Processing): receives candidate-option ICEs and yields a decision ICE. Distinct from Act of Appraisal (judges without committing) and Act of Planning. NOTE: ratifying a single already-settled option is NOT selection (no candidate set) -- anchor such acts at cco:ont00000228 (Planned Act)." .
+
+ex:ActOfServiceProvision a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Service Provision" ;
+    skos:definition "A Planned Act in which an Agent renders a service to a customer by carrying out and completing the tasks that fulfil an agreed service need." ;
+    rdfs:comment "PROPOSE-EXT (D9). Operations-category signature genus for 'deliver/render/execute/deploy/operate a service' processes. Anchored at the generic cco:ont00000228 (Planned Act) because service provision need not produce or modify an artifact and need not transfer an ICE. Rejected cco:ont00000908 (Act of Material Artifact Processing: its product is a modified Material Artifact, whereas a service need not modify matter) and cco:ont00000402 (Act of Communication: mere ICE transfer). Recurs in operations/IT-service categories (4.0, 5.0, 6.0, 8.0, 9.0, 10.0)." .
+
+####################################################################
+# 0. PROVENANCE ANNOTATION PROPERTIES
+####################################################################
+
+ex:pcfID a owl:AnnotationProperty ;
+    rdfs:label "APQC PCF ID" ;
+    rdfs:comment "Stable APQC identifier. Anchor process-class IRIs (ex:P<pcfID>) to this; it persists across PCF versions." .
+
+ex:hierarchyID a owl:AnnotationProperty ;
+    rdfs:label "APQC Hierarchy ID" ;
+    rdfs:comment "Positional dotted-decimal locator. NON-STABLE across PCF versions. Reference only; never for IRI minting or subsumption." .
+
+ex:apqcSourceText a owl:AnnotationProperty ;
+    rdfs:label "APQC source description" ;
+    rdfs:comment "Verbatim APQC Element Description retained for provenance." .
+
+ex:designatesProcessType a owl:AnnotationProperty ;
+    rdfs:label "designates process type" ;
+    rdfs:comment "Catalog->reality bridge: relates an APQC catalog node (ex:PCF_<pcfID>) to the reality-layer class (process or capability) it designates." .
+
+####################################################################
+# 2. SHARED SUPPORTING VOCABULARY
+# (ICEs, material I/O, agents/orgs, roles, capabilities)
+#
+# Minted ONCE for the whole section so the three groups (5.1, 5.2,
+# 5.3) reuse one consistent set with no collisions. Contains NO
+# process classes. Each cco:ont... IRI verified by reading its
+# definition. GOLDEN PRINCIPLE applied to outputs: forecasts/
+# assessments/reviews/confirmations/validations = Descriptive ICEs;
+# plans/policies/goals/objectives/specs/contracts/decisions =
+# Directive ICEs. Material I/O is legal here (operations category).
+####################################################################
+
+####################################################################
+# 2.0 INPUT INFORMATION CONTENT ENTITIES  (Descriptive unless noted)
+####################################################################
+
+ex:CustomerRequirements a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;   # Descriptive ICE
+    rdfs:label "Customer Requirements" ;
+    skos:definition "A Descriptive Information Content Entity that describes the needs, expectations, and constraints a customer places on a service to be delivered." ;
+    rdfs:comment "Shared section-5.0 input. Recurs across 5.1.1.1, 5.1.2.3, 5.2.1.3, 5.3.1.2, 5.3.2.1. Descriptive: it states needs rather than prescribing a course of action." .
+
+ex:CustomerFeedback a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Customer Feedback" ;
+    skos:definition "A Descriptive Information Content Entity that describes a customer's evaluation of services rendered, solicited to inform improvement of service delivery." ;
+    rdfs:comment "Shared section-5.0 input. Recurs across 5.1.1.4, 5.2.3.7, 5.3.3.6." .
+
+ex:HistoricalDemandData a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Historical Demand Data" ;
+    skos:definition "A Descriptive Information Content Entity that describes past levels of customer demand for an organization's services, used as input to forecasting." ;
+    rdfs:comment "Shared section-5.0 forecasting input (5.2.1.2)." .
+
+ex:MarketEnvironmentData a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Market Environment Data" ;
+    skos:definition "A Descriptive Information Content Entity that describes external market conditions relevant to estimating future demand for an organization's services." ;
+    rdfs:comment "Shared section-5.0 forecasting input (5.2.1.2). Distinct from ex:MarketData in the reference module (external-environment scan); kept local to 5.0 as a demand-forecasting input." .
+
+ex:OpportunityPipelineData a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Opportunity Pipeline Data" ;
+    skos:definition "A Descriptive Information Content Entity that describes potential service-delivery opportunities and their stage within a sales or engagement pipeline." ;
+    rdfs:comment "Shared section-5.0 input to pipeline monitoring (5.2.1.1)." .
+
+ex:CustomerBusinessObjectives a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;   # Directive ICE
+    rdfs:label "Customer Business Objectives" ;
+    skos:definition "A Directive Information Content Entity that prescribes the business goals a customer intends a delivered service to advance." ;
+    rdfs:comment "Shared section-5.0 input (5.3.1.4). Directive: objectives prescribe an intended end-state. Distinct from ex:ServiceDeliveryGoal (the provider's own goals)." .
+
+####################################################################
+# 2.1 OUTPUT INFORMATION CONTENT ENTITIES -- DESCRIPTIVE
+####################################################################
+
+ex:DemandForecast a owl:Class ;
+    rdfs:subClassOf cco:ont00000626 ,   # Predictive ICE
+        cco:ont00000853 ;   # its parent Descriptive ICE, asserted so standalone SHACL S3 resolves
+    rdfs:label "Demand Forecast" ;
+    skos:definition "A Predictive Information Content Entity that describes the anticipated (uncertain, future) level of customer demand for an organization's services." ;
+    rdfs:comment "Shared section-5.0 output. Baseline (5.2.1.2) and consensus (5.2.1.4) forecasts are both Demand Forecasts; ex:ConsensusDemandForecast specialises this. PREDICTIVE (cco:ont00000626, a Descriptive ICE about an uncertain future), matching the Slice-3 forecast pattern -- produced by ex:ActOfForecasting." .
+
+ex:ConsensusDemandForecast a owl:Class ;
+    rdfs:subClassOf ex:DemandForecast ;
+    rdfs:label "Consensus Demand Forecast" ;
+    skos:definition "A Demand Forecast that describes a level of future demand agreed upon by reconciling baseline forecasts with customer input." ;
+    rdfs:comment "Shared section-5.0 output (5.2.1.4)." .
+
+ex:ForecastAccuracyAssessment a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Forecast Accuracy Assessment" ;
+    skos:definition "A Descriptive Information Content Entity that describes a judgement of how closely a demand forecast matched realized demand." ;
+    rdfs:comment "Shared section-5.0 output (5.2.1.8). Descriptive: it reports a measured comparison." .
+
+ex:ResourceAvailabilityAssessment a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Resource Availability Assessment" ;
+    skos:definition "A Descriptive Information Content Entity that describes a judgement of whether the resources, skills, and capacity needed for service delivery are available." ;
+    rdfs:comment "Shared section-5.0 output. Recurs across 5.1.2.3, 5.2.1.5, 5.2.2.3, 5.3.1.5." .
+
+ex:SkillsTaxonomy a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Skills Taxonomy" ;
+    skos:definition "A Descriptive Information Content Entity that classifies and organizes the skills required to perform an organization's services." ;
+    rdfs:comment "Shared section-5.0 output (5.2.2.1). Descriptive: a classification describes how skills are organized; it does not prescribe action." .
+
+ex:SolutionValidationResult a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Solution Validation Result" ;
+    skos:definition "A Descriptive Information Content Entity that describes a judgement of whether a proposed service-delivery solution is feasible and meets customer needs." ;
+    rdfs:comment "Shared section-5.0 output (5.3.2.3, 5.3.2.4). Descriptive: it records a validation judgement." .
+
+ex:EnvironmentalReadinessConfirmation a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Environmental Readiness Confirmation" ;
+    skos:definition "A Descriptive Information Content Entity that describes a confirmed judgement that an organization holds the resources and conditions required to deliver a service." ;
+    rdfs:comment "Shared section-5.0 output (5.3.1.5). Descriptive: a confirmation reports a verified state." .
+
+ex:ServiceDeliveryReview a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Service Delivery Review" ;
+    skos:definition "A Descriptive Information Content Entity that describes an end-to-end evaluation of the success of a completed service-delivery engagement." ;
+    rdfs:comment "Shared section-5.0 output (5.3.3.1). Descriptive: it appraises and reports outcomes." .
+
+ex:ServiceDeliverySatisfactionAssessment a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,
+        [ a owl:Restriction ;
+          owl:onProperty cco:ont00001808 ;   # is about
+          owl:someValuesFrom ex:Customer ] ;
+    rdfs:label "Service Delivery Satisfaction Assessment" ;
+    skos:definition "A Descriptive Information Content Entity that describes a judgement, derived from customer feedback, of how satisfactorily a service was delivered." ;
+    rdfs:comment "Shared section-5.0 output (5.1.1.4). 'is about' the Customer whose satisfaction it characterises." .
+
+ex:TrainingEffectivenessEvaluation a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Training Effectiveness Evaluation" ;
+    skos:definition "A Descriptive Information Content Entity that describes a judgement of how effectively delivered training imparted the targeted skills or behaviours." ;
+    rdfs:comment "Shared section-5.0 output (5.2.3.6, 5.2.3.7). Descriptive: it reports an evaluation judgement." .
+
+ex:ServiceKnowledgeBase a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,
+        [ a owl:Restriction ;
+          owl:onProperty cco:ont00001808 ;   # is about
+          owl:someValuesFrom ex:ServiceDeliveryProcessSpecification ] ;
+    rdfs:label "Service Knowledge Base" ;
+    skos:definition "A Descriptive Information Content Entity that describes accumulated lessons and information harvested from completed service-delivery engagements." ;
+    rdfs:comment "Shared section-5.0 output (5.3.3.6). 'is about' the service-delivery process the knowledge concerns." .
+
+ex:ServiceDeliveryRecord a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Service Delivery Record" ;
+    skos:definition "A Descriptive Information Content Entity that records facts about a delivered service for archival and system-of-record purposes." ;
+    rdfs:comment "Shared section-5.0 output/input (5.3.3.7). Descriptive: it documents what occurred." .
+
+ex:SupplyConstraintAnalysis a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Supply Constraint Analysis" ;
+    skos:definition "A Descriptive Information Content Entity that describes the limitations imposed on an organization's service-delivery network and supply." ;
+    rdfs:comment "Shared section-5.0 output (5.1.2.4). Descriptive: it identifies and characterises constraints." .
+
+ex:TrainingMaterialSpecification a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;   # Descriptive ICE
+    rdfs:label "Training Material Specification" ;
+    skos:definition "A Descriptive Information Content Entity that describes the content and structure of the training materials developed to teach service-delivery skills or behaviours." ;
+    rdfs:comment "Shared section-5.0 output (5.2.3.2). Despite the 'Specification' label this is DESCRIPTIVE (D6 false-friend guard): it records the content and structure of produced training materials, not a prescriptive requirement. A prescriptive training-material requirement would be a Directive ICE, modeled separately. The informational deliverable of training-material development (every has-output is an ICE, D3/S3); the produced ex:TrainingMaterial bearer is consumed downstream as an input." .
+
+ex:SolutionBuildRecord a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;   # Descriptive ICE
+    rdfs:label "Solution Build Record" ;
+    skos:definition "A Descriptive Information Content Entity that records that a service-delivery solution has been constructed or purchased and documents how it was realized." ;
+    rdfs:comment "Shared section-5.0 output (5.3.2.6). The informational deliverable of make/build-or-buy: every process has output is an ICE (D3 / S3), whereas the produced ex:ServiceDeliverySolution artifact (a material entity) is consumed downstream by deployment (5.3.2.7) only as an input. ex:SolutionSpecification (Directive ICE) prescribes the solution; this records that it was built/bought." .
+
+####################################################################
+# 2.2 OUTPUT INFORMATION CONTENT ENTITIES -- DIRECTIVE
+####################################################################
+
+ex:ServiceDeliveryStrategy a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;   # Directive ICE
+    rdfs:label "Service Delivery Strategy" ;
+    skos:definition "A Directive Information Content Entity that prescribes the goals, policies, processes, and procedures by which an organization intends to deliver services." ;
+    rdfs:comment "Shared section-5.0 output (5.1.2). Directive: a strategy prescribes an intended course of action." .
+
+ex:ServiceDeliveryGoal a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Service Delivery Goal" ;
+    skos:definition "A Directive Information Content Entity that prescribes a target outcome an organization's service delivery is intended to achieve for its customers." ;
+    rdfs:comment "Shared section-5.0 output (5.1.2.1). Directive: a goal prescribes an intended end-state." .
+
+ex:LaborPolicy a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Labor Policy" ;
+    skos:definition "A Directive Information Content Entity that prescribes rules governing the use of labor resources in service delivery, consistent with organizational and regulatory requirements." ;
+    rdfs:comment "Shared section-5.0 output (5.1.2.2). Directive: a policy prescribes permitted and required conduct." .
+
+ex:ServiceDeliveryProcessSpecification a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Service Delivery Process Specification" ;
+    skos:definition "A Directive Information Content Entity that prescribes the policies and procedures by which a service is delivered within an organization's operating parameters." ;
+    rdfs:comment "Shared section-5.0 output (5.1.2.5, 5.1.2.6, 5.3.1.2). Directive: a procedure prescribes how the work is to be carried out." .
+
+ex:WorkplaceLayoutPlan a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Workplace Layout Plan" ;
+    skos:definition "A Directive Information Content Entity that prescribes the physical layout and infrastructure of a workplace to support service delivery." ;
+    rdfs:comment "Shared section-5.0 output (5.1.2.7). Directive: a layout plan prescribes an intended arrangement." .
+
+ex:ResourcePlan a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Resource Plan" ;
+    skos:definition "A Directive Information Content Entity that prescribes how the personnel, physical resources, and capabilities required to deliver services are to be provisioned and allocated." ;
+    rdfs:comment "Shared section-5.0 output (5.2.2.2, 5.3.1.6). Directive: a plan prescribes intended provisioning." .
+
+ex:TrainingPlan a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Training Plan" ;
+    skos:definition "A Directive Information Content Entity that prescribes the actions, timing, locations, and instructors for teaching service-delivery personnel a skill or behaviour." ;
+    rdfs:comment "Shared section-5.0 output (5.2.3.1). Directive: a training plan prescribes how training is to be conducted." .
+
+ex:ProjectPlan a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Project Plan" ;
+    skos:definition "A Directive Information Content Entity that prescribes the scope, tasks, and sequence by which a service-delivery engagement is to be carried out." ;
+    rdfs:comment "Shared section-5.0 output/input (5.3.1.3). Directive: a project plan prescribes intended work." .
+
+ex:ServiceDeliveryPlan a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Service Delivery Plan" ;
+    skos:definition "A Directive Information Content Entity that prescribes the plan of action for rendering a service-delivery solution to a customer." ;
+    rdfs:comment "Shared section-5.0 output (5.2, 5.3.1, 5.3.1.7). Distinct from ex:ProjectPlan: the action plan for the delivery itself rather than the overall engagement." .
+
+ex:SolutionSpecification a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Solution Specification" ;
+    skos:definition "A Directive Information Content Entity that prescribes the service-delivery solution to be built, bought, or deployed to meet a customer's needs." ;
+    rdfs:comment "Shared section-5.0 output (5.3.2.2). Directive: a specification prescribes what is to be produced." .
+
+ex:EngagementRules a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Engagement Rules" ;
+    skos:definition "A Directive Information Content Entity that prescribes how service-delivery resources are to interact with and accommodate the customer." ;
+    rdfs:comment "Shared section-5.0 output (5.3.1.6.2). Directive: rules prescribe required conduct." .
+
+ex:PeopleObjectives a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "People Objectives" ;
+    skos:definition "A Directive Information Content Entity that prescribes the goals and plan of action assigned to the workforce delivering a service." ;
+    rdfs:comment "Shared section-5.0 output (5.3.1.6.1). Directive: objectives prescribe intended ends for personnel." .
+
+ex:ServiceDeliveryContract a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Service Delivery Contract" ;
+    skos:definition "A Directive Information Content Entity that prescribes the agreed terms and obligations governing the delivery of a service to a customer." ;
+    rdfs:comment "Shared section-5.0 input/output. Recurs across 5.3.1.1, 5.3.3.3. Directive: a contract prescribes binding obligations." .
+
+ex:BuildBuyDecision a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Build/Buy Decision" ;
+    skos:definition "A Directive Information Content Entity that prescribes whether a service-delivery solution is to be constructed in-house or purchased." ;
+    rdfs:comment "Shared section-5.0 output (5.3.2.6). Directive: a decision prescribes the chosen course of action." .
+
+ex:ProceedApprovalDecision a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Proceed Approval Decision" ;
+    skos:definition "A Directive Information Content Entity that prescribes authorization to proceed with delivering a service-delivery solution." ;
+    rdfs:comment "Shared section-5.0 output (5.3.2.5). Directive: an approval prescribes that work may continue." .
+
+####################################################################
+# 2.3 MATERIAL OUTPUTS  (legal in operations categories; material entity)
+####################################################################
+
+ex:TrainingMaterial a owl:Class ;
+    rdfs:subClassOf cco:ont00000253 ,   # Information Bearing Entity
+        obo:BFO_0000040 ;   # Material Entity (IBE transitive BFO parent; asserted so standalone SHACL S4 resolves)
+    rdfs:label "Training Material" ;
+    skos:definition "An Information Bearing Entity (manual, slide deck, e-learning file, workbook, CBT module) produced to support the comprehensive training of personnel in skills or behaviours needed to deliver services." ;
+    rdfs:comment "Shared section-5.0 output (5.2.3.2). Re-anchored to cco:ont00000253 (Information Bearing Entity) -- the right mid-level for a material/digital bearer of training content -- which is still a material entity (IBE subClassOf Object subClassOf Material Entity), so the material-I/O usage holds. Non-informational training equipment, if needed, would be a separate class." .
+
+ex:ServiceDeliverySolution a owl:Class ;
+    rdfs:subClassOf obo:BFO_0000040 ;   # material entity
+    rdfs:label "Service Delivery Solution (deployed artifact)" ;
+    skos:definition "A Material Entity (a built or purchased artifact) that is deployed to a customer to fulfil a service-delivery need." ;
+    rdfs:comment "Shared section-5.0 output (5.3.2.6, 5.3.2.7). Modeled as a material entity per the operations material-I/O allowance; where a particular solution is purely informational, group agents may instead use ex:SolutionSpecification. ex:SolutionSpecification (Directive ICE) prescribes it; this class is the delivered artifact." .
+
+####################################################################
+# 2.4 AGENTS / ORGANIZATIONS  (independent continuants; realizables only)
+####################################################################
+
+ex:Customer a owl:Class ;
+    rdfs:subClassOf cco:ont00001017 ,   # Agent
+        [ a owl:Restriction ;
+          owl:onProperty obo:BFO_0000196 ;   # bearer of
+          owl:someValuesFrom ex:CustomerRole ] ;
+    rdfs:label "Customer" ;
+    skos:definition "An Agent that bears a customer role in relation to an organization delivering a service." ;
+    rdfs:comment "Shared section-5.0 participant. Modeled as cco:Agent (not Organization) so that both individual and organizational customers are admitted; group agents may narrow to cco:ont00001180 where the customer is specifically an organization." .
+
+ex:ServiceProvider a owl:Class ;
+    rdfs:subClassOf cco:ont00001180 ,   # Organization
+        [ a owl:Restriction ;
+          owl:onProperty cco:ont00001954 ;   # has capability
+          owl:someValuesFrom ex:ServiceDeliveryCapability ] ;
+    rdfs:label "Service Provider" ;
+    skos:definition "An Organization that has the capability to deliver services to customers." ;
+    rdfs:comment "Shared section-5.0 agent: the focal organization rendering service. Capability borne on the Organization, not on any ICE (D4)." .
+
+ex:Supplier a owl:Class ;
+    rdfs:subClassOf cco:ont00001180 ,   # Agent
+        [ a owl:Restriction ;
+          owl:onProperty obo:BFO_0000196 ;
+          owl:someValuesFrom ex:SupplierRole ] ;
+    rdfs:label "Supplier" ;
+    skos:definition "An Agent that bears a supplier role in virtue of providing resources, skills, or capabilities that supplement an organization's service delivery." ;
+    rdfs:comment "Shared section-5.0 participant (5.2.2.4, 5.2.2.5, 5.3.1.1). Modeled as cco:Agent to admit both organizational and individual suppliers." .
+
+ex:DeliveryPartner a owl:Class ;
+    rdfs:subClassOf cco:ont00001017 ,   # Agent
+        [ a owl:Restriction ;
+          owl:onProperty obo:BFO_0000196 ;
+          owl:someValuesFrom ex:DeliveryPartnerRole ] ;
+    rdfs:label "Delivery Partner" ;
+    skos:definition "An Agent that bears a delivery-partner role in virtue of collaborating with an organization to supplement its service-delivery skills and capabilities." ;
+    rdfs:comment "Shared section-5.0 participant (5.2.2.4, 5.3.1.1). Distinguished from ex:Supplier: a partner collaborates on delivery rather than merely supplying resources." .
+
+ex:ServiceDeliveryPersonnel a owl:Class ;
+    rdfs:subClassOf cco:ont00001017 ,   # Agent
+        [ a owl:Restriction ;
+          owl:onProperty obo:BFO_0000196 ;
+          owl:someValuesFrom ex:ServiceDeliveryPersonnelRole ] ;
+    rdfs:label "Service Delivery Personnel" ;
+    skos:definition "An Agent that bears a service-delivery personnel role in virtue of being assigned to perform the work of delivering a service to a customer." ;
+    rdfs:comment "Shared section-5.0 participant (5.3.1.6, 5.2.3.4, 5.2.3.5). The 'resources' assigned and trained for delivery." .
+
+####################################################################
+# 2.5 ROLES  (obo:BFO_0000023; borne by Agents/Orgs only -- D4)
+####################################################################
+
+ex:CustomerRole a owl:Class ;
+    rdfs:subClassOf obo:BFO_0000023 ;   # role
+    rdfs:label "Customer Role" ;
+    skos:definition "A Role that is borne by an Agent or Organization in virtue of acquiring, consuming, contracting for, or being a target acquirer of the goods or services of a focal organization." .
+
+ex:SupplierRole a owl:Class ;
+    rdfs:subClassOf obo:BFO_0000023 ;
+    rdfs:label "Supplier Role" ;
+    skos:definition "A Role that is borne by an Agent or Organization in virtue of furnishing goods, materials, resources, or services to a procuring organization, typically for consideration." .
+
+ex:DeliveryPartnerRole a owl:Class ;
+    rdfs:subClassOf obo:BFO_0000023 ;
+    rdfs:label "Delivery Partner Role" ;
+    skos:definition "A Role that is borne by an Agent in virtue of collaborating with an organization to supplement its service-delivery skills and capabilities." .
+
+ex:ServiceDeliveryPersonnelRole a owl:Class ;
+    rdfs:subClassOf obo:BFO_0000023 ;
+    rdfs:label "Service Delivery Personnel Role" ;
+    skos:definition "A Role that is borne by an Agent in virtue of being assigned to perform the work of delivering a service to a customer." .
+
+ex:TrainerRole a owl:Class ;
+    rdfs:subClassOf obo:BFO_0000023 ;
+    rdfs:label "Trainer Role" ;
+    skos:definition "A Role that is borne by an Agent in virtue of being tasked with imparting service-delivery skills or behaviours to other Agents." ;
+    rdfs:comment "Shared section-5.0 role for the training processes (5.2.3.4, 5.2.3.5)." .
+
+####################################################################
+# 2.6 CAPABILITIES  (Organization Capability cco:ont00000568;
+#    borne by Orgs only -- D4). The R6 'realized in some <act>'
+#    restriction is added where the realising bounded act is defined
+#    in this module (see the 5.1 governance establishment act).
+####################################################################
+
+ex:ServiceDeliveryCapability a owl:Class ;
+    rdfs:subClassOf cco:ont00000568 ;   # Organization Capability
+    rdfs:label "Service Delivery Capability" ;
+    skos:definition "An Organization Capability that is realized in the acts by which an organization renders services to its customers." ;
+    rdfs:comment "Shared section-5.0 capability. Standing-function nodes (R5) realize this; the group agent that mints those acts adds the 'realized in some <act>' restriction (R6)." .
+
+ex:ServiceDeliveryGovernanceCapability a owl:Class ;
+    rdfs:subClassOf cco:ont00000568 ;
+    rdfs:label "Service Delivery Governance Capability" ;
+    skos:definition "An Organization Capability that is realized in the acts by which an organization governs the performance, development, and direction of its service delivery." ;
+    rdfs:comment "Shared section-5.0 capability for the governance standing-functions in 5.1.1 (e.g. 5.1.1.1-5.1.1.3 'Manage ...' nodes that R5 resolves to capability, not process)." .
+
+ex:ResourceManagementCapability a owl:Class ;
+    rdfs:subClassOf cco:ont00000568 ;
+    rdfs:label "Resource Management Capability" ;
+    skos:definition "An Organization Capability that is realized in the acts by which an organization plans, allocates, and monitors the resources needed for service delivery." ;
+    rdfs:comment "Shared section-5.0 capability for resource-management standing-functions in 5.2 (e.g. 5.2.2.6 'Monitor and manage resource capacity')." .
+
+ex:DemandForecastingCapability a owl:Class ;
+    rdfs:subClassOf cco:ont00000568 ;
+    rdfs:label "Demand Forecasting Capability" ;
+    skos:definition "An Organization Capability that is realized in the acts by which an organization forecasts and revises demand for its services." ;
+    rdfs:comment "Shared section-5.0 capability underlying the forecasting acts in 5.2.1." .
+
+####################################################################
+# 2.7 GROUP-LOCAL SUPPORTING ICEs (minted once; no shared IRI given)
+#    Descriptive ICE = cco:ont00000853 ; Directive ICE = cco:ont00000965.
+####################################################################
+
+ex:PipelineStatusAssessment a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;   # Descriptive ICE
+    rdfs:label "Pipeline Status Assessment" ;
+    skos:definition "A Descriptive Information Content Entity that describes the current stage and status of potential opportunities tracked through a sales or delivery pipeline." ;
+    rdfs:comment "Minted locally (5.2.1.1): no shared-vocab ICE captures the per-stage status output of pipeline monitoring. Descriptive because it represents observed state." ;
+    skos:example "A weekly pipeline report listing each opportunity and the stage it currently occupies." .
+
+ex:SkillsCapabilityTestResult a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;   # Descriptive ICE
+    rdfs:label "Skills and Capability Test Result" ;
+    skos:definition "A Descriptive Information Content Entity that describes the outcome of administering a skill or capability test to service delivery personnel following training." ;
+    rdfs:comment "Minted locally (5.2.3.6): distinct from ex:TrainingEffectivenessEvaluation (an aggregate appraisal); this records a single test administration outcome. Descriptive because it reports measured performance." ;
+    skos:example "A pass/fail record from a hands-on competency test administered after a technical training course." .
+
+ex:TrainingSchedule a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;   # Directive ICE
+    rdfs:label "Training Schedule" ;
+    skos:definition "A Directive Information Content Entity that prescribes the times, places, and sequence in which training sessions are to be delivered to trainees." ;
+    rdfs:comment "Minted locally (5.2.3.3): a schedule prescribes (Directive) when/where training occurs; no shared-vocab ICE covers it." ;
+    skos:example "A calendar prescribing which cohorts attend which training modules over a quarter." .
+
+ex:CustomerNeedsAnalysis a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Customer Needs Analysis" ;
+    skos:definition "A Descriptive Information Content Entity that describes an understanding of a customer's environment and service needs within the organization's scope." ;
+    rdfs:comment "Minted locally: APQC 5.3.2.1 output and input to 5.3.2.2; no shared-vocab ICE supplied." ;
+    skos:example "A discovery report summarizing a client's pain points and the in-scope needs to address." .
+
+ex:ObjectiveAlignmentAssessment a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Objective Alignment Assessment" ;
+    skos:definition "A Descriptive Information Content Entity that describes the degree to which a customer's business objectives align with an agreed service-delivery solution." ;
+    rdfs:comment "Minted locally: APQC 5.3.1.4 output; no shared-vocab ICE supplied." ;
+    skos:example "A note recording that the proposed solution supports the client's stated growth objective." .
+
+ex:SolutionChangeSpecification a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Solution Change Specification" ;
+    skos:definition "A Directive Information Content Entity that prescribes corrections to a drafted solution in response to identified issues." ;
+    rdfs:comment "Minted locally: APQC 5.3.2.4 output; no shared-vocab ICE supplied. Directive because it prescribes changes to be applied." ;
+    skos:example "A change request listing fixes required before a solution can be approved." .
+
+ex:ContractFulfillmentConfirmation a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,
+        [ a owl:Restriction ;
+          owl:onProperty cco:ont00001808 ;   # is about
+          owl:someValuesFrom ex:ServiceDeliveryContract ] ;
+    rdfs:label "Contract Fulfillment Confirmation" ;
+    skos:definition "A Descriptive Information Content Entity that describes confirmation that all terms of a service-delivery contract have been satisfied." ;
+    rdfs:comment "Minted locally: APQC 5.3.3.3 output; no shared-vocab ICE supplied." ;
+    skos:example "A sign-off memo stating every contractual deliverable has been met." .
+
+ex:TrainingFeedback a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;   # Descriptive ICE
+    rdfs:label "Training Feedback" ;
+    skos:definition "A Descriptive Information Content Entity that describes a manager's or trainee's evaluation of training that has been provided, solicited to gauge its effectiveness." ;
+    rdfs:comment "Minted locally (Gate-F fix, 5.2.3.7): input to ex:P12135. Distinct from ex:CustomerFeedback (a CUSTOMER's evaluation of SERVICES RENDERED). The APQC source for 12135 specifies 'manager or student feedback ... to evaluate training effectiveness' -- i.e. trainee/manager feedback ABOUT TRAINING, not customer feedback about delivered services; reusing ex:CustomerFeedback here was a definitional category error. Descriptive: it reports an evaluation." ;
+    skos:example "A post-course survey in which a line manager rates how well a trainee can now perform the taught task." .
+
+ex:ContractTermsReview a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,   # Descriptive ICE
+        [ a owl:Restriction ;
+          owl:onProperty cco:ont00001808 ;   # is about
+          owl:someValuesFrom ex:ServiceDeliveryContract ] ;
+    rdfs:label "Contract Terms Review" ;
+    skos:definition "A Descriptive Information Content Entity that describes a judgement, formed at service-delivery initiation, of the terms of a solutions contract under review prior to their agreement." ;
+    rdfs:comment "Minted locally (Gate-F fix, 5.3.1.1): output of ex:P20060. Rejected reuse of ex:ServiceDeliveryReview, which is defined as 'an end-to-end evaluation of the SUCCESS of a COMPLETED service-delivery engagement' (a post-delivery retrospective, the correct output of ex:P20078): a contract-terms appraisal at INITIATION cannot output a completed-engagement success review. 'is about' the contract whose terms it appraises. Descriptive: it records an appraisal judgement." ;
+    skos:example "Meeting notes recording the agreed and contested clauses of a solutions contract before sign-off." .
+
+ex:ServiceDeliveryCompletionConfirmation a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;   # Descriptive ICE
+    rdfs:label "Service Delivery Completion Confirmation" ;
+    skos:definition "A Descriptive Information Content Entity that describes a confirmed judgement that all internal and external aspects of a service delivery have been completed." ;
+    rdfs:comment "Minted locally (Gate-F fix, 5.3.3.5): output of ex:P20082, supplying the descriptive completion-confirmation its Act-of-Appraisal genus definitionally produces. Descriptive: a confirmation reports a verified state." ;
+    skos:example "A closeout checklist signed off once every internal and external completion item is cleared." .
+
+####################################################################
+# 3. PROCESS CLASSES + group-specific capabilities
+####################################################################
+
+####################################################################
+# ===== APQC PROCESS GROUP 5.1 (PCF 20026)
+# "Establish service delivery governance and strategies"
+# Partonomy via cco:ont00001777; no rdfs:subClassOf between processes.
+# Act genera: inlined canonical shared genera (ex:ActOfFormulation,
+# ex:ActOfAnalysis) and CCO (cco:ont00000636 Act of Appraisal).
+####################################################################
+
+# ---- 5.1 group node (PCF 20026): bounded establishment act -------------
+ex:P20026 a owl:Class ;
+    ex:pcfID "20026" ; ex:hierarchyID "5.1" ;
+    ex:apqcSourceText "Creating rules and regulations for service delivery to the customer. Establish a system to manage performance, delivery, and direction of service delivery. Engage with the customer for satisfaction feedback. Define goals, policies, processes, and workplace layout and infrastructure as a part of the service delivery strategy." ;
+    rdfs:label "Establish service delivery governance and strategies" ;
+    skos:definition "An Act of Formulation that establishes the governance and strategies for service delivery by standing up service delivery governance and developing the service delivery strategies that define its goals, policies, processes, and workplace layout." ;
+    rdfs:comment "Models APQC process group 5.1 as an occurrent whose two APQC children (5.1.1, 5.1.2) are process parts (cco:ont00001777). Not given existential has-process-part from Category 5.0 (R3). Genus Act of Formulation because its dominant deliverable is prescriptive (governance rules + strategies = Directive ICEs), per the GOLDEN PRINCIPLE." ;
+    skos:example "A service organization's annual cycle of standing up delivery governance and refreshing its service delivery strategy." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20027 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20032 ] .
+
+# ---- 5.1.1 (PCF 20027): establish governance -------------------------
+ex:P20027 a owl:Class ;
+    ex:pcfID "20027" ; ex:hierarchyID "5.1.1" ;
+    ex:apqcSourceText "Establishing service delivery governance through a system that manages performance, development, and direction. Allow for customer feedback on delivery satisfaction." ;
+    rdfs:label "Establish service delivery governance" ;
+    skos:definition "An Act of Formulation that establishes service delivery governance by standing up a system to manage delivery performance, development, and direction and to gather customer satisfaction feedback." ;
+    rdfs:comment "Bounded establishment act (begin/end). Its APQC children that are standing management functions (5.1.1.1-5.1.1.3) are demoted to Organization Capabilities (R5/R6) and are NOT process parts; only the bounded feedback act 5.1.1.4 is a process part. Genus Act of Formulation: the principal deliverable is a governance system (Directive ICE), per the GOLDEN PRINCIPLE." ;
+    skos:example "A delivery organization institutes its governance system and a satisfaction-feedback loop for a new service line." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20031 ] .
+
+# ---- 5.1.1.4 (PCF 20031): solicit customer feedback ------------------
+ex:P20031 a owl:Class ;
+    ex:pcfID "20031" ; ex:hierarchyID "5.1.1.4" ;
+    ex:apqcSourceText "Engaging the customer post delivery to gauge the effectiveness of services rendered in order to improve on key delivery functions going forward." ;
+    rdfs:label "Solicit feedback from customer on service delivery satisfaction" ;
+    skos:definition "An Act of Appraisal that engages the customer after delivery to gauge the effectiveness of services rendered and produces a service delivery satisfaction assessment about that customer." ;
+    rdfs:comment "Anchored to cco:ont00000636 (Act of Appraisal): it evaluates/judges delivery effectiveness from the customer's perspective; its definitional output is the Descriptive ex:ServiceDeliverySatisfactionAssessment (GOLDEN PRINCIPLE: appraisal -> descriptive). The Customer participates (has participant). Customer feedback is a typical input (rdfs:comment, not definitional restriction)." ;
+    skos:example "A delivery lead surveys a customer after a project and records a satisfaction assessment to improve future delivery." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceDeliverySatisfactionAssessment ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:Customer ] .
+
+# ---- 5.1.2 (PCF 20032): develop service delivery strategies ----------
+ex:P20032 a owl:Class ;
+    ex:pcfID "20032" ; ex:hierarchyID "5.1.2" ;
+    ex:apqcSourceText "Constructing strategies that identify goals, policies, processes, and procedures in relation to service delivery. Review and validate strategies. Define the workplace layout and infrastructure." ;
+    rdfs:label "Develop service delivery strategies" ;
+    skos:definition "An Act of Formulation that constructs an organization's service delivery strategies, defining the goals, policies, processes, and workplace layout that govern how services are delivered." ;
+    rdfs:comment "Bounded strategy-construction act whose APQC children (5.1.2.1-5.1.2.7) are process parts (cco:ont00001777). Genus Act of Formulation: its dominant deliverable is the prescriptive ex:ServiceDeliveryStrategy (Directive ICE), per the GOLDEN PRINCIPLE." ;
+    skos:example "A service organization's strategy team drafts its delivery goals, labor policy, process specification, and workplace layout for the year." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceDeliveryStrategy ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20033 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20034 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20035 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20036 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20037 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20038 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20039 ] .
+
+# ---- 5.1.2.1 (PCF 20033): define service delivery goals --------------
+ex:P20033 a owl:Class ;
+    ex:pcfID "20033" ; ex:hierarchyID "5.1.2.1" ;
+    ex:apqcSourceText "Aligning organization practices to meet the needs of the customer by creating service delivery goals." ;
+    rdfs:label "Define service delivery goals" ;
+    skos:definition "An Act of Formulation that aligns organizational practice to customer needs by composing the service delivery goals an organization sets for itself." ;
+    rdfs:comment "Genus Act of Formulation: its definitional output ex:ServiceDeliveryGoal is a Directive ICE (GOLDEN PRINCIPLE). Customer requirements are a typical input (rdfs:comment, not a definitional restriction)." ;
+    skos:example "A delivery organization sets measurable on-time and satisfaction goals aligned to customer needs." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceDeliveryGoal ] .
+
+# ---- 5.1.2.2 (PCF 20034): define labor policies ----------------------
+ex:P20034 a owl:Class ;
+    ex:pcfID "20034" ; ex:hierarchyID "5.1.2.2" ;
+    ex:apqcSourceText "Outlining labor policies for resources and ensuring that those policies meet the needs of the organization, the customer, and government regulations." ;
+    rdfs:label "Define labor policies" ;
+    skos:definition "An Act of Formulation that outlines an organization's labor policies for its delivery resources so as to satisfy the needs of the organization, the customer, and government regulations." ;
+    rdfs:comment "Genus Act of Formulation: its definitional output ex:LaborPolicy is a Directive ICE (GOLDEN PRINCIPLE). Regulatory and customer requirements are typical inputs (rdfs:comment, not definitional restrictions)." ;
+    skos:example "An HR-and-delivery team drafts staffing and working-hours policies compliant with labor law." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:LaborPolicy ] .
+
+# ---- 5.1.2.3 (PCF 20035): evaluate resource availability -------------
+ex:P20035 a owl:Class ;
+    ex:pcfID "20035" ; ex:hierarchyID "5.1.2.3" ;
+    ex:apqcSourceText "Understanding the needs of the customer and providing the necessary resources to meet those requirements." ;
+    rdfs:label "Evaluate resource availability" ;
+    skos:definition "An Act of Appraisal that judges the availability of the resources required to meet customer needs and produces a resource availability assessment." ;
+    rdfs:comment "Anchored to cco:ont00000636 (Act of Appraisal): it evaluates whether resources suffice for customer requirements; its definitional output ex:ResourceAvailabilityAssessment is a Descriptive ICE (GOLDEN PRINCIPLE: appraisal -> descriptive). Customer requirements are a typical input (rdfs:comment)." ;
+    skos:example "A resourcing manager appraises staff and tooling availability against an upcoming engagement and reports the gap." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ResourceAvailabilityAssessment ] .
+
+# ---- 5.1.2.4 (PCF 20036): define network and supply constraints ------
+ex:P20036 a owl:Class ;
+    ex:pcfID "20036" ; ex:hierarchyID "5.1.2.4" ;
+    ex:apqcSourceText "Identifying and understanding the limitations imposed upon service delivery network and supply." ;
+    rdfs:label "Define service delivery network and supply constraints" ;
+    skos:definition "An Act of Analysis that identifies and examines the limitations imposed upon an organization's service delivery network and supply and produces a supply constraint analysis." ;
+    rdfs:comment "Genus Act of Analysis (cco:ont00000366 Act of Information Processing): the verb 'identify and understand limitations' is information processing that yields a representation, not a prescription; its definitional output ex:SupplyConstraintAnalysis is a Descriptive ICE (GOLDEN PRINCIPLE)." ;
+    skos:example "A delivery planner maps capacity and supplier limits across the delivery network and documents the constraints." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:SupplyConstraintAnalysis ] .
+
+# ---- 5.1.2.5 (PCF 20037): define service delivery process ------------
+ex:P20037 a owl:Class ;
+    ex:pcfID "20037" ; ex:hierarchyID "5.1.2.5" ;
+    ex:apqcSourceText "Defanging policies and procedures that focus on meeting the needs and expectations of the customer within the working parameters of the organization." ;
+    rdfs:label "Define service delivery process" ;
+    skos:definition "An Act of Formulation that composes the policies and procedures focused on meeting customer needs and expectations within the organization's working parameters, yielding a service delivery process specification." ;
+    rdfs:comment "Genus Act of Formulation: its definitional output ex:ServiceDeliveryProcessSpecification is a Directive ICE (GOLDEN PRINCIPLE). The source text typo 'Defanging' is read as 'Defining'; the verbatim APQC text is preserved in ex:apqcSourceText." ;
+    skos:example "A process owner documents the standard service delivery procedure customers can expect for a given offering." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceDeliveryProcessSpecification ] .
+
+# ---- 5.1.2.6 (PCF 20038): review and validate procedures -------------
+ex:P20038 a owl:Class ;
+    ex:pcfID "20038" ; ex:hierarchyID "5.1.2.6" ;
+    ex:apqcSourceText "Revisioning service delivery procedures that fall short of performance parameters. Realign procedures with specified expectations in order to provide successful service delivery." ;
+    rdfs:label "Review and validate service delivery procedures" ;
+    skos:definition "An Act of Appraisal that reviews and validates existing service delivery procedures against performance parameters and produces a service delivery review identifying where they fall short of expectations." ;
+    rdfs:comment "Anchored to cco:ont00000636 (Act of Appraisal): it judges existing procedures against performance parameters; its definitional output ex:ServiceDeliveryReview is a Descriptive ICE (GOLDEN PRINCIPLE: appraisal -> descriptive). Has the service delivery process specification as a typical input (rdfs:comment); the realignment/revision of the procedures is a downstream formulation step, not part of this review act." ;
+    skos:example "A quality lead reviews delivery procedures against KPIs and flags the ones missing their targets for realignment." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceDeliveryReview ] .
+
+# ---- 5.1.2.7 (PCF 20039): define workplace layout and infrastructure -
+ex:P20039 a owl:Class ;
+    ex:pcfID "20039" ; ex:hierarchyID "5.1.2.7" ;
+    ex:apqcSourceText "Creating a workplace that best serves the needs of the organization and customer through strategic layout and infrastructure." ;
+    rdfs:label "Define service delivery workplace layout and infrastructure" ;
+    skos:definition "An Act of Formulation that designs a service delivery workplace best serving the needs of the organization and customer, yielding a workplace layout plan for its layout and infrastructure." ;
+    rdfs:comment "Genus Act of Formulation: its definitional output ex:WorkplaceLayoutPlan is a Directive ICE (a prescriptive layout/infrastructure plan), per the GOLDEN PRINCIPLE." ;
+    skos:example "A facilities-and-delivery team designs the floor layout and infrastructure of a new service center." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:WorkplaceLayoutPlan ] .
+
+####################################################################
+# EXTRA SUPPORTING CAPABILITIES for group 5.1
+# Organization Capabilities for the R5/R6 demotions of the standing-
+# management activities 5.1.1.2 (PCF 20029) and 5.1.1.3 (PCF 20030).
+# Specializations of the shared ex:ServiceDeliveryGovernanceCapability
+# (cco:ont00000568 Organization Capability). Realized in the bounded
+# governance establishment act ex:P20027 (R6). No PCF row identifiers
+# on supporting classes (rule 11). 5.1.1.1 (PCF 20028) maps to the
+# already-shared ex:ServiceDeliveryGovernanceCapability (no new class).
+####################################################################
+
+ex:ServiceDeliveryPerformanceManagementCapability a owl:Class ;
+    rdfs:subClassOf ex:ServiceDeliveryGovernanceCapability ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P20027 ] ;
+    rdfs:label "Service Delivery Performance Management Capability" ;
+    skos:definition "A Service Delivery Governance Capability that is realized in the ongoing acts by which an organization conducts and implements performance measures to ensure successful delivery of service to the customer." ;
+    rdfs:comment "Minted for the R5/R6 demotion of APQC activity 5.1.1.2 'Manage service delivery performance' [20029]: a standing oversight function with no natural end, so an Organization Capability (cco:ont00000568) rather than a bounded process. Specializes the shared ex:ServiceDeliveryGovernanceCapability; realized in the bounded governance establishment act ex:P20027 (R6)." .
+
+ex:ServiceDeliveryDevelopmentManagementCapability a owl:Class ;
+    rdfs:subClassOf ex:ServiceDeliveryGovernanceCapability ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P20027 ] ;
+    rdfs:label "Service Delivery Development and Direction Management Capability" ;
+    skos:definition "A Service Delivery Governance Capability that is realized in the ongoing acts by which an organization guides the resources that keep the development and direction of service delivery in line with customer needs." ;
+    rdfs:comment "Minted for the R5/R6 demotion of APQC activity 5.1.1.3 'Manage service delivery development and direction' [20030]: a standing guidance/management function with no natural end, hence an Organization Capability (cco:ont00000568) not a bounded process. Specializes the shared ex:ServiceDeliveryGovernanceCapability; realized in the bounded governance establishment act ex:P20027 (R6)." .
+
+####################################################################
+# ===== APQC PROCESS GROUP 5.2 (PCF 20040)
+# "Manage service delivery resources"
+# Partonomy via cco:ont00001777. Act genera per GOLDEN PRINCIPLE.
+####################################################################
+
+ex:P20040 a owl:Class ;
+    ex:pcfID "20040" ; ex:hierarchyID "5.2" ;
+    ex:apqcSourceText "Understanding the demands on resources and creating a plan to enable the delivery of services via those resources." ;
+    rdfs:label "Manage service delivery resources" ;
+    skos:definition "An Act of Planning that understands the demands placed on service delivery resources and produces a resource plan enabling those resources to deliver services." ;
+    rdfs:comment "Models APQC process group 5.2 as a bounded, repeatable resource-management cycle (partonomy anchor). Its APQC children are process parts (cco:ont00001777), not subclasses. Anchored at cco:ont00000511 (Act of Planning) because the cycle's defining output is a directive plan. Gate-F fix: the definitional has-output was changed from ex:ServiceDeliveryPlan to ex:ResourcePlan. ex:ServiceDeliveryPlan is 'the plan of action for rendering a service-delivery solution to a customer' -- a 5.3 RENDERING deliverable; APQC 5.2 is RESOURCE management, whose source ('creating a plan to enable the delivery of services via those resources') and children (ex:ResourcePlan in 5.2.2, forecasts in 5.2.1) produce a RESOURCE plan, not a service-rendering plan. Asserting ServiceDeliveryPlan as the existential output conflated 5.2 with 5.3 and failed Phase-3 necessity; ex:ResourcePlan is the cycle's genuine deliverable." ;
+    skos:example "An annual service-resource planning cycle that forecasts demand, plans resources, and enables staff before a delivery season." ;
+    rdfs:subClassOf cco:ont00000511 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ResourcePlan ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20041 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20050 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P12127 ] .
+
+# ---- 5.2.1 (PCF 20041): manage service delivery resource demand ------
+ex:P20041 a owl:Class ;
+    ex:pcfID "20041" ; ex:hierarchyID "5.2.1" ;
+    ex:apqcSourceText "Ensuring necessary resources are maintained through monitoring pipeline, developing forecasts, and collaborating with customers. Determine skills needed for service deliver and forecast customer orders. Monitor forecasted orders and modify if where needed. Measure forecast accuracy." ;
+    rdfs:label "Manage service delivery resource demand" ;
+    skos:definition "An Act of Analysis that monitors opportunity pipeline and demand signals and produces a consensus demand forecast for service delivery resources." ;
+    rdfs:comment "Bounded, repeatable demand-management cycle. Children are process parts (cco:ont00001777). Anchored at ex:ActOfAnalysis because its defining output is a Descriptive forecast." ;
+    skos:example "A planning team builds, reconciles, and tracks a quarterly demand forecast for a services business." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ConsensusDemandForecast ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20042 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20043 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20044 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20045 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20046 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20047 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20048 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20049 ] .
+
+# --- 5.2.1.1 (PCF 20042) : Monitoring
+ex:P20042 a owl:Class ;
+    ex:pcfID "20042" ; ex:hierarchyID "5.2.1.1" ;
+    ex:apqcSourceText "Tracking potential opportunities as they move through the various stages of the pipeline." ;
+    rdfs:label "Monitor pipeline" ;
+    skos:definition "An Act of Monitoring that has as input opportunity pipeline data and has as output a pipeline status assessment of opportunities moving through the pipeline." ;
+    rdfs:comment "Anchored at ex:ActOfMonitoring: the act tracks ongoing opportunity state rather than rendering a value judgement. Descriptive output." ;
+    skos:example "A sales-operations analyst tracks each opportunity's pipeline stage week over week." ;
+    rdfs:subClassOf ex:ActOfMonitoring ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:OpportunityPipelineData ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:PipelineStatusAssessment ] .
+
+# --- 5.2.1.2 (PCF 20043) : Analysis
+ex:P20043 a owl:Class ;
+    ex:pcfID "20043" ; ex:hierarchyID "5.2.1.2" ;
+    ex:apqcSourceText "Identifying the demand anticipated for the organization's services. Estimate future demand for services using historical data, analysis of the market environment, and external data." ;
+    rdfs:label "Develop baseline forecasts" ;
+    skos:definition "An Act of Forecasting that has as input historical demand data and market environment data and has as output a demand forecast for the organization's services." ;
+    rdfs:comment "Re-anchored (Gate-F) to ex:ActOfForecasting (Act of Prediction): the output ex:DemandForecast is a PREDICTIVE ICE about uncertain future demand, matching the Slice-3 forecast pattern rather than generic analysis." ;
+    skos:example "A demand planner estimates next quarter's service demand from prior-year volumes and market trends." ;
+    rdfs:subClassOf ex:ActOfForecasting ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:HistoricalDemandData ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:MarketEnvironmentData ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:DemandForecast ] .
+
+# --- 5.2.1.3 (PCF 20044) : Analysis / requirements elicitation (customer engagement)
+ex:P20044 a owl:Class ;
+    ex:pcfID "20044" ; ex:hierarchyID "5.2.1.3" ;
+    ex:apqcSourceText "Providing a collaborative meeting in which to engage the customer to understand the scope of their needs and constructing solutions based on need and constraints." ;
+    rdfs:label "Collaborate with customers" ;
+    skos:definition "An Act of Analysis that engages a customer in a collaborative meeting to elicit and understand the scope of their needs and has as output a customer-needs analysis." ;
+    rdfs:comment "Gate-F fix: REJECTED ex:ActOfServiceProvision (a Planned Act in which an Agent renders a service to a customer by completing the tasks that fulfil an agreed service need). No service is rendered here -- this is a requirements-elicitation/communication act in which the organization GATHERS information; the deliverable is an understanding of customer needs (Descriptive), so per the GOLDEN PRINCIPLE the genus is an analysis/information-processing act, ex:ActOfAnalysis. Re-anchored accordingly. The customer participant is definitional. The understanding of needs is the OUTPUT of the meeting (ex:CustomerNeedsAnalysis), not a pre-existing input: the prior has-input ex:CustomerRequirements was removed because the requirements are elicited here, not consumed. Constructing a solution is a typical, not necessary, downstream output (recorded here, not as a restriction). ex:ActOfServiceProvision is reserved for 5.3 rendering acts." ;
+    skos:example "A delivery lead runs a scoping workshop with the customer to capture the in-scope needs." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CustomerNeedsAnalysis ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:Customer ] .
+
+# --- 5.2.1.4 (PCF 20045) : Analysis (consensus)
+ex:P20045 a owl:Class ;
+    ex:pcfID "20045" ; ex:hierarchyID "5.2.1.4" ;
+    ex:apqcSourceText "Arriving at a consensus over the forecasted levels of demand for services by analyzing baseline forecasts and customer input." ;
+    rdfs:label "Develop consensus forecast" ;
+    skos:definition "An Act of Forecasting that has as input a demand forecast and customer feedback and has as output a consensus demand forecast." ;
+    rdfs:comment "Re-anchored (Gate-F) to ex:ActOfForecasting: reconciles the baseline forecast with customer input into an agreed PREDICTIVE forecast (ex:ConsensusDemandForecast)." ;
+    skos:example "Sales and delivery leaders reconcile the baseline forecast with customer commitments into one agreed number." ;
+    rdfs:subClassOf ex:ActOfForecasting ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:DemandForecast ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:CustomerFeedback ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ConsensusDemandForecast ] .
+
+# --- 5.2.1.5 (PCF 20046) : Analysis (skills/availability)
+ex:P20046 a owl:Class ;
+    ex:pcfID "20046" ; ex:hierarchyID "5.2.1.5" ;
+    ex:apqcSourceText "Identifying what skillset is necessary for the delivery of opportunities. Determine the forecast of customer orders based upon those skillsets and the resources available." ;
+    rdfs:label "Determine availability of skills to deliver on current and forecast customer orders" ;
+    skos:definition "An Act of Analysis that has as input a demand forecast and has as output a resource availability assessment of the skills available to deliver on current and forecast customer orders." ;
+    rdfs:comment "Discerns required skillsets against available resources; descriptive assessment output anchors it at ex:ActOfAnalysis." ;
+    skos:example "A resource manager checks whether the skills on hand can cover the forecast order book." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:DemandForecast ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ResourceAvailabilityAssessment ] .
+
+# --- 5.2.1.6 (PCF 20047) : Monitoring (track + revise)
+ex:P20047 a owl:Class ;
+    ex:pcfID "20047" ; ex:hierarchyID "5.2.1.6" ;
+    ex:apqcSourceText "Overseeing all activities necessary to deliver services to customer. Revise forecast to account for any issues that may arise. This could be changes in market trend, resource changes, etc." ;
+    rdfs:label "Monitor activity against forecast and revise forecast" ;
+    skos:definition "An Act of Monitoring that has as input a consensus demand forecast and has as output a revised demand forecast reflecting observed delivery activity and emerging issues." ;
+    rdfs:comment "Anchored at ex:ActOfMonitoring: the DOMINANT act is oversight of delivery activity against the forecast (source: 'Overseeing all activities'); the emitted revised forecast is a byproduct. Its output ex:DemandForecast is a PREDICTIVE ICE (cco:ont00000626 subClassOf Descriptive ICE), so the Information-Processing genus still agrees with the descriptive-kind output (GOLDEN PRINCIPLE). The pure forecast-production acts P20043/P20045 use ex:ActOfForecasting." ;
+    skos:example "A delivery manager tracks actuals against forecast and updates the forecast when a key resource leaves." ;
+    rdfs:subClassOf ex:ActOfMonitoring ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:ConsensusDemandForecast ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:DemandForecast ] .
+
+# --- 5.2.1.7 (PCF 20048) : Analysis (evaluate/revise approach)
+ex:P20048 a owl:Class ;
+    ex:pcfID "20048" ; ex:hierarchyID "5.2.1.7" ;
+    ex:apqcSourceText "Recognizing potential problems in the current forecast and making the necessary changes to align the forecast meet demand." ;
+    rdfs:label "Evaluate and revise forecasting approach" ;
+    skos:definition "An Act of Analysis that has as input a forecast accuracy assessment and has as output a revised demand forecast that better aligns the forecasting approach with demand." ;
+    rdfs:comment "Recognizes problems in the forecasting approach and adjusts it; the corrective change is expressed as a Descriptive revised forecast, so it anchors at ex:ActOfAnalysis." ;
+    skos:example "A planning lead diagnoses systematic over-forecasting and recalibrates the model." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:ForecastAccuracyAssessment ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:DemandForecast ] .
+
+# --- 5.2.1.8 (PCF 20049) : Analysis (measure accuracy)
+ex:P20049 a owl:Class ;
+    ex:pcfID "20049" ; ex:hierarchyID "5.2.1.8" ;
+    ex:apqcSourceText "Analyzing forecasting against actuals to determine accuracy. Modify forecasting to align with actual need." ;
+    rdfs:label "Measure forecast accuracy" ;
+    skos:definition "An Act of Analysis that has as input a demand forecast and has as output a forecast accuracy assessment determined by comparing the forecast against actuals." ;
+    rdfs:comment "Compares forecast to actuals to yield a Descriptive accuracy judgement, so it anchors at ex:ActOfAnalysis." ;
+    skos:example "An analyst computes MAPE between forecasted and actual service volumes for the prior period." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:DemandForecast ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ForecastAccuracyAssessment ] .
+
+# ---- 5.2.2 (PCF 20050): create and manage resource plan --------------
+ex:P20050 a owl:Class ;
+    ex:pcfID "20050" ; ex:hierarchyID "5.2.2" ;
+    ex:apqcSourceText "Identifying the need for and creating a resource plan. Understand resource demand and align with capacity, skills, and capabilities. Enlist suppliers and partners to supplement needed skills and capabilities. Monitor and manage capabilities and skills with an eye on critical resources and supplier capacity." ;
+    rdfs:label "Create and manage resource plan" ;
+    skos:definition "An Act of Formulation that aligns resource demand with capacity, skills, and capabilities and has as output a resource plan." ;
+    rdfs:comment "Bounded, repeatable resource-planning cycle (partonomy anchor). Children are process parts (cco:ont00001777). Anchored at ex:ActOfFormulation because its defining output is a Directive resource plan." ;
+    skos:example "A resource manager assembles and maintains a staffing-and-supplier plan for the delivery portfolio." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ResourcePlan ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20051 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20052 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20053 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20054 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20055 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20056 ] .
+
+# --- 5.2.2.1 (PCF 20051) : Analysis (skills taxonomy)
+ex:P20051 a owl:Class ;
+    ex:pcfID "20051" ; ex:hierarchyID "5.2.2.1" ;
+    ex:apqcSourceText "Analyzing the skills needed to perform services to be delivered. Classify and organize these skills requirements." ;
+    rdfs:label "Define and manage skills taxonomy" ;
+    skos:definition "An Act of Analysis that has as input customer requirements and has as output a skills taxonomy classifying and organizing the skills needed to deliver services." ;
+    rdfs:comment "Produces a Descriptive classification of skill requirements; anchored at ex:ActOfAnalysis. The taxonomy describes (does not prescribe) the skill landscape." ;
+    skos:example "An HR analyst builds a structured catalog of the competencies needed across service offerings." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:CustomerRequirements ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:SkillsTaxonomy ] .
+
+# --- 5.2.2.2 (PCF 20052) : Formulation (resource plan)
+ex:P20052 a owl:Class ;
+    ex:pcfID "20052" ; ex:hierarchyID "5.2.2.2" ;
+    ex:apqcSourceText "Creating a plan to ensure that all resources are available to carry out services required for the customer. This can include physical resources and personnel." ;
+    rdfs:label "Create resource plan" ;
+    skos:definition "An Act of Formulation that has as input a resource availability assessment and has as output a resource plan ensuring all resources are available to carry out required services." ;
+    rdfs:comment "Defining output is a Directive resource plan, so anchored at ex:ActOfFormulation per the GOLDEN PRINCIPLE." ;
+    skos:example "A resource manager writes the staffing and equipment plan for an upcoming engagement." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:ResourceAvailabilityAssessment ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ResourcePlan ] .
+
+# --- 5.2.2.3 (PCF 20053) : Analysis (match demand to supply)
+ex:P20053 a owl:Class ;
+    ex:pcfID "20053" ; ex:hierarchyID "5.2.2.3" ;
+    ex:apqcSourceText "Matching demand with skills and capability. Enlisting suppliers and partners to help with demand when needed." ;
+    rdfs:label "Match resource demand with capacity, skills, and capabilities" ;
+    skos:definition "An Act of Analysis that has as input a demand forecast and has as output a resource availability assessment matching demand against capacity, skills, and capabilities." ;
+    rdfs:comment "Descriptive matching judgement output anchors it at ex:ActOfAnalysis. Enlisting suppliers/partners is the downstream collaboration process (ex:P20054), not part of the matching analysis itself." ;
+    skos:example "A planner compares the forecast order book against the skills inventory to find gaps." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:DemandForecast ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ResourceAvailabilityAssessment ] .
+
+# --- 5.2.2.4 (PCF 20054) : Acquisition (supplier/partner engagement)
+ex:P20054 a owl:Class ;
+    ex:pcfID "20054" ; ex:hierarchyID "5.2.2.4" ;
+    ex:apqcSourceText "Understanding organizational need to enlist suppliers to provide resources for gaps in skills and capabilities. Identify where additional skills are needed and collaborate with third parties to fill those demands." ;
+    rdfs:label "Collaborate with suppliers and partners to supplement skills and capabilities" ;
+    skos:definition "An Act of Acquisition that obtains from suppliers and delivery partners the resources, skills, and capabilities needed to supplement gaps in an organization's own service delivery, and has as input a supply constraint analysis." ;
+    rdfs:comment "Gate-F fix: REJECTED ex:ActOfServiceProvision (rendering a service TO a customer). The source describes the organization OBTAINING resources/skills FROM suppliers to fill gaps -- a procurement/acquisition act in which the org is the RECIPIENT and the supplier is the provider; ServiceProvision's 'render service to a customer' definition does not fit (the roles are reversed). Re-anchored at ex:ActOfAcquisition (Planned Act; 'obtains from some authority or supplier an entity ... the Agent did not previously hold'), which fits exactly. Supplier and delivery-partner participants are definitional to a third-party acquisition/collaboration act." ;
+    skos:example "A resource manager negotiates a partner SOW to obtain a specialist-skill capability for a delivery." ;
+    rdfs:subClassOf ex:ActOfAcquisition ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:SupplyConstraintAnalysis ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:Supplier ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:DeliveryPartner ] .
+
+# --- 5.2.2.5 (PCF 20055) : Identification (critical resources)
+ex:P20055 a owl:Class ;
+    ex:pcfID "20055" ; ex:hierarchyID "5.2.2.5" ;
+    ex:apqcSourceText "Realizing critical resources required to perform and carry out customer needs. Engage with suppliers to fulfill those needs, if necessary. Identify supplier threshold for performing those needs." ;
+    rdfs:label "Identify critical resources and supplier capacity" ;
+    skos:definition "An Act of Identification that has as input customer requirements and has as output a supply constraint analysis registering the critical resources required and the capacity thresholds of suppliers." ;
+    rdfs:comment "Discerns and registers critical resources and supplier capacity limits; descriptive register output anchors it at ex:ActOfIdentification (discernment sense), not the CCO communication-sense identifying act." ;
+    skos:example "A delivery lead lists the few specialist roles that are single points of failure and the suppliers who can backfill them." ;
+    rdfs:subClassOf ex:ActOfIdentification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:CustomerRequirements ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:SupplyConstraintAnalysis ] .
+
+# --- 5.2.2.6 (PCF 20056) : Monitoring (capacity/availability)
+ex:P20056 a owl:Class ;
+    ex:pcfID "20056" ; ex:hierarchyID "5.2.2.6" ;
+    ex:apqcSourceText "Directing and managing workforce needs. Ensure that resources are at full capacity. Monitor that all resources are able to skilled in their respective rolls. Make sure that necessary resources are available to provide the needed services." ;
+    rdfs:label "Monitor and manage resource capacity and availability" ;
+    skos:definition "An Act of Monitoring that has as input a resource plan and has as output a resource availability assessment confirming that resources are at capacity and available for service delivery." ;
+    rdfs:comment "Anchored at ex:ActOfMonitoring: it oversees ongoing workforce capacity and availability and reports state. Output is a Descriptive resource availability assessment. Bounded within a planning cycle (a part of ex:P20050), so modeled as a process; the standing capacity it realizes is ex:ResourceManagementCapability." ;
+    skos:example "A resource manager runs a weekly utilization review to confirm staff are fully and appropriately deployed." ;
+    rdfs:subClassOf ex:ActOfMonitoring ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:ResourcePlan ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ResourceAvailabilityAssessment ] .
+
+# ---- 5.2.3 (PCF 12127): enable service delivery resources ------------
+ex:P12127 a owl:Class ;
+    ex:pcfID "12127" ; ex:hierarchyID "5.2.3" ;
+    ex:apqcSourceText "Instituting training to enable resources to provide service delivery to the customer. Develop a training plan. Create materials that provide for operation and technical training. Schedule, perform, and evaluate training." ;
+    rdfs:label "Enable service delivery resources" ;
+    skos:definition "A Planned Act that institutes training to enable service delivery personnel to provide service delivery, comprising planning, material development, scheduling, delivery, and evaluation of training." ;
+    rdfs:comment "Bounded, repeatable training-enablement cycle (partonomy anchor). Children are process parts (cco:ont00001777). Anchored at the generic cco:ont00000228 (Planned Act) because the cycle composes heterogeneous parts (formulation, material production, instruction, appraisal) and is not reducible to a single act genus." ;
+    skos:example "An L&D team plans, builds, schedules, delivers, and evaluates onboarding for new delivery staff." ;
+    rdfs:subClassOf cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P12128 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P12129 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P12131 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P12132 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P12133 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20057 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P12135 ] .
+
+# --- 5.2.3.1 (PCF 12128) : Formulation (training plan)
+ex:P12128 a owl:Class ;
+    ex:pcfID "12128" ; ex:hierarchyID "5.2.3.1" ;
+    ex:apqcSourceText "Creating a detailed summary of all the actions relevant to teaching a person a particular skill or type of behavior. Determine who will deliver the training. Determine when and where the apprentice or trainee needs to go to receive the structured component of the training." ;
+    rdfs:label "Develop service delivery training plan" ;
+    skos:definition "An Act of Formulation that has as input a skills taxonomy and has as output a training plan detailing the actions, deliverers, timing, and location for teaching service delivery skills." ;
+    rdfs:comment "Defining output is a Directive training plan, so anchored at ex:ActOfFormulation per the GOLDEN PRINCIPLE." ;
+    skos:example "A training lead drafts the curriculum, instructors, and venue plan for a new-hire program." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:SkillsTaxonomy ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:TrainingPlan ] .
+
+# --- 5.2.3.2 (PCF 12129) : Production of material training materials (operations)
+ex:P12129 a owl:Class ;
+    ex:pcfID "12129" ; ex:hierarchyID "5.2.3.2" ;
+    ex:apqcSourceText "Developing materials necessary to provide comprehensive training for the skills or behavior needed to deliver services. This can be any number for formats such as classroom or computer based training." ;
+    rdfs:label "Develop training materials" ;
+    skos:definition "A Planned Act that has as input a training plan and has as output training material used to provide comprehensive training in service delivery skills." ;
+    rdfs:comment "Anchored at the generic cco:ont00000228 (Planned Act): the cycle produces training materials but is not reducible to a single information-output act genus. Per D3 / S3 the definitional has output is the Descriptive ex:TrainingMaterialSpecification (the informational deliverable); the produced ex:TrainingMaterial artifact (a material entity) is consumed downstream as an input to the training-instruction acts (5.2.3.4, 5.2.3.5). The training plan input is informational (an ICE)." ;
+    skos:example "An instructional designer produces slide decks and an e-learning module for a technical course." ;
+    rdfs:subClassOf cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:TrainingPlan ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:TrainingMaterialSpecification ] .
+
+# --- 5.2.3.3 (PCF 12131) : Formulation (training schedule)
+ex:P12131 a owl:Class ;
+    ex:pcfID "12131" ; ex:hierarchyID "5.2.3.3" ;
+    ex:apqcSourceText "Providing training to the employee within a manageable timeframe to meet the needs of both the individual and the organization." ;
+    rdfs:label "Manage training schedule" ;
+    skos:definition "An Act of Formulation that has as input a training plan and has as output a training schedule prescribing the timeframe in which training is delivered to meet individual and organizational needs." ;
+    rdfs:comment "Defining output is a Directive training schedule (prescribes when/where), so anchored at ex:ActOfFormulation per the GOLDEN PRINCIPLE." ;
+    skos:example "A coordinator slots cohorts into training weeks that fit both delivery commitments and learner availability." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:TrainingPlan ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:TrainingSchedule ] .
+
+# --- 5.2.3.4 (PCF 12132) : Training Instruction (operations)
+ex:P12132 a owl:Class ;
+    ex:pcfID "12132" ; ex:hierarchyID "5.2.3.4" ;
+    ex:apqcSourceText "Educating service delivery personnel on all aspects of the operations process of the organization." ;
+    rdfs:label "Deliver operations training" ;
+    skos:definition "An Act of Training Instruction that imparts knowledge of the organization's operations processes to service delivery personnel using training material." ;
+    rdfs:comment "Reuses CCO cco:ont00001075 (Act of Training Instruction): knowledge imparted from agent to agent. Service delivery personnel (the trainees) are definitional participants; training material is a definitional input." ;
+    skos:example "A senior operator runs an operations-process onboarding session for new delivery staff." ;
+    rdfs:subClassOf cco:ont00001075 ,
+        cco:ont00000228 ,   # Planned Act (explicit anchor: Act of Training Instruction is a CCO Planned Act, but it sits outside the SHACL S2/S5 allowlist, so the chain is asserted locally so standalone validation can resolve it)
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:TrainingMaterial ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:ServiceDeliveryPersonnel ] .
+
+# --- 5.2.3.5 (PCF 12133) : Training Instruction (technical)
+ex:P12133 a owl:Class ;
+    ex:pcfID "12133" ; ex:hierarchyID "5.2.3.5" ;
+    ex:apqcSourceText "Ensuring that all personnel are trained on all technical aspects of service delivery." ;
+    rdfs:label "Deliver technical training" ;
+    skos:definition "An Act of Training Instruction that imparts knowledge of the technical aspects of service delivery to service delivery personnel using training material." ;
+    rdfs:comment "Reuses CCO cco:ont00001075 (Act of Training Instruction). Service delivery personnel are definitional participants; training material is a definitional input." ;
+    skos:example "A technical trainer certifies field engineers on a product's installation procedures." ;
+    rdfs:subClassOf cco:ont00001075 ,
+        cco:ont00000228 ,   # Planned Act (explicit anchor: Act of Training Instruction is a CCO Planned Act, but it sits outside the SHACL S2/S5 allowlist, so the chain is asserted locally so standalone validation can resolve it)
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:TrainingMaterial ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:ServiceDeliveryPersonnel ] .
+
+# --- 5.2.3.6 (PCF 20057) : Appraisal (skill/capability testing)
+ex:P20057 a owl:Class ;
+    ex:pcfID "20057" ; ex:hierarchyID "5.2.3.6" ;
+    ex:apqcSourceText "Verifying that training provided to the person was successful through the administration testing and the application of skills for practical use." ;
+    rdfs:label "Perform skill and capability testing" ;
+    skos:definition "An Act of Appraisal that administers a test and has as output a skills and capability test result judging whether training was successful through testing and practical application of skills." ;
+    rdfs:comment "Gate-F reconciliation: genus re-anchored from ex:ActOfAnalysis to cco:ont00000636 (Act of Appraisal) for sibling consistency with ex:P12135 'Evaluate training effectiveness'. Administering a competency test verifies/judges the trainee's success (an evaluative act), and its output ex:SkillsCapabilityTestResult records that judgement. GOLDEN PRINCIPLE holds: descriptive output. Service delivery personnel are the test subjects (definitional participants)." ;
+    skos:example "A competency assessor administers a hands-on test after a technical course and records pass/fail." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:SkillsCapabilityTestResult ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:ServiceDeliveryPersonnel ] .
+
+# --- 5.2.3.7 (PCF 12135) : Appraisal (evaluate effectiveness)
+ex:P12135 a owl:Class ;
+    ex:pcfID "12135" ; ex:hierarchyID "5.2.3.7" ;
+    ex:apqcSourceText "Eliciting feedback from various sources to evaluate the training provided. This can be achieved through testing and the practical application of skills. Additionally, manager or student feedback can be garnered to evaluate training effectiveness." ;
+    rdfs:label "Evaluate training effectiveness" ;
+    skos:definition "An Act of Appraisal that has as input a skills and capability test result and training feedback and has as output a training effectiveness evaluation judging how effectively the training imparted the targeted skills." ;
+    rdfs:comment "Gate-F fix: the has-input was changed from ex:CustomerFeedback to ex:TrainingFeedback. ex:CustomerFeedback is 'a customer's evaluation of SERVICES RENDERED', but the source for 12135 specifies 'manager or student feedback ... to evaluate training effectiveness' -- trainee/manager feedback ABOUT TRAINING, not customer feedback about services; reusing ex:CustomerFeedback was a definitional category error. Genus re-anchored from ex:ActOfAnalysis to cco:ont00000636 (Act of Appraisal) to match the 'evaluate' verb and the output ex:TrainingEffectivenessEvaluation, which is itself defined as a judgement; applied consistently with sibling ex:P20057 (also re-anchored to Act of Appraisal). GOLDEN PRINCIPLE holds either way (descriptive output)." ;
+    skos:example "A training manager combines test scores and manager surveys into an end-of-program effectiveness report." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:SkillsCapabilityTestResult ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:TrainingFeedback ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:TrainingEffectivenessEvaluation ] .
+
+####################################################################
+# ===== APQC PROCESS GROUP 5.3 (PCF 20058)
+# "Deliver service to customer"
+# Partonomy via cco:ont00001777. Act genera per GOLDEN PRINCIPLE.
+####################################################################
+
+ex:P20058 a owl:Class ;
+    ex:pcfID "20058" ; ex:hierarchyID "5.3" ;
+    ex:apqcSourceText "Rendering service to the customer by initiating, executing, and completing tasks associated with service delivery." ;
+    rdfs:label "Deliver service to customer" ;
+    skos:definition "An Act of Service Provision that renders a service to a customer by initiating, executing, and completing the tasks associated with service delivery." ;
+    rdfs:comment "Models APQC process group 5.3 as an occurrent; its APQC children are process parts, not subclasses." ;
+    skos:example "A consultancy's full engagement to scope, build, deliver, and close out a service for a client." ;
+    rdfs:subClassOf ex:ActOfServiceProvision ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20059 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20069 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20077 ] .
+
+# ---- 5.3.1 (PCF 20059) Initiate service delivery ----
+ex:P20059 a owl:Class ;
+    ex:pcfID "20059" ; ex:hierarchyID "5.3.1" ;
+    ex:apqcSourceText "Collaborating with the customer to understand service needs. Review, understand, and modify the delivery scope with the organization needs of the customer in mind. Confirm readiness and identify, select, and assign resources. Plan for service delivery." ;
+    rdfs:label "Initiate service delivery" ;
+    skos:definition "An Act of Service Provision that initiates a service delivery by reviewing scope with the customer, confirming readiness, and identifying, selecting, and assigning resources, as the initiation sub-phase of rendering the service." ;
+    rdfs:comment "Gate-F fix: re-anchored from cco:ont00000511 (Act of Planning) to ex:ActOfServiceProvision, and the existential has-output some ex:ServiceDeliveryPlan was dropped. As a phase-aggregate it is parallel to siblings ex:P20069 (Execute) and ex:P20077 (Complete), both anchored to ex:ActOfServiceProvision with no output restriction; anchoring P20059 alone to Act of Planning with an output broke parallel-sibling consistency. Its seven children are a heterogeneous mix (appraisal P20060/P20064, analysis P20063, selection P20065, formulation P20061/P20062/P20068), so the plan is the output of child ex:P20068 qua child, not of the aggregate qua aggregate; promoting it to an existential on the parent over-committed (Phase-3 necessity). The service-delivery plan therefore stays as the output of ex:P20068 and is noted here only in this comment, not as a restriction." ;
+    skos:example "A kickoff phase in which scope is agreed, readiness confirmed, a team assigned, and a delivery plan produced." ;
+    rdfs:subClassOf ex:ActOfServiceProvision ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20060 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20061 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20062 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20063 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20064 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20065 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20068 ] .
+
+# ---- 5.3.1.1 (PCF 20060) Review contract and agreed terms ----
+ex:P20060 a owl:Class ;
+    ex:pcfID "20060" ; ex:hierarchyID "5.3.1.1" ;
+    ex:apqcSourceText "Meeting with the customer, partner, and/or supplier to review the terms of the solutions contract and agree on the terms set forth." ;
+    rdfs:label "Review contract and agreed terms" ;
+    skos:definition "An Act of Appraisal that has as input a service-delivery contract and has as output a contract-terms review of its terms, and has the customer as participant." ;
+    rdfs:comment "Anchored to cco:ont00000636 (Act of Appraisal): the act evaluates and judges the contract terms before agreement. Gate-F fix: the definitional has-output was changed from ex:ServiceDeliveryReview to ex:ContractTermsReview. ex:ServiceDeliveryReview is 'an end-to-end evaluation of the SUCCESS of a COMPLETED service-delivery engagement' (a post-delivery retrospective, the correct output of ex:P20078 and reused there); a contract-terms appraisal at INITIATION cannot output a completed-engagement success review. A distinct descriptive output ICE (ex:ContractTermsReview, is about the contract) was minted for this pre-delivery appraisal; ex:ServiceDeliveryReview is reserved for P20078 (and the aggregate retrospective)." ;
+    skos:example "A contract-review meeting where provider, customer, and supplier confirm the terms." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:ServiceDeliveryContract ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ContractTermsReview ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:Customer ] .
+
+# ---- 5.3.1.2 (PCF 20061) Understand customer requirements and define/refine approach ----
+ex:P20061 a owl:Class ;
+    ex:pcfID "20061" ; ex:hierarchyID "5.3.1.2" ;
+    ex:apqcSourceText "Taking the customer requirements for a solution and applying those requirements to a refined approach for service." ;
+    rdfs:label "Understand customer requirements and define refine approach" ;
+    skos:definition "An Act of Formulation that has as input customer requirements and has as output a service-delivery process specification expressing a refined service approach." ;
+    rdfs:comment "Anchored to ex:ActOfFormulation (Act of Planning): the act composes a directive specification. GOLDEN PRINCIPLE: directive output -> formulation genus." ;
+    skos:example "Translating gathered requirements into a refined delivery approach document." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:CustomerRequirements ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceDeliveryProcessSpecification ] .
+
+# ---- 5.3.1.3 (PCF 20062) Modify/revise and approve project plan ----
+ex:P20062 a owl:Class ;
+    ex:pcfID "20062" ; ex:hierarchyID "5.3.1.3" ;
+    ex:apqcSourceText "Updating the project plan to align with the new solution approach agreed upon with the customer." ;
+    rdfs:label "Modify/revise and approve project plan" ;
+    skos:definition "An Act of Formulation that has as output an updated and approved project plan aligned with the agreed solution approach." ;
+    rdfs:comment "Anchored to ex:ActOfFormulation (Act of Planning): revising/approving a plan produces a Directive ICE." ;
+    skos:example "Revising the project schedule and tasks to match the agreed approach, then approving it." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ProjectPlan ] .
+
+# ---- 5.3.1.4 (PCF 20063) Review customer business objectives ----
+ex:P20063 a owl:Class ;
+    ex:pcfID "20063" ; ex:hierarchyID "5.3.1.4" ;
+    ex:apqcSourceText "Aligning the customer business objectives with the agreed service delivery solution." ;
+    rdfs:label "Review customer business objectives" ;
+    skos:definition "An Act of Analysis that has as input customer business objectives and has as output an objective-alignment assessment relating them to the agreed solution." ;
+    rdfs:comment "Anchored to ex:ActOfAnalysis: the act examines objectives against the solution and yields a descriptive judgement." ;
+    skos:example "Checking that each client objective is served by the agreed solution." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:CustomerBusinessObjectives ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ObjectiveAlignmentAssessment ] .
+
+# ---- 5.3.1.5 (PCF 20064) Confirm environmental readiness ----
+ex:P20064 a owl:Class ;
+    ex:pcfID "20064" ; ex:hierarchyID "5.3.1.5" ;
+    ex:apqcSourceText "Confirming that the organization has the recourses necessary to meet the expectations for the solution for service delivery." ;
+    rdfs:label "Confirm environmental readiness" ;
+    skos:definition "An Act of Appraisal that has as output an environmental-readiness confirmation that the organization holds the resources needed for the solution." ;
+    rdfs:comment "Anchored to cco:ont00000636 (Act of Appraisal): the act judges whether resources suffice and confirms readiness." ;
+    skos:example "Verifying staffing, tooling, and facilities are in place before delivery begins." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:EnvironmentalReadinessConfirmation ] .
+
+# ---- 5.3.1.6 (PCF 20065) Identify, select, and assign resources ----
+ex:P20065 a owl:Class ;
+    ex:pcfID "20065" ; ex:hierarchyID "5.3.1.6" ;
+    ex:apqcSourceText "Identifying, selecting, and assigning resources required to deliver service to the customer. Ensure that all objectives are established and met, and the all rules of engagement have been identified and communicated." ;
+    rdfs:label "Identify, select, and assign resources" ;
+    skos:definition "An Act of Selection that chooses and assigns the resources required to deliver a service and has as output a resource plan." ;
+    rdfs:comment "Anchored to ex:ActOfSelection (Act of Information Processing): it chooses resources from candidates and yields a directive assignment. GOLDEN PRINCIPLE: directive output -> selection genus." ;
+    skos:example "Picking the delivery team and assigning each member to the engagement." ;
+    rdfs:subClassOf ex:ActOfSelection ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ResourcePlan ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:ServiceDeliveryPersonnel ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20066 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20067 ] .
+
+# ---- 5.3.1.6.1 (PCF 20066) Establish people objectives ----
+ex:P20066 a owl:Class ;
+    ex:pcfID "20066" ; ex:hierarchyID "5.3.1.6.1" ;
+    ex:apqcSourceText "Providing the workforce with a plan of action and goals necessary to provide a service. Make sure that those objectives are met." ;
+    rdfs:label "Establish people objectives" ;
+    skos:definition "An Act of Formulation that has as output people objectives prescribing the plan of action and goals for the workforce." ;
+    rdfs:comment "Anchored to ex:ActOfFormulation (Act of Planning): articulating objectives produces a Directive ICE." ;
+    skos:example "Setting each team member's goals for the engagement." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:PeopleObjectives ] .
+
+# ---- 5.3.1.6.2 (PCF 20067) Establish engagement rules ----
+ex:P20067 a owl:Class ;
+    ex:pcfID "20067" ; ex:hierarchyID "5.3.1.6.2" ;
+    ex:apqcSourceText "Establishing guidelines for how resources engage with the customer. For example, set rules of accountability, interaction, and accommodation when engaging the customer. Resources should be polite, empathetic, and attentive." ;
+    rdfs:label "Establish engagement rules" ;
+    skos:definition "An Act of Formulation that has as output engagement rules prescribing how delivery resources are to interact with the customer." ;
+    rdfs:comment "Anchored to ex:ActOfFormulation (Act of Planning): establishing guidelines produces a Directive ICE." ;
+    skos:example "Documenting the conduct and accountability rules the team follows with the client." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:EngagementRules ] .
+
+# ---- 5.3.1.7 (PCF 20068) Plan for service delivery ----
+ex:P20068 a owl:Class ;
+    ex:pcfID "20068" ; ex:hierarchyID "5.3.1.7" ;
+    ex:apqcSourceText "Establishing a plan of action to successfully render a solution for service delivery." ;
+    rdfs:label "Plan for service delivery" ;
+    skos:definition "An Act of Formulation that has as output a service-delivery plan prescribing the action by which the solution is to be rendered." ;
+    rdfs:comment "Anchored to ex:ActOfFormulation (Act of Planning): producing a plan of action yields a Directive ICE." ;
+    skos:example "Drafting the step-by-step delivery plan for the engagement." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceDeliveryPlan ] .
+
+# ---- 5.3.2 (PCF 20069) Execute service delivery ----
+ex:P20069 a owl:Class ;
+    ex:pcfID "20069" ; ex:hierarchyID "5.3.2" ;
+    ex:apqcSourceText "Carrying out service delivery to the customer by creating and deploying the necessary solution. Analyze need and create a solution. Validate the solution and make changes if needed. Obtain approval to build/buy solution and then deploy solution to customer." ;
+    rdfs:label "Execute service delivery" ;
+    skos:definition "An Act of Service Provision that carries out a service delivery by creating, validating, building, and deploying the necessary solution to the customer." ;
+    rdfs:comment "Anchored to ex:ActOfServiceProvision: execution renders the service. Its APQC children are process parts." ;
+    skos:example "Building and deploying the agreed solution to the client." ;
+    rdfs:subClassOf ex:ActOfServiceProvision ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20070 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20071 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20072 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20073 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20074 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20075 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20076 ] .
+
+# ---- 5.3.2.1 (PCF 20070) Analyze environment and customer needs ----
+ex:P20070 a owl:Class ;
+    ex:pcfID "20070" ; ex:hierarchyID "5.3.2.1" ;
+    ex:apqcSourceText "Understanding the needs of the customer and providing the necessary resources to meet those requirements within the scope of the organization." ;
+    rdfs:label "Analyze environment and customer needs" ;
+    skos:definition "An Act of Analysis that has as input customer requirements and has as output a customer-needs analysis within the organization's scope." ;
+    rdfs:comment "Anchored to ex:ActOfAnalysis: it examines requirements and yields a descriptive understanding." ;
+    skos:example "Discovery work that documents the client's in-scope needs." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:CustomerRequirements ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CustomerNeedsAnalysis ] .
+
+# ---- 5.3.2.2 (PCF 20071) Define solution ----
+ex:P20071 a owl:Class ;
+    ex:pcfID "20071" ; ex:hierarchyID "5.3.2.2" ;
+    ex:apqcSourceText "Creating a plan of action to provide service delivery to the customer through a possible solution. This solution should be in response to a collaborative effort made by the organization and the customer to meet service delivery needs." ;
+    rdfs:label "Define solution" ;
+    skos:definition "An Act of Formulation that has as input a customer-needs analysis and has as output a solution specification for providing the service." ;
+    rdfs:comment "Anchored to ex:ActOfFormulation (Act of Planning): defining a solution composes a Directive ICE. GOLDEN PRINCIPLE: directive output -> formulation genus." ;
+    skos:example "Designing the solution that will satisfy the documented needs." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:CustomerNeedsAnalysis ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:SolutionSpecification ] .
+
+# ---- 5.3.2.3 (PCF 20072) Validate solution ----
+ex:P20072 a owl:Class ;
+    ex:pcfID "20072" ; ex:hierarchyID "5.3.2.3" ;
+    ex:apqcSourceText "Validating that the proposed solution is feasible and provides the needed services for the customer." ;
+    rdfs:label "Validate solution" ;
+    skos:definition "An Act of Appraisal that has as input a solution specification and has as output a solution-validation result judging its feasibility and fit." ;
+    rdfs:comment "Anchored to cco:ont00000636 (Act of Appraisal): it judges feasibility and fitness and yields a descriptive result." ;
+    skos:example "Testing the proposed design against the client's requirements." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:SolutionSpecification ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:SolutionValidationResult ] .
+
+# ---- 5.3.2.4 (PCF 20073) Identify changes ----
+ex:P20073 a owl:Class ;
+    ex:pcfID "20073" ; ex:hierarchyID "5.3.2.4" ;
+    ex:apqcSourceText "Realizing issues within the original drafted solution and providing changes to correct those issues." ;
+    rdfs:label "Identify changes" ;
+    skos:definition "An Act of Formulation that has as input a solution-validation result and has as output a solution-change specification prescribing corrections to the drafted solution." ;
+    rdfs:comment "Gate-F fix: REJECTED ex:ActOfIdentification, whose ext definition is a discernment information-processing act that 'produces an Information Content Entity that REGISTERS them' (a descriptive registration). The asserted has-output is ex:SolutionChangeSpecification, a DIRECTIVE ICE that 'prescribes corrections to a drafted solution', so a descriptive-output discernment genus cannot definitionally yield it. The source ('Realizing issues ... AND providing changes to correct those issues') fuses discernment (descriptive) with formulation of corrective changes (directive); the directive output is the dominant tracked deliverable. Per the GOLDEN PRINCIPLE the genus is aligned to the directive output: re-anchored to ex:ActOfFormulation (Act of Planning). The 'realizing/discerning issues' aspect is a sub-aspect recorded here rather than split out as a separate part." ;
+    skos:example "Logging defects found in validation and specifying the fixes required." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:SolutionValidationResult ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:SolutionChangeSpecification ] .
+
+# ---- 5.3.2.5 (PCF 20074) Obtain approval to proceed ----
+ex:P20074 a owl:Class ;
+    ex:pcfID "20074" ; ex:hierarchyID "5.3.2.5" ;
+    ex:apqcSourceText "Gaining approval from all avenues to proceed with providing solutions for service delivery." ;
+    rdfs:label "Obtain approval to proceed" ;
+    skos:definition "An Act of Acquisition that obtains from the relevant authorities a proceed-approval decision authorizing the service-delivery solution." ;
+    rdfs:comment "Anchored to ex:ActOfAcquisition (Planned Act): the act secures an authorization (a Directive ICE) the agent did not previously hold." ;
+    skos:example "Securing sign-off from finance and the sponsor before building the solution." ;
+    rdfs:subClassOf ex:ActOfAcquisition ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ProceedApprovalDecision ] .
+
+# ---- 5.3.2.6 (PCF 20075) Make build/buy solution ----
+ex:P20075 a owl:Class ;
+    ex:pcfID "20075" ; ex:hierarchyID "5.3.2.6" ;
+    ex:apqcSourceText "Constructing or purchasing solutions necessary to provide service delivery." ;
+    rdfs:label "Make build/buy solution" ;
+    skos:definition "A Planned Act that constructs or purchases a service-delivery solution and produces a record that the solution has been built or bought." ;
+    rdfs:comment "Anchored at cco:ont00000228 (Planned Act). Rejected cco:ont00000051 (Act of Construction: too narrow -- excludes purchasing) and ex:ActOfAcquisition (covers only obtaining, not building). Per D3 / S3 the definitional has output is the Descriptive ex:SolutionBuildRecord (the informational deliverable); the produced ex:ServiceDeliverySolution artifact (a material entity) is consumed downstream as the input to deployment (5.3.2.7). The build/buy decision is a typical accompanying output (rdfs:comment)." ;
+    skos:example "Either building the solution in-house or buying it from a vendor." ;
+    rdfs:subClassOf cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:SolutionBuildRecord ] .
+
+# ---- 5.3.2.7 (PCF 20076) Deploy solution ----
+ex:P20076 a owl:Class ;
+    ex:pcfID "20076" ; ex:hierarchyID "5.3.2.7" ;
+    ex:apqcSourceText "Providing the customer with promised services and solutions." ;
+    rdfs:label "Deploy solution" ;
+    skos:definition "An Act of Service Provision that has as input a service-delivery solution, delivers the promised services to the customer, and has as output a service-delivery record, with the customer as participant." ;
+    rdfs:comment "Anchored to ex:ActOfServiceProvision: deployment renders the solution to the customer. Operations material input (the solution) is legal here." ;
+    skos:example "Go-live: handing the working solution and services over to the client." ;
+    rdfs:subClassOf ex:ActOfServiceProvision ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:ServiceDeliverySolution ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceDeliveryRecord ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:Customer ] .
+
+# ---- 5.3.3 (PCF 20077) Complete service delivery ----
+ex:P20077 a owl:Class ;
+    ex:pcfID "20077" ; ex:hierarchyID "5.3.3" ;
+    ex:apqcSourceText "Implementing final steps to complete service delivery to the customer. Evaluate success through project review, complete finance activities, and confirm delivery. Release resources and manage completion by harvesting knowledge and systems by archiving records." ;
+    rdfs:label "Complete service delivery" ;
+    skos:definition "An Act of Service Provision that completes a service delivery by reviewing success, closing finances, confirming delivery, releasing resources, harvesting knowledge, and archiving records." ;
+    rdfs:comment "Anchored to ex:ActOfServiceProvision: the closeout phase of rendering the service. Its APQC children are process parts." ;
+    skos:example "Wrapping up an engagement: review, invoice closeout, sign-off, team release, and archival." ;
+    rdfs:subClassOf ex:ActOfServiceProvision ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20078 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20079 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20080 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20081 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20082 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20083 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P20084 ] .
+
+# ---- 5.3.3.1 (PCF 20078) Conduct service delivery/project review and evaluate success ----
+ex:P20078 a owl:Class ;
+    ex:pcfID "20078" ; ex:hierarchyID "5.3.3.1" ;
+    ex:apqcSourceText "Reviewing the entire service delivery process to evaluate the success of the project from beginning to end." ;
+    rdfs:label "Conduct service delivery/project review and evaluate success" ;
+    skos:definition "An Act of Appraisal that reviews the whole service delivery and has as output a service-delivery review evaluating its success." ;
+    rdfs:comment "Anchored to cco:ont00000636 (Act of Appraisal): it judges the success of the delivery and yields a descriptive review." ;
+    skos:example "A post-mortem evaluating how the engagement went end to end." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceDeliveryReview ] .
+
+# ---- 5.3.3.2 (PCF 20079) Complete/finalize financial management activities ----
+ex:P20079 a owl:Class ;
+    ex:pcfID "20079" ; ex:hierarchyID "5.3.3.2" ;
+    ex:apqcSourceText "Insuring all payments are received and all activates therein are completed." ;
+    rdfs:label "Complete/finalize financial management activities" ;
+    skos:definition "A Planned Act that closes out the financial activities of a service delivery by ensuring all payments are received and all related activities are completed." ;
+    rdfs:comment "Anchored at cco:ont00000228 (Planned Act): a bounded financial-closeout act. Detailed financial sub-processes cross-reference APQC Category 9.0; no informational output is definitional here." ;
+    skos:example "Confirming the final invoice is paid and the engagement's ledger is closed." ;
+    rdfs:subClassOf cco:ont00000228 .
+
+# ---- 5.3.3.3 (PCF 20080) Confirm delivery according to contract terms ----
+ex:P20080 a owl:Class ;
+    ex:pcfID "20080" ; ex:hierarchyID "5.3.3.3" ;
+    ex:apqcSourceText "Confirming that the organization has satisfied all terms of the delivery contract set forth in collaboration between the organization and customer." ;
+    rdfs:label "Confirm delivery according to contract terms" ;
+    skos:definition "An Act of Appraisal that has as input a service-delivery contract and has as output a contract-fulfillment confirmation that all its terms are satisfied." ;
+    rdfs:comment "Anchored to cco:ont00000636 (Act of Appraisal): it judges fulfillment against the contract and yields a descriptive confirmation." ;
+    skos:example "Signing off that every contracted deliverable has been met." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:ServiceDeliveryContract ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ContractFulfillmentConfirmation ] .
+
+# ---- 5.3.3.4 (PCF 20081) Release resources ----
+ex:P20081 a owl:Class ;
+    ex:pcfID "20081" ; ex:hierarchyID "5.3.3.4" ;
+    ex:apqcSourceText "Discharging leveraged resources from service delivery commitments upon completion. Returning resources to the resource pool." ;
+    rdfs:label "Release resources" ;
+    skos:definition "A Planned Act that discharges the resources leveraged for a service delivery and returns them to the resource pool, with service-delivery personnel as participants." ;
+    rdfs:comment "Anchored at cco:ont00000228 (Planned Act): a bounded release act. Operations participants (the released resources) are material entities/agents." ;
+    skos:example "Rolling the delivery team off the engagement and back to the bench." ;
+    rdfs:subClassOf cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:ServiceDeliveryPersonnel ] .
+
+# ---- 5.3.3.5 (PCF 20082) Manage service delivery completion ----
+ex:P20082 a owl:Class ;
+    ex:pcfID "20082" ; ex:hierarchyID "5.3.3.5" ;
+    ex:apqcSourceText "Ensuring that all aspects of the service delivery process are completed both internally and externally." ;
+    rdfs:label "Manage service delivery completion" ;
+    skos:definition "An Act of Appraisal that judges whether all internal and external aspects of a service delivery's closeout are completed and has as output a service-delivery completion confirmation." ;
+    rdfs:comment "Although labelled 'Manage', here it is bounded to the completion of THIS service delivery (a natural end), so it is a process, not a standing capability. Gate-F fix: REJECTED ex:ActOfMonitoring, whose definition requires an Agent that REPEATEDLY observes an ongoing process OVER TIME -- this is a bounded one-shot closeout/ensure-completion act, not repeated status-tracking; the monitoring genus is also output-bearing (produces a Descriptive ICE) yet this class asserted no has-output, so genus and modeled facts disagreed. Re-anchored to cco:ont00000636 (Act of Appraisal) because it judges/confirms completeness, consistent with sibling closeout/confirmation acts; added the definitional descriptive output ex:ServiceDeliveryCompletionConfirmation (GOLDEN PRINCIPLE: appraisal -> descriptive)." ;
+    skos:example "A delivery lead confirming that no internal or external closeout item remains outstanding." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceDeliveryCompletionConfirmation ] .
+
+# ---- 5.3.3.6 (PCF 20083) Harvest knowledge ----
+ex:P20083 a owl:Class ;
+    ex:pcfID "20083" ; ex:hierarchyID "5.3.3.6" ;
+    ex:apqcSourceText "Garnering feedback from all avenues to collect a knowledge base concerning services rendered." ;
+    rdfs:label "Harvest knowledge" ;
+    skos:definition "An Act of Analysis that has as input customer feedback and has as output a service knowledge base concerning the services rendered." ;
+    rdfs:comment "Anchored to ex:ActOfAnalysis (Act of Information Processing): it consolidates feedback into a descriptive knowledge base." ;
+    skos:example "Collating lessons learned and client feedback into a reusable knowledge base." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:CustomerFeedback ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ServiceKnowledgeBase ] .
+
+# ---- 5.3.3.7 (PCF 20084) Archive records and update systems ----
+ex:P20084 a owl:Class ;
+    ex:pcfID "20084" ; ex:hierarchyID "5.3.3.7" ;
+    ex:apqcSourceText "Completing and archiving all records associated with requested services. Update all necessary systems to reflect those changes." ;
+    rdfs:label "Archive records and update systems" ;
+    skos:definition "An Act of Information Processing that has as input service-delivery records and stores them by archiving the records and updating the relevant systems." ;
+    rdfs:comment "Anchored directly to cco:ont00000366 (Act of Information Processing): archiving/storing records is information processing (storage), not analysis or appraisal." ;
+    skos:example "Filing the final engagement records and updating the CRM and document systems." ;
+    rdfs:subClassOf cco:ont00000366 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:ServiceDeliveryRecord ] .
+
+####################################################################
+# 4. CATALOG -> REALITY BRIDGES
+# Each APQC catalog node (ex:PCF_<pcfID>, defined in apqc-catalog.ttl)
+# designates the reality-layer class it maps to (a process class, or
+# an Organization Capability for R5-demoted standing functions).
+####################################################################
+
+ex:PCF_20026 ex:designatesProcessType ex:P20026 .
+ex:PCF_20027 ex:designatesProcessType ex:P20027 .
+ex:PCF_20028 ex:designatesProcessType ex:ServiceDeliveryGovernanceCapability .
+ex:PCF_20029 ex:designatesProcessType ex:ServiceDeliveryPerformanceManagementCapability .
+ex:PCF_20030 ex:designatesProcessType ex:ServiceDeliveryDevelopmentManagementCapability .
+ex:PCF_20031 ex:designatesProcessType ex:P20031 .
+ex:PCF_20032 ex:designatesProcessType ex:P20032 .
+ex:PCF_20033 ex:designatesProcessType ex:P20033 .
+ex:PCF_20034 ex:designatesProcessType ex:P20034 .
+ex:PCF_20035 ex:designatesProcessType ex:P20035 .
+ex:PCF_20036 ex:designatesProcessType ex:P20036 .
+ex:PCF_20037 ex:designatesProcessType ex:P20037 .
+ex:PCF_20038 ex:designatesProcessType ex:P20038 .
+ex:PCF_20039 ex:designatesProcessType ex:P20039 .
+ex:PCF_20040 ex:designatesProcessType ex:P20040 .
+ex:PCF_20041 ex:designatesProcessType ex:P20041 .
+ex:PCF_20042 ex:designatesProcessType ex:P20042 .
+ex:PCF_20043 ex:designatesProcessType ex:P20043 .
+ex:PCF_20044 ex:designatesProcessType ex:P20044 .
+ex:PCF_20045 ex:designatesProcessType ex:P20045 .
+ex:PCF_20046 ex:designatesProcessType ex:P20046 .
+ex:PCF_20047 ex:designatesProcessType ex:P20047 .
+ex:PCF_20048 ex:designatesProcessType ex:P20048 .
+ex:PCF_20049 ex:designatesProcessType ex:P20049 .
+ex:PCF_20050 ex:designatesProcessType ex:P20050 .
+ex:PCF_20051 ex:designatesProcessType ex:P20051 .
+ex:PCF_20052 ex:designatesProcessType ex:P20052 .
+ex:PCF_20053 ex:designatesProcessType ex:P20053 .
+ex:PCF_20054 ex:designatesProcessType ex:P20054 .
+ex:PCF_20055 ex:designatesProcessType ex:P20055 .
+ex:PCF_20056 ex:designatesProcessType ex:P20056 .
+ex:PCF_12127 ex:designatesProcessType ex:P12127 .
+ex:PCF_12128 ex:designatesProcessType ex:P12128 .
+ex:PCF_12129 ex:designatesProcessType ex:P12129 .
+ex:PCF_12131 ex:designatesProcessType ex:P12131 .
+ex:PCF_12132 ex:designatesProcessType ex:P12132 .
+ex:PCF_12133 ex:designatesProcessType ex:P12133 .
+ex:PCF_20057 ex:designatesProcessType ex:P20057 .
+ex:PCF_12135 ex:designatesProcessType ex:P12135 .
+ex:PCF_20058 ex:designatesProcessType ex:P20058 .
+ex:PCF_20059 ex:designatesProcessType ex:P20059 .
+ex:PCF_20060 ex:designatesProcessType ex:P20060 .
+ex:PCF_20061 ex:designatesProcessType ex:P20061 .
+ex:PCF_20062 ex:designatesProcessType ex:P20062 .
+ex:PCF_20063 ex:designatesProcessType ex:P20063 .
+ex:PCF_20064 ex:designatesProcessType ex:P20064 .
+ex:PCF_20065 ex:designatesProcessType ex:P20065 .
+ex:PCF_20066 ex:designatesProcessType ex:P20066 .
+ex:PCF_20067 ex:designatesProcessType ex:P20067 .
+ex:PCF_20068 ex:designatesProcessType ex:P20068 .
+ex:PCF_20069 ex:designatesProcessType ex:P20069 .
+ex:PCF_20070 ex:designatesProcessType ex:P20070 .
+ex:PCF_20071 ex:designatesProcessType ex:P20071 .
+ex:PCF_20072 ex:designatesProcessType ex:P20072 .
+ex:PCF_20073 ex:designatesProcessType ex:P20073 .
+ex:PCF_20074 ex:designatesProcessType ex:P20074 .
+ex:PCF_20075 ex:designatesProcessType ex:P20075 .
+ex:PCF_20076 ex:designatesProcessType ex:P20076 .
+ex:PCF_20077 ex:designatesProcessType ex:P20077 .
+ex:PCF_20078 ex:designatesProcessType ex:P20078 .
+ex:PCF_20079 ex:designatesProcessType ex:P20079 .
+ex:PCF_20080 ex:designatesProcessType ex:P20080 .
+ex:PCF_20081 ex:designatesProcessType ex:P20081 .
+ex:PCF_20082 ex:designatesProcessType ex:P20082 .
+ex:PCF_20083 ex:designatesProcessType ex:P20083 .
+ex:PCF_20084 ex:designatesProcessType ex:P20084 .

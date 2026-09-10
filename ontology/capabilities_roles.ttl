@@ -1,0 +1,169 @@
+@prefix ex:   <http://example.org/apqc#> .
+@prefix cco:  <https://www.commoncoreontologies.org/> .
+@prefix obo:  <http://purl.obolibrary.org/obo/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+# =====================================================================
+# capabilities_roles.ttl  (v0.2.0 -- promoted from the capabilities/ seed)
+# The bridge from PROCESS (requiresCapability/requiresRole/requiresPermission)
+# to AGENT (registry: capabilities[]/roles[]).
+#
+# This is the Phase 1 SHARED capability/role layer. Per the four gating
+# decisions (PHASE1 §6/§8): it is a standalone module MERGED ONLY at
+# corpus-check + dispatch time (it preserves slice self-containment -- no
+# slice owl:imports it); slice Organization Capabilities are LEFT at
+# cco:ont00000568 and matched by the "reaches cco:ont00001379" test, not
+# re-homed under ex:Capability; ex:enablesProcess is the authored direction
+# and ex:requiresCapability is DERIVED from it (never hand-authored both);
+# delivery-process universals live in delivery_processes.ttl.
+#
+# Grounding (verified against CCO v2.0 2024-11-06 / BFO 2020):
+#   Agent Capability  cco:ont00001379  (Realizable Entity; bearer = Material Entity)
+#   has capability    cco:ont00001954  (Agent bearer_of Agent Capability)
+#   Role              obo:BFO_0000023  (Realizable Entity; a position a bearer occupies)
+#     Occupation Role cco:ont00000984  | Authority Role cco:ont00000187
+#   Action Permission cco:ont00000751  (Process Regulation that permits a Process)
+#
+# Distinction enforced here:
+#   Capability = what an agent CAN do (competence; feasibility filter).
+#   Role       = the position in which it acts (framing + authority; deontic hook).
+#   Neither is a Process. Processes are the actions; these are borne by agents.
+# =====================================================================
+
+<http://example.org/apqc/capabilities> a owl:Ontology ;
+    dct:title "APQC Phase 1: Capability / Role bridge layer" ;
+    owl:versionInfo "0.2.0" ;
+    rdfs:comment "Shared capability/role registry and the process->agent dispatch bridge. CCO pin v2.0 (2024-11-06); ADR-001. Merge-only shared layer: no slice imports it; merged into the corpus only for the coherence check and for dispatch/matchability. Promoted from the capabilities/ v0.1.0 seed; the three ex:requires* properties were promoted from shape-referenced markers to declared object properties." .
+
+# ---- local marker genera (let SHACL and the daemon classify cleanly) ----
+
+ex:Capability a owl:Class ;
+    rdfs:subClassOf cco:ont00001379 ;          # Agent Capability
+    rdfs:label "FNSR Capability" ;
+    skos:definition "A competence borne by an agent in virtue of which it can successfully perform some kind of process. Realized in process executions; a feasibility filter for dispatch." .
+
+ex:Role a owl:Class ;
+    rdfs:subClassOf obo:BFO_0000023 ;          # Role
+    rdfs:label "FNSR Role" ;
+    skos:definition "A position an agent occupies while performing work. Frames the work and may bear permissions; not a competence and not an action." .
+
+# ---- module-local properties (could migrate to apqc-ext.ttl) ----
+
+ex:enablesProcess a owl:AnnotationProperty ;
+    rdfs:label "enables process" ;
+    rdfs:comment "Capability -> process class whose execution it enables. Operational inverse of ex:requiresCapability; BFO grounding is 'has realization' (a capability is realized in such processes). Used for authoring scope and wiring-coherence checks." .
+
+ex:bearsPermission a owl:AnnotationProperty ;
+    rdfs:label "bears permission" ;
+    rdfs:comment "Role -> Action Permission class the role carries. The deontic hook (RDM/IEE authors the permission)." .
+
+# ---- the three process-side wiring properties (promoted from the seed's
+#      shape-referenced markers to declared object properties) ----
+# Range is enforced by SHACL (coherence shapes C5-C7), NOT by rdfs:range:
+# asserting rdfs:domain/range here would force class entailments into the
+# merged corpus and risk perturbing the v0.3.0 ELK closure. The intended
+# domain/range is documented per property and tested structurally instead.
+
+ex:requiresCapability a owl:ObjectProperty ;
+    rdfs:label "requires capability" ;
+    rdfs:comment "Process class -> the capability an agent must bear to perform it. DERIVED from ex:enablesProcess (author scope once on the capability; generate this inverse onto the process, so the two never drift -- PHASE1 §8). Intended domain: a process universal (reaches obo:BFO_0000015); intended range: a class reaching cco:ont00001379 Agent Capability (an Organization Capability cco:ont00000568 qualifies, since 568 ⊑ 1379). Matching is species-satisfies-genus: an agent bearing C_a satisfies a requirement C_p iff C_a rdfs:subClassOf* C_p. Range enforced by SHACL C5." .
+
+ex:requiresRole a owl:ObjectProperty ;
+    rdfs:label "requires role" ;
+    rdfs:comment "Process class -> the role in whose capacity the work must be performed. Intended domain: a process universal; intended range: a class reaching obo:BFO_0000023 Role (typically a cco:ont00000984 Occupation Role or cco:ont00000187 Authority Role). Same species-satisfies-genus matching as ex:requiresCapability. Range enforced by SHACL C6." .
+
+ex:requiresPermission a owl:ObjectProperty ;
+    rdfs:label "requires permission" ;
+    rdfs:comment "Process class -> the Action Permission that must be held for the work to be authorized. Intended range: a class reaching cco:ont00000751 Action Permission. The RDM/IEE layer owns the permission catalogue and the gate conflict-resolution; this seam is declared but LEFT UNPOPULATED in Phase 1. Range enforced by SHACL C7." .
+
+# =====================================================================
+# CAPABILITIES
+# Granularity is NOT free choice: a capability is the coherent bundle one
+# agent can own, which in this corpus is exactly the R5/R6 stop node -- a
+# standing function demoted to an Organization Capability (R6). The 111
+# slice *Capability classes already encode those stop nodes; the harvest
+# step reuses them rather than re-deriving granularity. The example below
+# is a delivery-process capability owned by THIS layer (it has no slice
+# home). The two strategy examples from the v0.1.0 seed
+# (ex:CompetitiveAnalysisCapability, ex:StrategicPlanningCapability) were
+# dropped here: both IRIs are already declared in ontology/slices/apqc_1_0.ttl
+# (the former ⊑ 1379, the latter ⊑ 568), so re-declaring them here would
+# duplicate/contradict the slice anchor. Their ex:enablesProcess wiring is
+# authored against the slice IRIs in the harvest step, not in the foundation.
+# =====================================================================
+
+ex:PlanAuthoringCapability a owl:Class ;
+    rdfs:subClassOf ex:Capability ;
+    rdfs:label "Plan authoring capability" ;
+    skos:definition "Competence to author phased roadmaps and tactical implementation plans from a normative spec, with falsifiable acceptance criteria." ;
+    ex:enablesProcess ex:AuthorRoadmap , ex:AuthorImplementationPlan .
+
+# ---- Process-Contract participant capabilities (FNSR factory; see delivery_processes.ttl) ----
+
+ex:CodeImplementationCapability a owl:Class ;
+    rdfs:subClassOf ex:Capability ;
+    rdfs:label "Code implementation capability" ;
+    skos:definition "An Agent Capability that enables its bearer to implement a planned module as a working code change set." ;
+    ex:enablesProcess ex:ImplementPhase .
+
+ex:ArchitectureCapability a owl:Class ;
+    rdfs:subClassOf ex:Capability ;
+    rdfs:label "Architecture capability" ;
+    skos:definition "An Agent Capability that enables its bearer to author a build's structural plan: its module boundaries, exported interfaces, and layering." ;
+    ex:enablesProcess ex:AuthorArchitecture .
+
+ex:EvaluationCapability a owl:Class ;
+    rdfs:subClassOf ex:Capability ;
+    rdfs:label "Evaluation capability" ;
+    skos:definition "An Agent Capability that enables its bearer to evaluate an artifact against its acceptance criteria." ;
+    ex:enablesProcess ex:EvaluateOutput .
+
+# =====================================================================
+# ROLES  (reuse CCO role taxonomy: Occupation Role / Authority Role)
+# =====================================================================
+
+ex:MarketAnalystRole a owl:Class ;
+    rdfs:subClassOf ex:Role , cco:ont00000984 ;   # Occupation Role
+    rdfs:label "Market analyst role" ;
+    skos:definition "The occupation role of an agent acting as a market/competitive analyst within a strategy effort." .
+
+ex:StrategistRole a owl:Class ;
+    rdfs:subClassOf ex:Role , cco:ont00000984 ;
+    rdfs:label "Strategist role" ;
+    skos:definition "The occupation role of an agent acting as a strategy author/owner." .
+
+ex:PlannerRole a owl:Class ;
+    rdfs:subClassOf ex:Role , cco:ont00000984 ;
+    rdfs:label "Planner role" ;
+    skos:definition "The occupation role of an agent producing planning documents in a delivery loop." .
+
+ex:DeveloperRole a owl:Class ;
+    rdfs:subClassOf ex:Role , cco:ont00000984 ;   # Occupation Role
+    rdfs:label "Developer role" ;
+    skos:definition "The occupation role of an agent implementing planned modules as code change sets." .
+
+ex:ArchitectRole a owl:Class ;
+    rdfs:subClassOf ex:Role , cco:ont00000984 ;   # Occupation Role
+    rdfs:label "Architect role" ;
+    skos:definition "The occupation role of an agent authoring and reviewing a build's structural decisions." .
+
+ex:EvaluatorRole a owl:Class ;
+    rdfs:subClassOf ex:Role , cco:ont00000984 ;   # Occupation Role
+    rdfs:label "Evaluator role" ;
+    skos:definition "The occupation role of an agent evaluating artifacts against their acceptance criteria." .
+
+ex:ApproverRole a owl:Class ;
+    rdfs:subClassOf ex:Role , cco:ont00000187 ;   # Authority Role
+    rdfs:label "Approver role" ;
+    skos:definition "The authority role occupied by the party who may approve passage through a review/approval gate." ;
+    ex:bearsPermission ex:ApproveImplementationPlanPermission .
+
+# ---- deontic stub (normally authored by the RDM/IEE layer; shown for the seam) ----
+
+ex:ApproveImplementationPlanPermission a owl:Class ;
+    rdfs:subClassOf cco:ont00000751 ;          # Action Permission
+    rdfs:label "Approve implementation plan (permission)" ;
+    skos:definition "Permission to authorize passage of an implementation plan beyond its review gate. RDM/IEE-owned; stubbed here to show the role->permission seam." .

@@ -1,5 +1,12 @@
 # Application Requirement Ontology
 
+> **New here?** Read [`docs/HANDOFF.md`](docs/HANDOFF.md) first. It states what is actually
+> in this repository today and what is not — in particular, that the ARO modules described
+> below are specified but not yet written, and that the ontology currently in the tree is
+> the APQC foundation they will be built on. [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md)
+> is how to run things; [`docs/process/PROCESS.md`](docs/process/PROCESS.md) is why it is
+> built this way.
+
 This repository develops the **Application Requirement Ontology** and supporting models for representing application specifications as machine-readable **Specification Graphs**.
 
 The ontology is intended to describe requirements, stakeholders, capabilities, constraints, interfaces, acceptance criteria, verification evidence, and the traceability relationships among them. Specification Graphs will provide a structured intermediate representation that software tools and agents can validate, query, and transform.

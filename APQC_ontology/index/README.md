@@ -22,17 +22,29 @@ Columns (tab-separated):
 ## Recipes
 
 ```bash
-grep -i "asset maintenance" ontology/index/corpus_index.tsv      # find by label
+grep -i "asset maintenance" APQC_ontology/index/corpus_index.tsv # find by label
 awk -F'\t' '$2=="capability" && $3=="9"' …                       # all capabilities in slice 9
 grep -P "^ex:P19945\t" …                                          # one process: anchor + wiring + def
 awk -F'\t' '$8 ~ /req-cap:ex:CompetitiveAnalysisCapability/' …    # processes requiring a capability
 ```
 
-## Regenerate
+## Regenerate — you cannot, yet
 
-```bash
-python scripts/build_index.py      # after ANY change to a slice / ext / catalog / capability layer
-```
+This section used to read `python scripts/build_index.py`. **There is no `scripts/`
+directory in this repository, and no tool here writes this file.** The paths in the
+recipes above were wrong for the same reason: they said `ontology/index/`, which is
+where the file lived in an earlier tree.
 
-The index is a derived artifact; it is committed so agents need no build step, but it can
-go stale — regenerate it after a corpus change (and before relying on it in a review).
+That matters more here than for the other orphaned artifacts, because this README
+tells you to grep this file *in preference to reading a slice*. A stale row is
+therefore read as fact. As of the last check it holds 5,051 rows over a corpus of
+3,119 authored classes, and nothing can tell you whether that is right.
+
+`config/repository-layout.yaml` records the component as `orphaned` with that reason,
+and `tests/test_repository_layout.py` fails if the list of such components changes
+without somebody deciding it should. Until a generator lands:
+
+- **Verify anything you take from here** against the slice it names before relying on it.
+- Prefer `python tools/layout.py` and the modules themselves for anything load-bearing.
+- Writing the generator is a small, well-defined first task, and it discharges a debt
+  the contract already records. See `docs/HANDOFF.md`.

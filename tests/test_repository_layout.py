@@ -100,6 +100,80 @@ def test_every_component_declares_a_role_with_a_meaning(layout,
         "than letting a file inherit a guess." % unknown)
 
 
+#: The artifacts nothing here can rebuild, named rather than counted.
+#:
+#: Pinned so the list can only change deliberately. A new entry is a
+#: failure -- somebody committed a derived file without its generator --
+#: and removing one is a visible change in a diff, which is what
+#: discharging the debt should look like.
+ORPHANED_ARTIFACTS = [
+    "generated.corpus-index",
+    "generated.reference",
+    "generated.reports",
+]
+
+
+def test_a_generated_artifact_names_its_generator_or_admits_it_has_none(
+        layout):
+    """The rule that would have caught this repository lying to itself.
+
+    Three components declared `generated-artifact`, whose stated meaning
+    is "regenerated, not edited", while the tools that wrote them were
+    not here. They could not be regenerated, and they were edited -- by
+    text substitution, during the namespace migration, because there was
+    no other way to move them.
+
+    Nothing detected that, because the contract had no way to express the
+    difference between an artifact with a generator and one without.
+    """
+    for entry in layout.components("generated-artifact"):
+        declared = [name for name, value in
+                    (("generator", entry.generator),
+                     ("orphaned", entry.orphaned)) if value]
+        assert len(declared) == 1, (
+            "%s declares %s; a generated artifact names the tool that "
+            "writes it, or states why nothing can" % (entry.id, declared))
+
+        if entry.generator:
+            tool = layout.component(entry.generator)
+            assert tool.exists(), (
+                "%s names generator %s, which the contract declares at %s "
+                "-- and that path does not exist"
+                % (entry.id, tool.id, tool.path))
+        else:
+            assert len(entry.orphaned.split()) >= 20, (
+                "%s is orphaned with a reason too short to be one: %r"
+                % (entry.id, entry.orphaned))
+
+
+def test_the_orphaned_artifacts_are_the_ones_recorded(layout):
+    """A debt register only works if adding to it is harder than paying
+    it off."""
+    found = sorted(c.id for c in layout.orphaned_artifacts())
+    assert found == ORPHANED_ARTIFACTS, (
+        "the set of artifacts nothing can rebuild changed: %s. If a "
+        "generator landed, remove the entry here in the same commit; if "
+        "a new derived file was committed without one, that is the "
+        "finding." % found)
+
+
+def test_no_orphaned_artifact_is_loaded_as_if_it_were_measured(layout):
+    """The reason the register is not merely documentation.
+
+    None of these may reach the reasoner scope or the corpus digest. An
+    18.9 MB tree of reasoner output from a different tree, swept into the
+    scope, would be reported as a property of this ontology.
+    """
+    orphans = {c.path for c in layout.orphaned_artifacts()}
+    scope = {p.relative_to(layout.repository_root()).as_posix()
+             for p in layout.ontology_files() + layout.vendored_files()}
+    for path in scope:
+        for orphan in orphans:
+            assert not (path == orphan or path.startswith(orphan + "/")), (
+                "%s is inside orphaned component %s and is in the scope"
+                % (path, orphan))
+
+
 def test_the_ontology_scope_excludes_what_it_must(layout, repo):
     """The reasoner scope is the authored ontology and nothing else.
 

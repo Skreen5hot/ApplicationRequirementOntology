@@ -13,6 +13,16 @@
 # never redistributed. A `test-fixture` is expected to be invalid on
 # purpose and must not be loaded as if it were part of the ontology.
 #
+# A `generated-artifact` must name the `generator` that writes it, or
+# declare itself `orphaned` with the reason. That field exists because
+# the sentence above -- "not hand-edited" -- was false for three
+# components at once: the tools that wrote them are not in this
+# repository, so they cannot be regenerated, and they were in fact
+# text-edited during the namespace migration because that was the only
+# way to move them. The contract asserted a property nothing could
+# deliver, which is precisely the defect docs/process/PROCESS.md opens
+# with. Recording it does not fix it; it stops it being invisible.
+#
 # Adding a file to the repository without declaring it here is a test
 # failure, in both directions: an undeclared file has no stated role, and
 # a declared component whose path does not exist is a contract describing
@@ -91,18 +101,45 @@ components:
   - id: generated.reports
     path: APQC_ontology/reports
     role: generated-artifact
+    orphaned: >-
+      The tool that wrote these is not in this repository, so they cannot
+      be regenerated and nothing here can check them. They are 18.9 MB of
+      reasoner output and gate results carried over from an earlier tree:
+      15 of the 17 gate reports name a module path
+      (`ontology\slices\apqc_1_0.ttl`) that does not exist here, and all
+      of them assert "D Reasoner: consistent; no unsatisfiable classes
+      (ELK)" -- a result nothing in this repository can reproduce, because
+      no reasoner of that kind is here. `matchability.json` describes an
+      agent fleet of 12 that belongs to a different project entirely.
+
+      They were text-edited during the namespace migration, which is the
+      one thing a generated artifact must never need. Treat every number
+      in them as unverified until a generator lands and rewrites them.
     description: >-
-      Reasoner output and validation gate results. Regenerated, not
-      edited; a hand-edited report is a measurement of nothing.
+      Reasoner output and validation-gate results from an earlier tree.
+      Superseded in practice by tools/ontology/validate.py, which is
+      reproducible; kept because deleting somebody else's evidence is not
+      a decision to take quietly.
 
   - id: generated.reference
     path: APQC_ontology/reference
     role: generated-artifact
-    description: Derived reference extracts.
+    orphaned: >-
+      One derived extract, apqc_1_1_1.ttl, whose generator is not here.
+      Nothing states what it was derived from or how, so it cannot be
+      rebuilt or checked against its source.
+    description: Derived reference extracts from an earlier tree.
 
   - id: generated.corpus-index
     path: APQC_ontology/index/corpus_index.tsv
     role: generated-artifact
+    orphaned: >-
+      Its own README documented `python scripts/build_index.py`; there is
+      no `scripts/` directory here. 5,051 rows over a corpus of 3,119
+      authored classes, and no way to tell whether that is right. It is
+      the most load-bearing of the three orphans -- the README tells
+      readers to grep it in preference to reading a slice, so a stale row
+      is read as fact.
     description: >-
       A greppable index of every class and individual across the slices
       and shared modules, so navigation costs a grep rather than a read.
@@ -133,6 +170,23 @@ components:
     role: documentation
     description: The public front door.
 
+  - id: docs.handoff
+    path: docs/HANDOFF.md
+    role: documentation
+    description: >-
+      What is actually in this repository, what is trustworthy, and what
+      is not. Written for a team taking the work over, and dated at the
+      commit it describes: it is a snapshot, and a snapshot that pretends
+      otherwise is worse than none.
+
+  - id: docs.development
+    path: docs/DEVELOPMENT.md
+    role: documentation
+    description: >-
+      How to set up, run the checks, add a module, and re-vendor the
+      upstream. The conventions and the traps, separated from the
+      reasoning behind them in PROCESS.md.
+
   - id: licence.project
     path: LICENSE
     role: project-licence
@@ -157,6 +211,7 @@ components:
   - id: vendor.bfo
     path: vendor/bfo/bfo-core-aro-extract.ttl
     role: vendored-ontology
+    generator: tool.vendor-upstream
     redistributable: true
     description: >-
       The BFO terms this repository names, plus their named ancestry.
@@ -165,6 +220,7 @@ components:
   - id: vendor.cco
     path: vendor/cco/cco-aro-extract.ttl
     role: vendored-ontology
+    generator: tool.vendor-upstream
     redistributable: true
     description: >-
       The CCO terms this repository names, plus their named ancestry.
@@ -176,6 +232,7 @@ components:
   - id: docs.vendor-notice
     path: vendor/NOTICE.md
     role: documentation
+    generator: tool.vendor-upstream
     description: >-
       Attribution for the vendored extracts, as both upstream licences
       require. Generated, because an attribution file is exactly the kind
@@ -192,6 +249,7 @@ components:
   - id: generated.upstream-extracts
     path: config/upstream-extracts.json
     role: generated-artifact
+    generator: tool.vendor-upstream
     description: >-
       What was taken from each upstream and what was left behind,
       including the count of axioms dropped because their object was an
@@ -255,6 +313,7 @@ components:
   - id: generated.corpus-digest
     path: config/corpus-digest.json
     role: generated-artifact
+    generator: tool.corpus-digest
     description: >-
       Ground digest and blank-node fingerprint of the authored ontology.
       Two measures because one is not enough: blank nodes are renamed by

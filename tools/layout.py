@@ -50,7 +50,7 @@ class Component:
     """One declaration, with the questions worth asking of it."""
 
     __slots__ = ("id", "path", "role", "description", "redistributable",
-                 "tracked", "_root")
+                 "tracked", "generator", "orphaned", "_root")
 
     def __init__(self, raw: dict, root: Path):
         for required in ("id", "path", "role"):
@@ -70,6 +70,19 @@ class Component:
         #: the files may exist locally and must never be committed, which
         #: is a stronger statement than .gitignore makes on its own.
         self.tracked = raw.get("tracked", True)
+        #: The component id of the tool that writes this file, when one
+        #: exists here. `orphaned` is the other answer: a reason, in
+        #: prose, why this artifact cannot be rebuilt. Exactly one of the
+        #: two is required of a generated-artifact, and the point of
+        #: forcing the choice is that "neither" was the state three
+        #: components were in while the contract said they were
+        #: regenerated rather than edited.
+        self.generator = raw.get("generator")
+        self.orphaned = raw.get("orphaned")
+        if self.generator and self.orphaned:
+            raise LayoutError(
+                "%s declares both a generator and a reason it is orphaned; "
+                "it is one or the other" % self.id)
         self._root = root
 
     def resolve(self) -> Path:
@@ -173,6 +186,16 @@ def ontology_files() -> list[Path]:
     return out
 
 
+def orphaned_artifacts() -> list["Component"]:
+    """Generated artifacts nothing in this repository can rebuild.
+
+    Kept as a list rather than a comment so it can shrink visibly. Every
+    entry is a file that looks derived, is treated as derived by anyone
+    reading it, and is in fact frozen at whatever it said when it arrived.
+    """
+    return [c for c in components() if c.orphaned]
+
+
 def vendored_files() -> list[Path]:
     """Every vendored upstream extract.
 
@@ -238,6 +261,10 @@ def main(argv=None) -> int:
     print("  roles: %s" % roles())
     print("  never tracked: %s"
           % [e.id for e in components() if not e.tracked])
+    orphans = orphaned_artifacts()
+    if orphans:
+        print("  cannot be regenerated (no generator here): %s"
+              % [e.id for e in orphans])
     missing = [e.id for e in components() if e.tracked and not e.exists()]
     if missing:
         print("  MISSING: %s" % missing)

@@ -1,0 +1,270 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix obo:   <http://purl.obolibrary.org/obo/> .
+@prefix cco:   <https://www.commoncoreontologies.org/> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix ex:    <http://example.org/apqc#> .
+
+####################################################################
+# APQC SHARED EXTENSION MODULE  (inlined)  v0.3.0
+#
+# D9: recurring local act genera live here ONCE as the canonical source
+# of truth -- never re-minted per slice. Each genus is anchored under the
+# nearest correct CCO Act class (verify-before-assert, Methodology §6).
+# Each self-contained slice INLINES (mirrors) the genera it uses; slice
+# modules no longer `owl:imports` this file (post-self-containment refactor).
+#
+# Growth policy (PHASE0 §5.1): the section daemon may PROPOSE a new
+# recurring genus; it is added here only after human approval, to keep
+# this the single source of truth for local universals.
+#
+# CCO pin: v2.0 (2024-11-06).
+####################################################################
+
+<http://example.org/apqc/ext> a owl:Ontology ;
+    dct:title "APQC Shared Extension: recurring local act genera (D9)" ;
+    owl:versionInfo "0.3.0" ;
+    rdfs:comment "Canonical registry of recurring local act genera (D9); its definitions are inlined (mirrored) into each self-contained reality-layer slice module (slices no longer import it). Anchors local act genera under CCO Act classes." .
+    # owl:imports <https://www.commoncoreontologies.org/2024-11-06/CommonCoreOntologiesMerged> .
+
+####################################################################
+# Seed genera (lifted from the reference module apqc_1_1_1.ttl, where
+# they were proven against CCO v2.0).
+####################################################################
+
+ex:ActOfAnalysis a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Analysis" ;
+    skos:definition "An Act of Information Processing in which an Agent examines one or more input Information Content Entities and produces an Information Content Entity that represents an understanding of their subject matter." ;
+    rdfs:comment "Local extension (D9). CCO 2.0 has no generic analysis class; analysis is information processing, so it is anchored under cco:ont00000366." .
+
+ex:ActOfIdentification a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Identification (discernment sense)" ;
+    skos:definition "An Act of Information Processing in which an Agent discerns and enumerates entities of a given kind and produces an Information Content Entity that registers them." ;
+    rdfs:comment "Local extension (D9). NOT cco:ont00001261 'Act of Identifying' (a communication act). APQC 'Identify ...' denotes discernment, i.e. information processing." .
+
+####################################################################
+# Promoted from the section 1.0 transform (recur corpus-wide).
+# v0.2.0: added ActOfFormulation, ActOfSelection, ActOfAcquisition.
+####################################################################
+
+ex:ActOfFormulation a owl:Class ;
+    rdfs:subClassOf cco:ont00000511 ;   # Act of Planning
+    rdfs:label "Act of Formulation" ;
+    skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." ;
+    rdfs:comment "Local extension (D9). Anchored under cco:ont00000511 (Act of Planning) because formulating a strategy/mission/design is making a plan to achieve an objective; its output is a Directive ICE. Recurs across develop/define/compose-a-directive processes corpus-wide." .
+
+ex:ActOfSelection a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Selection" ;
+    skos:definition "An Act of Information Processing in which an Agent chooses one or more options from a set of candidates and produces a Directive Information Content Entity that prescribes the chosen option(s)." ;
+    rdfs:comment "Local extension (D9). Anchored under cco:ont00000366 (Act of Information Processing): receives candidate-option ICEs and yields a decision ICE. Distinct from Act of Appraisal (judges without committing) and Act of Planning. NOTE: ratifying a single already-settled option is NOT selection (no candidate set) -- anchor such acts at cco:ont00000228 (Planned Act)." .
+
+ex:ActOfAcquisition a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Acquisition" ;
+    skos:definition "A Planned Act in which an Agent obtains from some authority or supplier an entity (such as an authorization, license, or resource) that the Agent did not previously hold." ;
+    rdfs:comment "Local extension (D9). Rejected cco:ont00000950 'Act of Maintenance' (modifying Material Artifacts) and cco:ont00000402 'Act of Communication' (mere ICE transfer). Securing/obtaining a held entity anchors at the generic Planned Act. Expected to recur in procurement/asset-acquisition categories (4.0, 10.0)." .
+
+####################################################################
+# CONSOLIDATED ACT GENERA (D9) -- append to apqc-ext.ttl
+# 29 canonical genera reconciled from the 13 slice modules.
+# Every cco:ont... IRI verified against vendor/cco/
+# CommonCoreOntologiesMerged.ttl (CCO v2.0, 2024-11-06):
+# label + skos:definition + parent chain all confirmed (D6).
+# The 5 seed genera (Analysis/Identification/Formulation/
+# Selection/Acquisition) are already defined above and are NOT
+# redefined here.
+####################################################################
+
+ex:ActOfMonitoring a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Monitoring" ;
+    skos:definition "An Act of Information Processing in which an Agent repeatedly or continuously observes the state, progress, or performance of some process, system, or quantity over time and produces a Descriptive Information Content Entity that represents its tracked status against expected conditions, targets, or requirements." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic monitoring/tracking class. Anchored under cco:ont00000366 (Act of Information Processing) because monitoring ingests repeated observations (including electronic records, not only senses) and yields a descriptive status/deviation ICE -- the GOLDEN PRINCIPLE (descriptive output => information-processing genus) holds. Rejected cco:ont00000037 (Act of Observation: a single sense-based acquisition, too narrow -- monitoring also processes ICEs and is sustained); cco:ont00000636 (Act of Appraisal: renders a single bounded value/quality judgement rather than tracking status over time); and cco:ont00000345 (Act of Measuring: a single quantification against a standard at one time -- at most a method sub-step of the monitoring cycle; a node that is purely one quantification, e.g. Calculate performance measures, anchors to cco:ont00000345 directly, not here). Distinct from ex:ActOfAnalysis (one-shot examination of a fixed input set) by its continuous, longitudinal character. A standing 'Manage/Monitor X' function with no natural end is an Organization Capability (cco:ont00000568) realized in such acts, not itself a process. Recurs corpus-wide (slices 3.0/4.0/5.0/6.0/8.0/9.0/10.0/11.0/12.0/13.0). Reconciled from 10 divergent slice restatements to one definition." .
+
+ex:ActOfVerification a owl:Class ;
+    rdfs:subClassOf cco:ont00000636 ;   # Act of Appraisal
+    rdfs:label "Act of Verification" ;
+    skos:definition "An Act of Appraisal in which an Agent subjects a product, service, solution, system, plan, control, or process to a test, audit, trial, or review against specified requirements and produces a Descriptive Information Content Entity that records whether and to what extent the requirements are met." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic verification/checking/testing class. Anchored under cco:ont00000636 (Act of Appraisal): verification checks a product, service, solution, system, plan, control, or process against specified requirements and produces a descriptive judgement. Many verification acts also have an information-processing character, but Act of Appraisal is the canonical genus for this corpus." .
+
+ex:ActOfReporting a owl:Class ;
+    rdfs:subClassOf cco:ont00000379 ,   # Act of Representative Communication
+        cco:ont00000228 ;               # Planned Act (explicit allowlist anchor; ont00000379 -> ont00000402 -> ont00000228 in the CCO closure, asserted locally so the standalone SHACL S2 Act-anchor chain resolves)
+    rdfs:label "Act of Reporting" ;
+    skos:definition "An Act of Representative Communication in which an Agent transfers to one or more recipients a Descriptive Information Content Entity (such as a report, statement, scorecard, or filing) that asserts, as true, a representation of an organization's condition or results." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no broad reporting class spanning compilation and assertion. Anchored under cco:ont00000379 (Act of Representative Communication), with cco:ont00000228 (Planned Act) co-anchored so standalone SHACL resolves the act chain: reporting transfers to recipients a descriptive account (report, statement, scorecard, filing) asserting an organization's condition or results. Pure submission of an already-prepared report may use the verified leaf cco:ont00000151 directly." .
+
+ex:ActOfNegotiation a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Negotiation" ;
+    skos:definition "A Planned Act in which two or more Agents confer and bargain over terms and conditions, exchanging proposals and concessions, in order to reach and record a mutually binding Directive Information Content Entity such as an agreement or contract." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000228 (Planned Act): negotiation is two or more agents conferring and bargaining over terms to reach a mutually binding directive (an agreement or contract). Rejected cco:ont00001327 (Social Act) as too generic; Act of Contract Formation (cco:ont00000684) models only the consummating promise, narrower than the bargaining process." .
+
+ex:ActOfScheduling a owl:Class ;
+    rdfs:subClassOf cco:ont00000511 ;   # Act of Planning
+    rdfs:label "Act of Scheduling" ;
+    skos:definition "An Act of Planning in which an Agent fixes the timing, sequencing, and resource allocation of future activities and produces a schedule (a Directive Information Content Entity) that prescribes when, in what order, and by whom those activities are to be performed." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000511 (Act of Planning, verified: 'A Planned Act that involves making a Plan to achieve some specified Objective'): a schedule is a plan whose differentia is the temporal/resource ordering of activities; its output is a Directive ICE, satisfying the GOLDEN PRINCIPLE. Distinct from ex:ActOfFormulation (mission/strategy/design) by its specifically temporal/resource-allocation product. Recurs across operations and project categories (4.0, 6.0, 8.0)." .
+
+ex:ActOfServiceProvision a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Service Provision" ;
+    skos:definition "A Planned Act in which an Agent renders a service to a customer by carrying out and completing the tasks that fulfil an agreed service need." ;
+    rdfs:comment "PROPOSE-EXT (D9). Operations-category signature genus for 'deliver/render/execute/deploy/operate a service' processes. Anchored at the generic cco:ont00000228 (Planned Act) because service provision need not produce or modify an artifact and need not transfer an ICE. Rejected cco:ont00000908 (Act of Material Artifact Processing: its product is a modified Material Artifact, whereas a service need not modify matter) and cco:ont00000402 (Act of Communication: mere ICE transfer). Recurs in operations/IT-service categories (4.0, 5.0, 6.0, 8.0, 9.0, 10.0)." .
+
+ex:ActOfDesign a owl:Class ;
+    rdfs:subClassOf cco:ont00000511 ;   # Act of Planning
+    rdfs:label "Act of Design" ;
+    skos:definition "An Act of Planning in which an Agent devises and specifies the form, structure, and behavior of a prospective product, service, solution, process, or architecture and produces a Directive Information Content Entity (a design specification) that prescribes how it is to be realized." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic design act; designing produces a Directive ICE (a design/architecture specification) prescribing an artifact-to-be, so it is anchored under cco:ont00000511 (Act of Planning), not under cco:ont00000908 (Act of Material Artifact Processing), which physically operates on existing matter. Rejected cco:ont00000051 (Act of Construction) and cco:ont00001359 (Act of Manufacturing) as both build/mass-produce finished goods rather than authoring a concept-stage design. Recurs across develop/design categories (2.0, 4.0, 7.0, 8.0)." .
+
+ex:ActOfDevelopment a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Development" ;
+    skos:definition "A Planned Act in which an Agent brings a novel product, service, solution, technology, component, prototype, or process from a specification or concept into an existent realized state." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored at the generic cco:ont00000228 (Planned Act) because development spans both informational and material outputs (new technologies, software/hardware components, prototypes, delivery processes) and is broader than cco:ont00001359 (Act of Manufacturing, mass production) and cco:ont00000051 (Act of Construction, building to contract); a development act whose product is specifically a built/mass-produced material artifact should instead use those narrower CCO acts, attaching the material product via obo:BFO_0000057 (has participant), not has output (reserved for ICEs). Recurs across develop/build categories (2.0, 4.0, 8.0)." .
+
+ex:ActOfDataManagement a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Data Management" ;
+    skos:definition "An Act of Information Processing in which an Agent stores, controls, updates, maintains, or governs access to a body of Information Content Entities so as to keep it accurate, secure, and available." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000366 (Act of Information Processing: ICEs are received, manipulated, transferred, or stored). Covers maintain-records / maintain-repository / control-access / document acts. Rejected cco:ont00001158 (Act of Data Transformation: requires executing an algorithm to transform inputs into outputs) and cco:ont00000950 (Act of Maintenance: modifies Material Artifacts, not ICEs). A standing 'Manage business information' function with no natural end is an Organization Capability (cco:ont00000568) realized in such acts, not itself a process. Recurs in information-management categories (2.0, 8.0)." .
+
+ex:ActOfForecasting a owl:Class ;
+    rdfs:subClassOf cco:ont00000371 ,   # Act of Prediction
+        cco:ont00000228 ;               # Planned Act (explicit; Act of Prediction ⊑ Planned Act in CCO, asserted so the standalone SHACL S2 Act-anchor chain resolves)
+    rdfs:label "Act of Forecasting" ;
+    skos:definition "An Act of Prediction in which an Agent extrapolates from historical and current Information Content Entities to produce a Predictive Information Content Entity that estimates a future quantity such as demand, volume, revenue, or value." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000371 (Act of Prediction, verified: 'A Planned Act that involves the generation of a Predictive Information Content entity that is intended to describe an uncertain possible future event, value, entity, or attribute'; parent cco:ont00000228), whose definitional output is a Predictive ICE (cco:ont00000626 ⊑ cco:ont00000853 Descriptive ICE) -- exactly the genus of a sales/demand/volume/ROI forecast. A thin specialization (quantitative, history-driven business projection) kept shared so slice agents need not re-derive the anchor. Output is a PREDICTIVE ICE (a Descriptive ICE about an uncertain future), per the GOLDEN PRINCIPLE. Recurs in 3.0 and 6.0." .
+
+ex:ActOfDisposition a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Disposition" ;
+    skos:definition "A Planned Act in which an Agent removes an asset or portion of material from active service, ownership, or possession at its end-of-life by retiring, selling, dismantling, recycling, abandoning, or otherwise applying a terminal disposition to it or its parts in accordance with applicable requirements." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic disposal/disposition Act. Anchored at the generic cco:ont00000228 (Planned Act) because disposition spans physical destruction/recycling AND ownership transfer (sale/trade) AND waste-stream removal -- not all of which physically process a material artifact. Rejected cco:ont00000908 (Act of Material Artifact Processing: too narrow -- excludes sale/abandonment), cco:ont00000950 (Act of Maintenance: preserves/restores Qualities, the opposite of retiring an asset), and cco:ont00000970 (Act of Artifact Modification: changes an artifact's qualities, not its service/ownership status). Recurs across asset end-of-life: decommission, sale/trade, recycle, abandonment, hazardous-material/waste disposition (10.0)." .
+
+ex:ActOfInvestigation a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Investigation" ;
+    skos:definition "An Act of Information Processing in which an Agent systematically examines and gathers evidence about a situation, framework, or cause in order to produce a Descriptive Information Content Entity that establishes the relevant facts." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic investigation/examination class. Anchored under cco:ont00000366 (Act of Information Processing) because investigation gathers and manipulates evidence into a Descriptive findings ICE (GOLDEN PRINCIPLE). Distinct from ex:ActOfAnalysis (examines GIVEN input ICEs) in that investigation also acquires the evidence; retained as a separate genus because 'investigate' recurs as a distinct verb. Rejected cco:ont00000636 (Act of Appraisal: judges value/condition, not factual examination of causes) and cco:ont00000151 (Act of Reporting: a communication act). Recurs in audit/forensics/incident categories (11.0)." .
+
+ex:ActOfRelationshipManagement a owl:Class ;
+    rdfs:subClassOf cco:ont00000433 ,   # Act of Association
+        cco:ont00000228 ;               # Planned Act (explicit allowlist anchor; ont00000433 -> Social Act ont00001327 -> Planned Act ont00000228 in the CCO closure)
+    rdfs:label "Act of Relationship Management" ;
+    skos:definition "An Act of Association in which an Agent builds, maintains, extends, or advances an ongoing relationship between an organization and one or more external parties or held assets." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000433 'Act of Association' (verified: 'A Social Act wherein an Agent unites with some other Agent in a Planned Act, enterprise or business'; parent cco:ont00001327 Social Act -> cco:ont00000228) because relationship-building is a sustained social uniting, not mere ICE transfer. Rejected cco:ont00000402 'Act of Communication' (a single ICE-transfer event, too narrow), cco:ont00000511 'Act of Planning' (output is a relationship, not a plan), and cco:ont00000168 'Act of Interpersonal Relationship' (restricted to Persons, whereas the external counterparties here are typically Organizations). Recurs across plan/build/manage-relationship nodes (12.0)." .
+
+ex:ActOfPayment a owl:Class ;
+    rdfs:subClassOf cco:ont00000836 ,   # Act of Financial Instrument Use
+        cco:ont00000228 ;               # Planned Act (explicit allowlist anchor; ont00000836 -> Act of Artifact Employment ont00000566 -> ... -> Planned Act in the CCO closure)
+    rdfs:label "Act of Payment" ;
+    skos:definition "An Act of Financial Instrument Use in which an Agent (the payer) transfers money or a monetary instrument to another Agent (the payee) in settlement of an obligation." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000836 'Act of Financial Instrument Use' (verified: 'An Act of Artifact Employment in which some Agent uses some Financial Instrument'; parent cco:ont00000566 Act of Artifact Employment). Rejected cco:ont00001334 'Act of Purchasing' (acquires a good/service in exchange, whereas payment may settle a pre-existing debt without acquisition) and cco:ont00000389 'Act of Buying' (acquires ownership of a good, narrower still). The transferred money is a material entity moved as a participant; the act's definitional informational output is a Descriptive ICE payment record. Recurs in disbursement/procurement processes (12.0)." .
+
+ex:ActOfAdvocacy a owl:Class ;
+    rdfs:subClassOf cco:ont00001327 ,   # Social Act
+        cco:ont00000228 ;               # Planned Act (explicit allowlist anchor; Social Act ont00001327 ⊑ Planned Act ont00000228 in the CCO closure)
+    rdfs:label "Act of Advocacy" ;
+    skos:definition "A Social Act in which an Agent promotes, encourages, or supports a cause, position, or change in the societal or political environment through campaigns, programs, or public engagement, on behalf of an organization." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00001327 'Social Act' (verified: 'A Planned Act having an objective that affects, is performed by, or is performed on behalf of, a community or group of Persons'; parent cco:ont00000228) because advocacy/promotion targets a community or society rather than uniting with a single counterpart. Evaluated cco:ont00000079 'Act of Social Movement' (verified: 'A Social Act composed of a series of performances, displays and campaigns directed at implementing, resisting or undoing a change in society') as the nearest sibling: it fits campaign-driven activism but is narrower than the general supporting/promoting intent here (supporting civic programs and connection platforms is not necessarily a movement to undo a societal change), so a dedicated advocacy genus is minted under the shared Social Act parent. Rejected cco:ont00000433 'Act of Association' (a bilateral uniting-with-an-Agent, whereas advocacy influences a societal/political environment rather than uniting into a shared enterprise). Recurs across promote/encourage/support-the-environment nodes (12.0)." .
+
+ex:ActOfImplementation a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Implementation" ;
+    skos:definition "A Planned Act in which an Agent executes, deploys, or puts into operation a previously specified plan, program, methodology, or system so as to bring about the state of affairs it prescribes." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000228 (Planned Act): carrying out a Directive ICE is realizing a plan, and its effect is a change in the world rather than a new ICE. Distinct from ex:ActOfFormulation (which composes the plan) and ex:ActOfDeployment (the narrower IT install/configure case). Rejected cco:ont00000950 'Act of Maintenance' (restricted to modifying Material Artifacts). Recurs in execute/deploy/implement processes (13.0)." .
+
+ex:ActOfImprovement a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Improvement" ;
+    skos:definition "A Planned Act in which an Agent modifies an existing process, system, or capability with the intent of raising its performance, quality, or fitness against stated objectives." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000228 (Planned Act): it alters an existing occurrent-type or system rather than merely processing information or composing a new plan. Distinct from ex:ActOfImplementation (enacts a fixed directive). Rejected cco:ont00000950 'Act of Maintenance' (restores/preserves a Material Artifact's designed Qualities/Functions, whereas improvement raises performance of a process/system). Recurs in improve/reengineer/enhance/sustain processes (13.0)." .
+
+ex:ActOfSelling a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Selling" ;
+    skos:definition "A Planned Act in which an Agent (the seller) transfers ownership of a good or the provision of a service to another Agent (the buyer) in exchange for a Financial Instrument." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 models only the BUYER side (cco:ont00001334 Act of Purchasing, cco:ont00000389 Act of Buying, cco:ont00000836 Act of Financial Instrument Use); APQC 3.5 makes the seller the focal Agent, so a complementary seller-side act is anchored at the generic cco:ont00000228 (Planned Act). Rejected cco:ont00000402 (Act of Communication: a sale transfers a good/value, not merely an ICE). A transactional Planned Act, neutral on ICE output. Recurs across sell-product/service processes (3.0)." .
+
+ex:ActOfProduction a owl:Class ;
+    rdfs:subClassOf cco:ont00000908 ,   # Act of Material Artifact Processing
+        cco:ont00000228 ;               # Planned Act (explicit; entailed via ont00000908, asserted so SHACL S2/S5 resolve standalone)
+    rdfs:label "Act of Production" ;
+    skos:definition "An Act of Material Artifact Processing in which an Agent transforms raw materials and components into finished Material Artifacts according to a production specification or schedule." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000908 (Act of Material Artifact Processing, verified: 'A Planned Act of performing a series of physical operations on a material artifact in order to change or preserve the artifact'; parent cco:ont00000228), the common parent of Act of Manufacturing (cco:ont00001359) and Act of Artifact Assembly. Generalizes produce/assemble-product where APQC covers both mass manufacturing and assembly; cco:ont00001359 (mass production for sale) alone is too narrow and Assembly alone excludes non-assembly production, so the shared genus sits at their common parent. The material product is attached via obo:BFO_0000057 (has participant), NOT has output -- a deliberate CORPUS-LOCAL CONVENTION (not a missing output): cco:has output is used only for informational (ICE) outputs in these reality slices, so material products produced or moved by operations attach via bfo:has participant. CCO itself permits a material has-output; adopting that pattern corpus-wide is an open policy option (see methodology section 10). Recurs in physical-production categories (4.0, 6.0)." .
+
+ex:ActOfTransportation a owl:Class ;
+    rdfs:subClassOf cco:ont00000065 ,   # Act of Location Change
+        cco:ont00000228 ;               # Planned Act (explicit; entailed via ont00000065, asserted so SHACL S2/S5 resolve standalone)
+    rdfs:label "Act of Transportation" ;
+    skos:definition "An Act of Location Change in which an Agent moves materials or finished products from one supply-chain location to another, such as from a source to a warehouse, distribution center, or customer." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000065 (Act of Location Change, verified: 'An Act of Motion in which the location of some Object is changed by some Agent'; parent cco:ont00000357 Act of Motion -> ... -> Planned Act), the parent of cco:ont00000595 'Act of Cargo Transportation'. Generalizes inbound/outbound movement, picking-packing-shipping, and warehouse transfers; cco:ont00000595 is a close fit but is scoped to a Payload being conveyed, whereas ex:ActOfTransportation also covers internal warehouse transfers and deployment. Recurs across physical-logistics categories (4.0, 6.0, 9.0)." .
+
+ex:ActOfProcessControl a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Process Control" ;
+    skos:definition "A Planned Act in which an Agent, or an automation system acting for an Agent, regulates a running production process or plant by closing the loop between observation and actuation -- adjusting setpoints, parameters, and equipment so as to keep the process within target or optimize its performance." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000228 (Planned Act): closed-loop control ACTS ON the plant (it changes setpoints and equipment state), so its product is a change in the controlled material participants, not a Descriptive ICE. Rejected ex:ActOfMonitoring (cco:ont00000366, Act of Information Processing): monitoring is the OBSERVE half only and over-commits to a descriptive output, whereas advanced process control / real-time optimization also ACTUATE. The controlled equipment is attached via obo:BFO_0000057 (has participant). Recurs across automate/control-plant and industrial-control activities (4.0)." .
+
+ex:ActOfResolution a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Resolution" ;
+    skos:definition "A Planned Act in which an Agent settles a raised case -- such as a customer inquiry, complaint, warranty claim, supplier-recovery matter, or product recall -- by determining and recording its disposition, comprising as needed the receipt, investigation, decision, and closure of the case." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic resolution/case-management class. A leaf resolve act settles one complaint and records a Descriptive resolution; an end-to-end case-resolution process composes information-processing/appraisal/planning/communication sub-acts and is individuated by carrying a case from open to closed. Both are Planned Acts that settle a matter, so the coherent genus is the generic cco:ont00000228 (Planned Act), neutral on output kind. Rejected cco:ont00000636 (Act of Appraisal: resolution settles a matter rather than merely judging value) and cco:ont00000402 (Act of Communication: the downstream notify/respond to the customer is a separate communication act). Recurs in service/support case management (6.0)." .
+
+ex:ActOfAdministration a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Administration" ;
+    skos:definition "A Planned Act in which an Agent carries out, enforces, delivers, coordinates, and maintains an already-established arrangement (such as a policy, program, plan, scheme, record set, or relationship) on behalf of an Organization in accordance with a Directive Information Content Entity, without itself creating that arrangement." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored at the generic cco:ont00000228 (Planned Act), neutral on output kind, so administrative acts yielding a Descriptive record or a Directive schedule both fit. Rejected cco:ont00000950 'Act of Maintenance' (modifies Material Artifacts to restore designed Qualities/Functions, whereas administration executes a directive arrangement rather than repairing an artifact), cco:ont00000511 'Act of Planning' (planning creates the arrangement; administering merely runs an existing one), and cco:ont00000366 'Act of Information Processing' (too narrow: administration provisions resources and enacts directives, not only ICE manipulation). Differentia is execution-and-upkeep of a settled arrangement. Recurs in 7.0." .
+
+ex:ActOfDeployment a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Deployment" ;
+    skos:definition "A Planned Act in which an Agent installs, configures, distributes, or otherwise makes operationally available an IT component, software release, or solution within an organization's environment." ;
+    rdfs:comment "PROPOSE-EXT (D9). Anchored at the generic cco:ont00000228 (Planned Act) because deployment places and configures a (often material) IT component into operation: it acts on material participants (IT infrastructure components / software releases, attached via obo:BFO_0000057 has participant), so it is neither a pure information-processing act nor a service-rendering act. Rejected ex:ActOfServiceProvision (renders an intangible service rather than installing/configuring a discrete component), cco:ont00000950 (Act of Maintenance: restores/preserves an existing artifact's qualities rather than first making it operational), and cco:ont00000908 (Act of Material Artifact Processing: fabricates/transforms matter rather than installing/configuring an already-built component). Recurs in IT/operations install-and-configure activities (8.0, 9.0)." .
+
+ex:ActOfCommunication a owl:Class ;
+    rdfs:subClassOf cco:ont00000402 ,   # Act of Communication (VERIFIED)
+        cco:ont00000228 ;               # Planned Act -- explicit allowlist anchor: the SHACL S2 graph does not merge the CCO closure, so the verified ont00000402 ⊑ ont00000228 edge is asserted here so the chain resolves to an allowlisted Act.
+    rdfs:label "Act of Communication (shared anchor)" ;
+    skos:definition "A Planned Act in which an Agent transfers one or more Information Content Entities to one or more other Agents." ;
+    rdfs:comment "PROPOSE-EXT (D9). Shared anchor that wraps the VERIFIED cco:ont00000402 (Act of Communication, def: 'A Planned Act in which some Information Content Entity is transferred from some Agent to Another'; parent cco:ont00000228) so the recurring 'communicate'/'convey'/'escalate'/'route' rows reuse one consistent, D6-verified parent rather than re-citing the raw IRI per class. NOT cco:ont00000379 'Act of Representative Communication' (the methodology's flagged false-friend, the truth-committing subclass): plain conveyance/escalation does not assert truth, whereas reporting (ex:ActOfReporting) does and therefore anchors under ont00000379. The cco:ont00000228 co-anchor is retained because SHACL S2 evaluates rdfs:subClassOf+ over the module graph only. Recurs in 8.0." .
+
+ex:ActOfAccounting a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Accounting" ;
+    skos:definition "An Act of Information Processing in which an Agent records, classifies, posts, or reconciles financial transactions and produces or updates a Descriptive Information Content Entity (such as a ledger, journal, or account record) that registers the organization's financial state." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic bookkeeping/record-keeping class; recording and reconciling transactions manipulates input ICEs into an updated record ICE, so it anchors under cco:ont00000366 (Act of Information Processing), per the GOLDEN PRINCIPLE. Rejected cco:ont00000950 'Act of Maintenance' (modifies Material Artifacts, not records). Distinct from ex:ActOfFinancialTransaction (which moves the money itself). Recurs in accounting categories (9.0; likely 8.0)." .
+
+ex:ActOfFinancialTransaction a owl:Class ;
+    rdfs:subClassOf cco:ont00000836 ,   # Act of Financial Instrument Use
+        cco:ont00000228 ;               # Planned Act (co-asserted: 836 is outside the S2 standalone-SHACL process-anchor allowlist {366,636,511,228}; 836 -> 566 -> 228 in the CCO closure)
+    rdfs:label "Act of Financial Transaction" ;
+    skos:definition "A Planned Act in which an Agent transfers or uses money or a Financial Instrument to or from another Agent in settlement of an obligation, an investment, or an exchange." ;
+    rdfs:comment "PROPOSE-EXT (D9). Re-anchored from the bare cco:ont00000228 to cco:ont00000836 (Act of Financial Instrument Use): every subclass uses/transfers a Financial Instrument (money and cash are Financial Instruments in CCO -- cf. Portion of Cash cco:ont00000475 subClassOf 537), and CCO models settlements, loans, purchases, deposits, withdrawals and exchanges uniformly under 836. Rejected cco:ont00001334 'Act of Purchasing' and cco:ont00000389 'Act of Buying' (both acquire a good/service -- too narrow) and cco:ont00000366 'Act of Information Processing' (a payment moves a material/financial-instrument filler, not only an ICE). cco:ont00000228 co-asserted because 836 falls outside the S2 standalone-SHACL allowlist. Recurs in payment/treasury/trade categories (9.0)." .
+
+ex:ActOfRemuneration a owl:Class ;
+    rdfs:subClassOf cco:ont00000449 ,   # Act of Remuneration (Employer compensates Employee)
+        cco:ont00000228 ;               # Planned Act (co-asserted: 449 -> 1334 -> 836 -> 566 -> 228; 449 is outside the S2 allowlist {366,636,511,228})
+    rdfs:label "Act of Remuneration" ;
+    skos:definition "An Act of Remuneration in which an Employer disburses a Financial Instrument (salary, wages, bonus, or other compensation) to an Employee for services performed." ;
+    rdfs:comment "PROPOSE-EXT (D9). Inlines the verified CCO leaf cco:ont00000449 (Act of Remuneration, subClassOf cco:ont00001334 Act of Purchasing subClassOf cco:ont00000836) for payroll rows whose APQC text is salary/compensation disbursement to employees -- a closer genus than ex:ActOfFinancialTransaction. NOT used for payroll-TAX remittance to a government authority. cco:ont00000228 co-asserted because 449 is outside the standalone-SHACL S2 process-anchor allowlist." .
+
+ex:ActOfCardAdministration a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Card Administration" ;
+    skos:definition "A Planned Act in which an Agent issues, handles, processes a request for, or deactivates a payment card on behalf of an Organization, thereby establishing or altering the card's status without itself transferring money or a Financial Instrument." ;
+    rdfs:comment "PROPOSE-EXT (D9). Minted for the corporate-credit-card lifecycle family (issue/handle, process requests, deactivate). REJECTED ex:ActOfFinancialTransaction: card issuance/handling/blocking transfers no money and settles no obligation, so it falls outside that genus's differentia ('transfers money or a Financial Instrument in settlement') -- anchoring it there was a false friend driven by the surface theme 'credit card'. Anchored at the generic cco:ont00000228 (Planned Act) because the act operates on the card artifact (a material participant) rather than manipulating only ICEs (cco:ont00000366) or obtaining a not-previously-held entity (ex:ActOfAcquisition, which covers ordering a card). Recurs in 9.0." .
+
+ex:ActOfOrganizationalEstablishment a owl:Class ;
+    rdfs:subClassOf cco:ont00000228 ;   # Planned Act
+    rdfs:label "Act of Organizational Establishment" ;
+    skos:definition "A Planned Act in which an Agent constitutes and seats an Organization or organizational body (such as a board, committee, or unit), bringing the body into existence and conferring its mandate." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no Act-of-Establishment/Organization class (verified: no 'Act of Establish/Organiz/Constitut/Found' label in the closure). REJECTED ex:ActOfFormulation (Act of Planning): formulating composes a Directive ICE, but establishing a committee primarily constitutes an independent continuant (the body) rather than authoring a directive; the responsibility-assignment directive is a downstream byproduct of seating the body, not the act's primary product. Anchored at the generic cco:ont00000228 (Planned Act). Recurs in 9.0." .

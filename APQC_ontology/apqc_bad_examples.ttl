@@ -1,0 +1,57 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix cco:  <https://www.commoncoreontologies.org/> .
+@prefix obo:  <http://purl.obolibrary.org/obo/> .
+@prefix ex:   <http://example.org/apqc#> .
+
+# Reused good fillers (minimal declarations)
+ex:CompetitorAnalysis a owl:Class ; rdfs:subClassOf cco:ont00000853 .
+ex:CompetitorRole     a owl:Class ; rdfs:subClassOf obo:BFO_0000023 .
+ex:CompetitorData     a owl:Class ; rdfs:subClassOf cco:ont00000853 .
+ex:Competitor         a owl:Class ; rdfs:subClassOf cco:ont00001180 .
+
+# V-S2: a process with NO CCO Act anchor (+ V-S1: no label/def/pcfID)
+ex:OrphanProcess a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompetitorAnalysis ] .
+
+# V-S6: a process subclassed UNDER another process (taxonomy-from-partonomy error)
+ex:GoodAnchorProcess a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompetitorAnalysis ] ;
+    rdfs:label "anchor proc" ; skos:definition "x" ; ex:pcfID "1" ; skos:example "e" .
+ex:BadSubsumedProcess a owl:Class ;
+    rdfs:subClassOf ex:GoodAnchorProcess ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompetitorAnalysis ] ;
+    rdfs:label "bad sub" ; skos:definition "x" ; ex:pcfID "2" ; skos:example "e" .
+
+# V-S3: has output filler is a Role, not an ICE
+ex:BadOutputProcess a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompetitorRole ] ;
+    rdfs:label "bad out" ; skos:definition "x" ; ex:pcfID "3" ; skos:example "e" .
+
+# V-S5: has process part filler is Data (not a process)
+ex:BadWholeProcess a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:CompetitorData ] ;
+    rdfs:label "bad whole" ; skos:definition "x" ; ex:pcfID "4" ; skos:example "e" .
+
+# V-S7: an ICE class that bears a Role
+ex:RoleBearingICE a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000196 ; owl:someValuesFrom ex:CompetitorRole ] .
+
+# V-S8: a process (non-ICE) carrying an 'is about' restriction
+ex:AboutOnProcess a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompetitorAnalysis ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001808 ; owl:someValuesFrom ex:Competitor ] ;
+    rdfs:label "about proc" ; skos:definition "x" ; ex:pcfID "5" ; skos:example "e" .
+
+# W-S4: has input filler is neither ICE nor material entity (a Role)
+ex:WeirdInputProcess a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:CompetitorRole ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompetitorAnalysis ] ;
+    rdfs:label "weird in" ; skos:definition "x" ; ex:pcfID "6" ; skos:example "e" .

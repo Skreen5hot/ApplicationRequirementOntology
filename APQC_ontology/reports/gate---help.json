@@ -1,0 +1,30 @@
+{
+  "module": "--help",
+  "results": [
+    {
+      "gate": "A Syntax",
+      "status": "FAIL",
+      "detail": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\aaron\\\\OneDrive\\\\Documents\\\\--help'",
+      "mandatory": true
+    },
+    {
+      "gate": "B IRI resolution",
+      "status": "SKIP",
+      "detail": "skipped: Gate A failed",
+      "mandatory": true
+    },
+    {
+      "gate": "C SHACL",
+      "status": "SKIP",
+      "detail": "skipped: Gate A failed",
+      "mandatory": true
+    },
+    {
+      "gate": "D Reasoner",
+      "status": "SKIP",
+      "detail": "skipped: Gate A failed",
+      "mandatory": true
+    }
+  ],
+  "failed_mandatory": true
+}

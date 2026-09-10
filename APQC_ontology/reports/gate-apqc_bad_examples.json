@@ -1,0 +1,30 @@
+{
+  "module": "ontology\\apqc_bad_examples.ttl",
+  "results": [
+    {
+      "gate": "A Syntax",
+      "status": "PASS",
+      "detail": "87 triples",
+      "mandatory": true
+    },
+    {
+      "gate": "B IRI resolution",
+      "status": "PASS",
+      "detail": "9 CCO/OBO IRIs resolve",
+      "mandatory": true
+    },
+    {
+      "gate": "C SHACL",
+      "status": "FAIL",
+      "detail": "10 violation(s), 1 warning(s)",
+      "mandatory": true
+    },
+    {
+      "gate": "D Reasoner",
+      "status": "FAIL",
+      "detail": "There are 3 unsatisfiable classes in the ontology.",
+      "mandatory": true
+    }
+  ],
+  "failed_mandatory": true
+}

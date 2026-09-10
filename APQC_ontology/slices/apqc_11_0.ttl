@@ -1,0 +1,1227 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix obo:   <http://purl.obolibrary.org/obo/> .
+@prefix cco:   <https://www.commoncoreontologies.org/> .
+@prefix ex:    <http://example.org/apqc#> .
+@prefix apqc:  <http://example.org/apqc/scheme#> .
+
+####################################################################
+# APQC PCF -> BFO 2020 / CCO 2.0  REALITY-LAYER MODULE
+# Slice 11.0 "Manage Enterprise Risk, Compliance, Remediation,
+#            and Resiliency"
+#
+# Assembled from the four process-group transforms (11.1 risk,
+# 11.2 compliance, 11.3 remediation, 11.4 resiliency) over a single
+# shared supporting-vocabulary layer.
+#
+# CCO pin: v2.0 (2024-11-06). Every cco:ont... IRI was verified
+# against vendor/cco/CommonCoreOntologiesMerged.ttl (label +
+# definition + parent read, not just the label). Two-layer model and
+# the R5 bounded-occurrent test per ADR-001.
+####################################################################
+
+<http://example.org/apqc/slice/11.0> a owl:Ontology ;
+    dct:title "APQC reality-layer slice 11.0: Manage Enterprise Risk, Compliance, Remediation, and Resiliency" ;
+    dct:source "APQC Process Classification Framework (Cross-Industry)" ;
+    owl:versionInfo "0.3.0" ;
+    rdfs:comment "Reality-layer module for APQC section 11.0. CCO pin v2.0 (2024-11-06). Modeling rules per ADR-001 (two-layer model, R5 bounded-occurrent test, GOLDEN PRINCIPLE). The ex:PCF_<pcfID> catalog nodes referenced by the bridges below are declared and typed in apqc-catalog.ttl. Self-contained: the shared act genera it uses are inlined from the apqc-ext.ttl registry, so it validates standalone against the pinned CCO/BFO closure with no extension merge." .
+
+####################################################################
+# ACT GENERA -- SELF-CONTAINED (canonical defs mirrored from
+# apqc-ext.ttl, the D9 shared registry). Inlined so this module
+# validates standalone against CCO without merging the extension.
+####################################################################
+
+ex:ActOfAnalysis a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Analysis" ;
+    skos:definition "An Act of Information Processing in which an Agent examines one or more input Information Content Entities and produces an Information Content Entity that represents an understanding of their subject matter." ;
+    rdfs:comment "Local extension (D9). CCO 2.0 has no generic analysis class; analysis is information processing, so it is anchored under cco:ont00000366." .
+
+ex:ActOfFormulation a owl:Class ;
+    rdfs:subClassOf cco:ont00000511 ;   # Act of Planning
+    rdfs:label "Act of Formulation" ;
+    skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." ;
+    rdfs:comment "Local extension (D9). Anchored under cco:ont00000511 (Act of Planning) because formulating a strategy/mission/design is making a plan to achieve an objective; its output is a Directive ICE. Recurs across develop/define/compose-a-directive processes corpus-wide." .
+
+ex:ActOfIdentification a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Identification (discernment sense)" ;
+    skos:definition "An Act of Information Processing in which an Agent discerns and enumerates entities of a given kind and produces an Information Content Entity that registers them." ;
+    rdfs:comment "Local extension (D9). NOT cco:ont00001261 'Act of Identifying' (a communication act). APQC 'Identify ...' denotes discernment, i.e. information processing." .
+
+ex:ActOfInvestigation a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Investigation" ;
+    skos:definition "An Act of Information Processing in which an Agent systematically examines and gathers evidence about a situation, framework, or cause in order to produce a Descriptive Information Content Entity that establishes the relevant facts." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic investigation/examination class. Anchored under cco:ont00000366 (Act of Information Processing) because investigation gathers and manipulates evidence into a Descriptive findings ICE (GOLDEN PRINCIPLE). Distinct from ex:ActOfAnalysis (examines GIVEN input ICEs) in that investigation also acquires the evidence; retained as a separate genus because 'investigate' recurs as a distinct verb. Rejected cco:ont00000636 (Act of Appraisal: judges value/condition, not factual examination of causes) and cco:ont00000151 (Act of Reporting: a communication act). Recurs in audit/forensics/incident categories (11.0)." .
+
+ex:ActOfMonitoring a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Monitoring" ;
+    skos:definition "An Act of Information Processing in which an Agent repeatedly or continuously observes the state, progress, or performance of some process, system, or quantity over time and produces a Descriptive Information Content Entity that represents its tracked status against expected conditions, targets, or requirements." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic monitoring/tracking class. Anchored under cco:ont00000366 (Act of Information Processing) because monitoring ingests repeated observations (including electronic records, not only senses) and yields a descriptive status/deviation ICE -- the GOLDEN PRINCIPLE (descriptive output => information-processing genus) holds. Rejected cco:ont00000037 (Act of Observation: a single sense-based acquisition, too narrow -- monitoring also processes ICEs and is sustained); cco:ont00000636 (Act of Appraisal: renders a single bounded value/quality judgement rather than tracking status over time); and cco:ont00000345 (Act of Measuring: a single quantification against a standard at one time -- at most a method sub-step of the monitoring cycle; a node that is purely one quantification, e.g. Calculate performance measures, anchors to cco:ont00000345 directly, not here). Distinct from ex:ActOfAnalysis (one-shot examination of a fixed input set) by its continuous, longitudinal character. A standing 'Manage/Monitor X' function with no natural end is an Organization Capability (cco:ont00000568) realized in such acts, not itself a process. Recurs corpus-wide (slices 3.0/4.0/5.0/6.0/8.0/9.0/10.0/11.0/12.0/13.0). Reconciled from 10 divergent slice restatements to one definition." .
+
+ex:ActOfReporting a owl:Class ;
+    rdfs:subClassOf cco:ont00000379 ,   # Act of Representative Communication
+        cco:ont00000228 ;               # Planned Act (explicit allowlist anchor; ont00000379 -> ont00000402 -> ont00000228 in the CCO closure, asserted locally so the standalone SHACL S2 Act-anchor chain resolves)
+    rdfs:label "Act of Reporting" ;
+    skos:definition "An Act of Representative Communication in which an Agent transfers to one or more recipients a Descriptive Information Content Entity (such as a report, statement, scorecard, or filing) that asserts, as true, a representation of an organization's condition or results." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no broad reporting class spanning compilation and assertion. Anchored under cco:ont00000379 (Act of Representative Communication), with cco:ont00000228 (Planned Act) co-anchored so standalone SHACL resolves the act chain: reporting transfers to recipients a descriptive account (report, statement, scorecard, filing) asserting an organization's condition or results. Pure submission of an already-prepared report may use the verified leaf cco:ont00000151 directly." .
+
+ex:ActOfSelection a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ;   # Act of Information Processing
+    rdfs:label "Act of Selection" ;
+    skos:definition "An Act of Information Processing in which an Agent chooses one or more options from a set of candidates and produces a Directive Information Content Entity that prescribes the chosen option(s)." ;
+    rdfs:comment "Local extension (D9). Anchored under cco:ont00000366 (Act of Information Processing): receives candidate-option ICEs and yields a decision ICE. Distinct from Act of Appraisal (judges without committing) and Act of Planning. NOTE: ratifying a single already-settled option is NOT selection (no candidate set) -- anchor such acts at cco:ont00000228 (Planned Act)." .
+
+ex:ActOfVerification a owl:Class ;
+    rdfs:subClassOf cco:ont00000636 ;   # Act of Appraisal
+    rdfs:label "Act of Verification" ;
+    skos:definition "An Act of Appraisal in which an Agent subjects a product, service, solution, system, plan, control, or process to a test, audit, trial, or review against specified requirements and produces a Descriptive Information Content Entity that records whether and to what extent the requirements are met." ;
+    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic verification/checking/testing class. Anchored under cco:ont00000636 (Act of Appraisal): verification checks a product, service, solution, system, plan, control, or process against specified requirements and produces a descriptive judgement. Many verification acts also have an information-processing character, but Act of Appraisal is the canonical genus for this corpus." .
+
+####################################################################
+# 0. PROVENANCE ANNOTATION PROPERTIES
+####################################################################
+
+ex:pcfID a owl:AnnotationProperty ;
+    rdfs:label "APQC PCF ID" ;
+    rdfs:comment "Stable APQC identifier. Anchor IRIs to this; it persists across PCF versions." .
+
+ex:hierarchyID a owl:AnnotationProperty ;
+    rdfs:label "APQC Hierarchy ID" ;
+    rdfs:comment "Positional dotted-decimal locator. NON-STABLE across PCF versions. Reference only; never for IRI minting or subsumption." .
+
+ex:apqcSourceText a owl:AnnotationProperty ;
+    rdfs:label "APQC source description" ;
+    rdfs:comment "Verbatim APQC Element Description retained for provenance." .
+
+ex:designatesProcessType a owl:AnnotationProperty ;
+    rdfs:label "designates process type" ;
+    rdfs:comment "Bridges a catalog node (ex:PCF_<pcfID>) to its reality-layer class (ex:P<pcfID> or a supporting capability). The catalog nodes themselves are declared and typed (owl:NamedIndividual, cco:ont00000853 Descriptive ICE, skos:Concept) in apqc-catalog.ttl. An ANNOTATION property is used (not an object property) deliberately, to keep the slice in OWL DL and avoid ICE-to-class punning (ADR-001 R4)." .
+
+####################################################################
+# 1. ACT GENERA -- INLINED ABOVE (Section 0.5), canonical defs
+#    mirrored from the D9 shared registry ontology/apqc-ext.ttl v0.3.0.
+#
+# ex:ActOfMonitoring, ex:ActOfReporting, ex:ActOfVerification and
+# ex:ActOfInvestigation -- together with the seed genera ex:ActOfAnalysis
+# / Identification / Formulation / Selection -- are inlined verbatim above
+# so this module validates standalone against the pinned CCO/BFO closure
+# with NO extension merge. apqc-ext.ttl remains the canonical source of
+# truth; the inlined copies are kept consistent with it.
+#
+# CANONICAL ANCHOR for ex:ActOfVerification (consolidated): Act of
+# Appraisal (cco:ont00000636) -- verification renders a criterion-
+# referenced conformance judgement of a realized artifact, system, or run
+# against a standard. (Per-group transforms had variously proposed Act of
+# Measuring 345 and Act of Information Processing 366; both are SUPERSEDED.
+# Many verification acts also retain an information-processing character.)
+####################################################################
+
+####################################################################
+# 2. SHARED SUPPORTING VOCABULARY  (section 11.0)
+#
+# The ONE shared supporting layer reused by all four groups (11.1
+# risk, 11.2 compliance, 11.3 remediation, 11.4 resiliency). Contains
+# NO process classes (no ex:P<pcfID>). Every cco:ont... IRI verified
+# against CCO v2.0 (2024-11-06).
+#
+# Verified reuse anchors:
+#   Descriptive ICE      cco:ont00000853
+#   Prescriptive ICE     cco:ont00000965  (Directive ICE)
+#   is about             cco:ont00001808
+#   has input            cco:ont00001921
+#   has output           cco:ont00001986
+#   Agent                cco:ont00001017
+#   Organization         cco:ont00001180
+#   Organization Cap.    cco:ont00000568
+#   role                 obo:BFO_0000023
+#   bearer of            obo:BFO_0000196
+#   realized in          obo:BFO_0000054
+#   material entity      obo:BFO_0000040
+#   Act of Communication cco:ont00000402  (Planned Act; an ICE is transferred from one Agent to another; subClassOf cco:ont00000228) -- Gate-F verified per P16471 task note; the family root for the two communication genera below
+#   Act of Directive Communication cco:ont00000133  (subClassOf cco:ont00000402; 'intended to cause the hearer to take a particular action'; examples ask/request/advise/suggest) -- used by P11202
+#   Act of Reporting     cco:ont00000151  (Act of Representative Communication, 'giving a detailed account or statement'; subClassOf cco:ont00000379) -- used by the 11.1 reporting rows, P19596, and P16471
+#   has sender           cco:ont00001844  (subPropertyOf BFO_0000057; domain Act of Communication; range Agent)
+#   has recipient        cco:ont00001922  (subPropertyOf BFO_0000057; domain Act of Communication; range Agent)
+####################################################################
+
+####################################################################
+# 2.1 DESCRIPTIVE INPUT/REFERENCE ICEs  (cco:ont00000853)
+####################################################################
+
+ex:RiskRegister a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Risk Register" ;
+    skos:definition "A Descriptive Information Content Entity that enumerates and describes the risks identified for an organization, business unit, or project, including their sources and potential consequences." ;
+    rdfs:comment "Shared output of identification acts across 11.1 (11.1.2.1 identify enterprise-level risks, 11.1.3.1 identify risks) and input to assessment acts. Descriptive: it registers discerned risks rather than prescribing action." .
+
+ex:RiskAssessment a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001808 ; owl:someValuesFrom ex:Risk ] ;
+    rdfs:label "Risk Assessment" ;
+    skos:definition "A Descriptive Information Content Entity, about one or more risks, that describes a judgement of the likelihood and impact of those risks together with their root causes, used to determine which to mitigate." ;
+    rdfs:comment "Shared output of appraisal acts (11.1.2.2, 11.1.3.2). Descriptive (a judgement), per GOLDEN PRINCIPLE for Act of Appraisal." .
+
+ex:InsuranceCoverageAssessment a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Insurance Coverage Assessment" ;
+    skos:definition "A Descriptive Information Content Entity that describes a judgement of the adequacy of an organization's insurance coverage against its changing needs and available providers and offerings." ;
+    rdfs:comment "Output of 11.1.3.3.1 (assess adequacy of insurance coverage)." .
+
+ex:RiskAnalysisReport a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Risk Analysis Report" ;
+    skos:definition "A Descriptive Information Content Entity that describes an examination of the impact of risk activities, including the potential for adverse consequences and the methods available to manage them." ;
+    rdfs:comment "Output of 11.1.3.6 (analyze risk activities and update plans)." .
+
+ex:EnterpriseRiskReport a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Enterprise Risk Report" ;
+    skos:definition "A Descriptive Information Content Entity that describes hazard, financial, and operational risks and risk-management activities for presentation to executive management and the board." ;
+    rdfs:comment "Shared reporting output across 11.1.1.5, 11.1.2.6, and 11.1.3.7. Descriptive (it represents the state of risk), produced by Act of Reporting." .
+
+ex:RiskMonitoringReport a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Risk Monitoring Report" ;
+    skos:definition "A Descriptive Information Content Entity that describes the observed status of risks and risk-mitigation actions tracked over time against expected parameters." ;
+    rdfs:comment "Output of monitoring acts (11.1.2.5, 11.1.3.5) produced by ex:ActOfMonitoring (inlined above). NOTE (Gate-F): this is a continuous time-series monitoring artifact and is a FALSE FRIEND for one-shot verification findings; verification acts (11.1.2.4, 11.1.2.8, 11.1.2.9) use the dedicated conformance-finding ICEs below instead." .
+
+ex:RiskMitigationVerificationReport a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Risk Mitigation Verification Report" ;
+    skos:definition "A Descriptive Information Content Entity that describes the finding of a bounded check of whether business-unit and functional risk mitigation plans have been correctly implemented." ;
+    rdfs:comment "Output of 11.1.2.4 (verify mitigation plans are implemented), produced by ex:ActOfVerification (inlined above). Gate-F mint: a dedicated one-shot conformance-finding ICE, separating verification findings from the continuous-monitoring ex:RiskMonitoringReport (a false friend) so that genus (Verification) and output ICE share semantic traceability. Both are Descriptive (cco:ont00000853)." .
+
+ex:ERMProcessConformanceReport a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "ERM Process Conformance Report" ;
+    skos:definition "A Descriptive Information Content Entity that describes the finding of a check of whether each business unit and function follows the enterprise risk management process." ;
+    rdfs:comment "Output of 11.1.2.8 (ensure each unit follows the ERM process), produced by ex:ActOfVerification (inlined above). Gate-F mint: a dedicated process-conformance finding ICE replacing the false-friend ex:RiskMonitoringReport (a time-series monitoring artifact) so the verification genus and its output ICE agree. Descriptive (cco:ont00000853)." .
+
+ex:ERMReportingConformanceReport a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "ERM Reporting Conformance Report" ;
+    skos:definition "A Descriptive Information Content Entity that describes the finding of a check of whether each business unit and function follows the enterprise risk reporting process." ;
+    rdfs:comment "Output of 11.1.2.9 (ensure each unit follows the ERM reporting process), produced by ex:ActOfVerification (inlined above). Gate-F mint: a dedicated reporting-process-conformance finding ICE replacing the false-friend ex:RiskMonitoringReport so the verification genus and its output ICE agree. Sibling of ex:ERMProcessConformanceReport. Descriptive (cco:ont00000853)." .
+
+ex:ComplianceAssessment a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Compliance Assessment" ;
+    skos:definition "A Descriptive Information Content Entity that describes a judgement of an organization's current compliance position against applicable regulations, including identified weaknesses, shortfalls, and necessary changes." ;
+    rdfs:comment "Shared output of appraisal acts in 11.2.2.4 and input to control-implementation acts (11.2.2.5)." .
+
+ex:ComplianceMonitoringReport a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Compliance Monitoring Report" ;
+    skos:definition "A Descriptive Information Content Entity that describes the observed compliance position of an organization and the robustness of its existing controls, tracked and tested over time against regulatory requirements." ;
+    rdfs:comment "Output of 11.2.2.6 (monitor and test regulatory compliance position), produced by ex:ActOfVerification (inlined above)." .
+
+ex:ComplianceScorecard a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Compliance Scorecard" ;
+    skos:definition "A Descriptive Information Content Entity that presents a graphical summary of metrics describing the general health of an organization with respect to risk and compliance." ;
+    rdfs:comment "Output of 11.2.2.7 (compile and communicate compliance scorecards)." .
+
+ex:ComplianceReport a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Compliance Report" ;
+    skos:definition "A Descriptive Information Content Entity that describes an organization's compliance status for submission to internal stakeholders or regulatory agencies." ;
+    rdfs:comment "Transferred ICE of 11.2.2.8 (compile and communicate internal and regulatory compliance reports): an already-compiled report submitted to regulators, modeled as the `has input` of P19596 (cco:ont00000151 communication/submission act), not its output. Descriptive: it represents compliance state." .
+
+ex:RegulatoryEnvironmentAnalysis a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Regulatory Environment Analysis" ;
+    skos:definition "A Descriptive Information Content Entity that describes an examination of the regulatory environment to spot changing or emerging regulations relevant to an organization." ;
+    rdfs:comment "Output of 11.2.2.3 (monitor the regulatory environment), produced by ex:ActOfMonitoring (inlined above)." .
+
+ex:ApplicableRequirementsDetermination a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001808 ; owl:someValuesFrom ex:RegulatoryRequirement ] ;
+    rdfs:label "Applicable Requirements Determination" ;
+    skos:definition "A Descriptive Information Content Entity, about one or more regulatory requirements, that describes which of the candidate body of regulation applies to the organization." ;
+    rdfs:comment "Output of 11.2.2.2 (identify applicable regulatory requirements), produced by ex:ActOfIdentification (discernment). Gate-F mint: an information-processing/discernment act produces a DESCRIPTIVE determination of which requirements apply -- it does NOT author the Directive ex:RegulatoryRequirement (which is issued by a governing authority and is the act's INPUT/subject). This realigns genus, output kind, and the GOLDEN PRINCIPLE. Descriptive (cco:ont00000853)." .
+
+ex:ExpertAdvice a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Expert Advice" ;
+    skos:definition "A Descriptive Information Content Entity that describes the recommendations and judgements solicited from subject-matter experts to inform remediation planning." ;
+    rdfs:comment "Output/input of 11.3.2 (contact and confer with experts); consumed by 11.3.1 (create remediation plans). Descriptive: it represents expert opinion." .
+
+ex:LegalAnalysis a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Legal Analysis" ;
+    skos:definition "A Descriptive Information Content Entity that describes an examination of regulatory and legislative frameworks bearing on an organization's remediation obligations, including liabilities for compensation, fines, and corrective effort." ;
+    rdfs:comment "Output of 11.3.4 (investigate legal aspects), produced by ex:ActOfInvestigation (inlined above)." .
+
+ex:DamageCauseAnalysis a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001808 ; owl:someValuesFrom ex:DamagedMaterialEntity ] ;
+    rdfs:label "Damage Cause Analysis" ;
+    skos:definition "A Descriptive Information Content Entity, about an instance of damage, that describes a study of the environmental, physical, or social causes of that damage in order to inform better policies and regulations." ;
+    rdfs:comment "Output of 11.3.5 (investigate damage cause), produced by ex:ActOfInvestigation (inlined above)." .
+
+ex:ResourceRequirementsAssessment a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Resource Requirements Assessment" ;
+    skos:definition "A Descriptive Information Content Entity that describes the resources discerned to be needed for managing remediation efforts and the rationale for their dedication." ;
+    rdfs:comment "Output of 11.3.3 (identify/dedicate resources). The actual dedication of resources is a directive/planning act; this ICE is the descriptive identification step." .
+
+ex:BusinessOperationsEvaluation a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Business Operations Evaluation" ;
+    skos:definition "A Descriptive Information Content Entity that describes a judgement of an organization's continuous business operations, including which activities generate revenue, perform best, and provide good returns." ;
+    rdfs:comment "Output of 11.4.4 (maintain continuous business operations -- the text is evaluative)." .
+
+ex:ContinuityTestResult a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Continuity Test Result" ;
+    skos:definition "A Descriptive Information Content Entity that describes the results of assessing whether continuous business operations perform as intended under test conditions." ;
+    rdfs:comment "Output of 11.4.3 (test continuous business operations), produced by ex:ActOfVerification (inlined above)." .
+
+ex:RiskKnowledge a owl:Class ; rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "Risk Knowledge" ;
+    skos:definition "A Descriptive Information Content Entity that describes information about specific risks and resilience strategies, shared across an organization so prospective risks can be anticipated and avoided." ;
+    rdfs:comment "Shared informational payload of the reporting/communication acts in 11.1.1.4 (P16443, coordinate sharing of risk knowledge) and 11.4.5 (P16471, share knowledge of specific risks). Descriptive content; per the Gate-F reconciliation both acts are anchored at cco:ont00000151 (Act of Reporting, a Representative Communication) and emit this ICE as a has-output only (it is not consumed as an input)." .
+
+####################################################################
+# 2.2 DIRECTIVE OUTPUT ICEs  (cco:ont00000965)
+####################################################################
+
+ex:RegulatoryRequirement a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Regulatory Requirement" ;
+    skos:definition "A Directive Information Content Entity, issued by a governing authority, that prescribes a law, guideline, statute, or stipulation with which an organization must comply." ;
+    rdfs:comment "Directive (not Descriptive): a regulatory requirement prescribes obligatory conduct. Shared input across 11.2 (identify applicable requirements 11.2.2.2) and 11.3 (investigate legal aspects 11.3.4). Anchored to cco:ont00000965 (Directive/Prescriptive ICE)." .
+
+ex:RiskTolerance a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Risk Tolerance Statement" ;
+    skos:definition "A Directive Information Content Entity that prescribes the level of risk an organization is willing to accept, given risk-return trade-offs for anticipated and predictable consequences." ;
+    rdfs:comment "Output of 11.1.1.1 (determine risk tolerance). Directive: it prescribes acceptable-risk thresholds that govern downstream decisions." .
+
+ex:EnterpriseRiskPolicy a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Enterprise Risk Policy and Procedure" ;
+    skos:definition "A Directive Information Content Entity that prescribes the rules, regulations, and procedures for managing hazardous, financial, operational, and strategic risk across an organization." ;
+    rdfs:comment "Output of 11.1.1.2 (develop and maintain enterprise risk policies and procedures); reference framework for 11.1.3.2 (assess risks using enterprise risk framework). Directive: prescribes conduct." .
+
+ex:RiskMitigationStrategy a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Risk Mitigation and Management Strategy" ;
+    skos:definition "A Directive Information Content Entity that prescribes the organization's objectives, strategies, and policies for improving opportunities and lessening threats, integrated with existing performance-management processes." ;
+    rdfs:comment "Output of 11.1.2.3 (develop risk mitigation and management strategy), produced by ex:ActOfFormulation (reused from ext)." .
+
+ex:RiskMitigationPlan a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Risk Mitigation Plan" ;
+    skos:definition "A Directive Information Content Entity that prescribes the arrangements and activities for improving opportunities and reducing deviations to project objectives in response to identified risks." ;
+    rdfs:comment "Output of 11.1.3.3 (develop mitigation plans); input to 11.1.3.4 (implement) and 11.1.2.4 (verify implementation). Directive: it prescribes mitigation actions." .
+
+ex:EnterpriseRiskTool a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Enterprise Risk Management Tool Specification" ;
+    skos:definition "A Directive Information Content Entity that prescribes the methods, models, and processes adopted for managing risks and opportunities associated with business objectives." ;
+    rdfs:comment "Output of 11.1.1.3 (identify and implement enterprise risk management tools). Modeled as a Directive ICE (a methodological specification), distinct from any physical software tool; if a particular org deploys a software artifact, that is a separate Material Artifact not minted here." .
+
+ex:CompliancePolicy a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Compliance Policy and Procedure" ;
+    skos:definition "A Directive Information Content Entity that prescribes an organization's standardized approach to ethics and compliance and the procedures for complying with applicable guidelines, provisions, and legislation." ;
+    rdfs:comment "Shared output across 11.2.1.1 (enterprise compliance policies) and 11.2.2.1 (regulatory compliance procedures). Directive: prescribes compliance conduct." .
+
+ex:ComplianceControl a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Compliance Control Specification" ;
+    skos:definition "A Directive Information Content Entity that prescribes a control, safeguard, or check implemented to ensure regulatory compliance and the security of an organization's information and processes." ;
+    rdfs:comment "Output/subject of 11.2.2.5 (implement missing or stronger controls) and 11.2.1.4 (controls-related technologies and tools). Directive: a control prescribes required behaviour." .
+
+ex:RemediationPlan a owl:Class ;
+    rdfs:subClassOf cco:ont00000965 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001808 ; owl:someValuesFrom ex:ContaminatedMaterial ] ;
+    rdfs:label "Remediation Plan" ;
+    skos:definition "A Directive Information Content Entity, about a case of contamination, that prescribes the corrective actions for identifying and treating environmental adulteration so that an affected area becomes operational again." ;
+    rdfs:comment "Output of 11.3.1 (create remediation plans), produced by ex:ActOfFormulation (reused from ext). Directive: a plan prescribes intended corrective acts." .
+
+ex:RemediationPolicy a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Remediation Policy" ;
+    skos:definition "A Directive Information Content Entity that prescribes a company-wide framework of policies and procedures for deploying remediation efforts, adapted to applicable national and international regulatory frameworks." ;
+    rdfs:comment "Output of 11.3.6 (amend or create policy), produced by ex:ActOfFormulation (reused from ext)." .
+
+ex:BusinessResilienceStrategy a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Business Resilience Strategy" ;
+    skos:definition "A Directive Information Content Entity that prescribes an organization's integrated approach for rapidly adapting and responding to internal or external opportunities, demands, disruptions, or threats while protecting employees, assets, and brand equity." ;
+    rdfs:comment "Output of 11.4.1 (develop the business resilience strategy), produced by ex:ActOfFormulation (reused from ext)." .
+
+ex:BusinessContinuityPlan a owl:Class ; rdfs:subClassOf cco:ont00000965 ;
+    rdfs:label "Business Continuity Plan" ;
+    skos:definition "A Directive Information Content Entity that prescribes the arrangements ensuring continuous business operations are maintained, including during disruption or emergency." ;
+    rdfs:comment "Output of 11.4.2 (perform continuous business operations planning); subject of 11.4.3 (test) and 11.4.4 (maintain). Directive: prescribes continuity actions." .
+
+####################################################################
+# 2.3 SUBJECTS OF I/O 'is about' RESTRICTIONS
+#     (genera referenced as fillers of cco:ont00001808 restrictions
+#      above; declared here so every filler IRI is grounded.)
+####################################################################
+
+ex:Risk a owl:Class ; rdfs:subClassOf obo:BFO_0000017 ;
+    rdfs:label "Risk" ;
+    skos:definition "A Realizable Entity that is the disposition of some entity to give rise, under specified conditions, to an adverse or uncertain consequence for an organization's objectives." ;
+    rdfs:comment "ex:Risk is the REALITY-LAYER risk disposition (BFO Realizable Entity, obo:BFO_0000017): the standing possibility of an adverse outcome borne by some entity -- NOT a process and NOT an information artifact. CAUTION for contributors: information artifacts ABOUT risks are modeled separately as ICEs -- ex:RiskRegister, ex:RiskAssessment, ex:RiskAnalysisReport, etc. (each cco:ont00000853 Descriptive ICE, 'is about' some ex:Risk). Do NOT use ex:Risk as an ICE / has-output filler; use the corresponding artifact class." .
+
+ex:DamagedMaterialEntity a owl:Class ; rdfs:subClassOf obo:BFO_0000040 ;
+    rdfs:label "Damaged Material Entity" ;
+    skos:definition "A Material Entity that has undergone harmful physical, environmental, or social alteration whose causes are studied in order to inform better policies and regulations." ;
+    rdfs:comment "The damaged site or system that is the subject of ex:DamageCauseAnalysis (cco:ont00001808 'is about'). Renamed from ex:Damage so the label matches its BFO category: it is a Material Entity (obo:BFO_0000040) that has undergone harm -- the damaged thing, not the damage condition itself. (If a contributor needs the harm qua condition, model it separately as a BFO Quality borne by this entity.)" .
+
+####################################################################
+# 2.4 MATERIAL ENTITY  (obo:BFO_0000040)
+#     Remediation (11.3) is genuinely physical: it identifies and
+#     treats environmental adulteration.
+####################################################################
+
+ex:ContaminatedMaterial a owl:Class ; rdfs:subClassOf obo:BFO_0000040 ;
+    rdfs:label "Contaminated Material" ;
+    skos:definition "A Material Entity that has been subject to environmental adulteration and that remediation efforts seek to identify and treat so that the affected area becomes operational again." ;
+    rdfs:comment "Material subject of 11.3 remediation. Anchored at BFO material entity (obo:BFO_0000040) rather than a 'Portion of Waste Material' class (processed material the user wants to dispose of) because contaminated soil/water/site is not necessarily processed waste; the relevant fact is its adulterated state. The remediation PLAN and POLICY are separate informational artifacts (Directive ICEs)." .
+
+####################################################################
+# 2.5 AGENTS / ORGANIZATIONS  (cco:ont00001017 / cco:ont00001180)
+####################################################################
+
+ex:RiskManager a owl:Class ;
+    rdfs:subClassOf cco:ont00001017 ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000196 ; owl:someValuesFrom ex:RiskManagerRole ] ;
+    rdfs:label "Risk Manager" ;
+    skos:definition "An Agent that bears a risk-manager role." ;
+    rdfs:comment "Definitional participant in enterprise and business-unit risk acts across 11.1." .
+
+ex:ComplianceOfficer a owl:Class ;
+    rdfs:subClassOf cco:ont00001017 ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000196 ; owl:someValuesFrom ex:ComplianceOfficerRole ] ;
+    rdfs:label "Compliance Officer" ;
+    skos:definition "An Agent that bears a compliance-officer role." ;
+    rdfs:comment "Definitional participant in compliance acts across 11.2." .
+
+ex:SubjectMatterExpert a owl:Class ;
+    rdfs:subClassOf cco:ont00001017 ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000196 ; owl:someValuesFrom ex:SubjectMatterExpertRole ] ;
+    rdfs:label "Subject Matter Expert" ;
+    skos:definition "An Agent that bears a subject-matter-expert role and is consulted to validate remediation plans." ;
+    rdfs:comment "Definitional participant in 11.3.2 (contact and confer with experts)." .
+
+ex:RegulatoryAuthority a owl:Class ;
+    rdfs:subClassOf cco:ont00001180 ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000196 ; owl:someValuesFrom ex:RegulatoryAuthorityRole ] ;
+    rdfs:label "Regulatory Authority" ;
+    skos:definition "An Organization that bears a regulatory-authority role, issuing laws, statutes, permits, or requirements and overseeing an organization's compliance." ;
+    rdfs:comment "Recipient/counterparty in 11.2 (maintain relationships with regulators 11.2.2.9; submit reports 11.2.2.8) and source of requirements investigated in 11.3.4." .
+
+ex:ExecutiveManagement a owl:Class ;
+    rdfs:subClassOf cco:ont00001017 ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000196 ; owl:someValuesFrom ex:ExecutiveManagementRole ] ;
+    rdfs:label "Executive Management" ;
+    skos:definition "An Agent that bears an executive-management role and is a recipient of enterprise risk and compliance reports." ;
+    rdfs:comment "Definitional recipient in 11.1.1.5 (report enterprise risk to executive management and board)." .
+
+####################################################################
+# 2.6 ROLES  (obo:BFO_0000023)  -- borne by independent continuants only
+####################################################################
+
+ex:RiskManagerRole a owl:Class ; rdfs:subClassOf obo:BFO_0000023 ;
+    rdfs:label "Risk Manager Role" ;
+    skos:definition "A Role that is borne by an Agent in virtue of being tasked with identifying, assessing, mitigating, monitoring, and reporting risk on behalf of an organization or business unit." .
+
+ex:ComplianceOfficerRole a owl:Class ; rdfs:subClassOf obo:BFO_0000023 ;
+    rdfs:label "Compliance Officer Role" ;
+    skos:definition "A Role that is borne by an Agent in virtue of being tasked with validating, maintaining, and ensuring an organization's enduring compliance with applicable regulations and legislation." .
+
+ex:SubjectMatterExpertRole a owl:Class ; rdfs:subClassOf obo:BFO_0000023 ;
+    rdfs:label "Subject Matter Expert Role" ;
+    skos:definition "A Role that is borne by an Agent in virtue of possessing specialized expertise solicited to advise on and validate remediation plans." .
+
+ex:RegulatoryAuthorityRole a owl:Class ; rdfs:subClassOf obo:BFO_0000023 ;
+    rdfs:label "Regulatory Authority Role" ;
+    skos:definition "A Role that is borne by an Organization in virtue of issuing, administering, or enforcing laws, statutes, permits, codes, or regulatory requirements binding on a focal organization, and overseeing its compliance with them." ;
+    rdfs:comment "Borne by the authority Organization, never by the requirement or report ICE it issues or receives." .
+
+ex:ExecutiveManagementRole a owl:Class ; rdfs:subClassOf obo:BFO_0000023 ;
+    rdfs:label "Executive Management Role" ;
+    skos:definition "A Role that is borne by an Agent in virtue of exercising executive authority and accountability for an organization, including oversight of enterprise risk and compliance." .
+
+####################################################################
+# 2.7 ORGANIZATION CAPABILITIES  (cco:ont00000568)
+#     The standing "Manage ..." functions (R5). Realized-in (R6) links
+#     to the bounded acts are asserted in the per-group sections below.
+####################################################################
+
+ex:EnterpriseRiskManagementCapability a owl:Class ; rdfs:subClassOf cco:ont00000568 ;
+    rdfs:label "Enterprise Risk Management Capability" ;
+    skos:definition "An Organization Capability that is realized in acts of establishing risk frameworks and policies and of overseeing, coordinating, and managing risk across an organization and its business units." ;
+    rdfs:comment "Models the standing function of 11.1 'Manage enterprise risk' (R5/R6). The realized-in axioms to the bounded 11.1 acts are carried by ex:P17060 below, which is this capability's reality-layer correlate." .
+
+ex:ComplianceManagementCapability a owl:Class ; rdfs:subClassOf cco:ont00000568 ;
+    rdfs:label "Compliance Management Capability" ;
+    skos:definition "An Organization Capability that is realized in acts of establishing compliance frameworks and policies and of managing enduring compliance with industry regulations and government legislation." ;
+    rdfs:comment "Models the standing function of 11.2 'Manage compliance' (R5/R6). Its regulatory-compliance facet is further specialized by ex:RegulatoryComplianceManagementCapability." .
+
+ex:RemediationManagementCapability a owl:Class ; rdfs:subClassOf cco:ont00000568 ;
+    rdfs:label "Remediation Management Capability" ;
+    skos:definition "An Organization Capability that is realized in acts of planning, resourcing, investigating, and policy-making for the remediation of environmental adulteration." ;
+    rdfs:comment "Models the standing function of 11.3 'Manage remediation efforts' (R5/R6)." .
+
+ex:BusinessResiliencyCapability a owl:Class ; rdfs:subClassOf cco:ont00000568 ;
+    rdfs:label "Business Resiliency Capability" ;
+    skos:definition "An Organization Capability that is realized in acts of developing resilience strategy, planning, testing, and maintaining continuous business operations, and sharing risk knowledge so an organization can rapidly adapt to disruption." ;
+    rdfs:comment "Models the standing function of 11.4 'Manage business resiliency' (R5/R6)." .
+
+####################################################################
+# ================================================================ #
+# 3. PROCESS CLASSES + CAPABILITIES
+# ================================================================ #
+####################################################################
+
+####################################################################
+# 3.1  GROUP 11.1 -- Manage enterprise risk  (parent PCF 17060)
+#
+# Reporting acts (16443,16444,16451,16462) reuse CCO cco:ont00000151
+# (Act of Reporting, Act of Representative Communication: "giving a
+# detailed account or statement") -- a genuine definitional fit, so
+# ex:ActOfReporting is NOT used for these "communicate/present" verbs.
+####################################################################
+
+# --- PROCESS-GROUP NODE 11.1 (PCF 17060) -- Organization Capability (R5/R6)
+ex:P17060 a owl:Class ;
+    ex:pcfID "17060" ;
+    ex:hierarchyID "11.1" ;
+    ex:apqcSourceText "Creating requisite frameworks and coordinating all risk management activities for the entire organization and each function. Manage the enterprise risk by outlining the risk policies and procedures. Monitor and communicate all risk management activities. Encourage correspondence among the business units. Manage the risk of all business units and functions." ;
+    rdfs:label "Manage enterprise risk" ;
+    skos:definition "An Organization Capability that inheres in an organization in virtue of its capacity to create enterprise-risk frameworks and policies and to coordinate, monitor, and communicate all risk-management activities across the entire organization and each of its functions." ;
+    rdfs:comment "R5: standing function ('Manage ... for the entire organization', no natural end) -> modeled as Organization Capability (cco:ont00000568), not a process. Realized in the bounded child processes 11.1.1-11.1.3. Corresponds to the shared ex:EnterpriseRiskManagementCapability." ;
+    skos:example "A firm's enterprise risk management office that sets risk policy and oversees risk across all business units." ;
+    rdfs:subClassOf cco:ont00000568 ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P16439 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P16445 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P17462 ] .
+
+# --- 11.1.1 (PCF 16439) -- Establish the enterprise risk framework and policies
+ex:P16439 a owl:Class ;
+    ex:pcfID "16439" ;
+    ex:hierarchyID "11.1.1" ;
+    ex:apqcSourceText "Creating an agenda for the rules and regulations of enterprise risk that deal with hazardous, financial, operational, and strategic risks." ;
+    rdfs:label "Establish the enterprise risk framework and policies" ;
+    skos:definition "An Act of Formulation that composes the enterprise-risk rules and regulations governing hazard, financial, operational, and strategic risks and produces enterprise risk policies and procedures." ;
+    rdfs:comment "Genus Act of Formulation (Planning): its definitional output is a Directive ICE (the enterprise risk policy/framework)." ;
+    skos:example "A risk committee drafting the firm's enterprise risk policy framework for the coming year." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:EnterpriseRiskPolicy ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16440 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16441 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16442 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16443 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16444 ] .
+
+# --- 11.1.1.1 (PCF 16440) : Formulation -> Directive output (risk tolerance)
+ex:P16440 a owl:Class ;
+    ex:pcfID "16440" ;
+    ex:hierarchyID "11.1.1.1" ;
+    ex:apqcSourceText "Recognizing the organization's tolerance for risk, given risk-return trade-offs for one or more anticipated and predictable consequences." ;
+    rdfs:label "Determine risk tolerance for organization" ;
+    skos:definition "An Act of Formulation that establishes the organization's tolerance for risk in light of risk-return trade-offs and produces a risk tolerance statement." ;
+    rdfs:comment "Genus Act of Formulation: the output is a Directive ICE (a prescriptive tolerance threshold to be observed), not a mere description, per the GOLDEN PRINCIPLE." ;
+    skos:example "A board setting the maximum acceptable annual value-at-risk for the enterprise." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskTolerance ] .
+
+# --- 11.1.1.2 (PCF 16441) : Formulation -> Directive output (policies)
+ex:P16441 a owl:Class ;
+    ex:pcfID "16441" ;
+    ex:hierarchyID "11.1.1.2" ;
+    ex:apqcSourceText "Establishing and maintaining the policies and procedures for managing risk. Create rules and regulations for enterprise risk dealing with hazardous, financial, operational, and strategic risks." ;
+    rdfs:label "Develop and maintain enterprise risk policies and procedures" ;
+    skos:definition "An Act of Formulation that composes and maintains the policies and procedures for managing hazard, financial, operational, and strategic risk and produces enterprise risk policies and procedures." ;
+    rdfs:comment "Genus Act of Formulation: definitional output is a Directive ICE (the enterprise risk policy and procedure)." ;
+    skos:example "A risk team updating the corporate risk policy manual after a regulatory change." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:EnterpriseRiskPolicy ] .
+
+# --- 11.1.1.3 (PCF 16442) : Selection -> Directive output (tool specification)
+ex:P16442 a owl:Class ;
+    ex:pcfID "16442" ;
+    ex:hierarchyID "11.1.1.3" ;
+    ex:apqcSourceText "Recognizing and implementing tools for managing risk. Identify and apply enterprise risk management tools. Leverage methods and processes to manage risks and opportunities associated with business objectives." ;
+    rdfs:label "Identify and implement enterprise risk management tools" ;
+    skos:definition "An Act of Selection that chooses enterprise risk management tools from available candidates and produces an enterprise risk management tool specification for their application." ;
+    rdfs:comment "Genus Act of Selection (Info Processing): a candidate set of ERM tools is narrowed to a chosen, specified set; output is a Directive ICE (the tool specification). Implementation/application of the selected tools is a downstream concern, captured as a comment rather than a separate definitional output." ;
+    skos:example "Selecting and configuring a GRC platform and a Monte-Carlo risk-modeling tool as the firm's standard ERM toolset." ;
+    rdfs:subClassOf ex:ActOfSelection ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:EnterpriseRiskTool ] .
+
+# --- 11.1.1.4 (PCF 16443) : Reporting (Representative Communication) -> Descriptive output
+ex:P16443 a owl:Class ;
+    ex:pcfID "16443" ;
+    ex:hierarchyID "11.1.1.4" ;
+    ex:apqcSourceText "Communicating the knowledge about risk within the organization. Identify operational risks. Share risk information within the organization." ;
+    rdfs:label "Coordinate the sharing of risk knowledge across the organization" ;
+    skos:definition "An Act of Reporting that communicates risk knowledge throughout the organization and produces and disseminates shared risk knowledge." ;
+    rdfs:comment "Genus reuses cco:ont00000151 (Act of Reporting, an Act of Representative Communication): the act gives a detailed account of risk to organizational audiences. Output is a Descriptive ICE (risk knowledge). Gate-F cross-reference: its parallel 'share risk knowledge' row P16471 (11.4.5) was reconciled to this SAME genus (cco:ont00000151) and to this SAME output-only I/O pattern, removing the prior 402-vs-151 split between the two rows." ;
+    skos:example "A risk manager circulating an operational-risk briefing to all business-unit heads." ;
+    rdfs:subClassOf cco:ont00000151 ,
+        cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskKnowledge ] .
+
+# --- 11.1.1.5 (PCF 16444) : Reporting -> Descriptive output (enterprise risk report)
+ex:P16444 a owl:Class ;
+    ex:pcfID "16444" ;
+    ex:hierarchyID "11.1.1.5" ;
+    ex:apqcSourceText "Preparing and presenting reports about enterprise risk to the management of the organization. Create reports for management on hazard risks (e.g., property damage and liability torts), financial risks (e.g., currency and liquidity risks), and operational risks (e.g., product failure, customer satisfaction, social trends, and competition)." ;
+    rdfs:label "Prepare and report enterprise risk to executive management and board" ;
+    skos:definition "An Act of Reporting that prepares and presents an account of enterprise hazard, financial, and operational risks to executive management and the board and produces an enterprise risk report." ;
+    rdfs:comment "Genus reuses cco:ont00000151 (Act of Reporting). Output is a Descriptive ICE (the enterprise risk report). Executive management and the board are the report audience (typical participants, not definitional fillers)." ;
+    skos:example "The CRO presenting the quarterly enterprise risk report to the audit committee." ;
+    rdfs:subClassOf cco:ont00000151 ,
+        cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:EnterpriseRiskReport ] .
+
+# --- 11.1.2 (PCF 16445) -- Oversee and coordinate enterprise risk management activities
+ex:P16445 a owl:Class ;
+    ex:pcfID "16445" ;
+    ex:hierarchyID "11.1.2" ;
+    ex:apqcSourceText "Coordinating to plan, organize, lead, and control the activities of an organization in order to minimize the special effects of risk on capital and earnings." ;
+    rdfs:label "Oversee and coordinate enterprise risk management activities" ;
+    skos:definition "A Planned Act that coordinates the planning, organizing, leading, and controlling of an organization's risk-management activities in order to minimize the effects of risk on capital and earnings." ;
+    rdfs:comment "R5: modeled as a bounded coordinating/oversight occurrent (a management cycle), distinct from the org-wide standing capability 17060. Anchored at cco:ont00000228 (Planned Act) because it spans planning, organizing, and controlling rather than a single act kind. Its APQC children are process parts." ;
+    skos:example "An enterprise-risk steering cycle that runs identify, assess, mitigate, verify, monitor, and report across the year." ;
+    rdfs:subClassOf cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16446 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16447 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16448 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16449 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16450 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16451 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16452 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16453 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16454 ] .
+
+# --- 11.1.2.1 (PCF 16446) : Identification -> Descriptive output (risk register)
+ex:P16446 a owl:Class ;
+    ex:pcfID "16446" ;
+    ex:hierarchyID "11.1.2.1" ;
+    ex:apqcSourceText "Determining risks that could thwart objectives. Document and communicate the concern." ;
+    rdfs:label "Identify enterprise level risks" ;
+    skos:definition "An Act of Identification that discerns the enterprise-level risks that could thwart organizational objectives and produces a risk register documenting them." ;
+    rdfs:comment "Genus Act of Identification (discernment sense): output is a Descriptive ICE (the risk register)." ;
+    skos:example "A workshop enumerating strategic and operational risks into the corporate risk register." ;
+    rdfs:subClassOf ex:ActOfIdentification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskRegister ] .
+
+# --- 11.1.2.2 (PCF 16447) : Appraisal -> Descriptive output (risk assessment)
+ex:P16447 a owl:Class ;
+    ex:pcfID "16447" ;
+    ex:hierarchyID "11.1.2.2" ;
+    ex:apqcSourceText "Identifying options/actions to enhance opportunities and reduce threats. Recognize the root reasons of the identified risks." ;
+    rdfs:label "Assess risks to determine which to mitigate" ;
+    skos:definition "An Act of Appraisal that evaluates identified risks and their root causes to judge which to mitigate and produces a risk assessment." ;
+    rdfs:comment "Anchored at cco:ont00000636 (Act of Appraisal): it evaluates/judges risks. Output is a Descriptive ICE (the risk assessment), so genus and output kind agree (GOLDEN PRINCIPLE). Gate-F fix: the risk register is a TYPICAL input, not definitional -- a risk assessment can be performed without a pre-existing formal register (the register may itself be assembled in the same act), so per the Phase-3 existential-necessity rule the prior `has input some ex:RiskRegister` restriction was REMOVED and demoted to this annotation (CQ target: 'which risk register, if any, did this assessment consume?')." ;
+    skos:example "Scoring each registered risk by likelihood and impact to prioritize mitigation." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskAssessment ] .
+
+# --- 11.1.2.3 (PCF 16448) : Formulation -> Directive output (mitigation strategy)
+ex:P16448 a owl:Class ;
+    ex:pcfID "16448" ;
+    ex:hierarchyID "11.1.2.3" ;
+    ex:apqcSourceText "Developing activities to improve opportunities and lessen threats. Specify the organization's objectives. Evolve strategies and policies to attain these objectives. Assign resources to project objectives." ;
+    rdfs:label "Develop risk mitigation and management strategy and integrate with existing performance management processes" ;
+    skos:definition "An Act of Formulation that composes activities, strategies, and policies to enhance opportunities and lessen threats and produces a risk mitigation and management strategy." ;
+    rdfs:comment "Genus Act of Formulation (Planning): definitional output is a Directive ICE (the risk mitigation and management strategy)." ;
+    skos:example "Drafting a hedging-and-controls strategy and integrating it into the annual performance plan." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:RiskAssessment ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskMitigationStrategy ] .
+
+# --- 11.1.2.4 (PCF 16449) : Verification -> Descriptive output (verification judgement)
+ex:P16449 a owl:Class ;
+    ex:pcfID "16449" ;
+    ex:hierarchyID "11.1.2.4" ;
+    ex:apqcSourceText "Checking that the blueprint created for managing risk in individual business units and divisions is correctly effectuated. Validate the implementation of all activities geared to mitigate risks." ;
+    rdfs:label "Verify business unit and functional risk mitigation plans are implemented" ;
+    skos:definition "An Act of Verification that checks whether business-unit and functional risk mitigation plans have been correctly implemented and produces a risk mitigation verification report recording the conformance finding." ;
+    rdfs:comment "Genus ex:ActOfVerification (inlined; Act of Appraisal cco:ont00000636; also information-processing in character): confirming conformance of implementation to the plan; output is a Descriptive ICE (the verification finding). Gate-F fix (1): the `has input some ex:RiskMitigationPlan` restriction was REMOVED -- per the Phase-3 existential-necessity rule the mitigation plan is a TYPICAL input (it is the conformance reference, but the comment formerly labeled it 'typical' while encoding it existentially), so it is demoted to this annotation. Gate-F fix (2): the output was changed from the FALSE-FRIEND ex:RiskMonitoringReport (a continuous-monitoring time-series artifact) to the dedicated one-shot conformance ICE ex:RiskMitigationVerificationReport, restoring genus/output semantic traceability (both Descriptive)." ;
+    skos:example "Auditing a division to confirm its mitigation controls are in place and operating." ;
+    rdfs:subClassOf ex:ActOfVerification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskMitigationVerificationReport ] .
+
+# --- 11.1.2.5 (PCF 16450) : Monitoring -> Descriptive output (monitoring report)
+ex:P16450 a owl:Class ;
+    ex:pcfID "16450" ;
+    ex:hierarchyID "11.1.2.5" ;
+    ex:apqcSourceText "Ensuring risk monitoring and mitigation activities. Monitor actions to enhance opportunities and reduce threats to project objectives." ;
+    rdfs:label "Ensure risks and risk mitigation actions are monitored" ;
+    skos:definition "An Act of Monitoring that tracks risks and risk-mitigation actions over time and produces a risk monitoring report." ;
+    rdfs:comment "Genus ex:ActOfMonitoring (under Info Processing): ongoing observation/tracking of risks and actions; output is a Descriptive ICE (the risk monitoring report)." ;
+    skos:example "A dashboard tracking key risk indicators and the status of open mitigation actions each month." ;
+    rdfs:subClassOf ex:ActOfMonitoring ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskMonitoringReport ] .
+
+# --- 11.1.2.6 (PCF 16451) : Reporting -> Descriptive output (enterprise risk report)
+ex:P16451 a owl:Class ;
+    ex:pcfID "16451" ;
+    ex:hierarchyID "11.1.2.6" ;
+    ex:apqcSourceText "Creating a report of activities to address hazard risks, liability torts, financial risks, operational risks, social trends, competition, etc." ;
+    rdfs:label "Report on enterprise risk activities" ;
+    skos:definition "An Act of Reporting that gives a detailed account of the activities undertaken to address enterprise hazard, financial, and operational risks and produces an enterprise risk report." ;
+    rdfs:comment "Genus reuses cco:ont00000151 (Act of Reporting). Output is a Descriptive ICE (the enterprise risk report)." ;
+    skos:example "Compiling the period's risk-treatment activities into a report for governance." ;
+    rdfs:subClassOf cco:ont00000151 ,
+        cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:EnterpriseRiskReport ] .
+
+# --- 11.1.2.7 (PCF 16452) : Coordination -> Planned Act
+ex:P16452 a owl:Class ;
+    ex:pcfID "16452" ;
+    ex:hierarchyID "11.1.2.7" ;
+    ex:apqcSourceText "Coordinating risk management activities to improve opportunities and lessen threats. Specify the organization's objectives. Assign resources to project objectives." ;
+    rdfs:label "Coordinate business unit and functional risk management activities" ;
+    skos:definition "A Planned Act that coordinates the risk-management activities of business units and functions, specifying objectives and assigning resources to improve opportunities and lessen threats." ;
+    rdfs:comment "Anchored at cco:ont00000228 (Planned Act): a coordinating/organizing act with no single dominant ICE output. The mitigation strategy is a typical input governing the coordination." ;
+    skos:example "Aligning each division's risk plan and assigning shared resources across the enterprise program." ;
+    rdfs:subClassOf cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:RiskMitigationStrategy ] .
+
+# --- 11.1.2.8 (PCF 16453) : Verification -> Descriptive output
+ex:P16453 a owl:Class ;
+    ex:pcfID "16453" ;
+    ex:hierarchyID "11.1.2.8" ;
+    ex:apqcSourceText "Checking each business unit's/function's options and activities to improve opportunities and lessen threats." ;
+    rdfs:label "Ensure that each business unit/function follows the enterprise risk management process" ;
+    skos:definition "An Act of Verification that checks whether each business unit and function follows the enterprise risk management process and produces an ERM process conformance report." ;
+    rdfs:comment "Genus ex:ActOfVerification (inlined; Act of Appraisal cco:ont00000636; also information-processing in character): confirming process conformance; output is a Descriptive ICE. Gate-F fix (1): the `has input some ex:EnterpriseRiskPolicy` restriction was REMOVED -- the source text ('checking each business unit's/function's options and activities') does not establish the policy as present for EVERY instance, so per the Phase-3 existential-necessity rule it is demoted to this annotation as the typical conformance reference. Gate-F fix (2): the output was changed from the FALSE-FRIEND ex:RiskMonitoringReport (a time-series monitoring artifact) to the dedicated ex:ERMProcessConformanceReport, restoring genus/output traceability (both Descriptive)." ;
+    skos:example "Reviewing a division against the ERM process checklist." ;
+    rdfs:subClassOf ex:ActOfVerification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ERMProcessConformanceReport ] .
+
+# --- 11.1.2.9 (PCF 16454) : Verification -> Descriptive output
+ex:P16454 a owl:Class ;
+    ex:pcfID "16454" ;
+    ex:hierarchyID "11.1.2.9" ;
+    ex:apqcSourceText "Checking the reporting process of each business unit's/function's options and activities to improve opportunities and lessen threats." ;
+    rdfs:label "Ensure that each business unit/function follows the enterprise risk reporting process" ;
+    skos:definition "An Act of Verification that checks whether each business unit and function follows the enterprise risk reporting process and produces an ERM reporting conformance report." ;
+    rdfs:comment "Genus ex:ActOfVerification (inlined; Act of Appraisal cco:ont00000636; also information-processing in character): confirming conformance of the reporting process; output is a Descriptive ICE. Sibling of P16453. Gate-F fix (1): the `has input some ex:EnterpriseRiskPolicy` restriction was REMOVED -- the source text ('checking the reporting process ...') does not establish the policy as present for EVERY instance, so per the Phase-3 existential-necessity rule it is demoted to this annotation as the typical conformance reference. Gate-F fix (2): the output was changed from the FALSE-FRIEND ex:RiskMonitoringReport (a time-series monitoring artifact) to the dedicated ex:ERMReportingConformanceReport, restoring genus/output traceability (both Descriptive)." ;
+    skos:example "Confirming each unit submits its risk report on the prescribed cadence and template." ;
+    rdfs:subClassOf ex:ActOfVerification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ERMReportingConformanceReport ] .
+
+# --- 11.1.3 (PCF 17462) -- Manage business unit and function risk
+ex:P17462 a owl:Class ;
+    ex:pcfID "17462" ;
+    ex:hierarchyID "11.1.3" ;
+    ex:apqcSourceText "Analyzing the threats a business unit/function faces to prioritize the controls it implements.." ;
+    rdfs:label "Manage business unit and function risk" ;
+    skos:definition "A Planned Act that analyzes the threats faced by a business unit or function in order to prioritize and operate the controls it implements, comprising the identification, assessment, mitigation, monitoring, and reporting of that unit's risks." ;
+    rdfs:comment "R5: although labeled 'Manage', the element description denotes a bounded analyze-and-prioritize cycle that decomposes into the concrete child acts 11.1.3.1-11.1.3.7; modeled as a composite Planned Act (cco:ont00000228) with those children as process parts, not as a standing capability." ;
+    skos:example "A business unit running its annual risk-and-controls cycle." ;
+    rdfs:subClassOf cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16456 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16457 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16458 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16459 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16460 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16461 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P16462 ] .
+
+# --- 11.1.3.1 (PCF 16456) : Identification -> Descriptive output (risk register)
+ex:P16456 a owl:Class ;
+    ex:pcfID "16456" ;
+    ex:hierarchyID "11.1.3.1" ;
+    ex:apqcSourceText "Developing a timely and continuous process to identify activities that might hinder a project's goals." ;
+    rdfs:label "Identify risks" ;
+    skos:definition "An Act of Identification that discerns the risks and activities that might hinder a business unit's goals and produces a risk register documenting them." ;
+    rdfs:comment "Genus Act of Identification (discernment sense): output is a Descriptive ICE (the risk register)." ;
+    skos:example "A project team listing the events that could delay delivery into its risk register." ;
+    rdfs:subClassOf ex:ActOfIdentification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskRegister ] .
+
+# --- 11.1.3.2 (PCF 16457) : Appraisal -> Descriptive output (risk assessment)
+ex:P16457 a owl:Class ;
+    ex:pcfID "16457" ;
+    ex:hierarchyID "11.1.3.2" ;
+    ex:apqcSourceText "Determining the possibility that a specified undesirable event will occur using established tools, implements, and frameworks. Use risk assessments to determine, for example, whether to undertake a particular venture, what rate of return a particular investment requires, and how to mitigate an activity's potential losses." ;
+    rdfs:label "Assess risks using enterprise risk framework policies and procedures" ;
+    skos:definition "An Act of Appraisal that estimates the likelihood of specified undesirable events using the established enterprise risk framework, policies, and procedures and produces a risk assessment." ;
+    rdfs:comment "Anchored at cco:ont00000636 (Act of Appraisal): it evaluates/judges the likelihood of adverse events. Output is a Descriptive ICE (the risk assessment). The enterprise risk policy/framework is DEFINITIONAL input (the source text fixes the assessment to the 'established tools, implements, and frameworks'), so it remains an existential `has input` restriction. Gate-F fix: the risk register is only a TYPICAL input (the comment formerly self-contradictingly encoded it as someValuesFrom while labeling it 'typical'); per the Phase-3 existential-necessity rule the `has input some ex:RiskRegister` restriction was REMOVED and demoted to this annotation (CQ target: 'which risk register did this assessment draw on?')." ;
+    skos:example "Using the corporate risk-scoring framework to rate a proposed venture's exposure." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:EnterpriseRiskPolicy ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskAssessment ] .
+
+# --- 11.1.3.3 (PCF 16458) : Formulation -> Directive output (mitigation plan)
+ex:P16458 a owl:Class ;
+    ex:pcfID "16458" ;
+    ex:hierarchyID "11.1.3.3" ;
+    ex:apqcSourceText "Developing possibilities and arrangements to improve opportunities and reduce deviations to project objectives." ;
+    rdfs:label "Develop mitigation plans for risks" ;
+    skos:definition "An Act of Formulation that devises arrangements to improve opportunities and reduce deviations to objectives and produces a risk mitigation plan." ;
+    rdfs:comment "Genus Act of Formulation (Planning): definitional output is a Directive ICE (the risk mitigation plan). Has its assess-insurance-coverage task as a process part." ;
+    skos:example "Drafting a mitigation plan with controls, owners, and contingency arrangements for the top risks." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:RiskAssessment ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskMitigationPlan ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P18129 ] .
+
+# --- 11.1.3.3.1 (PCF 18129) : Appraisal -> Descriptive output (insurance coverage assessment)
+ex:P18129 a owl:Class ;
+    ex:pcfID "18129" ;
+    ex:hierarchyID "11.1.3.3.1" ;
+    ex:apqcSourceText "Evaluating the changing needs for insurance coverage. Research available insurance providers and offerings." ;
+    rdfs:label "Assess adequacy of insurance coverage" ;
+    skos:definition "An Act of Appraisal that evaluates the organization's changing insurance-coverage needs against available providers and offerings and produces an insurance coverage assessment." ;
+    rdfs:comment "Anchored at cco:ont00000636 (Act of Appraisal): it judges the adequacy of coverage. Output is a Descriptive ICE (the insurance coverage assessment). Process part of 16458." ;
+    skos:example "Comparing current policy limits to projected exposures and recommending added coverage." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:InsuranceCoverageAssessment ] .
+
+# --- 11.1.3.4 (PCF 16459) : Implementation -> Planned Act (input: mitigation plan)
+ex:P16459 a owl:Class ;
+    ex:pcfID "16459" ;
+    ex:hierarchyID "11.1.3.4" ;
+    ex:apqcSourceText "Executing mitigation plans to improve opportunities and reduce deviations to project objectives." ;
+    rdfs:label "Implement mitigation plans for risks" ;
+    skos:definition "A Planned Act that executes a risk mitigation plan to improve opportunities and reduce deviations to objectives." ;
+    rdfs:comment "Anchored at cco:ont00000228 (Planned Act): an execution act prescribed by the mitigation plan; it has no definitional ICE output of its own. The risk mitigation plan is a definitional input." ;
+    skos:example "Standing up the controls and contingency arrangements specified in the approved mitigation plan." ;
+    rdfs:subClassOf cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:RiskMitigationPlan ] .
+
+# --- 11.1.3.5 (PCF 16460) : Monitoring -> Descriptive output (monitoring report)
+ex:P16460 a owl:Class ;
+    ex:pcfID "16460" ;
+    ex:hierarchyID "11.1.3.5" ;
+    ex:apqcSourceText "Identifying, examining, and recognizing/justifying any improbability in investment decision making." ;
+    rdfs:label "Monitor risks" ;
+    skos:definition "An Act of Monitoring that tracks and examines a business unit's risks over time and produces a risk monitoring report." ;
+    rdfs:comment "Genus ex:ActOfMonitoring (under Info Processing): ongoing observation of risks; output is a Descriptive ICE (the risk monitoring report)." ;
+    skos:example "Watching key risk indicators on a recurring basis and flagging breaches." ;
+    rdfs:subClassOf ex:ActOfMonitoring ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskMonitoringReport ] .
+
+# --- 11.1.3.6 (PCF 16461) : Analysis -> Descriptive output + updated plan
+ex:P16461 a owl:Class ;
+    ex:pcfID "16461" ;
+    ex:hierarchyID "11.1.3.6" ;
+    ex:apqcSourceText "Examining the impact of risk activities in order to update the existing scheme of risk management. Analyze and substantiate the potential for adverse consequences to occur. Consider the risks associated with the activity and the methods available to manage those risks." ;
+    rdfs:label "Analyze risk activities and update plans" ;
+    skos:definition "An Act of Analysis that examines the impact of risk activities and the potential for adverse consequences and produces a risk analysis report used to update the risk mitigation plan." ;
+    rdfs:comment "Genus Act of Analysis (Info Processing): its definitional output is a Descriptive ICE (the risk analysis report). The revised risk mitigation plan is a typical further output (a Directive ICE), recorded in comment rather than as a definitional restriction. Has the risk monitoring report as a typical input." ;
+    skos:example "Reviewing the period's incidents and revising the mitigation plan accordingly." ;
+    rdfs:subClassOf ex:ActOfAnalysis ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:RiskMonitoringReport ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskAnalysisReport ] .
+
+# --- 11.1.3.7 (PCF 16462) : Reporting -> Descriptive output
+ex:P16462 a owl:Class ;
+    ex:pcfID "16462" ;
+    ex:hierarchyID "11.1.3.7" ;
+    ex:apqcSourceText "Creating reports on risk activities, and communicating them to management. Prepare reports on the potential for adverse safety consequences." ;
+    rdfs:label "Report on risk activities" ;
+    skos:definition "An Act of Reporting that gives a detailed account of a business unit's risk activities and communicates it to management, producing a risk monitoring report." ;
+    rdfs:comment "Genus reuses cco:ont00000151 (Act of Reporting). Output is a Descriptive ICE (the risk monitoring report)." ;
+    skos:example "Submitting the unit's monthly risk-status report to the program lead." ;
+    rdfs:subClassOf cco:ont00000151 ,
+        cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskMonitoringReport ] .
+
+####################################################################
+# 3.2  GROUP 11.2 -- Manage compliance
+####################################################################
+
+# --- 11.2.1 (PCF 17468) : Formulation -> Directive ICE ; parent of 17469, 17470
+ex:P17468 a owl:Class ;
+    ex:pcfID "17468" ; ex:hierarchyID "11.2.1" ;
+    ex:apqcSourceText "Developing a set of procedures detailing an organization's progress in complying with established guidelines, provisions, and legislation." ;
+    rdfs:label "Establish compliance framework and policies" ;
+    skos:definition "An Act of Formulation that composes and articulates an organization's compliance policies and procedures, producing a compliance policy and procedure specification." ;
+    rdfs:comment "Anchored under ex:ActOfFormulation (Act of Planning) per the GOLDEN PRINCIPLE: 'establish a framework and policies' composes a Directive ICE. Its APQC children 17469 and 17470 are process parts (cco:ont00001777); standing-function children 14133 and 14137 are Organization Capabilities, not process parts." ;
+    skos:example "A compliance team drafts the enterprise compliance policy-and-procedure set governing how the organization meets its legal obligations." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompliancePolicy ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P17469 ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001777 ; owl:someValuesFrom ex:P17470 ] .
+
+# --- 11.2.1.1 (PCF 17469) : Formulation -> Directive ICE
+ex:P17469 a owl:Class ;
+    ex:pcfID "17469" ; ex:hierarchyID "11.2.1.1" ;
+    ex:apqcSourceText "Creating a standardized approach to ethics and compliance. Have a programmatic approach for compliance that focuses on the definite risks the organization faces." ;
+    rdfs:label "Develop enterprise compliance policies and procedures" ;
+    skos:definition "An Act of Formulation that composes a standardized, risk-focused approach to ethics and compliance, producing a compliance policy and procedure specification." ;
+    rdfs:comment "Output is a Directive ICE (ex:CompliancePolicy), so the act is anchored under ex:ActOfFormulation (Act of Planning) per the GOLDEN PRINCIPLE." ;
+    skos:example "An organization authors its enterprise code of conduct and the procedures implementing it." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompliancePolicy ] .
+
+# --- 11.2.1.2 (PCF 17470) : execution -> Planned Act (no definitional informational output)
+ex:P17470 a owl:Class ;
+    ex:pcfID "17470" ; ex:hierarchyID "11.2.1.2" ;
+    ex:apqcSourceText "Implementing standardized for ethics and compliance. Have a programmatic approach, built from the top down, to enterprise compliance that focuses on the definite risks the organization faces." ;
+    rdfs:label "Implement enterprise compliance activities" ;
+    skos:definition "A Planned Act that carries out the organization's prescribed compliance program by executing the activities specified in its compliance policies and procedures." ;
+    rdfs:comment "Anchored directly under cco:ont00000228 (Planned Act): implementation is the carrying-out of an already-formulated program, not the production of a new informational artifact, so it bears no definitional has-output restriction. The compliance policy that governs it (ex:CompliancePolicy) is a typical prescriptive input rather than a definitional one." ;
+    skos:example "Compliance staff roll out and operate the ethics-and-compliance program defined by the policy set." ;
+    rdfs:subClassOf cco:ont00000228 .
+
+# --- 11.2.2.1 (PCF 16464) : Formulation -> Directive ICE
+ex:P16464 a owl:Class ;
+    ex:pcfID "16464" ; ex:hierarchyID "11.2.2.1" ;
+    ex:apqcSourceText "Developing procedures and methodologies to comply with relevant laws and regulations of an organization's obedience to laws, guidelines, strategies and stipulations related to business." ;
+    rdfs:label "Develop regulatory compliance procedures" ;
+    skos:definition "An Act of Formulation that composes procedures and methodologies for complying with relevant laws and regulations, producing a compliance policy and procedure specification." ;
+    rdfs:comment "Output is a Directive ICE (ex:CompliancePolicy), so anchored under ex:ActOfFormulation (Act of Planning) per the GOLDEN PRINCIPLE." ;
+    skos:example "A compliance function documents the step-by-step procedures the firm follows to satisfy a new regulation." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompliancePolicy ] .
+
+# --- 11.2.2.2 (PCF 16465) : Identification (discernment) -> Directive ICE determination
+ex:P16465 a owl:Class ;
+    ex:pcfID "16465" ; ex:hierarchyID "11.2.2.2" ;
+    ex:apqcSourceText "Determining the regulatory requirements that are most appropriate for the organization. Identify goals in order to follow the appropriate rules and regulations, guidelines, and strategies." ;
+    rdfs:label "Identify applicable regulatory requirements" ;
+    skos:definition "An Act of Identification that discerns which regulatory requirements apply to the organization and produces an applicable requirements determination registering them." ;
+    rdfs:comment "Anchored under ex:ActOfIdentification (Act of Information Processing): the act discerns/enumerates applicable requirements. Gate-F fix (GOLDEN PRINCIPLE / Phase-3): the prior `has output some ex:RegulatoryRequirement` was WRONG -- ex:RegulatoryRequirement is a DIRECTIVE ICE 'issued by a governing authority', and an information-processing/discernment act does not author that directive (the comment itself notes 'the requirements are not authored here'). The act's true definitional output is a DESCRIPTIVE determination of WHICH requirements apply (ex:ApplicableRequirementsDetermination, subClassOf cco:ont00000853), which agrees with the ext ActOfIdentification definition ('produces an ICE that registers them') and the GOLDEN PRINCIPLE. The pre-existing body of regulation is the act's INPUT/subject (the candidate regulation it screens), now modeled as `has input some ex:RegulatoryRequirement`." ;
+    skos:example "A compliance officer screens the legal landscape and registers which statutes and rules the organization must obey." ;
+    rdfs:subClassOf ex:ActOfIdentification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:RegulatoryRequirement ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ApplicableRequirementsDetermination ] .
+
+# --- 11.2.2.3 (PCF 16466) : Monitoring -> Descriptive ICE
+ex:P16466 a owl:Class ;
+    ex:pcfID "16466" ; ex:hierarchyID "11.2.2.3" ;
+    ex:apqcSourceText "Analyzing and overseeing the regulatory environment in order to spot any changing or emerging regulations. This process element calls upon the organization to monitor the regulatory environment for any new statutes, policies, and enactments issued by the respective government authorities or those which have been updated." ;
+    rdfs:label "Monitor the regulatory environment for changing or emerging regulations" ;
+    skos:definition "An Act of Monitoring that repeatedly observes and analyzes the regulatory environment to detect new or changed statutes, policies, and enactments, producing a regulatory environment analysis." ;
+    rdfs:comment "Anchored under ex:ActOfMonitoring (inlined above). Output is a Descriptive ICE (ex:RegulatoryEnvironmentAnalysis), satisfying the GOLDEN PRINCIPLE." ;
+    skos:example "A regulatory-affairs team continuously scans government bulletins and reports newly issued rules affecting the firm." ;
+    rdfs:subClassOf ex:ActOfMonitoring ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RegulatoryEnvironmentAnalysis ] .
+
+# --- 11.2.2.4 (PCF 16467) : Appraisal -> Descriptive ICE
+ex:P16467 a owl:Class ;
+    ex:pcfID "16467" ; ex:hierarchyID "11.2.2.4" ;
+    ex:apqcSourceText "Evaluating current regulatory policies and regulations. Assess their performance. Make necessary changes." ;
+    rdfs:label "Assess current compliance position and identify weaknesses or shortfalls therein" ;
+    skos:definition "An Act of Appraisal that evaluates the organization's current compliance position against applicable regulations and judges its weaknesses and shortfalls, producing a compliance assessment." ;
+    rdfs:comment "Anchored under cco:ont00000636 (Act of Appraisal): the act evaluates and judges performance. Output is a Descriptive ICE (ex:ComplianceAssessment) per the GOLDEN PRINCIPLE." ;
+    skos:example "An internal review judges where the firm falls short of its regulatory obligations and documents the gaps." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ComplianceAssessment ] .
+
+# --- 11.2.2.5 (PCF 16468) : execution -> Planned Act
+ex:P16468 a owl:Class ;
+    ex:pcfID "16468" ; ex:hierarchyID "11.2.2.5" ;
+    ex:apqcSourceText "Assessing the current policies and policies. Implement missing and necessary changes environmental changes, political changes, technological changes, etc." ;
+    rdfs:label "Implement missing or stronger regulatory compliance controls and policies" ;
+    skos:definition "A Planned Act that puts into effect missing or strengthened regulatory compliance controls and policies as required to close identified compliance gaps." ;
+    rdfs:comment "Anchored directly under cco:ont00000228 (Planned Act): implementing controls is the carrying-out of prescribed controls, not the production of a new informational artifact, so it bears no definitional has-output restriction. The control and policy specifications it enacts (ex:ComplianceControl, ex:CompliancePolicy) are typical prescriptive inputs rather than definitional outputs." ;
+    skos:example "Following a gap assessment, the firm deploys an additional access-control policy to meet a regulatory requirement." ;
+    rdfs:subClassOf cco:ont00000228 .
+
+# --- 11.2.2.6 (PCF 16469) : Verification/testing -> Descriptive ICE
+ex:P16469 a owl:Class ;
+    ex:pcfID "16469" ; ex:hierarchyID "11.2.2.6" ;
+    ex:apqcSourceText "Monitoring, appraising, and evaluating the compliance position of the organization in order to fine-tune for effective remediation. Track efforts for handling regulatory and compliance requirements necessitated by law. Test the robustness of internal frameworks, procedures, and approaches for dealing with these requirements, in order to clearly identify any necessary changes." ;
+    rdfs:label "Monitor and test regulatory compliance position and existing controls" ;
+    skos:definition "An Act of Verification that tests the robustness of the organization's compliance controls, frameworks, and procedures against regulatory requirements, producing a compliance monitoring report of their performance and any necessary changes." ;
+    rdfs:comment "Anchored under ex:ActOfVerification (inlined above): the act tests whether existing controls satisfy requirements. Output is a Descriptive ICE (ex:ComplianceMonitoringReport) per the GOLDEN PRINCIPLE." ;
+    skos:example "An assurance team runs control tests and reports which compliance controls hold and which must be revised." ;
+    rdfs:subClassOf ex:ActOfVerification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ComplianceMonitoringReport ] .
+
+# --- 11.2.2.7 (PCF 19595) : Reporting -> Descriptive ICE (scorecard)
+ex:P19595 a owl:Class ;
+    ex:pcfID "19595" ; ex:hierarchyID "11.2.2.7" ;
+    ex:apqcSourceText "Creating a graphical representation of metrics in order to communicate the general health of the organization in relation to risk and compliancy." ;
+    rdfs:label "Compile and communicate compliance scorecard(s)" ;
+    skos:definition "An Act of Reporting that compiles compliance metrics into a graphical representation and conveys it to stakeholders, producing a compliance scorecard." ;
+    rdfs:comment "Anchored under ex:ActOfReporting (PROPOSE-EXT, compilation sense). Output is a Descriptive ICE (ex:ComplianceScorecard) per the GOLDEN PRINCIPLE." ;
+    skos:example "A compliance function publishes a red/amber/green dashboard summarizing the firm's compliance health." ;
+    rdfs:subClassOf ex:ActOfReporting ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ComplianceScorecard ] .
+
+# --- 11.2.2.8 (PCF 19596) : Reporting -> Descriptive ICE (report)
+ex:P19596 a owl:Class ;
+    ex:pcfID "19596" ; ex:hierarchyID "11.2.2.8" ;
+    ex:apqcSourceText "Submitting compliance reports to regulatory agencies. These reports can be made to environmental, securities, or human resources agencies as stipulated by the local governing body." ;
+    rdfs:label "Compile and communicate internal and regulatory compliance reports" ;
+    skos:definition "An Act of Reporting that submits an already-compiled compliance report to internal stakeholders and regulatory agencies, giving them a detailed account of the organization's compliance status." ;
+    rdfs:comment "Gate-F fix (genus vs verbatim source / sibling consistency): RE-ANCHORED from ex:ActOfReporting (PROPOSE-EXT, compilation sense) to cco:ont00000151 (Act of Reporting, an Act of Representative Communication). Verified cco:ont00000151: 'An Act of Representative Communication performed by giving a detailed account or statement' (subClassOf cco:ont00000379). Reason: although the LABEL says 'compile and communicate', the verbatim apqcSourceText describes ONLY 'Submitting compliance reports to regulatory agencies' -- the mere transfer of an already-existing report, which the ex:ActOfReporting comment explicitly scopes OUT (it belongs to cco:ont00000151). This also reconciles with the 11.1 reporting siblings (P16443/P16444/P16451/P16462) deliberately anchored at cco:ont00000151. Consequently ex:ComplianceReport is the TRANSFERRED ICE (`has input`, not has output -- the report pre-exists this submission act), and ex:RegulatoryAuthority is the definitional recipient via cco:ont00001922 (verified 'has recipient', subPropertyOf BFO_0000057, domain Act of Communication). Rejected option (b) (split compile+submit into two acts) as over-modeling for a single PCF row whose source describes only submission. Compilation of the report is covered upstream (the scorecard/report-creation acts)." ;
+    skos:example "The firm files its periodic securities-compliance report with the relevant regulator." ;
+    rdfs:subClassOf cco:ont00000151 ,
+        cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:ComplianceReport ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001922 ; owl:someValuesFrom ex:RegulatoryAuthority ] .
+
+# --- 11.2 (PCF 17467) "Manage compliance" -- reuse shared capability; realized in its acts.
+ex:ComplianceManagementCapability rdfs:subClassOf
+    [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P17468 ] .
+# NOTE (provenance for the group node 17467): ex:ComplianceManagementCapability is the
+# reality-layer correlate of APQC group 11.2 (a standing function, no natural end). Its
+# regulatory-compliance facet is further specialized by ex:RegulatoryComplianceManagementCapability.
+
+# --- 11.2.1.3 (PCF 14133) "Manage internal audits" -- standing function.
+ex:InternalAuditManagementCapability a owl:Class ;
+    rdfs:subClassOf cco:ont00000568 ;   # Organization Capability
+    rdfs:label "Internal Audit Management Capability" ;
+    skos:definition "An Organization Capability that inheres in an organization in virtue of its capacity to plan, conduct, and report on internal audits of its accounts and performance." ;
+    rdfs:comment "Reality-layer correlate of APQC 11.2.1.3 (PCF 14133), a standing 'Manage' function with no natural end; modeled as a capability (R5/R6) rather than a process. Its discrete auditing acts are modeled in the relevant audit subtree." .
+
+# --- 11.2.1.4 (PCF 14137) "Maintain controls-related technologies and tools" -- standing function.
+ex:ControlsTechnologyMaintenanceCapability a owl:Class ;
+    rdfs:subClassOf cco:ont00000568 ;   # Organization Capability
+    rdfs:label "Controls Technology Maintenance Capability" ;
+    skos:definition "An Organization Capability that inheres in an organization in virtue of its capacity to manage and maintain the technologies and tools that safeguard the confidentiality, integrity, and availability of its information." ;
+    rdfs:comment "Reality-layer correlate of APQC 11.2.1.4 (PCF 14137), a standing 'Maintain' function with no natural end; modeled as a capability (R5/R6) rather than a process." .
+
+# --- 11.2.2 (PCF 16463) "Manage regulatory compliance" -- standing function; realized in its acts.
+ex:RegulatoryComplianceManagementCapability a owl:Class ;
+    rdfs:subClassOf cco:ont00000568 ,   # Organization Capability
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P16464 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P16465 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P16466 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P16467 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P16468 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P16469 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P19595 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P19596 ] ;
+    rdfs:label "Regulatory Compliance Management Capability" ;
+    skos:definition "An Organization Capability that inheres in an organization in virtue of its capacity to obey the laws, guidelines, strategies, and stipulations applicable to its business, realized in acts of developing procedures, identifying requirements, monitoring the regulatory environment, assessing and testing its compliance position, implementing controls, and reporting on compliance." ;
+    rdfs:comment "Reality-layer correlate of APQC 11.2.2 (PCF 16463), a standing 'Manage' function with no natural end; modeled as a capability (R5/R6). Its APQC children that are bounded occurrents (16464, 16465, 16466, 16467, 16468, 16469, 19595, 19596) are the acts in which it is realized -- not process parts, since a capability is not a process. ex:RegulatoryComplianceManagementCapability is a specialization of ex:ComplianceManagementCapability." ;
+    rdfs:subClassOf ex:ComplianceManagementCapability .
+
+# --- 11.2.2.9 (PCF 16470) "Maintain relationships with regulators" -- standing relational function.
+ex:RegulatorRelationshipManagementCapability a owl:Class ;
+    rdfs:subClassOf cco:ont00000568 ;   # Organization Capability
+    rdfs:label "Regulator Relationship Management Capability" ;
+    skos:definition "An Organization Capability that inheres in an organization in virtue of its capacity to develop and preserve appropriate working relationships with its regulators without compromising the legal basis of those relationships." ;
+    rdfs:comment "Reality-layer correlate of APQC 11.2.2.9 (PCF 16470), an ongoing relational standing function with no natural end and no definitional informational output; modeled as a capability (R5/R6) rather than a process." .
+
+####################################################################
+# 3.3  GROUP 11.3 -- Manage remediation efforts  (PCF 11185)
+#
+# DELIBERATE NON-REUSE (verified): CCO cco:ont00000151 "Act of
+# Reporting" (an Act of Representative Communication) is NOT used here.
+# Most remediation acts are planning, identification, or investigation.
+# Gate-F correction: the prior blanket claim that the remediation acts
+# are "not communication" is WRONG for 11.3.2 (P11202, "Contact and
+# confer with experts"), whose source ("DISCUSSING and SOLICITING
+# advice from experts") is a Directive Communication act, anchored at
+# cco:ont00000133 (Act of Directive Communication). The non-reuse note
+# concerns cco:ont00000151 (representative reporting) specifically, not
+# every communication genus.
+####################################################################
+
+# --- 11.3 (PCF 11185) as ORGANIZATION CAPABILITY (R5/R6)
+ex:RemediationManagementCapability
+    ex:pcfID "11185" ;
+    ex:hierarchyID "11.3" ;
+    ex:apqcSourceText "Administering the efforts and activities for remediation. This process element requires the organization to create plans for corrective action in collaboration with government agencies and pertinent professional services agencies which specialize in remediation efforts relevant to the organization's operations. Additionally, the organization needs to consult experts to validate the plan, determine resources allocation, resolve any legal concerns, and formulate a company-wide policy for remediation." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P11201 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P11202 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P11203 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P11204 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P11205 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P11206 ] .
+    # rdfs:label/skos:definition for ex:RemediationManagementCapability are supplied in the
+    # shared-vocabulary block above; this block adds APQC provenance + the realized-in (R6)
+    # restrictions to its six remediation acts.
+
+# --- 11.3.1 (PCF 11201) : Create plans -> Formulation; Directive output
+ex:P11201 a owl:Class ;
+    ex:pcfID "11201" ; ex:hierarchyID "11.3.1" ;
+    ex:apqcSourceText "Creating plans for remediation efforts. Make a plan to address a case of environmental adulteration. Identify and treat the adulteration so that the area will become operational again." ;
+    rdfs:label "Create remediation plans" ;
+    skos:definition "An Act of Formulation that composes a remediation plan prescribing the corrective actions needed to treat adulteration or damage and restore an affected area to operation." ;
+    rdfs:comment "Anchored to ex:ActOfFormulation (subClassOf cco:ont00000511 Act of Planning): the act makes a plan, so its definitional output is a Directive ICE (ex:RemediationPlan)." ;
+    skos:example "An environmental team drafts a remediation plan for a contaminated site so it can return to operational status." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RemediationPlan ] .
+
+# --- 11.3.2 (PCF 11202) : Confer with experts -> Acquisition of advice; SME participant
+ex:P11202 a owl:Class ;
+    ex:pcfID "11202" ; ex:hierarchyID "11.3.2" ;
+    ex:apqcSourceText "Discussing and soliciting advice from experts for in order to incorporate their suggestion (regarding Create remediation plans [11201])." ;
+    rdfs:label "Contact and confer with experts" ;
+    skos:definition "An Act of Representative Communication in which subject matter experts, conferred with by the organization, convey their expert advice -- committing to its truth -- so that their suggestions can be incorporated into remediation planning." ;
+    rdfs:comment "Gate-F reconciliation: anchored under cco:ont00000379 (Act of Representative Communication, a truth-committed conveyance; subClassOf cco:ont00000402 Act of Communication), with cco:ont00000228 (Planned Act) co-asserted for the standalone S2 act anchor (379 is outside the allowlist {366,636,511,228}). The act's defining axioms -- ex:SubjectMatterExpert as the has-sender (cco:ont00001844) and ex:ExpertAdvice (a Descriptive ICE) as the conveyed has-output -- describe the SME->organization advice transfer, which is a representative communication. Previously modeled as cco:ont00000133 (Act of Directive Communication) on the 'soliciting' reading; but that genus casts the soliciting organization as sender and the SME as hearer, contradicting the asserted SME-as-sender axiom, so the genus was reconciled to 379. The earlier rejection of ex:ActOfAcquisition still stands: obtaining advice by conferral is communication, not procurement (cco:ont00000228-scoped acquisition of an authorization/license/resource). ex:SubjectMatterExpert is also a definitional participant (obo:BFO_0000057)." ;
+    skos:example "A remediation lead convenes subject matter experts and captures their advice to refine the remediation plan." ;
+    rdfs:subClassOf cco:ont00000379 ,
+        cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ExpertAdvice ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001844 ; owl:someValuesFrom ex:SubjectMatterExpert ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000057 ; owl:someValuesFrom ex:SubjectMatterExpert ] .
+
+# --- 11.3.3 (PCF 11203) : Identify/dedicate resources -> Appraisal; Descriptive output
+ex:P11203 a owl:Class ;
+    ex:pcfID "11203" ; ex:hierarchyID "11.3.3" ;
+    ex:apqcSourceText "Identifying and dedicating the resources for managing remediation efforts. Discern the resources needed for remediation efforts. Dispense with resources in a sound and well-reasoned manner." ;
+    rdfs:label "Identify/dedicate resources" ;
+    skos:definition "An Act of Identification that discerns the resources needed for managing remediation efforts and produces a resource requirements assessment to guide their dedication." ;
+    rdfs:comment "Gate-F fix (false-friend genus + GOLDEN PRINCIPLE / sibling consistency): RE-ANCHORED from cco:ont00000636 (Act of Appraisal) to ex:ActOfIdentification (subClassOf cco:ont00000366 Act of Information Processing). Rejected cco:ont00000636: verified in the pinned CCO file, Act of Appraisal is 'An Act of Measuring that involves evaluating, assessing, estimating, or judging the nature, VALUE, importance, condition, or QUALITY of something' (e.g. a critic rating a restaurant). The source text is NOT a value/quality judgement on a scale; it is discernment/enumeration ('DISCERN the resources NEEDED for remediation efforts'). 'Judge what resources are needed' is a surface-word false friend for 'judge the value/quality of resources'. This also matches the sibling 'Identify enterprise level risks' (P16446), an identical 'identify/discern X needed' act anchored at ex:ActOfIdentification. Output remains the Descriptive ICE ex:ResourceRequirementsAssessment, so the GOLDEN PRINCIPLE (Information-Processing/discernment -> Descriptive) still holds. The downstream allocation/dedication of resources is operational and non-definitional, so it is not promoted to a restriction." ;
+    skos:example "A remediation manager discerns staffing, equipment, and funding needs and records a resource requirements assessment." ;
+    rdfs:subClassOf ex:ActOfIdentification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ResourceRequirementsAssessment ] .
+
+# --- 11.3.4 (PCF 11204) : Investigate legal aspects -> Investigation; Descriptive output
+ex:P11204 a owl:Class ;
+    ex:pcfID "11204" ; ex:hierarchyID "11.3.4" ;
+    ex:apqcSourceText "Examining regulatory and legislative frameworks. Obligate the organization to remediate any damages through compensations, fines, and any other remedial efforts necessitated to correct the situations. Analyze local environmental laws, binding international covenants, etc. in order to examine legal accuracy about the rules and procedures." ;
+    rdfs:label "Investigate legal aspects" ;
+    skos:definition "An Act of Investigation that examines the regulatory and legislative frameworks bearing on remediation and produces a legal analysis of the organization's obligations and the accuracy of applicable rules and procedures." ;
+    rdfs:comment "Anchored to ex:ActOfInvestigation (subClassOf cco:ont00000366 Act of Information Processing): the act examines input regulatory-requirement ICEs and yields a Descriptive ICE (ex:LegalAnalysis). ex:RegulatoryRequirement is definitional as input." ;
+    skos:example "Counsel reviews environmental statutes and international covenants and issues a legal analysis of remediation liabilities." ;
+    rdfs:subClassOf ex:ActOfInvestigation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:RegulatoryRequirement ] ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:LegalAnalysis ] .
+
+# --- 11.3.5 (PCF 11205) : Investigate damage cause -> Investigation; Descriptive output
+ex:P11205 a owl:Class ;
+    ex:pcfID "11205" ; ex:hierarchyID "11.3.5" ;
+    ex:apqcSourceText "Studying the causes of damage, which could be environmental, physical, social, etc. at country level in order to institute better policies and regulations." ;
+    rdfs:label "Investigate damage cause" ;
+    skos:definition "An Act of Investigation that studies the environmental, physical, or social causes of damage and produces a damage cause analysis that can inform better policies and regulations." ;
+    rdfs:comment "Anchored to ex:ActOfInvestigation (subClassOf cco:ont00000366 Act of Information Processing): the act examines evidence of damage and yields a Descriptive ICE (ex:DamageCauseAnalysis)." ;
+    skos:example "Investigators study a contamination incident and document the chain of causes that led to the damage." ;
+    rdfs:subClassOf ex:ActOfInvestigation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:DamageCauseAnalysis ] .
+
+# --- 11.3.6 (PCF 11206) : Amend or create policy -> Formulation; Directive output
+ex:P11206 a owl:Class ;
+    ex:pcfID "11206" ; ex:hierarchyID "11.3.6" ;
+    ex:apqcSourceText "Crafting a new framework of policies and procedures for deploying remediation efforts, or change existing policies and procedures. Adapt the policy structure to the context of the apposite national and international regulatory frameworks." ;
+    rdfs:label "Amend or create policy" ;
+    skos:definition "An Act of Formulation that crafts a new framework of remediation policies and procedures, or revises an existing one, to align with applicable national and international regulatory frameworks." ;
+    rdfs:comment "Anchored to ex:ActOfFormulation (subClassOf cco:ont00000511 Act of Planning): crafting/amending a policy-and-procedure framework yields a Directive ICE (ex:RemediationPolicy)." ;
+    skos:example "A policy team revises the company-wide remediation policy to reflect new international environmental covenants." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RemediationPolicy ] .
+
+####################################################################
+# 3.4  GROUP 11.4 -- Manage business resiliency  (PCF 11216)
+####################################################################
+
+# --- 11.4 (PCF 11216) AS AN ORGANIZATION CAPABILITY (R5 -> R6)
+ex:BusinessResiliencyCapability
+    ex:pcfID "11216" ;
+    ex:hierarchyID "11.4" ;
+    ex:apqcSourceText "Including the processes required to rapidly adapt and respond to any internal or external opportunity, demand, disruption, or threat. Develop a more dynamic, strategic, and integrated approach to managing compliance obligations." ;
+    rdfs:comment "Models APQC process group 11.4 ('Manage business resiliency') under R5/R6: it is a standing function with no natural end, so it is an Organization Capability (cco:ont00000568) realized in its constituent acts, NOT a process. Per R3/R5 it carries no has-process-part to its children. rdfs:label/skos:definition are supplied in the shared-vocabulary block above." ;
+    skos:example "An enterprise's standing ability to keep critical operations running and recover quickly during a regional outage." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P11221 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P11222 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P11223 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P11224 ] ,
+        [ a owl:Restriction ; owl:onProperty obo:BFO_0000054 ; owl:someValuesFrom ex:P16471 ] .
+
+# --- 11.4.1 (PCF 11221) : Formulation -> Directive ICE output
+ex:P11221 a owl:Class ;
+    ex:pcfID "11221" ;
+    ex:hierarchyID "11.4.1" ;
+    ex:apqcSourceText "Creating a strategy for rapidly adapting to disturbances. Maintain continuous business processes and protecting employees, assets, and overall brand equity." ;
+    rdfs:label "Develop the business resilience strategy" ;
+    skos:definition "An Act of Formulation that composes and articulates a business resilience strategy prescribing how an organization rapidly adapts to disturbances while maintaining continuous operations and protecting employees, assets, and brand equity." ;
+    rdfs:comment "Anchored to ex:ActOfFormulation (under cco:ont00000511 Act of Planning): its definitional output is a Directive ICE (a strategy), per the GOLDEN PRINCIPLE. Models APQC 11.4.1 as an occurrent, not the strategy artifact (ex:BusinessResilienceStrategy) nor a standing function." ;
+    skos:example "A resilience team drafts the enterprise's business resilience strategy for the coming planning cycle." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:BusinessResilienceStrategy ] .
+
+# --- 11.4.2 (PCF 11222) : Formulation -> Directive ICE output (continuity plan)
+ex:P11222 a owl:Class ;
+    ex:pcfID "11222" ;
+    ex:hierarchyID "11.4.2" ;
+    ex:apqcSourceText "Developing plans to ensure continuous business operations." ;
+    rdfs:label "Perform continuous business operations planning" ;
+    skos:definition "An Act of Formulation that composes and articulates a business continuity plan prescribing the measures required to ensure continuous business operations." ;
+    rdfs:comment "Anchored to ex:ActOfFormulation (under cco:ont00000511 Act of Planning): the definitional output is a Directive ICE (a continuity plan), per the GOLDEN PRINCIPLE." ;
+    skos:example "A continuity planner produces the business continuity plan for the firm's critical processes." ;
+    rdfs:subClassOf ex:ActOfFormulation ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:BusinessContinuityPlan ] .
+
+# --- 11.4.3 (PCF 11223) : Verification -> Descriptive ICE output
+ex:P11223 a owl:Class ;
+    ex:pcfID "11223" ;
+    ex:hierarchyID "11.4.3" ;
+    ex:apqcSourceText "Assessing ongoing activities within the organization that are not intended to stop except for in an emergency." ;
+    rdfs:label "Test continuous business operations" ;
+    skos:definition "An Act of Verification that exercises the organization's ongoing, non-stop activities against the business continuity plan and produces a continuity test result recording whether those operations perform as intended." ;
+    rdfs:comment "Anchored to ex:ActOfVerification (inlined; Act of Appraisal cco:ont00000636; also information-processing in character): testing exercises operations against a standard and yields a Descriptive ICE (a test result), per the GOLDEN PRINCIPLE. The business continuity plan is a typical (not definitional) input, so it is noted here rather than promoted to a restriction." ;
+    skos:example "A resilience team runs a failover drill and records the continuity test result." ;
+    rdfs:subClassOf ex:ActOfVerification ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:ContinuityTestResult ] .
+
+# --- 11.4.4 (PCF 11224) : Appraisal -> Descriptive ICE output (evaluation)
+ex:P11224 a owl:Class ;
+    ex:pcfID "11224" ;
+    ex:hierarchyID "11.4.4" ;
+    ex:apqcSourceText "Evaluating business operations. Determine which activities generate revenues, perform best, and provide good returns." ;
+    rdfs:label "Maintain continuous business operations" ;
+    skos:definition "An Act of Appraisal that evaluates ongoing business operations to judge which activities generate revenue, perform best, and provide good returns, and produces a business operations evaluation." ;
+    rdfs:comment "Anchored to cco:ont00000636 (Act of Appraisal): despite the APQC label 'Maintain', the Element Description is evaluative ('Evaluating ... Determine which activities ... perform best'), so the definitional output is a Descriptive ICE (an evaluation/judgement), per the GOLDEN PRINCIPLE." ;
+    skos:example "An operations analyst evaluates ongoing activities and issues a business operations evaluation ranking them by return." ;
+    rdfs:subClassOf cco:ont00000636 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:BusinessOperationsEvaluation ] .
+
+# --- 11.4.5 (PCF 16471) : Communication -> transfers a Descriptive ICE (risk knowledge)
+ex:P16471 a owl:Class ;
+    ex:pcfID "16471" ;
+    ex:hierarchyID "11.4.5" ;
+    ex:apqcSourceText "Sharing information about risks and resilience strategies of business operations across the organization so that prospective risks can be avoided." ;
+    rdfs:label "Share knowledge of specific risks across other parts of the organization" ;
+    skos:definition "An Act of Reporting that gives other parts of the organization a detailed account of risk knowledge about business operations so that prospective risks can be avoided." ;
+    rdfs:comment "Gate-F fix (sibling/parallel-row consistency): RE-ANCHORED from the generic cco:ont00000402 (Act of Communication) to cco:ont00000151 (Act of Reporting, an Act of Representative Communication) to match its semantically parallel 11.1 sibling P16443 (11.1.1.4 'Coordinate the sharing of risk knowledge', source 'Share risk information within the organization'), which is anchored at cco:ont00000151. Both rows describe an agent conveying ex:RiskKnowledge across the organization; reconciling them to ONE genus removes the former split (402 vs 151). Also reconciled the I/O pattern: the former `has input some ex:RiskKnowledge` restriction was DROPPED (a report 'gives an account', it does not consume the same ICE it emits), leaving the single Descriptive output ex:RiskKnowledge to match P16443's output-only pattern. Cross-reference: P16443." ;
+    skos:example "A risk manager circulates lessons learned about a near-miss disruption to other business units." ;
+    rdfs:subClassOf cco:ont00000151 ,
+        cco:ont00000228 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:RiskKnowledge ] .
+
+####################################################################
+# 4. CATALOG -> REALITY BRIDGES
+#    Each catalog node ex:PCF_<pcfID> designates its reality-layer
+#    class (a process ex:P<pcfID> or a supporting capability).
+####################################################################
+
+ex:PCF_17060 ex:designatesProcessType ex:P17060 .
+ex:PCF_16439 ex:designatesProcessType ex:P16439 .
+ex:PCF_16440 ex:designatesProcessType ex:P16440 .
+ex:PCF_16441 ex:designatesProcessType ex:P16441 .
+ex:PCF_16442 ex:designatesProcessType ex:P16442 .
+ex:PCF_16443 ex:designatesProcessType ex:P16443 .
+ex:PCF_16444 ex:designatesProcessType ex:P16444 .
+ex:PCF_16445 ex:designatesProcessType ex:P16445 .
+ex:PCF_16446 ex:designatesProcessType ex:P16446 .
+ex:PCF_16447 ex:designatesProcessType ex:P16447 .
+ex:PCF_16448 ex:designatesProcessType ex:P16448 .
+ex:PCF_16449 ex:designatesProcessType ex:P16449 .
+ex:PCF_16450 ex:designatesProcessType ex:P16450 .
+ex:PCF_16451 ex:designatesProcessType ex:P16451 .
+ex:PCF_16452 ex:designatesProcessType ex:P16452 .
+ex:PCF_16453 ex:designatesProcessType ex:P16453 .
+ex:PCF_16454 ex:designatesProcessType ex:P16454 .
+ex:PCF_17462 ex:designatesProcessType ex:P17462 .
+ex:PCF_16456 ex:designatesProcessType ex:P16456 .
+ex:PCF_16457 ex:designatesProcessType ex:P16457 .
+ex:PCF_16458 ex:designatesProcessType ex:P16458 .
+ex:PCF_18129 ex:designatesProcessType ex:P18129 .
+ex:PCF_16459 ex:designatesProcessType ex:P16459 .
+ex:PCF_16460 ex:designatesProcessType ex:P16460 .
+ex:PCF_16461 ex:designatesProcessType ex:P16461 .
+ex:PCF_16462 ex:designatesProcessType ex:P16462 .
+ex:PCF_17467 ex:designatesProcessType ex:ComplianceManagementCapability .
+ex:PCF_17468 ex:designatesProcessType ex:P17468 .
+ex:PCF_17469 ex:designatesProcessType ex:P17469 .
+ex:PCF_17470 ex:designatesProcessType ex:P17470 .
+ex:PCF_14133 ex:designatesProcessType ex:InternalAuditManagementCapability .
+ex:PCF_14137 ex:designatesProcessType ex:ControlsTechnologyMaintenanceCapability .
+ex:PCF_16463 ex:designatesProcessType ex:RegulatoryComplianceManagementCapability .
+ex:PCF_16464 ex:designatesProcessType ex:P16464 .
+ex:PCF_16465 ex:designatesProcessType ex:P16465 .
+ex:PCF_16466 ex:designatesProcessType ex:P16466 .
+ex:PCF_16467 ex:designatesProcessType ex:P16467 .
+ex:PCF_16468 ex:designatesProcessType ex:P16468 .
+ex:PCF_16469 ex:designatesProcessType ex:P16469 .
+ex:PCF_19595 ex:designatesProcessType ex:P19595 .
+ex:PCF_19596 ex:designatesProcessType ex:P19596 .
+ex:PCF_16470 ex:designatesProcessType ex:RegulatorRelationshipManagementCapability .
+ex:PCF_11185 ex:designatesProcessType ex:RemediationManagementCapability .
+ex:PCF_11201 ex:designatesProcessType ex:P11201 .
+ex:PCF_11202 ex:designatesProcessType ex:P11202 .
+ex:PCF_11203 ex:designatesProcessType ex:P11203 .
+ex:PCF_11204 ex:designatesProcessType ex:P11204 .
+ex:PCF_11205 ex:designatesProcessType ex:P11205 .
+ex:PCF_11206 ex:designatesProcessType ex:P11206 .
+ex:PCF_11216 ex:designatesProcessType ex:BusinessResiliencyCapability .
+ex:PCF_11221 ex:designatesProcessType ex:P11221 .
+ex:PCF_11222 ex:designatesProcessType ex:P11222 .
+ex:PCF_11223 ex:designatesProcessType ex:P11223 .
+ex:PCF_11224 ex:designatesProcessType ex:P11224 .
+ex:PCF_16471 ex:designatesProcessType ex:P16471 .

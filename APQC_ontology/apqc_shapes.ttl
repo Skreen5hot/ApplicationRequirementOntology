@@ -1,0 +1,247 @@
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix cco:   <https://www.commoncoreontologies.org/> .
+@prefix obo:   <http://purl.obolibrary.org/obo/> .
+@prefix ex:    <http://example.org/apqc#> .
+@prefix sh-ex: <http://example.org/apqc/shapes#> .
+
+####################################################################
+# SHACL SHAPES for APQC -> BFO 2020 / CCO transforms  (v0.1.0)
+#
+# These validate the ONTOLOGY (TBox) itself: targets are owl:Class and
+# owl:Restriction nodes, so SHACL-SPARQL targets/constraints are used.
+# Run with advanced mode + SPARQL enabled, e.g.:
+#   pyshacl -a -s apqc_shapes.ttl apqc_1_1_1.ttl
+# (Validates standalone. Loading CCO+BFO alongside the data graph makes
+#  the transitive checks stronger but is not required.)
+#
+# Rules (severity):
+#   S1 ProcessAnnotations        every process: label+definition+pcfID (V); example (W)
+#   S2 ProcessAnchoredToAct      every process subClassOf+ a CCO Act class           (V)
+#   S3 OutputIsICE               has output filler must be an ICE                    (V)
+#   S4 InputIsContinuantKind     has input filler should be an ICE or material ent.  (W)
+#   S5 ProcessPartIsProcess      has process part filler must itself be a process    (V)
+#   S6 NoProcessSubsumption      no process may rdfs:subClassOf another process      (V)
+#   S7 NoRoleInGDC               no ICE/GDC may bear a Role                           (V)
+#   S8 IsAboutOnlyOnICE          is about may only sit on an ICE                     (V)
+####################################################################
+
+sh-ex:prefixes a owl:Ontology ;
+    sh:declare
+        [ sh:prefix "cco"  ; sh:namespace "https://www.commoncoreontologies.org/"^^xsd:anyURI ] ,
+        [ sh:prefix "obo"  ; sh:namespace "http://purl.obolibrary.org/obo/"^^xsd:anyURI ] ,
+        [ sh:prefix "owl"  ; sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ] ,
+        [ sh:prefix "rdfs" ; sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ] ,
+        [ sh:prefix "skos" ; sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ] ,
+        [ sh:prefix "ex"   ; sh:namespace "http://example.org/apqc#"^^xsd:anyURI ] .
+
+####################################################################
+# S1 + S2 : target = every APQC process class
+#   (an ex: owl:Class that carries a has input / has output /
+#    has process part restriction)
+####################################################################
+
+sh-ex:ProcessShape a sh:NodeShape ;
+    rdfs:label "APQC Process shape" ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:prefixes sh-ex:prefixes ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this a owl:Class ;
+                      rdfs:subClassOf ?r .
+                ?r owl:onProperty ?p .
+                FILTER( ?p IN (cco:ont00001921, cco:ont00001986, cco:ont00001777) )
+                FILTER( STRSTARTS(STR(?this), "http://example.org/apqc#") )
+            }
+        """ ] ;
+    # --- S1 annotation completeness ---
+    sh:property [
+        sh:path rdfs:label ; sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Process is missing rdfs:label." ] ;
+    sh:property [
+        sh:path skos:definition ; sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Process is missing skos:definition (genus-differentia form required)." ] ;
+    sh:property [
+        sh:path ex:pcfID ; sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Process is missing ex:pcfID (stable APQC provenance anchor)." ] ;
+    sh:property [
+        sh:path skos:example ; sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Process has no skos:example (recommended for production)." ] ;
+    # --- S2 anchored to a CCO Act class ---
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Violation ;
+        sh:message "Process is not subClassOf+ any CCO Act class (Act of Information Processing / Appraisal / Planning / Planned Act). Engineer its is-a anchor; do not rely on APQC position." ;
+        sh:prefixes sh-ex:prefixes ;
+        sh:select """
+            SELECT $this WHERE {
+                FILTER NOT EXISTS {
+                    $this rdfs:subClassOf+ ?a .
+                    FILTER( ?a IN (cco:ont00000366, cco:ont00000636, cco:ont00000511, cco:ont00000228) )
+                }
+            }
+        """ ] .
+
+####################################################################
+# S6 : no process may subsume another process
+#   (APQC decomposition is partonomy, not taxonomy)
+####################################################################
+
+sh-ex:NoProcessSubsumptionShape a sh:NodeShape ;
+    rdfs:label "No process-to-process subsumption" ;
+    sh:target [
+        a sh:SPARQLTarget ; sh:prefixes sh-ex:prefixes ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this a owl:Class ; rdfs:subClassOf ?r .
+                ?r owl:onProperty ?p .
+                FILTER( ?p IN (cco:ont00001921, cco:ont00001986, cco:ont00001777) )
+                FILTER( STRSTARTS(STR(?this), "http://example.org/apqc#") )
+            }
+        """ ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Violation ;
+        sh:message "Process {$this} is rdfs:subClassOf another process {?super}. APQC children are PARTS, not subclasses: use cco:ont00001777 (has process part), and subclass only the act-type layer." ;
+        sh:prefixes sh-ex:prefixes ;
+        sh:select """
+            SELECT $this ?super WHERE {
+                $this rdfs:subClassOf ?super .
+                FILTER( STRSTARTS(STR(?super), "http://example.org/apqc#") )
+                ?super rdfs:subClassOf ?r2 .
+                ?r2 owl:onProperty ?p2 .
+                FILTER( ?p2 IN (cco:ont00001921, cco:ont00001986, cco:ont00001777) )
+            }
+        """ ] .
+
+####################################################################
+# S3 : has output filler must be an ICE
+####################################################################
+
+sh-ex:OutputIsICEShape a sh:NodeShape ;
+    rdfs:label "has output filler is an ICE" ;
+    sh:target [
+        a sh:SPARQLTarget ; sh:prefixes sh-ex:prefixes ;
+        sh:select """SELECT ?this WHERE { ?this owl:onProperty cco:ont00001986 . }""" ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Violation ;
+        sh:message "has output filler {?value} is not an Information Content Entity (ICE / Descriptive / Directive). Process outputs in this domain are ICEs." ;
+        sh:prefixes sh-ex:prefixes ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this owl:someValuesFrom ?value .
+                FILTER NOT EXISTS {
+                    ?value rdfs:subClassOf* ?ice .
+                    FILTER( ?ice IN (cco:ont00000958, cco:ont00000853, cco:ont00000965) )
+                }
+            }
+        """ ] .
+
+####################################################################
+# S4 : has input filler should be a recognized continuant kind
+#   (ICE or material entity). Warning -- material inputs are legal in
+#   other PCF categories, so this flags rather than blocks.
+####################################################################
+
+sh-ex:InputKindShape a sh:NodeShape ;
+    rdfs:label "has input filler is ICE or material entity" ;
+    sh:target [
+        a sh:SPARQLTarget ; sh:prefixes sh-ex:prefixes ;
+        sh:select """SELECT ?this WHERE { ?this owl:onProperty cco:ont00001921 . }""" ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Warning ;
+        sh:message "has input filler {?value} is neither an ICE nor a material entity. Confirm it is an intended continuant input." ;
+        sh:prefixes sh-ex:prefixes ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this owl:someValuesFrom ?value .
+                FILTER NOT EXISTS {
+                    ?value rdfs:subClassOf* ?k .
+                    FILTER( ?k IN (cco:ont00000958, cco:ont00000853, cco:ont00000965, obo:BFO_0000040) )
+                }
+            }
+        """ ] .
+
+####################################################################
+# S5 : has process part filler must itself be a process
+####################################################################
+
+sh-ex:ProcessPartShape a sh:NodeShape ;
+    rdfs:label "has process part filler is a process" ;
+    sh:target [
+        a sh:SPARQLTarget ; sh:prefixes sh-ex:prefixes ;
+        sh:select """SELECT ?this WHERE { ?this owl:onProperty cco:ont00001777 . }""" ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Violation ;
+        sh:message "has process part filler {?value} is not anchored as a process (no CCO Act ancestor). Only processes may be process parts." ;
+        sh:prefixes sh-ex:prefixes ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this owl:someValuesFrom ?value .
+                FILTER NOT EXISTS {
+                    ?value rdfs:subClassOf+ ?a .
+                    FILTER( ?a IN (cco:ont00000366, cco:ont00000636, cco:ont00000511, cco:ont00000228) )
+                }
+            }
+        """ ] .
+
+####################################################################
+# S7 : no ICE/GDC may bear a Role  (roles inhere only in independent
+#   continuants). Target = bearer-of restrictions whose filler is a Role.
+####################################################################
+
+sh-ex:NoRoleInGDCShape a sh:NodeShape ;
+    rdfs:label "No role inhering in a GDC/ICE" ;
+    sh:target [
+        a sh:SPARQLTarget ; sh:prefixes sh-ex:prefixes ;
+        sh:select """SELECT ?this WHERE { ?this owl:onProperty obo:BFO_0000196 . }""" ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Violation ;
+        sh:message "Class {?cls} bears a Role but is an Information Content Entity. A Role (BFO_0000023) is a specifically dependent continuant and cannot inhere in a generically dependent continuant; place the role on an independent continuant (Agent/Organization)." ;
+        sh:prefixes sh-ex:prefixes ;
+        sh:select """
+            SELECT $this ?cls WHERE {
+                $this owl:someValuesFrom ?role .
+                ?role rdfs:subClassOf* obo:BFO_0000023 .
+                ?cls rdfs:subClassOf $this .
+                ?cls rdfs:subClassOf* ?ice .
+                FILTER( ?ice IN (cco:ont00000958, cco:ont00000853, cco:ont00000965) )
+            }
+        """ ] .
+
+####################################################################
+# S8 : is about may only sit on an ICE
+####################################################################
+
+sh-ex:IsAboutOnICEShape a sh:NodeShape ;
+    rdfs:label "is about only on an ICE" ;
+    sh:target [
+        a sh:SPARQLTarget ; sh:prefixes sh-ex:prefixes ;
+        sh:select """SELECT ?this WHERE { ?this owl:onProperty cco:ont00001808 . }""" ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Violation ;
+        sh:message "Class {?cls} carries an 'is about' restriction but is not an Information Content Entity. cco:is about has domain ICE." ;
+        sh:prefixes sh-ex:prefixes ;
+        sh:select """
+            SELECT $this ?cls WHERE {
+                ?cls rdfs:subClassOf $this .
+                FILTER NOT EXISTS {
+                    ?cls rdfs:subClassOf* ?ice .
+                    FILTER( ?ice IN (cco:ont00000958, cco:ont00000853, cco:ont00000965) )
+                }
+            }
+        """ ] .

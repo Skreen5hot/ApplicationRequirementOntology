@@ -20,11 +20,26 @@ namespace prefix string still runs when the string is stale, matches
 nothing, and reports success. This repository moved namespaces recently
 and had exactly that construct in it, which is why the second rung is
 not optional.
+
+SCOPE
+
+The data graph is the authored ontology *plus* the vendored upstream
+extracts. Both are needed: a shape asking whether a class reaches
+cco:ont00001379 through subClassOf has nothing to walk without CCO, and
+answers "no" for every subject. That report is indistinguishable from a
+real defect, and this tool produced it -- 202 violations that were a
+property of the scope.
+
+Loading the extracts creates the opposite risk, so violations are split
+by whose term the focus node is. A violation against an upstream IRI is a
+finding about the extract; only violations against terms this repository
+authored are findings about this ontology.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -51,6 +66,15 @@ def shape_sets() -> dict[str, Path]:
             for c in layout.components("ontology-validation")}
 
 
+def stable_shape(source, message) -> str:
+    import rdflib
+
+    if not isinstance(source, rdflib.BNode):
+        return str(source)
+    digest = hashlib.sha256(str(message or "").encode("utf-8")).hexdigest()
+    return "_:constraint-" + digest[:12]
+
+
 def run(data, shapes) -> dict:
     from pyshacl import validate as shacl
 
@@ -70,7 +94,12 @@ def run(data, shapes) -> dict:
         severity = results_graph.value(result, SH.resultSeverity)
         violations.append({
             "focus": str(focus) if focus else None,
-            "shape": str(source) if source else None,
+            # Named shapes keep their IRI. An inline constraint is a
+            # blank node, and rdflib renames blank nodes on every parse,
+            # so using its label here would give the report an identifier
+            # that changes when nothing has. The message is what
+            # identifies the constraint, so the digest is taken of that.
+            "shape": (stable_shape(source, message) if source else None),
             "severity": str(severity).rsplit("#", 1)[-1] if severity else None,
             "message": (str(message)[:200] if message else None),
         })
@@ -127,15 +156,63 @@ def shapes_depend_on(path: Path) -> list[str]:
                   if prefix in text)
 
 
+def vendoring() -> dict:
+    """What the vendored extracts contain, and what they left behind.
+
+    Carried into this report rather than left in a separate file, because
+    the reader who needs it is the one reading a green result. "Every
+    referenced term is described" is true of a partial extract and does
+    not mean the upstream is present; the dropped-axiom counts are the
+    difference, and they belong next to the conclusion they qualify.
+    """
+    path = layout.repository_root() / "config/upstream-extracts.json"
+    if not path.is_file():
+        return {"available": False}
+    record = json.loads(path.read_text(encoding="utf-8"))
+    return {
+        "available": True,
+        "partial_extracts": True,
+        "sources": {key: {"release": entry["release"],
+                          "commit": entry["commit"],
+                          "licence": entry["licence_spdx"],
+                          "terms": entry["terms_described_in_full"],
+                          "stubs": entry["terms_declared_as_stubs"],
+                          "axioms_dropped": entry[
+                              "axioms_dropped_anonymous_object"]}
+                    for key, entry in record["extracts"].items()},
+        "not_covered": record["not_covered"],
+    }
+
+
+def authored_namespace() -> str:
+    return "https://fandaws.com/ontology/"
+
+
+def passed_of(rungs: dict) -> bool:
+    """Whether the ladder passed, as a function of the rungs alone.
+
+    Lifted out of `measure` so the empty case can be tested. `all()` over
+    an empty sequence is True, and the first version of this tool
+    reported success having evaluated no rung at all -- a check that
+    certified the ontology while doing nothing. That branch cannot be
+    reached from this repository any more, which is exactly why it needs
+    a test that does not depend on reaching it.
+    """
+    return (any(r["evaluable"] for r in rungs.values())
+            and all(r["corpus"]["conforms"] and r["can_still_fail"]
+                    for r in rungs.values() if r["evaluable"]))
+
+
 def measure() -> dict:
     root = layout.repository_root()
     scope = layout.ontology_files()
+    vendored = layout.vendored_files()
     fixture = layout.component("fixture.apqc-bad-examples").resolve()
     sets = shape_sets()
     if not sets:
         raise SystemExit("no ontology-validation component is declared")
 
-    data = load(scope)
+    data = load(list(scope) + list(vendored))
     bad = load([fixture])
     vocabularies = unresolved_vocabularies(data)
     missing = sorted(name for name, info in vocabularies.items()
@@ -148,6 +225,15 @@ def measure() -> dict:
         blocked = sorted(set(depends) & set(missing))
         corpus = run(data, shapes)
         against_fixture = run(bad, shapes)
+        # A violation whose focus node is an upstream term is a finding
+        # about the vendored extract, not about this ontology. Counting
+        # the two together would let a defect in the extract be reported
+        # as a defect in the corpus, and the reverse.
+        upstream_focus = [v for v in corpus["violations"]
+                          if v["focus"] and v["focus"].startswith(
+                              tuple(UPSTREAM))]
+        authored_focus = [v for v in corpus["violations"]
+                          if v not in upstream_focus]
         rungs[name] = {
             "shapes": path.relative_to(root).as_posix(),
             "depends_on": depends,
@@ -160,12 +246,19 @@ def measure() -> dict:
             "corpus": {
                 "conforms": corpus["conforms"],
                 "violations": len(corpus["violations"]),
-                "detail": corpus["violations"][:20],
+                "against_authored_terms": len(authored_focus),
+                "against_vendored_terms": len(upstream_focus),
+                "detail": authored_focus[:20],
+                "vendored_detail": upstream_focus[:10],
             },
             "fixture": {
                 "conforms": against_fixture["conforms"],
                 "violations": len(against_fixture["violations"]),
-                "detail": against_fixture["violations"][:10],
+                # Not truncated as tightly as the corpus detail above.
+                # This list is the evidence that each constraint fires,
+                # and a cap short enough to hide one of them would make
+                # the falsification report a subset of itself.
+                "detail": against_fixture["violations"][:60],
             },
             # The fixture conforming means the shapes did not fire on data
             # built to break them, which is a broken check reporting
@@ -180,9 +273,12 @@ def measure() -> dict:
         "generated_by": GENERATOR,
         "scope": {
             "data_files": len(scope),
+            "vendored_files": [p.relative_to(root).as_posix()
+                               for p in vendored],
             "fixture": fixture.relative_to(root).as_posix(),
             "shape_sets": sorted(sets),
         },
+        "vendoring": vendoring(),
         "upstream_vocabularies": vocabularies,
         "unresolved": missing,
         "rungs": rungs,
@@ -199,12 +295,7 @@ def measure() -> dict:
                                   if r["evaluable"]),
         "blocked_rungs": sorted(n for n, r in rungs.items()
                                 if not r["evaluable"]),
-        # `all()` over an empty sequence is True, so a ladder where every
-        # rung is blocked would have reported success having evaluated
-        # nothing. It has not passed; it has not run.
-        "passed": (any(r["evaluable"] for r in rungs.values())
-                   and all(r["corpus"]["conforms"] and r["can_still_fail"]
-                           for r in rungs.values() if r["evaluable"])),
+        "passed": passed_of(rungs),
     }
 
 
@@ -214,8 +305,15 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
 
     record = measure()
-    print("  %d data file(s), %d shape set(s)"
-          % (record["scope"]["data_files"], len(record["rungs"])))
+    print("  %d data file(s) + %d vendored extract(s), %d shape set(s)"
+          % (record["scope"]["data_files"],
+             len(record["scope"]["vendored_files"]), len(record["rungs"])))
+    vendored = record["vendoring"]
+    if vendored.get("available"):
+        for key, entry in sorted(vendored["sources"].items()):
+            print("    %-4s %-20s %s  %d term(s), %d axiom(s) dropped"
+                  % (key, entry["release"], entry["licence"], entry["terms"],
+                     entry["axioms_dropped"]))
     print()
     if record["unresolved"]:
         print("  upstream vocabulary not in scope: %s"
@@ -234,9 +332,11 @@ def main(argv=None) -> int:
             print("    %d reported violation(s) describe the scope, not the "
                   "ontology" % corpus["violations"])
             continue
-        print("    corpus  %-9s %d violation(s)"
+        print("    corpus  %-9s %d violation(s)  (%d authored, %d "
+              "vendored)"
               % ("conforms" if corpus["conforms"] else "VIOLATIONS",
-                 corpus["violations"]))
+                 corpus["violations"], corpus["against_authored_terms"],
+                 corpus["against_vendored_terms"]))
         print("    fixture %-9s %d violation(s)  %s"
               % ("conforms" if fixture["conforms"] else "rejected",
                  fixture["violations"],

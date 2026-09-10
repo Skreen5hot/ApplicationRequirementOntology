@@ -1,11 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 """The corpus measures, and the honesty of the validation ladder.
 
-The SHACL tests here assert almost nothing about whether the ontology is
-correct, because right now that cannot be determined: the shapes reason
-over BFO and CCO, and neither is in the repository. What they assert is
-that the tool says so, rather than reporting 213 violations that describe
-a missing vocabulary and reading exactly like defects.
+Until BFO and CCO were vendored these tests asserted almost nothing about
+whether the ontology is correct, because that could not be determined:
+the shapes reason over both, and neither was in the repository. What they
+asserted instead was that the tool said so, rather than reporting 213
+violations that described a missing vocabulary and read exactly like
+defects.
+
+Both rungs are evaluable now, so the assertions have been inverted rather
+than deleted -- the old ones are still visible in the git history, and
+what they were guarding against is still what the new ones guard.
+
+The findings that remain are findings. Five process classes are missing
+ex:pcfID and five are missing skos:example; those are recorded here as
+the number they are, so that fixing them is a visible change and adding
+new ones is a failure.
 """
 
 from __future__ import annotations
@@ -116,34 +126,95 @@ def test_the_blank_node_shape_survives_reparsing(digest_tool):
 # ------------------------------------------------------- the ladder
 
 
-def test_the_ladder_reports_missing_vocabulary_rather_than_violations(
-        validation):
-    """The finding, and the distinction that makes it a finding.
+def test_the_upstream_vocabulary_the_shapes_walk_is_in_scope(validation):
+    """The inverse of what this test used to assert.
 
     Shapes requiring a class to reach a CCO anchor via subClassOf+ have
     no chain to walk when CCO is absent. They report every subject as
     violating, and that report is indistinguishable from a real defect
-    unless the tool separates the two.
+    unless the tool separates the two. It did separate them, and then the
+    vocabulary was vendored, so now every referenced term resolves.
     """
     record = validation
-    assert record["unresolved"], (
-        "no upstream vocabulary is reported missing; if BFO and CCO have "
-        "been vendored, this test should be inverted rather than deleted")
-    assert set(record["unresolved"]) == {"BFO/OBO", "CCO"}, record["unresolved"]
+    assert record["unresolved"] == [], (
+        "%s is referenced and not described, so any rung that walks "
+        "through it is reporting the scope again" % record["unresolved"])
+    for name, info in record["upstream_vocabularies"].items():
+        assert info["resolvable"], (name, info)
 
     for name, rung in record["rungs"].items():
-        assert not rung["evaluable"], (
-            "%s became evaluable; its violations are now findings about "
-            "the ontology and should be asserted as such" % name)
+        assert rung["evaluable"], (
+            "%s is blocked on %s" % (name,
+                                     rung["blocked_by_missing_vocabulary"]))
 
 
-def test_a_ladder_that_evaluated_nothing_does_not_pass(validation):
+def test_a_resolvable_vocabulary_is_not_a_complete_one(validation):
+    """What "resolvable" does and does not mean.
+
+    Every referenced term is described. That is true of a partial extract
+    by construction -- the extract was built from the references -- and
+    it is not the same claim as "BFO and CCO are present". The report has
+    to carry the difference, or a reader takes the first for the second.
+    """
+    vendoring = validation["vendoring"]
+    assert vendoring["available"], vendoring
+    assert vendoring["partial_extracts"] is True
+    assert vendoring["not_covered"]
+    assert sum(entry["axioms_dropped"]
+               for entry in vendoring["sources"].values()) > 0
+
+
+def test_the_violations_are_attributed_to_whose_terms_they_are(validation):
+    """Loading somebody else ontology into the data graph creates the
+    mirror of the problem it solved: a defect in the extract reported as
+    a defect here."""
+    for name, rung in validation["rungs"].items():
+        corpus = rung["corpus"]
+        assert (corpus["against_authored_terms"]
+                + corpus["against_vendored_terms"]
+                == corpus["violations"]), (name, corpus)
+        assert corpus["against_vendored_terms"] == 0, (
+            "%d violation(s) are against vendored upstream terms, which "
+            "are findings about the extract" % corpus["against_vendored_terms"])
+
+
+def test_the_findings_that_remain_are_the_ones_recorded(validation):
+    """The ontology has ten open findings against it, and they are here
+    as a number so that the next one is a failure rather than a line in a
+    report nobody diffs."""
+    rung = validation["rungs"]["validation.apqc-shapes"]
+    assert rung["corpus"]["against_authored_terms"] == 10, (
+        "the count of open findings moved to %d; if that is a fix, lower "
+        "the number here in the same commit"
+        % rung["corpus"]["against_authored_terms"])
+
+    messages = sorted({v["message"] for v in rung["corpus"]["detail"]})
+    assert messages == [
+        "Process has no skos:example (recommended for production).",
+        "Process is missing ex:pcfID (stable APQC provenance anchor).",
+    ], messages
+
+
+def test_a_ladder_that_evaluated_nothing_does_not_pass(validator):
     """`all()` over an empty sequence is True, so the first version of
-    this tool reported success having evaluated no rung at all."""
-    record = validation
-    if not record["evaluable_rungs"]:
-        assert record["passed"] is False, (
-            "every rung is blocked and the ladder still reports passed")
+    this tool reported success having evaluated no rung at all.
+
+    That state cannot be reached from this repository any more, which is
+    exactly why the guard is tested against a constructed record rather
+    than against the live one -- otherwise it would be a branch nobody
+    executes, sitting in a tool whose whole subject is checks that do not
+    fire.
+    """
+    assert validator.passed_of({}) is False
+
+    blocked = {"one": {"evaluable": False,
+                       "corpus": {"conforms": True}, "can_still_fail": True}}
+    assert validator.passed_of(blocked) is False
+
+    evaluated = {"one": {"evaluable": True,
+                         "corpus": {"conforms": True},
+                         "can_still_fail": True}}
+    assert validator.passed_of(evaluated) is True
 
 
 def test_the_shapes_are_still_wired_to_a_fixture(validation):
@@ -161,6 +232,69 @@ def test_the_shapes_are_still_wired_to_a_fixture(validation):
         "set, so nothing is falsifying the shapes")
 
     unexercised = sorted(set(record["rungs"]) - set(exercised))
-    assert unexercised == ["validation.capabilities-roles-shapes"], (
-        "the set of shape sets with no negative fixture changed: %s"
-        % unexercised)
+    assert unexercised == [], (
+        "%s has no negative fixture behind it, so its result cannot be "
+        "distinguished from a constraint that selects nothing" % unexercised)
+
+
+CAPABILITY_ROLE_CONSTRAINTS = [
+    "A class must not be both a Capability and a Role.",
+    "Capability must have rdfs:label and skos:definition.",
+    "Capability must reach cco:Agent Capability (ont00001379) via "
+    "subClassOf+.",
+    "Role must have rdfs:label and skos:definition.",
+    "Role must reach bfo:Role (BFO_0000023) via subClassOf+.",
+    "ex:bearsPermission must target a class reaching cco:Action Permission "
+    "(ont00000751).",
+    "ex:requiresCapability must target a class reaching cco:Agent Capability "
+    "(ont00001379).",
+    "ex:requiresPermission must target a class reaching cco:Action Permission "
+    "(ont00000751).",
+    "ex:requiresRole must target a class reaching bfo:Role (BFO_0000023).",
+]
+
+
+def test_every_capability_and_role_constraint_is_exercised(validation):
+    """Named one by one, not counted.
+
+    This shape set reported 202 violations while CCO was absent and zero
+    the moment it arrived. A count would have been satisfied by any nine
+    violations; what makes the zero against the corpus mean something is
+    that each specific constraint is known to fire on data built to break
+    it.
+    """
+    rung = validation["rungs"]["validation.capabilities-roles-shapes"]
+    fired = sorted({v["message"] for v in rung["fixture"]["detail"]})
+    missing = [m for m in CAPABILITY_ROLE_CONSTRAINTS if m not in fired]
+    assert not missing, (
+        "%d constraint(s) did not fire against the fixture: %s"
+        % (len(missing), missing))
+
+
+def test_the_fixture_does_not_simply_violate_everything(validation):
+    """A fixture where every case fails cannot show a constraint
+    discriminates. The positive controls have to survive it."""
+    rung = validation["rungs"]["validation.capabilities-roles-shapes"]
+    focus = {v["focus"] for v in rung["fixture"]["detail"]}
+    for good in ("GoodCapability", "GoodRole", "GoodPermission"):
+        assert not [f for f in focus if f and f.endswith("#" + good)], (
+            "%s was built to conform and did not" % good)
+
+
+# ------------------------------------------- the committed measurement
+
+
+def test_the_committed_digest_is_the_one_the_tool_produces(digest, repo):
+    """An artifact in the tree that nothing compares is a claim, not a
+    measurement. This is the comparison."""
+    import json
+
+    recorded = json.loads(
+        (repo / "config/corpus-digest.json").read_text(encoding="utf-8"))
+    assert (recorded["merged"]["ground_sha256"]
+            == digest["merged"]["ground_sha256"]), (
+        "config/corpus-digest.json describes a different corpus; "
+        "regenerate it in the commit that changed the ontology")
+    assert (recorded["merged"]["blank_nodes"]["shape_sha256"]
+            == digest["merged"]["blank_nodes"]["shape_sha256"])
+    assert recorded["scope"]["paths"] == digest["scope"]["paths"]

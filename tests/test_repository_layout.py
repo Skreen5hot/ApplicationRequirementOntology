@@ -75,17 +75,29 @@ def test_no_two_components_share_an_id(layout):
         i for i in ids if ids.count(i) > 1)
 
 
-def test_every_component_declares_a_role_with_a_meaning(layout):
+def test_every_component_declares_a_role_with_a_meaning(layout,
+                                                       disposition):
     """A role is not a label. Each one carries a licensing consequence,
-    so an unrecognised role would be classified by accident."""
-    known = {"ontology-module", "ontology-module-set", "ontology-validation",
-             "test-fixture", "generated-artifact", "documentation",
-             "third-party-reference", "configuration", "tool",
-             "project-licence"}
+    so an unrecognised role would be classified by accident.
+
+    The known set is read from the licensing tool rather than listed
+    here. It was listed here, and adding `vendored-ontology` failed this
+    test for the right reason and then invited the wrong fix: paste the
+    new name into the list and move on, leaving a role that the
+    classifier still had no rule for. Asking the classifier what it knows
+    makes the two impossible to disagree.
+    """
+    known = (disposition.CONTENT_ROLES | disposition.SOFTWARE_ROLES
+             | disposition.LICENCE_ROLES | disposition.CITED_ROLES
+             | disposition.VENDORED_ROLES)
+    assert "invented-role" not in known, (
+        "the known set accepts anything, so this test would pass for a "
+        "role with no licensing rule")
+
     unknown = sorted({c.role for c in layout.components()} - known)
     assert not unknown, (
-        "roles with no stated meaning: %s. Add them to the licensing rules "
-        "deliberately rather than letting a file inherit a guess." % unknown)
+        "roles with no licensing rule: %s. Add one deliberately rather "
+        "than letting a file inherit a guess." % unknown)
 
 
 def test_the_ontology_scope_excludes_what_it_must(layout, repo):

@@ -28,3 +28,14 @@ Thumbs.db
 # different facts, and only the second one matters.
 docs/Reference/
 *.pdf
+
+# Upstream sources, downloaded to rebuild the vendored extracts. The
+# extracts are committed; these are not -- they are two megabytes of
+# somebody else ontology that the pins in config/upstream-sources.yaml
+# can fetch again byte-for-byte.
+.upstream-cache/
+
+# The validation report is a measurement, not a pin. Committing it would
+# put a file in the tree that agrees with the ontology only until the
+# next edit, and nothing here compares the two.
+config/validation-report.json

@@ -55,3 +55,92 @@ ex:WeirdInputProcess a owl:Class ;
         [ a owl:Restriction ; owl:onProperty cco:ont00001921 ; owl:someValuesFrom ex:CompetitorRole ] ,
         [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompetitorAnalysis ] ;
     rdfs:label "weird in" ; skos:definition "x" ; ex:pcfID "6" ; skos:example "e" .
+
+# ---------------------------------------------------------------------
+# capabilities_roles_shapes.ttl (C1-C7)
+#
+# Added when BFO and CCO were vendored. Until then that shape set could
+# not be evaluated at all, so the absence of a fixture behind it did not
+# show; the moment it became evaluable it reported zero violations
+# against the corpus, and zero from a constraint that selects nothing
+# looks exactly like zero from data that is clean.
+#
+# Every case below names the constraint it is built to break. The
+# positive controls are here for the same reason: a fixture where
+# everything violates cannot show that a constraint discriminates.
+#
+# These are read with the fixture loaded ALONE, so each class states the
+# subClassOf edge it needs rather than inheriting it from the corpus.
+
+# -- C1: capability must reach cco:ont00001379, and be labelled --------
+
+ex:Capability a owl:Class ;
+    rdfs:label "Capability" ; skos:definition "local anchor" .
+
+# C1-a: declared a capability, reaches no CCO anchor.
+ex:UnanchoredCapability a owl:Class ;
+    rdfs:subClassOf ex:Capability ;
+    rdfs:label "unanchored cap" ; skos:definition "x" .
+
+# C1-b: anchored, but carries neither label nor definition.
+ex:UnlabelledCapability a owl:Class ;
+    rdfs:subClassOf ex:Capability , cco:ont00001379 .
+
+# C1-positive: anchored and labelled. Must NOT violate C1.
+ex:GoodCapability a owl:Class ;
+    rdfs:subClassOf ex:Capability , cco:ont00001379 ;
+    rdfs:label "good cap" ; skos:definition "x" .
+
+# -- C2: role must reach bfo:Role, and be labelled ---------------------
+
+ex:Role a owl:Class ;
+    rdfs:label "Role" ; skos:definition "local anchor" .
+
+# C2-a: declared a role, reaches no BFO anchor.
+ex:UnanchoredRole a owl:Class ;
+    rdfs:subClassOf ex:Role ;
+    rdfs:label "unanchored role" ; skos:definition "x" .
+
+# C2-b: anchored, unlabelled.
+ex:UnlabelledRole a owl:Class ;
+    rdfs:subClassOf ex:Role , obo:BFO_0000023 .
+
+# C2-positive: anchored and labelled. Must NOT violate C2.
+ex:GoodRole a owl:Class ;
+    rdfs:subClassOf ex:Role , obo:BFO_0000023 ;
+    rdfs:label "good role" ; skos:definition "x" .
+
+# -- C3: nothing is both a capability and a role -----------------------
+
+ex:ConfusedCapabilityRole a owl:Class ;
+    rdfs:subClassOf ex:Capability , cco:ont00001379 , obo:BFO_0000023 ;
+    rdfs:label "both at once" ; skos:definition "x" .
+
+# -- C4/C7: permission targets must reach cco:ont00000751 --------------
+
+ex:GoodPermission a owl:Class ;
+    rdfs:subClassOf cco:ont00000751 ;
+    rdfs:label "good permission" ; skos:definition "x" .
+
+ex:NotAPermission a owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ;
+    rdfs:label "not a permission" ; skos:definition "x" .
+
+ex:PermissionBearer a owl:Class ;
+    rdfs:subClassOf cco:ont00001180 ;
+    rdfs:label "bearer" ; skos:definition "x" ;
+    ex:bearsPermission ex:NotAPermission ,   # C4-a: violates
+                       ex:GoodPermission .   # C4-positive: must not
+
+# -- C5/C6/C7: the requires* edges point at the wrong kind of thing ----
+
+ex:MiswiredProcess a owl:Class ;
+    rdfs:subClassOf cco:ont00000366 ,
+        [ a owl:Restriction ; owl:onProperty cco:ont00001986 ; owl:someValuesFrom ex:CompetitorAnalysis ] ;
+    rdfs:label "miswired proc" ; skos:definition "x" ; ex:pcfID "7" ; skos:example "e" ;
+    ex:requiresCapability ex:UnanchoredCapability ,  # C5-a: violates
+                          ex:GoodCapability ;        # C5-positive
+    ex:requiresRole       ex:UnanchoredRole ,        # C6-a: violates
+                          ex:GoodRole ;              # C6-positive
+    ex:requiresPermission ex:NotAPermission ,        # C7-a: violates
+                          ex:GoodPermission .        # C7-positive

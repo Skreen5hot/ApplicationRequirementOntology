@@ -11,6 +11,18 @@ The ontology will use:
 - **Basic Formal Ontology (BFO)** as its top-level ontology.
 - **Common Core Ontologies (CCO)** as a principled framework for reusable mid-level concepts and relations.
 
+Both are vendored under [`vendor/`](vendor/) as pinned partial extracts rather than resolved over the network at validation time. Each carries only the terms this repository names plus their named ancestry, which is what the SHACL constraints walk when they ask whether a capability reaches `cco:Agent Capability`. The extracts are **not** the upstream ontologies: every axiom whose object is an anonymous class expression is dropped, so a reasoner over them derives less than one over BFO or CCO and they cannot be used to claim consistency with either.
+
+Provenance, digests and licences are in [`config/upstream-sources.yaml`](config/upstream-sources.yaml) (the pins) and [`config/upstream-extracts.json`](config/upstream-extracts.json) (what was taken and what was left). Attribution, which both licences require, is in [`vendor/NOTICE.md`](vendor/NOTICE.md) and is checked rather than assumed.
+
+To rebuild them from the pinned sources:
+
+```
+python tools/ontology/vendor_upstream.py --rebuild   # fetch and rewrite
+python tools/ontology/vendor_upstream.py --confirm   # fetch and compare
+python tools/ontology/vendor_upstream.py             # offline verify
+```
+
 ## Reference Materials
 
 Development will be informed by:
@@ -20,6 +32,8 @@ Development will be informed by:
 - **NASA Software Engineering and Software Assurance Handbook**.
 
 These publications are reference sources; this repository does not redistribute them or claim conformance with, certification by, or endorsement from ISO, IEC, IEEE, or NASA. Original ontology definitions will be used unless a source explicitly permits reuse.
+
+That is a different disposition from the BFO and CCO extracts above, which **are** redistributed, because their licences permit it with attribution. The distinction is enforced rather than described: `config/repository-layout.yaml` declares the reference material `tracked: false`, and `python tools/licensing/disposition.py --check` fails if any of it is ever committed.
 
 ## Planned Outputs
 

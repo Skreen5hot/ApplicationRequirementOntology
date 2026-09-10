@@ -21,6 +21,12 @@ Not "what licence is this" but "may this be published". Those differ
 exactly where it matters. Reference material consulted while building an
 ontology is cited, not redistributed, and a repository that contains it
 is redistributing it whatever the README says.
+
+There are three third-party answers here, not one. A paid standard may
+not be redistributed at all. A permissive upstream may, on condition --
+and a condition nobody checks is a condition nobody meets, so the
+attribution both vendored licences require is a check below rather than
+a notice file somebody remembers to update.
 """
 
 from __future__ import annotations
@@ -38,6 +44,14 @@ import layout  # noqa: E402
 CONTENT = "project-content"
 SOFTWARE = "project-software"
 CITED = "third-party-cited"
+#: Third-party, redistributed, and permitted to be. The distinction from
+#: CITED is the licence and not the convenience: BFO is CC BY 4.0 and CCO
+#: is BSD-3-Clause, and both allow redistribution provided attribution
+#: travels with the work.
+VENDORED = "third-party-redistributed"
+
+UPSTREAM_SOURCES = "config/upstream-sources.yaml"
+NOTICE = "vendor/NOTICE.md"
 
 #: SPDX identifiers this tool can recognise in a LICENSE file. Listed
 #: rather than pattern-matched, because "BSD" appears in several licences
@@ -78,9 +92,48 @@ def project_licence() -> str:
     return found[0]
 
 
-def licence_of(disposition: str) -> str | None:
+def vendored_sources() -> dict:
+    """Pinned upstreams, indexed by the extract path each produces.
+
+    Read here rather than restated, so the licence this tool reports for
+    a vendored file and the licence the vendoring tool wrote into that
+    file come from one declaration.
+    """
+    import yaml
+
+    root = layout.repository_root()
+    path = root / UPSTREAM_SOURCES
+    if not path.is_file():
+        raise Refused(
+            UPSTREAM_SOURCES + " is missing, so the licence of every "
+            "vendored extract would have to be guessed from its contents.")
+    raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    found = {}
+    for entry in raw.get("sources") or []:
+        for required in ("extract", "licence"):
+            if not entry.get(required):
+                raise Refused("a source in %s declares no %r"
+                              % (UPSTREAM_SOURCES, required))
+        for required in ("spdx", "attribution"):
+            if not entry["licence"].get(required):
+                raise Refused("%s declares no licence.%s for %s"
+                              % (UPSTREAM_SOURCES, required,
+                                 entry["extract"]))
+        found[entry["extract"]] = entry
+    return found
+
+
+def licence_of(disposition: str, relative=None):
     if disposition == CITED:
         return None
+    if disposition == VENDORED:
+        sources = vendored_sources()
+        if relative not in sources:
+            raise Refused(
+                "%s is declared a vendored upstream extract, and %s pins no "
+                "source producing it, so nothing states what licence it "
+                "carries." % (relative, UPSTREAM_SOURCES))
+        return sources[relative]["licence"]["spdx"]
     return project_licence()
 
 ADJUDICATIONS = "config/licensing-adjudications.yaml"
@@ -99,6 +152,9 @@ LICENCE_ROLES = {"project-licence"}
 
 #: Roles this repository may not redistribute at all.
 CITED_ROLES = {"third-party-reference"}
+
+#: Roles that are somebody else work, redistributed under their terms.
+VENDORED_ROLES = {"vendored-ontology"}
 
 #: Suffix rules for files no component claims. Kept small on purpose: the
 #: contract is the primary authority and this is the fallback, so a
@@ -156,7 +212,8 @@ def adjudications() -> dict[str, dict]:
                     % (ADJUDICATIONS, required, entry))
         if entry["path"] in found:
             raise Refused("two adjudications name " + entry["path"])
-        if entry["disposition"] not in (CONTENT, SOFTWARE, CITED):
+        if entry["disposition"] not in (CONTENT, SOFTWARE, CITED,
+                                        VENDORED):
             raise Refused("unknown disposition %r in %s"
                           % (entry["disposition"], ADJUDICATIONS))
         found[entry["path"]] = entry
@@ -175,6 +232,11 @@ def rules(relative: str, owner) -> list[tuple[str, str, str]]:
                 "third-party reference material, consulted and cited; this "
                 "repository grants no rights over it and must not "
                 "redistribute it"))
+        elif role in VENDORED_ROLES:
+            matched.append((
+                VENDORED, role,
+                "a pinned extract of a third-party ontology, redistributed "
+                "under the upstream licence and requiring attribution"))
         elif role in SOFTWARE_ROLES:
             matched.append((SOFTWARE, role, "repository tooling"))
         elif role in LICENCE_ROLES:
@@ -218,7 +280,8 @@ def classify() -> list[Disposition]:
             entry = ruled[relative]
             out.append(Disposition(
                 relative, "(adjudicated)", entry["disposition"],
-                entry.get("licence", licence_of(entry["disposition"])),
+                entry.get("licence",
+                          licence_of(entry["disposition"], relative)),
                 entry["disposition"] != CITED,
                 "owner ruling %s: %s" % (entry["decided"], entry["why"])))
             continue
@@ -234,7 +297,7 @@ def classify() -> list[Disposition]:
             continue
         disposition, role, why = matched[0]
         out.append(Disposition(relative, role, disposition,
-                               licence_of(disposition),
+                               licence_of(disposition, relative),
                                disposition != CITED, why))
 
     unused = sorted(set(ruled) - {row.path for row in out})
@@ -249,9 +312,48 @@ def classify() -> list[Disposition]:
     return out
 
 
+def attribution_findings(rows) -> list:
+    """Redistribution on condition, with the condition checked.
+
+    Both vendored licences permit redistribution provided attribution
+    travels with the work. `vendor/NOTICE.md` is generated, which makes
+    it right on the day it is written and says nothing about the day a
+    source is added and the notice is not regenerated. So the pins are
+    read here and each declared attribution is required to appear in it.
+    """
+    out = []
+    vendored = [r for r in rows if r.disposition == VENDORED]
+    if not vendored:
+        return out
+
+    root = layout.repository_root()
+    notice = root / NOTICE
+    if not notice.is_file():
+        return ["%d vendored extract(s) are tracked and %s does not exist. "
+                "Both upstream licences permit redistribution on condition "
+                "of attribution, and this repository is redistributing "
+                "without it." % (len(vendored), NOTICE)]
+
+    flat = " ".join(notice.read_text(encoding="utf-8").split())
+    sources = vendored_sources()
+    missing = []
+    for row in vendored:
+        attribution = " ".join(
+            sources[row.path]["licence"]["attribution"].split())
+        if attribution not in flat:
+            missing.append("%s: %s" % (row.path, attribution))
+    if missing:
+        out.append(
+            "%d vendored extract(s) are redistributed without the "
+            "attribution their licence requires appearing in %s:"
+            % (len(missing), NOTICE)
+            + chr(10) + "    " + (chr(10) + "    ").join(missing))
+    return out
+
+
 def findings(rows: list[Disposition]) -> list[str]:
     """What is wrong, as opposed to what is unusual."""
-    out = []
+    out = attribution_findings(rows)
     not_publishable = [r for r in rows if not r.redistributable]
     if not_publishable:
         out.append(
@@ -285,17 +387,18 @@ def main(argv=None) -> int:
         key = (row.disposition, row.licence or "(no rights granted)")
         counts[key] = counts.get(key, 0) + 1
     for (disposition, licence), count in sorted(counts.items()):
-        print("    %-20s %-22s %4d" % (disposition, licence, count))
+        print("    %-26s %-14s %4d" % (disposition, licence, count))
 
     problems = findings(rows)
     if problems:
         print()
         for problem in problems:
             print("  FINDING: %s" % problem)
-        print()
-        print("  Citing a source and shipping it are different acts. A "
-              "README saying the repository does not redistribute these "
-              "is not a licence; the repository's contents are.")
+        if any(not row.redistributable for row in rows):
+            print()
+            print("  Citing a source and shipping it are different acts. A "
+                  "README saying the repository does not redistribute "
+                  "these is not a licence; the repository's contents are.")
     if args.check:
         return 1 if problems else 0
     return 0

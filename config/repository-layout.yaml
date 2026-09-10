@@ -141,6 +141,70 @@ components:
       tool rather than assumed: a classifier that hardcoded a licence
       would happily assert one the repository does not declare.
 
+  # ---- Vendored upstream ontology ------------------------------------
+  #
+  # Redistributed, unlike docs/Reference, and the difference is the
+  # licence rather than the convenience. BFO is CC BY 4.0 and CCO is
+  # BSD-3-Clause; both permit redistribution with attribution, and
+  # vendor/NOTICE.md is that attribution.
+  #
+  # A separate role from `ontology-module` on purpose. These files are not
+  # authored here and must not be counted as this repository's ontology:
+  # the corpus digest would move when an upstream pin changed, and the
+  # licensing tool would report 660 third-party triples as project
+  # content.
+
+  - id: vendor.bfo
+    path: vendor/bfo/bfo-core-aro-extract.ttl
+    role: vendored-ontology
+    redistributable: true
+    description: >-
+      The BFO terms this repository names, plus their named ancestry.
+      Generated from a pinned commit; the file header records which one.
+
+  - id: vendor.cco
+    path: vendor/cco/cco-aro-extract.ttl
+    role: vendored-ontology
+    redistributable: true
+    description: >-
+      The CCO terms this repository names, plus their named ancestry.
+      This is what gives "Capability must reach cco:ont00001379 via
+      subClassOf+" a chain to walk. Without it 10 of 116 capability
+      classes reached the anchor and the other 106 were reported as
+      violations of the ontology.
+
+  - id: docs.vendor-notice
+    path: vendor/NOTICE.md
+    role: documentation
+    description: >-
+      Attribution for the vendored extracts, as both upstream licences
+      require. Generated, because an attribution file is exactly the kind
+      of document that is right when written and quietly wrong after the
+      next source is added.
+
+  - id: config.upstream-sources
+    path: config/upstream-sources.yaml
+    role: configuration
+    description: >-
+      The pins: url, commit, digest and licence for each upstream. The
+      url names the commit, so the bytes it serves cannot change.
+
+  - id: generated.upstream-extracts
+    path: config/upstream-extracts.json
+    role: generated-artifact
+    description: >-
+      What was taken from each upstream and what was left behind,
+      including the count of axioms dropped because their object was an
+      anonymous class expression.
+
+  - id: tool.vendor-upstream
+    path: tools/ontology/vendor_upstream.py
+    role: tool
+    description: >-
+      Fetches the pinned upstreams, extracts the referenced terms and
+      their ancestry, and writes the extracts, the notice and the
+      manifest. Verifies offline by default; rebuilding needs the network.
+
   # ---- Third-party reference material --------------------------------
   #
   # Consulted, cited, and never redistributed. These are declared so the

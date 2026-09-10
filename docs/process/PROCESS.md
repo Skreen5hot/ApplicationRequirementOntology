@@ -34,6 +34,29 @@ measured, and the adjacency was invisible from the result. A passing test
 is not evidence. **Evidence is a passing test plus a demonstration that it
 can fail.**
 
+### It runs in the other direction too
+
+Every row above is a green result that meant nothing. The same defect
+produces red results that mean nothing, and those are harder to spot
+because a failing check looks like it is doing its job.
+
+The SHACL ladder here reported 202 violations of the form *"Capability
+must reach cco:Agent Capability via subClassOf+"*. Every one of them was
+true, and none of them was a defect in the ontology: CCO was not in the
+repository, so the chain the constraint walks stopped at the first
+upstream parent and the answer was no for every subject. The report named
+the ontology and measured the scope.
+
+The fix was not to relax the constraint. It was to make the tool say
+**not evaluable** when a shape set reasons over a vocabulary that is
+absent — and then to put the vocabulary in. With BFO and CCO vendored,
+116 of 116 capability classes reach the anchor; before, 10 did. The 106
+in between were an artifact of the question being asked without the
+vocabulary needed to answer it.
+
+A check that cannot distinguish *"the answer is no"* from *"I could not
+ask"* is not reporting on what it claims.
+
 ---
 
 ## 2. Falsification is not optional
@@ -198,6 +221,40 @@ If a build is not reproducible, no checksum it publishes means anything.
   remote-tracking ref moves when somebody else pushes, which would let a
   licensing result change with no commit in this repository.
 
+### Upstream vocabulary is vendored, not imported
+
+An `owl:imports` resolves over the network when the validator runs. That
+makes the result a function of the day it ran and of what the far end
+served, which is the opposite of what a check is for. So the upstream is
+pinned to a commit, fetched once, reduced to the terms this repository
+actually names plus their structural ancestry, and committed.
+
+Four things make that honest rather than convenient:
+
+- **The url names the commit**, so the bytes cannot change, and the
+  digest is recorded and checked anyway. A proxy, a TLS appliance, or a
+  truncated download all serve different bytes from the same url and none
+  of them announce it.
+- **The licence is read from the artifact.** The pins declare
+  `CC-BY-4.0`, and the build requires the source's own `dcterms:license`
+  to say so before it will vendor anything. An SPDX identifier typed into
+  a config file is a claim; checking it against the file is evidence.
+- **The extract is regenerable and byte-identical.** The serialiser is
+  written out rather than delegated, because a recorded digest over a
+  library's output is a measurement of the library. A weekly job refetches
+  the pinned sources and requires the committed files to match.
+- **The extract says what it is not.** It is partial: every axiom whose
+  object is an anonymous class expression is dropped, so a reasoner over
+  it derives strictly less than one over the upstream and it cannot be
+  used to claim consistency with it. That sentence is in the header of
+  each file, in the manifest, and in the validation report — see §5.
+
+Redistribution is a licensing question, not a technical one. BFO is
+CC BY 4.0 and CCO is BSD-3-Clause, so vendoring is permitted **on
+condition of attribution** — and a condition nobody checks is a condition
+nobody meets, so the licensing tool reads the pins and fails when a
+declared attribution is missing from the notice file.
+
 ---
 
 ## 9. Tests, specifically
@@ -233,6 +290,11 @@ Decide what may be published before publishing anything.
 - Reference material you do not own is **cited, never redistributed**. A
   README saying "this repository does not redistribute them" is not a
   licence; the repository's contents are.
+- There are **three** third-party answers, not one. A paid standard may
+  not be redistributed at all. A permissive upstream may, on condition.
+  Your own work is a third case. Collapsing the first two into "third
+  party" makes the tool either refuse legitimate vendoring or wave through
+  an infringement.
 - Licence texts are the pinned instrument, not an SPDX template. ValueNet
   shipped a BSD-3-Clause *template* with `Copyright (c) <year> <owner>`
   placeholders, and the test asserted only a phrase every BSD variant

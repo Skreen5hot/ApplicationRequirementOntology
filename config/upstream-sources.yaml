@@ -1,0 +1,81 @@
+# Pinned upstream ontologies, and what may be done with them.
+#
+# The shapes in this repository ask reachability questions -- "does this
+# capability reach cco:ont00001379 via subClassOf+" -- and a question like
+# that cannot be answered without the vocabulary it walks through. Before
+# this file existed the validation ladder reported 213 violations that were
+# entirely an artifact of BFO and CCO being absent, and those violations
+# were indistinguishable from real defects.
+#
+# WHY EXTRACTS RATHER THAN owl:imports
+#
+# An owl:imports resolves over the network at validation time. That makes
+# the result depend on when it ran and on what the far end served, which
+# is the opposite of what a check is for. A pinned extract is part of the
+# repository, identical on every machine, and reviewable.
+#
+# WHY PINNED TO A COMMIT RATHER THAN A TAG
+#
+# A tag can be moved to a different commit. The raw URLs below name the
+# commit, so the bytes they serve cannot change; `sha256` records what
+# those bytes were, so a proxy or a cache that serves something else is a
+# refusal rather than a silent substitution.
+#
+# LICENSING
+#
+# Both upstreams may be redistributed with attribution, which is what
+# makes vendoring legitimate here -- unlike the ISO standard in
+# docs/Reference, which may not and is `tracked: false` for that reason.
+# `licence_statement_contains` is checked against what the source file
+# itself says in its dcterms:license, so the SPDX identifier below is
+# verified against the artifact rather than asserted by whoever wrote
+# this file.
+
+version: 1
+
+sources:
+
+  - id: bfo
+    project: Basic Formal Ontology
+    release: release-2024-01-29
+    commit: 044490fc5100ffed6df7d4d15cbc167698b6fdee
+    url: >-
+      https://raw.githubusercontent.com/BFO-ontology/BFO-2020/044490fc5100ffed6df7d4d15cbc167698b6fdee/src/owl/bfo-core.ttl
+    sha256: 6944e2c96a0d8709dc15ae5364792019e208061eda3f32311af4f3b8d8443a3b
+    namespace: http://purl.obolibrary.org/obo/
+    extract: vendor/bfo/bfo-core-aro-extract.ttl
+    licence:
+      spdx: CC-BY-4.0
+      url: https://creativecommons.org/licenses/by/4.0/
+      licence_statement_contains: creativecommons.org/licenses/by/4.0
+      attribution: >-
+        Basic Formal Ontology (BFO) 2020, ISO/IEC 21838-2. Copyright the
+        BFO contributors, licensed CC BY 4.0.
+    note: >-
+      The URLs under `master/src/owl/` that the previous project used now
+      404; the repository was reorganised. This is the commit behind the
+      release-2024-01-29 tag, resolved through the GitHub API rather than
+      taken from the tag name.
+
+  - id: cco
+    project: Common Core Ontologies
+    release: v2.2
+    commit: 0bc7d33e1bc09fd4693366119ab4e03cb0340042
+    url: >-
+      https://raw.githubusercontent.com/CommonCoreOntology/CommonCoreOntologies/0bc7d33e1bc09fd4693366119ab4e03cb0340042/src/cco-merged/CommonCoreOntologiesMerged.ttl
+    sha256: a9453382b25b40781c181d6ba44981f228abb76d90d548846713adba9baadb42
+    namespace: https://www.commoncoreontologies.org/
+    extract: vendor/cco/cco-aro-extract.ttl
+    licence:
+      spdx: BSD-3-Clause
+      url: >-
+        https://github.com/CommonCoreOntology/CommonCoreOntologies/blob/0bc7d33e1bc09fd4693366119ab4e03cb0340042/LICENSE
+      licence_statement_contains: BSD 3-Clause
+      attribution: >-
+        Common Core Ontologies v2.2. Copyright (c) 2017 CUBRC, Inc.,
+        licensed BSD-3-Clause.
+    note: >-
+      v2.2 is an annotated tag; the commit above is the tag's target,
+      dereferenced rather than assumed. It is the same commit the previous
+      project pinned, which is a coincidence worth having checked rather
+      than a reason to skip checking.

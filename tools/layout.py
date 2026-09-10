@@ -173,6 +173,22 @@ def ontology_files() -> list[Path]:
     return out
 
 
+def vendored_files() -> list[Path]:
+    """Every vendored upstream extract.
+
+    Separate from `ontology_files` and deliberately so. These belong in
+    the *data* graph -- a shape asking whether a class reaches a CCO
+    anchor cannot answer without them -- and must be absent from every
+    measure of what this repository authored. One combined list would
+    make the corpus digest move whenever an upstream pin changed, which
+    is a digest of the wrong thing.
+    """
+    out: list[Path] = []
+    for entry in components("vendored-ontology"):
+        out.extend(entry.members("*.ttl"))
+    return out
+
+
 def declared_paths() -> set[str]:
     """Every path the contract names, relative to the root."""
     return {entry.path for entry in _load().values()}

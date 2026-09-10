@@ -188,6 +188,28 @@ components:
       entire agent runtime, so asking where a file lived cost 44 module
       imports.
 
+  - id: generated.corpus-digest
+    path: config/corpus-digest.json
+    role: generated-artifact
+    description: >-
+      Ground digest and blank-node fingerprint of the authored ontology.
+      Two measures because one is not enough: blank nodes are renamed by
+      every parse and cannot be digested directly, and an ontology can be
+      rewritten substantially without a single named term changing.
+
+  - id: tool.corpus-digest
+    path: tools/ontology/corpus_digest.py
+    role: tool
+    description: Measures the corpus; scope comes from this contract.
+
+  - id: tool.validate
+    path: tools/ontology/validate.py
+    role: tool
+    description: >-
+      Runs the SHACL shapes, and reports whether they could still fail.
+      Distinguishes a violation from a shape set that could not be
+      evaluated because the vocabulary it reasons over is absent.
+
   - id: tool.licensing
     path: tools/licensing/disposition.py
     role: tool

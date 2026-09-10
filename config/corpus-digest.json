@@ -1,0 +1,240 @@
+{
+  "format_version": 1,
+  "generated_by": "tools/ontology/corpus_digest.py",
+  "merged": {
+    "blank_nodes": {
+      "blank_nodes": 4401,
+      "distinct_shapes": 4831,
+      "shape_sha256": "12b6a343652cb18ccd3182dd812e0e3b925eef1bcdcd2afa0f7d86064b3ebb52",
+      "triples_touching": 17604
+    },
+    "ground_sha256": "da0bf309f304ef52ef0d4ac3dd9b25bd58b5fcf7a83569a5fe498b064ab273bb",
+    "ground_triples": 45042,
+    "triples": 62646
+  },
+  "note": "Ground triples and blank-node shape together cover every triple. Blank nodes are renamed by every parse, so their identities are erased and only their structure is digested.",
+  "per_file": {
+    "APQC_ontology/apqc-catalog.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 0,
+        "distinct_shapes": 0,
+        "shape_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "triples_touching": 0
+      },
+      "ground_sha256": "314e02043d5edac33bfb1fdcc1b2edb8fbeca03a6c33d0674739cb1841d315ef",
+      "ground_triples": 19215,
+      "triples": 19215
+    },
+    "APQC_ontology/apqc-ext.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 0,
+        "distinct_shapes": 0,
+        "shape_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "triples_touching": 0
+      },
+      "ground_sha256": "d8748ff76de42814227a1d54ea512e31d84bc9cdc1f874ec90921591d8a98862",
+      "ground_triples": 189,
+      "triples": 189
+    },
+    "APQC_ontology/capabilities_roles.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 0,
+        "distinct_shapes": 0,
+        "shape_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "triples_touching": 0
+      },
+      "ground_sha256": "abf0cc0fb206ac1eec0dcbb1ea98793737b7b441ff48ab5728f9925fd1e5f403",
+      "ground_triples": 88,
+      "triples": 88
+    },
+    "APQC_ontology/capabilities_wiring.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 0,
+        "distinct_shapes": 0,
+        "shape_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "triples_touching": 0
+      },
+      "ground_sha256": "35f8bc9da923bddf9cc2b7efaa13f01a85ae980ee64f27d48c75b8fa5fcf9652",
+      "ground_triples": 971,
+      "triples": 971
+    },
+    "APQC_ontology/delivery_processes.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 5,
+        "distinct_shapes": 12,
+        "shape_sha256": "60519b0d3068e9718ea07a6c6f9eb16a6f93f37fc0710dd27551b14a32c15aec",
+        "triples_touching": 20
+      },
+      "ground_sha256": "60dad2757051d6a7b0104bc942153297a0fcf76cb69ba1f99072614975258985",
+      "ground_triples": 82,
+      "triples": 102
+    },
+    "APQC_ontology/slices/apqc_10_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 190,
+        "distinct_shapes": 257,
+        "shape_sha256": "087529bf6437664a720e0af1d39f5c1460d62b627069b704af6a8d412296a98f",
+        "triples_touching": 760
+      },
+      "ground_sha256": "c80e758f46fb2738cedee4cec3203da4e9bfc3558d1751362c37e5dbc093ab7d",
+      "ground_triples": 1286,
+      "triples": 2046
+    },
+    "APQC_ontology/slices/apqc_11_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 108,
+        "distinct_shapes": 159,
+        "shape_sha256": "ecd0123a957d7fc45dbdf08c56d8e04dbd71440b3be1d4ba93e1e17b59018faa",
+        "triples_touching": 432
+      },
+      "ground_sha256": "656170c3d9498ef597eea8b449950315252ce28e7f7307ef576134065c95ac41",
+      "ground_triples": 832,
+      "triples": 1264
+    },
+    "APQC_ontology/slices/apqc_12_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 124,
+        "distinct_shapes": 180,
+        "shape_sha256": "7902d21fb068b59af159564c87e4880cbefaa93787ff7ca3943e9d7089f9e7e6",
+        "triples_touching": 496
+      },
+      "ground_sha256": "433606f4acfebc1933d3ba53f52b5ce19eb28fe40f4f6e1807315827e4f67805",
+      "ground_triples": 964,
+      "triples": 1460
+    },
+    "APQC_ontology/slices/apqc_13_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 457,
+        "distinct_shapes": 581,
+        "shape_sha256": "f3585843fcaca83c7cf756dd69a9b0b4eab4a8e67a66226eca03c08d3362ea98",
+        "triples_touching": 1828
+      },
+      "ground_sha256": "0c6a26f788d157c85895d0f86fb09c6c9019f62ce367885e4609583e1987251b",
+      "ground_triples": 2992,
+      "triples": 4820
+    },
+    "APQC_ontology/slices/apqc_1_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 363,
+        "distinct_shapes": 377,
+        "shape_sha256": "5c82740b209af4e01c6b54d4428a67da67a1751ca173b33cbe4257ced491e5b2",
+        "triples_touching": 1452
+      },
+      "ground_sha256": "70bebe94fdca0e5d246117c272a1ef447513bfc386026977273971748ca16a9f",
+      "ground_triples": 1831,
+      "triples": 3283
+    },
+    "APQC_ontology/slices/apqc_2_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 235,
+        "distinct_shapes": 276,
+        "shape_sha256": "c15377db6e0f80dadcabf4f249331da7d153625c0d41bad4e79d512c5f673f83",
+        "triples_touching": 940
+      },
+      "ground_sha256": "ea047df79d3d4025179bcd44a2e33bdedb70f0ea8fc7fa43c2b071774fc8b704",
+      "ground_triples": 1411,
+      "triples": 2351
+    },
+    "APQC_ontology/slices/apqc_3_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 474,
+        "distinct_shapes": 522,
+        "shape_sha256": "709bac48f9f3d317ba9ef99b582fbffcb7af7e442bdde70f0d9104003fb17ec2",
+        "triples_touching": 1896
+      },
+      "ground_sha256": "bdabd6d1dc749b97bf2695366d35669d62827a624ec7e792424753ed5245fa98",
+      "ground_triples": 2598,
+      "triples": 4494
+    },
+    "APQC_ontology/slices/apqc_4_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 339,
+        "distinct_shapes": 421,
+        "shape_sha256": "b98561846f28f2f27a5426fabfd1769411dbd1a9ed5794a4422ab7c02d5f6344",
+        "triples_touching": 1356
+      },
+      "ground_sha256": "a3f75f83d2223a9ceb91a0e1e2a0c41d0eddba4bfd014f16f679708864ed3a5f",
+      "ground_triples": 2011,
+      "triples": 3367
+    },
+    "APQC_ontology/slices/apqc_5_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 165,
+        "distinct_shapes": 198,
+        "shape_sha256": "f45605dd657e433ddaa3b2444d91fb4ab8f7938dd4515a181e38dcd22359e666",
+        "triples_touching": 660
+      },
+      "ground_sha256": "84e490519021e3948c84186fe780bcaa1fac13a77a32855dd3a50f416c3e751d",
+      "ground_triples": 1020,
+      "triples": 1680
+    },
+    "APQC_ontology/slices/apqc_6_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 281,
+        "distinct_shapes": 312,
+        "shape_sha256": "83e808263cfd1ed1f1ce237e5d22df33c0285f390947974eca2e4af178803ad2",
+        "triples_touching": 1124
+      },
+      "ground_sha256": "77ab0cb27b571dcb827c78ce4773909fb57a7b88400dda42e9bc06d2d134b661",
+      "ground_triples": 1524,
+      "triples": 2648
+    },
+    "APQC_ontology/slices/apqc_7_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 343,
+        "distinct_shapes": 375,
+        "shape_sha256": "9f3c9bdb8424430707a7ce5a1521e1afcf102a611ef0440cbb627c4502d73e8c",
+        "triples_touching": 1372
+      },
+      "ground_sha256": "7b0fb8c0bd7da31ec000d13cbba70101a0460f7c93a88a4ac23ec17064515a79",
+      "ground_triples": 1949,
+      "triples": 3321
+    },
+    "APQC_ontology/slices/apqc_8_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 720,
+        "distinct_shapes": 759,
+        "shape_sha256": "35cc9ef68c95c925dacebcec756379dcba8ab0005439bb58bc1ba90b35d937ca",
+        "triples_touching": 2880
+      },
+      "ground_sha256": "6bdc605cc7c3bf8d5ba14c6194cac7fc7010e53579e5ea71172602b4c077f88e",
+      "ground_triples": 3906,
+      "triples": 6786
+    },
+    "APQC_ontology/slices/apqc_9_0.ttl": {
+      "blank_nodes": {
+        "blank_nodes": 597,
+        "distinct_shapes": 617,
+        "shape_sha256": "506daa82635fc3aa9d4b974c099f59067fcc82b3d93f2ef901e557f27a989b28",
+        "triples_touching": 2388
+      },
+      "ground_sha256": "5a08623f8219b1f265e52311ca8acddae8b8990e6fe06e55dafa48ac4008f9c3",
+      "ground_triples": 3232,
+      "triples": 5620
+    }
+  },
+  "scope": {
+    "files": 18,
+    "from": "config/repository-layout.yaml, roles ontology-module and ontology-module-set",
+    "paths": [
+      "APQC_ontology/apqc-catalog.ttl",
+      "APQC_ontology/apqc-ext.ttl",
+      "APQC_ontology/capabilities_roles.ttl",
+      "APQC_ontology/capabilities_wiring.ttl",
+      "APQC_ontology/delivery_processes.ttl",
+      "APQC_ontology/slices/apqc_10_0.ttl",
+      "APQC_ontology/slices/apqc_11_0.ttl",
+      "APQC_ontology/slices/apqc_12_0.ttl",
+      "APQC_ontology/slices/apqc_13_0.ttl",
+      "APQC_ontology/slices/apqc_1_0.ttl",
+      "APQC_ontology/slices/apqc_2_0.ttl",
+      "APQC_ontology/slices/apqc_3_0.ttl",
+      "APQC_ontology/slices/apqc_4_0.ttl",
+      "APQC_ontology/slices/apqc_5_0.ttl",
+      "APQC_ontology/slices/apqc_6_0.ttl",
+      "APQC_ontology/slices/apqc_7_0.ttl",
+      "APQC_ontology/slices/apqc_8_0.ttl",
+      "APQC_ontology/slices/apqc_9_0.ttl"
+    ]
+  }
+}

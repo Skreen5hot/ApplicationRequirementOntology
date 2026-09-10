@@ -70,6 +70,14 @@ jobs:
       - name: The corpus index is not stale
         run: python tools/ontology/build_index.py --check
 
+      # The SHACL ladder, gated against config/validation-baseline.json.
+      # This is the check that says "no new findings" -- the ontology has
+      # known defects and this is what stops them growing. Running it here
+      # costs a second full ladder pass, because a test may not read build
+      # output and so the two cannot share a report.
+      - name: No new ontology findings
+        run: python tools/ontology/validate.py --gate
+
       - name: Tests
         run: python -m pytest tests/ -q -p no:randomly
 

@@ -74,6 +74,30 @@ Before a check counts as done:
    broken mutation, not a strong check.
 4. **Restore, and confirm the restore.**
 
+### Verify the mutation moved what is measured
+
+A falsification has two halves and the second is easy to skip: change
+something, *and check the change reached the quantity the check reads*. Three
+attempts in one afternoon failed this way, each looking like a passing check:
+
+| the mutation | what was verified | what was actually true |
+|---|---|---|
+| edited a line to change a `kind` | nothing | the line did not contain the string being replaced; the file never changed |
+| appended a label to a slice | the file digest moved | the term was never declared, so it was not a focus node |
+| a slow run implied a slow query | nothing | a second job was using the same eight cores |
+
+Every one of those was reported to a human as "the check passed" or "this is
+slower", and every one was a statement about the test rather than the thing
+tested. The file digest changing is not enough. **Assert the measured number
+moved** — the finding count, the digest, the row — before believing what the
+check then says about it.
+
+The third row is the same defect wearing different clothes: a measurement taken
+while something else was running is a measurement of the machine. And before
+concluding anything from a timing, find out what this machine's variance is —
+the same unchanged suite here has been timed at 6m25s and 10m51s, so any
+difference narrower than that is noise being read as a result.
+
 ### Falsify the right thing
 
 A falsification can miss for the same reason a check can. When a corpus

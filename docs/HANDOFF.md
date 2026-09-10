@@ -31,9 +31,10 @@ is the ARO.
 | SHACL ladder | `tools/ontology/validate.py`; both shape sets evaluable, both falsified by a negative fixture |
 | Corpus digest | `config/corpus-digest.json`; pinned, and compared against a fresh measure by a test |
 | Corpus index | `tools/ontology/build_index.py`; derived from the ontology, `--check` in CI, classification anchored in the vendored BFO/CCO |
+| Known findings | `config/validation-baseline.json`; 67 of them, gated in CI so the count can only go down |
 | Line endings | `.gitattributes`, applied before the corpus grew |
 | CI | `.github/workflows/checks.yml`; actions pinned to commit SHAs |
-| Tests | 77, all passing, ~6 minutes (almost all of it SHACL) |
+| Tests | 84, all passing, 6-11 minutes (almost all of it SHACL; the machine varies) |
 
 Everything in that table has a test behind it, and — per `PROCESS.md` §2 — the tests have
 been falsified: the fix reverted, the specific check required to fail, then restored.
@@ -117,16 +118,19 @@ For the two that remain, the team should pick one of:
    something reproducible. Deleting somebody else's evidence is not a call to make
    quietly, which is why it has been left.
 
-### 5.2 Ten open findings against the ontology
+### 5.2 Sixty-seven open findings against the ontology
 
-`tools/ontology/validate.py` reports them, and a test pins the count so an eleventh is a
-failure:
+All recorded in `config/validation-baseline.json` and gated in CI, so the number can only
+go down:
 
-- 5 process classes missing `ex:pcfID` (severity Violation)
-- the same 5 missing `skos:example` (severity Warning)
+| shape set | findings | what |
+|---|---|---|
+| `validation.apqc-shapes` | 10 | 5 process classes missing `ex:pcfID`, the same 5 missing `skos:example` — `AuthorArchitecture`, `AuthorImplementationPlan`, `AuthorRoadmap`, `EvaluateOutput`, `ImplementPhase` |
+| `validation.wellformedness` | 57 | the drift in §5.3 — 51 definitions, 6 labels |
+| `validation.capabilities-roles-shapes` | 0 | — |
 
-`AuthorArchitecture`, `AuthorImplementationPlan`, `AuthorRoadmap`, `EvaluateOutput`,
-`ImplementPhase`. These are real defects in the corpus, not artifacts of scope.
+These are real defects in the corpus, not artifacts of scope. `--record` refuses to raise
+any of these counts without an explicit reason, so the register cannot quietly grow.
 
 ### 5.3 The inlined slice copies have drifted
 
@@ -138,12 +142,17 @@ apart, so the same IRI means different things depending on which file is read.
 way in `apqc_10_0.ttl`.
 
 The previous index hid this by reading one file. `build_index.py` resolves it by a stated
-rule — the canonical home wins — reports the count on every run, and
-`tests/test_corpus_index.py` pins both numbers so they can only go down deliberately.
+rule — the canonical home wins — and reports the count on every run.
 
-This is a real corpus defect and it is not fixed. The natural home for it is a SHACL
-shape asserting at most one label and one definition per term, which would move it from
-"a number in a test" to "a gate". That is a good second task.
+**It is now a gate.** `shapes/wellformedness_shapes.ttl` asserts that no authored term
+carries two values of the same property in the same language, and
+`python tools/ontology/validate.py --gate` fails if the count rises. The SHACL run and
+`build_index.py` reach 57 independently, by different routes, which is the corroboration
+— neither is evidence alone.
+
+This is a real corpus defect and **it is not fixed**. Fixing it means deciding which
+definition is right for each of the 51 terms, which is a judgement about what the term
+denotes. See `docs/HANDOFF-PLAN.md`.
 
 ### 5.4 The vendored extracts are partial, deliberately
 

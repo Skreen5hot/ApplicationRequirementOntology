@@ -22,8 +22,8 @@ python -m pytest tests/ -q -p no:randomly
 tests import by path, so there is no build step between writing a tool and testing the
 tool that ships.
 
-Expect roughly four minutes for the suite. Almost all of it is four SHACL passes over
-62,000 triples;
+Expect six to eleven minutes for the suite -- it has been timed at both, unchanged, so
+budget for the upper end. Almost all of it is SHACL over 63,000 triples;
 the validation record is computed once in a module-scoped fixture because three tests
 asking for it separately once outran a ten-minute timeout.
 
@@ -39,6 +39,7 @@ python tools/licensing/disposition.py         # one disposition per tracked file
 python tools/licensing/disposition.py --check # nothing unpublishable is tracked
 python tools/ontology/vendor_upstream.py      # the extracts cover what the shapes walk
 python tools/ontology/build_index.py --check  # the corpus index is not stale
+python tools/ontology/validate.py --gate     # no new ontology findings
 python tools/ontology/corpus_digest.py        # measure the authored ontology
 python tools/ontology/validate.py             # the SHACL ladder
 python -m pytest tests/ -q -p no:randomly     # all of the above, plus the falsifications
@@ -51,7 +52,8 @@ python -m pytest tests/ -q -p no:randomly     # all of the above, plus the falsi
 | `disposition.py --check` | a tracked file that may not be redistributed; a vendored extract whose required attribution is missing from `vendor/NOTICE.md` |
 | `vendor_upstream.py` | an upstream term this repository names that no extract describes; an extract whose digest is not what the manifest records |
 | `build_index.py` | running at all when the vendored upstream is absent, or when a classification anchor resolves to nothing — both would emit an index where every class is `other` and nothing looks wrong |
-| `validate.py` | exits 1 on any violation, and on a shape set the negative fixture does not exercise |
+| `validate.py --gate` | a rung with more findings than `config/validation-baseline.json` records, a rung with fewer that has not been re-recorded, a shape set the fixture does not exercise, a rung blocked on missing vocabulary, a violation against a vendored term, and a rung the baseline does not mention |
+| `validate.py --record` | raising any recorded count without `--accept-regression "<why>"`. Lowering is always free |
 
 `validate.py` writes a report with `-o config/validation-report.json`. That file is
 gitignored on purpose: it is a measurement, not a pin, and a committed copy would agree
@@ -157,11 +159,34 @@ requires the committed extracts to be byte-identical.
 
 ## Conventions
 
+### Paying down a finding
+
+The ontology carries 67 known findings. They are recorded per shape set in
+`config/validation-baseline.json`, and the gate requires the file to describe
+reality — *more* is a regression, *fewer* means re-record so the reduction shows
+up in a diff:
+
+```bash
+python tools/ontology/validate.py --record     # after fixing something
+```
+
+`--record` refuses to raise a count without `--accept-regression "<why>"`, and
+writes the reason beside the number it excuses. Without that, a regression
+certifies itself on the one run that introduces it.
+
 **Falsify every check.** A passing test is not evidence. Evidence is a passing test plus a
 demonstration that it can fail: revert the fix, require *that specific* check to fail,
 restore, confirm. Two real bugs in this repository were found this way, one of them in the
 failure branch of a check that had correctly detected a licence breach and then crashed
 instead of reporting it.
+
+**And verify the mutation moved what is measured.** A changed file digest is not enough.
+An attempt to falsify the validation gate appended a label for `ex:ActOfPlanning` — a term
+this corpus never declares — so the file changed, nothing became a focus node, and the
+gate correctly reported no new findings. That read as a broken gate for as long as it took
+to check. Assert the number you expect to move has moved, *then* run the check. And
+measure timings on a quiet machine: two jobs on eight cores produced a 415-second figure
+for work that takes 270.
 
 **Stage before you mutate.** `git checkout --` restores from the index; unstaged work is
 destroyed.

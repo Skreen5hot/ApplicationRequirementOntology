@@ -178,21 +178,183 @@ def test_the_violations_are_attributed_to_whose_terms_they_are(validation):
             "are findings about the extract" % corpus["against_vendored_terms"])
 
 
-def test_the_findings_that_remain_are_the_ones_recorded(validation):
-    """The ontology has ten open findings against it, and they are here
-    as a number so that the next one is a failure rather than a line in a
-    report nobody diffs."""
-    rung = validation["rungs"]["validation.apqc-shapes"]
-    assert rung["corpus"]["against_authored_terms"] == 10, (
-        "the count of open findings moved to %d; if that is a fix, lower "
-        "the number here in the same commit"
-        % rung["corpus"]["against_authored_terms"])
+def test_the_baseline_describes_reality(validation, validator):
+    """The gate, run as a test.
 
+    The count of open findings used to be written into this file as
+    `== 10`. It now lives in config/validation-baseline.json, so the team
+    inheriting this can see what is owed without reading test code, and
+    so there is one source of truth rather than a number here and another
+    in a report.
+    """
+    problems = validator.compare(validation, validator.baseline())
+    assert problems == [], problems
+
+
+def test_every_rung_is_recorded(validation, validator):
+    """Both directions. A rung with no baseline entry would be adopted
+    silently; an entry for a rung that no longer exists is coverage for
+    nothing."""
+    recorded = set((validator.baseline().get("rungs") or {}))
+    assert recorded == set(validation["rungs"]), (
+        "recorded but gone: %s; present but unrecorded: %s"
+        % (sorted(recorded - set(validation["rungs"])),
+           sorted(set(validation["rungs"]) - recorded)))
+
+
+def test_the_apqc_findings_are_still_the_two_kinds_recorded(validation):
+    """The baseline carries a count. This carries what the count is of,
+    because ten findings of a different kind would satisfy a number."""
+    rung = validation["rungs"]["validation.apqc-shapes"]
     messages = sorted({v["message"] for v in rung["corpus"]["detail"]})
     assert messages == [
         "Process has no skos:example (recommended for production).",
         "Process is missing ex:pcfID (stable APQC provenance anchor).",
     ], messages
+
+
+# ------------------------------------------------------- the gate
+
+
+def rung(findings=0, evaluable=True, exercised=True, vendored=0):
+    return {"evaluable": evaluable, "can_still_fail": exercised,
+            "blocked_by_missing_vocabulary": [] if evaluable else ["CCO"],
+            "corpus": {"against_authored_terms": findings,
+                       "against_vendored_terms": vendored}}
+
+
+def test_the_gate_accepts_only_a_baseline_that_matches(validator):
+    """Falsifies the gate, one disagreement at a time.
+
+    Run against constructed records rather than the live ladder, because
+    each live run is five minutes and because several of these states --
+    a rung that has vanished, a vocabulary that has gone missing -- can
+    no longer be reached from this repository at all. A branch that
+    cannot be reached is a branch nobody has executed.
+    """
+    baseline = {"rungs": {"a": {"authored_findings": 10}}}
+
+    assert validator.compare({"rungs": {"a": rung(10)}}, baseline) == []
+
+    got = validator.compare({"rungs": {"a": rung(11)}}, baseline)
+    assert got and "1 new finding." in got[0], got
+
+    got = validator.compare({"rungs": {"a": rung(13)}}, baseline)
+    assert got and "3 new findings." in got[0], got
+
+    got = validator.compare({"rungs": {"a": rung(9)}}, baseline)
+    assert got and "re-record" in got[0], got
+
+    got = validator.compare({"rungs": {"a": rung(10), "b": rung(0)}}, baseline)
+    assert got and "no entry" in got[0], got
+
+    got = validator.compare({"rungs": {}}, baseline)
+    assert got and "no longer exists" in got[0], got
+
+    got = validator.compare({"rungs": {"a": rung(10, evaluable=False)}},
+                            baseline)
+    assert got and "cannot be evaluated" in got[0], got
+
+    got = validator.compare({"rungs": {"a": rung(10, exercised=False)}},
+                            baseline)
+    assert got and "did not fire on the fixture" in got[0], got
+
+    got = validator.compare({"rungs": {"a": rung(10, vendored=3)}}, baseline)
+    assert got and "vendored upstream terms" in got[0], got
+
+
+def test_recording_refuses_to_raise_a_count_without_a_reason(validator,
+                                                             tmp_path,
+                                                             monkeypatch):
+    """Without this, a regression certifies itself on the one run that
+    introduces it and the baseline becomes a transcript of whatever
+    happened rather than a commitment."""
+    import json
+
+    monkeypatch.setattr(validator.layout, "repository_root",
+                        lambda: tmp_path)
+    (tmp_path / "config").mkdir()
+    (tmp_path / "config" / "validation-baseline.json").write_text(
+        json.dumps({"rungs": {"a": {"authored_findings": 10}}}),
+        encoding="utf-8")
+
+    raised = {"rungs": {"a": rung(11)}}
+    assert validator.record_baseline(raised, None) == 1, (
+        "recording accepted a raised count with no reason given")
+
+    assert validator.record_baseline(raised, "deliberate, see ADR-9") == 0
+    after = json.loads(
+        (tmp_path / "config" / "validation-baseline.json").read_text(
+            encoding="utf-8"))
+    assert after["rungs"]["a"]["authored_findings"] == 11
+    assert after["rungs"]["a"]["why"] == "deliberate, see ADR-9", (
+        "the reason was not recorded beside the number it excuses")
+
+    # Lowering never needs a reason.
+    assert validator.record_baseline({"rungs": {"a": rung(4)}}, None) == 0
+
+
+# --------------------------------------------- the wellformedness set
+
+
+WELLFORMEDNESS_CONSTRAINTS = [
+    "Class has no rdfs:label.",
+    "Class has no skos:definition.",
+    "Concept has no skos:prefLabel.",
+]
+
+
+def test_every_wellformedness_constraint_is_exercised(validation):
+    """Named, not counted.
+
+    Two of these find nothing in the corpus today -- every authored class
+    already carries a label and a definition. A constraint that finds
+    nothing and is never exercised is indistinguishable from one that
+    selects nothing, and these exist for modules that do not yet exist,
+    so the fixture is the only evidence they work at all.
+    """
+    rung = validation["rungs"]["validation.wellformedness"]
+    fired = sorted({v["message"] for v in rung["fixture"]["detail"]})
+    missing = [m for m in WELLFORMEDNESS_CONSTRAINTS if m not in fired]
+    assert not missing, (
+        "%d presence constraint(s) did not fire against the fixture: %s"
+        % (len(missing), missing))
+
+    drift = [m for m in fired if "in the same language" in m]
+    assert drift, (
+        "no drift constraint fired against the fixture, so the 57 findings "
+        "it reports against the corpus rest on nothing")
+
+
+def test_the_wellformedness_fixture_does_not_flag_what_is_legitimate(
+        validation):
+    """The false positives sh:maxCount 1 would have produced.
+
+    A multilingual label pair is correct and must not be reported, and a
+    catalog concept carrying no rdfs:label is correct because a concept
+    is labelled with skos:prefLabel. The second of those was the first
+    draft of this shape set, and it reported 3,842 findings that were the
+    catalog being told to look like a class.
+    """
+    rung = validation["rungs"]["validation.wellformedness"]
+    flagged = {v["focus"] for v in rung["fixture"]["detail"]}
+    for good in ("FixtureMultilingual", "FixtureWellFormed",
+                 "FixtureRepeatedValue", "FixtureConceptWellFormed"):
+        assert not [f for f in flagged if f and f.endswith("#" + good)], (
+            "%s was built to conform and did not" % good)
+
+
+def test_the_fixtures_come_from_the_contract(validator, layout):
+    """`measure` named one fixture component. A second shape set then had
+    nowhere to put its cases except a file named for a corpus they have
+    nothing to do with."""
+    declared = {c.path for c in layout.components("test-fixture")}
+    found = {p.relative_to(layout.repository_root()).as_posix()
+             for p in validator.fixtures()}
+    assert found == declared, (declared, found)
+    assert len(found) > 1, (
+        "there is still only one fixture, so this does not demonstrate "
+        "that more than one is loaded")
 
 
 def test_a_ladder_that_evaluated_nothing_does_not_pass(validator):

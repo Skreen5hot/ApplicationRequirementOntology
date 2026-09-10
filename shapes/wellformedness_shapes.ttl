@@ -1,0 +1,162 @@
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix wf:    <https://fandaws.com/ontology/shapes/wellformedness#> .
+
+# Well-formedness of an authored term, whatever module it lives in.
+#
+# The other two shape sets constrain the APQC layer. This one constrains
+# everything this repository authors, which is why it sits here rather
+# than beside a corpus it does not belong to. The ARO modules inherit it
+# on the day they are written, which is the only moment a constraint like
+# this is cheap to add.
+#
+# TWO POPULATIONS, NOT ONE
+#
+# An owl:Class here is labelled with rdfs:label and defined with
+# skos:definition. A skos:Concept in the APQC catalog is labelled with
+# skos:prefLabel and carries neither of the other two. The first draft of
+# this file asked one question of both and reported 3,899 violations, of
+# which 3,842 were the catalog being told it should look like a class.
+# Two shapes, because they are two kinds of thing.
+#
+# WHY THE DRIFT RULES ARE SPARQL
+#
+# The obvious spellings are both wrong.
+#
+#   sh:uniqueLang true   ignores literals with no language tag. Every one
+#                        of the 57 real conflicts is untagged, so this
+#                        fires on nothing at all.
+#
+#   sh:maxCount 1        fires on the drift, and also on a legitimate
+#                        "x"@en / "y"@fr pair -- so it would break the
+#                        first time this ontology gained a second
+#                        language, and the fix would be to weaken it.
+#
+# Comparing only values that share a language tag is correct in both
+# directions. wellformedness_bad_examples.ttl carries the multilingual
+# case as a positive control, so that false positive is a test rather
+# than something somebody has to remember.
+#
+# One constraint covering both predicates, rather than one each.
+#
+# A SPARQL constraint is evaluated once per focus node, and there are
+# 3,119 classes and 1,921 concepts, so the number of constraints is what
+# this costs.
+#
+# Which of the two spellings is faster is NOT established, and this
+# comment previously claimed it was. A paired run gave 270s unbound
+# against 349s bound; the same suite, unchanged, has since been timed at
+# 6m25s and 10m51s, so run-to-run variance here is wider than the gap
+# being measured. An earlier claim in the other direction came from a run
+# that was sharing eight cores with a second job. Three timing statements,
+# none of which survived. The honest summary is that this machine cannot
+# separate the two, and a difference this size would not justify the
+# reading cost either way.
+#
+# One constraint is kept because it is one constraint and it names the
+# predicate in the message, not because it is faster.
+#
+# A VALUES clause is the natural way to write this and SHACL forbids it
+# inside a constraint; FILTER(?p IN (...)) is the same thing spelled
+# legally. The predicate is bound in the result and named in the message,
+# so nothing is lost by folding the two together.
+#
+# WHAT THE DRIFT IS
+#
+# The slices inline the shared genera rather than importing them, and the
+# copies have moved apart: ex:ActOfForecasting is defined one way in
+# apqc-ext.ttl and five slices, and another way in apqc_10_0.ttl. In the
+# merged graph that reads as one term with two meanings. Identical copies
+# collapse -- an RDF graph is a set -- so a second value here is always a
+# disagreement and never a duplicate.
+#
+# The count lives in config/validation-baseline.json rather than here. It
+# is 57 today, and the gate exists so that it can only go down.
+
+wf:prefixes
+    a owl:Ontology ;
+    sh:declare
+        [ sh:prefix "rdfs" ; sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ] ,
+        [ sh:prefix "skos" ; sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ] ,
+        [ sh:prefix "owl"  ; sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ] .
+
+
+# ---------------------------------------------------------------------
+# Authored classes
+# ---------------------------------------------------------------------
+
+wf:AuthoredClassShape
+    a sh:NodeShape ;
+
+    # Authored terms only. A violation against a vendored BFO or CCO term
+    # would be a finding about the extract rather than about this
+    # ontology -- validate.py reports those separately, but there is no
+    # reason to ask the question of somebody else vocabulary at all.
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:prefixes wf:prefixes ;
+        sh:select """SELECT ?this WHERE {
+          ?this a owl:Class .
+          FILTER(STRSTARTS(STR(?this), "https://fandaws.com/ontology/"))
+        }""" ] ;
+
+    # Presence. Zero findings against the corpus today: every authored
+    # class already carries both. Native constraints rather than SPARQL,
+    # because these are evaluated set-wise and cost almost nothing.
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Class has no rdfs:label." ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Class has no skos:definition." ] ;
+
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Violation ;
+        sh:message "Class {$this} carries two different {?p} values in the same language. Inlined copies of a shared term have drifted, so the same IRI now reads differently depending on which module is loaded." ;
+        sh:prefixes wf:prefixes ;
+        sh:select """SELECT $this ?p WHERE {
+          $this ?p ?a, ?b .
+          FILTER(?p IN (rdfs:label, skos:definition))
+          FILTER(STR(?a) < STR(?b))
+          FILTER(LANG(?a) = LANG(?b)) }""" ] .
+
+
+# ---------------------------------------------------------------------
+# Authored SKOS concepts
+# ---------------------------------------------------------------------
+
+wf:AuthoredConceptShape
+    a sh:NodeShape ;
+
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:prefixes wf:prefixes ;
+        sh:select """SELECT ?this WHERE {
+          ?this a skos:Concept .
+          FILTER(STRSTARTS(STR(?this), "https://fandaws.com/ontology/"))
+        }""" ] ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Concept has no skos:prefLabel." ] ;
+
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Violation ;
+        sh:message "Concept {$this} carries two different skos:prefLabel values in the same language." ;
+        sh:prefixes wf:prefixes ;
+        sh:select """SELECT $this WHERE {
+          $this skos:prefLabel ?a, ?b .
+          FILTER(STR(?a) < STR(?b))
+          FILTER(LANG(?a) = LANG(?b)) }""" ] .

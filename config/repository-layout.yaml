@@ -85,6 +85,18 @@ components:
     role: ontology-validation
     description: SHACL constraints over the capability and role layer.
 
+  - id: validation.wellformedness
+    path: shapes/wellformedness_shapes.ttl
+    role: ontology-validation
+    description: >-
+      Well-formedness of an authored term, whatever module it lives in.
+      Outside APQC_ontology/ because it constrains everything this
+      repository authors, including the ARO modules that do not exist
+      yet. Its drift rules are SPARQL rather than sh:uniqueLang or
+      sh:maxCount, because the first ignores untagged literals -- which
+      is all 57 of the real conflicts -- and the second would reject a
+      legitimate pair of labels in two languages.
+
   # ---- Deliberately invalid ------------------------------------------
 
   - id: fixture.apqc-bad-examples
@@ -95,6 +107,15 @@ components:
       role so nothing loads it as ontology and reports its defects as
       corpus defects -- which is exactly what would happen if it were
       simply another .ttl in the directory.
+
+  - id: fixture.wellformedness-bad-examples
+    path: shapes/wellformedness_bad_examples.ttl
+    role: test-fixture
+    description: >-
+      Cases built to break wellformedness_shapes.ttl, with positive
+      controls beside them -- including the multilingual label pair that
+      sh:maxCount 1 would have rejected, so the false positive is a test
+      rather than something somebody remembers.
 
   # ---- Generated ----------------------------------------------------
 
@@ -172,6 +193,15 @@ components:
       is not. Written for a team taking the work over, and dated at the
       commit it describes: it is a snapshot, and a snapshot that pretends
       otherwise is worse than none.
+
+  - id: docs.handoff-plan
+    path: docs/HANDOFF-PLAN.md
+    role: documentation
+    description: >-
+      The sequence, where HANDOFF.md is the state: what happens next, in
+      what order, and who owns it. Carries the debt register with an
+      owner and an exit criterion against each item, so nothing is owed
+      by nobody.
 
   - id: docs.development
     path: docs/DEVELOPMENT.md
@@ -313,6 +343,18 @@ components:
       the equivalent lived inside a package whose __init__ loaded an
       entire agent runtime, so asking where a file lived cost 44 module
       imports.
+
+  - id: generated.validation-baseline
+    path: config/validation-baseline.json
+    role: generated-artifact
+    generator: tool.validate
+    description: >-
+      The findings this repository is known to carry, per shape set. The
+      gate requires reality to match it: more is a regression, fewer
+      means re-record so the reduction shows up in a diff. Kept as an
+      artifact rather than as numbers inside test assertions, because a
+      team taking this over needs to see the debt without reading test
+      code.
 
   - id: generated.corpus-digest
     path: config/corpus-digest.json

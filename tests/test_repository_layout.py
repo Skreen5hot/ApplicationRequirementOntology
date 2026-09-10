@@ -18,11 +18,53 @@ def tracked(repo) -> list[str]:
     return [line for line in result.stdout.splitlines() if line]
 
 
-def test_every_component_resolves(layout):
+def test_every_tracked_component_resolves(layout):
     """A contract naming something absent is worse than no contract:
     every consumer believes it."""
-    missing = [c.id for c in layout.components() if not c.exists()]
+    missing = [c.id for c in layout.components()
+               if c.tracked and not c.exists()]
     assert not missing, missing
+
+
+def test_never_tracked_components_are_absent_from_the_index(layout, repo):
+    """The invariant, asserted rather than remembered.
+
+    `tracked: false` says a component's files may exist on disk and must
+    never be committed. That is a stronger statement than .gitignore
+    makes: ignoring a path and a path being absent from the index are
+    different facts, and only the second one keeps something off a public
+    URL. A file already tracked stays tracked however the ignore rules
+    change.
+
+    This exists because four PDFs -- one of them a paid ISO standard --
+    were committed and served publicly while the README said they were
+    not redistributed.
+    """
+    never = [c for c in layout.components() if not c.tracked]
+    assert never, (
+        "no component is marked tracked: false, so this test is watching "
+        "nothing")
+
+    indexed = set(tracked(repo))
+    for entry in never:
+        leaked = sorted(p for p in indexed
+                        if p == entry.path or p.startswith(entry.path + "/"))
+        assert not leaked, (
+            "%s is declared never-tracked but these files are in the "
+            "index: %s" % (entry.id, leaked))
+
+
+def test_the_never_tracked_check_would_catch_a_committed_file(layout, repo):
+    """Guards the test above. It passes trivially if the component's path
+    never appears, so a typo in the declared path would silence it."""
+    never = [c for c in layout.components() if not c.tracked]
+    for entry in never:
+        pretend_indexed = {entry.path + "/something.pdf"}
+        leaked = sorted(p for p in pretend_indexed
+                        if p == entry.path or p.startswith(entry.path + "/"))
+        assert leaked, (
+            "a file under %s would not be recognised as belonging to it, "
+            "so the check cannot fire" % entry.path)
 
 
 def test_no_two_components_share_an_id(layout):

@@ -151,10 +151,19 @@ components:
     path: docs/Reference
     role: third-party-reference
     redistributable: false
+    tracked: false
     description: >-
       Standards and handbooks used as sources. ISO/IEC/IEEE 29148 is a
       paid standard and is not ours to publish; the NASA material is US
       Government work but is still cited rather than claimed.
+
+      `tracked: false` is the load-bearing part. These files live on disk
+      because the work needs them and are absent from the index because
+      publishing them is not ours to do. It was declared after the fact:
+      the four PDFs were committed and served from a public URL while the
+      README said they were not redistributed, and the history had to be
+      rewritten. The declaration is what stops that being something
+      somebody has to remember.
 
   # ---- Configuration and tooling --------------------------------------
 

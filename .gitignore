@@ -14,3 +14,17 @@ _work/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Reference material: consulted, cited, never redistributed.
+#
+# ISO/IEC/IEEE 29148:2018 is a paid standard. It was committed here and
+# served from a public raw.githubusercontent.com URL while README.md said
+# this repository does not redistribute it. The history has been rewritten
+# to remove it; this keeps it from coming back.
+#
+# The files stay on disk because the work needs them. They are ignored
+# rather than deleted, and tests/test_licensing.py asserts they are not
+# tracked -- ignoring a file and it being absent from the index are
+# different facts, and only the second one matters.
+docs/Reference/
+*.pdf

@@ -50,7 +50,7 @@ class Component:
     """One declaration, with the questions worth asking of it."""
 
     __slots__ = ("id", "path", "role", "description", "redistributable",
-                 "_root")
+                 "tracked", "_root")
 
     def __init__(self, raw: dict, root: Path):
         for required in ("id", "path", "role"):
@@ -65,6 +65,11 @@ class Component:
         # Absent means "no statement made", which is different from False.
         # Only a third-party reference is expected to say so explicitly.
         self.redistributable = raw.get("redistributable")
+        #: Whether this component belongs in the index at all. Defaults
+        #: to True because almost everything does; `tracked: false` says
+        #: the files may exist locally and must never be committed, which
+        #: is a stronger statement than .gitignore makes on its own.
+        self.tracked = raw.get("tracked", True)
         self._root = root
 
     def resolve(self) -> Path:
@@ -207,12 +212,17 @@ def main(argv=None) -> int:
     print("root %s" % repository_root())
     print()
     for entry in components(args.role):
-        mark = "ok " if entry.exists() else "MISSING"
+        if not entry.tracked:
+            mark = "local " if entry.exists() else "absent"
+        else:
+            mark = "ok    " if entry.exists() else "MISSING"
         print("  %-7s %-36s %-22s %s"
               % (mark, entry.id, entry.role, entry.path))
     print()
     print("  roles: %s" % roles())
-    missing = [e.id for e in components() if not e.exists()]
+    print("  never tracked: %s"
+          % [e.id for e in components() if not e.tracked])
+    missing = [e.id for e in components() if e.tracked and not e.exists()]
     if missing:
         print("  MISSING: %s" % missing)
     return 1 if missing else 0

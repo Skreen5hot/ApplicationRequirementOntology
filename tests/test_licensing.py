@@ -1,10 +1,15 @@
 # SPDX-License-Identifier: Apache-2.0
 """What this repository may publish, decided before it publishes.
 
-The load-bearing test here is the last one, and it currently fails. That
-is not a broken check: the repository redistributes a paid ISO standard
-from a public URL while its README says it does not. The test is how that
-stops being something somebody has to remember.
+These tests were written while the repository was redistributing a paid
+ISO standard from a public URL, with a README on the same commit saying
+it did not. The history has since been rewritten and the file is ignored
+rather than tracked, so they pass -- and they are what stops that being
+something somebody has to remember.
+
+Two of them test the rule rather than the current corpus. Once the files
+stopped being tracked, a test asserting on the classified set would pass
+by finding nothing, and would go on passing if the rule broke.
 """
 
 from __future__ import annotations
@@ -79,36 +84,59 @@ def test_an_adjudication_matching_no_file_is_refused(disposition,
     assert "naming no tracked file" in str(error.value)
 
 
-def test_reference_material_is_classified_as_not_redistributable(
-        disposition):
-    """The role exists so this is derived rather than remembered."""
-    rows = {row.path: row for row in disposition.classify()}
-    references = [row for row in rows.values()
-                  if row.disposition == disposition.CITED]
-    assert references, (
-        "nothing is classified as third-party-cited, so either the "
-        "reference material left the repository or the role stopped "
-        "carrying its consequence")
-    for row in references:
-        assert row.redistributable is False, row
-        assert row.licence is None, (
-            "%s reports a licence; this repository grants no rights over "
-            "it" % row.path)
+def test_the_cited_rule_makes_reference_material_unpublishable(
+        disposition, layout):
+    """Tests the rule, not the corpus.
+
+    Nothing is classified third-party-cited any more, because the files
+    are no longer tracked. Asserting on the classified set would
+    therefore pass vacuously and stop meaning anything the moment the
+    rule broke, so the rule is exercised directly against a path the
+    reference component owns.
+    """
+    owner = layout.component("reference.third-party")
+    matched = disposition.rules(owner.path + "/some-standard.pdf", owner)
+    assert len(matched) == 1, matched
+    kind, role, why = matched[0]
+    assert kind == disposition.CITED, matched
+    assert role == "third-party-reference"
+    assert "must not" in why and "redistribute" in why
+    assert disposition.licence_of(kind) is None, (
+        "a cited work reports a licence; this repository grants no rights "
+        "over it")
+
+
+def test_the_reference_material_is_present_locally_but_not_committed(
+        disposition, layout, repo):
+    """Both halves. Absent from the index is the part that matters; still
+    on disk is what makes the arrangement usable rather than a deletion.
+    """
+    import subprocess
+
+    owner = layout.component("reference.third-party")
+    indexed = subprocess.run(["git", "ls-files", owner.path],
+                             cwd=str(repo), capture_output=True,
+                             text=True).stdout.split()
+    assert not indexed, (
+        "reference material is tracked again: %s" % indexed[:4])
+
+    if owner.exists():
+        assert any((repo / owner.path).iterdir()), (
+            "%s exists but is empty; the work needs these files even "
+            "though the repository must not publish them" % owner.path)
 
 
 def test_nothing_unpublishable_is_tracked(disposition):
-    """The finding this repository currently has.
+    """The finding this repository had, kept as the check that it stays
+    fixed.
 
-    ISO/IEC/IEEE 29148:2018 is a paid standard. It is committed here and
-    served from a public GitHub URL, while README.md states that this
-    repository does not redistribute it. One of those has to change, and
-    it is not the standard's licence.
-
-    Removing the files from the working tree is not enough on its own:
-    they remain fetchable from the commit that added them, so the fix
-    also has to rewrite that commit and force-push. That is the owner's
-    call, which is why this is a failing test rather than an edit
-    somebody made unilaterally.
+    ISO/IEC/IEEE 29148:2018 is a paid standard and was committed here,
+    served from a public GitHub URL, while README.md said this repository
+    does not redistribute it. Deleting the files would not have been
+    enough: they stayed fetchable from the commits that added them, and
+    those turned out to be two commits rather than one -- the files began
+    at the repository root and were moved into docs/Reference later, so
+    the first rewrite removed the destination and left the origin.
     """
     rows = disposition.classify()
     unpublishable = [row.path for row in rows if not row.redistributable]

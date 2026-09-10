@@ -151,3 +151,50 @@ def test_a_component_pointing_nowhere_is_caught(layout, repo, tmp_path):
     finally:
         entry.path = original
     assert entry.resolve().is_file()
+
+
+def test_the_index_is_lf_throughout(repo):
+    """The rule in .gitattributes, checked rather than trusted.
+
+    A CRLF inside a Turtle literal is part of that literal's value, so
+    two checkouts with different core.autocrlf settings would disagree
+    about the corpus while both looked correct locally. The same applies
+    to any digest recorded over a file git is free to re-encode: a byte
+    digest over such a file is not a byte digest.
+
+    The index was already LF when the rule was written -- 65 blobs, none
+    with CRLF -- so this pins existing behaviour rather than announcing a
+    change. That is the cheap moment to do it, and the reason to assert
+    it now is that nothing about a passing state stops it drifting.
+    """
+    import subprocess
+
+    nul = chr(0).encode()
+    crlf = (chr(13) + chr(10)).encode()
+    files = subprocess.run(["git", "ls-files"], cwd=str(repo),
+                           capture_output=True, text=True).stdout.split(chr(10))
+    offenders, checked = [], 0
+    for name in filter(None, files):
+        blob = subprocess.run(["git", "cat-file", "blob", ":" + name],
+                              cwd=str(repo), capture_output=True).stdout
+        if nul in blob[:8000]:
+            continue
+        checked += 1
+        if crlf in blob:
+            offenders.append(name)
+
+    assert checked > 40, (
+        "only %d text blobs were examined; this test is watching less "
+        "than it should" % checked)
+    assert not offenders, (
+        "%d blob(s) carry CRLF in the index: %s"
+        % (len(offenders), offenders[:8]))
+
+
+def test_the_line_ending_rule_is_repository_wide(repo):
+    """Narrowing it to *.ttl would leave every recorded digest describing
+    the machine that measured it."""
+    rule = (repo / ".gitattributes").read_text(encoding="utf-8")
+    assert "* text=auto eol=lf" in rule, (
+        "the repository-wide rule is gone; a corpus-only rule protects "
+        "the corpus and nothing that records a checksum of anything else")

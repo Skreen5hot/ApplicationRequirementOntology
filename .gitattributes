@@ -1,0 +1,38 @@
+# Line endings are content here, so git is told rather than asked.
+#
+# Without a rule, core.autocrlf decides, and it is a per-machine setting.
+# In the project this was carried from, a Windows checkout produced CRLF
+# and a Linux one LF, and the two disagreed about the contents of every
+# multi-line Turtle literal -- because a CRLF inside a literal is part of
+# that literal's value, not formatting around it. That was 77 triples
+# across 8 files, and 11 of them were SPARQL text a validator executes
+# rather than prose somebody reads.
+#
+# This repository has the same exposure. `skos:definition` and
+# `rdfs:comment` carry multi-line text throughout the APQC modules, and
+# every commit made here so far has warned "LF will be replaced by CRLF".
+#
+# The rule is repository-wide rather than limited to *.ttl, for a reason
+# that only shows up later: any digest recorded over a file git is free to
+# re-encode is not a digest. Pin the corpus alone and the first artifact
+# recording a checksum of a JSON report will match on the machine that
+# wrote it and nowhere else.
+#
+# Applied before the corpus grew, which is the cheap moment. Renormalising
+# rewrites every text blob, so doing it later means doing it across more
+# files and comparing digests taken on both sides of the change.
+
+* text=auto eol=lf
+
+# Redundant under the rule above, and kept anyway: the corpus is the
+# reason the rule exists, and a future narrowing of `*` should not
+# silently take the corpus with it.
+*.ttl text eol=lf
+*.tsv text eol=lf
+
+# Declared binary so content detection is not what stands between these
+# and a corrupting newline translation.
+*.pdf -text
+*.zip -text
+*.png -text
+.DS_Store -text

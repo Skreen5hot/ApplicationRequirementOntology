@@ -385,3 +385,14 @@ components:
     description: >-
       Exactly one disposition per tracked file, derived from role and
       adjudication rather than from a list of filenames.
+
+  # ---- Decision record ---------------------------------------------------
+
+  - id: docs.decisions
+    path: docs/decisions
+    role: documentation
+    description: >-
+      The repo decision record: the architect's signed instruments and
+      directions, recorded verbatim and dated. ARO v0.5.2 section 18 says
+      the ratification instrument is recorded here; the Phase-1.5
+      amendments of 2026-09-10 are its first entries.

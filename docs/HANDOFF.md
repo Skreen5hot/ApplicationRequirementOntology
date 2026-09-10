@@ -30,9 +30,10 @@ is the ARO.
 | Upstream vocabulary | BFO 2020 and CCO v2.2 vendored as pinned partial extracts; regenerable and byte-identical; weekly CI job refetches and compares |
 | SHACL ladder | `tools/ontology/validate.py`; both shape sets evaluable, both falsified by a negative fixture |
 | Corpus digest | `config/corpus-digest.json`; pinned, and compared against a fresh measure by a test |
+| Corpus index | `tools/ontology/build_index.py`; derived from the ontology, `--check` in CI, classification anchored in the vendored BFO/CCO |
 | Line endings | `.gitattributes`, applied before the corpus grew |
 | CI | `.github/workflows/checks.yml`; actions pinned to commit SHAs |
-| Tests | 59, all passing, ~4 minutes (almost all of it SHACL) |
+| Tests | 77, all passing, ~6 minutes (almost all of it SHACL) |
 
 Everything in that table has a test behind it, and — per `PROCESS.md` §2 — the tests have
 been falsified: the fix reverted, the specific check required to fail, then restored.
@@ -87,7 +88,7 @@ once, early.
 
 ## 5. What not to trust
 
-### 5.1 Three artifacts nothing here can rebuild
+### 5.1 Two artifacts nothing here can rebuild
 
 The contract now records these as `orphaned`, `python tools/layout.py` prints them, and
 `tests/test_repository_layout.py` fails if the list changes without a decision. They are
@@ -96,18 +97,22 @@ still in the tree:
 | Component | Problem |
 |---|---|
 | `APQC_ontology/reports/` | 18.9 MB of reasoner output and gate results. **15 of 17 gate reports name a module path that does not exist here** (`ontology\slices\apqc_1_0.ttl`). All of them assert "D Reasoner: consistent; no unsatisfiable classes (ELK)" — no reasoner of that kind is in this repository, so nothing can reproduce it. `matchability.json` describes an agent fleet of 12, which belongs to a different project. |
-| `APQC_ontology/index/corpus_index.tsv` | Its own README documented `python scripts/build_index.py`; there is no `scripts/`. 5,051 rows over 3,119 authored classes, uncheckable. **The most dangerous of the three**, because that README tells readers to grep it in preference to reading a slice. |
 | `APQC_ontology/reference/apqc_1_1_1.ttl` | One derived extract; nothing states what from, or how. |
 
-All three were **text-edited** during the namespace migration, which is the one thing a
-generated artifact must never need. Until then the contract described them as
+Both were **text-edited** during the namespace migration, which is the one thing a
+generated artifact must never need. Until recently the contract described them as
 "Regenerated, not edited" — a property nothing could deliver. That is the defect class
 `PROCESS.md` opens with, and it was sitting in the contract.
 
-Two honest ways out, and the team should pick one rather than leaving them:
+The third, `APQC_ontology/index/corpus_index.tsv`, **has been discharged** —
+`tools/ontology/build_index.py` now writes it, CI compares it against a fresh build on
+every push, and the contract names the generator instead of admitting there is none. It
+was the worst of the three, because its README told readers to grep it in preference to
+reading a slice.
 
-1. **Write the generators.** `build_index.py` is small and well-specified by the README's
-   own column table; it discharges the worst of the three in a day.
+For the two that remain, the team should pick one of:
+
+1. **Write the generators**, as was done for the index.
 2. **Delete them.** `tools/ontology/validate.py` already supersedes the gate reports with
    something reproducible. Deleting somebody else's evidence is not a call to make
    quietly, which is why it has been left.
@@ -123,7 +128,24 @@ failure:
 `AuthorArchitecture`, `AuthorImplementationPlan`, `AuthorRoadmap`, `EvaluateOutput`,
 `ImplementPhase`. These are real defects in the corpus, not artifacts of scope.
 
-### 5.3 The vendored extracts are partial, deliberately
+### 5.3 The inlined slice copies have drifted
+
+Found while writing the index generator, and new: **51 terms carry more than one
+distinct `skos:definition`, and 6 carry more than one distinct `rdfs:label`.** The
+slices inline the shared genera instead of importing them, and the copies have moved
+apart, so the same IRI means different things depending on which file is read.
+`ex:ActOfForecasting` is defined one way in `apqc-ext.ttl` and five slices, and another
+way in `apqc_10_0.ttl`.
+
+The previous index hid this by reading one file. `build_index.py` resolves it by a stated
+rule — the canonical home wins — reports the count on every run, and
+`tests/test_corpus_index.py` pins both numbers so they can only go down deliberately.
+
+This is a real corpus defect and it is not fixed. The natural home for it is a SHACL
+shape asserting at most one label and one definition per term, which would move it from
+"a number in a test" to "a gate". That is a good second task.
+
+### 5.4 The vendored extracts are partial, deliberately
 
 `vendor/bfo/` and `vendor/cco/` carry only the terms this repository names plus their
 named ancestry. **44 axioms were dropped** — every one whose object is an anonymous class
@@ -154,8 +176,9 @@ recorded limit, not an oversight.
    or record what is blocking it. Everything downstream is gated on it.
 2. **Create `docs/adr/` and write ADR-003.** Assertion identity and the fragment locator
    criterion. §17 watch item 2 is the argument for doing it before anything else.
-3. **Decide the three orphans.** Write `build_index.py`, or delete. Either is fine; leaving
-   them is not.
+3. **Decide the two remaining orphans** — `APQC_ontology/reports/` and
+   `APQC_ontology/reference/`. Write generators, or delete. Either is fine; leaving them
+   is not. The index shows what discharging one looks like.
 4. **Fix the ten findings**, or record why they stand. Lower the pinned count in the same
    commit — the test message says so.
 5. **Start `aro-core.ttl`** with a matching shape set *and* a matching negative fixture in

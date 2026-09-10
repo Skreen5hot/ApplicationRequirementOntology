@@ -107,7 +107,6 @@ def test_every_component_declares_a_role_with_a_meaning(layout,
 #: and removing one is a visible change in a diff, which is what
 #: discharging the debt should look like.
 ORPHANED_ARTIFACTS = [
-    "generated.corpus-index",
     "generated.reference",
     "generated.reports",
 ]

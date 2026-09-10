@@ -38,6 +38,7 @@ python tools/layout.py                        # the contract describes the tree
 python tools/licensing/disposition.py         # one disposition per tracked file
 python tools/licensing/disposition.py --check # nothing unpublishable is tracked
 python tools/ontology/vendor_upstream.py      # the extracts cover what the shapes walk
+python tools/ontology/build_index.py --check  # the corpus index is not stale
 python tools/ontology/corpus_digest.py        # measure the authored ontology
 python tools/ontology/validate.py             # the SHACL ladder
 python -m pytest tests/ -q -p no:randomly     # all of the above, plus the falsifications
@@ -49,6 +50,7 @@ python -m pytest tests/ -q -p no:randomly     # all of the above, plus the falsi
 | `disposition.py` | a file matching two rules, or none; an adjudication naming no file; a `LICENSE` naming zero or two recognised licences |
 | `disposition.py --check` | a tracked file that may not be redistributed; a vendored extract whose required attribution is missing from `vendor/NOTICE.md` |
 | `vendor_upstream.py` | an upstream term this repository names that no extract describes; an extract whose digest is not what the manifest records |
+| `build_index.py` | running at all when the vendored upstream is absent, or when a classification anchor resolves to nothing — both would emit an index where every class is `other` and nothing looks wrong |
 | `validate.py` | exits 1 on any violation, and on a shape set the negative fixture does not exercise |
 
 `validate.py` writes a report with `-o config/validation-report.json`. That file is

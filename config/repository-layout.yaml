@@ -133,13 +133,7 @@ components:
   - id: generated.corpus-index
     path: APQC_ontology/index/corpus_index.tsv
     role: generated-artifact
-    orphaned: >-
-      Its own README documented `python scripts/build_index.py`; there is
-      no `scripts/` directory here. 5,051 rows over a corpus of 3,119
-      authored classes, and no way to tell whether that is right. It is
-      the most load-bearing of the three orphans -- the README tells
-      readers to grep it in preference to reading a slice, so a stale row
-      is read as fact.
+    generator: tool.build-index
     description: >-
       A greppable index of every class and individual across the slices
       and shared modules, so navigation costs a grep rather than a read.
@@ -254,6 +248,16 @@ components:
       What was taken from each upstream and what was left behind,
       including the count of axioms dropped because their object was an
       anonymous class expression.
+
+  - id: tool.build-index
+    path: tools/ontology/build_index.py
+    role: tool
+    description: >-
+      Writes the corpus index. Every `kind` is decided by walking
+      rdfs:subClassOf to a BFO or CCO anchor, so this depends on the
+      vendored extracts and refuses to run without them -- absent the
+      upstream, every class would be indexed `other` and the result would
+      look complete.
 
   - id: tool.vendor-upstream
     path: tools/ontology/vendor_upstream.py

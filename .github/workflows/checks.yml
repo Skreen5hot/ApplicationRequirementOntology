@@ -67,6 +67,9 @@ jobs:
       - name: The vendored extracts cover what the shapes walk
         run: python tools/ontology/vendor_upstream.py
 
+      - name: The corpus index is not stale
+        run: python tools/ontology/build_index.py --check
+
       - name: Tests
         run: python -m pytest tests/ -q -p no:randomly
 

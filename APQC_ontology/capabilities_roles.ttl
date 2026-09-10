@@ -1,4 +1,4 @@
-@prefix ex:   <http://example.org/apqc#> .
+@prefix ex:   <https://fandaws.com/ontology/apqc#> .
 @prefix cco:  <https://www.commoncoreontologies.org/> .
 @prefix obo:  <http://purl.obolibrary.org/obo/> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
@@ -33,7 +33,7 @@
 #   Neither is a Process. Processes are the actions; these are borne by agents.
 # =====================================================================
 
-<http://example.org/apqc/capabilities> a owl:Ontology ;
+<https://fandaws.com/ontology/apqc/capabilities> a owl:Ontology ;
     dct:title "APQC Phase 1: Capability / Role bridge layer" ;
     owl:versionInfo "0.2.0" ;
     rdfs:comment "Shared capability/role registry and the process->agent dispatch bridge. CCO pin v2.0 (2024-11-06); ADR-001. Merge-only shared layer: no slice imports it; merged into the corpus only for the coherence check and for dispatch/matchability. Promoted from the capabilities/ v0.1.0 seed; the three ex:requires* properties were promoted from shape-referenced markers to declared object properties." .

@@ -1,5 +1,5 @@
-@prefix : <http://example.org/apqc/slice/1.0#> .
-@prefix ex: <http://example.org/apqc#> .
+@prefix : <https://fandaws.com/ontology/apqc/slice/1.0#> .
+@prefix ex: <https://fandaws.com/ontology/apqc#> .
 @prefix cco: <https://www.commoncoreontologies.org/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
@@ -7,12 +7,12 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix apqc: <http://example.org/apqc/scheme#> .
+@prefix apqc: <https://fandaws.com/ontology/apqc/scheme#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <http://example.org/apqc/slice/1.0> .
+@base <https://fandaws.com/ontology/apqc/slice/1.0> .
 
-<http://example.org/apqc/slice/1.0> rdf:type owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/1.0> rdf:type owl:Ontology ;
                                      dct:source "APQC Process Classification Framework (Cross-Industry)" ;
                                      dct:title "APQC reality-layer slice 1.0: Develop Vision and Strategy" ;
                                      rdfs:comment "Reality-layer module for APQC Category 1.0 (groups 1.1-1.4). CCO pin v2.0 (2024-11-06). Follows ADR-001 two-layer policy: this is the reality layer only; the curatorial catalog (skos) lives in apqc-catalog.ttl. Self-contained: the shared act genera it uses are inlined from the apqc-ext.ttl registry, so it validates standalone against the pinned CCO/BFO closure with no extension merge." ;
@@ -22,25 +22,25 @@
 #    Annotation properties
 #################################################################
 
-###  http://example.org/apqc#apqcSourceText
+###  https://fandaws.com/ontology/apqc#apqcSourceText
 ex:apqcSourceText rdf:type owl:AnnotationProperty ;
                   rdfs:comment "Verbatim APQC Element Description retained for provenance." ;
                   rdfs:label "APQC source description" .
 
 
-###  http://example.org/apqc#designatesProcessType
+###  https://fandaws.com/ontology/apqc#designatesProcessType
 ex:designatesProcessType rdf:type owl:AnnotationProperty ;
                          rdfs:comment "ADR-001 R4 bridge: catalog node -> reality-layer process universal or capability. Populated during reality-layer modeling, NOT by the catalog generator." ;
                          rdfs:label "designates process type" .
 
 
-###  http://example.org/apqc#hierarchyID
+###  https://fandaws.com/ontology/apqc#hierarchyID
 ex:hierarchyID rdf:type owl:AnnotationProperty ;
                rdfs:comment "Positional dotted-decimal locator. NON-STABLE across PCF versions. Reference only; never for IRI minting or subsumption." ;
                rdfs:label "APQC Hierarchy ID" .
 
 
-###  http://example.org/apqc#pcfID
+###  https://fandaws.com/ontology/apqc#pcfID
 ex:pcfID rdf:type owl:AnnotationProperty ;
          rdfs:comment "Stable APQC identifier. Anchor IRIs to this; it persists across PCF versions." ;
          rdfs:label "APQC PCF ID" .
@@ -2630,7 +2630,7 @@ cco:ont00001773 rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
-###  http://example.org/apqc#ActOfAcquisition
+###  https://fandaws.com/ontology/apqc#ActOfAcquisition
 ex:ActOfAcquisition rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000228 ;
                     rdfs:comment "Local extension (D9). Rejected cco:ont00000950 'Act of Maintenance' (modifying Material Artifacts) and cco:ont00000402 'Act of Communication' (mere ICE transfer). Securing/obtaining a held entity anchors at the generic Planned Act. Expected to recur in procurement/asset-acquisition categories (4.0, 10.0)." ;
@@ -2638,7 +2638,7 @@ ex:ActOfAcquisition rdf:type owl:Class ;
                     skos:definition "A Planned Act in which an Agent obtains from some authority or supplier an entity (such as an authorization, license, or resource) that the Agent did not previously hold." .
 
 
-###  http://example.org/apqc#ActOfAnalysis
+###  https://fandaws.com/ontology/apqc#ActOfAnalysis
 ex:ActOfAnalysis rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000366 ;
                  rdfs:comment "Local extension (D9). CCO 2.0 has no generic analysis class; analysis is information processing, so it is anchored under cco:ont00000366." ;
@@ -2646,7 +2646,7 @@ ex:ActOfAnalysis rdf:type owl:Class ;
                  skos:definition "An Act of Information Processing in which an Agent examines one or more input Information Content Entities and produces an Information Content Entity that represents an understanding of their subject matter." .
 
 
-###  http://example.org/apqc#ActOfFormulation
+###  https://fandaws.com/ontology/apqc#ActOfFormulation
 ex:ActOfFormulation rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000511 ;
                     rdfs:comment "Local extension (D9). Anchored under cco:ont00000511 (Act of Planning) because formulating a strategy/mission/design is making a plan to achieve an objective; its output is a Directive ICE. Recurs across develop/define/compose-a-directive processes corpus-wide." ;
@@ -2654,7 +2654,7 @@ ex:ActOfFormulation rdf:type owl:Class ;
                     skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." .
 
 
-###  http://example.org/apqc#ActOfIdentification
+###  https://fandaws.com/ontology/apqc#ActOfIdentification
 ex:ActOfIdentification rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000366 ;
                        rdfs:comment "Local extension (D9). NOT cco:ont00001261 'Act of Identifying' (a communication act). APQC 'Identify ...' denotes discernment, i.e. information processing." ;
@@ -2662,7 +2662,7 @@ ex:ActOfIdentification rdf:type owl:Class ;
                        skos:definition "An Act of Information Processing in which an Agent discerns and enumerates entities of a given kind and produces an Information Content Entity that registers them." .
 
 
-###  http://example.org/apqc#ActOfSelection
+###  https://fandaws.com/ontology/apqc#ActOfSelection
 ex:ActOfSelection rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000366 ;
                   rdfs:comment "Local extension (D9). Anchored under cco:ont00000366 (Act of Information Processing): receives candidate-option ICEs and yields a decision ICE. Distinct from Act of Appraisal (judges without committing) and Act of Planning. NOTE: ratifying a single already-settled option is NOT selection (no candidate set) -- anchor such acts at cco:ont00000228 (Planned Act)." ;
@@ -2670,7 +2670,7 @@ ex:ActOfSelection rdf:type owl:Class ;
                   skos:definition "An Act of Information Processing in which an Agent chooses one or more options from a set of candidates and produces a Directive Information Content Entity that prescribes the chosen option(s)." .
 
 
-###  http://example.org/apqc#BusinessAuthorization
+###  https://fandaws.com/ontology/apqc#BusinessAuthorization
 ex:BusinessAuthorization rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000751 ;
                          rdfs:comment "Minted for 1.4.1.2 output. Subclass of cco:ont00000751 (Action Permission, altLabel Authorization/License), itself a Directive ICE." ;
@@ -2678,7 +2678,7 @@ ex:BusinessAuthorization rdf:type owl:Class ;
                          skos:definition "An Action Permission that authorizes the conduct of a particular business or business activity." .
 
 
-###  http://example.org/apqc#BusinessConcept
+###  https://fandaws.com/ontology/apqc#BusinessConcept
 ex:BusinessConcept rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:comment "Output of process group 1.1 'Define the business concept and long-term vision'." ;
@@ -2686,7 +2686,7 @@ ex:BusinessConcept rdf:type owl:Class ;
                    skos:definition "A Directive Information Content Entity that prescribes the conceptual framework of an organization's business activity with long-term applicability." .
 
 
-###  http://example.org/apqc#BusinessModel
+###  https://fandaws.com/ontology/apqc#BusinessModel
 ex:BusinessModel rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000965 ;
                  rdfs:comment "Output of group 1.4 'Develop and maintain business models'. Directive: an adopted business model serves as the guiding model for day-to-day operations." ;
@@ -2694,7 +2694,7 @@ ex:BusinessModel rdf:type owl:Class ;
                  skos:definition "A Directive Information Content Entity that prescribes how an organization creates, delivers, and captures value, including its products, target market, and core economics." .
 
 
-###  http://example.org/apqc#BusinessModelAdoptionDecision
+###  https://fandaws.com/ontology/apqc#BusinessModelAdoptionDecision
 ex:BusinessModelAdoptionDecision rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000965 ;
                                  rdfs:comment "Minted for 1.4.1.4 output. Directive (a decision prescribes) rather than Descriptive." ;
@@ -2702,7 +2702,7 @@ ex:BusinessModelAdoptionDecision rdf:type owl:Class ;
                                  skos:definition "A Directive Information Content Entity that prescribes that a particular business model is to serve as the accepted basis of an organization's operations." .
 
 
-###  http://example.org/apqc#BusinessModelGovernanceCapability
+###  https://fandaws.com/ontology/apqc#BusinessModelGovernanceCapability
 ex:BusinessModelGovernanceCapability rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000568 ,
                                                      [ rdf:type owl:Restriction ;
@@ -2714,7 +2714,7 @@ ex:BusinessModelGovernanceCapability rdf:type owl:Class ;
                                      skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to maintain and govern its business models through intentional acts of review, update, and control." .
 
 
-###  http://example.org/apqc#BusinessModelGovernancePolicy
+###  https://fandaws.com/ontology/apqc#BusinessModelGovernancePolicy
 ex:BusinessModelGovernancePolicy rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000965 ;
                                  rdfs:comment "Output of 1.4.3 'Establish business model governance' and the maintenance-parameter nodes of 1.4.2." ;
@@ -2722,14 +2722,14 @@ ex:BusinessModelGovernancePolicy rdf:type owl:Class ;
                                  skos:definition "A Directive Information Content Entity that prescribes the responsibilities, control mechanisms, and review parameters for managing an organization's business models." .
 
 
-###  http://example.org/apqc#BusinessModelInformation
+###  https://fandaws.com/ontology/apqc#BusinessModelInformation
 ex:BusinessModelInformation rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:label "Business Model Information" ;
                             skos:definition "A Descriptive Information Content Entity that describes the materials, goals, and process facts gathered as the basis for developing or revising a business model." .
 
 
-###  http://example.org/apqc#BusinessModelMaintenancePlan
+###  https://fandaws.com/ontology/apqc#BusinessModelMaintenancePlan
 ex:BusinessModelMaintenancePlan rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000965 ;
                                 rdfs:comment "Minted for 1.4.2.1 output. Directive (it prescribes the maintenance procedure)." ;
@@ -2737,7 +2737,7 @@ ex:BusinessModelMaintenancePlan rdf:type owl:Class ;
                                 skos:definition "A Directive Information Content Entity that prescribes the timeline, procedures, and responsibilities for reviewing and updating a business model." .
 
 
-###  http://example.org/apqc#BusinessModelSourceMaterial
+###  https://fandaws.com/ontology/apqc#BusinessModelSourceMaterial
 ex:BusinessModelSourceMaterial rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000853 ;
                                rdfs:comment "Minted (Gate-F) for P20946 'Assemble business model information' as the definitional input its Act-of-Information-Processing genus receives. Distinct from ex:BusinessModelInformation (the assembled output)." ;
@@ -2745,7 +2745,7 @@ ex:BusinessModelSourceMaterial rdf:type owl:Class ;
                                skos:definition "A Descriptive Information Content Entity comprising the relevant materials, documents, and process facts gathered as the raw input from which a business model is developed." .
 
 
-###  http://example.org/apqc#BusinessStrategy
+###  https://fandaws.com/ontology/apqc#BusinessStrategy
 ex:BusinessStrategy rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000974 ;
                     rdfs:comment "Reuses CCO Plan (ont00000974) rather than minting under ont00000965, because the CCO Plan definition ('prescribes some set of intended Intentional Acts through which some Agent expects to achieve some Objective') fits a strategy exactly. Base genus for the strategy outputs of 1.2.3, 1.2.7, and 1.2.8." ;
@@ -2753,7 +2753,7 @@ ex:BusinessStrategy rdf:type owl:Class ;
                     skos:definition "A Plan that prescribes the set of intended intentional acts through which an organization expects to achieve its long-term business objectives." .
 
 
-###  http://example.org/apqc#BusinessUnit
+###  https://fandaws.com/ontology/apqc#BusinessUnit
 ex:BusinessUnit rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00001180 ,
                                 [ rdf:type owl:Restriction ;
@@ -2764,7 +2764,7 @@ ex:BusinessUnit rdf:type owl:Class ;
                 skos:definition "An Organization that bears a business unit role within a larger parent organization." .
 
 
-###  http://example.org/apqc#BusinessUnitRole
+###  https://fandaws.com/ontology/apqc#BusinessUnitRole
 ex:BusinessUnitRole rdf:type owl:Class ;
                     rdfs:subClassOf obo:BFO_0000023 ;
                     rdfs:comment "Borne by the sub-organization (the unit), not by the business-unit-strategy ICE about it." ;
@@ -2772,14 +2772,14 @@ ex:BusinessUnitRole rdf:type owl:Class ;
                     skos:definition "A Role that is borne by an Organization in virtue of being a constituent operating unit within a larger parent organization." .
 
 
-###  http://example.org/apqc#BusinessValueAssessment
+###  https://fandaws.com/ontology/apqc#BusinessValueAssessment
 ex:BusinessValueAssessment rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:label "Business Value Assessment" ;
                            skos:definition "A Descriptive Information Content Entity that describes the assessed business or customer value of a strategic priority or initiative." .
 
 
-###  http://example.org/apqc#BusinessValueDriver
+###  https://fandaws.com/ontology/apqc#BusinessValueDriver
 ex:BusinessValueDriver rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:comment "Minted for PCF 19982/19983: distinct from ex:PerformanceMetric (a target measure) -- a driver is the underlying value-causing factor." ;
@@ -2787,7 +2787,7 @@ ex:BusinessValueDriver rdf:type owl:Class ;
                        skos:definition "A Descriptive Information Content Entity that describes a key operational, financial, or sustainability indicator responsible for driving business value." .
 
 
-###  http://example.org/apqc#BusinessValueDriverBaseline
+###  https://fandaws.com/ontology/apqc#BusinessValueDriverBaseline
 ex:BusinessValueDriverBaseline rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000853 ;
                                rdfs:comment "Minted for PCF 19983/19984: distinct from ex:ProcessBaseline (process-scoped) -- this baselines a value driver. Distinct from ex:PerformanceRecord (actuals)." ;
@@ -2795,7 +2795,7 @@ ex:BusinessValueDriverBaseline rdf:type owl:Class ;
                                skos:definition "A Descriptive Information Content Entity that records a baseline standard measure for a business value driver against which later performance is assessed." .
 
 
-###  http://example.org/apqc#CommunicationStrategy
+###  https://fandaws.com/ontology/apqc#CommunicationStrategy
 ex:CommunicationStrategy rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000974 ;
                          rdfs:comment "Reuses CCO Plan. Output of the 'communicate' nodes (1.1.4.3, 1.2.1.3, 1.2.9, 1.3.3.2, 1.2.8.2.7 content strategy)." ;
@@ -2803,7 +2803,7 @@ ex:CommunicationStrategy rdf:type owl:Class ;
                          skos:definition "A Plan that prescribes the intended channels and acts for conveying a mission, vision, or strategy to stakeholders." .
 
 
-###  http://example.org/apqc#CompetitiveAnalysisCapability
+###  https://fandaws.com/ontology/apqc#CompetitiveAnalysisCapability
 ex:CompetitiveAnalysisCapability rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00001379 ,
                                                  [ rdf:type owl:Restriction ;
@@ -2815,21 +2815,21 @@ ex:CompetitiveAnalysisCapability rdf:type owl:Class ;
                                  skos:definition "An Agent Capability that is realized in Acts of Analyzing Competitors." .
 
 
-###  http://example.org/apqc#CompetitiveBenchmark
+###  https://fandaws.com/ontology/apqc#CompetitiveBenchmark
 ex:CompetitiveBenchmark rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:label "Competitive Benchmark" ;
                         skos:definition "A Descriptive Information Content Entity that describes a juxtaposition of processes and performance metrics against competitors." .
 
 
-###  http://example.org/apqc#CompetitiveForcesAssessment
+###  https://fandaws.com/ontology/apqc#CompetitiveForcesAssessment
 ex:CompetitiveForcesAssessment rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000853 ;
                                rdfs:label "Competitive Forces Assessment" ;
                                skos:definition "A Descriptive Information Content Entity that describes a judgement of the competitive forces in a marketplace." .
 
 
-###  http://example.org/apqc#CompetitiveIntelligenceAnalyst
+###  https://fandaws.com/ontology/apqc#CompetitiveIntelligenceAnalyst
 ex:CompetitiveIntelligenceAnalyst rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00001017 ,
                                                   [ rdf:type owl:Restriction ;
@@ -2845,14 +2845,14 @@ ex:CompetitiveIntelligenceAnalyst rdf:type owl:Class ;
                                   skos:definition "An Agent that has a competitive analysis capability and bears a competitive-intelligence analyst role." .
 
 
-###  http://example.org/apqc#CompetitiveIntelligenceAnalystRole
+###  https://fandaws.com/ontology/apqc#CompetitiveIntelligenceAnalystRole
 ex:CompetitiveIntelligenceAnalystRole rdf:type owl:Class ;
                                       rdfs:subClassOf obo:BFO_0000023 ;
                                       rdfs:label "Competitive Intelligence Analyst Role" ;
                                       skos:definition "A Role that is borne by an Agent in virtue of being tasked with analyzing competitors on behalf of an Organization." .
 
 
-###  http://example.org/apqc#Competitor
+###  https://fandaws.com/ontology/apqc#Competitor
 ex:Competitor rdf:type owl:Class ;
               rdfs:subClassOf cco:ont00001180 ,
                               [ rdf:type owl:Restriction ;
@@ -2864,7 +2864,7 @@ ex:Competitor rdf:type owl:Class ;
               skos:definition "An Organization that bears a competitor role in relation to some focal organization or market." .
 
 
-###  http://example.org/apqc#CompetitorAnalysis
+###  https://fandaws.com/ontology/apqc#CompetitorAnalysis
 ex:CompetitorAnalysis rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ,
                                       [ rdf:type owl:Restriction ;
@@ -2877,14 +2877,14 @@ ex:CompetitorAnalysis rdf:type owl:Class ;
                       skos:example "A report comparing two competitors' pricing, product capabilities, and market position." .
 
 
-###  http://example.org/apqc#CompetitorData
+###  https://fandaws.com/ontology/apqc#CompetitorData
 ex:CompetitorData rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:label "Competitor Data" ;
                   skos:definition "A Descriptive Information Content Entity that describes competitors and their products or services." .
 
 
-###  http://example.org/apqc#CompetitorRole
+###  https://fandaws.com/ontology/apqc#CompetitorRole
 ex:CompetitorRole rdf:type owl:Class ;
                   rdfs:subClassOf obo:BFO_0000023 ;
                   rdfs:comment "Borne by an independent continuant (the rival Organization), never by the analysis ICE that is about it." ;
@@ -2892,14 +2892,14 @@ ex:CompetitorRole rdf:type owl:Class ;
                   skos:definition "A Role that is borne by an Organization in virtue of competing with a focal organization in a market." .
 
 
-###  http://example.org/apqc#CoreCompetencyAnalysis
+###  https://fandaws.com/ontology/apqc#CoreCompetencyAnalysis
 ex:CoreCompetencyAnalysis rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:label "Core Competency Analysis" ;
                           skos:definition "A Descriptive Information Content Entity that describes the strategically significant competences and capacities that differentiate an organization in its market." .
 
 
-###  http://example.org/apqc#CurrentBusinessAnalysis
+###  https://fandaws.com/ontology/apqc#CurrentBusinessAnalysis
 ex:CurrentBusinessAnalysis rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:comment "Minted (Gate-F) for P10044 'Define current business'. Descriptive (it represents an understanding of the status quo), so it agrees with the ex:ActOfAnalysis genus; ex:BusinessConcept (Directive) is reserved for the formulation acts P10045/P17040." ;
@@ -2907,7 +2907,7 @@ ex:CurrentBusinessAnalysis rdf:type owl:Class ;
                            skos:definition "A Descriptive Information Content Entity that describes the de-facto core of what a business does and the capacities that underpin it, as understood at the present time." .
 
 
-###  http://example.org/apqc#Customer
+###  https://fandaws.com/ontology/apqc#Customer
 ex:Customer rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00001017 ,
                             [ rdf:type owl:Restriction ;
@@ -2919,21 +2919,21 @@ ex:Customer rdf:type owl:Class ;
             skos:definition "An Agent that bears a customer role." .
 
 
-###  http://example.org/apqc#CustomerData
+###  https://fandaws.com/ontology/apqc#CustomerData
 ex:CustomerData rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:label "Customer Data" ;
                 skos:definition "A Descriptive Information Content Entity that describes customers, their characteristics, and their needs and wants." .
 
 
-###  http://example.org/apqc#CustomerExperienceAssessment
+###  https://fandaws.com/ontology/apqc#CustomerExperienceAssessment
 ex:CustomerExperienceAssessment rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ;
                                 rdfs:label "Customer Experience Assessment" ;
                                 skos:definition "A Descriptive Information Content Entity that describes measured customer experience, satisfaction, and feedback across touchpoints." .
 
 
-###  http://example.org/apqc#CustomerExperienceManagementCapability
+###  https://fandaws.com/ontology/apqc#CustomerExperienceManagementCapability
 ex:CustomerExperienceManagementCapability rdf:type owl:Class ;
                                           rdfs:subClassOf cco:ont00000568 ;
                                           rdfs:comment "Supports the standing-function reading of 1.2.8 'Develop customer experience strategy' and its design sub-nodes." ;
@@ -2941,7 +2941,7 @@ ex:CustomerExperienceManagementCapability rdf:type owl:Class ;
                                           skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to register, design, and improve the experience of its customers through intentional acts of assessment and design." .
 
 
-###  http://example.org/apqc#CustomerExperienceRoadmap
+###  https://fandaws.com/ontology/apqc#CustomerExperienceRoadmap
 ex:CustomerExperienceRoadmap rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000974 ;
                              rdfs:comment "Output of 1.2.8.3/1.2.8.4 customer-experience support structure and roadmap." ;
@@ -2949,28 +2949,28 @@ ex:CustomerExperienceRoadmap rdf:type owl:Class ;
                              skos:definition "A Plan that prescribes the intended capabilities, behaviors, and timeline for delivering a defined customer experience." .
 
 
-###  http://example.org/apqc#CustomerFeedback
+###  https://fandaws.com/ontology/apqc#CustomerFeedback
 ex:CustomerFeedback rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:label "Customer Feedback" ;
                     skos:definition "A Descriptive Information Content Entity that describes responses, reactions, sentiments, and insights expressed by customers about products, services, or experiences." .
 
 
-###  http://example.org/apqc#CustomerJourneyMap
+###  https://fandaws.com/ontology/apqc#CustomerJourneyMap
 ex:CustomerJourneyMap rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Customer Journey Map" ;
                       skos:definition "A Descriptive Information Content Entity that describes the sequence of a customer's interactions with an organization from initial contact through long-term relationship." .
 
 
-###  http://example.org/apqc#CustomerNeedsAssessment
+###  https://fandaws.com/ontology/apqc#CustomerNeedsAssessment
 ex:CustomerNeedsAssessment rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:label "Customer Needs Assessment" ;
                            skos:definition "A Descriptive Information Content Entity that describes the products and services that are needed or wanted by customers in a relevant market." .
 
 
-###  http://example.org/apqc#CustomerProfile
+###  https://fandaws.com/ontology/apqc#CustomerProfile
 ex:CustomerProfile rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ,
                                    [ rdf:type owl:Restriction ;
@@ -2982,7 +2982,7 @@ ex:CustomerProfile rdf:type owl:Class ;
                    skos:definition "A Descriptive Information Content Entity that describes a group of customers with respect to their characteristics, needs, and behavioral patterns." .
 
 
-###  http://example.org/apqc#CustomerRole
+###  https://fandaws.com/ontology/apqc#CustomerRole
 ex:CustomerRole rdf:type owl:Class ;
                 rdfs:subClassOf obo:BFO_0000023 ;
                 rdfs:comment "Minted because CCO 2.0 has no Customer class/role. Borne by an independent continuant (the buying Agent/Organization), never by the customer-profile ICE that is about it." ;
@@ -2990,7 +2990,7 @@ ex:CustomerRole rdf:type owl:Class ;
                 skos:definition "A Role that is borne by an Agent or Organization in virtue of acquiring, consuming, contracting for, or being a target acquirer of the goods or services of a focal organization." .
 
 
-###  http://example.org/apqc#CustomerTouchpointInventory
+###  https://fandaws.com/ontology/apqc#CustomerTouchpointInventory
 ex:CustomerTouchpointInventory rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000853 ;
                                rdfs:comment "Minted (Gate-F) for P19961 'Identify and review customer touchpoints'. A register of discerned touchpoints, agreeing with the ex:ActOfIdentification genus; replaces the mis-typed ex:CustomerExperienceAssessment output." ;
@@ -2998,7 +2998,7 @@ ex:CustomerTouchpointInventory rdf:type owl:Class ;
                                skos:definition "A Descriptive Information Content Entity that registers the touchpoints through which customers interact with an organization, such as billboards, web sites, direct mail, and service calls." .
 
 
-###  http://example.org/apqc#CustomerValueAssessment
+###  https://fandaws.com/ontology/apqc#CustomerValueAssessment
 ex:CustomerValueAssessment rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:comment "Minted (Gate-F) for P19979 'Determine the customer value'. Descriptive judgement of value, parallel to ex:BusinessValueAssessment (the sibling P19978 output)." ;
@@ -3006,49 +3006,49 @@ ex:CustomerValueAssessment rdf:type owl:Class ;
                            skos:definition "A Descriptive Information Content Entity that describes the assessed value a customer derives from a product or service relative to what the customer gives up to obtain it." .
 
 
-###  http://example.org/apqc#DealOptionAnalysis
+###  https://fandaws.com/ontology/apqc#DealOptionAnalysis
 ex:DealOptionAnalysis rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Deal Option Analysis" ;
                       skos:definition "A Descriptive Information Content Entity that describes an appraisal of acquisition, merger, de-merger, or divestment options for an organization." .
 
 
-###  http://example.org/apqc#DemographicAnalysis
+###  https://fandaws.com/ontology/apqc#DemographicAnalysis
 ex:DemographicAnalysis rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:label "Demographic Analysis" ;
                        skos:definition "A Descriptive Information Content Entity that describes the size, distribution, and composition of relevant populations." .
 
 
-###  http://example.org/apqc#DemographicData
+###  https://fandaws.com/ontology/apqc#DemographicData
 ex:DemographicData rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ;
                    rdfs:label "Demographic Data" ;
                    skos:definition "A Descriptive Information Content Entity that describes the size, distribution, and composition of populations." .
 
 
-###  http://example.org/apqc#DueDiligenceReport
+###  https://fandaws.com/ontology/apqc#DueDiligenceReport
 ex:DueDiligenceReport rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Due-Diligence Report" ;
                       skos:definition "A Descriptive Information Content Entity that describes verified tangible and substantial facts about an entity being considered for a restructuring transaction." .
 
 
-###  http://example.org/apqc#EcologicalConcernRegister
+###  https://fandaws.com/ontology/apqc#EcologicalConcernRegister
 ex:EcologicalConcernRegister rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:label "Ecological Concern Register" ;
                              skos:definition "A Descriptive Information Content Entity that describes identified ecological concerns." .
 
 
-###  http://example.org/apqc#EcologicalData
+###  https://fandaws.com/ontology/apqc#EcologicalData
 ex:EcologicalData rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:label "Ecological Data" ;
                   skos:definition "A Descriptive Information Content Entity that describes ecological factors and shifts relevant to an organization." .
 
 
-###  http://example.org/apqc#ExternalEnvironmentAssessment
+###  https://fandaws.com/ontology/apqc#ExternalEnvironmentAssessment
 ex:ExternalEnvironmentAssessment rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000853 ;
                                  rdfs:comment "Carried over from the 1.1.1 reference module so this module is self-contained." ;
@@ -3057,7 +3057,7 @@ ex:ExternalEnvironmentAssessment rdf:type owl:Class ;
                                  skos:example "A strategy team's annual environmental scan report." .
 
 
-###  http://example.org/apqc#FeedbackCriteriaSpecification
+###  https://fandaws.com/ontology/apqc#FeedbackCriteriaSpecification
 ex:FeedbackCriteriaSpecification rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000965 ;
                                  rdfs:comment "Minted for 1.4.2.2 output. Directive (it prescribes admissible feedback)." ;
@@ -3065,7 +3065,7 @@ ex:FeedbackCriteriaSpecification rdf:type owl:Class ;
                                  skos:definition "A Directive Information Content Entity that prescribes which types of feedback are to be taken into consideration during business-model maintenance." .
 
 
-###  http://example.org/apqc#FeedbackPrioritization
+###  https://fandaws.com/ontology/apqc#FeedbackPrioritization
 ex:FeedbackPrioritization rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:comment "Minted for 1.4.2.3 output. Descriptive (it represents a judgement of importance)." ;
@@ -3073,21 +3073,21 @@ ex:FeedbackPrioritization rdf:type owl:Class ;
                           skos:definition "A Descriptive Information Content Entity that describes the relative importance of items of incoming feedback, identifying which are critical to act upon." .
 
 
-###  http://example.org/apqc#FinancialHealthAnalysis
+###  https://fandaws.com/ontology/apqc#FinancialHealthAnalysis
 ex:FinancialHealthAnalysis rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:label "Financial Health Analysis" ;
                            skos:definition "A Descriptive Information Content Entity that describes an appraisal of an organization's financial state and capacities." .
 
 
-###  http://example.org/apqc#FinancialStatement
+###  https://fandaws.com/ontology/apqc#FinancialStatement
 ex:FinancialStatement rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Financial Statement" ;
                       skos:definition "A Descriptive Information Content Entity that describes the financial state of an organization, including its balance sheet, income, cash flows, equity, and liquidity." .
 
 
-###  http://example.org/apqc#GoNoGoDecision
+###  https://fandaws.com/ontology/apqc#GoNoGoDecision
 ex:GoNoGoDecision rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000965 ;
                   rdfs:comment "Carried over from the 1.1.1 reference module. Directive (not Descriptive) because a decision prescribes rather than describes." ;
@@ -3095,7 +3095,7 @@ ex:GoNoGoDecision rdf:type owl:Class ;
                   skos:definition "A Directive Information Content Entity that prescribes whether to proceed or not proceed with a course of action." .
 
 
-###  http://example.org/apqc#IPThreatMeasureSpecification
+###  https://fandaws.com/ontology/apqc#IPThreatMeasureSpecification
 ex:IPThreatMeasureSpecification rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000965 ;
                                 rdfs:comment "Carried over from the 1.1.1 reference module." ;
@@ -3104,7 +3104,7 @@ ex:IPThreatMeasureSpecification rdf:type owl:Class ;
                                 skos:example "A documented procedure listing IP-threat indicators and the steps to screen for them." .
 
 
-###  http://example.org/apqc#InitiativeSelectionDecision
+###  https://fandaws.com/ontology/apqc#InitiativeSelectionDecision
 ex:InitiativeSelectionDecision rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000965 ;
                                rdfs:comment "Directive (a decision prescribes a course of action), parallel to ex:GoNoGoDecision in the 1.1.1 reference module. Output of 1.3.3 'Select strategic initiatives'." ;
@@ -3112,14 +3112,14 @@ ex:InitiativeSelectionDecision rdf:type owl:Class ;
                                skos:definition "A Directive Information Content Entity that prescribes which strategic initiatives an organization will pursue." .
 
 
-###  http://example.org/apqc#InternalCapabilityData
+###  https://fandaws.com/ontology/apqc#InternalCapabilityData
 ex:InternalCapabilityData rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:label "Internal Capability Data" ;
                           skos:definition "A Descriptive Information Content Entity that describes an organization's in-house skills, resources, operations, and capacities." .
 
 
-###  http://example.org/apqc#InternalEnvironmentAssessment
+###  https://fandaws.com/ontology/apqc#InternalEnvironmentAssessment
 ex:InternalEnvironmentAssessment rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000853 ;
                                  rdfs:comment "Internal counterpart of ex:ExternalEnvironmentAssessment from the 1.1.1 reference module." ;
@@ -3127,28 +3127,28 @@ ex:InternalEnvironmentAssessment rdf:type owl:Class ;
                                  skos:definition "A Descriptive Information Content Entity that describes a big-picture understanding of an organization's internal skills, resources, and capacities." .
 
 
-###  http://example.org/apqc#InternalOperationsAnalysis
+###  https://fandaws.com/ontology/apqc#InternalOperationsAnalysis
 ex:InternalOperationsAnalysis rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000853 ;
                               rdfs:label "Internal Operations Analysis" ;
                               skos:definition "A Descriptive Information Content Entity that describes the key elements and measured effectiveness of an organization's internal operations." .
 
 
-###  http://example.org/apqc#MacroeconomicData
+###  https://fandaws.com/ontology/apqc#MacroeconomicData
 ex:MacroeconomicData rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:label "Macroeconomic Data" ;
                      skos:definition "A Descriptive Information Content Entity that describes macroeconomic indicators such as interest rates, taxation, commodity prices, and unemployment." .
 
 
-###  http://example.org/apqc#MacroeconomicTrendAnalysis
+###  https://fandaws.com/ontology/apqc#MacroeconomicTrendAnalysis
 ex:MacroeconomicTrendAnalysis rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000853 ;
                               rdfs:label "Macroeconomic Trend Analysis" ;
                               skos:definition "A Descriptive Information Content Entity that describes medium- to long-term macroeconomic shifts relevant to an organization." .
 
 
-###  http://example.org/apqc#MarketData
+###  https://fandaws.com/ontology/apqc#MarketData
 ex:MarketData rdf:type owl:Class ;
               rdfs:subClassOf cco:ont00000853 ;
               rdfs:comment "Carried over from the 1.1.1 reference module (same IRI, same definition) so this self-contained module has every filler declared." ;
@@ -3156,7 +3156,7 @@ ex:MarketData rdf:type owl:Class ;
               skos:definition "A Descriptive Information Content Entity that describes features of a market." .
 
 
-###  http://example.org/apqc#MissionStatement
+###  https://fandaws.com/ontology/apqc#MissionStatement
 ex:MissionStatement rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000965 ;
                     rdfs:comment "Directive: a mission prescribes intended direction rather than describing a state of affairs." ;
@@ -3164,7 +3164,7 @@ ex:MissionStatement rdf:type owl:Class ;
                     skos:definition "A Directive Information Content Entity that prescribes the overarching purpose and practicable targets an organization aims to pursue." .
 
 
-###  http://example.org/apqc#ModelIntegrationPointRegister
+###  https://fandaws.com/ontology/apqc#ModelIntegrationPointRegister
 ex:ModelIntegrationPointRegister rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000853 ;
                                  rdfs:comment "Minted for 1.4.1.3 output. Descriptive (it represents integration points) rather than Directive." ;
@@ -3172,14 +3172,14 @@ ex:ModelIntegrationPointRegister rdf:type owl:Class ;
                                  skos:definition "A Descriptive Information Content Entity that describes the points at which a new business model must integrate with pre-existing models to remain coherent with them." .
 
 
-###  http://example.org/apqc#OrganizationalCharacteristicsAnalysis
+###  https://fandaws.com/ontology/apqc#OrganizationalCharacteristicsAnalysis
 ex:OrganizationalCharacteristicsAnalysis rdf:type owl:Class ;
                                          rdfs:subClassOf cco:ont00000853 ;
                                          rdfs:label "Organizational Characteristics Analysis" ;
                                          skos:definition "A Descriptive Information Content Entity that describes the key attributes differentiating an organization in its market and underpinning its operations." .
 
 
-###  http://example.org/apqc#OrganizationalDesign
+###  https://fandaws.com/ontology/apqc#OrganizationalDesign
 ex:OrganizationalDesign rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000965 ;
                         rdfs:comment "Output of 1.2.5 'Create organizational design'. Directive: a design prescribes (serves as a model for) the structure to be realized." ;
@@ -3187,7 +3187,7 @@ ex:OrganizationalDesign rdf:type owl:Class ;
                         skos:definition "A Directive Information Content Entity that prescribes the intended structure and relationships among an organization's units and roles." .
 
 
-###  http://example.org/apqc#OrganizationalObjective
+###  https://fandaws.com/ontology/apqc#OrganizationalObjective
 ex:OrganizationalObjective rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000476 ;
                            rdfs:comment "Reuses CCO Objective (ont00000476). Output of 1.2.6 'Develop and set organizational objectives' and the priority statements of 1.3.1." ;
@@ -3195,7 +3195,7 @@ ex:OrganizationalObjective rdf:type owl:Class ;
                            skos:definition "An Objective that prescribes a projected state an organization intends to achieve in pursuit of its mission." .
 
 
-###  http://example.org/apqc#OrganizationalStructureAdoptionDecision
+###  https://fandaws.com/ontology/apqc#OrganizationalStructureAdoptionDecision
 ex:OrganizationalStructureAdoptionDecision rdf:type owl:Class ;
                                            rdfs:subClassOf cco:ont00000965 ;
                                            rdfs:comment "Minted (Gate-F) for P10056 'Migrate to new organization', parallel to ex:BusinessModelAdoptionDecision. Subject-matched (an organizational structure, not a strategic initiative), replacing the mis-subjected ex:InitiativeSelectionDecision." ;
@@ -3203,14 +3203,14 @@ ex:OrganizationalStructureAdoptionDecision rdf:type owl:Class ;
                                            skos:definition "A Directive Information Content Entity that prescribes that a particular organizational structure is to serve as the accepted basis of an organization's operations." .
 
 
-###  http://example.org/apqc#OrganizationalStructureAssessment
+###  https://fandaws.com/ontology/apqc#OrganizationalStructureAssessment
 ex:OrganizationalStructureAssessment rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000853 ;
                                      rdfs:label "Organizational Structure Assessment" ;
                                      skos:definition "A Descriptive Information Content Entity that describes the evaluated breadth, depth, and implications of an organization's structural makeup." .
 
 
-###  http://example.org/apqc#P10015
+###  https://fandaws.com/ontology/apqc#P10015
 ex:P10015 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -3262,7 +3262,7 @@ ex:P10015 rdf:type owl:Class ;
           skos:example "An organization's annual strategic-planning programme that produces a refreshed mission, long-term strategy, and organizational design." .
 
 
-###  http://example.org/apqc#P10016
+###  https://fandaws.com/ontology/apqc#P10016
 ex:P10016 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -3302,7 +3302,7 @@ ex:P10016 rdf:type owl:Class ;
           skos:example "An organization's annual strategic-initiative cycle, from drafting candidate initiatives to evaluating the executed ones." .
 
 
-###  http://example.org/apqc#P10017
+###  https://fandaws.com/ontology/apqc#P10017
 ex:P10017 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3358,7 +3358,7 @@ ex:P10017 rdf:type owl:Class ;
           skos:example "An organization's yearly strategic environmental scan culminating in an external-environment assessment." .
 
 
-###  http://example.org/apqc#P10018
+###  https://fandaws.com/ontology/apqc#P10018
 ex:P10018 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3394,7 +3394,7 @@ ex:P10018 rdf:type owl:Class ;
           skos:example "A market-research team surveys a segment and reports the customer needs the firm should address." .
 
 
-###  http://example.org/apqc#P10019
+###  https://fandaws.com/ontology/apqc#P10019
 ex:P10019 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3438,7 +3438,7 @@ ex:P10019 rdf:type owl:Class ;
           skos:example "A strategy team reviews the firm's capabilities and produces an internal-environment assessment." .
 
 
-###  http://example.org/apqc#P10020
+###  https://fandaws.com/ontology/apqc#P10020
 ex:P10020 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -3466,7 +3466,7 @@ ex:P10020 rdf:type owl:Class ;
           skos:example "An executive team establishes a ten-year vision and aligns stakeholders behind it." .
 
 
-###  http://example.org/apqc#P10021
+###  https://fandaws.com/ontology/apqc#P10021
 ex:P10021 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3494,7 +3494,7 @@ ex:P10021 rdf:type owl:Class ;
           skos:example "An analyst benchmarks rivals and issues an assessment of the competitive forces in the sector." .
 
 
-###  http://example.org/apqc#P10022
+###  https://fandaws.com/ontology/apqc#P10022
 ex:P10022 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3514,7 +3514,7 @@ ex:P10022 rdf:type owl:Class ;
           skos:example "An economist reviews indicators and reports the trends likely to affect the firm over five years." .
 
 
-###  http://example.org/apqc#P10023
+###  https://fandaws.com/ontology/apqc#P10023
 ex:P10023 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3534,7 +3534,7 @@ ex:P10023 rdf:type owl:Class ;
           skos:example "A compliance team screens jurisdictions and registers the regulatory changes that bear on the firm." .
 
 
-###  http://example.org/apqc#P10024
+###  https://fandaws.com/ontology/apqc#P10024
 ex:P10024 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3558,7 +3558,7 @@ ex:P10024 rdf:type owl:Class ;
           skos:example "Senior managers appraise an emerging technology and issue a technology assessment." .
 
 
-###  http://example.org/apqc#P10025
+###  https://fandaws.com/ontology/apqc#P10025
 ex:P10025 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3578,7 +3578,7 @@ ex:P10025 rdf:type owl:Class ;
           skos:example "A team analyzes census data and produces a demographic profile of a target market." .
 
 
-###  http://example.org/apqc#P10026
+###  https://fandaws.com/ontology/apqc#P10026
 ex:P10026 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3598,7 +3598,7 @@ ex:P10026 rdf:type owl:Class ;
           skos:example "A market researcher distinguishes generational value shifts relevant to the brand." .
 
 
-###  http://example.org/apqc#P10027
+###  https://fandaws.com/ontology/apqc#P10027
 ex:P10027 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3622,7 +3622,7 @@ ex:P10027 rdf:type owl:Class ;
           skos:example "An ESG analyst registers ecological risks drawn from scientific publications and expert input." .
 
 
-###  http://example.org/apqc#P10028
+###  https://fandaws.com/ontology/apqc#P10028
 ex:P10028 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3646,7 +3646,7 @@ ex:P10028 rdf:type owl:Class ;
           skos:example "Researchers run a survey and focus groups and distill the findings into a needs assessment." .
 
 
-###  http://example.org/apqc#P10030
+###  https://fandaws.com/ontology/apqc#P10030
 ex:P10030 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3670,7 +3670,7 @@ ex:P10030 rdf:type owl:Class ;
           skos:example "Senior executives examine the firm's differentiating attributes and document an organizational-characteristics analysis." .
 
 
-###  http://example.org/apqc#P10031
+###  https://fandaws.com/ontology/apqc#P10031
 ex:P10031 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3690,7 +3690,7 @@ ex:P10031 rdf:type owl:Class ;
           skos:example "Management surveys archival performance records and derives process baselines for benchmarking." .
 
 
-###  http://example.org/apqc#P10032
+###  https://fandaws.com/ontology/apqc#P10032
 ex:P10032 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3710,7 +3710,7 @@ ex:P10032 rdf:type owl:Class ;
           skos:example "An IT team surveys deployed automation systems and documents a systems-and-technology analysis." .
 
 
-###  http://example.org/apqc#P10033
+###  https://fandaws.com/ontology/apqc#P10033
 ex:P10033 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3730,7 +3730,7 @@ ex:P10033 rdf:type owl:Class ;
           skos:example "A finance team scrutinizes the balance sheet and cash-flow statements and reports the firm's financial health." .
 
 
-###  http://example.org/apqc#P10034
+###  https://fandaws.com/ontology/apqc#P10034
 ex:P10034 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3750,7 +3750,7 @@ ex:P10034 rdf:type owl:Class ;
           skos:example "Senior executives determine and document the firm's core competencies for its value proposition." .
 
 
-###  http://example.org/apqc#P10035
+###  https://fandaws.com/ontology/apqc#P10035
 ex:P10035 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -3774,7 +3774,7 @@ ex:P10035 rdf:type owl:Class ;
           skos:example "Senior strategy personnel map stakeholders and produce a plan to align them with the vision." .
 
 
-###  http://example.org/apqc#P10036
+###  https://fandaws.com/ontology/apqc#P10036
 ex:P10036 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -3802,7 +3802,7 @@ ex:P10036 rdf:type owl:Class ;
           skos:example "Strategy personnel and marketing convey the vision to stakeholders through tailored channels." .
 
 
-###  http://example.org/apqc#P10037
+###  https://fandaws.com/ontology/apqc#P10037
 ex:P10037 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3830,7 +3830,7 @@ ex:P10037 rdf:type owl:Class ;
           skos:example "An executive team drafts, ratifies, and circulates a one-paragraph corporate mission statement." .
 
 
-###  http://example.org/apqc#P10038
+###  https://fandaws.com/ontology/apqc#P10038
 ex:P10038 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3890,7 +3890,7 @@ ex:P10038 rdf:type owl:Class ;
           skos:example "Strategy leadership enumerates and weighs make-vs-buy, B2B, B2C, partnership, and improvement options before committing to a direction." .
 
 
-###  http://example.org/apqc#P10039
+###  https://fandaws.com/ontology/apqc#P10039
 ex:P10039 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3938,7 +3938,7 @@ ex:P10039 rdf:type owl:Class ;
           skos:example "The executive committee commits to and elaborates a ten-year enterprise strategy." .
 
 
-###  http://example.org/apqc#P10040
+###  https://fandaws.com/ontology/apqc#P10040
 ex:P10040 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3958,7 +3958,7 @@ ex:P10040 rdf:type owl:Class ;
           skos:example "A PMO calibrates each division's annual plan to the enterprise strategy and publishes the alignment plan." .
 
 
-###  http://example.org/apqc#P10041
+###  https://fandaws.com/ontology/apqc#P10041
 ex:P10041 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4006,7 +4006,7 @@ ex:P10041 rdf:type owl:Class ;
           skos:example "An org-design team produces a new operating-structure framework aligned to strategy." .
 
 
-###  http://example.org/apqc#P10042
+###  https://fandaws.com/ontology/apqc#P10042
 ex:P10042 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4038,7 +4038,7 @@ ex:P10042 rdf:type owl:Class ;
           skos:example "Leadership sets the firm's annual organization-wide objectives in support of the mission." .
 
 
-###  http://example.org/apqc#P10043
+###  https://fandaws.com/ontology/apqc#P10043
 ex:P10043 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4066,7 +4066,7 @@ ex:P10043 rdf:type owl:Class ;
           skos:example "Each division head drafts a unit strategy aligned to enterprise goals." .
 
 
-###  http://example.org/apqc#P10044
+###  https://fandaws.com/ontology/apqc#P10044
 ex:P10044 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4086,7 +4086,7 @@ ex:P10044 rdf:type owl:Class ;
           skos:example "A strategy team documents the firm's de-facto business and core capacities before redrafting the mission." .
 
 
-###  http://example.org/apqc#P10045
+###  https://fandaws.com/ontology/apqc#P10045
 ex:P10045 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4102,7 +4102,7 @@ ex:P10045 rdf:type owl:Class ;
           skos:example "Executives translate the long-term vision into a concise, actionable mission statement." .
 
 
-###  http://example.org/apqc#P10046
+###  https://fandaws.com/ontology/apqc#P10046
 ex:P10046 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -4122,7 +4122,7 @@ ex:P10046 rdf:type owl:Class ;
           skos:example "Leadership rolls out the new mission to employees, customers, and the public across email, town halls, and the website." .
 
 
-###  http://example.org/apqc#P10047
+###  https://fandaws.com/ontology/apqc#P10047
 ex:P10047 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4146,7 +4146,7 @@ ex:P10047 rdf:type owl:Class ;
           skos:example "A strategy team enumerates make-vs-buy and market-entry permutations consistent with the mission." .
 
 
-###  http://example.org/apqc#P10048
+###  https://fandaws.com/ontology/apqc#P10048
 ex:P10048 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4174,7 +4174,7 @@ ex:P10048 rdf:type owl:Class ;
           skos:example "Analysts model the projected impact of each candidate strategy on revenue and operations." .
 
 
-###  http://example.org/apqc#P10049
+###  https://fandaws.com/ontology/apqc#P10049
 ex:P10049 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4190,7 +4190,7 @@ ex:P10049 rdf:type owl:Class ;
           skos:example "An org-design analyst assesses the firm's span-of-control and reporting layers." .
 
 
-###  http://example.org/apqc#P10050
+###  https://fandaws.com/ontology/apqc#P10050
 ex:P10050 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4206,7 +4206,7 @@ ex:P10050 rdf:type owl:Class ;
           skos:example "An analyst maps every role to its value contribution across operations." .
 
 
-###  http://example.org/apqc#P10051
+###  https://fandaws.com/ontology/apqc#P10051
 ex:P10051 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4222,7 +4222,7 @@ ex:P10051 rdf:type owl:Class ;
           skos:example "An analyst breaks a manager role into tasks and charts the hand-offs between them." .
 
 
-###  http://example.org/apqc#P10052
+###  https://fandaws.com/ontology/apqc#P10052
 ex:P10052 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -4242,7 +4242,7 @@ ex:P10052 rdf:type owl:Class ;
           skos:example "Facilitators run redesign workshops to walk staff through the new structure and role map." .
 
 
-###  http://example.org/apqc#P10053
+###  https://fandaws.com/ontology/apqc#P10053
 ex:P10053 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4258,7 +4258,7 @@ ex:P10053 rdf:type owl:Class ;
           skos:example "Designers formalize the dependencies and shared resources between two divisions." .
 
 
-###  http://example.org/apqc#P10054
+###  https://fandaws.com/ontology/apqc#P10054
 ex:P10054 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4274,7 +4274,7 @@ ex:P10054 rdf:type owl:Class ;
           skos:example "An analyst maps roles to each step of the order-to-cash process." .
 
 
-###  http://example.org/apqc#P10055
+###  https://fandaws.com/ontology/apqc#P10055
 ex:P10055 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4294,7 +4294,7 @@ ex:P10055 rdf:type owl:Class ;
           skos:example "An analyst weighs the multi-year impact of three candidate structures." .
 
 
-###  http://example.org/apqc#P10056
+###  https://fandaws.com/ontology/apqc#P10056
 ex:P10056 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -4314,7 +4314,7 @@ ex:P10056 rdf:type owl:Class ;
           skos:example "Leadership formally ratifies the new operating structure and authorizes the move to it." .
 
 
-###  http://example.org/apqc#P10057
+###  https://fandaws.com/ontology/apqc#P10057
 ex:P10057 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4342,7 +4342,7 @@ ex:P10057 rdf:type owl:Class ;
           skos:example "A strategy team drafts a slate of discretionary projects to advance the firm's ten-year goals." .
 
 
-###  http://example.org/apqc#P10058
+###  https://fandaws.com/ontology/apqc#P10058
 ex:P10058 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4370,7 +4370,7 @@ ex:P10058 rdf:type owl:Class ;
           skos:example "A review board appraises each candidate initiative for fit with the firm's vision and constraints." .
 
 
-###  http://example.org/apqc#P10059
+###  https://fandaws.com/ontology/apqc#P10059
 ex:P10059 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -4402,7 +4402,7 @@ ex:P10059 rdf:type owl:Class ;
           skos:example "Senior managers and strategists pick the initiatives the firm will fund this cycle." .
 
 
-###  http://example.org/apqc#P10060
+###  https://fandaws.com/ontology/apqc#P10060
 ex:P10060 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4430,7 +4430,7 @@ ex:P10060 rdf:type owl:Class ;
           skos:example "A team defines the high-level KPIs by which the initiatives' impact will be judged." .
 
 
-###  http://example.org/apqc#P13289
+###  https://fandaws.com/ontology/apqc#P13289
 ex:P13289 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4450,7 +4450,7 @@ ex:P13289 rdf:type owl:Class ;
           skos:example "An analyst lists the staffing and policy changes a candidate strategy would force on the operating model." .
 
 
-###  http://example.org/apqc#P13290
+###  https://fandaws.com/ontology/apqc#P13290
 ex:P13290 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4470,7 +4470,7 @@ ex:P13290 rdf:type owl:Class ;
           skos:example "An architect identifies the ROI and architecture impacts of a proposed strategy." .
 
 
-###  http://example.org/apqc#P14189
+###  https://fandaws.com/ontology/apqc#P14189
 ex:P14189 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4486,7 +4486,7 @@ ex:P14189 rdf:type owl:Class ;
           skos:example "A sustainability office formulates the firm's long-term ESG strategy and resource commitments." .
 
 
-###  http://example.org/apqc#P14197
+###  https://fandaws.com/ontology/apqc#P14197
 ex:P14197 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4502,7 +4502,7 @@ ex:P14197 rdf:type owl:Class ;
           skos:example "A lean office formulates the multi-year continuous-improvement roadmap." .
 
 
-###  http://example.org/apqc#P16612
+###  https://fandaws.com/ontology/apqc#P16612
 ex:P16612 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4522,7 +4522,7 @@ ex:P16612 rdf:type owl:Class ;
           skos:example "A marketer defines three buyer personas from demographic and behavioral data." .
 
 
-###  http://example.org/apqc#P16790
+###  https://fandaws.com/ontology/apqc#P16790
 ex:P16790 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -4538,7 +4538,7 @@ ex:P16790 rdf:type owl:Class ;
           skos:example "Legal counsel establishes a procedure for screening incoming filings for IP-infringement risk." .
 
 
-###  http://example.org/apqc#P16792
+###  https://fandaws.com/ontology/apqc#P16792
 ex:P16792 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4566,7 +4566,7 @@ ex:P16792 rdf:type owl:Class ;
           skos:example "A corporate-development team probes merger and divestment options and documents a restructuring opportunity analysis." .
 
 
-###  http://example.org/apqc#P16793
+###  https://fandaws.com/ontology/apqc#P16793
 ex:P16793 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4590,7 +4590,7 @@ ex:P16793 rdf:type owl:Class ;
           skos:example "A strategy team surveys the market and internal readiness and lists viable restructuring opportunities." .
 
 
-###  http://example.org/apqc#P16794
+###  https://fandaws.com/ontology/apqc#P16794
 ex:P16794 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4610,7 +4610,7 @@ ex:P16794 rdf:type owl:Class ;
           skos:example "Advisors audit a target company's financials and legal status and issue a due-diligence report." .
 
 
-###  http://example.org/apqc#P16795
+###  https://fandaws.com/ontology/apqc#P16795
 ex:P16795 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4646,7 +4646,7 @@ ex:P16795 rdf:type owl:Class ;
           skos:example "A corporate-development team compares acquisition and divestment options and documents a deal-option analysis." .
 
 
-###  http://example.org/apqc#P16796
+###  https://fandaws.com/ontology/apqc#P16796
 ex:P16796 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4666,7 +4666,7 @@ ex:P16796 rdf:type owl:Class ;
           skos:example "An M&A team appraises an acquisition target's fit and reports its business value." .
 
 
-###  http://example.org/apqc#P16797
+###  https://fandaws.com/ontology/apqc#P16797
 ex:P16797 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4686,7 +4686,7 @@ ex:P16797 rdf:type owl:Class ;
           skos:example "A strategy team appraises a merger candidate's fit and reports its business value." .
 
 
-###  http://example.org/apqc#P16798
+###  https://fandaws.com/ontology/apqc#P16798
 ex:P16798 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4706,7 +4706,7 @@ ex:P16798 rdf:type owl:Class ;
           skos:example "A corporate-development team evaluates spinning off a subsidiary and reports its business value." .
 
 
-###  http://example.org/apqc#P16799
+###  https://fandaws.com/ontology/apqc#P16799
 ex:P16799 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4726,7 +4726,7 @@ ex:P16799 rdf:type owl:Class ;
           skos:example "A strategy team evaluates divesting a business unit and reports its business value." .
 
 
-###  http://example.org/apqc#P16803
+###  https://fandaws.com/ontology/apqc#P16803
 ex:P16803 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4742,7 +4742,7 @@ ex:P16803 rdf:type owl:Class ;
           skos:example "An alliance office drafts the multi-year partnership strategy and its success measures." .
 
 
-###  http://example.org/apqc#P16805
+###  https://fandaws.com/ontology/apqc#P16805
 ex:P16805 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4758,7 +4758,7 @@ ex:P16805 rdf:type owl:Class ;
           skos:example "Corporate development drafts the M&A strategy and the screening criteria for targets." .
 
 
-###  http://example.org/apqc#P17040
+###  https://fandaws.com/ontology/apqc#P17040
 ex:P17040 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -4794,7 +4794,7 @@ ex:P17040 rdf:type owl:Class ;
           skos:example "An executive team integrates market and capability analyses into a ten-year business concept and vision." .
 
 
-###  http://example.org/apqc#P18083
+###  https://fandaws.com/ontology/apqc#P18083
 ex:P18083 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -4818,7 +4818,7 @@ ex:P18083 rdf:type owl:Class ;
           skos:example "Executives decide to outsource distribution and franchise dealerships rather than run them in-house." .
 
 
-###  http://example.org/apqc#P18916
+###  https://fandaws.com/ontology/apqc#P18916
 ex:P18916 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -4838,7 +4838,7 @@ ex:P18916 rdf:type owl:Class ;
           skos:example "Leadership rolls out the new strategy to staff, customers, and suppliers via briefings and publications." .
 
 
-###  http://example.org/apqc#P19507
+###  https://fandaws.com/ontology/apqc#P19507
 ex:P19507 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -4854,7 +4854,7 @@ ex:P19507 rdf:type owl:Class ;
           skos:example "Project teams carry out the funded initiatives across the organization." .
 
 
-###  http://example.org/apqc#P19945
+###  https://fandaws.com/ontology/apqc#P19945
 ex:P19945 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4878,7 +4878,7 @@ ex:P19945 rdf:type owl:Class ;
           skos:example "A competitive-intelligence team reviews market reports and produces a competitor analysis." .
 
 
-###  http://example.org/apqc#P19946
+###  https://fandaws.com/ontology/apqc#P19946
 ex:P19946 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4898,7 +4898,7 @@ ex:P19946 rdf:type owl:Class ;
           skos:example "A marketing analyst collects survey responses and registers the unmet needs of a customer segment." .
 
 
-###  http://example.org/apqc#P19947
+###  https://fandaws.com/ontology/apqc#P19947
 ex:P19947 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4918,7 +4918,7 @@ ex:P19947 rdf:type owl:Class ;
           skos:example "An analyst segments the market and builds customer profiles for the strategy team." .
 
 
-###  http://example.org/apqc#P19948
+###  https://fandaws.com/ontology/apqc#P19948
 ex:P19948 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4938,7 +4938,7 @@ ex:P19948 rdf:type owl:Class ;
           skos:example "An operations team measures the effectiveness of key processes and reports an internal-operations analysis." .
 
 
-###  http://example.org/apqc#P19949
+###  https://fandaws.com/ontology/apqc#P19949
 ex:P19949 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -4958,7 +4958,7 @@ ex:P19949 rdf:type owl:Class ;
           skos:example "A strategy team drafts and documents the firm's strategic vision statement." .
 
 
-###  http://example.org/apqc#P19950
+###  https://fandaws.com/ontology/apqc#P19950
 ex:P19950 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4974,7 +4974,7 @@ ex:P19950 rdf:type owl:Class ;
           skos:example "A shared-services office formulates the plan to deliver global support at scale." .
 
 
-###  http://example.org/apqc#P19951
+###  https://fandaws.com/ontology/apqc#P19951
 ex:P19951 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4990,7 +4990,7 @@ ex:P19951 rdf:type owl:Class ;
           skos:example "A transformation office formulates the strategy to consolidate functions into shared services." .
 
 
-###  http://example.org/apqc#P19952
+###  https://fandaws.com/ontology/apqc#P19952
 ex:P19952 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5006,7 +5006,7 @@ ex:P19952 rdf:type owl:Class ;
           skos:example "An R&D leadership team formulates the three-year innovation roadmap." .
 
 
-###  http://example.org/apqc#P19953
+###  https://fandaws.com/ontology/apqc#P19953
 ex:P19953 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5022,7 +5022,7 @@ ex:P19953 rdf:type owl:Class ;
           skos:example "Strategy leadership drafts the outcome-oriented objectives that will guide employee effort." .
 
 
-###  http://example.org/apqc#P19954
+###  https://fandaws.com/ontology/apqc#P19954
 ex:P19954 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5042,7 +5042,7 @@ ex:P19954 rdf:type owl:Class ;
           skos:example "A performance office defines the KPI baselines for each function from the organizational goals." .
 
 
-###  http://example.org/apqc#P19955
+###  https://fandaws.com/ontology/apqc#P19955
 ex:P19955 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5062,7 +5062,7 @@ ex:P19955 rdf:type owl:Class ;
           skos:example "A performance office defines the quarterly methodology and cadence for monitoring each function's KPIs." .
 
 
-###  http://example.org/apqc#P19956
+###  https://fandaws.com/ontology/apqc#P19956
 ex:P19956 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5082,7 +5082,7 @@ ex:P19956 rdf:type owl:Class ;
           skos:example "An analyst assesses a division's results against its KPI targets." .
 
 
-###  http://example.org/apqc#P19957
+###  https://fandaws.com/ontology/apqc#P19957
 ex:P19957 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -5102,7 +5102,7 @@ ex:P19957 rdf:type owl:Class ;
           skos:example "An analyst catalogs each unit's distinctive technical capabilities." .
 
 
-###  http://example.org/apqc#P19958
+###  https://fandaws.com/ontology/apqc#P19958
 ex:P19958 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5122,7 +5122,7 @@ ex:P19958 rdf:type owl:Class ;
           skos:example "A division reworks its strategy to drop initiatives that conflict with the enterprise strategy." .
 
 
-###  http://example.org/apqc#P19959
+###  https://fandaws.com/ontology/apqc#P19959
 ex:P19959 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5154,7 +5154,7 @@ ex:P19959 rdf:type owl:Class ;
           skos:example "A CX office drafts the multi-year roadmap for improving customer experience." .
 
 
-###  http://example.org/apqc#P19960
+###  https://fandaws.com/ontology/apqc#P19960
 ex:P19960 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5186,7 +5186,7 @@ ex:P19960 rdf:type owl:Class ;
           skos:example "A CX team scores satisfaction from survey responses on delivered services." .
 
 
-###  http://example.org/apqc#P19961
+###  https://fandaws.com/ontology/apqc#P19961
 ex:P19961 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -5206,7 +5206,7 @@ ex:P19961 rdf:type owl:Class ;
           skos:example "A CX analyst enumerates and reviews every channel through which customers reach the brand." .
 
 
-###  http://example.org/apqc#P19962
+###  https://fandaws.com/ontology/apqc#P19962
 ex:P19962 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5226,7 +5226,7 @@ ex:P19962 rdf:type owl:Class ;
           skos:example "A CX team scores experience quality at each interaction across the customer lifecycle." .
 
 
-###  http://example.org/apqc#P19963
+###  https://fandaws.com/ontology/apqc#P19963
 ex:P19963 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5246,7 +5246,7 @@ ex:P19963 rdf:type owl:Class ;
           skos:example "An analyst traces recurring complaints to a flawed onboarding step." .
 
 
-###  http://example.org/apqc#P19964
+###  https://fandaws.com/ontology/apqc#P19964
 ex:P19964 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5294,7 +5294,7 @@ ex:P19964 rdf:type owl:Class ;
           skos:example "A CX team designs the target interaction model from voice-of-customer research." .
 
 
-###  http://example.org/apqc#P19965
+###  https://fandaws.com/ontology/apqc#P19965
 ex:P19965 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5314,7 +5314,7 @@ ex:P19965 rdf:type owl:Class ;
           skos:example "A CX designer charts the end-to-end journey from awareness to renewal." .
 
 
-###  http://example.org/apqc#P19966
+###  https://fandaws.com/ontology/apqc#P19966
 ex:P19966 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5330,7 +5330,7 @@ ex:P19966 rdf:type owl:Class ;
           skos:example "A data team defines the unified customer-record parameters spanning all channels." .
 
 
-###  http://example.org/apqc#P19967
+###  https://fandaws.com/ontology/apqc#P19967
 ex:P19967 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5346,7 +5346,7 @@ ex:P19967 rdf:type owl:Class ;
           skos:example "Leadership articulates the guiding vision for every customer interaction." .
 
 
-###  http://example.org/apqc#P19968
+###  https://fandaws.com/ontology/apqc#P19968
 ex:P19968 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5366,7 +5366,7 @@ ex:P19968 rdf:type owl:Class ;
           skos:example "A product team validates the pricing assumptions through customer interviews." .
 
 
-###  http://example.org/apqc#P19969
+###  https://fandaws.com/ontology/apqc#P19969
 ex:P19969 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5386,7 +5386,7 @@ ex:P19969 rdf:type owl:Class ;
           skos:example "A brand team aligns the service experience to the brand promise and strategy." .
 
 
-###  http://example.org/apqc#P19970
+###  https://fandaws.com/ontology/apqc#P19970
 ex:P19970 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5402,7 +5402,7 @@ ex:P19970 rdf:type owl:Class ;
           skos:example "A content team formulates the editorial and distribution strategy for the year." .
 
 
-###  http://example.org/apqc#P19971
+###  https://fandaws.com/ontology/apqc#P19971
 ex:P19971 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5426,7 +5426,7 @@ ex:P19971 rdf:type owl:Class ;
           skos:example "A CX office designs the support model and rollout timeframe for the new experience." .
 
 
-###  http://example.org/apqc#P19972
+###  https://fandaws.com/ontology/apqc#P19972
 ex:P19972 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -5442,7 +5442,7 @@ ex:P19972 rdf:type owl:Class ;
           skos:example "A CX lead lists the analytics and service skills the support team must have." .
 
 
-###  http://example.org/apqc#P19973
+###  https://fandaws.com/ontology/apqc#P19973
 ex:P19973 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -5458,7 +5458,7 @@ ex:P19973 rdf:type owl:Class ;
           skos:example "An analyst identifies how the new CX support model changes the call-center workflow." .
 
 
-###  http://example.org/apqc#P19974
+###  https://fandaws.com/ontology/apqc#P19974
 ex:P19974 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5474,7 +5474,7 @@ ex:P19974 rdf:type owl:Class ;
           skos:example "A CX office publishes the roadmap and talent plan to stand up the new capabilities." .
 
 
-###  http://example.org/apqc#P19975
+###  https://fandaws.com/ontology/apqc#P19975
 ex:P19975 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5494,7 +5494,7 @@ ex:P19975 rdf:type owl:Class ;
           skos:example "Leadership ranks its objectives and issues the priorities that govern the year's budgeting." .
 
 
-###  http://example.org/apqc#P19976
+###  https://fandaws.com/ontology/apqc#P19976
 ex:P19976 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5510,7 +5510,7 @@ ex:P19976 rdf:type owl:Class ;
           skos:example "A team frames its candidate initiatives explicitly around customer value drivers." .
 
 
-###  http://example.org/apqc#P19977
+###  https://fandaws.com/ontology/apqc#P19977
 ex:P19977 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5530,7 +5530,7 @@ ex:P19977 rdf:type owl:Class ;
           skos:example "Strategists hold a review session reporting strategy evaluation results to the board and partners." .
 
 
-###  http://example.org/apqc#P19978
+###  https://fandaws.com/ontology/apqc#P19978
 ex:P19978 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5550,7 +5550,7 @@ ex:P19978 rdf:type owl:Class ;
           skos:example "Analysts score each priority by the benefit it adds to the business." .
 
 
-###  http://example.org/apqc#P19979
+###  https://fandaws.com/ontology/apqc#P19979
 ex:P19979 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5574,7 +5574,7 @@ ex:P19979 rdf:type owl:Class ;
           skos:example "A team appraises what customers gain from offerings tied to each strategic priority." .
 
 
-###  http://example.org/apqc#P19980
+###  https://fandaws.com/ontology/apqc#P19980
 ex:P19980 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5594,7 +5594,7 @@ ex:P19980 rdf:type owl:Class ;
           skos:example "A filter scores initiatives so the team can list them most- to least-important." .
 
 
-###  http://example.org/apqc#P19981
+###  https://fandaws.com/ontology/apqc#P19981
 ex:P19981 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5614,7 +5614,7 @@ ex:P19981 rdf:type owl:Class ;
           skos:example "Leadership drafts the communication plan and roadmap so every business unit will understand the chosen initiatives." .
 
 
-###  http://example.org/apqc#P19982
+###  https://fandaws.com/ontology/apqc#P19982
 ex:P19982 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -5630,7 +5630,7 @@ ex:P19982 rdf:type owl:Class ;
           skos:example "Analysts enumerate the operational and financial factors that move enterprise value." .
 
 
-###  http://example.org/apqc#P19983
+###  https://fandaws.com/ontology/apqc#P19983
 ex:P19983 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5650,7 +5650,7 @@ ex:P19983 rdf:type owl:Class ;
           skos:example "The team derives the starting-period value of each driver as its assessment benchmark." .
 
 
-###  http://example.org/apqc#P19984
+###  https://fandaws.com/ontology/apqc#P19984
 ex:P19984 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000345 ,
                           [ rdf:type owl:Restriction ;
@@ -5670,7 +5670,7 @@ ex:P19984 rdf:type owl:Class ;
           skos:example "A PMO tracks each driver's running value against its baseline to flag off-course initiatives." .
 
 
-###  http://example.org/apqc#P20944
+###  https://fandaws.com/ontology/apqc#P20944
 ex:P20944 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -5698,7 +5698,7 @@ ex:P20944 rdf:type owl:Class ;
           skos:example "An organization's program to design its business model, keep it current against market feedback, and govern its evolution over a planning horizon." .
 
 
-###  http://example.org/apqc#P20945
+###  https://fandaws.com/ontology/apqc#P20945
 ex:P20945 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -5738,7 +5738,7 @@ ex:P20945 rdf:type owl:Class ;
           skos:example "A strategy team integrates the firm's business concept and strategy into a formally adopted business model." .
 
 
-###  http://example.org/apqc#P20946
+###  https://fandaws.com/ontology/apqc#P20946
 ex:P20946 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -5758,7 +5758,7 @@ ex:P20946 rdf:type owl:Class ;
           skos:example "An analyst gathers cost, market, and process documents into a single business-model information pack." .
 
 
-###  http://example.org/apqc#P20947
+###  https://fandaws.com/ontology/apqc#P20947
 ex:P20947 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -5774,7 +5774,7 @@ ex:P20947 rdf:type owl:Class ;
           skos:example "A compliance officer secures the licenses needed to operate the proposed line of business." .
 
 
-###  http://example.org/apqc#P20948
+###  https://fandaws.com/ontology/apqc#P20948
 ex:P20948 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -5798,7 +5798,7 @@ ex:P20948 rdf:type owl:Class ;
           skos:example "A modeller maps where the new business model touches the existing operating model to prevent contradictions." .
 
 
-###  http://example.org/apqc#P20949
+###  https://fandaws.com/ontology/apqc#P20949
 ex:P20949 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -5818,7 +5818,7 @@ ex:P20949 rdf:type owl:Class ;
           skos:example "An executive board formally adopts the proposed business model as the company's operating basis." .
 
 
-###  http://example.org/apqc#P20950
+###  https://fandaws.com/ontology/apqc#P20950
 ex:P20950 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -5850,7 +5850,7 @@ ex:P20950 rdf:type owl:Class ;
           skos:example "A product team runs its periodic review and reissues the business model to reflect new market behavior." .
 
 
-###  http://example.org/apqc#P20951
+###  https://fandaws.com/ontology/apqc#P20951
 ex:P20951 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -5866,7 +5866,7 @@ ex:P20951 rdf:type owl:Class ;
           skos:example "A governance lead sets a quarterly review cadence and assigns owners for business-model updates." .
 
 
-###  http://example.org/apqc#P20952
+###  https://fandaws.com/ontology/apqc#P20952
 ex:P20952 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -5882,7 +5882,7 @@ ex:P20952 rdf:type owl:Class ;
           skos:example "A team decides that only structured customer-survey and churn signals will drive model changes." .
 
 
-###  http://example.org/apqc#P20953
+###  https://fandaws.com/ontology/apqc#P20953
 ex:P20953 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5902,7 +5902,7 @@ ex:P20953 rdf:type owl:Class ;
           skos:example "A product council ranks incoming feedback and flags the items that mandate model changes." .
 
 
-###  http://example.org/apqc#P20954
+###  https://fandaws.com/ontology/apqc#P20954
 ex:P20954 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -5918,7 +5918,7 @@ ex:P20954 rdf:type owl:Class ;
           skos:example "A team revises the in-force business model to reflect prioritized feedback and new market conditions." .
 
 
-###  http://example.org/apqc#P20955
+###  https://fandaws.com/ontology/apqc#P20955
 ex:P20955 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -5934,7 +5934,7 @@ ex:P20955 rdf:type owl:Class ;
           skos:example "An organization stands up a model-governance board with a charter, owners, and review controls." .
 
 
-###  http://example.org/apqc#P21421
+###  https://fandaws.com/ontology/apqc#P21421
 ex:P21421 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -5958,7 +5958,7 @@ ex:P21421 rdf:type owl:Class ;
           skos:example "A product team weighs a substitute on the market and commits to a no-go decision." .
 
 
-###  http://example.org/apqc#P21422
+###  https://fandaws.com/ontology/apqc#P21422
 ex:P21422 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5978,7 +5978,7 @@ ex:P21422 rdf:type owl:Class ;
           skos:example "A quarterly steering review assesses how the executed initiatives are performing." .
 
 
-###  http://example.org/apqc#P21423
+###  https://fandaws.com/ontology/apqc#P21423
 ex:P21423 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5998,7 +5998,7 @@ ex:P21423 rdf:type owl:Class ;
           skos:example "After a downturn, the team rewrites two initiatives' project plans to fit the new market." .
 
 
-###  http://example.org/apqc#P21606
+###  https://fandaws.com/ontology/apqc#P21606
 ex:P21606 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6018,7 +6018,7 @@ ex:P21606 rdf:type owl:Class ;
           skos:example "Strategists weigh new B2B channels against the firm's historical B2B performance." .
 
 
-###  http://example.org/apqc#P21607
+###  https://fandaws.com/ontology/apqc#P21607
 ex:P21607 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6038,7 +6038,7 @@ ex:P21607 rdf:type owl:Class ;
           skos:example "Strategists assess new direct-to-consumer offerings against historical B2C results." .
 
 
-###  http://example.org/apqc#P21608
+###  https://fandaws.com/ontology/apqc#P21608
 ex:P21608 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6054,7 +6054,7 @@ ex:P21608 rdf:type owl:Class ;
           skos:example "An alliance team weighs the cost and benefit of candidate distribution partners." .
 
 
-###  http://example.org/apqc#P21609
+###  https://fandaws.com/ontology/apqc#P21609
 ex:P21609 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6070,7 +6070,7 @@ ex:P21609 rdf:type owl:Class ;
           skos:example "A team appraises licensing versus acquiring a patent portfolio." .
 
 
-###  http://example.org/apqc#P21610
+###  https://fandaws.com/ontology/apqc#P21610
 ex:P21610 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6086,7 +6086,7 @@ ex:P21610 rdf:type owl:Class ;
           skos:example "An innovation board weighs candidate R&D bets for the coming cycle." .
 
 
-###  http://example.org/apqc#P21611
+###  https://fandaws.com/ontology/apqc#P21611
 ex:P21611 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6102,7 +6102,7 @@ ex:P21611 rdf:type owl:Class ;
           skos:example "A sustainability office appraises the cost and benefit of carbon-reduction initiatives." .
 
 
-###  http://example.org/apqc#P21612
+###  https://fandaws.com/ontology/apqc#P21612
 ex:P21612 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6118,7 +6118,7 @@ ex:P21612 rdf:type owl:Class ;
           skos:example "A shared-services team appraises centralized versus regional global support models." .
 
 
-###  http://example.org/apqc#P21613
+###  https://fandaws.com/ontology/apqc#P21613
 ex:P21613 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6134,7 +6134,7 @@ ex:P21613 rdf:type owl:Class ;
           skos:example "A team appraises consolidating finance and HR into a shared-services center." .
 
 
-###  http://example.org/apqc#P21614
+###  https://fandaws.com/ontology/apqc#P21614
 ex:P21614 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6150,7 +6150,7 @@ ex:P21614 rdf:type owl:Class ;
           skos:example "A continuous-improvement office appraises lean initiatives for the operations division." .
 
 
-###  http://example.org/apqc#PartnerOrganization
+###  https://fandaws.com/ontology/apqc#PartnerOrganization
 ex:PartnerOrganization rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001180 ,
                                        [ rdf:type owl:Restriction ;
@@ -6161,14 +6161,14 @@ ex:PartnerOrganization rdf:type owl:Class ;
                        skos:definition "An Organization that bears a partner role in relation to a focal organization." .
 
 
-###  http://example.org/apqc#PartnerRole
+###  https://fandaws.com/ontology/apqc#PartnerRole
 ex:PartnerRole rdf:type owl:Class ;
                rdfs:subClassOf obo:BFO_0000023 ;
                rdfs:label "Partner Role" ;
                skos:definition "A Role that is borne by an Organization in virtue of entering a partnership or alliance with a focal organization to deliver products or services." .
 
 
-###  http://example.org/apqc#PartnershipSelectionDecision
+###  https://fandaws.com/ontology/apqc#PartnershipSelectionDecision
 ex:PartnershipSelectionDecision rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000965 ;
                                 rdfs:comment "Minted (Gate-F) for P18083 'Select partnerships and relationships' as the Directive chosen-option output required by the ex:ActOfSelection genus (the Descriptive ex:StrategicOptionAnalysis alone did not satisfy it)." ;
@@ -6176,7 +6176,7 @@ ex:PartnershipSelectionDecision rdf:type owl:Class ;
                                 skos:definition "A Directive Information Content Entity that prescribes which partnerships, alliances, and make-versus-buy relationships an organization will pursue to support its extended enterprise." .
 
 
-###  http://example.org/apqc#PerformanceMetric
+###  https://fandaws.com/ontology/apqc#PerformanceMetric
 ex:PerformanceMetric rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:comment "Covers APQC baseline metrics, KPIs, business-value drivers, and high-level measures (1.2.6, 1.3.4). Directive because a metric/target prescribes the standard to be met." ;
@@ -6184,7 +6184,7 @@ ex:PerformanceMetric rdf:type owl:Class ;
                      skos:definition "A Directive Information Content Entity that prescribes a standard measure and target against which the performance of a function, process, or initiative is assessed." .
 
 
-###  http://example.org/apqc#PerformanceMonitoringMethodSpecification
+###  https://fandaws.com/ontology/apqc#PerformanceMonitoringMethodSpecification
 ex:PerformanceMonitoringMethodSpecification rdf:type owl:Class ;
                                             rdfs:subClassOf cco:ont00000965 ;
                                             rdfs:comment "Minted (Gate-F) for P19955 'Monitor performance against objective', whose lead verb is 'defining methodology and frequency' (a formulation act producing a Directive monitoring-method spec), not the appraisal that produces a ex:PerformanceReport." ;
@@ -6192,21 +6192,21 @@ ex:PerformanceMonitoringMethodSpecification rdf:type owl:Class ;
                                             skos:definition "A Directive Information Content Entity that prescribes the methodology and frequency by which the performance of functions, processes, and activities is to be measured and monitored against set goals." .
 
 
-###  http://example.org/apqc#PerformanceRecord
+###  https://fandaws.com/ontology/apqc#PerformanceRecord
 ex:PerformanceRecord rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:label "Performance Record" ;
                      skos:definition "A Descriptive Information Content Entity that describes recorded performance levels of an organization's processes, functions, or units over a period." .
 
 
-###  http://example.org/apqc#PerformanceReport
+###  https://fandaws.com/ontology/apqc#PerformanceReport
 ex:PerformanceReport rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:label "Performance Report" ;
                      skos:definition "A Descriptive Information Content Entity that describes monitored performance of functions, processes, or initiatives against established baselines or objectives." .
 
 
-###  http://example.org/apqc#PrioritizedInitiativeList
+###  https://fandaws.com/ontology/apqc#PrioritizedInitiativeList
 ex:PrioritizedInitiativeList rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000965 ;
                              rdfs:comment "Minted for PCF 19980: no shared-vocab ICE captures a ranked order of initiatives. Directive (prescribes order of pursuit)." ;
@@ -6214,14 +6214,14 @@ ex:PrioritizedInitiativeList rdf:type owl:Class ;
                              skos:definition "A Directive Information Content Entity that ranks strategic initiatives from most to least important to guide which are pursued first." .
 
 
-###  http://example.org/apqc#ProcessBaseline
+###  https://fandaws.com/ontology/apqc#ProcessBaseline
 ex:ProcessBaseline rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ;
                    rdfs:label "Process Baseline" ;
                    skos:definition "A Descriptive Information Content Entity that describes a standard reference level of process performance against which current performance is benchmarked." .
 
 
-###  http://example.org/apqc#ProfessionalServicesProvider
+###  https://fandaws.com/ontology/apqc#ProfessionalServicesProvider
 ex:ProfessionalServicesProvider rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00001017 ,
                                                 [ rdf:type owl:Restriction ;
@@ -6233,7 +6233,7 @@ ex:ProfessionalServicesProvider rdf:type owl:Class ;
                                 skos:definition "An Agent that bears a professional services provider role." .
 
 
-###  http://example.org/apqc#ProfessionalServicesProviderRole
+###  https://fandaws.com/ontology/apqc#ProfessionalServicesProviderRole
 ex:ProfessionalServicesProviderRole rdf:type owl:Class ;
                                     rdfs:subClassOf obo:BFO_0000023 ;
                                     rdfs:comment "Covers APQC 'specialist professional services providers' engaged for due-diligence and deal evaluation (1.1.5)." ;
@@ -6241,21 +6241,21 @@ ex:ProfessionalServicesProviderRole rdf:type owl:Class ;
                                     skos:definition "A Role that is borne by an Agent or Organization in virtue of being engaged externally to supply legal, accounting, consulting, or advisory services to a focal organization." .
 
 
-###  http://example.org/apqc#RegulatoryConcernRegister
+###  https://fandaws.com/ontology/apqc#RegulatoryConcernRegister
 ex:RegulatoryConcernRegister rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:label "Regulatory Concern Register" ;
                              skos:definition "A Descriptive Information Content Entity that describes identified public-policy and regulatory concerns." .
 
 
-###  http://example.org/apqc#RegulatoryData
+###  https://fandaws.com/ontology/apqc#RegulatoryData
 ex:RegulatoryData rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:label "Regulatory Data" ;
                   skos:definition "A Descriptive Information Content Entity that describes public-policy and regulatory measures issued by sovereign or multinational authorities." .
 
 
-###  http://example.org/apqc#RequiredCapabilityList
+###  https://fandaws.com/ontology/apqc#RequiredCapabilityList
 ex:RequiredCapabilityList rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:comment "Minted (Gate-F) for P19972 'Identify required capabilities'. A register of discerned required skills, agreeing with the ex:ActOfIdentification genus; replaces the mis-scoped ex:CoreCompetencyAnalysis output." ;
@@ -6263,35 +6263,35 @@ ex:RequiredCapabilityList rdf:type owl:Class ;
                           skos:definition "A Descriptive Information Content Entity that registers the skills and competencies required to operate a function or support structure." .
 
 
-###  http://example.org/apqc#ResearchPublication
+###  https://fandaws.com/ontology/apqc#ResearchPublication
 ex:ResearchPublication rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:label "Research Publication" ;
                        skos:definition "A Descriptive Information Content Entity published as a report, brief, or article and used as analytic input." .
 
 
-###  http://example.org/apqc#RestructuringOpportunityAnalysis
+###  https://fandaws.com/ontology/apqc#RestructuringOpportunityAnalysis
 ex:RestructuringOpportunityAnalysis rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000853 ;
                                     rdfs:label "Restructuring Opportunity Analysis" ;
                                     skos:definition "A Descriptive Information Content Entity that describes identified opportunities for restructuring an organization in light of internal viability and external contingency." .
 
 
-###  http://example.org/apqc#RoleActivityDiagram
+###  https://fandaws.com/ontology/apqc#RoleActivityDiagram
 ex:RoleActivityDiagram rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:label "Role Activity Diagram" ;
                        skos:definition "A Descriptive Information Content Entity that describes the constituent activities of a work-related role and the hand-offs among them." .
 
 
-###  http://example.org/apqc#RootCauseAnalysis
+###  https://fandaws.com/ontology/apqc#RootCauseAnalysis
 ex:RootCauseAnalysis rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:label "Root Cause Analysis" ;
                      skos:definition "A Descriptive Information Content Entity that describes the underlying causes of a problematic outcome, such as a negative customer experience." .
 
 
-###  http://example.org/apqc#SeniorManagement
+###  https://fandaws.com/ontology/apqc#SeniorManagement
 ex:SeniorManagement rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00001017 ,
                                     [ rdf:type owl:Restriction ;
@@ -6303,7 +6303,7 @@ ex:SeniorManagement rdf:type owl:Class ;
                     skos:definition "An Agent that bears a senior manager role." .
 
 
-###  http://example.org/apqc#SeniorManagerRole
+###  https://fandaws.com/ontology/apqc#SeniorManagerRole
 ex:SeniorManagerRole rdf:type owl:Class ;
                      rdfs:subClassOf obo:BFO_0000023 ;
                      rdfs:comment "Narrower than the 1.1.1 reference module's ex:ManagerRole; used where APQC text specifies senior executives / senior strategy personnel. MERGE DECISION: this Senior pair (ex:SeniorManagerRole / ex:SeniorManagement) deliberately supersedes the reference's generic ex:ManagerRole / ex:ManagementPersonnel for the 1.1.1.8 (P10024) participant, which APQC scopes to 'mid- to senior-level management'. The generic role/agent pair is intentionally not carried over: no process in this merged module requires a non-senior management universal, so re-adding it would leave orphaned classes. Re-mint ex:ManagerRole (and ex:ManagementPersonnel bearing it) as the rdfs:subClassOf parent of this pair only if a future merged process needs the generic universal." ;
@@ -6311,21 +6311,21 @@ ex:SeniorManagerRole rdf:type owl:Class ;
                      skos:definition "A Role that is borne by an Agent in virtue of exercising senior managerial or executive authority over the strategy and direction of an Organization." .
 
 
-###  http://example.org/apqc#SocioculturalData
+###  https://fandaws.com/ontology/apqc#SocioculturalData
 ex:SocioculturalData rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:label "Sociocultural Data" ;
                      skos:definition "A Descriptive Information Content Entity that describes societal composition, distribution, and value systems." .
 
 
-###  http://example.org/apqc#SocioculturalShiftAnalysis
+###  https://fandaws.com/ontology/apqc#SocioculturalShiftAnalysis
 ex:SocioculturalShiftAnalysis rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000853 ;
                               rdfs:label "Sociocultural Shift Analysis" ;
                               skos:definition "A Descriptive Information Content Entity that describes shifts in societal makeup and cultural composition." .
 
 
-###  http://example.org/apqc#Stakeholder
+###  https://fandaws.com/ontology/apqc#Stakeholder
 ex:Stakeholder rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00001017 ,
                                [ rdf:type owl:Restriction ;
@@ -6336,7 +6336,7 @@ ex:Stakeholder rdf:type owl:Class ;
                skos:definition "An Agent that bears a stakeholder role." .
 
 
-###  http://example.org/apqc#StakeholderAlignmentPlan
+###  https://fandaws.com/ontology/apqc#StakeholderAlignmentPlan
 ex:StakeholderAlignmentPlan rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000974 ;
                             rdfs:comment "Output of 1.1.4.2 'Align stakeholders around strategic vision'." ;
@@ -6344,7 +6344,7 @@ ex:StakeholderAlignmentPlan rdf:type owl:Class ;
                             skos:definition "A Plan that prescribes how stakeholders are to be oriented and positioned in support of an organization's strategic vision." .
 
 
-###  http://example.org/apqc#StakeholderRole
+###  https://fandaws.com/ontology/apqc#StakeholderRole
 ex:StakeholderRole rdf:type owl:Class ;
                    rdfs:subClassOf obo:BFO_0000023 ;
                    rdfs:comment "Minted because CCO 2.0 has no Stakeholder class/role. Superset of customer, partner, and regulator relations relative to a focal organization." ;
@@ -6352,14 +6352,14 @@ ex:StakeholderRole rdf:type owl:Class ;
                    skos:definition "A Role that is borne by an Agent or Organization in virtue of having an interest in, or being affected by, the operations, strategy, processes, programs, or policies of a focal organization." .
 
 
-###  http://example.org/apqc#StrategicInitiativeEvaluation
+###  https://fandaws.com/ontology/apqc#StrategicInitiativeEvaluation
 ex:StrategicInitiativeEvaluation rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000853 ;
                                  rdfs:label "Strategic Initiative Evaluation" ;
                                  skos:definition "A Descriptive Information Content Entity that describes the applicability and feasibility of a strategic initiative relative to an organization's vision and constraints." .
 
 
-###  http://example.org/apqc#StrategicInitiativeSpecification
+###  https://fandaws.com/ontology/apqc#StrategicInitiativeSpecification
 ex:StrategicInitiativeSpecification rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000965 ;
                                     rdfs:comment "Output of 1.3.1 'Develop strategic initiatives'; consumed (as input) by 1.3.2/1.3.3 evaluation and selection." ;
@@ -6367,7 +6367,7 @@ ex:StrategicInitiativeSpecification rdf:type owl:Class ;
                                     skos:definition "A Directive Information Content Entity that prescribes a discretionary, time-bound strategic project lying beyond an organization's routine operations." .
 
 
-###  http://example.org/apqc#StrategicOption
+###  https://fandaws.com/ontology/apqc#StrategicOption
 ex:StrategicOption rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:comment "Directive (a candidate prescription) and distinct from ex:StrategicOptionAnalysis, which describes the assessed impact of options." ;
@@ -6375,7 +6375,7 @@ ex:StrategicOption rdf:type owl:Class ;
                    skos:definition "A Directive Information Content Entity that prescribes one candidate course of strategic action available to an organization." .
 
 
-###  http://example.org/apqc#StrategicOptionAnalysis
+###  https://fandaws.com/ontology/apqc#StrategicOptionAnalysis
 ex:StrategicOptionAnalysis rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:comment "Covers the impact/option assessments produced across 1.2.2 (B2B, B2C, partner, IP, innovation, sustainability, support, shared-services, lean options)." ;
@@ -6383,7 +6383,7 @@ ex:StrategicOptionAnalysis rdf:type owl:Class ;
                            skos:definition "A Descriptive Information Content Entity that describes the assessed impact and consequences of one or more candidate strategic options." .
 
 
-###  http://example.org/apqc#StrategicPlanningCapability
+###  https://fandaws.com/ontology/apqc#StrategicPlanningCapability
 ex:StrategicPlanningCapability rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000568 ;
                                rdfs:comment "Use as the realizable behind standing 'develop/define strategy' functions. Subclass of ont00000568 because the bearer is the Organization as a whole." ;
@@ -6391,7 +6391,7 @@ ex:StrategicPlanningCapability rdf:type owl:Class ;
                                skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to formulate vision, mission, and strategy through intentional acts of strategy formulation and selection." .
 
 
-###  http://example.org/apqc#StrategicPriority
+###  https://fandaws.com/ontology/apqc#StrategicPriority
 ex:StrategicPriority rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000476 ;
                      rdfs:comment "Reuses CCO Objective. Output of 1.3.1.1 'Identify strategic priorities'; priorities are objectives ordered by importance." ;
@@ -6399,7 +6399,7 @@ ex:StrategicPriority rdf:type owl:Class ;
                      skos:definition "An Objective that prescribes a ranked organizational direction used to guide resource-allocation decisions." .
 
 
-###  http://example.org/apqc#StrategicVision
+###  https://fandaws.com/ontology/apqc#StrategicVision
 ex:StrategicVision rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:comment "Directive output of 1.1.4 'Establish strategic vision' and 1.2.8 customer-experience vision." ;
@@ -6407,7 +6407,7 @@ ex:StrategicVision rdf:type owl:Class ;
                    skos:definition "A Directive Information Content Entity that prescribes an organization's intended long-term direction and aspirational future state." .
 
 
-###  http://example.org/apqc#StrategyAlignmentPlan
+###  https://fandaws.com/ontology/apqc#StrategyAlignmentPlan
 ex:StrategyAlignmentPlan rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000974 ;
                          rdfs:comment "Minted (Gate-F) for P10040 'Coordinate and align cross-functional and process strategies'. Units/processes-oriented, replacing the stakeholder-oriented ex:StakeholderAlignmentPlan, which concerns orienting stakeholders rather than calibrating unit plans." ;
@@ -6415,7 +6415,7 @@ ex:StrategyAlignmentPlan rdf:type owl:Class ;
                          skos:definition "A Plan that prescribes how the plans and methods of an organization's individual units, departments, and processes are to be calibrated to the adopted enterprise strategy." .
 
 
-###  http://example.org/apqc#StrategyPersonnel
+###  https://fandaws.com/ontology/apqc#StrategyPersonnel
 ex:StrategyPersonnel rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00001017 ,
                                      [ rdf:type owl:Restriction ;
@@ -6426,7 +6426,7 @@ ex:StrategyPersonnel rdf:type owl:Class ;
                      skos:definition "An Agent that bears a strategy personnel role." .
 
 
-###  http://example.org/apqc#StrategyPersonnelRole
+###  https://fandaws.com/ontology/apqc#StrategyPersonnelRole
 ex:StrategyPersonnelRole rdf:type owl:Class ;
                          rdfs:subClassOf obo:BFO_0000023 ;
                          rdfs:comment "Covers APQC 'strategy personnel', 'strategy executives', and 'business-unit strategy personnel'." ;
@@ -6434,7 +6434,7 @@ ex:StrategyPersonnelRole rdf:type owl:Class ;
                          skos:definition "A Role that is borne by an Agent in virtue of being tasked with formulating, evaluating, or coordinating an Organization's strategy." .
 
 
-###  http://example.org/apqc#StrategyReviewReport
+###  https://fandaws.com/ontology/apqc#StrategyReviewReport
 ex:StrategyReviewReport rdf:type owl:Class ;
                         rdfs:subClassOf ex:PerformanceReport ,
                                         [ rdf:type owl:Restriction ;
@@ -6446,28 +6446,28 @@ ex:StrategyReviewReport rdf:type owl:Class ;
                         skos:definition "A Performance Report that describes an evaluation of an organization's business objectives and strategies and is about the business strategy reviewed." .
 
 
-###  http://example.org/apqc#SubstitutionBusinessCase
+###  https://fandaws.com/ontology/apqc#SubstitutionBusinessCase
 ex:SubstitutionBusinessCase rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:label "Substitution Business Case" ;
                             skos:definition "A Descriptive Information Content Entity that describes an argument for or against a course of action in light of substitute products or services." .
 
 
-###  http://example.org/apqc#SystemsAndTechnologyAnalysis
+###  https://fandaws.com/ontology/apqc#SystemsAndTechnologyAnalysis
 ex:SystemsAndTechnologyAnalysis rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ;
                                 rdfs:label "Systems and Technology Analysis" ;
                                 skos:definition "A Descriptive Information Content Entity that describes the capabilities of technology and process-automation systems deployed within an organization." .
 
 
-###  http://example.org/apqc#TechnologyAssessment
+###  https://fandaws.com/ontology/apqc#TechnologyAssessment
 ex:TechnologyAssessment rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:label "Technology Assessment" ;
                         skos:definition "A Descriptive Information Content Entity that describes a judgement of current, emerging, and disruptive technologies." .
 
 
-###  http://example.org/apqc#TechnologyData
+###  https://fandaws.com/ontology/apqc#TechnologyData
 ex:TechnologyData rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:label "Technology Data" ;

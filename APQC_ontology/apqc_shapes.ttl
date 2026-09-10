@@ -6,8 +6,8 @@
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix cco:   <https://www.commoncoreontologies.org/> .
 @prefix obo:   <http://purl.obolibrary.org/obo/> .
-@prefix ex:    <http://example.org/apqc#> .
-@prefix sh-ex: <http://example.org/apqc/shapes#> .
+@prefix ex:    <https://fandaws.com/ontology/apqc#> .
+@prefix sh-ex: <https://fandaws.com/ontology/apqc/shapes#> .
 
 ####################################################################
 # SHACL SHAPES for APQC -> BFO 2020 / CCO transforms  (v0.1.0)
@@ -37,7 +37,7 @@ sh-ex:prefixes a owl:Ontology ;
         [ sh:prefix "owl"  ; sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ] ,
         [ sh:prefix "rdfs" ; sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ] ,
         [ sh:prefix "skos" ; sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ] ,
-        [ sh:prefix "ex"   ; sh:namespace "http://example.org/apqc#"^^xsd:anyURI ] .
+        [ sh:prefix "ex"   ; sh:namespace "https://fandaws.com/ontology/apqc#"^^xsd:anyURI ] .
 
 ####################################################################
 # S1 + S2 : target = every APQC process class
@@ -56,7 +56,7 @@ sh-ex:ProcessShape a sh:NodeShape ;
                       rdfs:subClassOf ?r .
                 ?r owl:onProperty ?p .
                 FILTER( ?p IN (cco:ont00001921, cco:ont00001986, cco:ont00001777) )
-                FILTER( STRSTARTS(STR(?this), "http://example.org/apqc#") )
+                FILTER( STRSTARTS(STR(?this), "https://fandaws.com/ontology/apqc#") )
             }
         """ ] ;
     # --- S1 annotation completeness ---
@@ -105,7 +105,7 @@ sh-ex:NoProcessSubsumptionShape a sh:NodeShape ;
                 ?this a owl:Class ; rdfs:subClassOf ?r .
                 ?r owl:onProperty ?p .
                 FILTER( ?p IN (cco:ont00001921, cco:ont00001986, cco:ont00001777) )
-                FILTER( STRSTARTS(STR(?this), "http://example.org/apqc#") )
+                FILTER( STRSTARTS(STR(?this), "https://fandaws.com/ontology/apqc#") )
             }
         """ ] ;
     sh:sparql [
@@ -116,7 +116,7 @@ sh-ex:NoProcessSubsumptionShape a sh:NodeShape ;
         sh:select """
             SELECT $this ?super WHERE {
                 $this rdfs:subClassOf ?super .
-                FILTER( STRSTARTS(STR(?super), "http://example.org/apqc#") )
+                FILTER( STRSTARTS(STR(?super), "https://fandaws.com/ontology/apqc#") )
                 ?super rdfs:subClassOf ?r2 .
                 ?r2 owl:onProperty ?p2 .
                 FILTER( ?p2 IN (cco:ont00001921, cco:ont00001986, cco:ont00001777) )

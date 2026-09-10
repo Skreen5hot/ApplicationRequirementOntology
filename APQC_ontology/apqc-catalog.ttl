@@ -5,8 +5,8 @@
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix cco:   <https://www.commoncoreontologies.org/> .
-@prefix ex:    <http://example.org/apqc#> .
-@prefix apqc:  <http://example.org/apqc/scheme#> .
+@prefix ex:    <https://fandaws.com/ontology/apqc#> .
+@prefix apqc:  <https://fandaws.com/ontology/apqc/scheme#> .
 
 ####################################################################
 # APQC PCF -> CATALOG LAYER  (GENERATED -- do not hand-edit)
@@ -20,7 +20,7 @@
 # CCO pin: 2.0 (2024-11-06)
 ####################################################################
 
-<http://example.org/apqc/scheme> a owl:Ontology ;
+<https://fandaws.com/ontology/apqc/scheme> a owl:Ontology ;
     dct:title "APQC PCF Catalog Layer" ;
     dct:source "APQC Process Classification Framework (Cross-Industry) v7.4" ;
     owl:versionInfo "0.1.0" ;

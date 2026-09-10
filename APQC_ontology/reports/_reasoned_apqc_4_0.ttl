@@ -1,5 +1,5 @@
-@prefix : <http://example.org/apqc/slice/4.0#> .
-@prefix ex: <http://example.org/apqc#> .
+@prefix : <https://fandaws.com/ontology/apqc/slice/4.0#> .
+@prefix ex: <https://fandaws.com/ontology/apqc#> .
 @prefix cco: <https://www.commoncoreontologies.org/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
@@ -7,12 +7,12 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix apqc: <http://example.org/apqc/scheme#> .
+@prefix apqc: <https://fandaws.com/ontology/apqc/scheme#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <http://example.org/apqc/slice/4.0> .
+@base <https://fandaws.com/ontology/apqc/slice/4.0> .
 
-<http://example.org/apqc/slice/4.0> rdf:type owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/4.0> rdf:type owl:Ontology ;
                                      dct:source "APQC Process Classification Framework (Cross-Industry)" ;
                                      dct:title "APQC reality-layer slice 4.0: Manage Supply Chain for Physical Products" ;
                                      rdfs:comment "Reality-layer module for APQC section 4.0 (groups 4.1-4.4) plus the section-wide shared supporting vocabulary. CCO pin v2.0 (2024-11-06); modeling decisions follow ADR-001 (reality layer only; the SKOS catalog lives in apqc-catalog.ttl). Self-contained: the shared act genera it uses are inlined from the apqc-ext.ttl registry, so it validates standalone against the pinned CCO/BFO closure with no extension merge." ;
@@ -22,25 +22,25 @@
 #    Annotation properties
 #################################################################
 
-###  http://example.org/apqc#apqcSourceText
+###  https://fandaws.com/ontology/apqc#apqcSourceText
 ex:apqcSourceText rdf:type owl:AnnotationProperty ;
                   rdfs:comment "Verbatim APQC Element Description retained for provenance." ;
                   rdfs:label "APQC source description" .
 
 
-###  http://example.org/apqc#designatesProcessType
+###  https://fandaws.com/ontology/apqc#designatesProcessType
 ex:designatesProcessType rdf:type owl:AnnotationProperty ;
                          rdfs:comment "ADR-001 R4 bridge: catalog node (ex:PCF_<id>, defined in apqc-catalog.ttl) -> reality-layer process universal or capability. Populated during reality-layer modeling, NOT by the catalog generator." ;
                          rdfs:label "designates process type" .
 
 
-###  http://example.org/apqc#hierarchyID
+###  https://fandaws.com/ontology/apqc#hierarchyID
 ex:hierarchyID rdf:type owl:AnnotationProperty ;
                rdfs:comment "Positional dotted-decimal locator. NON-STABLE across PCF versions. Reference only; never for IRI minting or subsumption." ;
                rdfs:label "APQC Hierarchy ID" .
 
 
-###  http://example.org/apqc#pcfID
+###  https://fandaws.com/ontology/apqc#pcfID
 ex:pcfID rdf:type owl:AnnotationProperty ;
          rdfs:comment "Stable APQC identifier. Anchor IRIs to this; it persists across PCF versions." ;
          rdfs:label "APQC PCF ID" .
@@ -2630,7 +2630,7 @@ cco:ont00001773 rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
-###  http://example.org/apqc#ActOfAcquisition
+###  https://fandaws.com/ontology/apqc#ActOfAcquisition
 ex:ActOfAcquisition rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000228 ;
                     rdfs:comment "Local extension (D9). Rejected cco:ont00000950 'Act of Maintenance' (modifying Material Artifacts) and cco:ont00000402 'Act of Communication' (mere ICE transfer). Securing/obtaining a held entity anchors at the generic Planned Act. Expected to recur in procurement/asset-acquisition categories (4.0, 10.0)." ;
@@ -2638,7 +2638,7 @@ ex:ActOfAcquisition rdf:type owl:Class ;
                     skos:definition "A Planned Act in which an Agent obtains from some authority or supplier an entity (such as an authorization, license, or resource) that the Agent did not previously hold." .
 
 
-###  http://example.org/apqc#ActOfAnalysis
+###  https://fandaws.com/ontology/apqc#ActOfAnalysis
 ex:ActOfAnalysis rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000366 ;
                  rdfs:comment "Local extension (D9). CCO 2.0 has no generic analysis class; analysis is information processing, so it is anchored under cco:ont00000366." ;
@@ -2646,7 +2646,7 @@ ex:ActOfAnalysis rdf:type owl:Class ;
                  skos:definition "An Act of Information Processing in which an Agent examines one or more input Information Content Entities and produces an Information Content Entity that represents an understanding of their subject matter." .
 
 
-###  http://example.org/apqc#ActOfForecasting
+###  https://fandaws.com/ontology/apqc#ActOfForecasting
 ex:ActOfForecasting rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000371 ;
                     rdfs:comment "Inlined canonical shared genus (apqc-ext.ttl registry). Anchored under cco:ont00000371 (Act of Prediction; parent cco:ont00000228), whose definitional output is a Predictive ICE (cco:ont00000626 subClassOf cco:ont00000853) -- exactly the genus of a demand/sales/volume forecast. Recurs in 3.0/5.0/6.0/8.0/10.0/4.0." ;
@@ -2654,7 +2654,7 @@ ex:ActOfForecasting rdf:type owl:Class ;
                     skos:definition "An Act of Prediction in which an Agent extrapolates from historical and current Information Content Entities to produce a Predictive Information Content Entity that estimates a future quantity such as demand, volume, revenue, or value." .
 
 
-###  http://example.org/apqc#ActOfFormulation
+###  https://fandaws.com/ontology/apqc#ActOfFormulation
 ex:ActOfFormulation rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000511 ;
                     rdfs:comment "Local extension (D9). Anchored under cco:ont00000511 (Act of Planning) because formulating a strategy/mission/design is making a plan to achieve an objective; its output is a Directive ICE. Recurs across develop/define/compose-a-directive processes corpus-wide." ;
@@ -2662,7 +2662,7 @@ ex:ActOfFormulation rdf:type owl:Class ;
                     skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." .
 
 
-###  http://example.org/apqc#ActOfIdentification
+###  https://fandaws.com/ontology/apqc#ActOfIdentification
 ex:ActOfIdentification rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000366 ;
                        rdfs:comment "Local extension (D9). NOT cco:ont00001261 'Act of Identifying' (a communication act). APQC 'Identify ...' denotes discernment, i.e. information processing." ;
@@ -2670,7 +2670,7 @@ ex:ActOfIdentification rdf:type owl:Class ;
                        skos:definition "An Act of Information Processing in which an Agent discerns and enumerates entities of a given kind and produces an Information Content Entity that registers them." .
 
 
-###  http://example.org/apqc#ActOfMonitoring
+###  https://fandaws.com/ontology/apqc#ActOfMonitoring
 ex:ActOfMonitoring rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000366 ;
                    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic monitoring/tracking class. Anchored under cco:ont00000366 (Act of Information Processing) because monitoring ingests repeated observations (including electronic records, not only senses) and yields a descriptive status/deviation ICE -- the GOLDEN PRINCIPLE (descriptive output => information-processing genus) holds. Rejected cco:ont00000037 (Act of Observation: a single sense-based acquisition, too narrow -- monitoring also processes ICEs and is sustained); cco:ont00000636 (Act of Appraisal: renders a single bounded value/quality judgement rather than tracking status over time); and cco:ont00000345 (Act of Measuring: a single quantification against a standard at one time -- at most a method sub-step of the monitoring cycle; a node that is purely one quantification, e.g. Calculate performance measures, anchors to cco:ont00000345 directly, not here). Distinct from ex:ActOfAnalysis (one-shot examination of a fixed input set) by its continuous, longitudinal character. A standing 'Manage/Monitor X' function with no natural end is an Organization Capability (cco:ont00000568) realized in such acts, not itself a process. Recurs corpus-wide (slices 3.0/4.0/5.0/6.0/8.0/9.0/10.0/11.0/12.0/13.0). Reconciled from 10 divergent slice restatements to one definition." ;
@@ -2678,7 +2678,7 @@ ex:ActOfMonitoring rdf:type owl:Class ;
                    skos:definition "An Act of Information Processing in which an Agent repeatedly or continuously observes the state, progress, or performance of some process, system, or quantity over time and produces a Descriptive Information Content Entity that represents its tracked status against expected conditions, targets, or requirements." .
 
 
-###  http://example.org/apqc#ActOfProcessControl
+###  https://fandaws.com/ontology/apqc#ActOfProcessControl
 ex:ActOfProcessControl rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000228 ;
                        rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000228 (Planned Act): closed-loop control ACTS ON the plant (it changes setpoints and equipment state), so its product is a change in the controlled material participants, not a Descriptive ICE. Rejected ex:ActOfMonitoring (cco:ont00000366, Act of Information Processing): monitoring is the OBSERVE half only and over-commits to a descriptive output, whereas advanced process control / real-time optimization also ACTUATE. The controlled equipment is attached via obo:BFO_0000057 (has participant). Recurs across automate/control-plant and industrial-control activities (4.0)." ;
@@ -2686,7 +2686,7 @@ ex:ActOfProcessControl rdf:type owl:Class ;
                        skos:definition "A Planned Act in which an Agent, or an automation system acting for an Agent, regulates a running production process or plant by closing the loop between observation and actuation -- adjusting setpoints, parameters, and equipment so as to keep the process within target or optimize its performance." .
 
 
-###  http://example.org/apqc#ActOfProduction
+###  https://fandaws.com/ontology/apqc#ActOfProduction
 ex:ActOfProduction rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000908 ;
                    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000908 (Act of Material Artifact Processing, verified: 'A Planned Act of performing a series of physical operations on a material artifact in order to change or preserve the artifact'; parent cco:ont00000228), the common parent of Act of Manufacturing (cco:ont00001359) and Act of Artifact Assembly. Generalizes produce/assemble-product where APQC covers both mass manufacturing and assembly; cco:ont00001359 (mass production for sale) alone is too narrow and Assembly alone excludes non-assembly production, so the shared genus sits at their common parent. The material product is attached via obo:BFO_0000057 (has participant), NOT has output -- a deliberate CORPUS-LOCAL CONVENTION (not a missing output): cco:has output is used only for informational (ICE) outputs in these reality slices, so material products produced or moved by operations attach via bfo:has participant. CCO itself permits a material has-output; adopting that pattern corpus-wide is an open policy option (see methodology section 10). Recurs in physical-production categories (4.0, 6.0)." ;
@@ -2694,7 +2694,7 @@ ex:ActOfProduction rdf:type owl:Class ;
                    skos:definition "An Act of Material Artifact Processing in which an Agent transforms raw materials and components into finished Material Artifacts according to a production specification or schedule." .
 
 
-###  http://example.org/apqc#ActOfScheduling
+###  https://fandaws.com/ontology/apqc#ActOfScheduling
 ex:ActOfScheduling rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000511 ;
                    rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000511 (Act of Planning, verified: 'A Planned Act that involves making a Plan to achieve some specified Objective'): a schedule is a plan whose differentia is the temporal/resource ordering of activities; its output is a Directive ICE, satisfying the GOLDEN PRINCIPLE. Distinct from ex:ActOfFormulation (mission/strategy/design) by its specifically temporal/resource-allocation product. Recurs across operations and project categories (4.0, 6.0, 8.0)." ;
@@ -2702,7 +2702,7 @@ ex:ActOfScheduling rdf:type owl:Class ;
                    skos:definition "An Act of Planning in which an Agent fixes the timing, sequencing, and resource allocation of future activities and produces a schedule (a Directive Information Content Entity) that prescribes when, in what order, and by whom those activities are to be performed." .
 
 
-###  http://example.org/apqc#ActOfSelection
+###  https://fandaws.com/ontology/apqc#ActOfSelection
 ex:ActOfSelection rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000366 ;
                   rdfs:comment "Local extension (D9). Anchored under cco:ont00000366 (Act of Information Processing): receives candidate-option ICEs and yields a decision ICE. Distinct from Act of Appraisal (judges without committing) and Act of Planning. NOTE: ratifying a single already-settled option is NOT selection (no candidate set) -- anchor such acts at cco:ont00000228 (Planned Act)." ;
@@ -2710,7 +2710,7 @@ ex:ActOfSelection rdf:type owl:Class ;
                   skos:definition "An Act of Information Processing in which an Agent chooses one or more options from a set of candidates and produces a Directive Information Content Entity that prescribes the chosen option(s)." .
 
 
-###  http://example.org/apqc#ActOfTransportation
+###  https://fandaws.com/ontology/apqc#ActOfTransportation
 ex:ActOfTransportation rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000065 ;
                        rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000065 (Act of Location Change, verified: 'An Act of Motion in which the location of some Object is changed by some Agent'; parent cco:ont00000357 Act of Motion -> ... -> Planned Act), the parent of cco:ont00000595 'Act of Cargo Transportation'. Generalizes inbound/outbound movement, picking-packing-shipping, and warehouse transfers; cco:ont00000595 is a close fit but is scoped to a Payload being conveyed, whereas ex:ActOfTransportation also covers internal warehouse transfers and deployment. Recurs across physical-logistics categories (4.0, 6.0, 9.0)." ;
@@ -2718,42 +2718,42 @@ ex:ActOfTransportation rdf:type owl:Class ;
                        skos:definition "An Act of Location Change in which an Agent moves materials or finished products from one supply-chain location to another, such as from a source to a warehouse, distribution center, or customer." .
 
 
-###  http://example.org/apqc#AvailableToPromiseQuantity
+###  https://fandaws.com/ontology/apqc#AvailableToPromiseQuantity
 ex:AvailableToPromiseQuantity rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000853 ;
                               rdfs:label "Available-to-Promise Quantity" ;
                               skos:definition "A Descriptive Information Content Entity that describes the volume of products or services that may be committed for delivery to fulfill sales." .
 
 
-###  http://example.org/apqc#BaselineDemandForecast
+###  https://fandaws.com/ontology/apqc#BaselineDemandForecast
 ex:BaselineDemandForecast rdf:type owl:Class ;
                           rdfs:subClassOf ex:DemandForecast ;
                           rdfs:label "Baseline Demand Forecast" ;
                           skos:definition "A Demand Forecast that describes the bedrock anticipated level of market demand, estimated from historical data and market analysis." .
 
 
-###  http://example.org/apqc#CapacityAssessment
+###  https://fandaws.com/ontology/apqc#CapacityAssessment
 ex:CapacityAssessment rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Capacity Assessment" ;
                       skos:definition "A Descriptive Information Content Entity that describes the manufacturing and processing capacities of an organization or supplier." .
 
 
-###  http://example.org/apqc#CapacityUtilizationReport
+###  https://fandaws.com/ontology/apqc#CapacityUtilizationReport
 ex:CapacityUtilizationReport rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:label "Capacity Utilization Report" ;
                              skos:definition "A Descriptive Information Content Entity that describes the extent to which an organization uses its installed productive capacity." .
 
 
-###  http://example.org/apqc#CapitalExpensePolicy
+###  https://fandaws.com/ontology/apqc#CapitalExpensePolicy
 ex:CapitalExpensePolicy rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000965 ;
                         rdfs:label "Capital Expense Policy" ;
                         skos:definition "A Directive Information Content Entity that prescribes rules and regulations governing expenditure on acquiring or upgrading manufacturing capital." .
 
 
-###  http://example.org/apqc#Carrier
+###  https://fandaws.com/ontology/apqc#Carrier
 ex:Carrier rdf:type owl:Class ;
            rdfs:subClassOf cco:ont00001180 ,
                            [ rdf:type owl:Restriction ;
@@ -2764,7 +2764,7 @@ ex:Carrier rdf:type owl:Class ;
            skos:definition "An Organization that bears a carrier role, conveying products between supply-chain locations on behalf of another organization." .
 
 
-###  http://example.org/apqc#CarrierInvoice
+###  https://fandaws.com/ontology/apqc#CarrierInvoice
 ex:CarrierInvoice rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ,
                                   [ rdf:type owl:Restriction ;
@@ -2775,7 +2775,7 @@ ex:CarrierInvoice rdf:type owl:Class ;
                   skos:definition "A Descriptive Information Content Entity that records the financial, regulatory, and administrative account of a carrier's freight transaction." .
 
 
-###  http://example.org/apqc#CarrierInvoiceAuditResult
+###  https://fandaws.com/ontology/apqc#CarrierInvoiceAuditResult
 ex:CarrierInvoiceAuditResult rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:comment "Minted locally (D5): no shared-vocab ICE covers a carrier-freight invoice audit. Descriptive (not Directive) because it reports a reconciliation judgement rather than prescribing action. Rejected ex:PurchaseOrderReconciliationReport (procurement PO scope)." ;
@@ -2784,7 +2784,7 @@ ex:CarrierInvoiceAuditResult rdf:type owl:Class ;
                              skos:example "An audit summary listing matched freight charges and flagged carrier overbilling for a billing period." .
 
 
-###  http://example.org/apqc#CarrierPerformanceReport
+###  https://fandaws.com/ontology/apqc#CarrierPerformanceReport
 ex:CarrierPerformanceReport rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ,
                                             [ rdf:type owl:Restriction ;
@@ -2795,21 +2795,21 @@ ex:CarrierPerformanceReport rdf:type owl:Class ;
                             skos:definition "A Descriptive Information Content Entity that describes the delivery performance of carriers conveying products from warehouses to retailers or consumers." .
 
 
-###  http://example.org/apqc#CarrierRole
+###  https://fandaws.com/ontology/apqc#CarrierRole
 ex:CarrierRole rdf:type owl:Class ;
                rdfs:subClassOf obo:BFO_0000023 ;
                rdfs:label "Carrier Role" ;
                skos:definition "A Role that is borne by an Organization in virtue of conveying products between supply-chain locations on behalf of another organization." .
 
 
-###  http://example.org/apqc#ConsensusDemandForecast
+###  https://fandaws.com/ontology/apqc#ConsensusDemandForecast
 ex:ConsensusDemandForecast rdf:type owl:Class ;
                            rdfs:subClassOf ex:DemandForecast ;
                            rdfs:label "Consensus Demand Forecast" ;
                            skos:definition "A Demand Forecast that describes an agreed level of anticipated demand reconciled between baseline forecasts and customer-collaboration estimates." .
 
 
-###  http://example.org/apqc#ConsolidationQuantity
+###  https://fandaws.com/ontology/apqc#ConsolidationQuantity
 ex:ConsolidationQuantity rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:comment "Minted because no shared-vocab Descriptive ICE captures a source-consolidation volume; it is the output of Calculate consolidation at source [10255]. Descriptive (states a computed quantity), so its producing act is an Act of Analysis." ;
@@ -2817,14 +2817,14 @@ ex:ConsolidationQuantity rdf:type owl:Class ;
                          skos:definition "A Descriptive Information Content Entity that states the aggregate volume of finished products consolidated at a source location for delivery on a given date." .
 
 
-###  http://example.org/apqc#ConstrainedMaterialsPlan
+###  https://fandaws.com/ontology/apqc#ConstrainedMaterialsPlan
 ex:ConstrainedMaterialsPlan rdf:type owl:Class ;
                             rdfs:subClassOf ex:MaterialsPlan ;
                             rdfs:label "Constrained Materials Plan" ;
                             skos:definition "A Materials Plan that prescribes raw-material and inventory provision bounded by the actual supply-chain scenario." .
 
 
-###  http://example.org/apqc#ContractManufacturer
+###  https://fandaws.com/ontology/apqc#ContractManufacturer
 ex:ContractManufacturer rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00001180 ,
                                         [ rdf:type owl:Restriction ;
@@ -2835,7 +2835,7 @@ ex:ContractManufacturer rdf:type owl:Class ;
                         skos:definition "An Organization that bears a supplier role and manufactures products under contract on behalf of a procuring organization." .
 
 
-###  http://example.org/apqc#ContractReviewAssessment
+###  https://fandaws.com/ontology/apqc#ContractReviewAssessment
 ex:ContractReviewAssessment rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:comment "Minted: no shared-vocab ICE for contract-administration findings. Descriptive because it represents review findings, not new terms." ;
@@ -2844,7 +2844,7 @@ ex:ContractReviewAssessment rdf:type owl:Class ;
                             skos:example "A quarterly note flagging that a contract's pricing schedule has lapsed and needs renewal." .
 
 
-###  http://example.org/apqc#Customer
+###  https://fandaws.com/ontology/apqc#Customer
 ex:Customer rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00001017 ,
                             [ rdf:type owl:Restriction ;
@@ -2855,7 +2855,7 @@ ex:Customer rdf:type owl:Class ;
             skos:definition "An Agent that bears a customer role in relation to an organization, being a recipient of its products or services." .
 
 
-###  http://example.org/apqc#CustomerCompensationOffer
+###  https://fandaws.com/ontology/apqc#CustomerCompensationOffer
 ex:CustomerCompensationOffer rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000965 ;
                              rdfs:comment "Minted (D5) as the conveyed deliverable of Perform salvage activities [10366], whose Element Description is about presenting customer incentives, not physical reconditioning. Directive because an offer proposes terms/action to the customer. Distinct from ex:DispositionDecision (reverse-logistics disposition of a returned artifact)." ;
@@ -2864,28 +2864,28 @@ ex:CustomerCompensationOffer rdf:type owl:Class ;
                              skos:example "A retention offer of a partial refund and free reshipment made to keep a customer from returning a discrepant order." .
 
 
-###  http://example.org/apqc#CustomerRole
+###  https://fandaws.com/ontology/apqc#CustomerRole
 ex:CustomerRole rdf:type owl:Class ;
                 rdfs:subClassOf obo:BFO_0000023 ;
                 rdfs:label "Customer Role" ;
                 skos:definition "A Role that is borne by an Agent in virtue of receiving or purchasing products or services from an organization." .
 
 
-###  http://example.org/apqc#DeliveryPerformanceReport
+###  https://fandaws.com/ontology/apqc#DeliveryPerformanceReport
 ex:DeliveryPerformanceReport rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:label "Delivery Performance Report" ;
                              skos:definition "A Descriptive Information Content Entity that describes the efficiency, cost-effectiveness, and schedule adherence of an inbound or outbound delivery system." .
 
 
-###  http://example.org/apqc#DeliveryServicePolicy
+###  https://fandaws.com/ontology/apqc#DeliveryServicePolicy
 ex:DeliveryServicePolicy rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ;
                          rdfs:label "Delivery Service Policy" ;
                          skos:definition "A Directive Information Content Entity that prescribes the rules, terms, and conditions governing how, when, and in what way services are delivered to customers." .
 
 
-###  http://example.org/apqc#DemandForecast
+###  https://fandaws.com/ontology/apqc#DemandForecast
 ex:DemandForecast rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000626 ;
                   rdfs:comment "Predictive (cco:ont00000626, a specialization of Descriptive cco:ont00000853): a forecast estimates an uncertain future demand state rather than prescribing action. Re-anchored from plain cco:ont00000853 to match the corpus forecast pattern (slice 5's identical ex:DemandForecast is 626+853); cco:ont00000853 co-asserted because 626 is outside the S3/S4 ICE allowlist. Genus for baseline and consensus forecasts." ;
@@ -2893,7 +2893,7 @@ ex:DemandForecast rdf:type owl:Class ;
                   skos:definition "A Predictive Information Content Entity that estimates the anticipated future demand for an organization's products or services." .
 
 
-###  http://example.org/apqc#DemandForecastAccuracyReport
+###  https://fandaws.com/ontology/apqc#DemandForecastAccuracyReport
 ex:DemandForecastAccuracyReport rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ,
                                                 [ rdf:type owl:Restriction ;
@@ -2904,7 +2904,7 @@ ex:DemandForecastAccuracyReport rdf:type owl:Class ;
                                 skos:definition "A Descriptive Information Content Entity that describes the measured accuracy and reliability of an organization's demand forecasts." .
 
 
-###  http://example.org/apqc#DestinationRequirementQuantity
+###  https://fandaws.com/ontology/apqc#DestinationRequirementQuantity
 ex:DestinationRequirementQuantity rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:comment "Minted (D5) as the descriptive figure output of Calculate requirements at destination [10254], mirroring ex:ConsolidationQuantity for the parallel sibling Calculate consolidation at source [10255]. Descriptive (states a computed figure), so its producing act is an Act of Analysis -- not a Directive requirements spec." ;
@@ -2912,14 +2912,14 @@ ex:DestinationRequirementQuantity rdf:type owl:Class ;
                                   skos:definition "A Descriptive Information Content Entity that states the specific computed figure correctly representing the distribution requirements at a destination." .
 
 
-###  http://example.org/apqc#DispatchPlan
+###  https://fandaws.com/ontology/apqc#DispatchPlan
 ex:DispatchPlan rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000965 ;
                 rdfs:label "Dispatch Plan" ;
                 skos:definition "A Directive Information Content Entity that prescribes the timing, duration, routes, and logistics of delivering inventory from a source to a destination." .
 
 
-###  http://example.org/apqc#DispositionDecision
+###  https://fandaws.com/ontology/apqc#DispositionDecision
 ex:DispositionDecision rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000965 ,
                                        [ rdf:type owl:Restriction ;
@@ -2931,49 +2931,49 @@ ex:DispositionDecision rdf:type owl:Class ;
                        skos:definition "A Directive Information Content Entity that prescribes whether a returned product is to be salvaged, repaired, refurbished, or returned to inventory." .
 
 
-###  http://example.org/apqc#DistributionCenter
+###  https://fandaws.com/ontology/apqc#DistributionCenter
 ex:DistributionCenter rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000192 ;
                       rdfs:label "Distribution Center" ;
                       skos:definition "A Facility designed for receiving, storing, and dispatching products to downstream destinations in a distribution network." .
 
 
-###  http://example.org/apqc#DistributionMasterData
+###  https://fandaws.com/ontology/apqc#DistributionMasterData
 ex:DistributionMasterData rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:label "Distribution Master Data" ;
                           skos:definition "A Descriptive Information Content Entity that describes the systematic master data of finished products and inventory used for distribution planning." .
 
 
-###  http://example.org/apqc#DistributionPlanningConstraintSpecification
+###  https://fandaws.com/ontology/apqc#DistributionPlanningConstraintSpecification
 ex:DistributionPlanningConstraintSpecification rdf:type owl:Class ;
                                                rdfs:subClassOf cco:ont00000965 ;
                                                rdfs:label "Distribution Planning Constraint Specification" ;
                                                skos:definition "A Directive Information Content Entity that prescribes the constraints governing distribution planning, covering distribution-center layout, inventory, transportation, and storage management." .
 
 
-###  http://example.org/apqc#DistributionPolicy
+###  https://fandaws.com/ontology/apqc#DistributionPolicy
 ex:DistributionPolicy rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000965 ;
                       rdfs:label "Distribution Policy" ;
                       skos:definition "A Directive Information Content Entity that prescribes guidelines for the distribution network, sourcing relationships, and dynamic product deployment across distribution centers." .
 
 
-###  http://example.org/apqc#DistributionRequirementsPlan
+###  https://fandaws.com/ontology/apqc#DistributionRequirementsPlan
 ex:DistributionRequirementsPlan rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000965 ;
                                 rdfs:label "Distribution Requirements Plan" ;
                                 skos:definition "A Directive Information Content Entity that prescribes the finished-goods requirements, consolidation, replenishment, dispatch, and load arrangements for distributing products from source to destination." .
 
 
-###  http://example.org/apqc#FinishedProduct
+###  https://fandaws.com/ontology/apqc#FinishedProduct
 ex:FinishedProduct rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000995 ;
                    rdfs:label "Finished Product" ;
                    skos:definition "A Material Artifact that has completed production and is ready to be tested, stored, distributed, or delivered to a customer." .
 
 
-###  http://example.org/apqc#FleetManagementCapability
+###  https://fandaws.com/ontology/apqc#FleetManagementCapability
 ex:FleetManagementCapability rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000568 ,
                                              [ rdf:type owl:Restriction ;
@@ -2985,7 +2985,7 @@ ex:FleetManagementCapability rdf:type owl:Class ;
                              skos:definition "An Organization Capability that inheres in a supply-chain organization in virtue of its capacity to administer the transportation vehicles used for delivering end products, covering vehicle financing, maintenance, telematics, driver, speed, fuel, and health-and-safety management." .
 
 
-###  http://example.org/apqc#ForecastingMethodologyAssessment
+###  https://fandaws.com/ontology/apqc#ForecastingMethodologyAssessment
 ex:ForecastingMethodologyAssessment rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000853 ,
                                                     [ rdf:type owl:Restriction ;
@@ -2998,28 +2998,28 @@ ex:ForecastingMethodologyAssessment rdf:type owl:Class ;
                                     skos:example "A planning lead's note that the current ARIMA model under-reacts to promotional spikes and should be reviewed." .
 
 
-###  http://example.org/apqc#InboundMaterialReceiptPlan
+###  https://fandaws.com/ontology/apqc#InboundMaterialReceiptPlan
 ex:InboundMaterialReceiptPlan rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:label "Inbound Material Receipt Plan" ;
                               skos:definition "A Directive Information Content Entity that prescribes the receipt of inbound materials procured from supply sources and delivered to a distribution center or warehouse." .
 
 
-###  http://example.org/apqc#InventoryAccuracyReport
+###  https://fandaws.com/ontology/apqc#InventoryAccuracyReport
 ex:InventoryAccuracyReport rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:label "Inventory Accuracy Report" ;
                            skos:definition "A Descriptive Information Content Entity that describes discrepancies between the recorded inventory and the physical state of the inventory." .
 
 
-###  http://example.org/apqc#InventoryItem
+###  https://fandaws.com/ontology/apqc#InventoryItem
 ex:InventoryItem rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000995 ;
                  rdfs:label "Inventory Item" ;
                  skos:definition "A Material Artifact held in stock by an organization, such as a raw material, spare, or finished product awaiting use or sale." .
 
 
-###  http://example.org/apqc#InventoryNeedsAssessment
+###  https://fandaws.com/ontology/apqc#InventoryNeedsAssessment
 ex:InventoryNeedsAssessment rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:comment "Minted (D5) as the descriptive output of Establish inventory management constraints [10268], whose source centres on discerning inventory problems and quantifying needs. Descriptive because it represents identified problems and a computed need rather than prescribing constraints." ;
@@ -3028,35 +3028,35 @@ ex:InventoryNeedsAssessment rdf:type owl:Class ;
                             skos:example "A note listing phantom-stock and shelf-life problems in the warehouse plus the near-term reorder quantity." .
 
 
-###  http://example.org/apqc#InventoryRecord
+###  https://fandaws.com/ontology/apqc#InventoryRecord
 ex:InventoryRecord rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ;
                    rdfs:label "Inventory Record" ;
                    skos:definition "A Descriptive Information Content Entity that describes the quantity, location, and availability of inventory items at warehouses and distribution centers." .
 
 
-###  http://example.org/apqc#KeyPerformanceIndicatorSpecification
+###  https://fandaws.com/ontology/apqc#KeyPerformanceIndicatorSpecification
 ex:KeyPerformanceIndicatorSpecification rdf:type owl:Class ;
                                         rdfs:subClassOf cco:ont00000965 ;
                                         rdfs:label "Key Performance Indicator Specification" ;
                                         skos:definition "A Directive Information Content Entity that prescribes the key performance measures by which the performance of a logistics or production strategy is to be evaluated." .
 
 
-###  http://example.org/apqc#LaborAndMaterialsPolicy
+###  https://fandaws.com/ontology/apqc#LaborAndMaterialsPolicy
 ex:LaborAndMaterialsPolicy rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000965 ;
                            rdfs:label "Labor and Materials Policy" ;
                            skos:definition "A Directive Information Content Entity that prescribes internal rules and regulations governing employees and materials." .
 
 
-###  http://example.org/apqc#LoadPlan
+###  https://fandaws.com/ontology/apqc#LoadPlan
 ex:LoadPlan rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00000965 ;
             rdfs:label "Load Plan" ;
             skos:definition "A Directive Information Content Entity that prescribes how loads are to be delivered to a given destination or partner." .
 
 
-###  http://example.org/apqc#LogisticsManagementCapability
+###  https://fandaws.com/ontology/apqc#LogisticsManagementCapability
 ex:LogisticsManagementCapability rdf:type owl:Class ;
                                  rdfs:subClassOf ex:SupplyChainManagementCapability ,
                                                  [ rdf:type owl:Restriction ;
@@ -3080,42 +3080,42 @@ ex:LogisticsManagementCapability rdf:type owl:Class ;
                                  skos:definition "A Supply Chain Management Capability that is realized in acts of governing logistics, managing inbound material flow, operating warehousing, and operating outbound transportation." .
 
 
-###  http://example.org/apqc#LogisticsNetworkDesign
+###  https://fandaws.com/ontology/apqc#LogisticsNetworkDesign
 ex:LogisticsNetworkDesign rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000965 ;
                           rdfs:label "Logistics Network Design" ;
                           skos:definition "A Directive Information Content Entity that prescribes the network of entities through which materials and information flow in logistical activities." .
 
 
-###  http://example.org/apqc#LogisticsRequirementSpecification
+###  https://fandaws.com/ontology/apqc#LogisticsRequirementSpecification
 ex:LogisticsRequirementSpecification rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000965 ;
                                      rdfs:label "Logistics Requirement Specification" ;
                                      skos:definition "A Directive Information Content Entity that prescribes the logistics requirements derived from customer service requirements for managing flow between origin and consumption." .
 
 
-###  http://example.org/apqc#LogisticsServiceProviderRole
+###  https://fandaws.com/ontology/apqc#LogisticsServiceProviderRole
 ex:LogisticsServiceProviderRole rdf:type owl:Class ;
                                 rdfs:subClassOf obo:BFO_0000023 ;
                                 rdfs:label "Logistics Service Provider Role" ;
                                 skos:definition "A Role that is borne by an Organization in virtue of performing outsourced logistics, storage, or shipping activities for another organization." .
 
 
-###  http://example.org/apqc#LogisticsStrategy
+###  https://fandaws.com/ontology/apqc#LogisticsStrategy
 ex:LogisticsStrategy rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:label "Logistics Strategy" ;
                      skos:definition "A Directive Information Content Entity that prescribes an organization's approach to managing logistics, including network design, outsourcing, and transportation cost and schedule optimization." .
 
 
-###  http://example.org/apqc#LotNumberingSystemSpecification
+###  https://fandaws.com/ontology/apqc#LotNumberingSystemSpecification
 ex:LotNumberingSystemSpecification rdf:type owl:Class ;
                                    rdfs:subClassOf cco:ont00000965 ;
                                    rdfs:label "Lot Numbering System Specification" ;
                                    skos:definition "A Directive Information Content Entity that prescribes the scheme for assigning lot identification numbers to quantities of manufactured material." .
 
 
-###  http://example.org/apqc#LotUsageSpecification
+###  https://fandaws.com/ontology/apqc#LotUsageSpecification
 ex:LotUsageSpecification rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ,
                                          [ rdf:type owl:Restriction ;
@@ -3128,21 +3128,21 @@ ex:LotUsageSpecification rdf:type owl:Class ;
                          skos:example "A plan earmarking a specific lot for a customer order and setting its consumption window." .
 
 
-###  http://example.org/apqc#MaintenanceIssueReport
+###  https://fandaws.com/ontology/apqc#MaintenanceIssueReport
 ex:MaintenanceIssueReport rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:label "Maintenance Issue Report" ;
                           skos:definition "A Descriptive Information Content Entity that describes deviations or issues in the maintenance schedule or in production performance." .
 
 
-###  http://example.org/apqc#MaintenanceSchedule
+###  https://fandaws.com/ontology/apqc#MaintenanceSchedule
 ex:MaintenanceSchedule rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000965 ;
                        rdfs:label "Maintenance Schedule" ;
                        skos:definition "A Directive Information Content Entity that prescribes the timing of planned and unplanned maintenance of production equipment." .
 
 
-###  http://example.org/apqc#ManagementPersonnel
+###  https://fandaws.com/ontology/apqc#ManagementPersonnel
 ex:ManagementPersonnel rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001017 ,
                                        [ rdf:type owl:Restriction ;
@@ -3154,28 +3154,28 @@ ex:ManagementPersonnel rdf:type owl:Class ;
                        skos:definition "An Agent that bears a manager role and exercises managerial authority within an organization." .
 
 
-###  http://example.org/apqc#ManagerRole
+###  https://fandaws.com/ontology/apqc#ManagerRole
 ex:ManagerRole rdf:type owl:Class ;
                rdfs:subClassOf obo:BFO_0000023 ;
                rdfs:label "Manager Role" ;
                skos:definition "A Role that is borne by an Agent in virtue of exercising managerial authority within an organization." .
 
 
-###  http://example.org/apqc#ManufacturingGoalSpecification
+###  https://fandaws.com/ontology/apqc#ManufacturingGoalSpecification
 ex:ManufacturingGoalSpecification rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000965 ;
                                   rdfs:label "Manufacturing Goal Specification" ;
                                   skos:definition "A Directive Information Content Entity that prescribes quantifiable strategic objectives for one or more manufacturing segments." .
 
 
-###  http://example.org/apqc#MasterProductionSchedule
+###  https://fandaws.com/ontology/apqc#MasterProductionSchedule
 ex:MasterProductionSchedule rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000965 ;
                             rdfs:label "Master Production Schedule" ;
                             skos:definition "A Directive Information Content Entity that prescribes the planned quantity, timing, and staffing of internal production and inventory activities over a planning horizon." .
 
 
-###  http://example.org/apqc#MaterialSpecification
+###  https://fandaws.com/ontology/apqc#MaterialSpecification
 ex:MaterialSpecification rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:comment "Despite the 'Specification' label, this class is DESCRIPTIVE: it records observed material attributes (density, volume, size), not a prescriptive requirement. A prescriptive material requirement should be modeled separately as a Directive ICE (e.g. a Material Requirement Specification). Label-driven false-friend guard (D6)." ;
@@ -3183,14 +3183,14 @@ ex:MaterialSpecification rdf:type owl:Class ;
                          skos:definition "A Descriptive Information Content Entity that describes the attributes and characteristics of an inventory item, such as density, volume, and size." .
 
 
-###  http://example.org/apqc#MaterialsManagementContingencyPlan
+###  https://fandaws.com/ontology/apqc#MaterialsManagementContingencyPlan
 ex:MaterialsManagementContingencyPlan rdf:type owl:Class ;
                                       rdfs:subClassOf cco:ont00000965 ;
                                       rdfs:label "Materials Management Contingency Plan" ;
                                       skos:definition "A Directive Information Content Entity that prescribes how to react to issues arising during execution of the inventory plan, such as a vendor failing to deliver on time." .
 
 
-###  http://example.org/apqc#MaterialsPlan
+###  https://fandaws.com/ontology/apqc#MaterialsPlan
 ex:MaterialsPlan rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000965 ;
                  rdfs:comment "Genus for both the unconstrained and the constrained materials plan; group modules may specialize as needed." ;
@@ -3198,7 +3198,7 @@ ex:MaterialsPlan rdf:type owl:Class ;
                  skos:definition "A Directive Information Content Entity that prescribes the advance provision of raw materials and spares required to meet market demand." .
 
 
-###  http://example.org/apqc#NeedsSupplyAlignmentAssessment
+###  https://fandaws.com/ontology/apqc#NeedsSupplyAlignmentAssessment
 ex:NeedsSupplyAlignmentAssessment rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:comment "Minted: no shared-vocab descriptive ICE captures a requirements-versus-capacity reconciliation. Descriptive because it represents fit rather than prescribing action." ;
@@ -3207,21 +3207,21 @@ ex:NeedsSupplyAlignmentAssessment rdf:type owl:Class ;
                                   skos:example "A report noting that forecast demand for a part exceeds the qualified suppliers' combined monthly capacity." .
 
 
-###  http://example.org/apqc#NonconformanceTrendAnalysis
+###  https://fandaws.com/ontology/apqc#NonconformanceTrendAnalysis
 ex:NonconformanceTrendAnalysis rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000853 ;
                                rdfs:label "Nonconformance Trend Analysis" ;
                                skos:definition "A Descriptive Information Content Entity that describes trends in the occurrence of process or product nonconformances over time." .
 
 
-###  http://example.org/apqc#OutboundTransportationPlan
+###  https://fandaws.com/ontology/apqc#OutboundTransportationPlan
 ex:OutboundTransportationPlan rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:label "Outbound Transportation Plan" ;
                               skos:definition "A Directive Information Content Entity that prescribes the dispatch, transportation, and delivery of outbound products to their destinations." .
 
 
-###  http://example.org/apqc#OutsourcingNeedsStatement
+###  https://fandaws.com/ontology/apqc#OutsourcingNeedsStatement
 ex:OutsourcingNeedsStatement rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:comment "Minted (D5) as the conveyed deliverable of Communicate outsourcing needs [10345]. Descriptive because it states/reports identified outsourcing needs rather than prescribing a course of action. Distinct from ex:OutsourcingPolicy (a Directive policy artifact), which APQC does not say this act produces." ;
@@ -3230,14 +3230,14 @@ ex:OutsourcingNeedsStatement rdf:type owl:Class ;
                              skos:example "A memo to management stating the warehousing scope recommended for outsourcing and the assistance required." .
 
 
-###  http://example.org/apqc#OutsourcingPolicy
+###  https://fandaws.com/ontology/apqc#OutsourcingPolicy
 ex:OutsourcingPolicy rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:label "Outsourcing Policy" ;
                      skos:definition "A Directive Information Content Entity that prescribes rules and regulations governing the contracting out of business processes to other parties." .
 
 
-###  http://example.org/apqc#P10215
+###  https://fandaws.com/ontology/apqc#P10215
 ex:P10215 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -3281,7 +3281,7 @@ ex:P10215 rdf:type owl:Class ;
           skos:example "An organization's annual supply-chain planning cycle aligning production, materials, and distribution resources." .
 
 
-###  http://example.org/apqc#P10216
+###  https://fandaws.com/ontology/apqc#P10216
 ex:P10216 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -3309,7 +3309,7 @@ ex:P10216 rdf:type owl:Class ;
           skos:example "A manufacturer's quarterly procurement cycle from sourcing strategy through supplier management." .
 
 
-###  http://example.org/apqc#P10217
+###  https://fandaws.com/ontology/apqc#P10217
 ex:P10217 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfProduction ,
                           [ rdf:type owl:Restriction ;
@@ -3341,7 +3341,7 @@ ex:P10217 rdf:type owl:Class ;
           skos:example "A plant's end-to-end run for a production order: scheduling, manufacturing, quality testing, and lot record-keeping." .
 
 
-###  http://example.org/apqc#P10221
+###  https://fandaws.com/ontology/apqc#P10221
 ex:P10221 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3393,7 +3393,7 @@ ex:P10221 rdf:type owl:Class ;
           skos:example "An operations team drafts the plant's production strategy together with its labor, outsourcing, and capital-expense policies." .
 
 
-###  http://example.org/apqc#P10222
+###  https://fandaws.com/ontology/apqc#P10222
 ex:P10222 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3437,7 +3437,7 @@ ex:P10222 rdf:type owl:Class ;
           skos:example "The demand-planning team runs its monthly forecasting cycle and signs off a consensus forecast." .
 
 
-###  http://example.org/apqc#P10223
+###  https://fandaws.com/ontology/apqc#P10223
 ex:P10223 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3477,7 +3477,7 @@ ex:P10223 rdf:type owl:Class ;
           skos:example "Materials planning produces and then constrains the quarter's raw-material supply plan." .
 
 
-###  http://example.org/apqc#P10224
+###  https://fandaws.com/ontology/apqc#P10224
 ex:P10224 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfScheduling ,
                           [ rdf:type owl:Restriction ;
@@ -3505,7 +3505,7 @@ ex:P10224 rdf:type owl:Class ;
           skos:example "Production control builds and weekly-updates the site master production schedule." .
 
 
-###  http://example.org/apqc#P10226
+###  https://fandaws.com/ontology/apqc#P10226
 ex:P10226 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3537,7 +3537,7 @@ ex:P10226 rdf:type owl:Class ;
           skos:example "Network planning fixes the layout, inventory, transport, and storage constraints for the next design cycle." .
 
 
-###  http://example.org/apqc#P10227
+###  https://fandaws.com/ontology/apqc#P10227
 ex:P10227 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3565,7 +3565,7 @@ ex:P10227 rdf:type owl:Class ;
           skos:example "The logistics council reviews and updates the distribution policy at year end." .
 
 
-###  http://example.org/apqc#P10229
+###  https://fandaws.com/ontology/apqc#P10229
 ex:P10229 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3580,7 +3580,7 @@ ex:P10229 rdf:type owl:Class ;
           skos:example "Planners set per-line output targets aligned with the annual sales projection." .
 
 
-###  http://example.org/apqc#P10230
+###  https://fandaws.com/ontology/apqc#P10230
 ex:P10230 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3595,7 +3595,7 @@ ex:P10230 rdf:type owl:Class ;
           skos:example "HR and operations jointly issue the plant's labor and materials handling policy." .
 
 
-###  http://example.org/apqc#P10231
+###  https://fandaws.com/ontology/apqc#P10231
 ex:P10231 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3610,7 +3610,7 @@ ex:P10231 rdf:type owl:Class ;
           skos:example "Management publishes the criteria under which production steps may be outsourced." .
 
 
-###  http://example.org/apqc#P10232
+###  https://fandaws.com/ontology/apqc#P10232
 ex:P10232 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3625,7 +3625,7 @@ ex:P10232 rdf:type owl:Class ;
           skos:example "Finance issues the capex approval thresholds for new production equipment." .
 
 
-###  http://example.org/apqc#P10233
+###  https://fandaws.com/ontology/apqc#P10233
 ex:P10233 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3641,7 +3641,7 @@ ex:P10233 rdf:type owl:Class ;
           skos:example "Engineers analyze line throughput and report the plant's effective production capacity." .
 
 
-###  http://example.org/apqc#P10234
+###  https://fandaws.com/ontology/apqc#P10234
 ex:P10234 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3656,7 +3656,7 @@ ex:P10234 rdf:type owl:Class ;
           skos:example "Supply-chain planners map the production stakeholder network and document its binding supply constraints." .
 
 
-###  http://example.org/apqc#P10235
+###  https://fandaws.com/ontology/apqc#P10235
 ex:P10235 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3671,7 +3671,7 @@ ex:P10235 rdf:type owl:Class ;
           skos:example "An analyst builds a statistical baseline forecast from three years of shipment history." .
 
 
-###  http://example.org/apqc#P10236
+###  https://fandaws.com/ontology/apqc#P10236
 ex:P10236 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfForecasting ,
                           [ rdf:type owl:Restriction ;
@@ -3691,7 +3691,7 @@ ex:P10236 rdf:type owl:Class ;
           skos:example "Planners run joint demand-review sessions with key accounts to refine the forecast." .
 
 
-###  http://example.org/apqc#P10237
+###  https://fandaws.com/ontology/apqc#P10237
 ex:P10237 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3715,7 +3715,7 @@ ex:P10237 rdf:type owl:Class ;
           skos:example "Sales, marketing, and operations leaders sign off one consensus number in the S&OP meeting." .
 
 
-###  http://example.org/apqc#P10238
+###  https://fandaws.com/ontology/apqc#P10238
 ex:P10238 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3730,7 +3730,7 @@ ex:P10238 rdf:type owl:Class ;
           skos:example "Planning computes the ATP quantity available against open sales orders for the week." .
 
 
-###  http://example.org/apqc#P10239
+###  https://fandaws.com/ontology/apqc#P10239
 ex:P10239 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3749,7 +3749,7 @@ ex:P10239 rdf:type owl:Class ;
           skos:example "Demand planners watch actual orders versus forecast and adjust the number mid-cycle." .
 
 
-###  http://example.org/apqc#P10240
+###  https://fandaws.com/ontology/apqc#P10240
 ex:P10240 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3765,7 +3765,7 @@ ex:P10240 rdf:type owl:Class ;
           skos:example "A planning lead reviews whether the current forecasting model still fits a volatile market." .
 
 
-###  http://example.org/apqc#P10241
+###  https://fandaws.com/ontology/apqc#P10241
 ex:P10241 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3784,7 +3784,7 @@ ex:P10241 rdf:type owl:Class ;
           skos:example "The team computes MAPE for last quarter's forecasts and reports the accuracy." .
 
 
-###  http://example.org/apqc#P10242
+###  https://fandaws.com/ontology/apqc#P10242
 ex:P10242 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3800,7 +3800,7 @@ ex:P10242 rdf:type owl:Class ;
           skos:example "Planning drafts the ideal materials plan ignoring supplier limits as a first pass." .
 
 
-###  http://example.org/apqc#P10243
+###  https://fandaws.com/ontology/apqc#P10243
 ex:P10243 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -3820,7 +3820,7 @@ ex:P10243 rdf:type owl:Class ;
           skos:example "Procurement holds standing supply reviews with strategic vendors and tracks their output." .
 
 
-###  http://example.org/apqc#P10244
+###  https://fandaws.com/ontology/apqc#P10244
 ex:P10244 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3835,7 +3835,7 @@ ex:P10244 rdf:type owl:Class ;
           skos:example "Sourcing flags the single-source materials and profiles each supplier's peak capacity." .
 
 
-###  http://example.org/apqc#P10245
+###  https://fandaws.com/ontology/apqc#P10245
 ex:P10245 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3850,7 +3850,7 @@ ex:P10245 rdf:type owl:Class ;
           skos:example "QA tracks incoming lots against the material spec for density and dimensional tolerance." .
 
 
-###  http://example.org/apqc#P10246
+###  https://fandaws.com/ontology/apqc#P10246
 ex:P10246 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3873,7 +3873,7 @@ ex:P10246 rdf:type owl:Class ;
           skos:example "Planning re-runs MRP against real supplier capacity to produce the executable materials plan." .
 
 
-###  http://example.org/apqc#P10252
+###  https://fandaws.com/ontology/apqc#P10252
 ex:P10252 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -3889,7 +3889,7 @@ ex:P10252 rdf:type owl:Class ;
           skos:example "Master-data stewards run the periodic update keeping distribution-center and lane reference data current." .
 
 
-###  http://example.org/apqc#P10253
+###  https://fandaws.com/ontology/apqc#P10253
 ex:P10253 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3905,7 +3905,7 @@ ex:P10253 rdf:type owl:Class ;
           skos:example "A planner confirms the regional DC's stocking requirement with its manager." .
 
 
-###  http://example.org/apqc#P10254
+###  https://fandaws.com/ontology/apqc#P10254
 ex:P10254 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3921,7 +3921,7 @@ ex:P10254 rdf:type owl:Class ;
           skos:example "The team agrees the exact replenishment quantity for the destination DC." .
 
 
-###  http://example.org/apqc#P10255
+###  https://fandaws.com/ontology/apqc#P10255
 ex:P10255 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3936,7 +3936,7 @@ ex:P10255 rdf:type owl:Class ;
           skos:example "Shipping totals the units ready to consolidate at the plant for Friday's outbound." .
 
 
-###  http://example.org/apqc#P10256
+###  https://fandaws.com/ontology/apqc#P10256
 ex:P10256 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3952,7 +3952,7 @@ ex:P10256 rdf:type owl:Class ;
           skos:example "Planners and the supplier agree a VMI replenishment plan for the DC." .
 
 
-###  http://example.org/apqc#P10258
+###  https://fandaws.com/ontology/apqc#P10258
 ex:P10258 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3967,7 +3967,7 @@ ex:P10258 rdf:type owl:Class ;
           skos:example "Transport planning builds the optimized dispatch plan for the week's outbound loads." .
 
 
-###  http://example.org/apqc#P10259
+###  https://fandaws.com/ontology/apqc#P10259
 ex:P10259 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3982,7 +3982,7 @@ ex:P10259 rdf:type owl:Class ;
           skos:example "Logistics control watches dispatch execution and reschedules a delayed load." .
 
 
-###  http://example.org/apqc#P10260
+###  https://fandaws.com/ontology/apqc#P10260
 ex:P10260 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3997,7 +3997,7 @@ ex:P10260 rdf:type owl:Class ;
           skos:example "Planning produces the per-destination load plan maximizing trailer fill." .
 
 
-###  http://example.org/apqc#P10261
+###  https://fandaws.com/ontology/apqc#P10261
 ex:P10261 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4012,7 +4012,7 @@ ex:P10261 rdf:type owl:Class ;
           skos:example "The team tracks partner load execution and resolves a missed partner pickup." .
 
 
-###  http://example.org/apqc#P10262
+###  https://fandaws.com/ontology/apqc#P10262
 ex:P10262 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4028,7 +4028,7 @@ ex:P10262 rdf:type owl:Class ;
           skos:example "Finance estimates the all-in cost to land product at each region's DC." .
 
 
-###  http://example.org/apqc#P10263
+###  https://fandaws.com/ontology/apqc#P10263
 ex:P10263 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4043,7 +4043,7 @@ ex:P10263 rdf:type owl:Class ;
           skos:example "Operations reports lines at 78 percent of installed capacity for the quarter." .
 
 
-###  http://example.org/apqc#P10264
+###  https://fandaws.com/ontology/apqc#P10264
 ex:P10264 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4059,7 +4059,7 @@ ex:P10264 rdf:type owl:Class ;
           skos:example "Network analysts evaluate whether the current DC footprint still serves demand efficiently." .
 
 
-###  http://example.org/apqc#P10265
+###  https://fandaws.com/ontology/apqc#P10265
 ex:P10265 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -4079,7 +4079,7 @@ ex:P10265 rdf:type owl:Class ;
           skos:example "Logistics screens carriers and selects the preferred regional partner." .
 
 
-###  http://example.org/apqc#P10266
+###  https://fandaws.com/ontology/apqc#P10266
 ex:P10266 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4094,7 +4094,7 @@ ex:P10266 rdf:type owl:Class ;
           skos:example "Planning sets the dynamic deployment rules that rebalance stock across DCs on stockout risk." .
 
 
-###  http://example.org/apqc#P10267
+###  https://fandaws.com/ontology/apqc#P10267
 ex:P10267 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4109,7 +4109,7 @@ ex:P10267 rdf:type owl:Class ;
           skos:example "Planners set the layout constraints for the DC given product mix and demand." .
 
 
-###  http://example.org/apqc#P10268
+###  https://fandaws.com/ontology/apqc#P10268
 ex:P10268 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4125,7 +4125,7 @@ ex:P10268 rdf:type owl:Class ;
           skos:example "The team documents storage and stock-level constraints for the warehouse." .
 
 
-###  http://example.org/apqc#P10269
+###  https://fandaws.com/ontology/apqc#P10269
 ex:P10269 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4140,7 +4140,7 @@ ex:P10269 rdf:type owl:Class ;
           skos:example "Logistics fixes mode, fleet-size, and routing constraints for source-to-DC transport." .
 
 
-###  http://example.org/apqc#P10277
+###  https://fandaws.com/ontology/apqc#P10277
 ex:P10277 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4180,7 +4180,7 @@ ex:P10277 rdf:type owl:Class ;
           skos:example "A procurement office defines category strategies and a documented sourcing process for the coming year." .
 
 
-###  http://example.org/apqc#P10278
+###  https://fandaws.com/ontology/apqc#P10278
 ex:P10278 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -4212,7 +4212,7 @@ ex:P10278 rdf:type owl:Class ;
           skos:example "A sourcing committee selects two qualified suppliers and puts framework contracts in place." .
 
 
-###  http://example.org/apqc#P10279
+###  https://fandaws.com/ontology/apqc#P10279
 ex:P10279 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -4252,7 +4252,7 @@ ex:P10279 rdf:type owl:Class ;
           skos:example "A buyer raises requisitions, gets approval, and dispatches purchase orders to win the needed parts." .
 
 
-###  http://example.org/apqc#P10280
+###  https://fandaws.com/ontology/apqc#P10280
 ex:P10280 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4284,7 +4284,7 @@ ex:P10280 rdf:type owl:Class ;
           skos:example "Procurement runs its periodic supplier scorecard cycle, rating vendors on delivery and quality." .
 
 
-###  http://example.org/apqc#P10281
+###  https://fandaws.com/ontology/apqc#P10281
 ex:P10281 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4299,7 +4299,7 @@ ex:P10281 rdf:type owl:Class ;
           skos:example "A procurement lead drafts a sourcing plan with timeline, team, and supplier-selection approach for a build program." .
 
 
-###  http://example.org/apqc#P10282
+###  https://fandaws.com/ontology/apqc#P10282
 ex:P10282 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4315,7 +4315,7 @@ ex:P10282 rdf:type owl:Class ;
           skos:example "A buyer defines exact part numbers and quantities required by a production line into a purchasing requirement spec." .
 
 
-###  http://example.org/apqc#P10283
+###  https://fandaws.com/ontology/apqc#P10283
 ex:P10283 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4330,7 +4330,7 @@ ex:P10283 rdf:type owl:Class ;
           skos:example "A team prepares fallback sourcing and buffer-stock procedures for the case of a key vendor's late delivery." .
 
 
-###  http://example.org/apqc#P10284
+###  https://fandaws.com/ontology/apqc#P10284
 ex:P10284 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4354,7 +4354,7 @@ ex:P10284 rdf:type owl:Class ;
           skos:example "A planner reconciles a bill of requirements with supplier capacity profiles and reports where demand exceeds capacity." .
 
 
-###  http://example.org/apqc#P10285
+###  https://fandaws.com/ontology/apqc#P10285
 ex:P10285 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4369,7 +4369,7 @@ ex:P10285 rdf:type owl:Class ;
           skos:example "A category manager classifies a year of purchase data and reports spend concentration by supplier and category." .
 
 
-###  http://example.org/apqc#P10286
+###  https://fandaws.com/ontology/apqc#P10286
 ex:P10286 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4385,7 +4385,7 @@ ex:P10286 rdf:type owl:Class ;
           skos:example "A sourcing analyst scans the supply base and registers consolidation and renegotiation opportunities." .
 
 
-###  http://example.org/apqc#P10287
+###  https://fandaws.com/ontology/apqc#P10287
 ex:P10287 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4405,7 +4405,7 @@ ex:P10287 rdf:type owl:Class ;
           skos:example "Buyers and key suppliers jointly identify a new co-sourcing arrangement for a component." .
 
 
-###  http://example.org/apqc#P10288
+###  https://fandaws.com/ontology/apqc#P10288
 ex:P10288 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -4424,7 +4424,7 @@ ex:P10288 rdf:type owl:Class ;
           skos:example "A buyer compares three vendor quotes and decides which supplier wins the award." .
 
 
-###  http://example.org/apqc#P10289
+###  https://fandaws.com/ontology/apqc#P10289
 ex:P10289 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4440,7 +4440,7 @@ ex:P10289 rdf:type owl:Class ;
           skos:example "A quality team audits a vendor's facility, judges it compliant, and grants official-supplier status." .
 
 
-###  http://example.org/apqc#P10290
+###  https://fandaws.com/ontology/apqc#P10290
 ex:P10290 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000684 ,
                           [ rdf:type owl:Restriction ;
@@ -4460,7 +4460,7 @@ ex:P10290 rdf:type owl:Class ;
           skos:example "Procurement and a supplier negotiate and sign a one-year supply agreement with fixed delivery windows." .
 
 
-###  http://example.org/apqc#P10291
+###  https://fandaws.com/ontology/apqc#P10291
 ex:P10291 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4480,7 +4480,7 @@ ex:P10291 rdf:type owl:Class ;
           skos:example "A contract administrator reviews active supplier contracts each quarter and flags terms needing update." .
 
 
-###  http://example.org/apqc#P10292
+###  https://fandaws.com/ontology/apqc#P10292
 ex:P10292 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -4500,7 +4500,7 @@ ex:P10292 rdf:type owl:Class ;
           skos:example "A procurement clerk validates incoming requisitions against policy before routing them for approval." .
 
 
-###  http://example.org/apqc#P10293
+###  https://fandaws.com/ontology/apqc#P10293
 ex:P10293 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -4520,7 +4520,7 @@ ex:P10293 rdf:type owl:Class ;
           skos:example "A budget owner signs off on a requisition, authorizing the purchase." .
 
 
-###  http://example.org/apqc#P10294
+###  https://fandaws.com/ontology/apqc#P10294
 ex:P10294 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4536,7 +4536,7 @@ ex:P10294 rdf:type owl:Class ;
           skos:example "A buyer issues an RFQ to five vendors for a custom fastener and opens a bidding window." .
 
 
-###  http://example.org/apqc#P10295
+###  https://fandaws.com/ontology/apqc#P10295
 ex:P10295 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4556,7 +4556,7 @@ ex:P10295 rdf:type owl:Class ;
           skos:example "A buyer turns the winning quotes into purchase orders and sends them to the chosen vendors." .
 
 
-###  http://example.org/apqc#P10296
+###  https://fandaws.com/ontology/apqc#P10296
 ex:P10296 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ;
           ex:apqcSourceText "Accelerating the purchase orders in order to fulfill the internal needs (for raw materials) depicted through inquiries." ;
@@ -4568,7 +4568,7 @@ ex:P10296 rdf:type owl:Class ;
           skos:example "A buyer chases a supplier to advance a delivery date so a production line is not starved of raw material." .
 
 
-###  http://example.org/apqc#P10297
+###  https://fandaws.com/ontology/apqc#P10297
 ex:P10297 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4592,7 +4592,7 @@ ex:P10297 rdf:type owl:Class ;
           skos:example "Accounts payable matches received quantities against PO lines and reports the discrepancies." .
 
 
-###  http://example.org/apqc#P10298
+###  https://fandaws.com/ontology/apqc#P10298
 ex:P10298 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -4608,7 +4608,7 @@ ex:P10298 rdf:type owl:Class ;
           skos:example "A buyer researches a hard-to-source material and decides to substitute an approved alternate." .
 
 
-###  http://example.org/apqc#P10299
+###  https://fandaws.com/ontology/apqc#P10299
 ex:P10299 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4624,7 +4624,7 @@ ex:P10299 rdf:type owl:Class ;
           skos:example "A supplier-management team logs each vendor's on-time delivery and defect rate into a performance report." .
 
 
-###  http://example.org/apqc#P10300
+###  https://fandaws.com/ontology/apqc#P10300
 ex:P10300 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4639,7 +4639,7 @@ ex:P10300 rdf:type owl:Class ;
           skos:example "An analyst aggregates vendor metrics into a performance report used to tune production planning." .
 
 
-###  http://example.org/apqc#P10301
+###  https://fandaws.com/ontology/apqc#P10301
 ex:P10301 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4655,7 +4655,7 @@ ex:P10301 rdf:type owl:Class ;
           skos:example "An analyst shows how a high minimum-order quantity inflates inventory and recommends renegotiation." .
 
 
-###  http://example.org/apqc#P10302
+###  https://fandaws.com/ontology/apqc#P10302
 ex:P10302 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4671,7 +4671,7 @@ ex:P10302 rdf:type owl:Class ;
           skos:example "An inbound-quality team records defect rates per supplier shipment into a supplier quality report." .
 
 
-###  http://example.org/apqc#P10303
+###  https://fandaws.com/ontology/apqc#P10303
 ex:P10303 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfScheduling ,
                           [ rdf:type owl:Restriction ;
@@ -4715,7 +4715,7 @@ ex:P10303 rdf:type owl:Class ;
           skos:example "A planner builds and releases the week's production and maintenance schedule." .
 
 
-###  http://example.org/apqc#P10304
+###  https://fandaws.com/ontology/apqc#P10304
 ex:P10304 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfProduction ,
                           [ rdf:type owl:Restriction ;
@@ -4755,7 +4755,7 @@ ex:P10304 rdf:type owl:Class ;
           skos:example "A line converts raw stock into finished units for the day's orders." .
 
 
-###  http://example.org/apqc#P10306
+###  https://fandaws.com/ontology/apqc#P10306
 ex:P10306 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfScheduling ,
                           [ rdf:type owl:Restriction ;
@@ -4775,7 +4775,7 @@ ex:P10306 rdf:type owl:Class ;
           skos:example "A scheduler decomposes the master plan into per-line objectives." .
 
 
-###  http://example.org/apqc#P10307
+###  https://fandaws.com/ontology/apqc#P10307
 ex:P10307 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfScheduling ,
                           [ rdf:type owl:Restriction ;
@@ -4794,7 +4794,7 @@ ex:P10307 rdf:type owl:Class ;
           skos:example "A planner produces the minute-by-minute working schedule for each line." .
 
 
-###  http://example.org/apqc#P10308
+###  https://fandaws.com/ontology/apqc#P10308
 ex:P10308 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfScheduling ,
                           [ rdf:type owl:Restriction ;
@@ -4814,7 +4814,7 @@ ex:P10308 rdf:type owl:Class ;
           skos:example "A scheduler sets order start dates and demarcates batch lot sizes." .
 
 
-###  http://example.org/apqc#P10309
+###  https://fandaws.com/ontology/apqc#P10309
 ex:P10309 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -4834,7 +4834,7 @@ ex:P10309 rdf:type owl:Class ;
           skos:example "A controller releases the day's production orders and opens their lots." .
 
 
-###  http://example.org/apqc#P10311
+###  https://fandaws.com/ontology/apqc#P10311
 ex:P10311 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfProduction ,
                           [ rdf:type owl:Restriction ;
@@ -4858,7 +4858,7 @@ ex:P10311 rdf:type owl:Class ;
           skos:example "Operators run the line per the released schedule, producing finished units." .
 
 
-###  http://example.org/apqc#P10313
+###  https://fandaws.com/ontology/apqc#P10313
 ex:P10313 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfProduction ,
                           [ rdf:type owl:Restriction ;
@@ -4882,7 +4882,7 @@ ex:P10313 rdf:type owl:Class ;
           skos:example "A line re-manufactures a batch that failed inspection." .
 
 
-###  http://example.org/apqc#P10314
+###  https://fandaws.com/ontology/apqc#P10314
 ex:P10314 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4902,7 +4902,7 @@ ex:P10314 rdf:type owl:Class ;
           skos:example "An operations analyst benchmarks line OEE and issues a performance assessment." .
 
 
-###  http://example.org/apqc#P10315
+###  https://fandaws.com/ontology/apqc#P10315
 ex:P10315 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfScheduling ,
                           [ rdf:type owl:Restriction ;
@@ -4917,7 +4917,7 @@ ex:P10315 rdf:type owl:Class ;
           skos:example "A maintenance planner books quarterly preventive servicing for each machine." .
 
 
-###  http://example.org/apqc#P10316
+###  https://fandaws.com/ontology/apqc#P10316
 ex:P10316 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfScheduling ,
                           [ rdf:type owl:Restriction ;
@@ -4932,7 +4932,7 @@ ex:P10316 rdf:type owl:Class ;
           skos:example "A line supervisor raises an emergency maintenance order for a stalled machine." .
 
 
-###  http://example.org/apqc#P10318
+###  https://fandaws.com/ontology/apqc#P10318
 ex:P10318 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000950 ,
                           [ rdf:type owl:Restriction ;
@@ -4952,7 +4952,7 @@ ex:P10318 rdf:type owl:Class ;
           skos:example "A metrologist calibrates a torque wrench against a reference standard before testing." .
 
 
-###  http://example.org/apqc#P10319
+###  https://fandaws.com/ontology/apqc#P10319
 ex:P10319 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4971,7 +4971,7 @@ ex:P10319 rdf:type owl:Class ;
           skos:example "A technician logs an out-of-tolerance reading and reports it to production management." .
 
 
-###  http://example.org/apqc#P10338
+###  https://fandaws.com/ontology/apqc#P10338
 ex:P10338 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5011,7 +5011,7 @@ ex:P10338 rdf:type owl:Class ;
           skos:example "A logistics function's annual governance cycle producing an updated logistics strategy and KPI set." .
 
 
-###  http://example.org/apqc#P10340
+###  https://fandaws.com/ontology/apqc#P10340
 ex:P10340 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -5055,7 +5055,7 @@ ex:P10340 rdf:type owl:Class ;
           skos:example "A distribution center's daily warehousing cycle from inbound put-away through outbound pick-pack-ship." .
 
 
-###  http://example.org/apqc#P10341
+###  https://fandaws.com/ontology/apqc#P10341
 ex:P10341 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -5079,7 +5079,7 @@ ex:P10341 rdf:type owl:Class ;
           skos:example "A transportation team's cycle from outbound dispatch planning through carrier-invoice audit." .
 
 
-###  http://example.org/apqc#P10343
+###  https://fandaws.com/ontology/apqc#P10343
 ex:P10343 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5094,7 +5094,7 @@ ex:P10343 rdf:type owl:Class ;
           skos:example "A logistics planner converts a customer's service-level expectations into documented inbound/outbound logistics requirements." .
 
 
-###  http://example.org/apqc#P10344
+###  https://fandaws.com/ontology/apqc#P10344
 ex:P10344 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5109,7 +5109,7 @@ ex:P10344 rdf:type owl:Class ;
           skos:example "A supply-chain team designs a hub-and-spoke distribution-center network for a product line." .
 
 
-###  http://example.org/apqc#P10345
+###  https://fandaws.com/ontology/apqc#P10345
 ex:P10345 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -5125,7 +5125,7 @@ ex:P10345 rdf:type owl:Class ;
           skos:example "A logistics manager conveys the warehousing scope to outsource to executives for action." .
 
 
-###  http://example.org/apqc#P10346
+###  https://fandaws.com/ontology/apqc#P10346
 ex:P10346 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5140,7 +5140,7 @@ ex:P10346 rdf:type owl:Class ;
           skos:example "A logistics team issues a delivery-service policy defining delivery windows, modes, and customer notification terms." .
 
 
-###  http://example.org/apqc#P10347
+###  https://fandaws.com/ontology/apqc#P10347
 ex:P10347 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5156,7 +5156,7 @@ ex:P10347 rdf:type owl:Class ;
           skos:example "A planner designs optimized delivery routes and selects carriers that minimize total transportation cost." .
 
 
-###  http://example.org/apqc#P10348
+###  https://fandaws.com/ontology/apqc#P10348
 ex:P10348 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5171,7 +5171,7 @@ ex:P10348 rdf:type owl:Class ;
           skos:example "A logistics team defines delivery-in-full and on-time KPIs and their measurement formulas." .
 
 
-###  http://example.org/apqc#P10349
+###  https://fandaws.com/ontology/apqc#P10349
 ex:P10349 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5186,7 +5186,7 @@ ex:P10349 rdf:type owl:Class ;
           skos:example "A receiving planner schedules expected inbound deliveries and dock assignments for the coming week." .
 
 
-###  http://example.org/apqc#P10350
+###  https://fandaws.com/ontology/apqc#P10350
 ex:P10350 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -5202,7 +5202,7 @@ ex:P10350 rdf:type owl:Class ;
           skos:example "A warehouse team routes arriving materials from the receiving dock to put-away locations and checks delivery timeliness." .
 
 
-###  http://example.org/apqc#P10351
+###  https://fandaws.com/ontology/apqc#P10351
 ex:P10351 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5217,7 +5217,7 @@ ex:P10351 rdf:type owl:Class ;
           skos:example "A logistics analyst reviews inbound on-time and cost metrics and issues a monthly delivery performance report." .
 
 
-###  http://example.org/apqc#P10352
+###  https://fandaws.com/ontology/apqc#P10352
 ex:P10352 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfTransportation ,
                           [ rdf:type owl:Restriction ;
@@ -5233,7 +5233,7 @@ ex:P10352 rdf:type owl:Class ;
           skos:example "A returns team routes deficient returned units from receiving to the disposition staging area." .
 
 
-###  http://example.org/apqc#P10353
+###  https://fandaws.com/ontology/apqc#P10353
 ex:P10353 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5248,7 +5248,7 @@ ex:P10353 rdf:type owl:Class ;
           skos:example "An inventory controller monitors per-DC deployment levels in the warehouse management system." .
 
 
-###  http://example.org/apqc#P10354
+###  https://fandaws.com/ontology/apqc#P10354
 ex:P10354 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfTransportation ,
                           [ rdf:type owl:Restriction ;
@@ -5268,7 +5268,7 @@ ex:P10354 rdf:type owl:Class ;
           skos:example "Dock staff receive a delivery, verify it, and put the goods away into warehouse storage." .
 
 
-###  http://example.org/apqc#P10355
+###  https://fandaws.com/ontology/apqc#P10355
 ex:P10355 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5283,7 +5283,7 @@ ex:P10355 rdf:type owl:Class ;
           skos:example "A planner checks current on-hand availability of SKUs across all distribution centers." .
 
 
-###  http://example.org/apqc#P10356
+###  https://fandaws.com/ontology/apqc#P10356
 ex:P10356 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfTransportation ,
                           [ rdf:type owl:Restriction ;
@@ -5299,7 +5299,7 @@ ex:P10356 rdf:type owl:Class ;
           skos:example "A warehouse operator picks and packs an order and ships it from the dock to the customer." .
 
 
-###  http://example.org/apqc#P10357
+###  https://fandaws.com/ontology/apqc#P10357
 ex:P10357 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5314,7 +5314,7 @@ ex:P10357 rdf:type owl:Class ;
           skos:example "A cycle-count team reconciles system records against physical counts and reports phantom inventory." .
 
 
-###  http://example.org/apqc#P10358
+###  https://fandaws.com/ontology/apqc#P10358
 ex:P10358 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5329,7 +5329,7 @@ ex:P10358 rdf:type owl:Class ;
           skos:example "A logistics manager scores a 3PL's storage and shipping metrics on a balanced scorecard." .
 
 
-###  http://example.org/apqc#P10359
+###  https://fandaws.com/ontology/apqc#P10359
 ex:P10359 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5345,7 +5345,7 @@ ex:P10359 rdf:type owl:Class ;
           skos:example "A warehouse supervisor monitors barcode-tracked volumes and shelf life to manage capacity." .
 
 
-###  http://example.org/apqc#P10360
+###  https://fandaws.com/ontology/apqc#P10360
 ex:P10360 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfTransportation ,
                           [ rdf:type owl:Restriction ;
@@ -5361,7 +5361,7 @@ ex:P10360 rdf:type owl:Class ;
           skos:example "A dispatcher plans routes and ships finished goods to their delivery destinations." .
 
 
-###  http://example.org/apqc#P10361
+###  https://fandaws.com/ontology/apqc#P10361
 ex:P10361 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5376,7 +5376,7 @@ ex:P10361 rdf:type owl:Class ;
           skos:example "A logistics analyst tracks carrier on-time delivery against KPIs and issues a carrier performance report." .
 
 
-###  http://example.org/apqc#P10363
+###  https://fandaws.com/ontology/apqc#P10363
 ex:P10363 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -5396,7 +5396,7 @@ ex:P10363 rdf:type owl:Class ;
           skos:example "An accounts team reconciles carrier invoices against shipment records and flags billing discrepancies." .
 
 
-###  http://example.org/apqc#P10366
+###  https://fandaws.com/ontology/apqc#P10366
 ex:P10366 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -5412,7 +5412,7 @@ ex:P10366 rdf:type owl:Class ;
           skos:example "A service rep offers a discrepant-order customer a discount and free reshipment to retain the sale." .
 
 
-###  http://example.org/apqc#P10368
+###  https://fandaws.com/ontology/apqc#P10368
 ex:P10368 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5444,7 +5444,7 @@ ex:P10368 rdf:type owl:Class ;
           skos:example "The quality team sets target tolerances and writes the matching test procedures." .
 
 
-###  http://example.org/apqc#P10369
+###  https://fandaws.com/ontology/apqc#P10369
 ex:P10369 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000345 ,
                           [ rdf:type owl:Restriction ;
@@ -5484,7 +5484,7 @@ ex:P10369 rdf:type owl:Class ;
           skos:example "A QA lab calibrates gauges, runs tests on sampled units, and records results." .
 
 
-###  http://example.org/apqc#P10370
+###  https://fandaws.com/ontology/apqc#P10370
 ex:P10370 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -5508,7 +5508,7 @@ ex:P10370 rdf:type owl:Class ;
           skos:example "A plant logs each run into the batch record and assigns traceable lot numbers." .
 
 
-###  http://example.org/apqc#P10371
+###  https://fandaws.com/ontology/apqc#P10371
 ex:P10371 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5523,7 +5523,7 @@ ex:P10371 rdf:type owl:Class ;
           skos:example "QA fixes the defect-rate and dimensional targets for the product family." .
 
 
-###  http://example.org/apqc#P10372
+###  https://fandaws.com/ontology/apqc#P10372
 ex:P10372 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5538,7 +5538,7 @@ ex:P10372 rdf:type owl:Class ;
           skos:example "QA writes the inspection procedure for incoming and finished-goods testing." .
 
 
-###  http://example.org/apqc#P10373
+###  https://fandaws.com/ontology/apqc#P10373
 ex:P10373 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -5554,7 +5554,7 @@ ex:P10373 rdf:type owl:Class ;
           skos:example "QA circulates the approved quality spec sheet to all plants and DCs." .
 
 
-###  http://example.org/apqc#P10374
+###  https://fandaws.com/ontology/apqc#P10374
 ex:P10374 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000345 ,
                           [ rdf:type owl:Restriction ;
@@ -5578,7 +5578,7 @@ ex:P10374 rdf:type owl:Class ;
           skos:example "A technician runs the prescribed tensile test on a sample and records the reading." .
 
 
-###  http://example.org/apqc#P10375
+###  https://fandaws.com/ontology/apqc#P10375
 ex:P10375 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -5594,7 +5594,7 @@ ex:P10375 rdf:type owl:Class ;
           skos:example "A LIMS captures each gauge reading into the test record." .
 
 
-###  http://example.org/apqc#P10376
+###  https://fandaws.com/ontology/apqc#P10376
 ex:P10376 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5610,7 +5610,7 @@ ex:P10376 rdf:type owl:Class ;
           skos:example "Operations defines a YYMMDD-line-sequence lot-numbering convention." .
 
 
-###  http://example.org/apqc#P10377
+###  https://fandaws.com/ontology/apqc#P10377
 ex:P10377 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5626,7 +5626,7 @@ ex:P10377 rdf:type owl:Class ;
           skos:example "Planning earmarks a specific lot for a customer order and sets its consumption window." .
 
 
-###  http://example.org/apqc#P12045
+###  https://fandaws.com/ontology/apqc#P12045
 ex:P12045 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5645,7 +5645,7 @@ ex:P12045 rdf:type owl:Class ;
           skos:example "A quality engineer charts defect rates by cause to find a rising trend." .
 
 
-###  http://example.org/apqc#P12046
+###  https://fandaws.com/ontology/apqc#P12046
 ex:P12046 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5665,7 +5665,7 @@ ex:P12046 rdf:type owl:Class ;
           skos:example "A team runs a 5-Whys investigation and documents the root cause of a defect." .
 
 
-###  http://example.org/apqc#P12708
+###  https://fandaws.com/ontology/apqc#P12708
 ex:P12708 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5689,7 +5689,7 @@ ex:P12708 rdf:type owl:Class ;
           skos:example "An inspector grades returned parts against the quality standard before disposition." .
 
 
-###  http://example.org/apqc#P14193
+###  https://fandaws.com/ontology/apqc#P14193
 ex:P14193 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5704,7 +5704,7 @@ ex:P14193 rdf:type owl:Class ;
           skos:example "Process engineers document the routing that converts raw material into the finished good." .
 
 
-###  http://example.org/apqc#P14194
+###  https://fandaws.com/ontology/apqc#P14194
 ex:P14194 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5719,7 +5719,7 @@ ex:P14194 rdf:type owl:Class ;
           skos:example "Industrial engineers lay out the new line's floor plan and equipment placement." .
 
 
-###  http://example.org/apqc#P14196
+###  https://fandaws.com/ontology/apqc#P14196
 ex:P14196 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5734,7 +5734,7 @@ ex:P14196 rdf:type owl:Class ;
           skos:example "Operations sets the level-loaded production volume and the kanban control rules to maintain it." .
 
 
-###  http://example.org/apqc#P16905
+###  https://fandaws.com/ontology/apqc#P16905
 ex:P16905 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5749,7 +5749,7 @@ ex:P16905 rdf:type owl:Class ;
           skos:example "A supply-chain team establishes a returns strategy covering approval, transport, tracking, disposition, and warranty handling." .
 
 
-###  http://example.org/apqc#P17041
+###  https://fandaws.com/ontology/apqc#P17041
 ex:P17041 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfScheduling ,
                           [ rdf:type owl:Restriction ;
@@ -5768,7 +5768,7 @@ ex:P17041 rdf:type owl:Class ;
           skos:example "The scheduler re-firms next week's build quantities every Monday." .
 
 
-###  http://example.org/apqc#P17042
+###  https://fandaws.com/ontology/apqc#P17042
 ex:P17042 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -5832,7 +5832,7 @@ ex:P17042 rdf:type owl:Class ;
           skos:example "Distribution planning produces the period's DRP covering replenishment, dispatch, and load plans." .
 
 
-###  http://example.org/apqc#P19551
+###  https://fandaws.com/ontology/apqc#P19551
 ex:P19551 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5847,7 +5847,7 @@ ex:P19551 rdf:type owl:Class ;
           skos:example "An SOP is written giving step-by-step instructions for a complex changeover." .
 
 
-###  http://example.org/apqc#P19555
+###  https://fandaws.com/ontology/apqc#P19555
 ex:P19555 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5863,7 +5863,7 @@ ex:P19555 rdf:type owl:Class ;
           skos:example "Warehousing defines the racking, temperature, and throughput requirements for the new DC." .
 
 
-###  http://example.org/apqc#P19558
+###  https://fandaws.com/ontology/apqc#P19558
 ex:P19558 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5878,7 +5878,7 @@ ex:P19558 rdf:type owl:Class ;
           skos:example "Warehousing sets the height, door, and automation constraints for the storage facility." .
 
 
-###  http://example.org/apqc#P19563
+###  https://fandaws.com/ontology/apqc#P19563
 ex:P19563 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5898,7 +5898,7 @@ ex:P19563 rdf:type owl:Class ;
           skos:example "An industrial engineer simulates line layouts to compare throughput across production alternatives." .
 
 
-###  http://example.org/apqc#P19566
+###  https://fandaws.com/ontology/apqc#P19566
 ex:P19566 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5930,7 +5930,7 @@ ex:P19566 rdf:type owl:Class ;
           skos:example "A control room runs APC and RTO loops and handles alarms during a production shift." .
 
 
-###  http://example.org/apqc#P19567
+###  https://fandaws.com/ontology/apqc#P19567
 ex:P19567 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfProcessControl ,
                           [ rdf:type owl:Restriction ;
@@ -5946,7 +5946,7 @@ ex:P19567 rdf:type owl:Class ;
           skos:example "A SCADA system regulates valve and conveyor setpoints automatically." .
 
 
-###  http://example.org/apqc#P19568
+###  https://fandaws.com/ontology/apqc#P19568
 ex:P19568 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfProcessControl ;
           ex:apqcSourceText "Including a broad range of techniques and technologies implemented within industrial process control systems that are routinely reviewed, audited, and improved, advanced process controls typically address particular performance or economic improvement opportunities. An advanced set of process control measures can be used to reduce variation and identify primary improvement options. Results of analysis are fed back into process design for incorporation into production." ;
@@ -5958,7 +5958,7 @@ ex:P19568 rdf:type owl:Class ;
           skos:example "An APC layer trims a distillation column to reduce energy variation." .
 
 
-###  http://example.org/apqc#P19569
+###  https://fandaws.com/ontology/apqc#P19569
 ex:P19569 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfProcessControl ;
           ex:apqcSourceText "Helping organizations increase performance and efficiency, real-time optimization is a category of closed-loop process control that aims at optimizing process performance in real time for systems. It is normally built upon model-based optimization systems and is usually large scale. Real-time optimization automatically detects errors, and can modify and eliminate both random and non-random errors, as well as analyze and monitor all systems involved." ;
@@ -5970,7 +5970,7 @@ ex:P19569 rdf:type owl:Class ;
           skos:example "An RTO solver continuously re-optimizes reactor conditions against a plant model." .
 
 
-###  http://example.org/apqc#P19570
+###  https://fandaws.com/ontology/apqc#P19570
 ex:P19570 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ;
           ex:apqcSourceText "Applying human factors and instrumentation engineering and systems thinking to manage the design of an alarm or alert system to increase its usability. Typical challenges include having too many alarms in a plant, poorly designed alarms/alerts, improperly set alarm/alert points, unclear alarm/alert messages, etc. Poor alarm management is one of the leading causes of unplanned downtime." ;
@@ -5982,7 +5982,7 @@ ex:P19570 rdf:type owl:Class ;
           skos:example "An operator rationalizes nuisance alarms and resets alert thresholds for a unit." .
 
 
-###  http://example.org/apqc#P20023
+###  https://fandaws.com/ontology/apqc#P20023
 ex:P20023 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5998,7 +5998,7 @@ ex:P20023 rdf:type owl:Class ;
           skos:example "Planners build a network model linking plants, lines, and product families for scenario simulation." .
 
 
-###  http://example.org/apqc#P20024
+###  https://fandaws.com/ontology/apqc#P20024
 ex:P20024 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfScheduling ,
                           [ rdf:type owl:Restriction ;
@@ -6017,7 +6017,7 @@ ex:P20024 rdf:type owl:Class ;
           skos:example "The MPS run converts the demand forecast into a weekly build schedule." .
 
 
-###  http://example.org/apqc#P20109
+###  https://fandaws.com/ontology/apqc#P20109
 ex:P20109 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -6049,7 +6049,7 @@ ex:P20109 rdf:type owl:Class ;
           skos:example "A disposition analyst decides a returned unit will be repaired rather than salvaged based on its condition." .
 
 
-###  http://example.org/apqc#P20936
+###  https://fandaws.com/ontology/apqc#P20936
 ex:P20936 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -6081,7 +6081,7 @@ ex:P20936 rdf:type owl:Class ;
           skos:example "An inbound-logistics team's per-shipment cycle from receipt plan through put-away and returns disposition." .
 
 
-###  http://example.org/apqc#P20956
+###  https://fandaws.com/ontology/apqc#P20956
 ex:P20956 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -6101,7 +6101,7 @@ ex:P20956 rdf:type owl:Class ;
           skos:example "An inspector pulls ten units from a batch for testing." .
 
 
-###  http://example.org/apqc#P20957
+###  https://fandaws.com/ontology/apqc#P20957
 ex:P20957 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfTransportation ,
                           [ rdf:type owl:Restriction ;
@@ -6117,7 +6117,7 @@ ex:P20957 rdf:type owl:Class ;
           skos:example "A planner triggers a stock transfer of items from a regional warehouse to a depleted one." .
 
 
-###  http://example.org/apqc#P21604
+###  https://fandaws.com/ontology/apqc#P21604
 ex:P21604 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000950 ,
                           [ rdf:type owl:Restriction ;
@@ -6133,7 +6133,7 @@ ex:P21604 rdf:type owl:Class ;
           skos:example "A refurbishment center remanufactures returned units and routes them back to customers." .
 
 
-###  http://example.org/apqc#P21605
+###  https://fandaws.com/ontology/apqc#P21605
 ex:P21605 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfTransportation ,
                           [ rdf:type owl:Restriction ;
@@ -6149,14 +6149,14 @@ ex:P21605 rdf:type owl:Class ;
           skos:example "A warehouse operator restocks a refurbished unit into sellable inventory." .
 
 
-###  http://example.org/apqc#ProcurementCapability
+###  https://fandaws.com/ontology/apqc#ProcurementCapability
 ex:ProcurementCapability rdf:type owl:Class ;
                          rdfs:subClassOf ex:SupplyChainManagementCapability ;
                          rdfs:label "Procurement Capability" ;
                          skos:definition "A Supply Chain Management Capability that is realized in acts of sourcing, selecting suppliers, ordering, and managing the supply of materials and services." .
 
 
-###  http://example.org/apqc#ProcurementImpactAnalysis
+###  https://fandaws.com/ontology/apqc#ProcurementImpactAnalysis
 ex:ProcurementImpactAnalysis rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:comment "Minted: no shared-vocab ICE for this cross-process impact study. Descriptive because it represents an analytical finding." ;
@@ -6165,21 +6165,21 @@ ex:ProcurementImpactAnalysis rdf:type owl:Class ;
                              skos:example "An analysis showing how minimum-order-quantity terms drive excess raw-material inventory." .
 
 
-###  http://example.org/apqc#ProcurementPlan
+###  https://fandaws.com/ontology/apqc#ProcurementPlan
 ex:ProcurementPlan rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:label "Procurement Plan" ;
                    skos:definition "A Directive Information Content Entity that prescribes what materials and services to buy, when, and from what sources, together with the supplier-selection approach and timeline." .
 
 
-###  http://example.org/apqc#ProductSample
+###  https://fandaws.com/ontology/apqc#ProductSample
 ex:ProductSample rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000995 ;
                  rdfs:label "Product Sample" ;
                  skos:definition "A Material Artifact consisting of a set of elements drawn from a product lot in order to infer the quality of the lot." .
 
 
-###  http://example.org/apqc#ProductionAndMaterialsStrategy
+###  https://fandaws.com/ontology/apqc#ProductionAndMaterialsStrategy
 ex:ProductionAndMaterialsStrategy rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000965 ;
                                   rdfs:comment "Shared 4.0 supporting class. Directive: a strategy prescribes a course of action (GOLDEN PRINCIPLE). Output of an Act of Formulation." ;
@@ -6187,42 +6187,42 @@ ex:ProductionAndMaterialsStrategy rdf:type owl:Class ;
                                   skos:definition "A Directive Information Content Entity that prescribes an organization's intended approach to production processes and the management of materials, including production and supply constraints." .
 
 
-###  http://example.org/apqc#ProductionBalanceAndControlScheme
+###  https://fandaws.com/ontology/apqc#ProductionBalanceAndControlScheme
 ex:ProductionBalanceAndControlScheme rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000965 ;
                                      rdfs:label "Production Balance and Control Scheme" ;
                                      skos:definition "A Directive Information Content Entity that prescribes an equilibrium production volume and a control scheme for systematically planning, coordinating, and directing manufacturing activities." .
 
 
-###  http://example.org/apqc#ProductionCapability
+###  https://fandaws.com/ontology/apqc#ProductionCapability
 ex:ProductionCapability rdf:type owl:Class ;
                         rdfs:subClassOf ex:SupplyChainManagementCapability ;
                         rdfs:label "Production Capability" ;
                         skos:definition "A Supply Chain Management Capability that is realized in acts of scheduling, producing, assembling, and quality-testing physical products." .
 
 
-###  http://example.org/apqc#ProductionEquipment
+###  https://fandaws.com/ontology/apqc#ProductionEquipment
 ex:ProductionEquipment rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000995 ;
                        rdfs:label "Production Equipment" ;
                        skos:definition "A Material Artifact, such as machinery, used in a production process and subject to planned or unplanned maintenance." .
 
 
-###  http://example.org/apqc#ProductionFacility
+###  https://fandaws.com/ontology/apqc#ProductionFacility
 ex:ProductionFacility rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000192 ;
                       rdfs:label "Production Facility" ;
                       skos:definition "A Facility designed for processing inventory into finished products or services." .
 
 
-###  http://example.org/apqc#ProductionLot
+###  https://fandaws.com/ontology/apqc#ProductionLot
 ex:ProductionLot rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000995 ;
                  rdfs:label "Production Lot" ;
                  skos:definition "A Material Artifact consisting of a particular production unit of an assembly that is planned and manufactured together and tracked under a single lot number." .
 
 
-###  http://example.org/apqc#ProductionNetworkModel
+###  https://fandaws.com/ontology/apqc#ProductionNetworkModel
 ex:ProductionNetworkModel rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000965 ;
                           rdfs:comment "Modeled as Directive when the model functions as a prescriptive blueprint for how the production network is to be configured or operated. A descriptive network representation (a model OF the current network for simulation/analysis) would instead be a Descriptive ICE; that reading is out of scope here. Reused for the plant model (4.3.1.1)." ;
@@ -6230,42 +6230,42 @@ ex:ProductionNetworkModel rdf:type owl:Class ;
                           skos:definition "A Directive Information Content Entity that represents the logical production system, providing the framework of sequential flow and capacity relationships among raw materials, parts, resources, and finished products to enable simulation and optimization." .
 
 
-###  http://example.org/apqc#ProductionNetworkSimulationResult
+###  https://fandaws.com/ontology/apqc#ProductionNetworkSimulationResult
 ex:ProductionNetworkSimulationResult rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000853 ;
                                      rdfs:label "Production Network Simulation Result" ;
                                      skos:definition "A Descriptive Information Content Entity that describes the outcomes of simulating and optimizing a production network model under given resources, volumes, and processes." .
 
 
-###  http://example.org/apqc#ProductionOrder
+###  https://fandaws.com/ontology/apqc#ProductionOrder
 ex:ProductionOrder rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:label "Production Order" ;
                    skos:definition "A Directive Information Content Entity that prescribes which material to produce, where, by which operations, and on which date." .
 
 
-###  http://example.org/apqc#ProductionPerformanceAssessment
+###  https://fandaws.com/ontology/apqc#ProductionPerformanceAssessment
 ex:ProductionPerformanceAssessment rdf:type owl:Class ;
                                    rdfs:subClassOf cco:ont00000853 ;
                                    rdfs:label "Production Performance Assessment" ;
                                    skos:definition "A Descriptive Information Content Entity that describes a judgement of the effectiveness and efficiency of a production process, including production metrics." .
 
 
-###  http://example.org/apqc#ProductionProcessSpecification
+###  https://fandaws.com/ontology/apqc#ProductionProcessSpecification
 ex:ProductionProcessSpecification rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000965 ;
                                   rdfs:label "Production Process Specification" ;
                                   skos:definition "A Directive Information Content Entity that prescribes the scheme for processing inventory into finished products or services, including the materials, machinery, and skills to be used." .
 
 
-###  http://example.org/apqc#ProductionRecord
+###  https://fandaws.com/ontology/apqc#ProductionRecord
 ex:ProductionRecord rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:label "Production Record" ;
                     skos:definition "A Descriptive Information Content Entity that documents the constituent parts, labor, and equipment involved in the manufacturing of a product, enabling lot traceability." .
 
 
-###  http://example.org/apqc#ProductionSchedule
+###  https://fandaws.com/ontology/apqc#ProductionSchedule
 ex:ProductionSchedule rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000965 ;
                       rdfs:comment "Genus for the line-level plan and the detailed schedule; group modules may specialize." ;
@@ -6273,7 +6273,7 @@ ex:ProductionSchedule rdf:type owl:Class ;
                       skos:definition "A Directive Information Content Entity that prescribes the timing and sequencing of production activities for final products." .
 
 
-###  http://example.org/apqc#ProductionStateReport
+###  https://fandaws.com/ontology/apqc#ProductionStateReport
 ex:ProductionStateReport rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:comment "Minted (D5) as the monitoring-specific descriptive output of Monitor and optimize production process [19566], distinct from ex:ProductionPerformanceAssessment (an appraisal judgement, output of Assess production performance [10314]). Descriptive state/deviation report, agreeing with the Act of Monitoring genus (GOLDEN PRINCIPLE)." ;
@@ -6282,21 +6282,21 @@ ex:ProductionStateReport rdf:type owl:Class ;
                          skos:example "A control-room dashboard snapshot showing live process variables and flagged deviations during a shift." .
 
 
-###  http://example.org/apqc#ProductionWorkplaceLayoutPlan
+###  https://fandaws.com/ontology/apqc#ProductionWorkplaceLayoutPlan
 ex:ProductionWorkplaceLayoutPlan rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000965 ;
                                  rdfs:label "Production Workplace Layout Plan" ;
                                  skos:definition "A Directive Information Content Entity that prescribes the floor plan and infrastructure of a processing facility for delivering finished products or services." .
 
 
-###  http://example.org/apqc#PurchaseOrder
+###  https://fandaws.com/ontology/apqc#PurchaseOrder
 ex:PurchaseOrder rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000965 ;
                  rdfs:label "Purchase Order" ;
                  skos:definition "A Directive Information Content Entity that directs a specified supplier to provide stated materials or services in stated quantities at agreed terms." .
 
 
-###  http://example.org/apqc#PurchaseOrderReconciliationReport
+###  https://fandaws.com/ontology/apqc#PurchaseOrderReconciliationReport
 ex:PurchaseOrderReconciliationReport rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000853 ,
                                                      [ rdf:type owl:Restriction ;
@@ -6307,28 +6307,28 @@ ex:PurchaseOrderReconciliationReport rdf:type owl:Class ;
                                      skos:definition "A Descriptive Information Content Entity that describes whether the items and quantities of a purchase order were delivered as expected against goods receipts." .
 
 
-###  http://example.org/apqc#PurchaseRequisition
+###  https://fandaws.com/ontology/apqc#PurchaseRequisition
 ex:PurchaseRequisition rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000965 ;
                        rdfs:label "Purchase Requisition" ;
                        skos:definition "A Directive Information Content Entity that requests authorization to procure specified products or services to satisfy an internal need." .
 
 
-###  http://example.org/apqc#PurchasingRequirementSpecification
+###  https://fandaws.com/ontology/apqc#PurchasingRequirementSpecification
 ex:PurchasingRequirementSpecification rdf:type owl:Class ;
                                       rdfs:subClassOf cco:ont00000965 ;
                                       rdfs:label "Purchasing Requirement Specification" ;
                                       skos:definition "A Directive Information Content Entity that prescribes the exact materials and services required for procurement, avoiding duplication or overlap." .
 
 
-###  http://example.org/apqc#QualityStandard
+###  https://fandaws.com/ontology/apqc#QualityStandard
 ex:QualityStandard rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:label "Quality Standard" ;
                    skos:definition "A Directive Information Content Entity that prescribes qualitative and quantitative quality targets for products or services." .
 
 
-###  http://example.org/apqc#QualityTestResult
+###  https://fandaws.com/ontology/apqc#QualityTestResult
 ex:QualityTestResult rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ,
                                      [ rdf:type owl:Restriction ;
@@ -6339,14 +6339,14 @@ ex:QualityTestResult rdf:type owl:Class ;
                      skos:definition "A Descriptive Information Content Entity that describes the documented outcomes of a quality test conducted on manufactured products." .
 
 
-###  http://example.org/apqc#QualityTestingProcedure
+###  https://fandaws.com/ontology/apqc#QualityTestingProcedure
 ex:QualityTestingProcedure rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000965 ;
                            rdfs:label "Quality Testing Procedure" ;
                            skos:definition "A Directive Information Content Entity that prescribes the standard steps and routine instructions for testing the quality of products or services." .
 
 
-###  http://example.org/apqc#RawMaterial
+###  https://fandaws.com/ontology/apqc#RawMaterial
 ex:RawMaterial rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00000457 ;
                rdfs:comment "Anchored under cco:ont00000457 (Portion of Material), whose CCO definition is a portion produced to be used as the input for another Act of Material Artifact Processing -- an exact fit for raw materials." ;
@@ -6354,7 +6354,7 @@ ex:RawMaterial rdf:type owl:Class ;
                skos:definition "A Portion of Material that is provided as input to an act of production and incorporated into, or consumed during, the manufacture of a finished product." .
 
 
-###  http://example.org/apqc#RawMaterialInventoryManagementCapability
+###  https://fandaws.com/ontology/apqc#RawMaterialInventoryManagementCapability
 ex:RawMaterialInventoryManagementCapability rdf:type owl:Class ;
                                             rdfs:subClassOf cco:ont00000568 ,
                                                             [ rdf:type owl:Restriction ;
@@ -6366,21 +6366,21 @@ ex:RawMaterialInventoryManagementCapability rdf:type owl:Class ;
                                             skos:definition "An Organization Capability that inheres in a supply-chain organization in virtue of its capacity to administer the stock and total cost of raw materials supporting production." .
 
 
-###  http://example.org/apqc#ReplenishmentPlan
+###  https://fandaws.com/ontology/apqc#ReplenishmentPlan
 ex:ReplenishmentPlan rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:label "Replenishment Plan" ;
                      skos:definition "A Directive Information Content Entity that prescribes the collaborative replenishment of inventory, including provision for faulty production." .
 
 
-###  http://example.org/apqc#RequestForQuotation
+###  https://fandaws.com/ontology/apqc#RequestForQuotation
 ex:RequestForQuotation rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000965 ;
                        rdfs:label "Request for Quotation" ;
                        skos:definition "A Directive Information Content Entity that solicits suppliers to submit price quotes for specified products or services." .
 
 
-###  http://example.org/apqc#RequisitionApprovalDecision
+###  https://fandaws.com/ontology/apqc#RequisitionApprovalDecision
 ex:RequisitionApprovalDecision rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000965 ;
                                rdfs:comment "Minted: distinct from ex:PurchaseRequisition (the request) and ex:PurchaseOrder (the order). Directive because an approval authorizes rather than describes." ;
@@ -6389,7 +6389,7 @@ ex:RequisitionApprovalDecision rdf:type owl:Class ;
                                skos:example "A signed approval record releasing a requisition for purchase-order creation." .
 
 
-###  http://example.org/apqc#ReturnedPartQualityAssessment
+###  https://fandaws.com/ontology/apqc#ReturnedPartQualityAssessment
 ex:ReturnedPartQualityAssessment rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000853 ,
                                                  [ rdf:type owl:Restriction ;
@@ -6400,21 +6400,21 @@ ex:ReturnedPartQualityAssessment rdf:type owl:Class ;
                                  skos:definition "A Descriptive Information Content Entity that describes whether a returned part meets acceptable quality standards, supporting a disposition decision." .
 
 
-###  http://example.org/apqc#ReturnedProduct
+###  https://fandaws.com/ontology/apqc#ReturnedProduct
 ex:ReturnedProduct rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000995 ;
                    rdfs:label "Returned Product" ;
                    skos:definition "A Material Artifact that has been returned by a buyer to the seller or an intermediary, pending inspection, salvage, repair, or restocking." .
 
 
-###  http://example.org/apqc#ReverseLogisticsStrategy
+###  https://fandaws.com/ontology/apqc#ReverseLogisticsStrategy
 ex:ReverseLogisticsStrategy rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000965 ;
                             rdfs:label "Reverse Logistics Strategy" ;
                             skos:definition "A Directive Information Content Entity that prescribes the handling, information processing, and disposition of products and packaging returned by a buyer to a seller or intermediary." .
 
 
-###  http://example.org/apqc#ReviewedRequisition
+###  https://fandaws.com/ontology/apqc#ReviewedRequisition
 ex:ReviewedRequisition rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000965 ;
                        rdfs:comment "Minted (D5) as the distinct output of Process/Review requisitions [10292], replacing the degenerate input-class=output-class restriction. Directive because it is a requisition (a request that authorizes/initiates procurement) bearing an added review status, not a mere description. Distinct from ex:PurchaseRequisition (the un-reviewed request) and ex:RequisitionApprovalDecision (the later authorization)." ;
@@ -6423,14 +6423,14 @@ ex:ReviewedRequisition rdf:type owl:Class ;
                        skos:example "An incoming requisition validated against policy and queued for a budget owner's approval." .
 
 
-###  http://example.org/apqc#RootCauseAnalysis
+###  https://fandaws.com/ontology/apqc#RootCauseAnalysis
 ex:RootCauseAnalysis rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:label "Root Cause Analysis" ;
                      skos:definition "A Descriptive Information Content Entity that describes the identified origin of a problem and the reasoning establishing what happened, why, and how to reduce recurrence." .
 
 
-###  http://example.org/apqc#SourcingOpportunityAssessment
+###  https://fandaws.com/ontology/apqc#SourcingOpportunityAssessment
 ex:SourcingOpportunityAssessment rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000853 ;
                                  rdfs:comment "Minted: shared vocab has no opportunity-register ICE. Descriptive because it represents identified opportunities, not a chosen course of action." ;
@@ -6439,21 +6439,21 @@ ex:SourcingOpportunityAssessment rdf:type owl:Class ;
                                  skos:example "A register of consolidation and dual-sourcing opportunities found across the supply base." .
 
 
-###  http://example.org/apqc#SpendProfileAnalysis
+###  https://fandaws.com/ontology/apqc#SpendProfileAnalysis
 ex:SpendProfileAnalysis rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:label "Spend Profile Analysis" ;
                         skos:definition "A Descriptive Information Content Entity that describes an organization's procurement spend, classified and analyzed to reduce cost and monitor compliance." .
 
 
-###  http://example.org/apqc#StandardOperatingProcedure
+###  https://fandaws.com/ontology/apqc#StandardOperatingProcedure
 ex:StandardOperatingProcedure rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:label "Standard Operating Procedure" ;
                               skos:definition "A Directive Information Content Entity that prescribes step-by-step methods to be followed routinely for the performance of designated operations." .
 
 
-###  http://example.org/apqc#StorageRequirementAssessment
+###  https://fandaws.com/ontology/apqc#StorageRequirementAssessment
 ex:StorageRequirementAssessment rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ;
                                 rdfs:comment "Minted (D5) as the descriptive output of Determine product storage facility requirements [19555], whose source leads with 'Evaluate constraints, needs, parameters, and conditions'. Descriptive because it represents an appraisal of storage requirements rather than prescribing a storage plan. Distinct from ex:LogisticsRequirementSpecification (a Directive spec)." ;
@@ -6462,7 +6462,7 @@ ex:StorageRequirementAssessment rdf:type owl:Class ;
                                 skos:example "An assessment of the racking, temperature, and throughput needs evaluated for a candidate storage facility." .
 
 
-###  http://example.org/apqc#Supplier
+###  https://fandaws.com/ontology/apqc#Supplier
 ex:Supplier rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00001180 ,
                             [ rdf:type owl:Restriction ;
@@ -6474,7 +6474,7 @@ ex:Supplier rdf:type owl:Class ;
             skos:definition "An Organization that bears a supplier role in relation to a procuring organization, providing materials or services." .
 
 
-###  http://example.org/apqc#SupplierCapacityProfile
+###  https://fandaws.com/ontology/apqc#SupplierCapacityProfile
 ex:SupplierCapacityProfile rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ,
                                            [ rdf:type owl:Restriction ;
@@ -6485,7 +6485,7 @@ ex:SupplierCapacityProfile rdf:type owl:Class ;
                            skos:definition "A Descriptive Information Content Entity that describes the average, peak, and baseline supply capacities of vendors and suppliers." .
 
 
-###  http://example.org/apqc#SupplierCertification
+###  https://fandaws.com/ontology/apqc#SupplierCertification
 ex:SupplierCertification rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ;
                          rdfs:comment "Minted: shared vocab has no supplier-certification artifact. Directive because it grants and governs an authorized status rather than describing one." ;
@@ -6494,14 +6494,14 @@ ex:SupplierCertification rdf:type owl:Class ;
                          skos:example "A certificate designating a vendor as an approved supplier for a given material category." .
 
 
-###  http://example.org/apqc#SupplierContract
+###  https://fandaws.com/ontology/apqc#SupplierContract
 ex:SupplierContract rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000965 ;
                     rdfs:label "Supplier Contract" ;
                     skos:definition "A Directive Information Content Entity that prescribes the mutually binding obligations between an organization and a supplier, including promised delivery, dates, and duration." .
 
 
-###  http://example.org/apqc#SupplierPerformanceReport
+###  https://fandaws.com/ontology/apqc#SupplierPerformanceReport
 ex:SupplierPerformanceReport rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ,
                                              [ rdf:type owl:Restriction ;
@@ -6512,7 +6512,7 @@ ex:SupplierPerformanceReport rdf:type owl:Class ;
                              skos:definition "A Descriptive Information Content Entity that describes the delivery timing and product quality achieved by suppliers." .
 
 
-###  http://example.org/apqc#SupplierQuote
+###  https://fandaws.com/ontology/apqc#SupplierQuote
 ex:SupplierQuote rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000853 ,
                                  [ rdf:type owl:Restriction ;
@@ -6523,14 +6523,14 @@ ex:SupplierQuote rdf:type owl:Class ;
                  skos:definition "A Descriptive Information Content Entity in which a supplier states its proposed price and terms for specified products or services." .
 
 
-###  http://example.org/apqc#SupplierRole
+###  https://fandaws.com/ontology/apqc#SupplierRole
 ex:SupplierRole rdf:type owl:Class ;
                 rdfs:subClassOf obo:BFO_0000023 ;
                 rdfs:label "Supplier Role" ;
                 skos:definition "A Role that is borne by an Organization in virtue of supplying materials or services to a procuring organization." .
 
 
-###  http://example.org/apqc#SupplierSelectionDecision
+###  https://fandaws.com/ontology/apqc#SupplierSelectionDecision
 ex:SupplierSelectionDecision rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000965 ,
                                              [ rdf:type owl:Restriction ;
@@ -6542,7 +6542,7 @@ ex:SupplierSelectionDecision rdf:type owl:Class ;
                              skos:definition "A Directive Information Content Entity that prescribes which supplier or suppliers are chosen, on the basis of material quality, delivery schedules, and cost." .
 
 
-###  http://example.org/apqc#SupplierValidationAssessment
+###  https://fandaws.com/ontology/apqc#SupplierValidationAssessment
 ex:SupplierValidationAssessment rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ;
                                 rdfs:comment "Minted: distinct from ex:SupplierPerformanceReport (ongoing performance) and ex:SupplierCertification (the resulting authorization). Descriptive because it represents a validation judgement." ;
@@ -6551,7 +6551,7 @@ ex:SupplierValidationAssessment rdf:type owl:Class ;
                                 skos:example "An audit finding that a vendor's quality system conforms to the required standard." .
 
 
-###  http://example.org/apqc#SupplyChainManagementCapability
+###  https://fandaws.com/ontology/apqc#SupplyChainManagementCapability
 ex:SupplyChainManagementCapability rdf:type owl:Class ;
                                    rdfs:subClassOf cco:ont00000568 ;
                                    rdfs:comment "Top section-4.0 capability. The four group-level capabilities below specialize it; group modules may add 'realized in' restrictions to specific process classes (R6)." ;
@@ -6559,7 +6559,7 @@ ex:SupplyChainManagementCapability rdf:type owl:Class ;
                                    skos:definition "An Organization Capability that is realized in the planning, procurement, production, and logistics acts by which an organization manages its supply chain for physical products." .
 
 
-###  http://example.org/apqc#SupplyChainOrganization
+###  https://fandaws.com/ontology/apqc#SupplyChainOrganization
 ex:SupplyChainOrganization rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00001017 ,
                                            cco:ont00001180 ,
@@ -6572,21 +6572,21 @@ ex:SupplyChainOrganization rdf:type owl:Class ;
                            skos:definition "An Organization that has a supply-chain management capability realized in supply-chain planning, procurement, production, and logistics acts." .
 
 
-###  http://example.org/apqc#SupplyChainPlanningCapability
+###  https://fandaws.com/ontology/apqc#SupplyChainPlanningCapability
 ex:SupplyChainPlanningCapability rdf:type owl:Class ;
                                  rdfs:subClassOf ex:SupplyChainManagementCapability ;
                                  rdfs:label "Supply Chain Planning Capability" ;
                                  skos:definition "A Supply Chain Management Capability that is realized in acts of planning and aligning production, materials, demand, and distribution resources." .
 
 
-###  http://example.org/apqc#SupplyCostEstimate
+###  https://fandaws.com/ontology/apqc#SupplyCostEstimate
 ex:SupplyCostEstimate rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Supply Cost Estimate" ;
                       skos:definition "A Descriptive Information Content Entity that describes the estimated overall cost of supplying products to market, including distribution and logistics costs." .
 
 
-###  http://example.org/apqc#ThirdPartyLogisticsPerformanceReport
+###  https://fandaws.com/ontology/apqc#ThirdPartyLogisticsPerformanceReport
 ex:ThirdPartyLogisticsPerformanceReport rdf:type owl:Class ;
                                         rdfs:subClassOf cco:ont00000853 ,
                                                         [ rdf:type owl:Restriction ;
@@ -6597,7 +6597,7 @@ ex:ThirdPartyLogisticsPerformanceReport rdf:type owl:Class ;
                                         skos:definition "A Descriptive Information Content Entity that describes the storage and shipping performance of third-party logistics providers." .
 
 
-###  http://example.org/apqc#ThirdPartyLogisticsProvider
+###  https://fandaws.com/ontology/apqc#ThirdPartyLogisticsProvider
 ex:ThirdPartyLogisticsProvider rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00001180 ,
                                                [ rdf:type owl:Restriction ;
@@ -6608,21 +6608,21 @@ ex:ThirdPartyLogisticsProvider rdf:type owl:Class ;
                                skos:definition "An Organization that bears a logistics service provider role, performing outsourced storage, shipping, or transportation activities on behalf of another organization." .
 
 
-###  http://example.org/apqc#TransportationVehicle
+###  https://fandaws.com/ontology/apqc#TransportationVehicle
 ex:TransportationVehicle rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000713 ;
                          rdfs:label "Transportation Vehicle" ;
                          skos:definition "A Vehicle used to convey inbound or outbound products between supply-chain locations." .
 
 
-###  http://example.org/apqc#UnconstrainedMaterialsPlan
+###  https://fandaws.com/ontology/apqc#UnconstrainedMaterialsPlan
 ex:UnconstrainedMaterialsPlan rdf:type owl:Class ;
                               rdfs:subClassOf ex:MaterialsPlan ;
                               rdfs:label "Unconstrained Materials Plan" ;
                               skos:definition "A Materials Plan that prescribes raw-material and inventory provision to meet market demand without yet accounting for supply-chain constraints." .
 
 
-###  http://example.org/apqc#ValidatedRequirementAssessment
+###  https://fandaws.com/ontology/apqc#ValidatedRequirementAssessment
 ex:ValidatedRequirementAssessment rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:comment "Minted (D5) as the descriptive output of Determine finished goods inventory requirements at destination [10253], whose source is purely a validation/communication-confirmation act. Descriptive because it represents a confirmation of existing requirements rather than composing a new prescriptive plan. Distinct from ex:LogisticsRequirementSpecification (the Directive requirements artifact that this act confirms, not authors)." ;
@@ -6631,7 +6631,7 @@ ex:ValidatedRequirementAssessment rdf:type owl:Class ;
                                   skos:example "A planner's confirmation note that the regional DC manager has agreed the stated stocking requirement is correct." .
 
 
-###  http://example.org/apqc#Warehouse
+###  https://fandaws.com/ontology/apqc#Warehouse
 ex:Warehouse rdf:type owl:Class ;
              rdfs:subClassOf cco:ont00000192 ;
              rdfs:label "Warehouse" ;

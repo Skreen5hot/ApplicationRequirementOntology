@@ -1,5 +1,5 @@
-@prefix : <http://example.org/apqc/slice/12.0#> .
-@prefix ex: <http://example.org/apqc#> .
+@prefix : <https://fandaws.com/ontology/apqc/slice/12.0#> .
+@prefix ex: <https://fandaws.com/ontology/apqc#> .
 @prefix cco: <https://www.commoncoreontologies.org/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
@@ -7,12 +7,12 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix apqc: <http://example.org/apqc/scheme#> .
+@prefix apqc: <https://fandaws.com/ontology/apqc/scheme#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <http://example.org/apqc/slice/12.0> .
+@base <https://fandaws.com/ontology/apqc/slice/12.0> .
 
-<http://example.org/apqc/slice/12.0> rdf:type owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/12.0> rdf:type owl:Ontology ;
                                       dct:source "APQC Process Classification Framework (Cross-Industry)" ;
                                       dct:title "APQC reality-layer slice 12.0: Manage External Relationships" ;
                                       rdfs:comment "Reality-layer module for APQC section 12.0. CCO pin v2.0 (2024-11-06). Modeling rules per ADR-001 (two-layer model, R5 bounded-occurrent test, GOLDEN PRINCIPLE). New recurring genera (ex:ActOfRelationshipManagement, ex:ActOfMonitoring, ex:ActOfNegotiation, ex:ActOfPayment, ex:ActOfReporting) are emitted below as PROPOSE-EXT for human promotion. Self-contained: the shared act genera it uses are inlined from the apqc-ext.ttl registry, so it validates standalone against the pinned CCO/BFO closure with no extension merge." ;
@@ -22,25 +22,25 @@
 #    Annotation properties
 #################################################################
 
-###  http://example.org/apqc#apqcSourceText
+###  https://fandaws.com/ontology/apqc#apqcSourceText
 ex:apqcSourceText rdf:type owl:AnnotationProperty ;
                   rdfs:comment "Verbatim APQC Element Description retained for provenance." ;
                   rdfs:label "APQC source description" .
 
 
-###  http://example.org/apqc#designatesProcessType
+###  https://fandaws.com/ontology/apqc#designatesProcessType
 ex:designatesProcessType rdf:type owl:AnnotationProperty ;
                          rdfs:comment "Bridges a catalog node (ex:PCF_<pcfID>) to its reality-layer class (ex:P<pcfID> or a supporting capability)." ;
                          rdfs:label "designates process type" .
 
 
-###  http://example.org/apqc#hierarchyID
+###  https://fandaws.com/ontology/apqc#hierarchyID
 ex:hierarchyID rdf:type owl:AnnotationProperty ;
                rdfs:comment "Positional dotted-decimal locator. NON-STABLE across PCF versions. Reference only; never for IRI minting or subsumption." ;
                rdfs:label "APQC Hierarchy ID" .
 
 
-###  http://example.org/apqc#pcfID
+###  https://fandaws.com/ontology/apqc#pcfID
 ex:pcfID rdf:type owl:AnnotationProperty ;
          rdfs:comment "Stable APQC identifier. Anchor IRIs to this; it persists across PCF versions." ;
          rdfs:label "APQC PCF ID" .
@@ -2630,7 +2630,7 @@ cco:ont00001773 rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
-###  http://example.org/apqc#ActOfAcquisition
+###  https://fandaws.com/ontology/apqc#ActOfAcquisition
 ex:ActOfAcquisition rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000228 ;
                     rdfs:comment "Local extension (D9). Rejected cco:ont00000950 'Act of Maintenance' (modifying Material Artifacts) and cco:ont00000402 'Act of Communication' (mere ICE transfer). Securing/obtaining a held entity anchors at the generic Planned Act. Expected to recur in procurement/asset-acquisition categories (4.0, 10.0)." ;
@@ -2638,7 +2638,7 @@ ex:ActOfAcquisition rdf:type owl:Class ;
                     skos:definition "A Planned Act in which an Agent obtains from some authority or supplier an entity (such as an authorization, license, or resource) that the Agent did not previously hold." .
 
 
-###  http://example.org/apqc#ActOfAdvocacy
+###  https://fandaws.com/ontology/apqc#ActOfAdvocacy
 ex:ActOfAdvocacy rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00001327 ;
                  rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00001327 'Social Act' (verified: 'A Planned Act having an objective that affects, is performed by, or is performed on behalf of, a community or group of Persons'; parent cco:ont00000228) because advocacy/promotion targets a community or society rather than uniting with a single counterpart. Evaluated cco:ont00000079 'Act of Social Movement' (verified: 'A Social Act composed of a series of performances, displays and campaigns directed at implementing, resisting or undoing a change in society') as the nearest sibling: it fits campaign-driven activism but is narrower than the general supporting/promoting intent here (supporting civic programs and connection platforms is not necessarily a movement to undo a societal change), so a dedicated advocacy genus is minted under the shared Social Act parent. Rejected cco:ont00000433 'Act of Association' (a bilateral uniting-with-an-Agent, whereas advocacy influences a societal/political environment rather than uniting into a shared enterprise). Recurs across promote/encourage/support-the-environment nodes (12.0)." ;
@@ -2646,7 +2646,7 @@ ex:ActOfAdvocacy rdf:type owl:Class ;
                  skos:definition "A Social Act in which an Agent promotes, encourages, or supports a cause, position, or change in the societal or political environment through campaigns, programs, or public engagement, on behalf of an organization." .
 
 
-###  http://example.org/apqc#ActOfFormulation
+###  https://fandaws.com/ontology/apqc#ActOfFormulation
 ex:ActOfFormulation rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000511 ;
                     rdfs:comment "Local extension (D9). Anchored under cco:ont00000511 (Act of Planning) because formulating a strategy/mission/design is making a plan to achieve an objective; its output is a Directive ICE. Recurs across develop/define/compose-a-directive processes corpus-wide." ;
@@ -2654,7 +2654,7 @@ ex:ActOfFormulation rdf:type owl:Class ;
                     skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." .
 
 
-###  http://example.org/apqc#ActOfMonitoring
+###  https://fandaws.com/ontology/apqc#ActOfMonitoring
 ex:ActOfMonitoring rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000366 ;
                    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic monitoring/tracking class. Anchored under cco:ont00000366 (Act of Information Processing) because monitoring ingests repeated observations (including electronic records, not only senses) and yields a descriptive status/deviation ICE -- the GOLDEN PRINCIPLE (descriptive output => information-processing genus) holds. Rejected cco:ont00000037 (Act of Observation: a single sense-based acquisition, too narrow -- monitoring also processes ICEs and is sustained); cco:ont00000636 (Act of Appraisal: renders a single bounded value/quality judgement rather than tracking status over time); and cco:ont00000345 (Act of Measuring: a single quantification against a standard at one time -- at most a method sub-step of the monitoring cycle; a node that is purely one quantification, e.g. Calculate performance measures, anchors to cco:ont00000345 directly, not here). Distinct from ex:ActOfAnalysis (one-shot examination of a fixed input set) by its continuous, longitudinal character. A standing 'Manage/Monitor X' function with no natural end is an Organization Capability (cco:ont00000568) realized in such acts, not itself a process. Recurs corpus-wide (slices 3.0/4.0/5.0/6.0/8.0/9.0/10.0/11.0/12.0/13.0). Reconciled from 10 divergent slice restatements to one definition." ;
@@ -2662,7 +2662,7 @@ ex:ActOfMonitoring rdf:type owl:Class ;
                    skos:definition "An Act of Information Processing in which an Agent repeatedly or continuously observes the state, progress, or performance of some process, system, or quantity over time and produces a Descriptive Information Content Entity that represents its tracked status against expected conditions, targets, or requirements." .
 
 
-###  http://example.org/apqc#ActOfNegotiation
+###  https://fandaws.com/ontology/apqc#ActOfNegotiation
 ex:ActOfNegotiation rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000228 ;
                     rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000228 (Planned Act): negotiation is two or more agents conferring and bargaining over terms to reach a mutually binding directive (an agreement or contract). Rejected cco:ont00001327 (Social Act) as too generic; Act of Contract Formation (cco:ont00000684) models only the consummating promise, narrower than the bargaining process." ;
@@ -2670,7 +2670,7 @@ ex:ActOfNegotiation rdf:type owl:Class ;
                     skos:definition "A Planned Act in which two or more Agents confer and bargain over terms and conditions, exchanging proposals and concessions, in order to reach and record a mutually binding Directive Information Content Entity such as an agreement or contract." .
 
 
-###  http://example.org/apqc#ActOfPayment
+###  https://fandaws.com/ontology/apqc#ActOfPayment
 ex:ActOfPayment rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000836 ;
                 rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000836 'Act of Financial Instrument Use' (verified: 'An Act of Artifact Employment in which some Agent uses some Financial Instrument'; parent cco:ont00000566 Act of Artifact Employment). Rejected cco:ont00001334 'Act of Purchasing' (acquires a good/service in exchange, whereas payment may settle a pre-existing debt without acquisition) and cco:ont00000389 'Act of Buying' (acquires ownership of a good, narrower still). The transferred money is a material entity moved as a participant; the act's definitional informational output is a Descriptive ICE payment record. Recurs in disbursement/procurement processes (12.0)." ;
@@ -2678,7 +2678,7 @@ ex:ActOfPayment rdf:type owl:Class ;
                 skos:definition "An Act of Financial Instrument Use in which an Agent (the payer) transfers money or a monetary instrument to another Agent (the payee) in settlement of an obligation." .
 
 
-###  http://example.org/apqc#ActOfRelationshipManagement
+###  https://fandaws.com/ontology/apqc#ActOfRelationshipManagement
 ex:ActOfRelationshipManagement rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000433 ;
                                rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000433 'Act of Association' (verified: 'A Social Act wherein an Agent unites with some other Agent in a Planned Act, enterprise or business'; parent cco:ont00001327 Social Act -> cco:ont00000228) because relationship-building is a sustained social uniting, not mere ICE transfer. Rejected cco:ont00000402 'Act of Communication' (a single ICE-transfer event, too narrow), cco:ont00000511 'Act of Planning' (output is a relationship, not a plan), and cco:ont00000168 'Act of Interpersonal Relationship' (restricted to Persons, whereas the external counterparties here are typically Organizations). Recurs across plan/build/manage-relationship nodes (12.0)." ;
@@ -2686,7 +2686,7 @@ ex:ActOfRelationshipManagement rdf:type owl:Class ;
                                skos:definition "An Act of Association in which an Agent builds, maintains, extends, or advances an ongoing relationship between an organization and one or more external parties or held assets." .
 
 
-###  http://example.org/apqc#ActOfReporting
+###  https://fandaws.com/ontology/apqc#ActOfReporting
 ex:ActOfReporting rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000379 ;
                   rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no broad reporting class spanning compilation and assertion. Anchored under cco:ont00000379 (Act of Representative Communication), with cco:ont00000228 (Planned Act) co-anchored so standalone SHACL resolves the act chain: reporting transfers to recipients a descriptive account (report, statement, scorecard, filing) asserting an organization's condition or results. Pure submission of an already-prepared report may use the verified leaf cco:ont00000151 directly." ;
@@ -2694,7 +2694,7 @@ ex:ActOfReporting rdf:type owl:Class ;
                   skos:definition "An Act of Representative Communication in which an Agent transfers to one or more recipients a Descriptive Information Content Entity (such as a report, statement, scorecard, or filing) that asserts, as true, a representation of an organization's condition or results." .
 
 
-###  http://example.org/apqc#Advisor
+###  https://fandaws.com/ontology/apqc#Advisor
 ex:Advisor rdf:type owl:Class ;
            rdfs:subClassOf cco:ont00001017 ,
                            [ rdf:type owl:Restriction ;
@@ -2706,14 +2706,14 @@ ex:Advisor rdf:type owl:Class ;
            skos:definition "An Agent that bears an advisor role in virtue of providing advice or counsel, whether internally or as a third party, to support an organization's relationships." .
 
 
-###  http://example.org/apqc#AdvisorRole
+###  https://fandaws.com/ontology/apqc#AdvisorRole
 ex:AdvisorRole rdf:type owl:Class ;
                rdfs:subClassOf obo:BFO_0000023 ;
                rdfs:label "Advisor Role" ;
                skos:definition "A Role that is borne by an Agent in virtue of providing advice or counsel to support a focal organization's relationships or decisions." .
 
 
-###  http://example.org/apqc#AdvisoryInput
+###  https://fandaws.com/ontology/apqc#AdvisoryInput
 ex:AdvisoryInput rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000853 ;
                  rdfs:comment "Input for 12.2.1.4 / 12.2.1.5 (receive input from advisors)." ;
@@ -2721,7 +2721,7 @@ ex:AdvisoryInput rdf:type owl:Class ;
                  skos:definition "A Descriptive Information Content Entity that describes advice or counsel furnished by an internal or external advisor." .
 
 
-###  http://example.org/apqc#AnalystRelationsManagementCapability
+###  https://fandaws.com/ontology/apqc#AnalystRelationsManagementCapability
 ex:AnalystRelationsManagementCapability rdf:type owl:Class ;
                                         rdfs:subClassOf ex:StakeholderRelationshipManagementCapability ;
                                         rdfs:comment "Minted for 12.1.2 (P11036), re-judged under R5 as a standing function -> Organization Capability ('creating and maintaining LONG-TERM relations' signals the no-natural-end / standing-capacity branch), reconciled with 12.2.1-3 (Gate-F cross-row consistency). Realized in the bounded analyst-relationship-cultivation episodes via obo:BFO_0000054." ;
@@ -2729,7 +2729,7 @@ ex:AnalystRelationsManagementCapability rdf:type owl:Class ;
                                         skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to create and maintain long-term relationships with financial analysts so as to elicit market intelligence." .
 
 
-###  http://example.org/apqc#AuditFindingsReport
+###  https://fandaws.com/ontology/apqc#AuditFindingsReport
 ex:AuditFindingsReport rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:comment "Output of 12.3.2 (Report audit findings)." ;
@@ -2737,7 +2737,7 @@ ex:AuditFindingsReport rdf:type owl:Class ;
                        skos:definition "A Descriptive Information Content Entity that describes the findings of an audit, including the situation, root cause, and recommendations for resolving a problem." .
 
 
-###  http://example.org/apqc#AuditInquiry
+###  https://fandaws.com/ontology/apqc#AuditInquiry
 ex:AuditInquiry rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:comment "Input for 12.2.2.2 (Respond to audit inquiries) and 12.3.2 (Report audit findings)." ;
@@ -2745,7 +2745,7 @@ ex:AuditInquiry rdf:type owl:Class ;
                 skos:definition "A Descriptive Information Content Entity that describes a question or request raised by an auditor in the course of an audit." .
 
 
-###  http://example.org/apqc#Auditor
+###  https://fandaws.com/ontology/apqc#Auditor
 ex:Auditor rdf:type owl:Class ;
            rdfs:subClassOf cco:ont00001017 ,
                            [ rdf:type owl:Restriction ;
@@ -2757,14 +2757,14 @@ ex:Auditor rdf:type owl:Class ;
            skos:definition "An Agent that bears an auditor role in virtue of conducting an examination of an organization's records, controls, or compliance." .
 
 
-###  http://example.org/apqc#AuditorRole
+###  https://fandaws.com/ontology/apqc#AuditorRole
 ex:AuditorRole rdf:type owl:Class ;
                rdfs:subClassOf obo:BFO_0000023 ;
                rdfs:label "Auditor Role" ;
                skos:definition "A Role that is borne by an Agent in virtue of conducting an examination of a focal organization's records, controls, or compliance." .
 
 
-###  http://example.org/apqc#BoardOfDirectors
+###  https://fandaws.com/ontology/apqc#BoardOfDirectors
 ex:BoardOfDirectors rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00001180 ,
                                     [ rdf:type owl:Restriction ;
@@ -2776,14 +2776,14 @@ ex:BoardOfDirectors rdf:type owl:Class ;
                     skos:definition "An Organization that bears a board-of-directors role in virtue of representing stockholders and governing a company's major decisions." .
 
 
-###  http://example.org/apqc#BoardOfDirectorsRole
+###  https://fandaws.com/ontology/apqc#BoardOfDirectorsRole
 ex:BoardOfDirectorsRole rdf:type owl:Class ;
                         rdfs:subClassOf obo:BFO_0000023 ;
                         rdfs:label "Board of Directors Role" ;
                         skos:definition "A Role that is borne by an Organization in virtue of representing stockholders and governing a focal company's major decisions." .
 
 
-###  http://example.org/apqc#Budget
+###  https://fandaws.com/ontology/apqc#Budget
 ex:Budget rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000965 ;
           rdfs:comment "Input for 12.4.5.3 (Receive strategy/budget). Directive: a financial plan that constrains spending." ;
@@ -2791,7 +2791,7 @@ ex:Budget rdf:type owl:Class ;
           skos:definition "A Directive Information Content Entity that prescribes, using figures, an organization's expected future financial results for an activity." .
 
 
-###  http://example.org/apqc#Community
+###  https://fandaws.com/ontology/apqc#Community
 ex:Community rdf:type owl:Class ;
              rdfs:subClassOf cco:ont00001180 ,
                              [ rdf:type owl:Restriction ;
@@ -2803,21 +2803,21 @@ ex:Community rdf:type owl:Class ;
              skos:definition "An Organization that bears a community role in virtue of constituting the population of the environment in which an organization operates and from which it draws resources." .
 
 
-###  http://example.org/apqc#CommunityRole
+###  https://fandaws.com/ontology/apqc#CommunityRole
 ex:CommunityRole rdf:type owl:Class ;
                  rdfs:subClassOf obo:BFO_0000023 ;
                  rdfs:label "Community Role" ;
                  skos:definition "A Role that is borne by an Organization in virtue of constituting the population of the environment in which a focal organization operates." .
 
 
-###  http://example.org/apqc#ComplianceOfficerRole
+###  https://fandaws.com/ontology/apqc#ComplianceOfficerRole
 ex:ComplianceOfficerRole rdf:type owl:Class ;
                          rdfs:subClassOf obo:BFO_0000023 ;
                          rdfs:label "Compliance Officer Role" ;
                          skos:definition "A Role that is borne by an Agent in virtue of being tasked with validating and maintaining a focal organization's compliance position." .
 
 
-###  http://example.org/apqc#CompliancePersonnel
+###  https://fandaws.com/ontology/apqc#CompliancePersonnel
 ex:CompliancePersonnel rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001017 ,
                                        [ rdf:type owl:Restriction ;
@@ -2829,7 +2829,7 @@ ex:CompliancePersonnel rdf:type owl:Class ;
                        skos:definition "An Agent that bears a compliance-officer role in virtue of being tasked with validating and maintaining an organization's compliance position." .
 
 
-###  http://example.org/apqc#CompliancePolicy
+###  https://fandaws.com/ontology/apqc#CompliancePolicy
 ex:CompliancePolicy rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000965 ;
                     rdfs:comment "Output of 12.4.4 / 12.4.4.1 (compliance framework and programs)." ;
@@ -2837,7 +2837,7 @@ ex:CompliancePolicy rdf:type owl:Class ;
                     skos:definition "A Directive Information Content Entity that prescribes the framework, rules, and procedures by which an organization maintains adherence to applicable statutes and regulations." .
 
 
-###  http://example.org/apqc#ComplianceProgram
+###  https://fandaws.com/ontology/apqc#ComplianceProgram
 ex:ComplianceProgram rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:comment "Output of 12.4.4.1 (Plan and initiate compliance program); implemented by 12.4.4.2." ;
@@ -2845,7 +2845,7 @@ ex:ComplianceProgram rdf:type owl:Class ;
                      skos:definition "A Directive Information Content Entity that prescribes the internal system and activities for identifying and reducing the risk of breaching applicable laws and regulations." .
 
 
-###  http://example.org/apqc#ContactRecord
+###  https://fandaws.com/ontology/apqc#ContactRecord
 ex:ContactRecord rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000853 ;
                  rdfs:comment "Input/output for 12.2.2.3 (Maintain documentation of contacts)." ;
@@ -2853,7 +2853,7 @@ ex:ContactRecord rdf:type owl:Class ;
                  skos:definition "A Descriptive Information Content Entity that describes a partner, prospect, or customer within an organization's network of contacts." .
 
 
-###  http://example.org/apqc#Contract
+###  https://fandaws.com/ontology/apqc#Contract
 ex:Contract rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00000965 ;
             rdfs:comment "Output of 12.4.9 (Negotiate and document agreements/contracts) and the engagement instrument in 12.4.5.2." ;
@@ -2861,7 +2861,7 @@ ex:Contract rdf:type owl:Class ;
             skos:definition "A Directive Information Content Entity that prescribes the mutually agreed terms binding two or more parties to a course of action." .
 
 
-###  http://example.org/apqc#CorporateGovernancePolicy
+###  https://fandaws.com/ontology/apqc#CorporateGovernancePolicy
 ex:CorporateGovernancePolicy rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000965 ;
                              rdfs:comment "Output of 12.4.2 (Manage corporate governance policies)." ;
@@ -2869,7 +2869,7 @@ ex:CorporateGovernancePolicy rdf:type owl:Class ;
                              skos:definition "A Directive Information Content Entity that prescribes the system of rules, practices, and processes through which a company is directed and controlled." .
 
 
-###  http://example.org/apqc#CultivateAnalystRelations
+###  https://fandaws.com/ontology/apqc#CultivateAnalystRelations
 ex:CultivateAnalystRelations rdf:type owl:Class ;
                              rdfs:subClassOf ex:ActOfRelationshipManagement ,
                                              [ rdf:type owl:Restriction ;
@@ -2882,7 +2882,7 @@ ex:CultivateAnalystRelations rdf:type owl:Class ;
                              skos:example "An investor-relations officer's briefing with a sell-side analyst ahead of an earnings release." .
 
 
-###  http://example.org/apqc#CultivateLenderRelations
+###  https://fandaws.com/ontology/apqc#CultivateLenderRelations
 ex:CultivateLenderRelations rdf:type owl:Class ;
                             rdfs:subClassOf ex:ActOfRelationshipManagement ,
                                             [ rdf:type owl:Restriction ;
@@ -2895,7 +2895,7 @@ ex:CultivateLenderRelations rdf:type owl:Class ;
                             skos:example "A treasury team's quarterly banker briefing to secure a low-rate credit line." .
 
 
-###  http://example.org/apqc#DetermineLegalWorkRequirements
+###  https://fandaws.com/ontology/apqc#DetermineLegalWorkRequirements
 ex:DetermineLegalWorkRequirements rdf:type owl:Class ;
                                   rdfs:subClassOf ex:ActOfFormulation ;
                                   rdfs:comment "Supporting act (no pcfID, so it carries NO targeted has-output someValuesFrom restriction -- the IRI scheme reserves pcfIDs for catalog-backed process classes and the process shape requires a pcfID on any class bearing an I/O restriction). Minted to de-conflate the compound row 12.4.5.1 (Phase-1): producing a Directive WorkRequirementsSpecification is a planning/decision facet whose genus is ex:ActOfFormulation (Act of Planning), in agreement with its Directive output (GOLDEN PRINCIPLE). Its output ex:WorkRequirementsSpecification is recorded here and in the definition rather than as a restriction. It is a cco:has process part of the appraisal P11056, which keeps only its Descriptive output." ;
@@ -2904,7 +2904,7 @@ ex:DetermineLegalWorkRequirements rdf:type owl:Class ;
                                   skos:example "In-house counsel breaks down a dispute into the tasks to hand to outside counsel and documents the action requirements." .
 
 
-###  http://example.org/apqc#DisputeResolution
+###  https://fandaws.com/ontology/apqc#DisputeResolution
 ex:DisputeResolution rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:comment "Output of 12.4.7 (Resolve disputes and litigations). Directive: a settlement that binds the parties." ;
@@ -2912,7 +2912,7 @@ ex:DisputeResolution rdf:type owl:Class ;
                      skos:definition "A Directive Information Content Entity that prescribes the agreed or adjudicated terms settling a dispute or civil lawsuit." .
 
 
-###  http://example.org/apqc#EthicsPolicy
+###  https://fandaws.com/ontology/apqc#EthicsPolicy
 ex:EthicsPolicy rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000965 ;
                 rdfs:comment "Output of 12.4.1 (Create ethics policies)." ;
@@ -2920,7 +2920,7 @@ ex:EthicsPolicy rdf:type owl:Class ;
                 skos:definition "A Directive Information Content Entity that prescribes an organization's code of ethics communicating its philosophy to employees, partners, and the public." .
 
 
-###  http://example.org/apqc#ExecutiveAppointment
+###  https://fandaws.com/ontology/apqc#ExecutiveAppointment
 ex:ExecutiveAppointment rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000965 ;
                         rdfs:comment "Output of 12.2.1.2 (Appoint responsible executives). Directive: it assigns responsibility." ;
@@ -2928,7 +2928,7 @@ ex:ExecutiveAppointment rdf:type owl:Class ;
                         skos:definition "A Directive Information Content Entity that prescribes the assignment of an executive-level agent to manage and drive a designated set of relationships." .
 
 
-###  http://example.org/apqc#ExecutivePersonnel
+###  https://fandaws.com/ontology/apqc#ExecutivePersonnel
 ex:ExecutivePersonnel rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00001017 ,
                                       [ rdf:type owl:Restriction ;
@@ -2940,14 +2940,14 @@ ex:ExecutivePersonnel rdf:type owl:Class ;
                       skos:definition "An Agent that bears an executive role in virtue of holding senior managerial authority responsible for driving and overseeing organizational relationships and activities." .
 
 
-###  http://example.org/apqc#ExecutiveRole
+###  https://fandaws.com/ontology/apqc#ExecutiveRole
 ex:ExecutiveRole rdf:type owl:Class ;
                  rdfs:subClassOf obo:BFO_0000023 ;
                  rdfs:label "Executive Role" ;
                  skos:definition "A Role that is borne by an Agent in virtue of holding senior managerial authority within an Organization." .
 
 
-###  http://example.org/apqc#FinancialAnalyst
+###  https://fandaws.com/ontology/apqc#FinancialAnalyst
 ex:FinancialAnalyst rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00001017 ,
                                     [ rdf:type owl:Restriction ;
@@ -2959,14 +2959,14 @@ ex:FinancialAnalyst rdf:type owl:Class ;
                     skos:definition "An Agent that bears a financial-analyst role in virtue of evaluating the securities, performance, and prospects of an organization." .
 
 
-###  http://example.org/apqc#FinancialAnalystRole
+###  https://fandaws.com/ontology/apqc#FinancialAnalystRole
 ex:FinancialAnalystRole rdf:type owl:Class ;
                         rdfs:subClassOf obo:BFO_0000023 ;
                         rdfs:label "Financial Analyst Role" ;
                         skos:definition "A Role that is borne by an Agent in virtue of evaluating the securities, performance, and prospects of a focal organization." .
 
 
-###  http://example.org/apqc#FinancialData
+###  https://fandaws.com/ontology/apqc#FinancialData
 ex:FinancialData rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000853 ;
                  rdfs:comment "Input for 12.3.1 (Report financial results)." ;
@@ -2974,7 +2974,7 @@ ex:FinancialData rdf:type owl:Class ;
                  skos:definition "A Descriptive Information Content Entity that describes an organization's financial position and performance." .
 
 
-###  http://example.org/apqc#FinancialResultsReport
+###  https://fandaws.com/ontology/apqc#FinancialResultsReport
 ex:FinancialResultsReport rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:comment "Output of 12.3.1 (Report financial results)." ;
@@ -2982,7 +2982,7 @@ ex:FinancialResultsReport rdf:type owl:Class ;
                           skos:definition "A Descriptive Information Content Entity that describes an organization's financial results, including its income statement, balance sheet, and statement of cash flows." .
 
 
-###  http://example.org/apqc#GovernmentBody
+###  https://fandaws.com/ontology/apqc#GovernmentBody
 ex:GovernmentBody rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00001180 ,
                                   [ rdf:type owl:Restriction ;
@@ -2994,14 +2994,14 @@ ex:GovernmentBody rdf:type owl:Class ;
                   skos:definition "An Organization that bears a government-body role in virtue of exercising public authority at a local, regional, national, or supranational level." .
 
 
-###  http://example.org/apqc#GovernmentBodyRole
+###  https://fandaws.com/ontology/apqc#GovernmentBodyRole
 ex:GovernmentBodyRole rdf:type owl:Class ;
                       rdfs:subClassOf obo:BFO_0000023 ;
                       rdfs:label "Government Body Role" ;
                       skos:definition "A Role that is borne by an Organization in virtue of exercising public authority over a focal organization at some level of government." .
 
 
-###  http://example.org/apqc#IntellectualPropertyManagementCapability
+###  https://fandaws.com/ontology/apqc#IntellectualPropertyManagementCapability
 ex:IntellectualPropertyManagementCapability rdf:type owl:Class ;
                                             rdfs:subClassOf cco:ont00000568 ;
                                             rdfs:comment "Supports 12.4.6 (Protect intellectual property) when modeled as a standing function." ;
@@ -3009,7 +3009,7 @@ ex:IntellectualPropertyManagementCapability rdf:type owl:Class ;
                                             skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to secure, maintain, and protect its intellectual property rights." .
 
 
-###  http://example.org/apqc#IntellectualPropertyPolicy
+###  https://fandaws.com/ontology/apqc#IntellectualPropertyPolicy
 ex:IntellectualPropertyPolicy rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:comment "Output of 12.4.6.2 (Maintain intellectual property rights and restrictions)." ;
@@ -3017,7 +3017,7 @@ ex:IntellectualPropertyPolicy rdf:type owl:Class ;
                               skos:definition "A Directive Information Content Entity that prescribes the rules, procedures, and restrictions governing the use and protection of an organization's intellectual property." .
 
 
-###  http://example.org/apqc#IntellectualPropertyRight
+###  https://fandaws.com/ontology/apqc#IntellectualPropertyRight
 ex:IntellectualPropertyRight rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000965 ;
                              rdfs:comment "Subject/output of 12.4.6.1 (Manage copyrights, patents, and trademarks). Directive: an enforceable entitlement prescribing permitted and prohibited uses. Scope note (two-layer model): this class captures only the DIRECTIVE prescriptive content of the right (the permitted/prohibited-use rules) -- hence Directive ICE (cco:ont00000965), admissible as the definitional has-output of the output-neutral ex:ActOfAcquisition at P11062. The legal ENTITLEMENT/STATUS itself (the holder's standing over the protected subject matter) is a distinct reality-layer legal relation/role and is deliberately NOT modeled here; if later represented it should be a separate entity, not this ICE." ;
@@ -3025,7 +3025,7 @@ ex:IntellectualPropertyRight rdf:type owl:Class ;
                              skos:definition "A Directive Information Content Entity that prescribes the exclusive legal entitlement an organization holds over a patent, copyright, or trademark." .
 
 
-###  http://example.org/apqc#InvestorRelationsCapability
+###  https://fandaws.com/ontology/apqc#InvestorRelationsCapability
 ex:InvestorRelationsCapability rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000568 ;
                                rdfs:comment "Supports 12.1 (Build investor relationships) when modeled as a standing function under R5." ;
@@ -3033,7 +3033,7 @@ ex:InvestorRelationsCapability rdf:type owl:Class ;
                                skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to integrate finance, communication, and securities-law compliance so as to manage two-way communication with the financial community." .
 
 
-###  http://example.org/apqc#Invoice
+###  https://fandaws.com/ontology/apqc#Invoice
 ex:Invoice rdf:type owl:Class ;
            rdfs:subClassOf cco:ont00000853 ;
            rdfs:comment "Input for 12.4.5.5 (Process payment for legal services)." ;
@@ -3041,7 +3041,7 @@ ex:Invoice rdf:type owl:Class ;
            skos:definition "A Descriptive Information Content Entity that describes fees claimed by a service provider for services rendered." .
 
 
-###  http://example.org/apqc#Journalist
+###  https://fandaws.com/ontology/apqc#Journalist
 ex:Journalist rdf:type owl:Class ;
               rdfs:subClassOf cco:ont00001017 ,
                               [ rdf:type owl:Restriction ;
@@ -3053,14 +3053,14 @@ ex:Journalist rdf:type owl:Class ;
               skos:definition "An Agent that bears a journalist role in virtue of gathering, reporting, and publishing news on behalf of a media outlet." .
 
 
-###  http://example.org/apqc#JournalistRole
+###  https://fandaws.com/ontology/apqc#JournalistRole
 ex:JournalistRole rdf:type owl:Class ;
                   rdfs:subClassOf obo:BFO_0000023 ;
                   rdfs:label "Journalist Role" ;
                   skos:definition "A Role that is borne by an Agent in virtue of gathering, reporting, and publishing news on behalf of a media outlet." .
 
 
-###  http://example.org/apqc#LegalActivityRecord
+###  https://fandaws.com/ontology/apqc#LegalActivityRecord
 ex:LegalActivityRecord rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:comment "Output of 12.4.5.6 (Track legal activity/performance)." ;
@@ -3068,7 +3068,7 @@ ex:LegalActivityRecord rdf:type owl:Class ;
                        skos:definition "A Descriptive Information Content Entity that describes the legal activities and performance of an organization over time." .
 
 
-###  http://example.org/apqc#LegalAdvice
+###  https://fandaws.com/ontology/apqc#LegalAdvice
 ex:LegalAdvice rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00000853 ;
                rdfs:comment "Output of 12.4.8 (Provide legal advice/counseling). Descriptive: it informs rather than itself binding the recipient to act." ;
@@ -3076,7 +3076,7 @@ ex:LegalAdvice rdf:type owl:Class ;
                skos:definition "A Descriptive Information Content Entity that describes counsel concerning the substance or procedure of a law as it applies to a particular situation." .
 
 
-###  http://example.org/apqc#LegalAndComplianceCapability
+###  https://fandaws.com/ontology/apqc#LegalAndComplianceCapability
 ex:LegalAndComplianceCapability rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000568 ;
                                 rdfs:comment "Supports 12.4 / 12.4.4 (Manage legal and ethical issues; Ensure compliance) when modeled as standing functions." ;
@@ -3084,7 +3084,7 @@ ex:LegalAndComplianceCapability rdf:type owl:Class ;
                                 skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to conduct legal and ethical practices and to validate adherence to applicable laws and regulations." .
 
 
-###  http://example.org/apqc#LegalProblemStatement
+###  https://fandaws.com/ontology/apqc#LegalProblemStatement
 ex:LegalProblemStatement rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:comment "Input/output for 12.4.5.1 (Assess problem and determine work requirements)." ;
@@ -3092,7 +3092,7 @@ ex:LegalProblemStatement rdf:type owl:Class ;
                          skos:definition "A Descriptive Information Content Entity that describes a legal or ethical problem an organization faces and the tasks for which assistance may be needed." .
 
 
-###  http://example.org/apqc#LegalWorkProduct
+###  https://fandaws.com/ontology/apqc#LegalWorkProduct
 ex:LegalWorkProduct rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:comment "Input for 12.4.5.4 (Receive work product and manage/monitor case). See also ex:WorkProductDeliverable for the deliverable-plus-effort record specifically monitored under 12.4.5.4." ;
@@ -3100,7 +3100,7 @@ ex:LegalWorkProduct rdf:type owl:Class ;
                     skos:definition "A Descriptive Information Content Entity that describes a deliverable produced by outside counsel in the course of an engagement." .
 
 
-###  http://example.org/apqc#Lender
+###  https://fandaws.com/ontology/apqc#Lender
 ex:Lender rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00001180 ,
                           [ rdf:type owl:Restriction ;
@@ -3112,7 +3112,7 @@ ex:Lender rdf:type owl:Class ;
           skos:definition "An Organization that bears a lender role in virtue of extending loans or credit to a borrowing organization." .
 
 
-###  http://example.org/apqc#LenderRelationsManagementCapability
+###  https://fandaws.com/ontology/apqc#LenderRelationsManagementCapability
 ex:LenderRelationsManagementCapability rdf:type owl:Class ;
                                        rdfs:subClassOf ex:StakeholderRelationshipManagementCapability ;
                                        rdfs:comment "Minted for 12.1.1 (P11035), re-judged under R5 as a standing function -> Organization Capability, reconciled with the parallel 'manage relations' rows 12.2.1-3 which are likewise capabilities (Gate-F cross-row consistency). Realized in the bounded lender-relationship-cultivation episodes via obo:BFO_0000054." ;
@@ -3120,14 +3120,14 @@ ex:LenderRelationsManagementCapability rdf:type owl:Class ;
                                        skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to build, maintain, and advance ongoing relationships with bankers and lenders so as to foster a receptive environment for favorable lending terms." .
 
 
-###  http://example.org/apqc#LenderRole
+###  https://fandaws.com/ontology/apqc#LenderRole
 ex:LenderRole rdf:type owl:Class ;
               rdfs:subClassOf obo:BFO_0000023 ;
               rdfs:label "Lender Role" ;
               skos:definition "A Role that is borne by an Organization in virtue of extending loans or credit to a focal organization." .
 
 
-###  http://example.org/apqc#LicensingTerms
+###  https://fandaws.com/ontology/apqc#LicensingTerms
 ex:LicensingTerms rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000965 ;
                   rdfs:comment "Output of 12.4.6.3 (Administer licensing terms) and referenced by 12.4.6.4 (Administer options)." ;
@@ -3135,7 +3135,7 @@ ex:LicensingTerms rdf:type owl:Class ;
                   skos:definition "A Directive Information Content Entity that prescribes the terms and conditions governing the granting of a license to an organization's intellectual property." .
 
 
-###  http://example.org/apqc#LobbyistRole
+###  https://fandaws.com/ontology/apqc#LobbyistRole
 ex:LobbyistRole rdf:type owl:Class ;
                 rdfs:subClassOf obo:BFO_0000023 ;
                 rdfs:comment "Minted for 12.2.4 (Manage lobby activities)." ;
@@ -3143,7 +3143,7 @@ ex:LobbyistRole rdf:type owl:Class ;
                 skos:definition "A Role that is borne by an Agent in virtue of being tasked with influencing public or government policy on behalf of a focal organization." .
 
 
-###  http://example.org/apqc#MediaOutlet
+###  https://fandaws.com/ontology/apqc#MediaOutlet
 ex:MediaOutlet rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00001180 ,
                                [ rdf:type owl:Restriction ;
@@ -3155,14 +3155,14 @@ ex:MediaOutlet rdf:type owl:Class ;
                skos:definition "An Organization that bears a media-outlet role in virtue of producing and distributing news or content through channels such as the web, newspapers, or social media." .
 
 
-###  http://example.org/apqc#MediaOutletRole
+###  https://fandaws.com/ontology/apqc#MediaOutletRole
 ex:MediaOutletRole rdf:type owl:Class ;
                    rdfs:subClassOf obo:BFO_0000023 ;
                    rdfs:label "Media Outlet Role" ;
                    skos:definition "A Role that is borne by an Organization in virtue of producing and distributing news or content to the public." .
 
 
-###  http://example.org/apqc#MeetingRecord
+###  https://fandaws.com/ontology/apqc#MeetingRecord
 ex:MeetingRecord rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000853 ;
                  rdfs:comment "Minted for 12.2.2.4 (P12878). Distinct from the input-side ex:RelationshipData ('describes the current state of a relationship', consumed as has-input in P12869/P12871/P12880): the recorded artifact a meeting produces is a meeting record (the output of recording), not the relationship-state data consumed elsewhere -- correcting the Gate-F category confusion of reusing an input class as a has-output filler." ;
@@ -3171,7 +3171,7 @@ ex:MeetingRecord rdf:type owl:Class ;
                  skos:example "Minutes of a quarterly liaison meeting with a quasi-governmental body." .
 
 
-###  http://example.org/apqc#OutsideCounsel
+###  https://fandaws.com/ontology/apqc#OutsideCounsel
 ex:OutsideCounsel rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00001017 ,
                                   [ rdf:type owl:Restriction ;
@@ -3183,14 +3183,14 @@ ex:OutsideCounsel rdf:type owl:Class ;
                   skos:definition "An Agent that bears an outside-counsel role in virtue of being an external subject-matter expert engaged to provide legal or ethical assistance to an organization." .
 
 
-###  http://example.org/apqc#OutsideCounselRole
+###  https://fandaws.com/ontology/apqc#OutsideCounselRole
 ex:OutsideCounselRole rdf:type owl:Class ;
                       rdfs:subClassOf obo:BFO_0000023 ;
                       rdfs:label "Outside Counsel Role" ;
                       skos:definition "A Role that is borne by an Agent in virtue of being an external expert engaged to provide legal or ethical assistance to a focal organization." .
 
 
-###  http://example.org/apqc#P11010
+###  https://fandaws.com/ontology/apqc#P11010
 ex:P11010 rdf:type owl:Class ;
           rdfs:subClassOf ex:InvestorRelationsCapability ,
                           [ rdf:type owl:Restriction ;
@@ -3214,7 +3214,7 @@ ex:P11010 rdf:type owl:Class ;
           skos:example "An organization's standing investor-relations office that cultivates lender, analyst, and shareholder relationships across fiscal periods." .
 
 
-###  http://example.org/apqc#P11012
+###  https://fandaws.com/ontology/apqc#P11012
 ex:P11012 rdf:type owl:Class ;
           rdfs:subClassOf ex:StakeholderRelationshipManagementCapability ,
                           [ rdf:type owl:Restriction ;
@@ -3234,7 +3234,7 @@ ex:P11012 rdf:type owl:Class ;
           skos:example "A corporate secretariat's ongoing capacity to deliver financial and audit reporting to the board and shareholders." .
 
 
-###  http://example.org/apqc#P11013
+###  https://fandaws.com/ontology/apqc#P11013
 ex:P11013 rdf:type owl:Class ;
           rdfs:subClassOf ex:LegalAndComplianceCapability ,
                           [ rdf:type owl:Restriction ;
@@ -3273,7 +3273,7 @@ ex:P11013 rdf:type owl:Class ;
           skos:definition "An Organization Capability that an Organization realizes in the acts by which it manages its legal and ethical practices so as to abide by the law." .
 
 
-###  http://example.org/apqc#P11035
+###  https://fandaws.com/ontology/apqc#P11035
 ex:P11035 rdf:type owl:Class ;
           rdfs:subClassOf ex:LenderRelationsManagementCapability ,
                           [ rdf:type owl:Restriction ;
@@ -3289,7 +3289,7 @@ ex:P11035 rdf:type owl:Class ;
           skos:example "An organization's standing treasury function that nurtures banking relationships across fiscal periods to secure low-rate credit lines." .
 
 
-###  http://example.org/apqc#P11036
+###  https://fandaws.com/ontology/apqc#P11036
 ex:P11036 rdf:type owl:Class ;
           rdfs:subClassOf ex:AnalystRelationsManagementCapability ,
                           [ rdf:type owl:Restriction ;
@@ -3305,7 +3305,7 @@ ex:P11036 rdf:type owl:Class ;
           skos:example "An organization's standing investor-relations function that maintains relationships with sell-side analysts covering the firm across reporting cycles." .
 
 
-###  http://example.org/apqc#P11037
+###  https://fandaws.com/ontology/apqc#P11037
 ex:P11037 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -3325,7 +3325,7 @@ ex:P11037 rdf:type owl:Class ;
           skos:example "A company holds its quarterly earnings call and issues a shareholders' letter." .
 
 
-###  http://example.org/apqc#P11038
+###  https://fandaws.com/ontology/apqc#P11038
 ex:P11038 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -3361,7 +3361,7 @@ ex:P11038 rdf:type owl:Class ;
           skos:example "A corporate government-affairs office's ongoing program of engaging legislators and agencies." .
 
 
-###  http://example.org/apqc#P11039
+###  https://fandaws.com/ontology/apqc#P11039
 ex:P11039 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -3389,7 +3389,7 @@ ex:P11039 rdf:type owl:Class ;
           skos:example "An organization's ongoing engagement with a quasi-governmental regulator." .
 
 
-###  http://example.org/apqc#P11040
+###  https://fandaws.com/ontology/apqc#P11040
 ex:P11040 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -3413,7 +3413,7 @@ ex:P11040 rdf:type owl:Class ;
           skos:example "An organization's ongoing membership and lobbying activity within an industry association." .
 
 
-###  http://example.org/apqc#P11041
+###  https://fandaws.com/ontology/apqc#P11041
 ex:P11041 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ;
           ex:apqcSourceText "Managing lobbying activities to affect government policies." ;
@@ -3425,7 +3425,7 @@ ex:P11041 rdf:type owl:Class ;
           skos:example "A firm's ongoing lobbying program directed at pending legislation." .
 
 
-###  http://example.org/apqc#P11042
+###  https://fandaws.com/ontology/apqc#P11042
 ex:P11042 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -3449,7 +3449,7 @@ ex:P11042 rdf:type owl:Class ;
           skos:example "A controller's office issues the quarterly income statement, balance sheet, and statement of cash flows to the board and to the public." .
 
 
-###  http://example.org/apqc#P11043
+###  https://fandaws.com/ontology/apqc#P11043
 ex:P11043 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -3473,7 +3473,7 @@ ex:P11043 rdf:type owl:Class ;
           skos:example "Internal audit issues a findings report to the audit committee of the board, stating the confirmed control gap, its root cause, and remediation recommendations." .
 
 
-###  http://example.org/apqc#P11044
+###  https://fandaws.com/ontology/apqc#P11044
 ex:P11044 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3489,7 +3489,7 @@ ex:P11044 rdf:type owl:Class ;
           skos:example "A compliance team drafts and publishes the company code of ethics." .
 
 
-###  http://example.org/apqc#P11045
+###  https://fandaws.com/ontology/apqc#P11045
 ex:P11045 rdf:type owl:Class ;
           rdfs:subClassOf ex:LegalAndComplianceCapability ;
           ex:apqcSourceText "Administering the system of rules, practices, and processes through which a company is directed and controlled. Balance stakeholder interests including shareholders, management, customers, suppliers, financiers, government, and the community. Outline a strategy for achieving organizational goals, from action plans and internal controls to performance measurement and corporate disclosure." ;
@@ -3500,7 +3500,7 @@ ex:P11045 rdf:type owl:Class ;
           skos:definition "An Organization Capability that an Organization realizes in administering the system of rules, practices, and processes through which it is directed and controlled while balancing stakeholder interests." .
 
 
-###  http://example.org/apqc#P11046
+###  https://fandaws.com/ontology/apqc#P11046
 ex:P11046 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3516,7 +3516,7 @@ ex:P11046 rdf:type owl:Class ;
           skos:example "Legal counsel rolls out an environmental-law and corporate-compliance preventive program." .
 
 
-###  http://example.org/apqc#P11047
+###  https://fandaws.com/ontology/apqc#P11047
 ex:P11047 rdf:type owl:Class ;
           rdfs:subClassOf ex:LegalAndComplianceCapability ,
                           [ rdf:type owl:Restriction ;
@@ -3536,7 +3536,7 @@ ex:P11047 rdf:type owl:Class ;
           skos:example "A standing compliance office that designs anti-trust programs and continually validates the firm's standing against SEC and consumer-protection statutes." .
 
 
-###  http://example.org/apqc#P11048
+###  https://fandaws.com/ontology/apqc#P11048
 ex:P11048 rdf:type owl:Class ;
           rdfs:subClassOf ex:LegalAndComplianceCapability ,
                           [ rdf:type owl:Restriction ;
@@ -3571,7 +3571,7 @@ ex:P11048 rdf:type owl:Class ;
           skos:definition "An Organization Capability that an Organization realizes in the acts by which it engages, oversees, pays, and monitors externally sourced professionals for legal and ethical assistance." .
 
 
-###  http://example.org/apqc#P11049
+###  https://fandaws.com/ontology/apqc#P11049
 ex:P11049 rdf:type owl:Class ;
           rdfs:subClassOf ex:IntellectualPropertyManagementCapability ,
                           [ rdf:type owl:Restriction ;
@@ -3598,7 +3598,7 @@ ex:P11049 rdf:type owl:Class ;
           skos:definition "An Organization Capability that an Organization realizes in the acts by which it safeguards, registers, licenses, and polices its intellectual property." .
 
 
-###  http://example.org/apqc#P11050
+###  https://fandaws.com/ontology/apqc#P11050
 ex:P11050 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfNegotiation ,
                           [ rdf:type owl:Restriction ;
@@ -3614,7 +3614,7 @@ ex:P11050 rdf:type owl:Class ;
           skos:example "The legal team negotiates a settlement that ends a supplier lawsuit." .
 
 
-###  http://example.org/apqc#P11051
+###  https://fandaws.com/ontology/apqc#P11051
 ex:P11051 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -3634,7 +3634,7 @@ ex:P11051 rdf:type owl:Class ;
           skos:example "Counsel advises management on the disclosure obligations triggered by an acquisition." .
 
 
-###  http://example.org/apqc#P11052
+###  https://fandaws.com/ontology/apqc#P11052
 ex:P11052 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfNegotiation ,
                           [ rdf:type owl:Restriction ;
@@ -3650,7 +3650,7 @@ ex:P11052 rdf:type owl:Class ;
           skos:example "Counsel negotiates and finalizes a master services agreement with a vendor." .
 
 
-###  http://example.org/apqc#P11053
+###  https://fandaws.com/ontology/apqc#P11053
 ex:P11053 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3666,7 +3666,7 @@ ex:P11053 rdf:type owl:Class ;
           skos:example "A compliance lead designs and launches an anti-trust compliance program." .
 
 
-###  http://example.org/apqc#P11054
+###  https://fandaws.com/ontology/apqc#P11054
 ex:P11054 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3686,7 +3686,7 @@ ex:P11054 rdf:type owl:Class ;
           skos:example "A compliance team carries out the scheduled controls and audits defined by the program." .
 
 
-###  http://example.org/apqc#P11056
+###  https://fandaws.com/ontology/apqc#P11056
 ex:P11056 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3706,7 +3706,7 @@ ex:P11056 rdf:type owl:Class ;
           skos:example "In-house counsel scopes a dispute (the appraisal) and, as a part, specifies the tasks to hand to outside counsel." .
 
 
-###  http://example.org/apqc#P11057
+###  https://fandaws.com/ontology/apqc#P11057
 ex:P11057 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -3726,7 +3726,7 @@ ex:P11057 rdf:type owl:Class ;
           skos:example "The legal department retains an external IP firm to handle a patent suit." .
 
 
-###  http://example.org/apqc#P11058
+###  https://fandaws.com/ontology/apqc#P11058
 ex:P11058 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -3742,7 +3742,7 @@ ex:P11058 rdf:type owl:Class ;
           skos:example "The legal team receives the finance-approved budget for an outside-counsel engagement." .
 
 
-###  http://example.org/apqc#P11059
+###  https://fandaws.com/ontology/apqc#P11059
 ex:P11059 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3766,7 +3766,7 @@ ex:P11059 rdf:type owl:Class ;
           skos:example "In-house counsel logs and verifies a law firm's filed briefs and billed hours before approving fees." .
 
 
-###  http://example.org/apqc#P11060
+###  https://fandaws.com/ontology/apqc#P11060
 ex:P11060 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfPayment ,
                           [ rdf:type owl:Restriction ;
@@ -3794,7 +3794,7 @@ ex:P11060 rdf:type owl:Class ;
           skos:example "Accounts payable settles an outside-counsel invoice for litigation services and logs the remittance." .
 
 
-###  http://example.org/apqc#P11061
+###  https://fandaws.com/ontology/apqc#P11061
 ex:P11061 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3810,7 +3810,7 @@ ex:P11061 rdf:type owl:Class ;
           skos:example "The legal operations team maintains a register of active matters and outcomes." .
 
 
-###  http://example.org/apqc#P11062
+###  https://fandaws.com/ontology/apqc#P11062
 ex:P11062 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -3826,7 +3826,7 @@ ex:P11062 rdf:type owl:Class ;
           skos:example "The IP office files and renews patents and pursues infringers of company trademarks." .
 
 
-###  http://example.org/apqc#P11063
+###  https://fandaws.com/ontology/apqc#P11063
 ex:P11063 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3842,7 +3842,7 @@ ex:P11063 rdf:type owl:Class ;
           skos:example "Legal drafts the company policy governing third-party use of its patents." .
 
 
-###  http://example.org/apqc#P11064
+###  https://fandaws.com/ontology/apqc#P11064
 ex:P11064 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3858,7 +3858,7 @@ ex:P11064 rdf:type owl:Class ;
           skos:example "Legal demarcates the standard royalty and field-of-use terms for licensing company patents." .
 
 
-###  http://example.org/apqc#P11065
+###  https://fandaws.com/ontology/apqc#P11065
 ex:P11065 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3874,7 +3874,7 @@ ex:P11065 rdf:type owl:Class ;
           skos:example "The IP office exercises a renewal option on a favorable inbound licensing agreement." .
 
 
-###  http://example.org/apqc#P11066
+###  https://fandaws.com/ontology/apqc#P11066
 ex:P11066 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfRelationshipManagement ,
                           [ rdf:type owl:Restriction ;
@@ -3890,7 +3890,7 @@ ex:P11066 rdf:type owl:Class ;
           skos:example "A community-affairs team runs a neighbourhood sponsorship program and meets with local leaders to build goodwill." .
 
 
-###  http://example.org/apqc#P11067
+###  https://fandaws.com/ontology/apqc#P11067
 ex:P11067 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfRelationshipManagement ,
                           [ rdf:type owl:Restriction ;
@@ -3906,7 +3906,7 @@ ex:P11067 rdf:type owl:Class ;
           skos:example "A PR officer pitches a feature story to a journalist and cultivates an ongoing media contact list." .
 
 
-###  http://example.org/apqc#P11068
+###  https://fandaws.com/ontology/apqc#P11068
 ex:P11068 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAdvocacy ,
                           [ rdf:type owl:Restriction ;
@@ -3922,7 +3922,7 @@ ex:P11068 rdf:type owl:Class ;
           skos:example "A corporate-affairs unit funds a local civic-engagement platform and partners with a municipal authority to support regional stability." .
 
 
-###  http://example.org/apqc#P11069
+###  https://fandaws.com/ontology/apqc#P11069
 ex:P11069 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -3938,7 +3938,7 @@ ex:P11069 rdf:type owl:Class ;
           skos:example "A communications writer drafts a press release announcing a new product launch." .
 
 
-###  http://example.org/apqc#P11070
+###  https://fandaws.com/ontology/apqc#P11070
 ex:P11070 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000588 ,
                           [ rdf:type owl:Restriction ;
@@ -3958,7 +3958,7 @@ ex:P11070 rdf:type owl:Class ;
           skos:example "A PR team distributes a finalized press release to wire services, newspapers, and the corporate social-media channels." .
 
 
-###  http://example.org/apqc#P12869
+###  https://fandaws.com/ontology/apqc#P12869
 ex:P12869 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3978,7 +3978,7 @@ ex:P12869 rdf:type owl:Class ;
           skos:example "A government-affairs team rates the strength of the firm's ties to local, regional, and national government." .
 
 
-###  http://example.org/apqc#P12870
+###  https://fandaws.com/ontology/apqc#P12870
 ex:P12870 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3998,7 +3998,7 @@ ex:P12870 rdf:type owl:Class ;
           skos:example "A CEO assigns a VP of Government Affairs to own the relationship with a regulatory ministry." .
 
 
-###  http://example.org/apqc#P12871
+###  https://fandaws.com/ontology/apqc#P12871
 ex:P12871 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4018,7 +4018,7 @@ ex:P12871 rdf:type owl:Class ;
           skos:example "A liaison reviews recent interactions and reports the health of each government relationship quarterly." .
 
 
-###  http://example.org/apqc#P12872
+###  https://fandaws.com/ontology/apqc#P12872
 ex:P12872 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -4038,7 +4038,7 @@ ex:P12872 rdf:type owl:Class ;
           skos:example "A government-affairs lead solicits guidance from an internal advisory committee before a policy push." .
 
 
-###  http://example.org/apqc#P12873
+###  https://fandaws.com/ontology/apqc#P12873
 ex:P12873 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -4058,7 +4058,7 @@ ex:P12873 rdf:type owl:Class ;
           skos:example "A firm retains an external lobbying advisor whose recommendations feed its government-relations plan." .
 
 
-###  http://example.org/apqc#P12874
+###  https://fandaws.com/ontology/apqc#P12874
 ex:P12874 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfRelationshipManagement ,
                           [ rdf:type owl:Restriction ;
@@ -4074,7 +4074,7 @@ ex:P12874 rdf:type owl:Class ;
           skos:example "A government-affairs director liaises with a ministry's representatives to discuss a pending regulation." .
 
 
-###  http://example.org/apqc#P12875
+###  https://fandaws.com/ontology/apqc#P12875
 ex:P12875 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfRelationshipManagement ,
                           [ rdf:type owl:Restriction ;
@@ -4090,7 +4090,7 @@ ex:P12875 rdf:type owl:Class ;
           skos:example "A compliance team formally registers with a quasi-governmental regulator to gain recognized standing." .
 
 
-###  http://example.org/apqc#P12876
+###  https://fandaws.com/ontology/apqc#P12876
 ex:P12876 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -4110,7 +4110,7 @@ ex:P12876 rdf:type owl:Class ;
           skos:example "A finance team supplies documentation in response to a regulator's audit inquiry." .
 
 
-###  http://example.org/apqc#P12877
+###  https://fandaws.com/ontology/apqc#P12877
 ex:P12877 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -4126,7 +4126,7 @@ ex:P12877 rdf:type owl:Class ;
           skos:example "A relationship manager keeps a CRM repository of agency contacts current through routine reviews." .
 
 
-###  http://example.org/apqc#P12878
+###  https://fandaws.com/ontology/apqc#P12878
 ex:P12878 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfRelationshipManagement ,
                           [ rdf:type owl:Restriction ;
@@ -4146,7 +4146,7 @@ ex:P12878 rdf:type owl:Class ;
           skos:example "A liaison holds quarterly meetings with a quasi-governmental body and logs the discussion for later analysis." .
 
 
-###  http://example.org/apqc#P12879
+###  https://fandaws.com/ontology/apqc#P12879
 ex:P12879 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4166,7 +4166,7 @@ ex:P12879 rdf:type owl:Class ;
           skos:example "A partnerships team documents the membership and participation requirements needed to join an industry consortium." .
 
 
-###  http://example.org/apqc#P12880
+###  https://fandaws.com/ontology/apqc#P12880
 ex:P12880 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4186,7 +4186,7 @@ ex:P12880 rdf:type owl:Class ;
           skos:example "A partnerships lead reviews engagement metrics and reports whether each industry-group relationship is on track." .
 
 
-###  http://example.org/apqc#P12881
+###  https://fandaws.com/ontology/apqc#P12881
 ex:P12881 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfRelationshipManagement ,
                           [ rdf:type owl:Restriction ;
@@ -4202,7 +4202,7 @@ ex:P12881 rdf:type owl:Class ;
           skos:example "A partnerships team upgrades the firm's membership tier in an industry association and notifies the counterpart." .
 
 
-###  http://example.org/apqc#PaymentInstrument
+###  https://fandaws.com/ontology/apqc#PaymentInstrument
 ex:PaymentInstrument rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000537 ;
                      rdfs:comment "Material participant of the Act of Payment in 12.4.5.5 (Process payment for legal services): the transferred MONEY moved by the act (obo:BFO_0000057), never the act, while the act's informational has-output is the separate Descriptive ICE ex:PaymentRecord (process outputs in this domain are ICEs, S3). Renamed from ex:Payment and re-anchored to cco:ont00000537 to mirror slice 9 and match CCO's treatment of money as a Financial Instrument (cf. Portion of Cash cco:ont00000475 subClassOf 537)." ;
@@ -4210,7 +4210,7 @@ ex:PaymentInstrument rdf:type owl:Class ;
                      skos:definition "A Financial Instrument consisting of a quantity of money (cash or funds) transferred from one Agent to another in settlement of an obligation or exchange." .
 
 
-###  http://example.org/apqc#PaymentRecord
+###  https://fandaws.com/ontology/apqc#PaymentRecord
 ex:PaymentRecord rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000853 ;
                  rdfs:comment "Definitional informational output of 12.4.5.5 (Process payment for legal services). The remittance/payment record is the ICE output of the act; the transferred money itself is the material entity ex:PaymentInstrument, modeled as a definitional participant rather than as an informational output (per S3 OutputIsICE: process outputs in this domain are ICEs)." ;
@@ -4218,7 +4218,7 @@ ex:PaymentRecord rdf:type owl:Class ;
                  skos:definition "A Descriptive Information Content Entity that records a payment made to a service provider in settlement of an obligation, including payer, payee, amount, and the invoice settled." .
 
 
-###  http://example.org/apqc#PressRelease
+###  https://fandaws.com/ontology/apqc#PressRelease
 ex:PressRelease rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:comment "Output of 12.5.4 (Create press releases) and subject of 12.5.5 (Issue press releases)." ;
@@ -4226,7 +4226,7 @@ ex:PressRelease rdf:type owl:Class ;
                 skos:definition "A Descriptive Information Content Entity that describes an official statement issued to the media to announce a newsworthy development of an organization." .
 
 
-###  http://example.org/apqc#PreventiveLawProgram
+###  https://fandaws.com/ontology/apqc#PreventiveLawProgram
 ex:PreventiveLawProgram rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000965 ;
                         rdfs:comment "Output of 12.4.3 (Develop and perform preventive law programs)." ;
@@ -4234,7 +4234,7 @@ ex:PreventiveLawProgram rdf:type owl:Class ;
                         skos:definition "A Directive Information Content Entity that prescribes programs and activities encouraging adherence to preventive laws such as environmental, corporate-compliance, and property-transaction law." .
 
 
-###  http://example.org/apqc#PublicRelationsCapability
+###  https://fandaws.com/ontology/apqc#PublicRelationsCapability
 ex:PublicRelationsCapability rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000568 ,
                                              [ rdf:type owl:Restriction ;
@@ -4262,7 +4262,7 @@ ex:PublicRelationsCapability rdf:type owl:Class ;
                              skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to manage its public image and relationships with the community, media, and the public." .
 
 
-###  http://example.org/apqc#QuasiGovernmentBody
+###  https://fandaws.com/ontology/apqc#QuasiGovernmentBody
 ex:QuasiGovernmentBody rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001180 ,
                                        [ rdf:type owl:Restriction ;
@@ -4274,14 +4274,14 @@ ex:QuasiGovernmentBody rdf:type owl:Class ;
                        skos:definition "An Organization that bears a quasi-government-body role in virtue of operating under government supervision while remaining distinct and self-directed from the government." .
 
 
-###  http://example.org/apqc#QuasiGovernmentBodyRole
+###  https://fandaws.com/ontology/apqc#QuasiGovernmentBodyRole
 ex:QuasiGovernmentBodyRole rdf:type owl:Class ;
                            rdfs:subClassOf obo:BFO_0000023 ;
                            rdfs:label "Quasi-Government Body Role" ;
                            skos:definition "A Role that is borne by an Organization in virtue of operating under government supervision while remaining distinct and self-directed from the government." .
 
 
-###  http://example.org/apqc#RegulatoryAuthority
+###  https://fandaws.com/ontology/apqc#RegulatoryAuthority
 ex:RegulatoryAuthority rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001180 ,
                                        [ rdf:type owl:Restriction ;
@@ -4293,14 +4293,14 @@ ex:RegulatoryAuthority rdf:type owl:Class ;
                        skos:definition "An Organization that bears a regulatory-authority role in virtue of issuing and enforcing statutes, regulatory directions, or legal principles binding on an organization." .
 
 
-###  http://example.org/apqc#RegulatoryAuthorityRole
+###  https://fandaws.com/ontology/apqc#RegulatoryAuthorityRole
 ex:RegulatoryAuthorityRole rdf:type owl:Class ;
                            rdfs:subClassOf obo:BFO_0000023 ;
                            rdfs:label "Regulatory Authority Role" ;
                            skos:definition "A Role that is borne by an Organization in virtue of issuing and enforcing statutes or regulatory directions binding on a focal organization." .
 
 
-###  http://example.org/apqc#RegulatoryRequirement
+###  https://fandaws.com/ontology/apqc#RegulatoryRequirement
 ex:RegulatoryRequirement rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ;
                          rdfs:comment "Directive (not Descriptive): it prescribes obligations. Input for 12.4.4 (Ensure compliance), 12.4.3 (preventive law programs)." ;
@@ -4308,7 +4308,7 @@ ex:RegulatoryRequirement rdf:type owl:Class ;
                          skos:definition "A Directive Information Content Entity that prescribes a statute, regulatory direction, or legal principle with which an organization must comply." .
 
 
-###  http://example.org/apqc#RelationshipAssessment
+###  https://fandaws.com/ontology/apqc#RelationshipAssessment
 ex:RelationshipAssessment rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:comment "Output of 12.2.1.1 (Assess relationships). The subject (the external-party relationship) is named in the definition; no formal 'is about' (cco:ont00001808) restriction is asserted because no reality-layer relationship class exists in the slice, and the only candidate filler ex:RelationshipData is the Descriptive ICE consumed as this act's has-input -- pointing is-about at the input data would mis-state the subject as the data rather than the relationship." ;
@@ -4316,7 +4316,7 @@ ex:RelationshipAssessment rdf:type owl:Class ;
                           skos:definition "A Descriptive Information Content Entity that describes a judgement of the state of an organization's relationship with an external party and areas needing growth." .
 
 
-###  http://example.org/apqc#RelationshipData
+###  https://fandaws.com/ontology/apqc#RelationshipData
 ex:RelationshipData rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:comment "Input for assessing/monitoring relationships (12.2.1.1, 12.2.1.3, 12.2.3.2)." ;
@@ -4324,7 +4324,7 @@ ex:RelationshipData rdf:type owl:Class ;
                     skos:definition "A Descriptive Information Content Entity that describes the current state of an organization's relationship with an external party." .
 
 
-###  http://example.org/apqc#RelationshipStatusReport
+###  https://fandaws.com/ontology/apqc#RelationshipStatusReport
 ex:RelationshipStatusReport rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:comment "Output of monitoring rows (12.2.1.3 Monitor relationships, 12.2.3.2 Monitor partnership success). The subject (the monitored external-party relationships) is named in the definition; no formal 'is about' (cco:ont00001808) restriction is asserted -- the only candidate filler ex:RelationshipData is these acts' has-input, so an is-about to it would mis-state the subject as the input data." ;
@@ -4332,7 +4332,7 @@ ex:RelationshipStatusReport rdf:type owl:Class ;
                             skos:definition "A Descriptive Information Content Entity that describes the current standing of an organization's relationships as observed through ongoing monitoring." .
 
 
-###  http://example.org/apqc#Shareholder
+###  https://fandaws.com/ontology/apqc#Shareholder
 ex:Shareholder rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00001017 ,
                                [ rdf:type owl:Restriction ;
@@ -4344,7 +4344,7 @@ ex:Shareholder rdf:type owl:Class ;
                skos:definition "An Agent that bears a shareholder role in virtue of holding an equity interest in an organization." .
 
 
-###  http://example.org/apqc#ShareholderCommunication
+###  https://fandaws.com/ontology/apqc#ShareholderCommunication
 ex:ShareholderCommunication rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:comment "Subject of 12.1.3 (Communicate with shareholders)." ;
@@ -4352,14 +4352,14 @@ ex:ShareholderCommunication rdf:type owl:Class ;
                             skos:definition "A Descriptive Information Content Entity that describes information conveyed to shareholders, such as a shareholders' letter, earnings-call statement, or meeting briefing." .
 
 
-###  http://example.org/apqc#ShareholderRole
+###  https://fandaws.com/ontology/apqc#ShareholderRole
 ex:ShareholderRole rdf:type owl:Class ;
                    rdfs:subClassOf obo:BFO_0000023 ;
                    rdfs:label "Shareholder Role" ;
                    skos:definition "A Role that is borne by an Agent in virtue of holding an equity interest in a focal organization." .
 
 
-###  http://example.org/apqc#StakeholderRelationshipManagementCapability
+###  https://fandaws.com/ontology/apqc#StakeholderRelationshipManagementCapability
 ex:StakeholderRelationshipManagementCapability rdf:type owl:Class ;
                                                rdfs:subClassOf cco:ont00000568 ;
                                                rdfs:comment "Shared capability for the 'Manage/Build ... relations' standing-function rows (12.1, 12.2.x, 12.3, 12.5.x), realized in the relevant relationship-management acts via obo:BFO_0000054 (realized in)." ;
@@ -4367,7 +4367,7 @@ ex:StakeholderRelationshipManagementCapability rdf:type owl:Class ;
                                                skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to build and maintain relationships with external stakeholders such as investors, government bodies, and the public." .
 
 
-###  http://example.org/apqc#TradeOrIndustryGroup
+###  https://fandaws.com/ontology/apqc#TradeOrIndustryGroup
 ex:TradeOrIndustryGroup rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00001180 ,
                                         [ rdf:type owl:Restriction ;
@@ -4379,14 +4379,14 @@ ex:TradeOrIndustryGroup rdf:type owl:Class ;
                         skos:definition "An Organization that bears a trade-or-industry-group role in virtue of being established and financed by businesses operating in a specific industry." .
 
 
-###  http://example.org/apqc#TradeOrIndustryGroupRole
+###  https://fandaws.com/ontology/apqc#TradeOrIndustryGroupRole
 ex:TradeOrIndustryGroupRole rdf:type owl:Class ;
                             rdfs:subClassOf obo:BFO_0000023 ;
                             rdfs:label "Trade or Industry Group Role" ;
                             skos:definition "A Role that is borne by an Organization in virtue of being established and financed by businesses operating in a specific industry." .
 
 
-###  http://example.org/apqc#WorkProductDeliverable
+###  https://fandaws.com/ontology/apqc#WorkProductDeliverable
 ex:WorkProductDeliverable rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:comment "Minted for 12.4.5.4: no other shared-vocab ICE captures counsel deliverables together with committed-effort records used to confirm fees. Genus Descriptive ICE because it records what was delivered/performed. Used ONLY as the has-input (received deliverable) of 12.4.5.4; the validated effort/fee record that act produces is the distinct ex:WorkProductValidationRecord." ;
@@ -4395,7 +4395,7 @@ ex:WorkProductDeliverable rdf:type owl:Class ;
                           skos:example "A memorandum and timesheet delivered by outside counsel on a litigation matter." .
 
 
-###  http://example.org/apqc#WorkProductValidationRecord
+###  https://fandaws.com/ontology/apqc#WorkProductValidationRecord
 ex:WorkProductValidationRecord rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000853 ;
                                rdfs:comment "Minted for 12.4.5.4 (P11059) as the definitional OUTPUT of the monitoring act, distinct from its has-input ex:WorkProductDeliverable (the raw received deliverable). Separating input and output ICEs corrects the Gate-F finding that the same class was asserted as both has-input and has-output (a vacuous distinction / thin-class over-commitment)." ;
@@ -4404,7 +4404,7 @@ ex:WorkProductValidationRecord rdf:type owl:Class ;
                                skos:example "A signed-off matter ledger confirming the briefs filed and billable hours verified before fee approval." .
 
 
-###  http://example.org/apqc#WorkRequirementsSpecification
+###  https://fandaws.com/ontology/apqc#WorkRequirementsSpecification
 ex:WorkRequirementsSpecification rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000965 ;
                                  rdfs:comment "Output of 12.4.5.1 (Assess problem and determine work requirements) and 12.2.3.1 (Evaluate the requirements for strategic relationships). Directive: it specifies required actions." ;

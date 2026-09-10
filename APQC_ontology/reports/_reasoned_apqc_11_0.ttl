@@ -1,5 +1,5 @@
-@prefix : <http://example.org/apqc/slice/11.0#> .
-@prefix ex: <http://example.org/apqc#> .
+@prefix : <https://fandaws.com/ontology/apqc/slice/11.0#> .
+@prefix ex: <https://fandaws.com/ontology/apqc#> .
 @prefix cco: <https://www.commoncoreontologies.org/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
@@ -7,12 +7,12 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix apqc: <http://example.org/apqc/scheme#> .
+@prefix apqc: <https://fandaws.com/ontology/apqc/scheme#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <http://example.org/apqc/slice/11.0> .
+@base <https://fandaws.com/ontology/apqc/slice/11.0> .
 
-<http://example.org/apqc/slice/11.0> rdf:type owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/11.0> rdf:type owl:Ontology ;
                                       dct:source "APQC Process Classification Framework (Cross-Industry)" ;
                                       dct:title "APQC reality-layer slice 11.0: Manage Enterprise Risk, Compliance, Remediation, and Resiliency" ;
                                       rdfs:comment "Reality-layer module for APQC section 11.0. CCO pin v2.0 (2024-11-06). Modeling rules per ADR-001 (two-layer model, R5 bounded-occurrent test, GOLDEN PRINCIPLE). The ex:PCF_<pcfID> catalog nodes referenced by the bridges below are declared and typed in apqc-catalog.ttl. Self-contained: the shared act genera it uses are inlined from the apqc-ext.ttl registry, so it validates standalone against the pinned CCO/BFO closure with no extension merge." ;
@@ -22,25 +22,25 @@
 #    Annotation properties
 #################################################################
 
-###  http://example.org/apqc#apqcSourceText
+###  https://fandaws.com/ontology/apqc#apqcSourceText
 ex:apqcSourceText rdf:type owl:AnnotationProperty ;
                   rdfs:comment "Verbatim APQC Element Description retained for provenance." ;
                   rdfs:label "APQC source description" .
 
 
-###  http://example.org/apqc#designatesProcessType
+###  https://fandaws.com/ontology/apqc#designatesProcessType
 ex:designatesProcessType rdf:type owl:AnnotationProperty ;
                          rdfs:comment "Bridges a catalog node (ex:PCF_<pcfID>) to its reality-layer class (ex:P<pcfID> or a supporting capability). The catalog nodes themselves are declared and typed (owl:NamedIndividual, cco:ont00000853 Descriptive ICE, skos:Concept) in apqc-catalog.ttl. An ANNOTATION property is used (not an object property) deliberately, to keep the slice in OWL DL and avoid ICE-to-class punning (ADR-001 R4)." ;
                          rdfs:label "designates process type" .
 
 
-###  http://example.org/apqc#hierarchyID
+###  https://fandaws.com/ontology/apqc#hierarchyID
 ex:hierarchyID rdf:type owl:AnnotationProperty ;
                rdfs:comment "Positional dotted-decimal locator. NON-STABLE across PCF versions. Reference only; never for IRI minting or subsumption." ;
                rdfs:label "APQC Hierarchy ID" .
 
 
-###  http://example.org/apqc#pcfID
+###  https://fandaws.com/ontology/apqc#pcfID
 ex:pcfID rdf:type owl:AnnotationProperty ;
          rdfs:comment "Stable APQC identifier. Anchor IRIs to this; it persists across PCF versions." ;
          rdfs:label "APQC PCF ID" .
@@ -2630,7 +2630,7 @@ cco:ont00001773 rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
-###  http://example.org/apqc#ActOfAnalysis
+###  https://fandaws.com/ontology/apqc#ActOfAnalysis
 ex:ActOfAnalysis rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000366 ;
                  rdfs:comment "Local extension (D9). CCO 2.0 has no generic analysis class; analysis is information processing, so it is anchored under cco:ont00000366." ;
@@ -2638,7 +2638,7 @@ ex:ActOfAnalysis rdf:type owl:Class ;
                  skos:definition "An Act of Information Processing in which an Agent examines one or more input Information Content Entities and produces an Information Content Entity that represents an understanding of their subject matter." .
 
 
-###  http://example.org/apqc#ActOfFormulation
+###  https://fandaws.com/ontology/apqc#ActOfFormulation
 ex:ActOfFormulation rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000511 ;
                     rdfs:comment "Local extension (D9). Anchored under cco:ont00000511 (Act of Planning) because formulating a strategy/mission/design is making a plan to achieve an objective; its output is a Directive ICE. Recurs across develop/define/compose-a-directive processes corpus-wide." ;
@@ -2646,7 +2646,7 @@ ex:ActOfFormulation rdf:type owl:Class ;
                     skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." .
 
 
-###  http://example.org/apqc#ActOfIdentification
+###  https://fandaws.com/ontology/apqc#ActOfIdentification
 ex:ActOfIdentification rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000366 ;
                        rdfs:comment "Local extension (D9). NOT cco:ont00001261 'Act of Identifying' (a communication act). APQC 'Identify ...' denotes discernment, i.e. information processing." ;
@@ -2654,7 +2654,7 @@ ex:ActOfIdentification rdf:type owl:Class ;
                        skos:definition "An Act of Information Processing in which an Agent discerns and enumerates entities of a given kind and produces an Information Content Entity that registers them." .
 
 
-###  http://example.org/apqc#ActOfInvestigation
+###  https://fandaws.com/ontology/apqc#ActOfInvestigation
 ex:ActOfInvestigation rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000366 ;
                       rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic investigation/examination class. Anchored under cco:ont00000366 (Act of Information Processing) because investigation gathers and manipulates evidence into a Descriptive findings ICE (GOLDEN PRINCIPLE). Distinct from ex:ActOfAnalysis (examines GIVEN input ICEs) in that investigation also acquires the evidence; retained as a separate genus because 'investigate' recurs as a distinct verb. Rejected cco:ont00000636 (Act of Appraisal: judges value/condition, not factual examination of causes) and cco:ont00000151 (Act of Reporting: a communication act). Recurs in audit/forensics/incident categories (11.0)." ;
@@ -2662,7 +2662,7 @@ ex:ActOfInvestigation rdf:type owl:Class ;
                       skos:definition "An Act of Information Processing in which an Agent systematically examines and gathers evidence about a situation, framework, or cause in order to produce a Descriptive Information Content Entity that establishes the relevant facts." .
 
 
-###  http://example.org/apqc#ActOfMonitoring
+###  https://fandaws.com/ontology/apqc#ActOfMonitoring
 ex:ActOfMonitoring rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000366 ;
                    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic monitoring/tracking class. Anchored under cco:ont00000366 (Act of Information Processing) because monitoring ingests repeated observations (including electronic records, not only senses) and yields a descriptive status/deviation ICE -- the GOLDEN PRINCIPLE (descriptive output => information-processing genus) holds. Rejected cco:ont00000037 (Act of Observation: a single sense-based acquisition, too narrow -- monitoring also processes ICEs and is sustained); cco:ont00000636 (Act of Appraisal: renders a single bounded value/quality judgement rather than tracking status over time); and cco:ont00000345 (Act of Measuring: a single quantification against a standard at one time -- at most a method sub-step of the monitoring cycle; a node that is purely one quantification, e.g. Calculate performance measures, anchors to cco:ont00000345 directly, not here). Distinct from ex:ActOfAnalysis (one-shot examination of a fixed input set) by its continuous, longitudinal character. A standing 'Manage/Monitor X' function with no natural end is an Organization Capability (cco:ont00000568) realized in such acts, not itself a process. Recurs corpus-wide (slices 3.0/4.0/5.0/6.0/8.0/9.0/10.0/11.0/12.0/13.0). Reconciled from 10 divergent slice restatements to one definition." ;
@@ -2670,7 +2670,7 @@ ex:ActOfMonitoring rdf:type owl:Class ;
                    skos:definition "An Act of Information Processing in which an Agent repeatedly or continuously observes the state, progress, or performance of some process, system, or quantity over time and produces a Descriptive Information Content Entity that represents its tracked status against expected conditions, targets, or requirements." .
 
 
-###  http://example.org/apqc#ActOfReporting
+###  https://fandaws.com/ontology/apqc#ActOfReporting
 ex:ActOfReporting rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000379 ;
                   rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no broad reporting class spanning compilation and assertion. Anchored under cco:ont00000379 (Act of Representative Communication), with cco:ont00000228 (Planned Act) co-anchored so standalone SHACL resolves the act chain: reporting transfers to recipients a descriptive account (report, statement, scorecard, filing) asserting an organization's condition or results. Pure submission of an already-prepared report may use the verified leaf cco:ont00000151 directly." ;
@@ -2678,7 +2678,7 @@ ex:ActOfReporting rdf:type owl:Class ;
                   skos:definition "An Act of Representative Communication in which an Agent transfers to one or more recipients a Descriptive Information Content Entity (such as a report, statement, scorecard, or filing) that asserts, as true, a representation of an organization's condition or results." .
 
 
-###  http://example.org/apqc#ActOfSelection
+###  https://fandaws.com/ontology/apqc#ActOfSelection
 ex:ActOfSelection rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000366 ;
                   rdfs:comment "Local extension (D9). Anchored under cco:ont00000366 (Act of Information Processing): receives candidate-option ICEs and yields a decision ICE. Distinct from Act of Appraisal (judges without committing) and Act of Planning. NOTE: ratifying a single already-settled option is NOT selection (no candidate set) -- anchor such acts at cco:ont00000228 (Planned Act)." ;
@@ -2686,7 +2686,7 @@ ex:ActOfSelection rdf:type owl:Class ;
                   skos:definition "An Act of Information Processing in which an Agent chooses one or more options from a set of candidates and produces a Directive Information Content Entity that prescribes the chosen option(s)." .
 
 
-###  http://example.org/apqc#ActOfVerification
+###  https://fandaws.com/ontology/apqc#ActOfVerification
 ex:ActOfVerification rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000636 ;
                      rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic verification/checking/testing class. Anchored under cco:ont00000636 (Act of Appraisal): verification checks a product, service, solution, system, plan, control, or process against specified requirements and produces a descriptive judgement. Many verification acts also have an information-processing character, but Act of Appraisal is the canonical genus for this corpus." ;
@@ -2694,7 +2694,7 @@ ex:ActOfVerification rdf:type owl:Class ;
                      skos:definition "An Act of Appraisal in which an Agent subjects a product, service, solution, system, plan, control, or process to a test, audit, trial, or review against specified requirements and produces a Descriptive Information Content Entity that records whether and to what extent the requirements are met." .
 
 
-###  http://example.org/apqc#ApplicableRequirementsDetermination
+###  https://fandaws.com/ontology/apqc#ApplicableRequirementsDetermination
 ex:ApplicableRequirementsDetermination rdf:type owl:Class ;
                                        rdfs:subClassOf cco:ont00000853 ,
                                                        [ rdf:type owl:Restriction ;
@@ -2706,7 +2706,7 @@ ex:ApplicableRequirementsDetermination rdf:type owl:Class ;
                                        skos:definition "A Descriptive Information Content Entity, about one or more regulatory requirements, that describes which of the candidate body of regulation applies to the organization." .
 
 
-###  http://example.org/apqc#BusinessContinuityPlan
+###  https://fandaws.com/ontology/apqc#BusinessContinuityPlan
 ex:BusinessContinuityPlan rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000965 ;
                           rdfs:comment "Output of 11.4.2 (perform continuous business operations planning); subject of 11.4.3 (test) and 11.4.4 (maintain). Directive: prescribes continuity actions." ;
@@ -2714,7 +2714,7 @@ ex:BusinessContinuityPlan rdf:type owl:Class ;
                           skos:definition "A Directive Information Content Entity that prescribes the arrangements ensuring continuous business operations are maintained, including during disruption or emergency." .
 
 
-###  http://example.org/apqc#BusinessOperationsEvaluation
+###  https://fandaws.com/ontology/apqc#BusinessOperationsEvaluation
 ex:BusinessOperationsEvaluation rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ;
                                 rdfs:comment "Output of 11.4.4 (maintain continuous business operations -- the text is evaluative)." ;
@@ -2722,7 +2722,7 @@ ex:BusinessOperationsEvaluation rdf:type owl:Class ;
                                 skos:definition "A Descriptive Information Content Entity that describes a judgement of an organization's continuous business operations, including which activities generate revenue, perform best, and provide good returns." .
 
 
-###  http://example.org/apqc#BusinessResilienceStrategy
+###  https://fandaws.com/ontology/apqc#BusinessResilienceStrategy
 ex:BusinessResilienceStrategy rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:comment "Output of 11.4.1 (develop the business resilience strategy), produced by ex:ActOfFormulation (reused from ext)." ;
@@ -2730,7 +2730,7 @@ ex:BusinessResilienceStrategy rdf:type owl:Class ;
                               skos:definition "A Directive Information Content Entity that prescribes an organization's integrated approach for rapidly adapting and responding to internal or external opportunities, demands, disruptions, or threats while protecting employees, assets, and brand equity." .
 
 
-###  http://example.org/apqc#BusinessResiliencyCapability
+###  https://fandaws.com/ontology/apqc#BusinessResiliencyCapability
 ex:BusinessResiliencyCapability rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000568 ,
                                                 [ rdf:type owl:Restriction ;
@@ -2763,7 +2763,7 @@ ex:BusinessResiliencyCapability rdf:type owl:Class ;
                                 skos:example "An enterprise's standing ability to keep critical operations running and recover quickly during a regional outage." .
 
 
-###  http://example.org/apqc#ComplianceAssessment
+###  https://fandaws.com/ontology/apqc#ComplianceAssessment
 ex:ComplianceAssessment rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:comment "Shared output of appraisal acts in 11.2.2.4 and input to control-implementation acts (11.2.2.5)." ;
@@ -2771,7 +2771,7 @@ ex:ComplianceAssessment rdf:type owl:Class ;
                         skos:definition "A Descriptive Information Content Entity that describes a judgement of an organization's current compliance position against applicable regulations, including identified weaknesses, shortfalls, and necessary changes." .
 
 
-###  http://example.org/apqc#ComplianceControl
+###  https://fandaws.com/ontology/apqc#ComplianceControl
 ex:ComplianceControl rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:comment "Output/subject of 11.2.2.5 (implement missing or stronger controls) and 11.2.1.4 (controls-related technologies and tools). Directive: a control prescribes required behaviour." ;
@@ -2779,7 +2779,7 @@ ex:ComplianceControl rdf:type owl:Class ;
                      skos:definition "A Directive Information Content Entity that prescribes a control, safeguard, or check implemented to ensure regulatory compliance and the security of an organization's information and processes." .
 
 
-###  http://example.org/apqc#ComplianceManagementCapability
+###  https://fandaws.com/ontology/apqc#ComplianceManagementCapability
 ex:ComplianceManagementCapability rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000568 ,
                                                   [ rdf:type owl:Restriction ;
@@ -2791,7 +2791,7 @@ ex:ComplianceManagementCapability rdf:type owl:Class ;
                                   skos:definition "An Organization Capability that is realized in acts of establishing compliance frameworks and policies and of managing enduring compliance with industry regulations and government legislation." .
 
 
-###  http://example.org/apqc#ComplianceMonitoringReport
+###  https://fandaws.com/ontology/apqc#ComplianceMonitoringReport
 ex:ComplianceMonitoringReport rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000853 ;
                               rdfs:comment "Output of 11.2.2.6 (monitor and test regulatory compliance position), produced by ex:ActOfVerification (inlined above)." ;
@@ -2799,7 +2799,7 @@ ex:ComplianceMonitoringReport rdf:type owl:Class ;
                               skos:definition "A Descriptive Information Content Entity that describes the observed compliance position of an organization and the robustness of its existing controls, tracked and tested over time against regulatory requirements." .
 
 
-###  http://example.org/apqc#ComplianceOfficer
+###  https://fandaws.com/ontology/apqc#ComplianceOfficer
 ex:ComplianceOfficer rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00001017 ,
                                      [ rdf:type owl:Restriction ;
@@ -2811,14 +2811,14 @@ ex:ComplianceOfficer rdf:type owl:Class ;
                      skos:definition "An Agent that bears a compliance-officer role." .
 
 
-###  http://example.org/apqc#ComplianceOfficerRole
+###  https://fandaws.com/ontology/apqc#ComplianceOfficerRole
 ex:ComplianceOfficerRole rdf:type owl:Class ;
                          rdfs:subClassOf obo:BFO_0000023 ;
                          rdfs:label "Compliance Officer Role" ;
                          skos:definition "A Role that is borne by an Agent in virtue of being tasked with ensuring an organization's enduring compliance with industry regulations and government legislation." .
 
 
-###  http://example.org/apqc#CompliancePolicy
+###  https://fandaws.com/ontology/apqc#CompliancePolicy
 ex:CompliancePolicy rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000965 ;
                     rdfs:comment "Shared output across 11.2.1.1 (enterprise compliance policies) and 11.2.2.1 (regulatory compliance procedures). Directive: prescribes compliance conduct." ;
@@ -2826,7 +2826,7 @@ ex:CompliancePolicy rdf:type owl:Class ;
                     skos:definition "A Directive Information Content Entity that prescribes an organization's standardized approach to ethics and compliance and the procedures for complying with applicable guidelines, provisions, and legislation." .
 
 
-###  http://example.org/apqc#ComplianceReport
+###  https://fandaws.com/ontology/apqc#ComplianceReport
 ex:ComplianceReport rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:comment "Transferred ICE of 11.2.2.8 (compile and communicate internal and regulatory compliance reports): an already-compiled report submitted to regulators, modeled as the `has input` of P19596 (cco:ont00000151 communication/submission act), not its output. Descriptive: it represents compliance state." ;
@@ -2834,7 +2834,7 @@ ex:ComplianceReport rdf:type owl:Class ;
                     skos:definition "A Descriptive Information Content Entity that describes an organization's compliance status for submission to internal stakeholders or regulatory agencies." .
 
 
-###  http://example.org/apqc#ComplianceScorecard
+###  https://fandaws.com/ontology/apqc#ComplianceScorecard
 ex:ComplianceScorecard rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:comment "Output of 11.2.2.7 (compile and communicate compliance scorecards)." ;
@@ -2842,7 +2842,7 @@ ex:ComplianceScorecard rdf:type owl:Class ;
                        skos:definition "A Descriptive Information Content Entity that presents a graphical summary of metrics describing the general health of an organization with respect to risk and compliance." .
 
 
-###  http://example.org/apqc#ContaminatedMaterial
+###  https://fandaws.com/ontology/apqc#ContaminatedMaterial
 ex:ContaminatedMaterial rdf:type owl:Class ;
                         rdfs:subClassOf obo:BFO_0000040 ;
                         rdfs:comment "Material subject of 11.3 remediation. Anchored at BFO material entity (obo:BFO_0000040) rather than a 'Portion of Waste Material' class (processed material the user wants to dispose of) because contaminated soil/water/site is not necessarily processed waste; the relevant fact is its adulterated state. The remediation PLAN and POLICY are separate informational artifacts (Directive ICEs)." ;
@@ -2850,7 +2850,7 @@ ex:ContaminatedMaterial rdf:type owl:Class ;
                         skos:definition "A Material Entity that has been subject to environmental adulteration and that remediation efforts seek to identify and treat so that the affected area becomes operational again." .
 
 
-###  http://example.org/apqc#ContinuityTestResult
+###  https://fandaws.com/ontology/apqc#ContinuityTestResult
 ex:ContinuityTestResult rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:comment "Output of 11.4.3 (test continuous business operations), produced by ex:ActOfVerification (inlined above)." ;
@@ -2858,7 +2858,7 @@ ex:ContinuityTestResult rdf:type owl:Class ;
                         skos:definition "A Descriptive Information Content Entity that describes the results of assessing whether continuous business operations perform as intended under test conditions." .
 
 
-###  http://example.org/apqc#ControlsTechnologyMaintenanceCapability
+###  https://fandaws.com/ontology/apqc#ControlsTechnologyMaintenanceCapability
 ex:ControlsTechnologyMaintenanceCapability rdf:type owl:Class ;
                                            rdfs:subClassOf cco:ont00000568 ;
                                            rdfs:comment "Reality-layer correlate of APQC 11.2.1.4 (PCF 14137), a standing 'Maintain' function with no natural end; modeled as a capability (R5/R6) rather than a process." ;
@@ -2866,7 +2866,7 @@ ex:ControlsTechnologyMaintenanceCapability rdf:type owl:Class ;
                                            skos:definition "An Organization Capability that inheres in an organization in virtue of its capacity to manage and maintain the technologies and tools that safeguard the confidentiality, integrity, and availability of its information." .
 
 
-###  http://example.org/apqc#DamageCauseAnalysis
+###  https://fandaws.com/ontology/apqc#DamageCauseAnalysis
 ex:DamageCauseAnalysis rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ,
                                        [ rdf:type owl:Restriction ;
@@ -2878,7 +2878,7 @@ ex:DamageCauseAnalysis rdf:type owl:Class ;
                        skos:definition "A Descriptive Information Content Entity, about an instance of damage, that describes a study of the environmental, physical, or social causes of that damage in order to inform better policies and regulations." .
 
 
-###  http://example.org/apqc#DamagedMaterialEntity
+###  https://fandaws.com/ontology/apqc#DamagedMaterialEntity
 ex:DamagedMaterialEntity rdf:type owl:Class ;
                          rdfs:subClassOf obo:BFO_0000040 ;
                          rdfs:comment "The damaged site or system that is the subject of ex:DamageCauseAnalysis (cco:ont00001808 'is about'). Renamed from ex:Damage so the label matches its BFO category: it is a Material Entity (obo:BFO_0000040) that has undergone harm -- the damaged thing, not the damage condition itself. (If a contributor needs the harm qua condition, model it separately as a BFO Quality borne by this entity.)" ;
@@ -2886,7 +2886,7 @@ ex:DamagedMaterialEntity rdf:type owl:Class ;
                          skos:definition "A Material Entity that has undergone harmful physical, environmental, or social alteration whose causes are studied in order to inform better policies and regulations." .
 
 
-###  http://example.org/apqc#ERMProcessConformanceReport
+###  https://fandaws.com/ontology/apqc#ERMProcessConformanceReport
 ex:ERMProcessConformanceReport rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000853 ;
                                rdfs:comment "Output of 11.1.2.8 (ensure each unit follows the ERM process), produced by ex:ActOfVerification (inlined above). Gate-F mint: a dedicated process-conformance finding ICE replacing the false-friend ex:RiskMonitoringReport (a time-series monitoring artifact) so the verification genus and its output ICE agree. Descriptive (cco:ont00000853)." ;
@@ -2894,7 +2894,7 @@ ex:ERMProcessConformanceReport rdf:type owl:Class ;
                                skos:definition "A Descriptive Information Content Entity that describes the finding of a check of whether each business unit and function follows the enterprise risk management process." .
 
 
-###  http://example.org/apqc#ERMReportingConformanceReport
+###  https://fandaws.com/ontology/apqc#ERMReportingConformanceReport
 ex:ERMReportingConformanceReport rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000853 ;
                                  rdfs:comment "Output of 11.1.2.9 (ensure each unit follows the ERM reporting process), produced by ex:ActOfVerification (inlined above). Gate-F mint: a dedicated reporting-process-conformance finding ICE replacing the false-friend ex:RiskMonitoringReport so the verification genus and its output ICE agree. Sibling of ex:ERMProcessConformanceReport. Descriptive (cco:ont00000853)." ;
@@ -2902,7 +2902,7 @@ ex:ERMReportingConformanceReport rdf:type owl:Class ;
                                  skos:definition "A Descriptive Information Content Entity that describes the finding of a check of whether each business unit and function follows the enterprise risk reporting process." .
 
 
-###  http://example.org/apqc#EnterpriseRiskManagementCapability
+###  https://fandaws.com/ontology/apqc#EnterpriseRiskManagementCapability
 ex:EnterpriseRiskManagementCapability rdf:type owl:Class ;
                                       rdfs:subClassOf cco:ont00000568 ;
                                       rdfs:comment "Models the standing function of 11.1 'Manage enterprise risk' (R5/R6). The realized-in axioms to the bounded 11.1 acts are carried by ex:P17060 below, which is this capability's reality-layer correlate." ;
@@ -2910,7 +2910,7 @@ ex:EnterpriseRiskManagementCapability rdf:type owl:Class ;
                                       skos:definition "An Organization Capability that is realized in acts of establishing risk frameworks and policies and of overseeing, coordinating, and managing risk across an organization and its business units." .
 
 
-###  http://example.org/apqc#EnterpriseRiskPolicy
+###  https://fandaws.com/ontology/apqc#EnterpriseRiskPolicy
 ex:EnterpriseRiskPolicy rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000965 ;
                         rdfs:comment "Output of 11.1.1.2 (develop and maintain enterprise risk policies and procedures); reference framework for 11.1.3.2 (assess risks using enterprise risk framework). Directive: prescribes conduct." ;
@@ -2918,7 +2918,7 @@ ex:EnterpriseRiskPolicy rdf:type owl:Class ;
                         skos:definition "A Directive Information Content Entity that prescribes the rules, regulations, and procedures for managing hazardous, financial, operational, and strategic risk across an organization." .
 
 
-###  http://example.org/apqc#EnterpriseRiskReport
+###  https://fandaws.com/ontology/apqc#EnterpriseRiskReport
 ex:EnterpriseRiskReport rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:comment "Shared reporting output across 11.1.1.5, 11.1.2.6, and 11.1.3.7. Descriptive (it represents the state of risk), produced by Act of Reporting." ;
@@ -2926,7 +2926,7 @@ ex:EnterpriseRiskReport rdf:type owl:Class ;
                         skos:definition "A Descriptive Information Content Entity that describes hazard, financial, and operational risks and risk-management activities for presentation to executive management and the board." .
 
 
-###  http://example.org/apqc#EnterpriseRiskTool
+###  https://fandaws.com/ontology/apqc#EnterpriseRiskTool
 ex:EnterpriseRiskTool rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000965 ;
                       rdfs:comment "Output of 11.1.1.3 (identify and implement enterprise risk management tools). Modeled as a Directive ICE (a methodological specification), distinct from any physical software tool; if a particular org deploys a software artifact, that is a separate Material Artifact not minted here." ;
@@ -2934,7 +2934,7 @@ ex:EnterpriseRiskTool rdf:type owl:Class ;
                       skos:definition "A Directive Information Content Entity that prescribes the methods, models, and processes adopted for managing risks and opportunities associated with business objectives." .
 
 
-###  http://example.org/apqc#ExecutiveManagement
+###  https://fandaws.com/ontology/apqc#ExecutiveManagement
 ex:ExecutiveManagement rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001017 ,
                                        [ rdf:type owl:Restriction ;
@@ -2946,14 +2946,14 @@ ex:ExecutiveManagement rdf:type owl:Class ;
                        skos:definition "An Agent that bears an executive-management role and is a recipient of enterprise risk and compliance reports." .
 
 
-###  http://example.org/apqc#ExecutiveManagementRole
+###  https://fandaws.com/ontology/apqc#ExecutiveManagementRole
 ex:ExecutiveManagementRole rdf:type owl:Class ;
                            rdfs:subClassOf obo:BFO_0000023 ;
                            rdfs:label "Executive Management Role" ;
                            skos:definition "A Role that is borne by an Agent in virtue of exercising executive authority and accountability for an organization, including oversight of enterprise risk and compliance." .
 
 
-###  http://example.org/apqc#ExpertAdvice
+###  https://fandaws.com/ontology/apqc#ExpertAdvice
 ex:ExpertAdvice rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:comment "Output/input of 11.3.2 (contact and confer with experts); consumed by 11.3.1 (create remediation plans). Descriptive: it represents expert opinion." ;
@@ -2961,7 +2961,7 @@ ex:ExpertAdvice rdf:type owl:Class ;
                 skos:definition "A Descriptive Information Content Entity that describes the recommendations and judgements solicited from subject-matter experts to inform remediation planning." .
 
 
-###  http://example.org/apqc#InsuranceCoverageAssessment
+###  https://fandaws.com/ontology/apqc#InsuranceCoverageAssessment
 ex:InsuranceCoverageAssessment rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000853 ;
                                rdfs:comment "Output of 11.1.3.3.1 (assess adequacy of insurance coverage)." ;
@@ -2969,7 +2969,7 @@ ex:InsuranceCoverageAssessment rdf:type owl:Class ;
                                skos:definition "A Descriptive Information Content Entity that describes a judgement of the adequacy of an organization's insurance coverage against its changing needs and available providers and offerings." .
 
 
-###  http://example.org/apqc#InternalAuditManagementCapability
+###  https://fandaws.com/ontology/apqc#InternalAuditManagementCapability
 ex:InternalAuditManagementCapability rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000568 ;
                                      rdfs:comment "Reality-layer correlate of APQC 11.2.1.3 (PCF 14133), a standing 'Manage' function with no natural end; modeled as a capability (R5/R6) rather than a process. Its discrete auditing acts are modeled in the relevant audit subtree." ;
@@ -2977,7 +2977,7 @@ ex:InternalAuditManagementCapability rdf:type owl:Class ;
                                      skos:definition "An Organization Capability that inheres in an organization in virtue of its capacity to plan, conduct, and report on internal audits of its accounts and performance." .
 
 
-###  http://example.org/apqc#LegalAnalysis
+###  https://fandaws.com/ontology/apqc#LegalAnalysis
 ex:LegalAnalysis rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000853 ;
                  rdfs:comment "Output of 11.3.4 (investigate legal aspects), produced by ex:ActOfInvestigation (inlined above)." ;
@@ -2985,7 +2985,7 @@ ex:LegalAnalysis rdf:type owl:Class ;
                  skos:definition "A Descriptive Information Content Entity that describes an examination of regulatory and legislative frameworks bearing on an organization's remediation obligations, including liabilities for compensation, fines, and corrective effort." .
 
 
-###  http://example.org/apqc#P11201
+###  https://fandaws.com/ontology/apqc#P11201
 ex:P11201 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3001,7 +3001,7 @@ ex:P11201 rdf:type owl:Class ;
           skos:example "An environmental team drafts a remediation plan for a contaminated site so it can return to operational status." .
 
 
-###  http://example.org/apqc#P11202
+###  https://fandaws.com/ontology/apqc#P11202
 ex:P11202 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000379 ,
                           [ rdf:type owl:Restriction ;
@@ -3025,7 +3025,7 @@ ex:P11202 rdf:type owl:Class ;
           skos:example "A remediation lead convenes subject matter experts and captures their advice to refine the remediation plan." .
 
 
-###  http://example.org/apqc#P11203
+###  https://fandaws.com/ontology/apqc#P11203
 ex:P11203 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3041,7 +3041,7 @@ ex:P11203 rdf:type owl:Class ;
           skos:example "A remediation manager discerns staffing, equipment, and funding needs and records a resource requirements assessment." .
 
 
-###  http://example.org/apqc#P11204
+###  https://fandaws.com/ontology/apqc#P11204
 ex:P11204 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfInvestigation ,
                           [ rdf:type owl:Restriction ;
@@ -3061,7 +3061,7 @@ ex:P11204 rdf:type owl:Class ;
           skos:example "Counsel reviews environmental statutes and international covenants and issues a legal analysis of remediation liabilities." .
 
 
-###  http://example.org/apqc#P11205
+###  https://fandaws.com/ontology/apqc#P11205
 ex:P11205 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfInvestigation ,
                           [ rdf:type owl:Restriction ;
@@ -3077,7 +3077,7 @@ ex:P11205 rdf:type owl:Class ;
           skos:example "Investigators study a contamination incident and document the chain of causes that led to the damage." .
 
 
-###  http://example.org/apqc#P11206
+###  https://fandaws.com/ontology/apqc#P11206
 ex:P11206 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3093,7 +3093,7 @@ ex:P11206 rdf:type owl:Class ;
           skos:example "A policy team revises the company-wide remediation policy to reflect new international environmental covenants." .
 
 
-###  http://example.org/apqc#P11221
+###  https://fandaws.com/ontology/apqc#P11221
 ex:P11221 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3109,7 +3109,7 @@ ex:P11221 rdf:type owl:Class ;
           skos:example "A resilience team drafts the enterprise's business resilience strategy for the coming planning cycle." .
 
 
-###  http://example.org/apqc#P11222
+###  https://fandaws.com/ontology/apqc#P11222
 ex:P11222 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3125,7 +3125,7 @@ ex:P11222 rdf:type owl:Class ;
           skos:example "A continuity planner produces the business continuity plan for the firm's critical processes." .
 
 
-###  http://example.org/apqc#P11223
+###  https://fandaws.com/ontology/apqc#P11223
 ex:P11223 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfVerification ,
                           [ rdf:type owl:Restriction ;
@@ -3141,7 +3141,7 @@ ex:P11223 rdf:type owl:Class ;
           skos:example "A resilience team runs a failover drill and records the continuity test result." .
 
 
-###  http://example.org/apqc#P11224
+###  https://fandaws.com/ontology/apqc#P11224
 ex:P11224 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3157,7 +3157,7 @@ ex:P11224 rdf:type owl:Class ;
           skos:example "An operations analyst evaluates ongoing activities and issues a business operations evaluation ranking them by return." .
 
 
-###  http://example.org/apqc#P16439
+###  https://fandaws.com/ontology/apqc#P16439
 ex:P16439 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3193,7 +3193,7 @@ ex:P16439 rdf:type owl:Class ;
           skos:example "A risk committee drafting the firm's enterprise risk policy framework for the coming year." .
 
 
-###  http://example.org/apqc#P16440
+###  https://fandaws.com/ontology/apqc#P16440
 ex:P16440 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3209,7 +3209,7 @@ ex:P16440 rdf:type owl:Class ;
           skos:example "A board setting the maximum acceptable annual value-at-risk for the enterprise." .
 
 
-###  http://example.org/apqc#P16441
+###  https://fandaws.com/ontology/apqc#P16441
 ex:P16441 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3225,7 +3225,7 @@ ex:P16441 rdf:type owl:Class ;
           skos:example "A risk team updating the corporate risk policy manual after a regulatory change." .
 
 
-###  http://example.org/apqc#P16442
+###  https://fandaws.com/ontology/apqc#P16442
 ex:P16442 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -3241,7 +3241,7 @@ ex:P16442 rdf:type owl:Class ;
           skos:example "Selecting and configuring a GRC platform and a Monte-Carlo risk-modeling tool as the firm's standard ERM toolset." .
 
 
-###  http://example.org/apqc#P16443
+###  https://fandaws.com/ontology/apqc#P16443
 ex:P16443 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000151 ,
                           [ rdf:type owl:Restriction ;
@@ -3257,7 +3257,7 @@ ex:P16443 rdf:type owl:Class ;
           skos:example "A risk manager circulating an operational-risk briefing to all business-unit heads." .
 
 
-###  http://example.org/apqc#P16444
+###  https://fandaws.com/ontology/apqc#P16444
 ex:P16444 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000151 ,
                           [ rdf:type owl:Restriction ;
@@ -3273,7 +3273,7 @@ ex:P16444 rdf:type owl:Class ;
           skos:example "The CRO presenting the quarterly enterprise risk report to the audit committee." .
 
 
-###  http://example.org/apqc#P16445
+###  https://fandaws.com/ontology/apqc#P16445
 ex:P16445 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3321,7 +3321,7 @@ ex:P16445 rdf:type owl:Class ;
           skos:example "An enterprise-risk steering cycle that runs identify, assess, mitigate, verify, monitor, and report across the year." .
 
 
-###  http://example.org/apqc#P16446
+###  https://fandaws.com/ontology/apqc#P16446
 ex:P16446 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3337,7 +3337,7 @@ ex:P16446 rdf:type owl:Class ;
           skos:example "A workshop enumerating strategic and operational risks into the corporate risk register." .
 
 
-###  http://example.org/apqc#P16447
+###  https://fandaws.com/ontology/apqc#P16447
 ex:P16447 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3353,7 +3353,7 @@ ex:P16447 rdf:type owl:Class ;
           skos:example "Scoring each registered risk by likelihood and impact to prioritize mitigation." .
 
 
-###  http://example.org/apqc#P16448
+###  https://fandaws.com/ontology/apqc#P16448
 ex:P16448 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3373,7 +3373,7 @@ ex:P16448 rdf:type owl:Class ;
           skos:example "Drafting a hedging-and-controls strategy and integrating it into the annual performance plan." .
 
 
-###  http://example.org/apqc#P16449
+###  https://fandaws.com/ontology/apqc#P16449
 ex:P16449 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfVerification ,
                           [ rdf:type owl:Restriction ;
@@ -3389,7 +3389,7 @@ ex:P16449 rdf:type owl:Class ;
           skos:example "Auditing a division to confirm its mitigation controls are in place and operating." .
 
 
-###  http://example.org/apqc#P16450
+###  https://fandaws.com/ontology/apqc#P16450
 ex:P16450 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3405,7 +3405,7 @@ ex:P16450 rdf:type owl:Class ;
           skos:example "A dashboard tracking key risk indicators and the status of open mitigation actions each month." .
 
 
-###  http://example.org/apqc#P16451
+###  https://fandaws.com/ontology/apqc#P16451
 ex:P16451 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000151 ,
                           [ rdf:type owl:Restriction ;
@@ -3421,7 +3421,7 @@ ex:P16451 rdf:type owl:Class ;
           skos:example "Compiling the period's risk-treatment activities into a report for governance." .
 
 
-###  http://example.org/apqc#P16452
+###  https://fandaws.com/ontology/apqc#P16452
 ex:P16452 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3437,7 +3437,7 @@ ex:P16452 rdf:type owl:Class ;
           skos:example "Aligning each division's risk plan and assigning shared resources across the enterprise program." .
 
 
-###  http://example.org/apqc#P16453
+###  https://fandaws.com/ontology/apqc#P16453
 ex:P16453 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfVerification ,
                           [ rdf:type owl:Restriction ;
@@ -3453,7 +3453,7 @@ ex:P16453 rdf:type owl:Class ;
           skos:example "Reviewing a division against the ERM process checklist." .
 
 
-###  http://example.org/apqc#P16454
+###  https://fandaws.com/ontology/apqc#P16454
 ex:P16454 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfVerification ,
                           [ rdf:type owl:Restriction ;
@@ -3469,7 +3469,7 @@ ex:P16454 rdf:type owl:Class ;
           skos:example "Confirming each unit submits its risk report on the prescribed cadence and template." .
 
 
-###  http://example.org/apqc#P16456
+###  https://fandaws.com/ontology/apqc#P16456
 ex:P16456 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3485,7 +3485,7 @@ ex:P16456 rdf:type owl:Class ;
           skos:example "A project team listing the events that could delay delivery into its risk register." .
 
 
-###  http://example.org/apqc#P16457
+###  https://fandaws.com/ontology/apqc#P16457
 ex:P16457 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3505,7 +3505,7 @@ ex:P16457 rdf:type owl:Class ;
           skos:example "Using the corporate risk-scoring framework to rate a proposed venture's exposure." .
 
 
-###  http://example.org/apqc#P16458
+###  https://fandaws.com/ontology/apqc#P16458
 ex:P16458 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3529,7 +3529,7 @@ ex:P16458 rdf:type owl:Class ;
           skos:example "Drafting a mitigation plan with controls, owners, and contingency arrangements for the top risks." .
 
 
-###  http://example.org/apqc#P16459
+###  https://fandaws.com/ontology/apqc#P16459
 ex:P16459 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3545,7 +3545,7 @@ ex:P16459 rdf:type owl:Class ;
           skos:example "Standing up the controls and contingency arrangements specified in the approved mitigation plan." .
 
 
-###  http://example.org/apqc#P16460
+###  https://fandaws.com/ontology/apqc#P16460
 ex:P16460 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3561,7 +3561,7 @@ ex:P16460 rdf:type owl:Class ;
           skos:example "Watching key risk indicators on a recurring basis and flagging breaches." .
 
 
-###  http://example.org/apqc#P16461
+###  https://fandaws.com/ontology/apqc#P16461
 ex:P16461 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3581,7 +3581,7 @@ ex:P16461 rdf:type owl:Class ;
           skos:example "Reviewing the period's incidents and revising the mitigation plan accordingly." .
 
 
-###  http://example.org/apqc#P16462
+###  https://fandaws.com/ontology/apqc#P16462
 ex:P16462 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000151 ,
                           [ rdf:type owl:Restriction ;
@@ -3597,7 +3597,7 @@ ex:P16462 rdf:type owl:Class ;
           skos:example "Submitting the unit's monthly risk-status report to the program lead." .
 
 
-###  http://example.org/apqc#P16464
+###  https://fandaws.com/ontology/apqc#P16464
 ex:P16464 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3613,7 +3613,7 @@ ex:P16464 rdf:type owl:Class ;
           skos:example "A compliance function documents the step-by-step procedures the firm follows to satisfy a new regulation." .
 
 
-###  http://example.org/apqc#P16465
+###  https://fandaws.com/ontology/apqc#P16465
 ex:P16465 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3633,7 +3633,7 @@ ex:P16465 rdf:type owl:Class ;
           skos:example "A compliance officer screens the legal landscape and registers which statutes and rules the organization must obey." .
 
 
-###  http://example.org/apqc#P16466
+###  https://fandaws.com/ontology/apqc#P16466
 ex:P16466 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3649,7 +3649,7 @@ ex:P16466 rdf:type owl:Class ;
           skos:example "A regulatory-affairs team continuously scans government bulletins and reports newly issued rules affecting the firm." .
 
 
-###  http://example.org/apqc#P16467
+###  https://fandaws.com/ontology/apqc#P16467
 ex:P16467 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3665,7 +3665,7 @@ ex:P16467 rdf:type owl:Class ;
           skos:example "An internal review judges where the firm falls short of its regulatory obligations and documents the gaps." .
 
 
-###  http://example.org/apqc#P16468
+###  https://fandaws.com/ontology/apqc#P16468
 ex:P16468 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ;
           ex:apqcSourceText "Assessing the current policies and policies. Implement missing and necessary changes environmental changes, political changes, technological changes, etc." ;
@@ -3677,7 +3677,7 @@ ex:P16468 rdf:type owl:Class ;
           skos:example "Following a gap assessment, the firm deploys an additional access-control policy to meet a regulatory requirement." .
 
 
-###  http://example.org/apqc#P16469
+###  https://fandaws.com/ontology/apqc#P16469
 ex:P16469 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfVerification ,
                           [ rdf:type owl:Restriction ;
@@ -3693,7 +3693,7 @@ ex:P16469 rdf:type owl:Class ;
           skos:example "An assurance team runs control tests and reports which compliance controls hold and which must be revised." .
 
 
-###  http://example.org/apqc#P16471
+###  https://fandaws.com/ontology/apqc#P16471
 ex:P16471 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000151 ,
                           [ rdf:type owl:Restriction ;
@@ -3709,7 +3709,7 @@ ex:P16471 rdf:type owl:Class ;
           skos:example "A risk manager circulates lessons learned about a near-miss disruption to other business units." .
 
 
-###  http://example.org/apqc#P17060
+###  https://fandaws.com/ontology/apqc#P17060
 ex:P17060 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -3733,7 +3733,7 @@ ex:P17060 rdf:type owl:Class ;
           skos:example "A firm's enterprise risk management office that sets risk policy and oversees risk across all business units." .
 
 
-###  http://example.org/apqc#P17462
+###  https://fandaws.com/ontology/apqc#P17462
 ex:P17462 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3773,7 +3773,7 @@ ex:P17462 rdf:type owl:Class ;
           skos:example "A business unit running its annual risk-and-controls cycle." .
 
 
-###  http://example.org/apqc#P17468
+###  https://fandaws.com/ontology/apqc#P17468
 ex:P17468 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3797,7 +3797,7 @@ ex:P17468 rdf:type owl:Class ;
           skos:example "A compliance team drafts the enterprise compliance policy-and-procedure set governing how the organization meets its legal obligations." .
 
 
-###  http://example.org/apqc#P17469
+###  https://fandaws.com/ontology/apqc#P17469
 ex:P17469 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3813,7 +3813,7 @@ ex:P17469 rdf:type owl:Class ;
           skos:example "An organization authors its enterprise code of conduct and the procedures implementing it." .
 
 
-###  http://example.org/apqc#P17470
+###  https://fandaws.com/ontology/apqc#P17470
 ex:P17470 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ;
           ex:apqcSourceText "Implementing standardized for ethics and compliance. Have a programmatic approach, built from the top down, to enterprise compliance that focuses on the definite risks the organization faces." ;
@@ -3825,7 +3825,7 @@ ex:P17470 rdf:type owl:Class ;
           skos:example "Compliance staff roll out and operate the ethics-and-compliance program defined by the policy set." .
 
 
-###  http://example.org/apqc#P18129
+###  https://fandaws.com/ontology/apqc#P18129
 ex:P18129 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3841,7 +3841,7 @@ ex:P18129 rdf:type owl:Class ;
           skos:example "Comparing current policy limits to projected exposures and recommending added coverage." .
 
 
-###  http://example.org/apqc#P19595
+###  https://fandaws.com/ontology/apqc#P19595
 ex:P19595 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -3857,7 +3857,7 @@ ex:P19595 rdf:type owl:Class ;
           skos:example "A compliance function publishes a red/amber/green dashboard summarizing the firm's compliance health." .
 
 
-###  http://example.org/apqc#P19596
+###  https://fandaws.com/ontology/apqc#P19596
 ex:P19596 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000151 ,
                           [ rdf:type owl:Restriction ;
@@ -3877,7 +3877,7 @@ ex:P19596 rdf:type owl:Class ;
           skos:example "The firm files its periodic securities-compliance report with the relevant regulator." .
 
 
-###  http://example.org/apqc#RegulatorRelationshipManagementCapability
+###  https://fandaws.com/ontology/apqc#RegulatorRelationshipManagementCapability
 ex:RegulatorRelationshipManagementCapability rdf:type owl:Class ;
                                              rdfs:subClassOf cco:ont00000568 ;
                                              rdfs:comment "Reality-layer correlate of APQC 11.2.2.9 (PCF 16470), an ongoing relational standing function with no natural end and no definitional informational output; modeled as a capability (R5/R6) rather than a process." ;
@@ -3885,7 +3885,7 @@ ex:RegulatorRelationshipManagementCapability rdf:type owl:Class ;
                                              skos:definition "An Organization Capability that inheres in an organization in virtue of its capacity to develop and preserve appropriate working relationships with its regulators without compromising the legal basis of those relationships." .
 
 
-###  http://example.org/apqc#RegulatoryAuthority
+###  https://fandaws.com/ontology/apqc#RegulatoryAuthority
 ex:RegulatoryAuthority rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001180 ,
                                        [ rdf:type owl:Restriction ;
@@ -3897,7 +3897,7 @@ ex:RegulatoryAuthority rdf:type owl:Class ;
                        skos:definition "An Organization that bears a regulatory-authority role, issuing laws, statutes, permits, or requirements and overseeing an organization's compliance." .
 
 
-###  http://example.org/apqc#RegulatoryAuthorityRole
+###  https://fandaws.com/ontology/apqc#RegulatoryAuthorityRole
 ex:RegulatoryAuthorityRole rdf:type owl:Class ;
                            rdfs:subClassOf obo:BFO_0000023 ;
                            rdfs:comment "Borne by the authority Organization, never by the requirement or report ICE it issues or receives." ;
@@ -3905,7 +3905,7 @@ ex:RegulatoryAuthorityRole rdf:type owl:Class ;
                            skos:definition "A Role that is borne by an Organization in virtue of issuing laws, statutes, permits, or requirements and overseeing an organization's compliance with them." .
 
 
-###  http://example.org/apqc#RegulatoryComplianceManagementCapability
+###  https://fandaws.com/ontology/apqc#RegulatoryComplianceManagementCapability
 ex:RegulatoryComplianceManagementCapability rdf:type owl:Class ;
                                             rdfs:subClassOf ex:ComplianceManagementCapability ,
                                                             [ rdf:type owl:Restriction ;
@@ -3945,7 +3945,7 @@ ex:RegulatoryComplianceManagementCapability rdf:type owl:Class ;
                                             skos:definition "An Organization Capability that inheres in an organization in virtue of its capacity to obey the laws, guidelines, strategies, and stipulations applicable to its business, realized in acts of developing procedures, identifying requirements, monitoring the regulatory environment, assessing and testing its compliance position, implementing controls, and reporting on compliance." .
 
 
-###  http://example.org/apqc#RegulatoryEnvironmentAnalysis
+###  https://fandaws.com/ontology/apqc#RegulatoryEnvironmentAnalysis
 ex:RegulatoryEnvironmentAnalysis rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000853 ;
                                  rdfs:comment "Output of 11.2.2.3 (monitor the regulatory environment), produced by ex:ActOfMonitoring (inlined above)." ;
@@ -3953,7 +3953,7 @@ ex:RegulatoryEnvironmentAnalysis rdf:type owl:Class ;
                                  skos:definition "A Descriptive Information Content Entity that describes an examination of the regulatory environment to spot changing or emerging regulations relevant to an organization." .
 
 
-###  http://example.org/apqc#RegulatoryRequirement
+###  https://fandaws.com/ontology/apqc#RegulatoryRequirement
 ex:RegulatoryRequirement rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ;
                          rdfs:comment "Directive (not Descriptive): a regulatory requirement prescribes obligatory conduct. Shared input across 11.2 (identify applicable requirements 11.2.2.2) and 11.3 (investigate legal aspects 11.3.4). Anchored to cco:ont00000965 (Directive/Prescriptive ICE)." ;
@@ -3961,7 +3961,7 @@ ex:RegulatoryRequirement rdf:type owl:Class ;
                          skos:definition "A Directive Information Content Entity, issued by a governing authority, that prescribes a law, guideline, statute, or stipulation with which an organization must comply." .
 
 
-###  http://example.org/apqc#RemediationManagementCapability
+###  https://fandaws.com/ontology/apqc#RemediationManagementCapability
 ex:RemediationManagementCapability rdf:type owl:Class ;
                                    rdfs:subClassOf cco:ont00000568 ,
                                                    [ rdf:type owl:Restriction ;
@@ -3996,7 +3996,7 @@ ex:RemediationManagementCapability rdf:type owl:Class ;
                                    skos:definition "An Organization Capability that is realized in acts of planning, resourcing, investigating, and policy-making for the remediation of environmental adulteration." .
 
 
-###  http://example.org/apqc#RemediationPlan
+###  https://fandaws.com/ontology/apqc#RemediationPlan
 ex:RemediationPlan rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ,
                                    [ rdf:type owl:Restriction ;
@@ -4008,7 +4008,7 @@ ex:RemediationPlan rdf:type owl:Class ;
                    skos:definition "A Directive Information Content Entity, about a case of contamination, that prescribes the corrective actions for identifying and treating environmental adulteration so that an affected area becomes operational again." .
 
 
-###  http://example.org/apqc#RemediationPolicy
+###  https://fandaws.com/ontology/apqc#RemediationPolicy
 ex:RemediationPolicy rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:comment "Output of 11.3.6 (amend or create policy), produced by ex:ActOfFormulation (reused from ext)." ;
@@ -4016,7 +4016,7 @@ ex:RemediationPolicy rdf:type owl:Class ;
                      skos:definition "A Directive Information Content Entity that prescribes a company-wide framework of policies and procedures for deploying remediation efforts, adapted to applicable national and international regulatory frameworks." .
 
 
-###  http://example.org/apqc#ResourceRequirementsAssessment
+###  https://fandaws.com/ontology/apqc#ResourceRequirementsAssessment
 ex:ResourceRequirementsAssessment rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:comment "Output of 11.3.3 (identify/dedicate resources). The actual dedication of resources is a directive/planning act; this ICE is the descriptive identification step." ;
@@ -4024,7 +4024,7 @@ ex:ResourceRequirementsAssessment rdf:type owl:Class ;
                                   skos:definition "A Descriptive Information Content Entity that describes the resources discerned to be needed for managing remediation efforts and the rationale for their dedication." .
 
 
-###  http://example.org/apqc#Risk
+###  https://fandaws.com/ontology/apqc#Risk
 ex:Risk rdf:type owl:Class ;
         rdfs:subClassOf obo:BFO_0000017 ;
         rdfs:comment "ex:Risk is the REALITY-LAYER risk disposition (BFO Realizable Entity, obo:BFO_0000017): the standing possibility of an adverse outcome borne by some entity -- NOT a process and NOT an information artifact. CAUTION for contributors: information artifacts ABOUT risks are modeled separately as ICEs -- ex:RiskRegister, ex:RiskAssessment, ex:RiskAnalysisReport, etc. (each cco:ont00000853 Descriptive ICE, 'is about' some ex:Risk). Do NOT use ex:Risk as an ICE / has-output filler; use the corresponding artifact class." ;
@@ -4032,7 +4032,7 @@ ex:Risk rdf:type owl:Class ;
         skos:definition "A Realizable Entity that is the disposition of some entity to give rise, under specified conditions, to an adverse or uncertain consequence for an organization's objectives." .
 
 
-###  http://example.org/apqc#RiskAnalysisReport
+###  https://fandaws.com/ontology/apqc#RiskAnalysisReport
 ex:RiskAnalysisReport rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:comment "Output of 11.1.3.6 (analyze risk activities and update plans)." ;
@@ -4040,7 +4040,7 @@ ex:RiskAnalysisReport rdf:type owl:Class ;
                       skos:definition "A Descriptive Information Content Entity that describes an examination of the impact of risk activities, including the potential for adverse consequences and the methods available to manage them." .
 
 
-###  http://example.org/apqc#RiskAssessment
+###  https://fandaws.com/ontology/apqc#RiskAssessment
 ex:RiskAssessment rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ,
                                   [ rdf:type owl:Restriction ;
@@ -4052,7 +4052,7 @@ ex:RiskAssessment rdf:type owl:Class ;
                   skos:definition "A Descriptive Information Content Entity, about one or more risks, that describes a judgement of the likelihood and impact of those risks together with their root causes, used to determine which to mitigate." .
 
 
-###  http://example.org/apqc#RiskKnowledge
+###  https://fandaws.com/ontology/apqc#RiskKnowledge
 ex:RiskKnowledge rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000853 ;
                  rdfs:comment "Shared informational payload of the reporting/communication acts in 11.1.1.4 (P16443, coordinate sharing of risk knowledge) and 11.4.5 (P16471, share knowledge of specific risks). Descriptive content; per the Gate-F reconciliation both acts are anchored at cco:ont00000151 (Act of Reporting, a Representative Communication) and emit this ICE as a has-output only (it is not consumed as an input)." ;
@@ -4060,7 +4060,7 @@ ex:RiskKnowledge rdf:type owl:Class ;
                  skos:definition "A Descriptive Information Content Entity that describes information about specific risks and resilience strategies, shared across an organization so prospective risks can be anticipated and avoided." .
 
 
-###  http://example.org/apqc#RiskManager
+###  https://fandaws.com/ontology/apqc#RiskManager
 ex:RiskManager rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00001017 ,
                                [ rdf:type owl:Restriction ;
@@ -4072,14 +4072,14 @@ ex:RiskManager rdf:type owl:Class ;
                skos:definition "An Agent that bears a risk-manager role." .
 
 
-###  http://example.org/apqc#RiskManagerRole
+###  https://fandaws.com/ontology/apqc#RiskManagerRole
 ex:RiskManagerRole rdf:type owl:Class ;
                    rdfs:subClassOf obo:BFO_0000023 ;
                    rdfs:label "Risk Manager Role" ;
                    skos:definition "A Role that is borne by an Agent in virtue of being tasked with identifying, assessing, mitigating, monitoring, and reporting risk on behalf of an organization or business unit." .
 
 
-###  http://example.org/apqc#RiskMitigationPlan
+###  https://fandaws.com/ontology/apqc#RiskMitigationPlan
 ex:RiskMitigationPlan rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000965 ;
                       rdfs:comment "Output of 11.1.3.3 (develop mitigation plans); input to 11.1.3.4 (implement) and 11.1.2.4 (verify implementation). Directive: it prescribes mitigation actions." ;
@@ -4087,7 +4087,7 @@ ex:RiskMitigationPlan rdf:type owl:Class ;
                       skos:definition "A Directive Information Content Entity that prescribes the arrangements and activities for improving opportunities and reducing deviations to project objectives in response to identified risks." .
 
 
-###  http://example.org/apqc#RiskMitigationStrategy
+###  https://fandaws.com/ontology/apqc#RiskMitigationStrategy
 ex:RiskMitigationStrategy rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000965 ;
                           rdfs:comment "Output of 11.1.2.3 (develop risk mitigation and management strategy), produced by ex:ActOfFormulation (reused from ext)." ;
@@ -4095,7 +4095,7 @@ ex:RiskMitigationStrategy rdf:type owl:Class ;
                           skos:definition "A Directive Information Content Entity that prescribes the organization's objectives, strategies, and policies for improving opportunities and lessening threats, integrated with existing performance-management processes." .
 
 
-###  http://example.org/apqc#RiskMitigationVerificationReport
+###  https://fandaws.com/ontology/apqc#RiskMitigationVerificationReport
 ex:RiskMitigationVerificationReport rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000853 ;
                                     rdfs:comment "Output of 11.1.2.4 (verify mitigation plans are implemented), produced by ex:ActOfVerification (inlined above). Gate-F mint: a dedicated one-shot conformance-finding ICE, separating verification findings from the continuous-monitoring ex:RiskMonitoringReport (a false friend) so that genus (Verification) and output ICE share semantic traceability. Both are Descriptive (cco:ont00000853)." ;
@@ -4103,7 +4103,7 @@ ex:RiskMitigationVerificationReport rdf:type owl:Class ;
                                     skos:definition "A Descriptive Information Content Entity that describes the finding of a bounded check of whether business-unit and functional risk mitigation plans have been correctly implemented." .
 
 
-###  http://example.org/apqc#RiskMonitoringReport
+###  https://fandaws.com/ontology/apqc#RiskMonitoringReport
 ex:RiskMonitoringReport rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:comment "Output of monitoring acts (11.1.2.5, 11.1.3.5) produced by ex:ActOfMonitoring (inlined above). NOTE (Gate-F): this is a continuous time-series monitoring artifact and is a FALSE FRIEND for one-shot verification findings; verification acts (11.1.2.4, 11.1.2.8, 11.1.2.9) use the dedicated conformance-finding ICEs below instead." ;
@@ -4111,7 +4111,7 @@ ex:RiskMonitoringReport rdf:type owl:Class ;
                         skos:definition "A Descriptive Information Content Entity that describes the observed status of risks and risk-mitigation actions tracked over time against expected parameters." .
 
 
-###  http://example.org/apqc#RiskRegister
+###  https://fandaws.com/ontology/apqc#RiskRegister
 ex:RiskRegister rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:comment "Shared output of identification acts across 11.1 (11.1.2.1 identify enterprise-level risks, 11.1.3.1 identify risks) and input to assessment acts. Descriptive: it registers discerned risks rather than prescribing action." ;
@@ -4119,7 +4119,7 @@ ex:RiskRegister rdf:type owl:Class ;
                 skos:definition "A Descriptive Information Content Entity that enumerates and describes the risks identified for an organization, business unit, or project, including their sources and potential consequences." .
 
 
-###  http://example.org/apqc#RiskTolerance
+###  https://fandaws.com/ontology/apqc#RiskTolerance
 ex:RiskTolerance rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000965 ;
                  rdfs:comment "Output of 11.1.1.1 (determine risk tolerance). Directive: it prescribes acceptable-risk thresholds that govern downstream decisions." ;
@@ -4127,7 +4127,7 @@ ex:RiskTolerance rdf:type owl:Class ;
                  skos:definition "A Directive Information Content Entity that prescribes the level of risk an organization is willing to accept, given risk-return trade-offs for anticipated and predictable consequences." .
 
 
-###  http://example.org/apqc#SubjectMatterExpert
+###  https://fandaws.com/ontology/apqc#SubjectMatterExpert
 ex:SubjectMatterExpert rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001017 ,
                                        [ rdf:type owl:Restriction ;
@@ -4139,7 +4139,7 @@ ex:SubjectMatterExpert rdf:type owl:Class ;
                        skos:definition "An Agent that bears a subject-matter-expert role and is consulted to validate remediation plans." .
 
 
-###  http://example.org/apqc#SubjectMatterExpertRole
+###  https://fandaws.com/ontology/apqc#SubjectMatterExpertRole
 ex:SubjectMatterExpertRole rdf:type owl:Class ;
                            rdfs:subClassOf obo:BFO_0000023 ;
                            rdfs:label "Subject Matter Expert Role" ;

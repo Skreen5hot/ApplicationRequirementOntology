@@ -6,8 +6,8 @@
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix obo:   <http://purl.obolibrary.org/obo/> .
 @prefix cco:   <https://www.commoncoreontologies.org/> .
-@prefix ex:    <http://example.org/apqc#> .
-@prefix apqc:  <http://example.org/apqc/scheme#> .
+@prefix ex:    <https://fandaws.com/ontology/apqc#> .
+@prefix apqc:  <https://fandaws.com/ontology/apqc/scheme#> .
 
 ####################################################################
 # APQC PCF -> BFO 2020 / CCO 2.0  REALITY-LAYER MODULE
@@ -24,7 +24,7 @@
 # the R5 bounded-occurrent test per ADR-001.
 ####################################################################
 
-<http://example.org/apqc/slice/11.0> a owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/11.0> a owl:Ontology ;
     dct:title "APQC reality-layer slice 11.0: Manage Enterprise Risk, Compliance, Remediation, and Resiliency" ;
     dct:source "APQC Process Classification Framework (Cross-Industry)" ;
     owl:versionInfo "0.3.0" ;

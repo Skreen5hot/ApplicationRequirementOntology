@@ -6,8 +6,8 @@
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix obo:   <http://purl.obolibrary.org/obo/> .
 @prefix cco:   <https://www.commoncoreontologies.org/> .
-@prefix ex:    <http://example.org/apqc#> .
-@prefix apqc:  <http://example.org/apqc/scheme#> .
+@prefix ex:    <https://fandaws.com/ontology/apqc#> .
+@prefix apqc:  <https://fandaws.com/ontology/apqc/scheme#> .
 
 ####################################################################
 # APQC SECTION 1.0 -> BFO 2020 / CCO  REALITY-LAYER MODULE
@@ -41,7 +41,7 @@
 #    BusinessValueDriver, BusinessValueDriverBaseline) merged to one.
 ####################################################################
 
-<http://example.org/apqc/slice/1.0> a owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/1.0> a owl:Ontology ;
     dct:title "APQC reality-layer slice 1.0: Develop Vision and Strategy" ;
     dct:source "APQC Process Classification Framework (Cross-Industry)" ;
     owl:versionInfo "0.3.0" ;

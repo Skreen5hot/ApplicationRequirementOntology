@@ -6,8 +6,8 @@
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix obo:   <http://purl.obolibrary.org/obo/> .
 @prefix cco:   <https://www.commoncoreontologies.org/> .
-@prefix ex:    <http://example.org/apqc#> .
-@prefix apqc:  <http://example.org/apqc/scheme#> .
+@prefix ex:    <https://fandaws.com/ontology/apqc#> .
+@prefix apqc:  <https://fandaws.com/ontology/apqc/scheme#> .
 
 ####################################################################
 # APQC reality-layer slice 5.0 "Deliver Services"
@@ -17,7 +17,7 @@
 # shared supporting vocabulary, with duplicate IRIs reconciled to a
 # single coherent definition.
 #
-# by the validator; the live example.org import is commented out so it
+# by the validator; the live fandaws.com import is commented out so it
 # does not break ROBOT). Per ADR-001.
 #
 #   ex:ActOfAnalysis, ex:ActOfIdentification, ex:ActOfFormulation,
@@ -48,7 +48,7 @@
 #   material entity             obo:BFO_0000040
 ####################################################################
 
-<http://example.org/apqc/slice/5.0> a owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/5.0> a owl:Ontology ;
     dct:title "APQC reality-layer slice 5.0: Deliver Services" ;
     owl:versionInfo "0.3.0" ;
     rdfs:comment "Reality-layer BFO 2020 / CCO 2.0 module for APQC section 5.0 'Deliver Services'. CCO pin v2.0 (2024-11-06); modeled per ADR-001 (two-layer model, R5 bounded-occurrent test, GOLDEN PRINCIPLE genus<->output agreement). Self-contained: the shared act genera it uses are inlined from the apqc-ext.ttl registry, so it validates standalone against the pinned CCO/BFO closure with no extension merge." .

@@ -1,5 +1,5 @@
-@prefix : <http://example.org/apqc/slice/9.0#> .
-@prefix ex: <http://example.org/apqc#> .
+@prefix : <https://fandaws.com/ontology/apqc/slice/9.0#> .
+@prefix ex: <https://fandaws.com/ontology/apqc#> .
 @prefix cco: <https://www.commoncoreontologies.org/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
@@ -7,12 +7,12 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix apqc: <http://example.org/apqc/scheme#> .
+@prefix apqc: <https://fandaws.com/ontology/apqc/scheme#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <http://example.org/apqc/slice/9.0> .
+@base <https://fandaws.com/ontology/apqc/slice/9.0> .
 
-<http://example.org/apqc/slice/9.0> rdf:type owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/9.0> rdf:type owl:Ontology ;
                                      dct:source "APQC Process Classification Framework (Cross-Industry)" ;
                                      dct:title "APQC reality-layer slice 9.0: Manage Financial Resources" ;
                                      rdfs:comment "Reality-layer module for APQC section 9.0. CCO pin v2.0 (2024-11-06); modeled per ADR-001 (two-layer model, R5 bounded-occurrent test). Self-contained: the shared act genera it uses are inlined from the apqc-ext.ttl registry, so it validates standalone against the pinned CCO/BFO closure with no extension merge." ;
@@ -22,25 +22,25 @@
 #    Annotation properties
 #################################################################
 
-###  http://example.org/apqc#apqcSourceText
+###  https://fandaws.com/ontology/apqc#apqcSourceText
 ex:apqcSourceText rdf:type owl:AnnotationProperty ;
                   rdfs:comment "Verbatim APQC Element Description retained for provenance." ;
                   rdfs:label "APQC source description" .
 
 
-###  http://example.org/apqc#designatesProcessType
+###  https://fandaws.com/ontology/apqc#designatesProcessType
 ex:designatesProcessType rdf:type owl:AnnotationProperty ;
                          rdfs:comment "Catalog-to-reality bridge: links an APQC catalog node (ex:PCF_<pcfID>) to the reality-layer class (process or capability) it designates." ;
                          rdfs:label "designates process type" .
 
 
-###  http://example.org/apqc#hierarchyID
+###  https://fandaws.com/ontology/apqc#hierarchyID
 ex:hierarchyID rdf:type owl:AnnotationProperty ;
                rdfs:comment "Positional dotted-decimal locator. NON-STABLE across PCF versions. Reference only; never for IRI minting or subsumption." ;
                rdfs:label "APQC Hierarchy ID" .
 
 
-###  http://example.org/apqc#pcfID
+###  https://fandaws.com/ontology/apqc#pcfID
 ex:pcfID rdf:type owl:AnnotationProperty ;
          rdfs:comment "Stable APQC identifier. Anchor IRIs to this; it persists across PCF versions." ;
          rdfs:label "APQC PCF ID" .
@@ -2630,7 +2630,7 @@ cco:ont00001773 rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
-###  http://example.org/apqc#AccountApprovalDecision
+###  https://fandaws.com/ontology/apqc#AccountApprovalDecision
 ex:AccountApprovalDecision rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000965 ;
                            rdfs:comment "Minted locally: Directive (not Descriptive) because a decision prescribes rather than describes. Distinct from the shared ex:CreditAssessment (the Descriptive judgement underlying it) and from ex:PaymentApproval (a per-payment approval)." ;
@@ -2639,14 +2639,14 @@ ex:AccountApprovalDecision rdf:type owl:Class ;
                            skos:example "A recorded decision to approve a new customer's credit account at a $10,000 limit." .
 
 
-###  http://example.org/apqc#AccountStatement
+###  https://fandaws.com/ontology/apqc#AccountStatement
 ex:AccountStatement rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:label "Account Statement" ;
                     skos:definition "A Descriptive Information Content Entity that describes the balance and activity of a particular financial account over a period." .
 
 
-###  http://example.org/apqc#Accountant
+###  https://fandaws.com/ontology/apqc#Accountant
 ex:Accountant rdf:type owl:Class ;
               rdfs:subClassOf cco:ont00001017 ,
                               [ rdf:type owl:Restriction ;
@@ -2661,21 +2661,21 @@ ex:Accountant rdf:type owl:Class ;
               skos:definition "An Agent that has an accounting capability and bears an accountant role." .
 
 
-###  http://example.org/apqc#AccountantRole
+###  https://fandaws.com/ontology/apqc#AccountantRole
 ex:AccountantRole rdf:type owl:Class ;
                   rdfs:subClassOf obo:BFO_0000023 ;
                   rdfs:label "Accountant Role" ;
                   skos:definition "A Role that is borne by an Agent in virtue of being tasked with recording, classifying, and reporting an Organization's financial transactions." .
 
 
-###  http://example.org/apqc#AccountingCapability
+###  https://fandaws.com/ontology/apqc#AccountingCapability
 ex:AccountingCapability rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00001379 ;
                         rdfs:label "Accounting Capability" ;
                         skos:definition "An Agent Capability that inheres in an Agent in virtue of its capacity to record, classify, reconcile, and report financial transactions." .
 
 
-###  http://example.org/apqc#ActOfAccounting
+###  https://fandaws.com/ontology/apqc#ActOfAccounting
 ex:ActOfAccounting rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000366 ;
                    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic bookkeeping/record-keeping class; recording and reconciling transactions manipulates input ICEs into an updated record ICE, so it anchors under cco:ont00000366 (Act of Information Processing), per the GOLDEN PRINCIPLE. Rejected cco:ont00000950 'Act of Maintenance' (modifies Material Artifacts, not records). Distinct from ex:ActOfFinancialTransaction (which moves the money itself). Recurs in accounting categories (9.0; likely 8.0)." ;
@@ -2683,7 +2683,7 @@ ex:ActOfAccounting rdf:type owl:Class ;
                    skos:definition "An Act of Information Processing in which an Agent records, classifies, posts, or reconciles financial transactions and produces or updates a Descriptive Information Content Entity (such as a ledger, journal, or account record) that registers the organization's financial state." .
 
 
-###  http://example.org/apqc#ActOfAcquisition
+###  https://fandaws.com/ontology/apqc#ActOfAcquisition
 ex:ActOfAcquisition rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000228 ;
                     rdfs:comment "Local extension (D9). Rejected cco:ont00000950 'Act of Maintenance' (modifying Material Artifacts) and cco:ont00000402 'Act of Communication' (mere ICE transfer). Securing/obtaining a held entity anchors at the generic Planned Act. Expected to recur in procurement/asset-acquisition categories (4.0, 10.0)." ;
@@ -2691,7 +2691,7 @@ ex:ActOfAcquisition rdf:type owl:Class ;
                     skos:definition "A Planned Act in which an Agent obtains from some authority or supplier an entity (such as an authorization, license, or resource) that the Agent did not previously hold." .
 
 
-###  http://example.org/apqc#ActOfAnalysis
+###  https://fandaws.com/ontology/apqc#ActOfAnalysis
 ex:ActOfAnalysis rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000366 ;
                  rdfs:comment "Local extension (D9). CCO 2.0 has no generic analysis class; analysis is information processing, so it is anchored under cco:ont00000366." ;
@@ -2699,7 +2699,7 @@ ex:ActOfAnalysis rdf:type owl:Class ;
                  skos:definition "An Act of Information Processing in which an Agent examines one or more input Information Content Entities and produces an Information Content Entity that represents an understanding of their subject matter." .
 
 
-###  http://example.org/apqc#ActOfCardAdministration
+###  https://fandaws.com/ontology/apqc#ActOfCardAdministration
 ex:ActOfCardAdministration rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000228 ;
                            rdfs:comment "PROPOSE-EXT (D9). Minted for the corporate-credit-card lifecycle family (issue/handle, process requests, deactivate). REJECTED ex:ActOfFinancialTransaction: card issuance/handling/blocking transfers no money and settles no obligation, so it falls outside that genus's differentia ('transfers money or a Financial Instrument in settlement') -- anchoring it there was a false friend driven by the surface theme 'credit card'. Anchored at the generic cco:ont00000228 (Planned Act) because the act operates on the card artifact (a material participant) rather than manipulating only ICEs (cco:ont00000366) or obtaining a not-previously-held entity (ex:ActOfAcquisition, which covers ordering a card). Recurs in 9.0." ;
@@ -2707,7 +2707,7 @@ ex:ActOfCardAdministration rdf:type owl:Class ;
                            skos:definition "A Planned Act in which an Agent issues, handles, processes a request for, or deactivates a payment card on behalf of an Organization, thereby establishing or altering the card's status without itself transferring money or a Financial Instrument." .
 
 
-###  http://example.org/apqc#ActOfFinancialTransaction
+###  https://fandaws.com/ontology/apqc#ActOfFinancialTransaction
 ex:ActOfFinancialTransaction rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000836 ;
                              rdfs:comment "PROPOSE-EXT (D9). Re-anchored from the bare cco:ont00000228 to cco:ont00000836 (Act of Financial Instrument Use): every subclass here uses/transfers a Financial Instrument (money and cash are Financial Instruments in CCO -- cf. Portion of Cash cco:ont00000475 subClassOf 537), and CCO models settlements, loans, purchases, deposits, withdrawals and exchanges uniformly under 836, so the earlier claim that this genus is 'broader than financial-instrument use' was incorrect (investments and exchanges still USE financial instruments). Rejected cco:ont00001334 'Act of Purchasing' and cco:ont00000389 'Act of Buying' (both acquire a good/service -- too narrow for payments/remittances/trades/deposits) and cco:ont00000366 'Act of Information Processing' (a payment moves a material/financial-instrument filler, not only an ICE). cco:ont00000228 co-asserted because 836 falls outside the S2 standalone-SHACL allowlist. Recurs in payment/treasury/trade categories (9.0)." ;
@@ -2715,7 +2715,7 @@ ex:ActOfFinancialTransaction rdf:type owl:Class ;
                              skos:definition "A Planned Act in which an Agent transfers or uses money or a Financial Instrument to or from another Agent in settlement of an obligation, an investment, or an exchange." .
 
 
-###  http://example.org/apqc#ActOfFormulation
+###  https://fandaws.com/ontology/apqc#ActOfFormulation
 ex:ActOfFormulation rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000511 ;
                     rdfs:comment "Local extension (D9). Anchored under cco:ont00000511 (Act of Planning) because formulating a strategy/mission/design is making a plan to achieve an objective; its output is a Directive ICE. Recurs across develop/define/compose-a-directive processes corpus-wide." ;
@@ -2723,7 +2723,7 @@ ex:ActOfFormulation rdf:type owl:Class ;
                     skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." .
 
 
-###  http://example.org/apqc#ActOfIdentification
+###  https://fandaws.com/ontology/apqc#ActOfIdentification
 ex:ActOfIdentification rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000366 ;
                        rdfs:comment "Local extension (D9). NOT cco:ont00001261 'Act of Identifying' (a communication act). APQC 'Identify ...' denotes discernment, i.e. information processing." ;
@@ -2731,7 +2731,7 @@ ex:ActOfIdentification rdf:type owl:Class ;
                        skos:definition "An Act of Information Processing in which an Agent discerns and enumerates entities of a given kind and produces an Information Content Entity that registers them." .
 
 
-###  http://example.org/apqc#ActOfMonitoring
+###  https://fandaws.com/ontology/apqc#ActOfMonitoring
 ex:ActOfMonitoring rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000366 ;
                    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic monitoring/tracking class. Anchored under cco:ont00000366 (Act of Information Processing) because monitoring ingests repeated observations (including electronic records, not only senses) and yields a descriptive status/deviation ICE -- the GOLDEN PRINCIPLE (descriptive output => information-processing genus) holds. Rejected cco:ont00000037 (Act of Observation: a single sense-based acquisition, too narrow -- monitoring also processes ICEs and is sustained); cco:ont00000636 (Act of Appraisal: renders a single bounded value/quality judgement rather than tracking status over time); and cco:ont00000345 (Act of Measuring: a single quantification against a standard at one time -- at most a method sub-step of the monitoring cycle; a node that is purely one quantification, e.g. Calculate performance measures, anchors to cco:ont00000345 directly, not here). Distinct from ex:ActOfAnalysis (one-shot examination of a fixed input set) by its continuous, longitudinal character. A standing 'Manage/Monitor X' function with no natural end is an Organization Capability (cco:ont00000568) realized in such acts, not itself a process. Recurs corpus-wide (slices 3.0/4.0/5.0/6.0/8.0/9.0/10.0/11.0/12.0/13.0). Reconciled from 10 divergent slice restatements to one definition." ;
@@ -2739,7 +2739,7 @@ ex:ActOfMonitoring rdf:type owl:Class ;
                    skos:definition "An Act of Information Processing in which an Agent repeatedly or continuously observes the state, progress, or performance of some process, system, or quantity over time and produces a Descriptive Information Content Entity that represents its tracked status against expected conditions, targets, or requirements." .
 
 
-###  http://example.org/apqc#ActOfOrganizationalEstablishment
+###  https://fandaws.com/ontology/apqc#ActOfOrganizationalEstablishment
 ex:ActOfOrganizationalEstablishment rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000228 ;
                                     rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no Act-of-Establishment/Organization class (verified: no 'Act of Establish/Organiz/Constitut/Found' label in the closure). REJECTED ex:ActOfFormulation (Act of Planning): formulating composes a Directive ICE, but establishing a committee primarily constitutes an independent continuant (the body) rather than authoring a directive; the responsibility-assignment directive is a downstream byproduct of seating the body, not the act's primary product. Anchored at the generic cco:ont00000228 (Planned Act). Recurs in 9.0." ;
@@ -2747,7 +2747,7 @@ ex:ActOfOrganizationalEstablishment rdf:type owl:Class ;
                                     skos:definition "A Planned Act in which an Agent constitutes and seats an Organization or organizational body (such as a board, committee, or unit), bringing the body into existence and conferring its mandate." .
 
 
-###  http://example.org/apqc#ActOfRemuneration
+###  https://fandaws.com/ontology/apqc#ActOfRemuneration
 ex:ActOfRemuneration rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000449 ;
                      rdfs:comment "PROPOSE-EXT (D9). Inlines the verified CCO leaf cco:ont00000449 (Act of Remuneration, subClassOf cco:ont00001334 Act of Purchasing subClassOf cco:ont00000836) for payroll rows whose APQC text is salary/compensation disbursement to employees -- a closer genus than ex:ActOfFinancialTransaction. NOT used for payroll-TAX remittance to a government authority (the recipient is not the compensated employee; those keep ex:ActOfFinancialTransaction). cco:ont00000228 co-asserted because 449 is outside the standalone-SHACL S2 process-anchor allowlist." ;
@@ -2755,7 +2755,7 @@ ex:ActOfRemuneration rdf:type owl:Class ;
                      skos:definition "An Act of Remuneration in which an Employer disburses a Financial Instrument (salary, wages, bonus, or other compensation) to an Employee for services performed." .
 
 
-###  http://example.org/apqc#ActOfReporting
+###  https://fandaws.com/ontology/apqc#ActOfReporting
 ex:ActOfReporting rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000379 ;
                   rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no broad reporting class spanning compilation and assertion. Anchored under cco:ont00000379 (Act of Representative Communication), with cco:ont00000228 (Planned Act) co-anchored so standalone SHACL resolves the act chain: reporting transfers to recipients a descriptive account (report, statement, scorecard, filing) asserting an organization's condition or results. Pure submission of an already-prepared report may use the verified leaf cco:ont00000151 directly." ;
@@ -2763,7 +2763,7 @@ ex:ActOfReporting rdf:type owl:Class ;
                   skos:definition "An Act of Representative Communication in which an Agent transfers to one or more recipients a Descriptive Information Content Entity (such as a report, statement, scorecard, or filing) that asserts, as true, a representation of an organization's condition or results." .
 
 
-###  http://example.org/apqc#ActOfSelection
+###  https://fandaws.com/ontology/apqc#ActOfSelection
 ex:ActOfSelection rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000366 ;
                   rdfs:comment "Local extension (D9). Anchored under cco:ont00000366 (Act of Information Processing): receives candidate-option ICEs and yields a decision ICE. Distinct from Act of Appraisal (judges without committing) and Act of Planning. NOTE: ratifying a single already-settled option is NOT selection (no candidate set) -- anchor such acts at cco:ont00000228 (Planned Act)." ;
@@ -2771,7 +2771,7 @@ ex:ActOfSelection rdf:type owl:Class ;
                   skos:definition "An Act of Information Processing in which an Agent chooses one or more options from a set of candidates and produces a Directive Information Content Entity that prescribes the chosen option(s)." .
 
 
-###  http://example.org/apqc#ApprovalLimitSpecification
+###  https://fandaws.com/ontology/apqc#ApprovalLimitSpecification
 ex:ApprovalLimitSpecification rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:comment "Minted locally: more specific than ex:FinancialPolicy/ex:FinancialProcedure (numeric approval thresholds). Directive per GOLDEN PRINCIPLE (it prescribes, not describes)." ;
@@ -2780,7 +2780,7 @@ ex:ApprovalLimitSpecification rdf:type owl:Class ;
                               skos:example "A schedule stating that purchases over USD 50,000 require CFO sign-off." .
 
 
-###  http://example.org/apqc#AssetDeploymentPlan
+###  https://fandaws.com/ontology/apqc#AssetDeploymentPlan
 ex:AssetDeploymentPlan rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000965 ;
                        rdfs:comment "Minted: shared vocab has ex:FinancialPlan/ex:Budget but no class specific to asset-resource allocation. Directive because it prescribes a deployment." ;
@@ -2789,7 +2789,7 @@ ex:AssetDeploymentPlan rdf:type owl:Class ;
                        skos:example "A plan reassigning two machines from line A to line B for the next quarter." .
 
 
-###  http://example.org/apqc#AuditJudgement
+###  https://fandaws.com/ontology/apqc#AuditJudgement
 ex:AuditJudgement rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:comment "Minted locally for 9.6.1.3: descriptive output of the invoice/AP-data audit." ;
@@ -2797,7 +2797,7 @@ ex:AuditJudgement rdf:type owl:Class ;
                   skos:definition "A Descriptive Information Content Entity that records the findings of an audit of invoices and key accounts-payable data." .
 
 
-###  http://example.org/apqc#Auditor
+###  https://fandaws.com/ontology/apqc#Auditor
 ex:Auditor rdf:type owl:Class ;
            rdfs:subClassOf cco:ont00001017 ,
                            [ rdf:type owl:Restriction ;
@@ -2808,7 +2808,7 @@ ex:Auditor rdf:type owl:Class ;
            skos:definition "An Agent that bears an auditor role and independently examines an Organization's financial records or controls." .
 
 
-###  http://example.org/apqc#AuditorRole
+###  https://fandaws.com/ontology/apqc#AuditorRole
 ex:AuditorRole rdf:type owl:Class ;
                rdfs:subClassOf obo:BFO_0000023 ;
                rdfs:comment "Covers both internal and external auditors; the bearer (a Person or Organization) carries the role." ;
@@ -2816,7 +2816,7 @@ ex:AuditorRole rdf:type owl:Class ;
                skos:definition "A Role that is borne by an Agent in virtue of being tasked with independently examining and attesting to an Organization's financial records or controls." .
 
 
-###  http://example.org/apqc#BankFeeAnalysis
+###  https://fandaws.com/ontology/apqc#BankFeeAnalysis
 ex:BankFeeAnalysis rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ;
                    rdfs:comment "Local mint for 9.7.2.8. Descriptive: it represents a judgement of fee levels rather than prescribing them." ;
@@ -2824,7 +2824,7 @@ ex:BankFeeAnalysis rdf:type owl:Class ;
                    skos:definition "A Descriptive Information Content Entity that describes a study and negotiated determination of the fees a bank charges for its services." .
 
 
-###  http://example.org/apqc#BankingPartner
+###  https://fandaws.com/ontology/apqc#BankingPartner
 ex:BankingPartner rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00001180 ,
                                   [ rdf:type owl:Restriction ;
@@ -2835,7 +2835,7 @@ ex:BankingPartner rdf:type owl:Class ;
                   skos:definition "An Organization that bears a banking partner role and provides banking, financial-intermediary, or custodial services to a focal Organization." .
 
 
-###  http://example.org/apqc#BankingPartnerRole
+###  https://fandaws.com/ontology/apqc#BankingPartnerRole
 ex:BankingPartnerRole rdf:type owl:Class ;
                       rdfs:subClassOf obo:BFO_0000023 ;
                       rdfs:comment "Used for banks and financial intermediaries in treasury and international-funds processes (9.7, 9.10)." ;
@@ -2843,7 +2843,7 @@ ex:BankingPartnerRole rdf:type owl:Class ;
                       skos:definition "A Role that is borne by an Organization in virtue of providing banking, financial-intermediary, or custodial services to a focal Organization." .
 
 
-###  http://example.org/apqc#Budget
+###  https://fandaws.com/ontology/apqc#Budget
 ex:Budget rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000965 ;
           rdfs:comment "Directive: a budget prescribes intended fund allocation, constraining subsequent spending." ;
@@ -2851,7 +2851,7 @@ ex:Budget rdf:type owl:Class ;
           skos:definition "A Directive Information Content Entity that prescribes the planned allocation of funds to activities over a defined period." .
 
 
-###  http://example.org/apqc#CashPosition
+###  https://fandaws.com/ontology/apqc#CashPosition
 ex:CashPosition rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:comment "Local mint for 9.7.2.1; reconciliation input/output not covered by the shared vocabulary." ;
@@ -2859,14 +2859,14 @@ ex:CashPosition rdf:type owl:Class ;
                 skos:definition "A Descriptive Information Content Entity that describes the reconciled balance of an organization's available cash funds at a point in time." .
 
 
-###  http://example.org/apqc#ChartOfAccounts
+###  https://fandaws.com/ontology/apqc#ChartOfAccounts
 ex:ChartOfAccounts rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ;
                    rdfs:label "Chart of Accounts" ;
                    skos:definition "A Descriptive Information Content Entity that enumerates and classifies the accounts used in an Organization's general ledger." .
 
 
-###  http://example.org/apqc#CodeOfEthics
+###  https://fandaws.com/ontology/apqc#CodeOfEthics
 ex:CodeOfEthics rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000965 ;
                 rdfs:comment "Minted for 9.8. Directive (cco:ont00000965), not Descriptive, because a code prescribes conduct rather than describing it." ;
@@ -2875,28 +2875,28 @@ ex:CodeOfEthics rdf:type owl:Class ;
                 skos:example "A published corporate code of conduct circulated to all employees." .
 
 
-###  http://example.org/apqc#ComplianceReport
+###  https://fandaws.com/ontology/apqc#ComplianceReport
 ex:ComplianceReport rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:label "Internal Controls Compliance Report" ;
                     skos:definition "A Descriptive Information Content Entity that describes the state of an Organization's compliance with its internal-control policies and procedures." .
 
 
-###  http://example.org/apqc#ConsolidatedFinancialStatement
+###  https://fandaws.com/ontology/apqc#ConsolidatedFinancialStatement
 ex:ConsolidatedFinancialStatement rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:label "Consolidated Financial Statement" ;
                                   skos:definition "A Descriptive Information Content Entity that describes the combined financial position and results of a parent Organization and its subsidiaries." .
 
 
-###  http://example.org/apqc#ControlEffectivenessAssessment
+###  https://fandaws.com/ontology/apqc#ControlEffectivenessAssessment
 ex:ControlEffectivenessAssessment rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:label "Control Effectiveness Assessment" ;
                                   skos:definition "A Descriptive Information Content Entity that describes a judgement of how effectively an Organization's internal controls mitigate risk." .
 
 
-###  http://example.org/apqc#ControlResponsibilityAssignment
+###  https://fandaws.com/ontology/apqc#ControlResponsibilityAssignment
 ex:ControlResponsibilityAssignment rdf:type owl:Class ;
                                    rdfs:subClassOf cco:ont00000965 ;
                                    rdfs:comment "Minted for 9.8. Directive because it prescribes who is accountable for what. Output of both 'establish board/audit committee' and 'assign roles and responsibility for internal controls'." ;
@@ -2905,7 +2905,7 @@ ex:ControlResponsibilityAssignment rdf:type owl:Class ;
                                    skos:example "A RACI matrix assigning internal-control duties to the audit committee and process owners." .
 
 
-###  http://example.org/apqc#CorporateCreditCard
+###  https://fandaws.com/ontology/apqc#CorporateCreditCard
 ex:CorporateCreditCard rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000995 ;
                        rdfs:comment "Material object handled in 9.6.3 (manage corporate credit cards): ordered, issued, deactivated. Anchored to cco:ont00000995 (Material Artifact), NOT cco:ont00000537 (Financial Instrument): a credit card is an access/authorization device, not a tradeable asset, so 537's 'designed to be a tradeable asset' differentia is unsatisfied (a finance-theme false friend). Genuinely tradeable instruments are modeled separately under 537 via ex:FinancialInstrument." ;
@@ -2913,7 +2913,7 @@ ex:CorporateCreditCard rdf:type owl:Class ;
                        skos:definition "A Material Artifact issued to an Organization or its personnel that is designed to realize the function of authorizing the charging of business expenses to a corporate credit account." .
 
 
-###  http://example.org/apqc#CorrectiveActionRecord
+###  https://fandaws.com/ontology/apqc#CorrectiveActionRecord
 ex:CorrectiveActionRecord rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:comment "Minted for 9.8.2.2. Descriptive: it records what remediation was performed. The remediation act itself is a Planned Act, not an information-processing act." ;
@@ -2922,21 +2922,21 @@ ex:CorrectiveActionRecord rdf:type owl:Class ;
                           skos:example "A remediation log noting that a missing approval control was reinstated for the procurement workflow." .
 
 
-###  http://example.org/apqc#CostAnalysis
+###  https://fandaws.com/ontology/apqc#CostAnalysis
 ex:CostAnalysis rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:label "Cost Analysis" ;
                 skos:definition "A Descriptive Information Content Entity that describes the composition, drivers, and behavior of an Organization's costs." .
 
 
-###  http://example.org/apqc#CostData
+###  https://fandaws.com/ontology/apqc#CostData
 ex:CostData rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00000853 ;
             rdfs:label "Cost Data" ;
             skos:definition "A Descriptive Information Content Entity that describes the costs incurred in producing products, delivering services, or performing activities." .
 
 
-###  http://example.org/apqc#CostDriverMeasurement
+###  https://fandaws.com/ontology/apqc#CostDriverMeasurement
 ex:CostDriverMeasurement rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:comment "Minted: distinct from ex:CostDriverSpecification (which names the drivers) - this records their quantified values. Descriptive measurement record." ;
@@ -2945,7 +2945,7 @@ ex:CostDriverMeasurement rdf:type owl:Class ;
                          skos:example "A table giving 12,400 machine-hours and 830 setups for the period." .
 
 
-###  http://example.org/apqc#CostDriverSpecification
+###  https://fandaws.com/ontology/apqc#CostDriverSpecification
 ex:CostDriverSpecification rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:comment "Minted: shared vocab has ex:CostData (raw cost facts) and ex:CostAnalysis (a cost study) but no class for the enumerated set of identified cost drivers. Descriptive because it registers what the drivers are." ;
@@ -2954,7 +2954,7 @@ ex:CostDriverSpecification rdf:type owl:Class ;
                            skos:example "A list naming machine-hours, setups, and order lines as the drivers of warehousing cost." .
 
 
-###  http://example.org/apqc#CreditAssessment
+###  https://fandaws.com/ontology/apqc#CreditAssessment
 ex:CreditAssessment rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ,
                                     [ rdf:type owl:Restriction ;
@@ -2965,14 +2965,14 @@ ex:CreditAssessment rdf:type owl:Class ;
                     skos:definition "A Descriptive Information Content Entity that describes a judgement of a customer's or applicant's creditworthiness." .
 
 
-###  http://example.org/apqc#CreditPolicy
+###  https://fandaws.com/ontology/apqc#CreditPolicy
 ex:CreditPolicy rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000965 ;
                 rdfs:label "Credit Policy" ;
                 skos:definition "A Directive Information Content Entity that prescribes the credit standards, terms, and collection rules an Organization applies to its customers." .
 
 
-###  http://example.org/apqc#CreditScoreRequirementSpecification
+###  https://fandaws.com/ontology/apqc#CreditScoreRequirementSpecification
 ex:CreditScoreRequirementSpecification rdf:type owl:Class ;
                                        rdfs:subClassOf cco:ont00000965 ;
                                        rdfs:comment "Directive (not Descriptive): a requirement prescribes a threshold the applicant must satisfy, rather than describing a projected future state. Minted for ex:P14188 ('Planning credit score requirements based on established credit policies'); contrast ex:FinancialForecast, which is a predictive description of income/cash flows and does not denote a credit-score requirement." ;
@@ -2980,14 +2980,14 @@ ex:CreditScoreRequirementSpecification rdf:type owl:Class ;
                                        skos:definition "A Directive Information Content Entity that prescribes the minimum credit scores an applicant must meet for credit to be extended." .
 
 
-###  http://example.org/apqc#CreditScoringHistory
+###  https://fandaws.com/ontology/apqc#CreditScoringHistory
 ex:CreditScoringHistory rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:label "Credit Scoring History" ;
                         skos:definition "A Descriptive Information Content Entity that describes the past credit scores and payment behavior of a customer or applicant." .
 
 
-###  http://example.org/apqc#CriticalActivityDetermination
+###  https://fandaws.com/ontology/apqc#CriticalActivityDetermination
 ex:CriticalActivityDetermination rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000853 ;
                                  rdfs:comment "Minted: no shared-vocab class registers the essential/non-cuttable activities. Descriptive register of a determination." ;
@@ -2996,7 +2996,7 @@ ex:CriticalActivityDetermination rdf:type owl:Class ;
                                  skos:example "A register marking payroll and statutory reporting as indispensable." .
 
 
-###  http://example.org/apqc#CurrencyConversionRecord
+###  https://fandaws.com/ontology/apqc#CurrencyConversionRecord
 ex:CurrencyConversionRecord rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:comment "Minted for group 9.11. Output of 9.11.4. Descriptive record of a performed conversion." ;
@@ -3005,7 +3005,7 @@ ex:CurrencyConversionRecord rdf:type owl:Class ;
                             skos:example "A record converting 100,000 yen to US dollars at the day's spot rate." .
 
 
-###  http://example.org/apqc#Customer
+###  https://fandaws.com/ontology/apqc#Customer
 ex:Customer rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00001017 ,
                             [ rdf:type owl:Restriction ;
@@ -3016,21 +3016,21 @@ ex:Customer rdf:type owl:Class ;
             skos:definition "An Agent that bears a customer role in relation to a focal Organization." .
 
 
-###  http://example.org/apqc#CustomerMasterFile
+###  https://fandaws.com/ontology/apqc#CustomerMasterFile
 ex:CustomerMasterFile rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Customer Master File" ;
                       skos:definition "A Descriptive Information Content Entity that records the identifying details and purchase history of an Organization's customers." .
 
 
-###  http://example.org/apqc#CustomerRole
+###  https://fandaws.com/ontology/apqc#CustomerRole
 ex:CustomerRole rdf:type owl:Class ;
                 rdfs:subClassOf obo:BFO_0000023 ;
                 rdfs:label "Customer Role" ;
                 skos:definition "A Role that is borne by an Agent in virtue of purchasing, or being billed for, goods or services from an Organization." .
 
 
-###  http://example.org/apqc#CustomsInformation
+###  https://fandaws.com/ontology/apqc#CustomsInformation
 ex:CustomsInformation rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:comment "Minted for group 9.11. The ICE transferred to customs in 9.11.6 (an Act of Communication)." ;
@@ -3039,7 +3039,7 @@ ex:CustomsInformation rdf:type owl:Class ;
                       skos:example "An electronic customs declaration submitted with a shipment." .
 
 
-###  http://example.org/apqc#DebtorRole
+###  https://fandaws.com/ontology/apqc#DebtorRole
 ex:DebtorRole rdf:type owl:Class ;
               rdfs:subClassOf obo:BFO_0000023 ;
               rdfs:comment "Used for delinquent/default account holders in 9.2." ;
@@ -3047,7 +3047,7 @@ ex:DebtorRole rdf:type owl:Class ;
               skos:definition "A Role that is borne by an Agent in virtue of owing an outstanding amount to an Organization under a credit or payment obligation." .
 
 
-###  http://example.org/apqc#DefaultAccountManagementCapability
+###  https://fandaws.com/ontology/apqc#DefaultAccountManagementCapability
 ex:DefaultAccountManagementCapability rdf:type owl:Class ;
                                       rdfs:subClassOf cco:ont00000568 ,
                                                       [ rdf:type owl:Restriction ;
@@ -3059,7 +3059,7 @@ ex:DefaultAccountManagementCapability rdf:type owl:Class ;
                                       skos:definition "An Organization Capability that is realized in the recovery and collection acts by which an organization handles customer accounts that have not met their agreed repayment obligations." .
 
 
-###  http://example.org/apqc#DutyCalculation
+###  https://fandaws.com/ontology/apqc#DutyCalculation
 ex:DutyCalculation rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ;
                    rdfs:comment "Minted for group 9.11. Output of 9.11.5. Descriptive: it represents a computed amount owed, it does not prescribe an action." ;
@@ -3068,7 +3068,7 @@ ex:DutyCalculation rdf:type owl:Class ;
                    skos:example "A line-item computation of customs duty owed on an imported shipment." .
 
 
-###  http://example.org/apqc#EarningsInformation
+###  https://fandaws.com/ontology/apqc#EarningsInformation
 ex:EarningsInformation rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:label "Employee Earnings Information" ;
@@ -3076,7 +3076,7 @@ ex:EarningsInformation rdf:type owl:Class ;
                        skos:example "The salary-structure record (base, allowances, bonus components) for one employee." .
 
 
-###  http://example.org/apqc#Employee
+###  https://fandaws.com/ontology/apqc#Employee
 ex:Employee rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00001017 ,
                             [ rdf:type owl:Restriction ;
@@ -3088,7 +3088,7 @@ ex:Employee rdf:type owl:Class ;
             skos:definition "An Agent that bears an employee role in relation to an employing Organization." .
 
 
-###  http://example.org/apqc#EmployeeRole
+###  https://fandaws.com/ontology/apqc#EmployeeRole
 ex:EmployeeRole rdf:type owl:Class ;
                 rdfs:subClassOf obo:BFO_0000023 ;
                 rdfs:comment "Used for payroll and expense-reimbursement subjects in 9.5 and 9.6." ;
@@ -3096,7 +3096,7 @@ ex:EmployeeRole rdf:type owl:Class ;
                 skos:definition "A Role that is borne by a Person in virtue of being employed by an Organization and entitled to compensation from it." .
 
 
-###  http://example.org/apqc#EmployeeTaxStatement
+###  https://fandaws.com/ontology/apqc#EmployeeTaxStatement
 ex:EmployeeTaxStatement rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:label "Employee Annual Tax Statement" ;
@@ -3104,7 +3104,7 @@ ex:EmployeeTaxStatement rdf:type owl:Class ;
                         skos:example "A year-end wage-and-tax statement provided to each employee." .
 
 
-###  http://example.org/apqc#EmployeeUtilizationReport
+###  https://fandaws.com/ontology/apqc#EmployeeUtilizationReport
 ex:EmployeeUtilizationReport rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:label "Employee Utilization Report" ;
@@ -3112,7 +3112,7 @@ ex:EmployeeUtilizationReport rdf:type owl:Class ;
                              skos:example "A utilization dashboard showing each consultant's billable-hour ratio." .
 
 
-###  http://example.org/apqc#ExceptionResolutionRecord
+###  https://fandaws.com/ontology/apqc#ExceptionResolutionRecord
 ex:ExceptionResolutionRecord rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:comment "Minted locally for 9.6.1.7: descriptive output of researching/resolving payable exceptions." ;
@@ -3120,7 +3120,7 @@ ex:ExceptionResolutionRecord rdf:type owl:Class ;
                              skos:definition "A Descriptive Information Content Entity that records the investigation and disposition of an atypical or inconsistent accounts-payable situation." .
 
 
-###  http://example.org/apqc#ExposureLimitResolution
+###  https://fandaws.com/ontology/apqc#ExposureLimitResolution
 ex:ExposureLimitResolution rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000965 ;
                            rdfs:comment "Local mint for 9.7.5.4.2. Directive because a resolution prescribes the corrective course of action." ;
@@ -3128,7 +3128,7 @@ ex:ExposureLimitResolution rdf:type owl:Class ;
                            skos:definition "A Directive Information Content Entity that prescribes the settlement of a customer exposure-limit violation." .
 
 
-###  http://example.org/apqc#FinanceFunction
+###  https://fandaws.com/ontology/apqc#FinanceFunction
 ex:FinanceFunction rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00001180 ,
                                    [ rdf:type owl:Restriction ;
@@ -3140,7 +3140,7 @@ ex:FinanceFunction rdf:type owl:Class ;
                    skos:definition "An Organization that bears a finance-function role within a larger organization in virtue of being tasked with carrying out its financial management activities." .
 
 
-###  http://example.org/apqc#FinanceFunctionRole
+###  https://fandaws.com/ontology/apqc#FinanceFunctionRole
 ex:FinanceFunctionRole rdf:type owl:Class ;
                        rdfs:subClassOf obo:BFO_0000023 ;
                        rdfs:comment "Shared across 9.0. Borne by the independent continuant (the finance unit or officer), never by an ICE." ;
@@ -3148,14 +3148,14 @@ ex:FinanceFunctionRole rdf:type owl:Class ;
                        skos:definition "A Role that is borne by an Agent or organizational unit in virtue of being tasked with carrying out the financial management activities of an Organization." .
 
 
-###  http://example.org/apqc#FinancialData
+###  https://fandaws.com/ontology/apqc#FinancialData
 ex:FinancialData rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000853 ;
                  rdfs:label "Financial Data" ;
                  skos:definition "A Descriptive Information Content Entity that describes an Organization's financial transactions, balances, or results." .
 
 
-###  http://example.org/apqc#FinancialForecast
+###  https://fandaws.com/ontology/apqc#FinancialForecast
 ex:FinancialForecast rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000626 ;
                      rdfs:comment "Predictive (a specialization of Descriptive, cco:ont00000853): a forecast describes an uncertain expected future state rather than prescribing an allocation; contrast ex:Budget. Re-anchored from cco:ont00000853 to cco:ont00000626 (Predictive Information Content Entity) so the output kind matches the predictive nature of ex:P10773 (Act of Prediction). Still a Descriptive ICE for GOLDEN-PRINCIPLE purposes (cco:ont00000626 subClassOf cco:ont00000853)." ;
@@ -3163,7 +3163,7 @@ ex:FinancialForecast rdf:type owl:Class ;
                      skos:definition "A Predictive Information Content Entity that describes projected future income, expenses, or cash flows of an Organization." .
 
 
-###  http://example.org/apqc#FinancialInstrument
+###  https://fandaws.com/ontology/apqc#FinancialInstrument
 ex:FinancialInstrument rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000537 ;
                        rdfs:comment "Specializes the verified CCO class cco:ont00000537 (a legally-sanctioned tradeable Material Artifact) for the treasury and trade instruments in 9.7, 9.10, 9.11." ;
@@ -3171,7 +3171,7 @@ ex:FinancialInstrument rdf:type owl:Class ;
                        skos:definition "A Financial Instrument such as a bond, currency holding, derivative, or marketable security that is held, traded, or hedged in treasury operations." .
 
 
-###  http://example.org/apqc#FinancialJustification
+###  https://fandaws.com/ontology/apqc#FinancialJustification
 ex:FinancialJustification rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:comment "Business case substantiating project approval in 9.4." ;
@@ -3179,7 +3179,7 @@ ex:FinancialJustification rdf:type owl:Class ;
                           skos:definition "A Descriptive Information Content Entity that describes the projected costs and benefits supporting or opposing a capital project or investment." .
 
 
-###  http://example.org/apqc#FinancialManagementCapability
+###  https://fandaws.com/ontology/apqc#FinancialManagementCapability
 ex:FinancialManagementCapability rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000568 ;
                                  rdfs:comment "Process-layer 'Manage ...' standing functions (R5 capabilities) realize-in the section's acts; group modules attach realized-in restrictions to this or its specializations." ;
@@ -3187,14 +3187,14 @@ ex:FinancialManagementCapability rdf:type owl:Class ;
                                  skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to plan, account for, control, and report on its financial resources." .
 
 
-###  http://example.org/apqc#FinancialPlan
+###  https://fandaws.com/ontology/apqc#FinancialPlan
 ex:FinancialPlan rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000965 ;
                  rdfs:label "Financial Plan" ;
                  skos:definition "A Directive Information Content Entity that prescribes the financial goals and the actions intended to achieve them over a planning horizon." .
 
 
-###  http://example.org/apqc#FinancialPolicy
+###  https://fandaws.com/ontology/apqc#FinancialPolicy
 ex:FinancialPolicy rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:comment "General policy genus for the many 'Establish ... policies' nodes across 9.0." ;
@@ -3202,7 +3202,7 @@ ex:FinancialPolicy rdf:type owl:Class ;
                    skos:definition "A Directive Information Content Entity that prescribes the rules governing a financial process such as budgeting, accounting, credit, or reimbursement." .
 
 
-###  http://example.org/apqc#FinancialPolicyManagementCapability
+###  https://fandaws.com/ontology/apqc#FinancialPolicyManagementCapability
 ex:FinancialPolicyManagementCapability rdf:type owl:Class ;
                                        rdfs:subClassOf cco:ont00000568 ,
                                                        [ rdf:type owl:Restriction ;
@@ -3227,14 +3227,14 @@ ex:FinancialPolicyManagementCapability rdf:type owl:Class ;
                                        skos:example "A finance department's ongoing capacity to keep accounting policy current and enforced." .
 
 
-###  http://example.org/apqc#FinancialProcedure
+###  https://fandaws.com/ontology/apqc#FinancialProcedure
 ex:FinancialProcedure rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000965 ;
                       rdfs:label "Financial Procedure" ;
                       skos:definition "A Directive Information Content Entity that prescribes the ordered steps for carrying out a financial process." .
 
 
-###  http://example.org/apqc#FinancialReport
+###  https://fandaws.com/ontology/apqc#FinancialReport
 ex:FinancialReport rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ;
                    rdfs:comment "General report genus for AR/AP, profitability, treasury, and shareholder reports across 9.0." ;
@@ -3242,14 +3242,14 @@ ex:FinancialReport rdf:type owl:Class ;
                    skos:definition "A Descriptive Information Content Entity that presents financial data compiled for a management, shareholder, or regulatory audience." .
 
 
-###  http://example.org/apqc#FinancialStatement
+###  https://fandaws.com/ontology/apqc#FinancialStatement
 ex:FinancialStatement rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Financial Statement" ;
                       skos:definition "A Descriptive Information Content Entity that describes an Organization's financial position and results, comprising balance sheet, income statement, cash-flow statement, and statement of equity." .
 
 
-###  http://example.org/apqc#FixedAssetProjectAccountingCapability
+###  https://fandaws.com/ontology/apqc#FixedAssetProjectAccountingCapability
 ex:FixedAssetProjectAccountingCapability rdf:type owl:Class ;
                                          rdfs:subClassOf cco:ont00000568 ,
                                                          [ rdf:type owl:Restriction ;
@@ -3266,21 +3266,21 @@ ex:FixedAssetProjectAccountingCapability rdf:type owl:Class ;
                                          skos:example "A corporation's standing ability to run capital-project accounting across its portfolio of multi-year investments." .
 
 
-###  http://example.org/apqc#FixedAssetRegister
+###  https://fandaws.com/ontology/apqc#FixedAssetRegister
 ex:FixedAssetRegister rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Fixed-Asset Register" ;
                       skos:definition "A Descriptive Information Content Entity that records each of an Organization's fixed assets together with its cost, useful life, depreciation, and resale value." .
 
 
-###  http://example.org/apqc#GeneralLedger
+###  https://fandaws.com/ontology/apqc#GeneralLedger
 ex:GeneralLedger rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000853 ;
                  rdfs:label "General Ledger" ;
                  skos:definition "A Descriptive Information Content Entity that records, by account, the complete set of an Organization's financial transactions for an accounting period." .
 
 
-###  http://example.org/apqc#GovernanceBody
+###  https://fandaws.com/ontology/apqc#GovernanceBody
 ex:GovernanceBody rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00001180 ;
                   rdfs:comment "Participant minted for ex:P10914 (the board of directors and audit committee that the establishment act constitutes). Modeled as an Organization (independent continuant) that bears the governance mandate, never as an ICE." ;
@@ -3288,7 +3288,7 @@ ex:GovernanceBody rdf:type owl:Class ;
                   skos:definition "An Organization constituted within or over a focal Organization to direct, oversee, or assure its activities, such as a board of directors or an audit committee." .
 
 
-###  http://example.org/apqc#HedgeRequirementSpecification
+###  https://fandaws.com/ontology/apqc#HedgeRequirementSpecification
 ex:HedgeRequirementSpecification rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000965 ;
                                  rdfs:comment "Local mint for 9.7.5.2.3 and 9.7.5.3.3. Directive because it prescribes which hedges must be put in place." ;
@@ -3296,7 +3296,7 @@ ex:HedgeRequirementSpecification rdf:type owl:Class ;
                                  skos:definition "A Directive Information Content Entity that prescribes the hedging requirements for a class of market exposures in accordance with an organization's risk policy." .
 
 
-###  http://example.org/apqc#HedgeSelectionDecision
+###  https://fandaws.com/ontology/apqc#HedgeSelectionDecision
 ex:HedgeSelectionDecision rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000965 ;
                           rdfs:comment "Local mint for 9.7.5.5.4. Directive because a selection decision commits to a chosen option." ;
@@ -3304,14 +3304,14 @@ ex:HedgeSelectionDecision rdf:type owl:Class ;
                           skos:definition "A Directive Information Content Entity that prescribes which hedging option is to be executed after evaluation of available options." .
 
 
-###  http://example.org/apqc#HedgingStrategy
+###  https://fandaws.com/ontology/apqc#HedgingStrategy
 ex:HedgingStrategy rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:label "Hedging Strategy" ;
                    skos:definition "A Directive Information Content Entity that prescribes the positions an Organization will take to offset exposure to financial risk." .
 
 
-###  http://example.org/apqc#ImportExportControlCapability
+###  https://fandaws.com/ontology/apqc#ImportExportControlCapability
 ex:ImportExportControlCapability rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000568 ,
                                                  [ rdf:type owl:Restriction ;
@@ -3324,7 +3324,7 @@ ex:ImportExportControlCapability rdf:type owl:Class ;
                                  skos:example "A trade-compliance department's standing capacity to govern what the firm imports and exports." .
 
 
-###  http://example.org/apqc#InternalControlCapability
+###  https://fandaws.com/ontology/apqc#InternalControlCapability
 ex:InternalControlCapability rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000568 ,
                                              [ rdf:type owl:Restriction ;
@@ -3343,14 +3343,14 @@ ex:InternalControlCapability rdf:type owl:Class ;
                              skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to establish, operate, monitor, and report on internal controls over financial reporting and operations." .
 
 
-###  http://example.org/apqc#InternalControlPolicy
+###  https://fandaws.com/ontology/apqc#InternalControlPolicy
 ex:InternalControlPolicy rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ;
                          rdfs:label "Internal Control Policy" ;
                          skos:definition "A Directive Information Content Entity that prescribes the controls, roles, and responsibilities an Organization adopts to assure reliable financial reporting and operations." .
 
 
-###  http://example.org/apqc#InternationalFundsManagementCapability
+###  https://fandaws.com/ontology/apqc#InternationalFundsManagementCapability
 ex:InternationalFundsManagementCapability rdf:type owl:Class ;
                                           rdfs:subClassOf cco:ont00000568 ,
                                                           [ rdf:type owl:Restriction ;
@@ -3375,14 +3375,14 @@ ex:InternationalFundsManagementCapability rdf:type owl:Class ;
                                           skos:example "An enterprise treasury team's ongoing program for consolidating subsidiary cash and managing cross-border currency risk." .
 
 
-###  http://example.org/apqc#InvestmentPolicy
+###  https://fandaws.com/ontology/apqc#InvestmentPolicy
 ex:InvestmentPolicy rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000965 ;
                     rdfs:label "Investment Policy" ;
                     skos:definition "A Directive Information Content Entity that prescribes the principles governing an Organization's investment decisions." .
 
 
-###  http://example.org/apqc#Invoice
+###  https://fandaws.com/ontology/apqc#Invoice
 ex:Invoice rdf:type owl:Class ;
            rdfs:subClassOf cco:ont00000853 ,
                            [ rdf:type owl:Restriction ;
@@ -3394,7 +3394,7 @@ ex:Invoice rdf:type owl:Class ;
            skos:definition "A Descriptive Information Content Entity that describes a commercial transaction between a seller and a customer, itemizing quantities, prices, dates, and tax." .
 
 
-###  http://example.org/apqc#LeaveRecord
+###  https://fandaws.com/ontology/apqc#LeaveRecord
 ex:LeaveRecord rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00000853 ;
                rdfs:label "Leave Report" ;
@@ -3402,7 +3402,7 @@ ex:LeaveRecord rdf:type owl:Class ;
                skos:example "A monthly report of vacation, sick, and unpaid leave balances per employee." .
 
 
-###  http://example.org/apqc#LetterOfCredit
+###  https://fandaws.com/ontology/apqc#LetterOfCredit
 ex:LetterOfCredit rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000965 ;
                   rdfs:comment "Directive: it commits a bank to pay under stated conditions (9.11)." ,
@@ -3411,7 +3411,7 @@ ex:LetterOfCredit rdf:type owl:Class ;
                   skos:definition "A Directive Information Content Entity issued by a bank that prescribes payment to a seller upon satisfaction of specified delivery conditions." .
 
 
-###  http://example.org/apqc#LifeCycleCostAnalysis
+###  https://fandaws.com/ontology/apqc#LifeCycleCostAnalysis
 ex:LifeCycleCostAnalysis rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:comment "Minted: narrower than ex:CostAnalysis, which is not stage/life-cycle structured. Descriptive." ;
@@ -3420,7 +3420,7 @@ ex:LifeCycleCostAnalysis rdf:type owl:Class ;
                          skos:example "A cradle-to-grave cost breakdown for a product across design, production, and disposal." .
 
 
-###  http://example.org/apqc#MarketRateData
+###  https://fandaws.com/ontology/apqc#MarketRateData
 ex:MarketRateData rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:comment "Input to treasury, hedging, and international-funds processes (9.7, 9.10)." ;
@@ -3428,7 +3428,7 @@ ex:MarketRateData rdf:type owl:Class ;
                   skos:definition "A Descriptive Information Content Entity that describes prevailing interest rates, foreign-exchange rates, or other market prices." .
 
 
-###  http://example.org/apqc#NewProductEvaluation
+###  https://fandaws.com/ontology/apqc#NewProductEvaluation
 ex:NewProductEvaluation rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:comment "Minted: distinct from ex:ProfitabilityAnalysis (general profit study) - this is the appraisal of a prospective product's viability. Descriptive judgement." ;
@@ -3437,7 +3437,7 @@ ex:NewProductEvaluation rdf:type owl:Class ;
                         skos:example "A go-to-market assessment of a proposed product line for a target segment." .
 
 
-###  http://example.org/apqc#P10728
+###  https://fandaws.com/ontology/apqc#P10728
 ex:P10728 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -3465,7 +3465,7 @@ ex:P10728 rdf:type owl:Class ;
           skos:example "A corporation's standing management-accounting function exercised continuously across fiscal periods." .
 
 
-###  http://example.org/apqc#P10729
+###  https://fandaws.com/ontology/apqc#P10729
 ex:P10729 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -3501,7 +3501,7 @@ ex:P10729 rdf:type owl:Class ;
           skos:example "A finance team's annual revenue close in which the year's customer transactions are reviewed to examine profits." .
 
 
-###  http://example.org/apqc#P10730
+###  https://fandaws.com/ontology/apqc#P10730
 ex:P10730 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -3529,7 +3529,7 @@ ex:P10730 rdf:type owl:Class ;
           skos:example "A company's fiscal-period close culminating in a published set of financial statements." .
 
 
-###  http://example.org/apqc#P10732
+###  https://fandaws.com/ontology/apqc#P10732
 ex:P10732 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -3557,7 +3557,7 @@ ex:P10732 rdf:type owl:Class ;
           skos:example "A company's biweekly payroll cycle that pays employees and remits withheld taxes." .
 
 
-###  http://example.org/apqc#P10733
+###  https://fandaws.com/ontology/apqc#P10733
 ex:P10733 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -3581,7 +3581,7 @@ ex:P10733 rdf:type owl:Class ;
           skos:example "A finance team's monthly run that settles supplier invoices, employee reimbursements, and corporate-card balances." .
 
 
-###  http://example.org/apqc#P10734
+###  https://fandaws.com/ontology/apqc#P10734
 ex:P10734 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -3609,7 +3609,7 @@ ex:P10734 rdf:type owl:Class ;
           skos:example "A corporate treasury department's ongoing stewardship of the firm's cash, debt, investments, and hedging." .
 
 
-###  http://example.org/apqc#P10738
+###  https://fandaws.com/ontology/apqc#P10738
 ex:P10738 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3645,7 +3645,7 @@ ex:P10738 rdf:type owl:Class ;
           skos:example "A finance team's annual budgeting and forecasting cycle led by the CFO." .
 
 
-###  http://example.org/apqc#P10739
+###  https://fandaws.com/ontology/apqc#P10739
 ex:P10739 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -3681,7 +3681,7 @@ ex:P10739 rdf:type owl:Class ;
           skos:example "A cost-accounting close that compiles product costs into the period's financial statements." .
 
 
-###  http://example.org/apqc#P10740
+###  https://fandaws.com/ontology/apqc#P10740
 ex:P10740 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3709,7 +3709,7 @@ ex:P10740 rdf:type owl:Class ;
           skos:example "A cost-reduction initiative that profiles cost drivers and reallocates assets." .
 
 
-###  http://example.org/apqc#P10741
+###  https://fandaws.com/ontology/apqc#P10741
 ex:P10741 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3745,7 +3745,7 @@ ex:P10741 rdf:type owl:Class ;
           skos:example "A profitability and product-mix review cycle assessing performance against targets." .
 
 
-###  http://example.org/apqc#P10742
+###  https://fandaws.com/ontology/apqc#P10742
 ex:P10742 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -3789,7 +3789,7 @@ ex:P10742 rdf:type owl:Class ;
           skos:example "A credit department reviews a customer's loan request and decides on a credit line." .
 
 
-###  http://example.org/apqc#P10743
+###  https://fandaws.com/ontology/apqc#P10743
 ex:P10743 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -3825,7 +3825,7 @@ ex:P10743 rdf:type owl:Class ;
           skos:example "Billing issues a tax invoice for a customer's order." .
 
 
-###  http://example.org/apqc#P10744
+###  https://fandaws.com/ontology/apqc#P10744
 ex:P10744 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -3861,7 +3861,7 @@ ex:P10744 rdf:type owl:Class ;
           skos:example "The AR team applies and books a batch of customer cheque and electronic payments." .
 
 
-###  http://example.org/apqc#P10745
+###  https://fandaws.com/ontology/apqc#P10745
 ex:P10745 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -3901,7 +3901,7 @@ ex:P10745 rdf:type owl:Class ;
           skos:example "The collections team posts a day's debtor receipts to the ledger." .
 
 
-###  http://example.org/apqc#P10746
+###  https://fandaws.com/ontology/apqc#P10746
 ex:P10746 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -3941,7 +3941,7 @@ ex:P10746 rdf:type owl:Class ;
           skos:example "Accounting books the period's required adjustments and deductions." .
 
 
-###  http://example.org/apqc#P10748
+###  https://fandaws.com/ontology/apqc#P10748
 ex:P10748 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -3993,7 +3993,7 @@ ex:P10748 rdf:type owl:Class ;
           skos:example "The monthly general-ledger close performed by a corporate accounting team." .
 
 
-###  http://example.org/apqc#P10749
+###  https://fandaws.com/ontology/apqc#P10749
 ex:P10749 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -4045,7 +4045,7 @@ ex:P10749 rdf:type owl:Class ;
           skos:example "Maintaining the fixed-asset subledger across a fiscal year." .
 
 
-###  http://example.org/apqc#P10750
+###  https://fandaws.com/ontology/apqc#P10750
 ex:P10750 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -4093,7 +4093,7 @@ ex:P10750 rdf:type owl:Class ;
           skos:example "Issuing the quarterly financial-reporting package to investors." .
 
 
-###  http://example.org/apqc#P10751
+###  https://fandaws.com/ontology/apqc#P10751
 ex:P10751 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -4125,7 +4125,7 @@ ex:P10751 rdf:type owl:Class ;
           skos:example "A finance team assembles a capital-project finance report and budget package and submits it to the investment committee for approval." .
 
 
-###  http://example.org/apqc#P10752
+###  https://fandaws.com/ontology/apqc#P10752
 ex:P10752 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -4157,7 +4157,7 @@ ex:P10752 rdf:type owl:Class ;
           skos:example "An accounting team sets up a new capital project, books its transactions, tracks spend against budget, capitalizes it on completion, and measures its return." .
 
 
-###  http://example.org/apqc#P10753
+###  https://fandaws.com/ontology/apqc#P10753
 ex:P10753 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -4193,7 +4193,7 @@ ex:P10753 rdf:type owl:Class ;
           skos:example "Capturing every employee's daily hours, billable time, and leave into a time record." .
 
 
-###  http://example.org/apqc#P10754
+###  https://fandaws.com/ontology/apqc#P10754
 ex:P10754 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -4241,7 +4241,7 @@ ex:P10754 rdf:type owl:Class ;
           skos:example "Running a pay cycle that calculates and pays each employee's net salary and bonuses." .
 
 
-###  http://example.org/apqc#P10755
+###  https://fandaws.com/ontology/apqc#P10755
 ex:P10755 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -4273,7 +4273,7 @@ ex:P10755 rdf:type owl:Class ;
           skos:example "Withholding income tax from salaries and paying it to the revenue authority." .
 
 
-###  http://example.org/apqc#P10756
+###  https://fandaws.com/ontology/apqc#P10756
 ex:P10756 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -4333,7 +4333,7 @@ ex:P10756 rdf:type owl:Class ;
           skos:example "An AP department settling a batch of approved supplier invoices." .
 
 
-###  http://example.org/apqc#P10757
+###  https://fandaws.com/ontology/apqc#P10757
 ex:P10757 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -4369,7 +4369,7 @@ ex:P10757 rdf:type owl:Class ;
           skos:example "Settling an employee's approved travel-expense claim." .
 
 
-###  http://example.org/apqc#P10758
+###  https://fandaws.com/ontology/apqc#P10758
 ex:P10758 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -4413,7 +4413,7 @@ ex:P10758 rdf:type owl:Class ;
           skos:example "A treasury policy office continuously maintaining the firm's investment rulebook." .
 
 
-###  http://example.org/apqc#P10759
+###  https://fandaws.com/ontology/apqc#P10759
 ex:P10759 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -4445,7 +4445,7 @@ ex:P10759 rdf:type owl:Class ;
           skos:example "A cash-management team's ongoing oversight of corporate liquidity." .
 
 
-###  http://example.org/apqc#P10760
+###  https://fandaws.com/ontology/apqc#P10760
 ex:P10760 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -4481,7 +4481,7 @@ ex:P10760 rdf:type owl:Class ;
           skos:example "A corporate in-house bank settling intercompany balances for the group." .
 
 
-###  http://example.org/apqc#P10761
+###  https://fandaws.com/ontology/apqc#P10761
 ex:P10761 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -4513,7 +4513,7 @@ ex:P10761 rdf:type owl:Class ;
           skos:example "A treasury investment desk balancing the firm's debt and investment book." .
 
 
-###  http://example.org/apqc#P10762
+###  https://fandaws.com/ontology/apqc#P10762
 ex:P10762 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4553,7 +4553,7 @@ ex:P10762 rdf:type owl:Class ;
           skos:example "A controllership team drafts and ratifies the company's internal-control policy and supporting procedures." .
 
 
-###  http://example.org/apqc#P10764
+###  https://fandaws.com/ontology/apqc#P10764
 ex:P10764 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -4585,7 +4585,7 @@ ex:P10764 rdf:type owl:Class ;
           skos:example "A compliance officer issues the annual internal-controls compliance report to the relevant stakeholders." .
 
 
-###  http://example.org/apqc#P10765
+###  https://fandaws.com/ontology/apqc#P10765
 ex:P10765 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4613,7 +4613,7 @@ ex:P10765 rdf:type owl:Class ;
           skos:example "A tax department sets next year's effective-tax-rate target and documents the plan to achieve it." .
 
 
-###  http://example.org/apqc#P10766
+###  https://fandaws.com/ontology/apqc#P10766
 ex:P10766 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -4653,7 +4653,7 @@ ex:P10766 rdf:type owl:Class ;
           skos:example "A finance shared-service center runs the quarterly cycle that files and pays all corporate and indirect taxes." .
 
 
-###  http://example.org/apqc#P10767
+###  https://fandaws.com/ontology/apqc#P10767
 ex:P10767 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4673,7 +4673,7 @@ ex:P10767 rdf:type owl:Class ;
           skos:example "A treasury analyst tracks global FX and interest-rate movements and issues a weekly currency-rate forecast." .
 
 
-###  http://example.org/apqc#P10768
+###  https://fandaws.com/ontology/apqc#P10768
 ex:P10768 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -4693,7 +4693,7 @@ ex:P10768 rdf:type owl:Class ;
           skos:example "A treasury operation converts EUR to USD and remits an intercompany payment to settle a cross-border purchase." .
 
 
-###  http://example.org/apqc#P10769
+###  https://fandaws.com/ontology/apqc#P10769
 ex:P10769 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4717,7 +4717,7 @@ ex:P10769 rdf:type owl:Class ;
           skos:example "A treasurer measures net open EUR exposure and forecasts its loss potential (the offsetting hedge decision/execution being modeled finer-grained at 9.7.5: ex:P19581 / ex:P19582)." .
 
 
-###  http://example.org/apqc#P10770
+###  https://fandaws.com/ontology/apqc#P10770
 ex:P10770 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -4737,7 +4737,7 @@ ex:P10770 rdf:type owl:Class ;
           skos:example "Accounting documents realized FX gains and issues the period's foreign-exchange results report." .
 
 
-###  http://example.org/apqc#P10771
+###  https://fandaws.com/ontology/apqc#P10771
 ex:P10771 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4757,7 +4757,7 @@ ex:P10771 rdf:type owl:Class ;
           skos:example "A controller drafts the corporate budgeting policy and the step-by-step budgeting procedure." .
 
 
-###  http://example.org/apqc#P10772
+###  https://fandaws.com/ontology/apqc#P10772
 ex:P10772 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4773,7 +4773,7 @@ ex:P10772 rdf:type owl:Class ;
           skos:example "The annual departmental budget estimating next year's revenues and expenses." .
 
 
-###  http://example.org/apqc#P10773
+###  https://fandaws.com/ontology/apqc#P10773
 ex:P10773 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000371 ,
                           [ rdf:type owl:Restriction ;
@@ -4793,7 +4793,7 @@ ex:P10773 rdf:type owl:Class ;
           skos:example "A quarterly cash-flow and P&L forecast for the next four quarters." .
 
 
-###  http://example.org/apqc#P10774
+###  https://fandaws.com/ontology/apqc#P10774
 ex:P10774 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -4813,7 +4813,7 @@ ex:P10774 rdf:type owl:Class ;
           skos:example "Recording depreciation and obsolescence write-downs against the fixed-asset register." .
 
 
-###  http://example.org/apqc#P10775
+###  https://fandaws.com/ontology/apqc#P10775
 ex:P10775 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4833,7 +4833,7 @@ ex:P10775 rdf:type owl:Class ;
           skos:example "Breaking down manufacturing cost of goods sold by component." .
 
 
-###  http://example.org/apqc#P10776
+###  https://fandaws.com/ontology/apqc#P10776
 ex:P10776 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4853,7 +4853,7 @@ ex:P10776 rdf:type owl:Class ;
           skos:example "Allocating direct material, labor, and overhead to compute a unit product cost." .
 
 
-###  http://example.org/apqc#P10777
+###  https://fandaws.com/ontology/apqc#P10777
 ex:P10777 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4873,7 +4873,7 @@ ex:P10777 rdf:type owl:Class ;
           skos:example "Plotting actual-vs-standard cost variances on a trend line." .
 
 
-###  http://example.org/apqc#P10778
+###  https://fandaws.com/ontology/apqc#P10778
 ex:P10778 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4893,7 +4893,7 @@ ex:P10778 rdf:type owl:Class ;
           skos:example "Identifying machine-hours and order-count as the drivers of a warehousing activity's cost." .
 
 
-###  http://example.org/apqc#P10779
+###  https://fandaws.com/ontology/apqc#P10779
 ex:P10779 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000345 ,
                           [ rdf:type owl:Restriction ;
@@ -4913,7 +4913,7 @@ ex:P10779 rdf:type owl:Class ;
           skos:example "Counting the machine-hours consumed per product line." .
 
 
-###  http://example.org/apqc#P10780
+###  https://fandaws.com/ontology/apqc#P10780
 ex:P10780 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4929,7 +4929,7 @@ ex:P10780 rdf:type owl:Class ;
           skos:example "Flagging payroll and regulatory reporting as indispensable, non-cuttable finance activities." .
 
 
-###  http://example.org/apqc#P10781
+###  https://fandaws.com/ontology/apqc#P10781
 ex:P10781 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4945,7 +4945,7 @@ ex:P10781 rdf:type owl:Class ;
           skos:example "Reassigning capital equipment between plants to improve utilization." .
 
 
-###  http://example.org/apqc#P10782
+###  https://fandaws.com/ontology/apqc#P10782
 ex:P10782 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4969,7 +4969,7 @@ ex:P10782 rdf:type owl:Class ;
           skos:example "Ranking customer segments by net margin after cost-to-serve." .
 
 
-###  http://example.org/apqc#P10783
+###  https://fandaws.com/ontology/apqc#P10783
 ex:P10783 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4985,7 +4985,7 @@ ex:P10783 rdf:type owl:Class ;
           skos:example "Assessing whether a proposed product line is worth producing for a target segment." .
 
 
-###  http://example.org/apqc#P10784
+###  https://fandaws.com/ontology/apqc#P10784
 ex:P10784 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5005,7 +5005,7 @@ ex:P10784 rdf:type owl:Class ;
           skos:example "Computing total cost of ownership across a product's design, production, and disposal stages." .
 
 
-###  http://example.org/apqc#P10785
+###  https://fandaws.com/ontology/apqc#P10785
 ex:P10785 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -5025,7 +5025,7 @@ ex:P10785 rdf:type owl:Class ;
           skos:example "Selecting which products to offer to which segments to maximize the customer base." .
 
 
-###  http://example.org/apqc#P10786
+###  https://fandaws.com/ontology/apqc#P10786
 ex:P10786 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5041,7 +5041,7 @@ ex:P10786 rdf:type owl:Class ;
           skos:example "Monitoring repeat-purchase rates of customers acquired under a new product strategy." .
 
 
-###  http://example.org/apqc#P10787
+###  https://fandaws.com/ontology/apqc#P10787
 ex:P10787 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5057,7 +5057,7 @@ ex:P10787 rdf:type owl:Class ;
           skos:example "Computing cost-per-transaction and cycle-time metrics for finance activities." .
 
 
-###  http://example.org/apqc#P10788
+###  https://fandaws.com/ontology/apqc#P10788
 ex:P10788 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -5073,7 +5073,7 @@ ex:P10788 rdf:type owl:Class ;
           skos:example "A standing kaizen-style cost-improvement program run every quarter." .
 
 
-###  http://example.org/apqc#P10789
+###  https://fandaws.com/ontology/apqc#P10789
 ex:P10789 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5089,7 +5089,7 @@ ex:P10789 rdf:type owl:Class ;
           skos:example "A controller sets the firm's credit standards and collection terms for the coming year." .
 
 
-###  http://example.org/apqc#P10790
+###  https://fandaws.com/ontology/apqc#P10790
 ex:P10790 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5113,7 +5113,7 @@ ex:P10790 rdf:type owl:Class ;
           skos:example "A credit analyst checks an applicant's status and approves a new account." .
 
 
-###  http://example.org/apqc#P10791
+###  https://fandaws.com/ontology/apqc#P10791
 ex:P10791 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5133,7 +5133,7 @@ ex:P10791 rdf:type owl:Class ;
           skos:example "A credit team reviews active accounts and reports each holder's current standing." .
 
 
-###  http://example.org/apqc#P10792
+###  https://fandaws.com/ontology/apqc#P10792
 ex:P10792 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -5149,7 +5149,7 @@ ex:P10792 rdf:type owl:Class ;
           skos:example "Accounting prepares a monthly collections report for senior management." .
 
 
-###  http://example.org/apqc#P10793
+###  https://fandaws.com/ontology/apqc#P10793
 ex:P10793 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5169,7 +5169,7 @@ ex:P10793 rdf:type owl:Class ;
           skos:example "A clerk suspends an account that breaches the revised credit policy." .
 
 
-###  http://example.org/apqc#P10794
+###  https://fandaws.com/ontology/apqc#P10794
 ex:P10794 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5185,7 +5185,7 @@ ex:P10794 rdf:type owl:Class ;
           skos:example "A clerk updates the customer master file after a new product is sold." .
 
 
-###  http://example.org/apqc#P10795
+###  https://fandaws.com/ontology/apqc#P10795
 ex:P10795 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5201,7 +5201,7 @@ ex:P10795 rdf:type owl:Class ;
           skos:example "The billing system generates the line-item billing data for a customer's monthly statement." .
 
 
-###  http://example.org/apqc#P10796
+###  https://fandaws.com/ontology/apqc#P10796
 ex:P10796 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -5221,7 +5221,7 @@ ex:P10796 rdf:type owl:Class ;
           skos:example "The system emails a customer a copy of their invoice." .
 
 
-###  http://example.org/apqc#P10797
+###  https://fandaws.com/ontology/apqc#P10797
 ex:P10797 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5237,7 +5237,7 @@ ex:P10797 rdf:type owl:Class ;
           skos:example "Accounting posts the receivable entry for a newly invoiced sale." .
 
 
-###  http://example.org/apqc#P10798
+###  https://fandaws.com/ontology/apqc#P10798
 ex:P10798 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5257,7 +5257,7 @@ ex:P10798 rdf:type owl:Class ;
           skos:example "A billing agent investigates and corrects an over-charge a customer disputed." .
 
 
-###  http://example.org/apqc#P10799
+###  https://fandaws.com/ontology/apqc#P10799
 ex:P10799 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5273,7 +5273,7 @@ ex:P10799 rdf:type owl:Class ;
           skos:example "Finance sets the allowable installment terms for credit sales." .
 
 
-###  http://example.org/apqc#P10800
+###  https://fandaws.com/ontology/apqc#P10800
 ex:P10800 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -5293,7 +5293,7 @@ ex:P10800 rdf:type owl:Class ;
           skos:example "A cashier deposits a customer's cash payment and records the receipt." .
 
 
-###  http://example.org/apqc#P10801
+###  https://fandaws.com/ontology/apqc#P10801
 ex:P10801 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -5317,7 +5317,7 @@ ex:P10801 rdf:type owl:Class ;
           skos:example "Treasury applies an inbound cross-border remittance to the customer's account via an authorized agent." .
 
 
-###  http://example.org/apqc#P10802
+###  https://fandaws.com/ontology/apqc#P10802
 ex:P10802 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -5333,7 +5333,7 @@ ex:P10802 rdf:type owl:Class ;
           skos:example "Accounting produces an aged-receivables report at month-end." .
 
 
-###  http://example.org/apqc#P10803
+###  https://fandaws.com/ontology/apqc#P10803
 ex:P10803 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5353,7 +5353,7 @@ ex:P10803 rdf:type owl:Class ;
           skos:example "The accountant posts the AR sub-ledger entries to the general ledger." .
 
 
-###  http://example.org/apqc#P10804
+###  https://fandaws.com/ontology/apqc#P10804
 ex:P10804 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5369,7 +5369,7 @@ ex:P10804 rdf:type owl:Class ;
           skos:example "Collections defines the dunning policy for accounts past due." .
 
 
-###  http://example.org/apqc#P10805
+###  https://fandaws.com/ontology/apqc#P10805
 ex:P10805 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5389,7 +5389,7 @@ ex:P10805 rdf:type owl:Class ;
           skos:example "An analyst studies a defaulter's payment history before settlement talks." .
 
 
-###  http://example.org/apqc#P10806
+###  https://fandaws.com/ontology/apqc#P10806
 ex:P10806 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5409,7 +5409,7 @@ ex:P10806 rdf:type owl:Class ;
           skos:example "A collections officer agrees an extended-time repayment plan with a customer in default." .
 
 
-###  http://example.org/apqc#P10807
+###  https://fandaws.com/ontology/apqc#P10807
 ex:P10807 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5425,7 +5425,7 @@ ex:P10807 rdf:type owl:Class ;
           skos:example "Department heads agree the rules for handling overdue accounts next quarter." .
 
 
-###  http://example.org/apqc#P10808
+###  https://fandaws.com/ontology/apqc#P10808
 ex:P10808 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5441,7 +5441,7 @@ ex:P10808 rdf:type owl:Class ;
           skos:example "Accounting writes off a bad debt and updates the allowance reserve." .
 
 
-###  http://example.org/apqc#P10809
+###  https://fandaws.com/ontology/apqc#P10809
 ex:P10809 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5457,7 +5457,7 @@ ex:P10809 rdf:type owl:Class ;
           skos:example "Finance documents the procedure for posting account adjustments." .
 
 
-###  http://example.org/apqc#P10810
+###  https://fandaws.com/ontology/apqc#P10810
 ex:P10810 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5477,7 +5477,7 @@ ex:P10810 rdf:type owl:Class ;
           skos:example "An accountant reviews the year's account adjustments to flag posting errors." .
 
 
-###  http://example.org/apqc#P10811
+###  https://fandaws.com/ontology/apqc#P10811
 ex:P10811 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5497,7 +5497,7 @@ ex:P10811 rdf:type owl:Class ;
           skos:example "An agent offers a customer a settlement discount to clear an adjustment dispute." .
 
 
-###  http://example.org/apqc#P10812
+###  https://fandaws.com/ontology/apqc#P10812
 ex:P10812 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5513,7 +5513,7 @@ ex:P10812 rdf:type owl:Class ;
           skos:example "Managers agree the rules for processing customer deductions next quarter." .
 
 
-###  http://example.org/apqc#P10813
+###  https://fandaws.com/ontology/apqc#P10813
 ex:P10813 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5533,7 +5533,7 @@ ex:P10813 rdf:type owl:Class ;
           skos:example "A distributor issues a supplier chargeback invoice for an over-billed shipment." .
 
 
-###  http://example.org/apqc#P10814
+###  https://fandaws.com/ontology/apqc#P10814
 ex:P10814 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5549,7 +5549,7 @@ ex:P10814 rdf:type owl:Class ;
           skos:example "The ledger clerk records the offsetting entries for a processed deduction." .
 
 
-###  http://example.org/apqc#P10815
+###  https://fandaws.com/ontology/apqc#P10815
 ex:P10815 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5565,7 +5565,7 @@ ex:P10815 rdf:type owl:Class ;
           skos:example "A shared-services finance team negotiating an SLA with an internal customer." .
 
 
-###  http://example.org/apqc#P10816
+###  https://fandaws.com/ontology/apqc#P10816
 ex:P10816 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5581,7 +5581,7 @@ ex:P10816 rdf:type owl:Class ;
           skos:example "A controller adopting a revenue-recognition policy for the organization." .
 
 
-###  http://example.org/apqc#P10817
+###  https://fandaws.com/ontology/apqc#P10817
 ex:P10817 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5597,7 +5597,7 @@ ex:P10817 rdf:type owl:Class ;
           skos:example "Defining tiered sign-off thresholds for expenditure approvals." .
 
 
-###  http://example.org/apqc#P10818
+###  https://fandaws.com/ontology/apqc#P10818
 ex:P10818 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5613,7 +5613,7 @@ ex:P10818 rdf:type owl:Class ;
           skos:example "Standing up a common ledger-posting and control procedure across business units." .
 
 
-###  http://example.org/apqc#P10819
+###  https://fandaws.com/ontology/apqc#P10819
 ex:P10819 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5628,7 +5628,7 @@ ex:P10819 rdf:type owl:Class ;
           skos:example "Adding a new expense account to the chart of accounts for a new business line." .
 
 
-###  http://example.org/apqc#P10820
+###  https://fandaws.com/ontology/apqc#P10820
 ex:P10820 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5647,7 +5647,7 @@ ex:P10820 rdf:type owl:Class ;
           skos:example "Posting the period's sales and purchase journals to the ledger." .
 
 
-###  http://example.org/apqc#P10821
+###  https://fandaws.com/ontology/apqc#P10821
 ex:P10821 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5667,7 +5667,7 @@ ex:P10821 rdf:type owl:Class ;
           skos:example "Allocating shared overhead to business units per the approved budget." .
 
 
-###  http://example.org/apqc#P10822
+###  https://fandaws.com/ontology/apqc#P10822
 ex:P10822 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5682,7 +5682,7 @@ ex:P10822 rdf:type owl:Class ;
           skos:example "Booking accruals and deferrals at month-end close." .
 
 
-###  http://example.org/apqc#P10823
+###  https://fandaws.com/ontology/apqc#P10823
 ex:P10823 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5702,7 +5702,7 @@ ex:P10823 rdf:type owl:Class ;
           skos:example "Reconciling an intercompany loan between a parent and its subsidiary." .
 
 
-###  http://example.org/apqc#P10824
+###  https://fandaws.com/ontology/apqc#P10824
 ex:P10824 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5721,7 +5721,7 @@ ex:P10824 rdf:type owl:Class ;
           skos:example "Tying cash-account balances to bank statements during close." .
 
 
-###  http://example.org/apqc#P10825
+###  https://fandaws.com/ontology/apqc#P10825
 ex:P10825 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5736,7 +5736,7 @@ ex:P10825 rdf:type owl:Class ;
           skos:example "Eliminating intercompany balances when consolidating group accounts." .
 
 
-###  http://example.org/apqc#P10826
+###  https://fandaws.com/ontology/apqc#P10826
 ex:P10826 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5756,7 +5756,7 @@ ex:P10826 rdf:type owl:Class ;
           skos:example "Producing the adjusted trial balance prior to drafting statements." .
 
 
-###  http://example.org/apqc#P10827
+###  https://fandaws.com/ontology/apqc#P10827
 ex:P10827 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5771,7 +5771,7 @@ ex:P10827 rdf:type owl:Class ;
           skos:example "Posting a management override to reclassify expenses after a tax-law change." .
 
 
-###  http://example.org/apqc#P10828
+###  https://fandaws.com/ontology/apqc#P10828
 ex:P10828 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5787,7 +5787,7 @@ ex:P10828 rdf:type owl:Class ;
           skos:example "Setting the straight-line depreciation policy for plant and equipment." .
 
 
-###  http://example.org/apqc#P10829
+###  https://fandaws.com/ontology/apqc#P10829
 ex:P10829 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5802,7 +5802,7 @@ ex:P10829 rdf:type owl:Class ;
           skos:example "Updating an asset's useful-life parameter in the fixed-asset register." .
 
 
-###  http://example.org/apqc#P10830
+###  https://fandaws.com/ontology/apqc#P10830
 ex:P10830 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5821,7 +5821,7 @@ ex:P10830 rdf:type owl:Class ;
           skos:example "Capitalizing a newly purchased machine and writing off a retired one." .
 
 
-###  http://example.org/apqc#P10831
+###  https://fandaws.com/ontology/apqc#P10831
 ex:P10831 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5836,7 +5836,7 @@ ex:P10831 rdf:type owl:Class ;
           skos:example "Revaluing a building to current market price and recording the uplift." .
 
 
-###  http://example.org/apqc#P10832
+###  https://fandaws.com/ontology/apqc#P10832
 ex:P10832 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5855,7 +5855,7 @@ ex:P10832 rdf:type owl:Class ;
           skos:example "Expensing a routine servicing cost against a vehicle asset." .
 
 
-###  http://example.org/apqc#P10833
+###  https://fandaws.com/ontology/apqc#P10833
 ex:P10833 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5870,7 +5870,7 @@ ex:P10833 rdf:type owl:Class ;
           skos:example "Booking monthly straight-line depreciation for the asset base." .
 
 
-###  http://example.org/apqc#P10834
+###  https://fandaws.com/ontology/apqc#P10834
 ex:P10834 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -5889,7 +5889,7 @@ ex:P10834 rdf:type owl:Class ;
           skos:example "Reconciling the fixed-asset subledger to the general ledger control account." .
 
 
-###  http://example.org/apqc#P10835
+###  https://fandaws.com/ontology/apqc#P10835
 ex:P10835 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5905,7 +5905,7 @@ ex:P10835 rdf:type owl:Class ;
           skos:example "An annual physical-inventory count reconciled to the asset register." .
 
 
-###  http://example.org/apqc#P10836
+###  https://fandaws.com/ontology/apqc#P10836
 ex:P10836 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -5925,7 +5925,7 @@ ex:P10836 rdf:type owl:Class ;
           skos:example "Supplying depreciation schedules to the tax team for a return." .
 
 
-###  http://example.org/apqc#P10837
+###  https://fandaws.com/ontology/apqc#P10837
 ex:P10837 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -5944,7 +5944,7 @@ ex:P10837 rdf:type owl:Class ;
           skos:example "Producing a division's standalone income statement and balance sheet." .
 
 
-###  http://example.org/apqc#P10838
+###  https://fandaws.com/ontology/apqc#P10838
 ex:P10838 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -5963,7 +5963,7 @@ ex:P10838 rdf:type owl:Class ;
           skos:example "Preparing group consolidated statements at year-end." .
 
 
-###  http://example.org/apqc#P10839
+###  https://fandaws.com/ontology/apqc#P10839
 ex:P10839 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -5982,7 +5982,7 @@ ex:P10839 rdf:type owl:Class ;
           skos:example "Issuing a divisional profitability pack for the monthly management review." .
 
 
-###  http://example.org/apqc#P10840
+###  https://fandaws.com/ontology/apqc#P10840
 ex:P10840 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -6002,7 +6002,7 @@ ex:P10840 rdf:type owl:Class ;
           skos:example "Reviewing group cost variances alongside the consolidated results." .
 
 
-###  http://example.org/apqc#P10841
+###  https://fandaws.com/ontology/apqc#P10841
 ex:P10841 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -6017,7 +6017,7 @@ ex:P10841 rdf:type owl:Class ;
           skos:example "Circulating draft annual statements to the audit committee." .
 
 
-###  http://example.org/apqc#P10842
+###  https://fandaws.com/ontology/apqc#P10842
 ex:P10842 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -6036,7 +6036,7 @@ ex:P10842 rdf:type owl:Class ;
           skos:example "Publishing the annual report and 10-K filing." .
 
 
-###  http://example.org/apqc#P10843
+###  https://fandaws.com/ontology/apqc#P10843
 ex:P10843 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -6055,7 +6055,7 @@ ex:P10843 rdf:type owl:Class ;
           skos:example "Filing statutory accounts with the securities regulator." .
 
 
-###  http://example.org/apqc#P10844
+###  https://fandaws.com/ontology/apqc#P10844
 ex:P10844 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6075,7 +6075,7 @@ ex:P10844 rdf:type owl:Class ;
           skos:example "Treasury drafts the corporate capital-investment policy and the accompanying approval procedure." .
 
 
-###  http://example.org/apqc#P10845
+###  https://fandaws.com/ontology/apqc#P10845
 ex:P10845 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6091,7 +6091,7 @@ ex:P10845 rdf:type owl:Class ;
           skos:example "A project manager builds a multi-year capital-expenditure budget and obtains sign-off from the board." .
 
 
-###  http://example.org/apqc#P10846
+###  https://fandaws.com/ontology/apqc#P10846
 ex:P10846 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -6107,7 +6107,7 @@ ex:P10846 rdf:type owl:Class ;
           skos:example "An investment committee reviews a capital project's details and approves the acquisition of the related fixed assets." .
 
 
-###  http://example.org/apqc#P10847
+###  https://fandaws.com/ontology/apqc#P10847
 ex:P10847 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6123,7 +6123,7 @@ ex:P10847 rdf:type owl:Class ;
           skos:example "An analyst validates a project's business case and documents a cost-benefit justification recommending approval." .
 
 
-###  http://example.org/apqc#P10848
+###  https://fandaws.com/ontology/apqc#P10848
 ex:P10848 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -6139,7 +6139,7 @@ ex:P10848 rdf:type owl:Class ;
           skos:example "The ledger administrator opens a new project and issues it a unique cost-collection account code." .
 
 
-###  http://example.org/apqc#P10849
+###  https://fandaws.com/ontology/apqc#P10849
 ex:P10849 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -6155,7 +6155,7 @@ ex:P10849 rdf:type owl:Class ;
           skos:example "A clerk posts each invoice and payment for a construction project to the shared project ledger." .
 
 
-###  http://example.org/apqc#P10850
+###  https://fandaws.com/ontology/apqc#P10850
 ex:P10850 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -6175,7 +6175,7 @@ ex:P10850 rdf:type owl:Class ;
           skos:example "A controller tracks a project's cumulative spend against its approved budget and reports the variance each month." .
 
 
-###  http://example.org/apqc#P10851
+###  https://fandaws.com/ontology/apqc#P10851
 ex:P10851 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -6195,7 +6195,7 @@ ex:P10851 rdf:type owl:Class ;
           skos:example "On reviewing a project's realized returns, the committee decides to continue (or halt) the investment." .
 
 
-###  http://example.org/apqc#P10852
+###  https://fandaws.com/ontology/apqc#P10852
 ex:P10852 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6215,7 +6215,7 @@ ex:P10852 rdf:type owl:Class ;
           skos:example "A finance analyst measures a finished plant project's realized IRR against the forecast and reports its profitability." .
 
 
-###  http://example.org/apqc#P10853
+###  https://fandaws.com/ontology/apqc#P10853
 ex:P10853 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6231,7 +6231,7 @@ ex:P10853 rdf:type owl:Class ;
           skos:example "HR drafts the standard operating procedure for computing employee compensation." .
 
 
-###  http://example.org/apqc#P10854
+###  https://fandaws.com/ontology/apqc#P10854
 ex:P10854 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6246,7 +6246,7 @@ ex:P10854 rdf:type owl:Class ;
           skos:example "Recording every employee's clock-in and billable hours each day." .
 
 
-###  http://example.org/apqc#P10855
+###  https://fandaws.com/ontology/apqc#P10855
 ex:P10855 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -6265,7 +6265,7 @@ ex:P10855 rdf:type owl:Class ;
           skos:example "Producing a monthly leave-balance report from recorded time data." .
 
 
-###  http://example.org/apqc#P10856
+###  https://fandaws.com/ontology/apqc#P10856
 ex:P10856 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -6281,7 +6281,7 @@ ex:P10856 rdf:type owl:Class ;
           skos:example "Daily tracking of overtime hours against the standard work week." .
 
 
-###  http://example.org/apqc#P10857
+###  https://fandaws.com/ontology/apqc#P10857
 ex:P10857 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -6300,7 +6300,7 @@ ex:P10857 rdf:type owl:Class ;
           skos:example "Computing and reporting each employee's billable-utilization ratio." .
 
 
-###  http://example.org/apqc#P10858
+###  https://fandaws.com/ontology/apqc#P10858
 ex:P10858 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6319,7 +6319,7 @@ ex:P10858 rdf:type owl:Class ;
           skos:example "Importing approved timesheet hours into the payroll engine before a pay run." .
 
 
-###  http://example.org/apqc#P10859
+###  https://fandaws.com/ontology/apqc#P10859
 ex:P10859 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -6335,7 +6335,7 @@ ex:P10859 rdf:type owl:Class ;
           skos:example "Updating an employee's salary-structure record after a raise." .
 
 
-###  http://example.org/apqc#P10860
+###  https://fandaws.com/ontology/apqc#P10860
 ex:P10860 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -6351,7 +6351,7 @@ ex:P10860 rdf:type owl:Class ;
           skos:example "Recording an employee's updated investment declarations to adjust deductions." .
 
 
-###  http://example.org/apqc#P10861
+###  https://fandaws.com/ontology/apqc#P10861
 ex:P10861 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -6367,7 +6367,7 @@ ex:P10861 rdf:type owl:Class ;
           skos:example "Detecting an employee's change of tax bracket and flagging it for the next pay run." .
 
 
-###  http://example.org/apqc#P10862
+###  https://fandaws.com/ontology/apqc#P10862
 ex:P10862 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfRemuneration ,
                           [ rdf:type owl:Restriction ;
@@ -6387,7 +6387,7 @@ ex:P10862 rdf:type owl:Class ;
           skos:example "Paying every employee's net salary by direct deposit on payday." .
 
 
-###  http://example.org/apqc#P10863
+###  https://fandaws.com/ontology/apqc#P10863
 ex:P10863 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -6403,7 +6403,7 @@ ex:P10863 rdf:type owl:Class ;
           skos:example "Cutting a manual check for an employee whose overtime was missed in the main run." .
 
 
-###  http://example.org/apqc#P10864
+###  https://fandaws.com/ontology/apqc#P10864
 ex:P10864 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -6423,7 +6423,7 @@ ex:P10864 rdf:type owl:Class ;
           skos:example "Recomputing year-end tax deductions and posting the correcting adjustments." .
 
 
-###  http://example.org/apqc#P10865
+###  https://fandaws.com/ontology/apqc#P10865
 ex:P10865 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6442,7 +6442,7 @@ ex:P10865 rdf:type owl:Class ;
           skos:example "Answering an employee's question about why a deduction changed this month." .
 
 
-###  http://example.org/apqc#P10866
+###  https://fandaws.com/ontology/apqc#P10866
 ex:P10866 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -6462,7 +6462,7 @@ ex:P10866 rdf:type owl:Class ;
           skos:example "Computing and remitting withheld income tax for the period to the revenue authority." .
 
 
-###  http://example.org/apqc#P10867
+###  https://fandaws.com/ontology/apqc#P10867
 ex:P10867 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -6482,7 +6482,7 @@ ex:P10867 rdf:type owl:Class ;
           skos:example "Issuing each employee a year-end statement of wages and taxes withheld." .
 
 
-###  http://example.org/apqc#P10868
+###  https://fandaws.com/ontology/apqc#P10868
 ex:P10868 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -6502,7 +6502,7 @@ ex:P10868 rdf:type owl:Class ;
           skos:example "Submitting the quarterly payroll-tax return to the revenue authority." .
 
 
-###  http://example.org/apqc#P10869
+###  https://fandaws.com/ontology/apqc#P10869
 ex:P10869 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6522,7 +6522,7 @@ ex:P10869 rdf:type owl:Class ;
           skos:example "An AP clerk three-way-matching an invoice to the PO and vendor master before release." .
 
 
-###  http://example.org/apqc#P10870
+###  https://fandaws.com/ontology/apqc#P10870
 ex:P10870 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -6538,7 +6538,7 @@ ex:P10870 rdf:type owl:Class ;
           skos:example "An e-commerce settlement console tracking the day's online supplier payments." .
 
 
-###  http://example.org/apqc#P10871
+###  https://fandaws.com/ontology/apqc#P10871
 ex:P10871 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6558,7 +6558,7 @@ ex:P10871 rdf:type owl:Class ;
           skos:example "An AP auditor reviewing posted invoices for accuracy and policy compliance." .
 
 
-###  http://example.org/apqc#P10872
+###  https://fandaws.com/ontology/apqc#P10872
 ex:P10872 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -6574,7 +6574,7 @@ ex:P10872 rdf:type owl:Class ;
           skos:example "A controller approving a vetted supplier payment for release." .
 
 
-###  http://example.org/apqc#P10873
+###  https://fandaws.com/ontology/apqc#P10873
 ex:P10873 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -6590,7 +6590,7 @@ ex:P10873 rdf:type owl:Class ;
           skos:example "Month-end posting of accrued expenses and the reversal of the prior period's adjusting entries." .
 
 
-###  http://example.org/apqc#P10874
+###  https://fandaws.com/ontology/apqc#P10874
 ex:P10874 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -6606,7 +6606,7 @@ ex:P10874 rdf:type owl:Class ;
           skos:example "Preparing and filing withholding/income tax returns tied to payables as of the balance-sheet date." .
 
 
-###  http://example.org/apqc#P10875
+###  https://fandaws.com/ontology/apqc#P10875
 ex:P10875 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6622,7 +6622,7 @@ ex:P10875 rdf:type owl:Class ;
           skos:example "An AP analyst researching a duplicate-payment exception and recording its resolution." .
 
 
-###  http://example.org/apqc#P10876
+###  https://fandaws.com/ontology/apqc#P10876
 ex:P10876 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -6642,7 +6642,7 @@ ex:P10876 rdf:type owl:Class ;
           skos:example "Releasing a scheduled ACH run to suppliers on invoice due dates." .
 
 
-###  http://example.org/apqc#P10877
+###  https://fandaws.com/ontology/apqc#P10877
 ex:P10877 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -6658,7 +6658,7 @@ ex:P10877 rdf:type owl:Class ;
           skos:example "AP staff answering a supplier's query about a payment date and discount taken." .
 
 
-###  http://example.org/apqc#P10878
+###  https://fandaws.com/ontology/apqc#P10878
 ex:P10878 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6674,7 +6674,7 @@ ex:P10878 rdf:type owl:Class ;
           skos:example "Archiving paid invoices and remittance advices to the records repository." .
 
 
-###  http://example.org/apqc#P10879
+###  https://fandaws.com/ontology/apqc#P10879
 ex:P10879 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -6690,7 +6690,7 @@ ex:P10879 rdf:type owl:Class ;
           skos:example "Posting correcting journal entries for a mis-keyed invoice amount." .
 
 
-###  http://example.org/apqc#P10880
+###  https://fandaws.com/ontology/apqc#P10880
 ex:P10880 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6706,7 +6706,7 @@ ex:P10880 rdf:type owl:Class ;
           skos:example "Finance issuing an updated travel-and-expense policy with per-diem caps." .
 
 
-###  http://example.org/apqc#P10881
+###  https://fandaws.com/ontology/apqc#P10881
 ex:P10881 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -6722,7 +6722,7 @@ ex:P10881 rdf:type owl:Class ;
           skos:example "Compiling employee per-diem and reimbursement amounts for payroll-tax reporting." .
 
 
-###  http://example.org/apqc#P10882
+###  https://fandaws.com/ontology/apqc#P10882
 ex:P10882 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -6746,7 +6746,7 @@ ex:P10882 rdf:type owl:Class ;
           skos:example "A manager approving an employee's travel-advance request." .
 
 
-###  http://example.org/apqc#P10883
+###  https://fandaws.com/ontology/apqc#P10883
 ex:P10883 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -6770,7 +6770,7 @@ ex:P10883 rdf:type owl:Class ;
           skos:example "Paying an employee's approved expense claim by direct deposit." .
 
 
-###  http://example.org/apqc#P10884
+###  https://fandaws.com/ontology/apqc#P10884
 ex:P10884 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -6786,7 +6786,7 @@ ex:P10884 rdf:type owl:Class ;
           skos:example "Updating an employee's advance/reimbursement balance after a settlement." .
 
 
-###  http://example.org/apqc#P10885
+###  https://fandaws.com/ontology/apqc#P10885
 ex:P10885 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6802,7 +6802,7 @@ ex:P10885 rdf:type owl:Class ;
           skos:example "A board committee sets the mandate and approval authority for the treasury desk." .
 
 
-###  http://example.org/apqc#P10886
+###  https://fandaws.com/ontology/apqc#P10886
 ex:P10886 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6818,7 +6818,7 @@ ex:P10886 rdf:type owl:Class ;
           skos:example "Treasury issues and circulates the written corporate investment policy." .
 
 
-###  http://example.org/apqc#P10887
+###  https://fandaws.com/ontology/apqc#P10887
 ex:P10887 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6834,7 +6834,7 @@ ex:P10887 rdf:type owl:Class ;
           skos:example "Treasury drafts the step-by-step procedure for placing a bond trade." .
 
 
-###  http://example.org/apqc#P10888
+###  https://fandaws.com/ontology/apqc#P10888
 ex:P10888 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -6854,7 +6854,7 @@ ex:P10888 rdf:type owl:Class ;
           skos:example "A treasury controller periodically reviews adherence to investment procedures." .
 
 
-###  http://example.org/apqc#P10889
+###  https://fandaws.com/ontology/apqc#P10889
 ex:P10889 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6870,7 +6870,7 @@ ex:P10889 rdf:type owl:Class ;
           skos:example "Internal audit reviews treasury controls and issues an assessment." .
 
 
-###  http://example.org/apqc#P10890
+###  https://fandaws.com/ontology/apqc#P10890
 ex:P10890 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6890,7 +6890,7 @@ ex:P10890 rdf:type owl:Class ;
           skos:example "Treasury updates its trading procedures in response to audit findings." .
 
 
-###  http://example.org/apqc#P10891
+###  https://fandaws.com/ontology/apqc#P10891
 ex:P10891 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6906,7 +6906,7 @@ ex:P10891 rdf:type owl:Class ;
           skos:example "Treasury defines the segregation-of-duties controls over derivative trades." .
 
 
-###  http://example.org/apqc#P10892
+###  https://fandaws.com/ontology/apqc#P10892
 ex:P10892 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6922,7 +6922,7 @@ ex:P10892 rdf:type owl:Class ;
           skos:example "Treasury IT specifies the access-control and audit-trail requirements for the dealing system." .
 
 
-###  http://example.org/apqc#P10893
+###  https://fandaws.com/ontology/apqc#P10893
 ex:P10893 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -6942,7 +6942,7 @@ ex:P10893 rdf:type owl:Class ;
           skos:example "Treasury reconciles bank statements against the ledger and corrects discrepancies." .
 
 
-###  http://example.org/apqc#P10894
+###  https://fandaws.com/ontology/apqc#P10894
 ex:P10894 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ;
           ex:apqcSourceText "Taking care of all cash-related activities in the business. Utilize short-term assets that can be easily convertible into cash, such as marketable securities, commercial paper and short-term government bonds, and treasury bills." ;
@@ -6954,7 +6954,7 @@ ex:P10894 rdf:type owl:Class ;
           skos:example "Treasury parks surplus cash in treasury bills and commercial paper." .
 
 
-###  http://example.org/apqc#P10895
+###  https://fandaws.com/ontology/apqc#P10895
 ex:P10895 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -6970,7 +6970,7 @@ ex:P10895 rdf:type owl:Class ;
           skos:example "Treasury executes a wire transfer to settle a supplier invoice." .
 
 
-###  http://example.org/apqc#P10896
+###  https://fandaws.com/ontology/apqc#P10896
 ex:P10896 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000371 ,
                           [ rdf:type owl:Restriction ;
@@ -6990,7 +6990,7 @@ ex:P10896 rdf:type owl:Class ;
           skos:example "Treasury builds a 13-week rolling cash-flow forecast." .
 
 
-###  http://example.org/apqc#P10897
+###  https://fandaws.com/ontology/apqc#P10897
 ex:P10897 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ;
           ex:apqcSourceText "Delaying the outflow of funds as long as possible, but encourage the inflow of as fast as possible." ;
@@ -7002,7 +7002,7 @@ ex:P10897 rdf:type owl:Class ;
           skos:example "Treasury accelerates receivables collection while extending payables." .
 
 
-###  http://example.org/apqc#P10898
+###  https://fandaws.com/ontology/apqc#P10898
 ex:P10898 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -7022,7 +7022,7 @@ ex:P10898 rdf:type owl:Class ;
           skos:example "Treasury issues the monthly cash-management activity report." .
 
 
-###  http://example.org/apqc#P10899
+###  https://fandaws.com/ontology/apqc#P10899
 ex:P10899 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ;
           ex:apqcSourceText "Maintaining and directing the course of relationships with banking partners." ;
@@ -7034,7 +7034,7 @@ ex:P10899 rdf:type owl:Class ;
           skos:example "Treasury holds quarterly reviews with its relationship banks." .
 
 
-###  http://example.org/apqc#P10900
+###  https://fandaws.com/ontology/apqc#P10900
 ex:P10900 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -7054,7 +7054,7 @@ ex:P10900 rdf:type owl:Class ;
           skos:example "Treasury benchmarks and negotiates a bank's transaction-fee schedule." .
 
 
-###  http://example.org/apqc#P10901
+###  https://fandaws.com/ontology/apqc#P10901
 ex:P10901 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ;
           ex:apqcSourceText "Maintaining subsidiaries' company accounts opened with bank inside the corporation. Manage different financial services provided by in-house bank structure for parent companies' subsidiaries or branches." ;
@@ -7066,7 +7066,7 @@ ex:P10901 rdf:type owl:Class ;
           skos:example "The in-house bank maintains a current account for each operating subsidiary." .
 
 
-###  http://example.org/apqc#P10902
+###  https://fandaws.com/ontology/apqc#P10902
 ex:P10902 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000884 ,
                           [ rdf:type owl:Restriction ;
@@ -7086,7 +7086,7 @@ ex:P10902 rdf:type owl:Class ;
           skos:example "The in-house bank books an intercompany loan to a foreign subsidiary." .
 
 
-###  http://example.org/apqc#P10903
+###  https://fandaws.com/ontology/apqc#P10903
 ex:P10903 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -7106,7 +7106,7 @@ ex:P10903 rdf:type owl:Class ;
           skos:example "The parent pays a subsidiary's vendor through the central payments factory." .
 
 
-###  http://example.org/apqc#P10904
+###  https://fandaws.com/ontology/apqc#P10904
 ex:P10904 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -7126,7 +7126,7 @@ ex:P10904 rdf:type owl:Class ;
           skos:example "The parent receives a customer remittance owed to a subsidiary." .
 
 
-###  http://example.org/apqc#P10905
+###  https://fandaws.com/ontology/apqc#P10905
 ex:P10905 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -7146,7 +7146,7 @@ ex:P10905 rdf:type owl:Class ;
           skos:example "The in-house bank nets intercompany balances and posts the residual settlement." .
 
 
-###  http://example.org/apqc#P10906
+###  https://fandaws.com/ontology/apqc#P10906
 ex:P10906 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -7166,7 +7166,7 @@ ex:P10906 rdf:type owl:Class ;
           skos:example "The in-house bank computes and posts monthly interest on subsidiary balances." .
 
 
-###  http://example.org/apqc#P10907
+###  https://fandaws.com/ontology/apqc#P10907
 ex:P10907 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -7186,7 +7186,7 @@ ex:P10907 rdf:type owl:Class ;
           skos:example "The in-house bank issues each subsidiary its monthly account statement." .
 
 
-###  http://example.org/apqc#P10908
+###  https://fandaws.com/ontology/apqc#P10908
 ex:P10908 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ;
           ex:apqcSourceText "Maintaining smooth relations with financial investment banks that help availing loans and services." ;
@@ -7198,7 +7198,7 @@ ex:P10908 rdf:type owl:Class ;
           skos:example "Treasury maintains its panel of investment-banking counterparties." .
 
 
-###  http://example.org/apqc#P10909
+###  https://fandaws.com/ontology/apqc#P10909
 ex:P10909 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ;
           ex:apqcSourceText "Managing and maintaining enough liquidity in form of cash and cash equivalents in the business to meet urgent and timely requirements" ;
@@ -7210,7 +7210,7 @@ ex:P10909 rdf:type owl:Class ;
           skos:example "Treasury keeps a liquidity buffer sized to a stressed cash-outflow scenario." .
 
 
-###  http://example.org/apqc#P10910
+###  https://fandaws.com/ontology/apqc#P10910
 ex:P10910 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ;
           ex:apqcSourceText "Managing the exposure incurred by the issuer for providing credit to the borrower." ;
@@ -7222,7 +7222,7 @@ ex:P10910 rdf:type owl:Class ;
           skos:example "Treasury monitors and caps exposure to each bond issuer in the portfolio." .
 
 
-###  http://example.org/apqc#P10911
+###  https://fandaws.com/ontology/apqc#P10911
 ex:P10911 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -7238,7 +7238,7 @@ ex:P10911 rdf:type owl:Class ;
           skos:example "Treasury draws a term loan and books the proceeds and schedule." .
 
 
-###  http://example.org/apqc#P10912
+###  https://fandaws.com/ontology/apqc#P10912
 ex:P10912 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -7254,7 +7254,7 @@ ex:P10912 rdf:type owl:Class ;
           skos:example "Treasury converts EUR proceeds to USD and records the settled trade." .
 
 
-###  http://example.org/apqc#P10913
+###  https://fandaws.com/ontology/apqc#P10913
 ex:P10913 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -7274,7 +7274,7 @@ ex:P10913 rdf:type owl:Class ;
           skos:example "Treasury issues the quarterly debt-and-investment portfolio report." .
 
 
-###  http://example.org/apqc#P10914
+###  https://fandaws.com/ontology/apqc#P10914
 ex:P10914 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfOrganizationalEstablishment ,
                           [ rdf:type owl:Restriction ;
@@ -7290,7 +7290,7 @@ ex:P10914 rdf:type owl:Class ;
           skos:example "Shareholders seat an audit committee and document its internal-control oversight mandate." .
 
 
-###  http://example.org/apqc#P10915
+###  https://fandaws.com/ontology/apqc#P10915
 ex:P10915 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7306,7 +7306,7 @@ ex:P10915 rdf:type owl:Class ;
           skos:example "A compliance office drafts the corporate code of ethics and distributes it to staff." .
 
 
-###  http://example.org/apqc#P10916
+###  https://fandaws.com/ontology/apqc#P10916
 ex:P10916 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7322,7 +7322,7 @@ ex:P10916 rdf:type owl:Class ;
           skos:example "A controller documents which positions own each key financial control." .
 
 
-###  http://example.org/apqc#P10918
+###  https://fandaws.com/ontology/apqc#P10918
 ex:P10918 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -7342,7 +7342,7 @@ ex:P10918 rdf:type owl:Class ;
           skos:example "An auditor reviews whether reconciliation controls operated as designed and reports their effectiveness." .
 
 
-###  http://example.org/apqc#P10919
+###  https://fandaws.com/ontology/apqc#P10919
 ex:P10919 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -7362,7 +7362,7 @@ ex:P10919 rdf:type owl:Class ;
           skos:example "After a monitoring finding, the team reinstates a missing dual-approval control and logs the fix." .
 
 
-###  http://example.org/apqc#P10923
+###  https://fandaws.com/ontology/apqc#P10923
 ex:P10923 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -7382,7 +7382,7 @@ ex:P10923 rdf:type owl:Class ;
           skos:example "Management furnishes the external audit firm with its internal-controls compliance report." .
 
 
-###  http://example.org/apqc#P10924
+###  https://fandaws.com/ontology/apqc#P10924
 ex:P10924 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -7406,7 +7406,7 @@ ex:P10924 rdf:type owl:Class ;
           skos:example "A listed company files its internal-controls compliance attestation with the securities regulator and notifies bondholders." .
 
 
-###  http://example.org/apqc#P10925
+###  https://fandaws.com/ontology/apqc#P10925
 ex:P10925 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -7430,7 +7430,7 @@ ex:P10925 rdf:type owl:Class ;
           skos:example "A vendor-management team shares the firm's data-controls compliance summary with key suppliers." .
 
 
-###  http://example.org/apqc#P10926
+###  https://fandaws.com/ontology/apqc#P10926
 ex:P10926 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -7450,7 +7450,7 @@ ex:P10926 rdf:type owl:Class ;
           skos:example "Leadership circulates an internal memo summarizing the company's controls-compliance status to all staff." .
 
 
-###  http://example.org/apqc#P10927
+###  https://fandaws.com/ontology/apqc#P10927
 ex:P10927 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7466,7 +7466,7 @@ ex:P10927 rdf:type owl:Class ;
           skos:example "A multinational drafts a transfer-pricing and import/export tax strategy spanning its operating jurisdictions." .
 
 
-###  http://example.org/apqc#P10928
+###  https://fandaws.com/ontology/apqc#P10928
 ex:P10928 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7482,7 +7482,7 @@ ex:P10928 rdf:type owl:Class ;
           skos:example "A finance team merges per-jurisdiction tax strategies into one optimized group tax plan." .
 
 
-###  http://example.org/apqc#P10929
+###  https://fandaws.com/ontology/apqc#P10929
 ex:P10929 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -7498,7 +7498,7 @@ ex:P10929 rdf:type owl:Class ;
           skos:example "A tax analyst updates jurisdiction codes and rates in the tax master file each quarter." .
 
 
-###  http://example.org/apqc#P10930
+###  https://fandaws.com/ontology/apqc#P10930
 ex:P10930 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7514,7 +7514,7 @@ ex:P10930 rdf:type owl:Class ;
           skos:example "A tax team designs a strategy for collecting and remitting indirect taxes on sales." .
 
 
-###  http://example.org/apqc#P10931
+###  https://fandaws.com/ontology/apqc#P10931
 ex:P10931 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -7530,7 +7530,7 @@ ex:P10931 rdf:type owl:Class ;
           skos:example "Payroll files year-end employee tax statements with the tax department." .
 
 
-###  http://example.org/apqc#P10932
+###  https://fandaws.com/ontology/apqc#P10932
 ex:P10932 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -7546,7 +7546,7 @@ ex:P10932 rdf:type owl:Class ;
           skos:example "A subsidiary's controller prepares the foreign-tax accrual report for an overseas jurisdiction." .
 
 
-###  http://example.org/apqc#P10933
+###  https://fandaws.com/ontology/apqc#P10933
 ex:P10933 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -7562,7 +7562,7 @@ ex:P10933 rdf:type owl:Class ;
           skos:example "An accountant computes the deferred tax liability from timing differences between book and tax depreciation." .
 
 
-###  http://example.org/apqc#P10934
+###  https://fandaws.com/ontology/apqc#P10934
 ex:P10934 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -7578,7 +7578,7 @@ ex:P10934 rdf:type owl:Class ;
           skos:example "A controller books and reconciles the tax accounts at period close." .
 
 
-###  http://example.org/apqc#P10935
+###  https://fandaws.com/ontology/apqc#P10935
 ex:P10935 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -7594,7 +7594,7 @@ ex:P10935 rdf:type owl:Class ;
           skos:example "An internal-controls reviewer audits VAT treatment against the tax code and flags exceptions." .
 
 
-###  http://example.org/apqc#P10936
+###  https://fandaws.com/ontology/apqc#P10936
 ex:P10936 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -7614,7 +7614,7 @@ ex:P10936 rdf:type owl:Class ;
           skos:example "A tax manager researches prior filings and replies to an information request from the revenue authority." .
 
 
-###  http://example.org/apqc#P11175
+###  https://fandaws.com/ontology/apqc#P11175
 ex:P11175 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -7634,7 +7634,7 @@ ex:P11175 rdf:type owl:Class ;
           skos:example "Issuing the quarterly profitability report to management." .
 
 
-###  http://example.org/apqc#P11208
+###  https://fandaws.com/ontology/apqc#P11208
 ex:P11208 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -7654,7 +7654,7 @@ ex:P11208 rdf:type owl:Class ;
           skos:example "A market-risk desk running the firm's hedging programme." .
 
 
-###  http://example.org/apqc#P11209
+###  https://fandaws.com/ontology/apqc#P11209
 ex:P11209 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -7682,7 +7682,7 @@ ex:P11209 rdf:type owl:Class ;
           skos:example "The rates desk managing the firm's interest-rate risk position." .
 
 
-###  http://example.org/apqc#P11210
+###  https://fandaws.com/ontology/apqc#P11210
 ex:P11210 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -7714,7 +7714,7 @@ ex:P11210 rdf:type owl:Class ;
           skos:example "The FX desk managing the group's currency risk." .
 
 
-###  http://example.org/apqc#P11211
+###  https://fandaws.com/ontology/apqc#P11211
 ex:P11211 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -7742,7 +7742,7 @@ ex:P11211 rdf:type owl:Class ;
           skos:example "The credit-risk team managing counterparty exposure limits." .
 
 
-###  http://example.org/apqc#P11213
+###  https://fandaws.com/ontology/apqc#P11213
 ex:P11213 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -7758,7 +7758,7 @@ ex:P11213 rdf:type owl:Class ;
           skos:example "The desk compares collar structures and selects one to refine the hedge." .
 
 
-###  http://example.org/apqc#P11214
+###  https://fandaws.com/ontology/apqc#P11214
 ex:P11214 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -7778,7 +7778,7 @@ ex:P11214 rdf:type owl:Class ;
           skos:example "Treasury issues the hedge-accounting effectiveness report." .
 
 
-###  http://example.org/apqc#P11215
+###  https://fandaws.com/ontology/apqc#P11215
 ex:P11215 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -7798,7 +7798,7 @@ ex:P11215 rdf:type owl:Class ;
           skos:example "The team rescreens counterparty credit files each quarter." .
 
 
-###  http://example.org/apqc#P11250
+###  https://fandaws.com/ontology/apqc#P11250
 ex:P11250 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7818,7 +7818,7 @@ ex:P11250 rdf:type owl:Class ;
           skos:example "A process owner documents the objectives of the payroll process and the risks that threaten them." .
 
 
-###  http://example.org/apqc#P11251
+###  https://fandaws.com/ontology/apqc#P11251
 ex:P11251 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7834,7 +7834,7 @@ ex:P11251 rdf:type owl:Class ;
           skos:example "A risk committee sets a maximum tolerable compliance-risk threshold for each business unit." .
 
 
-###  http://example.org/apqc#P12974
+###  https://fandaws.com/ontology/apqc#P12974
 ex:P12974 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7850,7 +7850,7 @@ ex:P12974 rdf:type owl:Class ;
           skos:example "The risk committee adopts a strategy to hedge 80 percent of forecast FX exposure." .
 
 
-###  http://example.org/apqc#P14007
+###  https://fandaws.com/ontology/apqc#P14007
 ex:P14007 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7870,7 +7870,7 @@ ex:P14007 rdf:type owl:Class ;
           skos:example "A workout specialist renegotiates a defaulted loan into a restructured repayment schedule." .
 
 
-###  http://example.org/apqc#P14057
+###  https://fandaws.com/ontology/apqc#P14057
 ex:P14057 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -7890,7 +7890,7 @@ ex:P14057 rdf:type owl:Class ;
           skos:example "Computing each business unit's monthly profit and loss." .
 
 
-###  http://example.org/apqc#P14074
+###  https://fandaws.com/ontology/apqc#P14074
 ex:P14074 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -7910,7 +7910,7 @@ ex:P14074 rdf:type owl:Class ;
           skos:example "Consolidating foreign-subsidiary ledgers into the group reporting currency." .
 
 
-###  http://example.org/apqc#P14075
+###  https://fandaws.com/ontology/apqc#P14075
 ex:P14075 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7926,7 +7926,7 @@ ex:P14075 rdf:type owl:Class ;
           skos:example "Designing a withholding strategy that lawfully reduces the firm's payroll-tax burden." .
 
 
-###  http://example.org/apqc#P14079
+###  https://fandaws.com/ontology/apqc#P14079
 ex:P14079 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7942,7 +7942,7 @@ ex:P14079 rdf:type owl:Class ;
           skos:example "The investment committee adopts a policy capping single-issuer exposure." .
 
 
-###  http://example.org/apqc#P14090
+###  https://fandaws.com/ontology/apqc#P14090
 ex:P14090 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -7962,7 +7962,7 @@ ex:P14090 rdf:type owl:Class ;
           skos:example "A compliance officer screens both counterparties of a shipment against the denied-parties list before release." .
 
 
-###  http://example.org/apqc#P14092
+###  https://fandaws.com/ontology/apqc#P14092
 ex:P14092 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -7978,7 +7978,7 @@ ex:P14092 rdf:type owl:Class ;
           skos:example "A trade analyst assigns HS tariff codes to each item in the product catalogue." .
 
 
-###  http://example.org/apqc#P14093
+###  https://fandaws.com/ontology/apqc#P14093
 ex:P14093 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -7994,7 +7994,7 @@ ex:P14093 rdf:type owl:Class ;
           skos:example "A customs broker computes the excise duty owed on a consignment before clearance." .
 
 
-###  http://example.org/apqc#P14094
+###  https://fandaws.com/ontology/apqc#P14094
 ex:P14094 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -8014,7 +8014,7 @@ ex:P14094 rdf:type owl:Class ;
           skos:example "Filing the mandated electronic declaration with the national customs agency for a shipment." .
 
 
-###  http://example.org/apqc#P14095
+###  https://fandaws.com/ontology/apqc#P14095
 ex:P14095 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -8030,7 +8030,7 @@ ex:P14095 rdf:type owl:Class ;
           skos:example "A logistics clerk records the bill of lading, packing list, and inspection certificate for a shipment." .
 
 
-###  http://example.org/apqc#P14096
+###  https://fandaws.com/ontology/apqc#P14096
 ex:P14096 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -8046,7 +8046,7 @@ ex:P14096 rdf:type owl:Class ;
           skos:example "Preparing a certificate of origin to claim a preferential tariff under a free-trade agreement." .
 
 
-###  http://example.org/apqc#P14098
+###  https://fandaws.com/ontology/apqc#P14098
 ex:P14098 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -8062,7 +8062,7 @@ ex:P14098 rdf:type owl:Class ;
           skos:example "A bank issues a documentary letter of credit guaranteeing payment to an exporter on presentation of shipping documents." .
 
 
-###  http://example.org/apqc#P14187
+###  https://fandaws.com/ontology/apqc#P14187
 ex:P14187 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -8082,7 +8082,7 @@ ex:P14187 rdf:type owl:Class ;
           skos:example "An analyst reviews a customer's credit-score history to decide on extending a line of credit." .
 
 
-###  http://example.org/apqc#P14188
+###  https://fandaws.com/ontology/apqc#P14188
 ex:P14188 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -8102,7 +8102,7 @@ ex:P14188 rdf:type owl:Class ;
           skos:example "Setting the minimum credit scores required for next year's lending program from the firm's credit policy." .
 
 
-###  http://example.org/apqc#P14210
+###  https://fandaws.com/ontology/apqc#P14210
 ex:P14210 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -8118,7 +8118,7 @@ ex:P14210 rdf:type owl:Class ;
           skos:example "Treasury enters a pay-fixed interest-rate swap and books the trade." .
 
 
-###  http://example.org/apqc#P16958
+###  https://fandaws.com/ontology/apqc#P16958
 ex:P16958 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ;
           ex:apqcSourceText "Handling cases that involve financial fraud. Resolve disputes." ;
@@ -8130,7 +8130,7 @@ ex:P16958 rdf:type owl:Class ;
           skos:example "A treasury controls team investigating and resolving suspected payment fraud." .
 
 
-###  http://example.org/apqc#P17059
+###  https://fandaws.com/ontology/apqc#P17059
 ex:P17059 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -8174,7 +8174,7 @@ ex:P17059 rdf:type owl:Class ;
           skos:example "An exporter's end-to-end handling of a cross-border shipment, from sanctions screening through customs clearance and letter-of-credit settlement." .
 
 
-###  http://example.org/apqc#P19575
+###  https://fandaws.com/ontology/apqc#P19575
 ex:P19575 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -8190,7 +8190,7 @@ ex:P19575 rdf:type owl:Class ;
           skos:example "The rates desk feeds live swap curves into its data store." .
 
 
-###  http://example.org/apqc#P19576
+###  https://fandaws.com/ontology/apqc#P19576
 ex:P19576 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -8210,7 +8210,7 @@ ex:P19576 rdf:type owl:Class ;
           skos:example "The desk computes the portfolio's DV01 by market." .
 
 
-###  http://example.org/apqc#P19577
+###  https://fandaws.com/ontology/apqc#P19577
 ex:P19577 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -8234,7 +8234,7 @@ ex:P19577 rdf:type owl:Class ;
           skos:example "The desk sets the required futures hedge given the accepted risk policy." .
 
 
-###  http://example.org/apqc#P19578
+###  https://fandaws.com/ontology/apqc#P19578
 ex:P19578 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -8250,7 +8250,7 @@ ex:P19578 rdf:type owl:Class ;
           skos:example "The desk executes an interest-rate futures order." .
 
 
-###  http://example.org/apqc#P19579
+###  https://fandaws.com/ontology/apqc#P19579
 ex:P19579 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -8266,7 +8266,7 @@ ex:P19579 rdf:type owl:Class ;
           skos:example "The FX desk ingests live spot and forward rates." .
 
 
-###  http://example.org/apqc#P19580
+###  https://fandaws.com/ontology/apqc#P19580
 ex:P19580 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -8286,7 +8286,7 @@ ex:P19580 rdf:type owl:Class ;
           skos:example "The desk reports net open position by currency." .
 
 
-###  http://example.org/apqc#P19581
+###  https://fandaws.com/ontology/apqc#P19581
 ex:P19581 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -8310,7 +8310,7 @@ ex:P19581 rdf:type owl:Class ;
           skos:example "The desk sets required forward cover given the FX risk policy." .
 
 
-###  http://example.org/apqc#P19582
+###  https://fandaws.com/ontology/apqc#P19582
 ex:P19582 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -8326,7 +8326,7 @@ ex:P19582 rdf:type owl:Class ;
           skos:example "The desk executes a spot EUR/USD trade." .
 
 
-###  http://example.org/apqc#P19583
+###  https://fandaws.com/ontology/apqc#P19583
 ex:P19583 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -8342,7 +8342,7 @@ ex:P19583 rdf:type owl:Class ;
           skos:example "The desk tracks translation risk on non-base-currency balances." .
 
 
-###  http://example.org/apqc#P19584
+###  https://fandaws.com/ontology/apqc#P19584
 ex:P19584 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -8362,7 +8362,7 @@ ex:P19584 rdf:type owl:Class ;
           skos:example "The team flags counterparties breaching their exposure limit." .
 
 
-###  http://example.org/apqc#P19585
+###  https://fandaws.com/ontology/apqc#P19585
 ex:P19585 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -8382,7 +8382,7 @@ ex:P19585 rdf:type owl:Class ;
           skos:example "The team requires additional margin to cure a limit breach." .
 
 
-###  http://example.org/apqc#P19586
+###  https://fandaws.com/ontology/apqc#P19586
 ex:P19586 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -8402,7 +8402,7 @@ ex:P19586 rdf:type owl:Class ;
           skos:example "The bank liquidates pledged shares to cover a defaulted margin loan." .
 
 
-###  http://example.org/apqc#P19587
+###  https://fandaws.com/ontology/apqc#P19587
 ex:P19587 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -8426,7 +8426,7 @@ ex:P19587 rdf:type owl:Class ;
           skos:example "Credit risk re-rates a corporate customer at its annual review." .
 
 
-###  http://example.org/apqc#P19588
+###  https://fandaws.com/ontology/apqc#P19588
 ex:P19588 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -8442,7 +8442,7 @@ ex:P19588 rdf:type owl:Class ;
           skos:example "The desk marks the offsetting commodity position to market." .
 
 
-###  http://example.org/apqc#P19589
+###  https://fandaws.com/ontology/apqc#P19589
 ex:P19589 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -8458,7 +8458,7 @@ ex:P19589 rdf:type owl:Class ;
           skos:example "The desk decides which put-option hedge to put on against an equity holding." .
 
 
-###  http://example.org/apqc#P19590
+###  https://fandaws.com/ontology/apqc#P19590
 ex:P19590 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFinancialTransaction ,
                           [ rdf:type owl:Restriction ;
@@ -8474,7 +8474,7 @@ ex:P19590 rdf:type owl:Class ;
           skos:example "The desk closes a futures hedge ahead of expiry." .
 
 
-###  http://example.org/apqc#P19593
+###  https://fandaws.com/ontology/apqc#P19593
 ex:P19593 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -8494,7 +8494,7 @@ ex:P19593 rdf:type owl:Class ;
           skos:example "Converting an invoice denominated in yen into US dollars at the current spot rate." .
 
 
-###  http://example.org/apqc#P20135
+###  https://fandaws.com/ontology/apqc#P20135
 ex:P20135 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -8510,7 +8510,7 @@ ex:P20135 rdf:type owl:Class ;
           skos:example "Releasing budgeted funds and steering spending to stay within the approved plan." .
 
 
-###  http://example.org/apqc#P20136
+###  https://fandaws.com/ontology/apqc#P20136
 ex:P20136 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -8538,7 +8538,7 @@ ex:P20136 rdf:type owl:Class ;
           skos:example "A monthly budget-versus-actual variance report." .
 
 
-###  http://example.org/apqc#P20137
+###  https://fandaws.com/ontology/apqc#P20137
 ex:P20137 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -8570,7 +8570,7 @@ ex:P20137 rdf:type owl:Class ;
           skos:example "The desk puts on the futures and options called for by the hedging strategy." .
 
 
-###  http://example.org/apqc#P20604
+###  https://fandaws.com/ontology/apqc#P20604
 ex:P20604 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -8586,7 +8586,7 @@ ex:P20604 rdf:type owl:Class ;
           skos:example "Posting the firm's accounting-policy manual on its investor-relations website." .
 
 
-###  http://example.org/apqc#P20929
+###  https://fandaws.com/ontology/apqc#P20929
 ex:P20929 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfCardAdministration ,
                           [ rdf:type owl:Restriction ;
@@ -8626,7 +8626,7 @@ ex:P20929 rdf:type owl:Class ;
           skos:example "A finance team issuing and administering corporate purchasing cards." .
 
 
-###  http://example.org/apqc#P20930
+###  https://fandaws.com/ontology/apqc#P20930
 ex:P20930 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -8642,7 +8642,7 @@ ex:P20930 rdf:type owl:Class ;
           skos:example "Issuing a corporate-card policy that sets default spend limits by role." .
 
 
-###  http://example.org/apqc#P20931
+###  https://fandaws.com/ontology/apqc#P20931
 ex:P20931 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfCardAdministration ,
                           [ rdf:type owl:Restriction ;
@@ -8658,7 +8658,7 @@ ex:P20931 rdf:type owl:Class ;
           skos:example "Intake and routing of an employee's corporate-card application." .
 
 
-###  http://example.org/apqc#P20932
+###  https://fandaws.com/ontology/apqc#P20932
 ex:P20932 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -8674,7 +8674,7 @@ ex:P20932 rdf:type owl:Class ;
           skos:example "Ordering newly approved corporate purchasing cards from the issuing bank." .
 
 
-###  http://example.org/apqc#P20933
+###  https://fandaws.com/ontology/apqc#P20933
 ex:P20933 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAccounting ,
                           [ rdf:type owl:Restriction ;
@@ -8690,7 +8690,7 @@ ex:P20933 rdf:type owl:Class ;
           skos:example "Reconciling and updating a corporate-card account at month-end." .
 
 
-###  http://example.org/apqc#P20934
+###  https://fandaws.com/ontology/apqc#P20934
 ex:P20934 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -8706,7 +8706,7 @@ ex:P20934 rdf:type owl:Class ;
           skos:example "Approving an increase to a department card's monthly credit limit." .
 
 
-###  http://example.org/apqc#P20935
+###  https://fandaws.com/ontology/apqc#P20935
 ex:P20935 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfCardAdministration ,
                           [ rdf:type owl:Restriction ;
@@ -8722,7 +8722,7 @@ ex:P20935 rdf:type owl:Class ;
           skos:example "Deactivating a lost corporate card to prevent further charges." .
 
 
-###  http://example.org/apqc#P21574
+###  https://fandaws.com/ontology/apqc#P21574
 ex:P21574 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -8746,7 +8746,7 @@ ex:P21574 rdf:type owl:Class ;
           skos:example "An internal-controls team runs the control suite each period and assesses whether procedures were followed." .
 
 
-###  http://example.org/apqc#PaymentApproval
+###  https://fandaws.com/ontology/apqc#PaymentApproval
 ex:PaymentApproval rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:comment "Directive: an approval authorizes (prescribes) an action; covers approve-payments, approve-reimbursements, approve credit-limit changes." ;
@@ -8754,7 +8754,7 @@ ex:PaymentApproval rdf:type owl:Class ;
                    skos:definition "A Directive Information Content Entity that prescribes that a particular payment, reimbursement, or credit change is authorized to proceed." .
 
 
-###  http://example.org/apqc#PaymentInstrument
+###  https://fandaws.com/ontology/apqc#PaymentInstrument
 ex:PaymentInstrument rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000537 ;
                      rdfs:comment "Material input/participant of Acts of Financial Transaction (payments, salary disbursements, deposits, remittances) in 9.2, 9.5, 9.6, 9.7, 9.10, 9.11. Renamed from ex:PaymentInstrument, whose label misread as the payment EVENT; this class is the transferred MONEY (a material filler), never the act. Anchored to cco:ont00000537 to match CCO's treatment of money as a Financial Instrument (cf. Portion of Cash cco:ont00000475 subClassOf 537)." ;
@@ -8762,7 +8762,7 @@ ex:PaymentInstrument rdf:type owl:Class ;
                      skos:definition "A Financial Instrument consisting of a quantity of money (cash or funds) transferred from one Agent to another in settlement of an obligation or exchange." .
 
 
-###  http://example.org/apqc#PaymentMatchResult
+###  https://fandaws.com/ontology/apqc#PaymentMatchResult
 ex:PaymentMatchResult rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:comment "Minted locally for 9.6.1.1: descriptive judgement of AP three-way matching. Descriptive, not Directive, because it represents a match state rather than prescribing action." ;
@@ -8770,7 +8770,7 @@ ex:PaymentMatchResult rdf:type owl:Class ;
                       skos:definition "A Descriptive Information Content Entity that records whether an accounts-payable pay-file entry matches the corresponding vendor master and purchase-order record." .
 
 
-###  http://example.org/apqc#PayrollDeductionRecord
+###  https://fandaws.com/ontology/apqc#PayrollDeductionRecord
 ex:PayrollDeductionRecord rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:label "Payroll Deduction Record" ;
@@ -8778,7 +8778,7 @@ ex:PayrollDeductionRecord rdf:type owl:Class ;
                           skos:example "A record of an employee's statutory and voluntary deductions for the year." .
 
 
-###  http://example.org/apqc#PayrollInquiryResponse
+###  https://fandaws.com/ontology/apqc#PayrollInquiryResponse
 ex:PayrollInquiryResponse rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:label "Payroll Inquiry Response" ;
@@ -8786,7 +8786,7 @@ ex:PayrollInquiryResponse rdf:type owl:Class ;
                           skos:example "A help-desk reply explaining a deduction that reduced an employee's net pay." .
 
 
-###  http://example.org/apqc#PerformanceMeasure
+###  https://fandaws.com/ontology/apqc#PerformanceMeasure
 ex:PerformanceMeasure rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:comment "Modeled as Descriptive ICE when it records/reports a quantified performance value; a KPI specification prescribing what to measure, how, and against what target should be modeled separately as a Directive ICE (cco:ont00000965)." ;
@@ -8794,7 +8794,7 @@ ex:PerformanceMeasure rdf:type owl:Class ;
                       skos:definition "A Descriptive Information Content Entity that describes a quantified measure of financial or operational performance." .
 
 
-###  http://example.org/apqc#PeriodEndAdjustmentRecord
+###  https://fandaws.com/ontology/apqc#PeriodEndAdjustmentRecord
 ex:PeriodEndAdjustmentRecord rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:label "Payroll Period-End Adjustment Record" ;
@@ -8802,7 +8802,7 @@ ex:PeriodEndAdjustmentRecord rdf:type owl:Class ;
                              skos:example "A year-end recalculation adjusting an employee's tax-deduction shortfall or surplus." .
 
 
-###  http://example.org/apqc#ProcessControlObjective
+###  https://fandaws.com/ontology/apqc#ProcessControlObjective
 ex:ProcessControlObjective rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000965 ;
                            rdfs:comment "Minted for 9.8.1.4. Directive (prescribes intended accomplishment). Paired with a descriptive ex:RiskAssessment describing the risks attached to the process." ;
@@ -8811,14 +8811,14 @@ ex:ProcessControlObjective rdf:type owl:Class ;
                            skos:example "A documented objective that all disbursements above a threshold require dual authorization." .
 
 
-###  http://example.org/apqc#ProductClassification
+###  https://fandaws.com/ontology/apqc#ProductClassification
 ex:ProductClassification rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:label "Product Trade Classification" ;
                          skos:definition "A Descriptive Information Content Entity that assigns products or services to trade categories according to national and international standards." .
 
 
-###  http://example.org/apqc#ProductMixDecision
+###  https://fandaws.com/ontology/apqc#ProductMixDecision
 ex:ProductMixDecision rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000965 ;
                       rdfs:comment "Minted: a decision/selection record (Directive ICE), distinct from descriptive analyses. Output of an Act of Selection (ex:P10785)." ;
@@ -8827,14 +8827,14 @@ ex:ProductMixDecision rdf:type owl:Class ;
                       skos:example "A decision to offer products X and Y to segment A and product Z to segment B." .
 
 
-###  http://example.org/apqc#ProfitabilityAnalysis
+###  https://fandaws.com/ontology/apqc#ProfitabilityAnalysis
 ex:ProfitabilityAnalysis rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:label "Profitability Analysis" ;
                          skos:definition "A Descriptive Information Content Entity that describes the revenues, costs, and resulting profit attributable to a customer, product, unit, or project." .
 
 
-###  http://example.org/apqc#ProjectAccountCode
+###  https://fandaws.com/ontology/apqc#ProjectAccountCode
 ex:ProjectAccountCode rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:comment "Local mint. Rejected ex:ChartOfAccounts (the master account structure) as too broad for a single per-project classification code. Descriptive (it identifies/classifies, it does not prescribe)." ;
@@ -8843,7 +8843,7 @@ ex:ProjectAccountCode rdf:type owl:Class ;
                       skos:example "Cost-collection code 'CP-2026-014' assigned to a new turbine-replacement project." .
 
 
-###  http://example.org/apqc#ProjectApprovalDecision
+###  https://fandaws.com/ontology/apqc#ProjectApprovalDecision
 ex:ProjectApprovalDecision rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000965 ;
                            rdfs:comment "Go/no-go decision in capital planning (9.4)." ;
@@ -8851,7 +8851,7 @@ ex:ProjectApprovalDecision rdf:type owl:Class ;
                            skos:definition "A Directive Information Content Entity that prescribes whether a capital project or fixed-asset acquisition is authorized to proceed." .
 
 
-###  http://example.org/apqc#ProjectContinuationDecision
+###  https://fandaws.com/ontology/apqc#ProjectContinuationDecision
 ex:ProjectContinuationDecision rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000965 ;
                                rdfs:comment "Directive go/no-go decision in capital project accounting (9.4.2). Minted for ex:P10851 ('Decide whether to proceed based on the revenues generated'), mirroring ex:ProjectApprovalDecision." ;
@@ -8859,14 +8859,14 @@ ex:ProjectContinuationDecision rdf:type owl:Class ;
                                skos:definition "A Directive Information Content Entity that prescribes whether to proceed with a capital project on the basis of the returns it has generated." .
 
 
-###  http://example.org/apqc#RegulatorRole
+###  https://fandaws.com/ontology/apqc#RegulatorRole
 ex:RegulatorRole rdf:type owl:Class ;
                  rdfs:subClassOf obo:BFO_0000023 ;
                  rdfs:label "Regulator Role" ;
                  skos:definition "A Role that is borne by an authority in virtue of having legal power to issue and enforce financial, tax, or trade rules binding on an Organization." .
 
 
-###  http://example.org/apqc#RegulatoryAuthority
+###  https://fandaws.com/ontology/apqc#RegulatoryAuthority
 ex:RegulatoryAuthority rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001180 ,
                                        [ rdf:type owl:Restriction ;
@@ -8878,14 +8878,14 @@ ex:RegulatoryAuthority rdf:type owl:Class ;
                        skos:definition "An Organization that bears a regulator role and issues or enforces financial, tax, or trade rules binding on other organizations." .
 
 
-###  http://example.org/apqc#RegulatoryFiling
+###  https://fandaws.com/ontology/apqc#RegulatoryFiling
 ex:RegulatoryFiling rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:label "Regulatory Filing" ;
                     skos:definition "A Descriptive Information Content Entity submitted to a regulatory authority that reports required financial, tax, or compliance information." .
 
 
-###  http://example.org/apqc#RestitutionManagementCapability
+###  https://fandaws.com/ontology/apqc#RestitutionManagementCapability
 ex:RestitutionManagementCapability rdf:type owl:Class ;
                                    rdfs:subClassOf cco:ont00000568 ,
                                                    [ rdf:type owl:Restriction ;
@@ -8898,14 +8898,14 @@ ex:RestitutionManagementCapability rdf:type owl:Class ;
                                    skos:example "A legal function's standing capacity to manage court-ordered restitution and regulatory penalties." .
 
 
-###  http://example.org/apqc#RiskAssessment
+###  https://fandaws.com/ontology/apqc#RiskAssessment
 ex:RiskAssessment rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:label "Financial Risk Assessment" ;
                   skos:definition "A Descriptive Information Content Entity that describes an organization's exposure to interest-rate, foreign-exchange, credit, or market risk." .
 
 
-###  http://example.org/apqc#RiskExposureData
+###  https://fandaws.com/ontology/apqc#RiskExposureData
 ex:RiskExposureData rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:comment "Definitional input to exposure-determination analyses (9.7.5). Used by ex:P19584; parallels ex:MarketRateData (the input to the rate-exposure analyses ex:P19576 / ex:P19580) so all three exposure-determination rows carry a definitional input." ;
@@ -8913,7 +8913,7 @@ ex:RiskExposureData rdf:type owl:Class ;
                     skos:definition "A Descriptive Information Content Entity that describes an Organization's current counterparty or customer exposures, positions, and the limits applicable to them." .
 
 
-###  http://example.org/apqc#RiskToleranceSpecification
+###  https://fandaws.com/ontology/apqc#RiskToleranceSpecification
 ex:RiskToleranceSpecification rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:comment "Minted for 9.8.1.5. Directive because it prescribes binding limits, not a description of current risk (that is ex:RiskAssessment)." ;
@@ -8922,7 +8922,7 @@ ex:RiskToleranceSpecification rdf:type owl:Class ;
                               skos:example "A board-approved statement capping aggregate operational loss exposure at 2% of revenue." .
 
 
-###  http://example.org/apqc#SanctionedPartyList
+###  https://fandaws.com/ontology/apqc#SanctionedPartyList
 ex:SanctionedPartyList rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:comment "Minted for group 9.11. Input to sanctioned-party screening. Descriptive (it represents who may trade), not Directive." ;
@@ -8931,7 +8931,7 @@ ex:SanctionedPartyList rdf:type owl:Class ;
                        skos:example "A consolidated denied-/approved-parties screening list maintained for export controls." .
 
 
-###  http://example.org/apqc#SanctionedPartyScreeningResult
+###  https://fandaws.com/ontology/apqc#SanctionedPartyScreeningResult
 ex:SanctionedPartyScreeningResult rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:comment "Minted for group 9.11. Output of 9.11.1. Descriptive (it records a clearance judgement) per the GOLDEN PRINCIPLE for an Appraisal act." ;
@@ -8940,14 +8940,14 @@ ex:SanctionedPartyScreeningResult rdf:type owl:Class ;
                                   skos:example "A trade-compliance clearance record flagging a counterparty as cleared or blocked." .
 
 
-###  http://example.org/apqc#ServiceLevelAgreement
+###  https://fandaws.com/ontology/apqc#ServiceLevelAgreement
 ex:ServiceLevelAgreement rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ;
                          rdfs:label "Service-Level Agreement" ;
                          skos:definition "A Directive Information Content Entity, agreed between parties, that prescribes the scope, quality, and responsibilities of a service." .
 
 
-###  http://example.org/apqc#Subsidiary
+###  https://fandaws.com/ontology/apqc#Subsidiary
 ex:Subsidiary rdf:type owl:Class ;
               rdfs:subClassOf cco:ont00001180 ,
                               [ rdf:type owl:Restriction ;
@@ -8958,7 +8958,7 @@ ex:Subsidiary rdf:type owl:Class ;
               skos:definition "An Organization that bears a subsidiary role, being a separate legal entity controlled by a parent Organization." .
 
 
-###  http://example.org/apqc#SubsidiaryRole
+###  https://fandaws.com/ontology/apqc#SubsidiaryRole
 ex:SubsidiaryRole rdf:type owl:Class ;
                   rdfs:subClassOf obo:BFO_0000023 ;
                   rdfs:comment "Used in consolidation, in-house banking, and international-funds processes (9.3, 9.7, 9.10)." ;
@@ -8966,7 +8966,7 @@ ex:SubsidiaryRole rdf:type owl:Class ;
                   skos:definition "A Role that is borne by an Organization in virtue of being a separate legal entity controlled by a parent Organization." .
 
 
-###  http://example.org/apqc#Supplier
+###  https://fandaws.com/ontology/apqc#Supplier
 ex:Supplier rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00001180 ,
                             [ rdf:type owl:Restriction ;
@@ -8978,7 +8978,7 @@ ex:Supplier rdf:type owl:Class ;
             skos:definition "An Agent that bears a supplier role and provides goods or services to a focal Organization for payment." .
 
 
-###  http://example.org/apqc#SupplierRole
+###  https://fandaws.com/ontology/apqc#SupplierRole
 ex:SupplierRole rdf:type owl:Class ;
                 rdfs:subClassOf obo:BFO_0000023 ;
                 rdfs:comment "Used for accounts-payable counterparties (vendors) in 9.6." ;
@@ -8986,7 +8986,7 @@ ex:SupplierRole rdf:type owl:Class ;
                 skos:definition "A Role that is borne by an Agent in virtue of providing goods or services to an Organization for which the Organization owes payment." .
 
 
-###  http://example.org/apqc#SystemSecurityRequirement
+###  https://fandaws.com/ontology/apqc#SystemSecurityRequirement
 ex:SystemSecurityRequirement rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000965 ;
                              rdfs:comment "Local mint for 9.7.1.8. Directive because requirements prescribe what a system must satisfy." ;
@@ -8994,14 +8994,14 @@ ex:SystemSecurityRequirement rdf:type owl:Class ;
                              skos:definition "A Directive Information Content Entity that prescribes requirements for controlling access, information reliability, accountability, and availability within an organization's treasury systems." .
 
 
-###  http://example.org/apqc#TaxData
+###  https://fandaws.com/ontology/apqc#TaxData
 ex:TaxData rdf:type owl:Class ;
            rdfs:subClassOf cco:ont00000853 ;
            rdfs:label "Tax Data" ;
            skos:definition "A Descriptive Information Content Entity that describes income, deductions, and liabilities relevant to an Organization's taxation." .
 
 
-###  http://example.org/apqc#TaxInquiryResponse
+###  https://fandaws.com/ontology/apqc#TaxInquiryResponse
 ex:TaxInquiryResponse rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ,
                                       [ rdf:type owl:Restriction ;
@@ -9014,7 +9014,7 @@ ex:TaxInquiryResponse rdf:type owl:Class ;
                       skos:example "A written reply to a revenue authority's audit question, citing the relevant prior-year filings." .
 
 
-###  http://example.org/apqc#TaxManagementCapability
+###  https://fandaws.com/ontology/apqc#TaxManagementCapability
 ex:TaxManagementCapability rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000568 ,
                                            [ rdf:type owl:Restriction ;
@@ -9025,21 +9025,21 @@ ex:TaxManagementCapability rdf:type owl:Class ;
                            skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to estimate, plan, file, and pay its tax liabilities." .
 
 
-###  http://example.org/apqc#TaxReturn
+###  https://fandaws.com/ontology/apqc#TaxReturn
 ex:TaxReturn rdf:type owl:Class ;
              rdfs:subClassOf cco:ont00000853 ;
              rdfs:label "Tax Return" ;
              skos:definition "A Descriptive Information Content Entity that reports an Organization's or individual's taxable income, deductions, and tax owed to a tax authority." .
 
 
-###  http://example.org/apqc#TaxStrategy
+###  https://fandaws.com/ontology/apqc#TaxStrategy
 ex:TaxStrategy rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00000965 ;
                rdfs:label "Tax Strategy" ;
                skos:definition "A Directive Information Content Entity that prescribes how an Organization will manage and minimize its tax liabilities." .
 
 
-###  http://example.org/apqc#TimeRecord
+###  https://fandaws.com/ontology/apqc#TimeRecord
 ex:TimeRecord rdf:type owl:Class ;
               rdfs:subClassOf cco:ont00000853 ;
               rdfs:label "Employee Time Record" ;
@@ -9047,7 +9047,7 @@ ex:TimeRecord rdf:type owl:Class ;
               skos:example "A weekly timesheet capturing each employee's hours and billable time." .
 
 
-###  http://example.org/apqc#TradeDocumentation
+###  https://fandaws.com/ontology/apqc#TradeDocumentation
 ex:TradeDocumentation rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:comment "Output of 9.11 document-trade processes." ;
@@ -9055,7 +9055,7 @@ ex:TradeDocumentation rdf:type owl:Class ;
                       skos:definition "A Descriptive Information Content Entity that records the description, quantity, transport, indemnity, and inspection details of an international-trade transaction." .
 
 
-###  http://example.org/apqc#TradePreferenceDocumentation
+###  https://fandaws.com/ontology/apqc#TradePreferenceDocumentation
 ex:TradePreferenceDocumentation rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ;
                                 rdfs:comment "Minted for group 9.11. Output of 9.11.8. Descriptive (it evidences eligibility); the preferential-rate entitlement it records derives from external trade agreements, not from this artifact prescribing conduct." ;
@@ -9064,14 +9064,14 @@ ex:TradePreferenceDocumentation rdf:type owl:Class ;
                                 skos:example "A certificate of origin claiming preferential tariff treatment under a free-trade agreement." .
 
 
-###  http://example.org/apqc#TransactionRecord
+###  https://fandaws.com/ontology/apqc#TransactionRecord
 ex:TransactionRecord rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:label "Transaction Record" ;
                      skos:definition "A Descriptive Information Content Entity that registers an individual financial transaction together with its amount, date, and parties." .
 
 
-###  http://example.org/apqc#Treasurer
+###  https://fandaws.com/ontology/apqc#Treasurer
 ex:Treasurer rdf:type owl:Class ;
              rdfs:subClassOf cco:ont00001017 ,
                              [ rdf:type owl:Restriction ;
@@ -9082,14 +9082,14 @@ ex:Treasurer rdf:type owl:Class ;
              skos:definition "An Agent that bears a treasurer role and manages an Organization's cash, liquidity, debt, investments, and financial risk." .
 
 
-###  http://example.org/apqc#TreasurerRole
+###  https://fandaws.com/ontology/apqc#TreasurerRole
 ex:TreasurerRole rdf:type owl:Class ;
                  rdfs:subClassOf obo:BFO_0000023 ;
                  rdfs:label "Treasurer Role" ;
                  skos:definition "A Role that is borne by an Agent in virtue of being tasked with managing an Organization's cash, liquidity, debt, investments, and financial risk." .
 
 
-###  http://example.org/apqc#TreasuryGovernanceCharter
+###  https://fandaws.com/ontology/apqc#TreasuryGovernanceCharter
 ex:TreasuryGovernanceCharter rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000965 ;
                              rdfs:comment "Local mint for 9.7.1.1; no fitting class in the shared section vocabulary. Directive because it prescribes scope and authority rather than describing them." ;
@@ -9097,14 +9097,14 @@ ex:TreasuryGovernanceCharter rdf:type owl:Class ;
                              skos:definition "A Directive Information Content Entity that prescribes the scope of treasury operations and designates the authoritative body governing investment decisions." .
 
 
-###  http://example.org/apqc#TreasuryManagementCapability
+###  https://fandaws.com/ontology/apqc#TreasuryManagementCapability
 ex:TreasuryManagementCapability rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000568 ;
                                 rdfs:label "Treasury Management Capability" ;
                                 skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to manage cash, liquidity, debt, investments, and financial risk." .
 
 
-###  http://example.org/apqc#TrialBalance
+###  https://fandaws.com/ontology/apqc#TrialBalance
 ex:TrialBalance rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:comment "Minted for ex:P10826 ('Prepare trial balance'). A trial balance is a distinct derived statement, not the general ledger from which it is computed; modeling its output as ex:GeneralLedger asserted a falsehood about the definitional artifact." ;
@@ -9112,14 +9112,14 @@ ex:TrialBalance rdf:type owl:Class ;
                 skos:definition "A Descriptive Information Content Entity that lists the debit and credit balances of all ledger accounts to verify that total debits equal total credits." .
 
 
-###  http://example.org/apqc#VarianceAnalysis
+###  https://fandaws.com/ontology/apqc#VarianceAnalysis
 ex:VarianceAnalysis rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:label "Variance Analysis" ;
                     skos:definition "A Descriptive Information Content Entity that describes the differences between budgeted or forecasted figures and actual financial results." .
 
 
-###  http://example.org/apqc#VendorMasterFile
+###  https://fandaws.com/ontology/apqc#VendorMasterFile
 ex:VendorMasterFile rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ,
                                     [ rdf:type owl:Restriction ;

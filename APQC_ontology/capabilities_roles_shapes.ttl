@@ -1,5 +1,5 @@
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
-@prefix ex:   <http://example.org/apqc#> .
+@prefix ex:   <https://fandaws.com/ontology/apqc#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 # capabilities_roles_shapes.ttl (v0.1.0)
@@ -14,9 +14,9 @@
 ex:CapabilityWellFormedShape a sh:NodeShape ;
     sh:target [ a sh:SPARQLTarget ;
         sh:select """SELECT ?this WHERE {
-          { ?this <http://example.org/apqc#enablesProcess> ?p }
+          { ?this <https://fandaws.com/ontology/apqc#enablesProcess> ?p }
           UNION
-          { ?this <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://example.org/apqc#Capability> } }""" ] ;
+          { ?this <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://fandaws.com/ontology/apqc#Capability> } }""" ] ;
     sh:sparql
       [ a sh:SPARQLConstraint ;
         sh:message "Capability must reach cco:Agent Capability (ont00001379) via subClassOf+." ;
@@ -32,7 +32,7 @@ ex:CapabilityWellFormedShape a sh:NodeShape ;
 ex:RoleWellFormedShape a sh:NodeShape ;
     sh:target [ a sh:SPARQLTarget ;
         sh:select """SELECT ?this WHERE {
-          ?this <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://example.org/apqc#Role> }""" ] ;
+          ?this <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://fandaws.com/ontology/apqc#Role> }""" ] ;
     sh:sparql
       [ a sh:SPARQLConstraint ;
         sh:message "Role must reach bfo:Role (BFO_0000023) via subClassOf+." ;

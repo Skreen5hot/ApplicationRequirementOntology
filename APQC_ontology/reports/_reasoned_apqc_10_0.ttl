@@ -1,5 +1,5 @@
-@prefix : <http://example.org/apqc/slice/10.0#> .
-@prefix ex: <http://example.org/apqc#> .
+@prefix : <https://fandaws.com/ontology/apqc/slice/10.0#> .
+@prefix ex: <https://fandaws.com/ontology/apqc#> .
 @prefix cco: <https://www.commoncoreontologies.org/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
@@ -7,12 +7,12 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix apqc: <http://example.org/apqc/scheme#> .
+@prefix apqc: <https://fandaws.com/ontology/apqc/scheme#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <http://example.org/apqc/slice/10.0> .
+@base <https://fandaws.com/ontology/apqc/slice/10.0> .
 
-<http://example.org/apqc/slice/10.0> rdf:type owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/10.0> rdf:type owl:Ontology ;
                                       dct:source "APQC Process Classification Framework (Cross-Industry)" ;
                                       dct:title "APQC reality-layer slice 10.0: Acquire, Construct, and Manage Assets" ;
                                       rdfs:comment "Reality-layer BFO 2020 / CCO 2.0 module for APQC section 10.0. CCO pin: v2.0 (2024-11-06). Modeling decisions per ADR-001 (two-layer model; R5 bounded-occurrent test; GOLDEN PRINCIPLE genus<->output agreement). Self-contained: the shared act genera it uses are inlined from the apqc-ext.ttl registry, so it validates standalone against the pinned CCO/BFO closure with no extension merge." ;
@@ -22,25 +22,25 @@
 #    Annotation properties
 #################################################################
 
-###  http://example.org/apqc#apqcSourceText
+###  https://fandaws.com/ontology/apqc#apqcSourceText
 ex:apqcSourceText rdf:type owl:AnnotationProperty ;
                   rdfs:comment "Verbatim APQC Element Description retained for provenance." ;
                   rdfs:label "APQC source description" .
 
 
-###  http://example.org/apqc#designatesProcessType
+###  https://fandaws.com/ontology/apqc#designatesProcessType
 ex:designatesProcessType rdf:type owl:AnnotationProperty ;
                          rdfs:comment "Catalog->reality bridge. Links an APQC catalog node (ex:PCF_<pcfID>) to the reality-layer class (process, capability) that it designates." ;
                          rdfs:label "designates process type" .
 
 
-###  http://example.org/apqc#hierarchyID
+###  https://fandaws.com/ontology/apqc#hierarchyID
 ex:hierarchyID rdf:type owl:AnnotationProperty ;
                rdfs:comment "Positional dotted-decimal locator. NON-STABLE across PCF versions. Reference only; never for IRI minting or subsumption." ;
                rdfs:label "APQC Hierarchy ID" .
 
 
-###  http://example.org/apqc#pcfID
+###  https://fandaws.com/ontology/apqc#pcfID
 ex:pcfID rdf:type owl:AnnotationProperty ;
          rdfs:comment "Stable APQC identifier. Anchor IRIs to this; it persists across PCF versions." ;
          rdfs:label "APQC PCF ID" .
@@ -2630,7 +2630,7 @@ cco:ont00001773 rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
-###  http://example.org/apqc#ActOfAcquisition
+###  https://fandaws.com/ontology/apqc#ActOfAcquisition
 ex:ActOfAcquisition rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000228 ;
                     rdfs:comment "Local extension (D9). Rejected cco:ont00000950 'Act of Maintenance' (modifying Material Artifacts) and cco:ont00000402 'Act of Communication' (mere ICE transfer). Securing/obtaining a held entity anchors at the generic Planned Act. Expected to recur in procurement/asset-acquisition categories (4.0, 10.0). Also rejected cco:ont00001334 (Act of Purchasing) and cco:ont00000389 (Act of Buying): both require a Financial Instrument and descend from cco:ont00000836 (Act of Financial Instrument Use), too narrow for non-purchase acquisitions such as obtaining permits/licenses from an authority or securing financing; purchasing is a species of acquisition, not its genus." ;
@@ -2638,7 +2638,7 @@ ex:ActOfAcquisition rdf:type owl:Class ;
                     skos:definition "A Planned Act in which an Agent obtains from some authority or supplier an entity (such as an authorization, license, or resource) that the Agent did not previously hold." .
 
 
-###  http://example.org/apqc#ActOfAnalysis
+###  https://fandaws.com/ontology/apqc#ActOfAnalysis
 ex:ActOfAnalysis rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000366 ;
                  rdfs:comment "Local extension (D9). CCO 2.0 has no generic analysis class; analysis is information processing, so it is anchored under cco:ont00000366." ;
@@ -2646,7 +2646,7 @@ ex:ActOfAnalysis rdf:type owl:Class ;
                  skos:definition "An Act of Information Processing in which an Agent examines one or more input Information Content Entities and produces an Information Content Entity that represents an understanding of their subject matter." .
 
 
-###  http://example.org/apqc#ActOfDisposition
+###  https://fandaws.com/ontology/apqc#ActOfDisposition
 ex:ActOfDisposition rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000228 ;
                     rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic disposal/disposition Act. Anchored at the generic cco:ont00000228 (Planned Act) because disposition spans physical destruction/recycling AND ownership transfer (sale/trade) AND waste-stream removal -- not all of which physically process a material artifact. Rejected cco:ont00000908 (Act of Material Artifact Processing: too narrow -- excludes sale/abandonment), cco:ont00000950 (Act of Maintenance: preserves/restores Qualities, the opposite of retiring an asset), and cco:ont00000970 (Act of Artifact Modification: changes an artifact's qualities, not its service/ownership status). Recurs across asset end-of-life: decommission, sale/trade, recycle, abandonment, hazardous-material/waste disposition (10.0). Also rejected cco:ont00001336 (Act of Ownership) and its parent cco:ont00001232 (Act of Possession): these model an agent HOLDING / exercising control over property (a state of possession), not relinquishing or transferring it; CCO 2.0 has no Act of Selling / Act of Ownership Transfer." ;
@@ -2654,7 +2654,7 @@ ex:ActOfDisposition rdf:type owl:Class ;
                     skos:definition "A Planned Act in which an Agent removes an asset or portion of material from active service, ownership, or possession at its end-of-life by retiring, selling, dismantling, recycling, abandoning, or otherwise applying a terminal disposition to it or its parts in accordance with applicable requirements." .
 
 
-###  http://example.org/apqc#ActOfForecasting
+###  https://fandaws.com/ontology/apqc#ActOfForecasting
 ex:ActOfForecasting rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000371 ;
                     rdfs:comment "Local extension (D9). Genus cco:ont00000371 (Act of Prediction, a Planned Act). Used where a process's definitional output is a forecast/projection of an uncertain future state (a Predictive ICE, cco:ont00000626), as opposed to ex:ActOfAnalysis whose output is a plain Descriptive ICE about an existing subject. cco:ont00000228 co-asserted locally so the class still anchors to an S2-allowlisted Planned Act. Recurs corpus-wide (slices 5.0/6.0/8.0/10.0)." ;
@@ -2662,7 +2662,7 @@ ex:ActOfForecasting rdf:type owl:Class ;
                     skos:definition "An Act of Prediction in which an Agent examines present information about an entity and generates a Predictive Information Content Entity that describes an uncertain future event, value, or condition of that entity." .
 
 
-###  http://example.org/apqc#ActOfFormulation
+###  https://fandaws.com/ontology/apqc#ActOfFormulation
 ex:ActOfFormulation rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000511 ;
                     rdfs:comment "Local extension (D9). Anchored under cco:ont00000511 (Act of Planning) because formulating a strategy/mission/design is making a plan to achieve an objective; its output is a Directive ICE. Recurs across develop/define/compose-a-directive processes corpus-wide." ;
@@ -2670,7 +2670,7 @@ ex:ActOfFormulation rdf:type owl:Class ;
                     skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." .
 
 
-###  http://example.org/apqc#ActOfIdentification
+###  https://fandaws.com/ontology/apqc#ActOfIdentification
 ex:ActOfIdentification rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000366 ;
                        rdfs:comment "Local extension (D9). NOT cco:ont00001261 'Act of Identifying' (a communication act). APQC 'Identify ...' denotes discernment, i.e. information processing." ;
@@ -2678,7 +2678,7 @@ ex:ActOfIdentification rdf:type owl:Class ;
                        skos:definition "An Act of Information Processing in which an Agent discerns and enumerates entities of a given kind and produces an Information Content Entity that registers them." .
 
 
-###  http://example.org/apqc#ActOfMonitoring
+###  https://fandaws.com/ontology/apqc#ActOfMonitoring
 ex:ActOfMonitoring rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000366 ;
                    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic monitoring/tracking class. Anchored under cco:ont00000366 (Act of Information Processing) because monitoring ingests repeated observations (including electronic records, not only senses) and yields a descriptive status/deviation ICE -- the GOLDEN PRINCIPLE (descriptive output => information-processing genus) holds. Rejected cco:ont00000037 (Act of Observation: a single sense-based acquisition, too narrow -- monitoring also processes ICEs and is sustained); cco:ont00000636 (Act of Appraisal: renders a single bounded value/quality judgement rather than tracking status over time); and cco:ont00000345 (Act of Measuring: a single quantification against a standard at one time -- at most a method sub-step of the monitoring cycle; a node that is purely one quantification, e.g. Calculate performance measures, anchors to cco:ont00000345 directly, not here). Distinct from ex:ActOfAnalysis (one-shot examination of a fixed input set) by its continuous, longitudinal character. A standing 'Manage/Monitor X' function with no natural end is an Organization Capability (cco:ont00000568) realized in such acts, not itself a process. Recurs corpus-wide (slices 3.0/4.0/5.0/6.0/8.0/9.0/10.0/11.0/12.0/13.0). Reconciled from 10 divergent slice restatements to one definition." ;
@@ -2686,7 +2686,7 @@ ex:ActOfMonitoring rdf:type owl:Class ;
                    skos:definition "An Act of Information Processing in which an Agent repeatedly or continuously observes the state, progress, or performance of some process, system, or quantity over time and produces a Descriptive Information Content Entity that represents its tracked status against expected conditions, targets, or requirements." .
 
 
-###  http://example.org/apqc#ActOfNegotiation
+###  https://fandaws.com/ontology/apqc#ActOfNegotiation
 ex:ActOfNegotiation rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000228 ;
                     rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000228 (Planned Act): negotiation is two or more agents conferring and bargaining over terms to reach a mutually binding directive (an agreement or contract). Rejected cco:ont00001327 (Social Act) as too generic; Act of Contract Formation (cco:ont00000684) models only the consummating promise, narrower than the bargaining process." ;
@@ -2694,7 +2694,7 @@ ex:ActOfNegotiation rdf:type owl:Class ;
                     skos:definition "A Planned Act in which two or more Agents confer and bargain over terms and conditions, exchanging proposals and concessions, in order to reach and record a mutually binding Directive Information Content Entity such as an agreement or contract." .
 
 
-###  http://example.org/apqc#ActOfSelection
+###  https://fandaws.com/ontology/apqc#ActOfSelection
 ex:ActOfSelection rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000366 ;
                   rdfs:comment "Local extension (D9). Anchored under cco:ont00000366 (Act of Information Processing): receives candidate-option ICEs and yields a decision ICE. Distinct from Act of Appraisal (judges without committing) and Act of Planning. NOTE: ratifying a single already-settled option is NOT selection (no candidate set) -- anchor such acts at cco:ont00000228 (Planned Act)." ;
@@ -2702,14 +2702,14 @@ ex:ActOfSelection rdf:type owl:Class ;
                   skos:definition "An Act of Information Processing in which an Agent chooses one or more options from a set of candidates and produces a Directive Information Content Entity that prescribes the chosen option(s)." .
 
 
-###  http://example.org/apqc#AssetConstructionCapability
+###  https://fandaws.com/ontology/apqc#AssetConstructionCapability
 ex:AssetConstructionCapability rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000568 ;
                                rdfs:label "Asset Construction Capability" ;
                                skos:definition "An Organization Capability that is realized in acts of designing, planning, scheduling, and performing the construction of assets." .
 
 
-###  http://example.org/apqc#AssetDesign
+###  https://fandaws.com/ontology/apqc#AssetDesign
 ex:AssetDesign rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00000965 ,
                                [ rdf:type owl:Restriction ;
@@ -2720,7 +2720,7 @@ ex:AssetDesign rdf:type owl:Class ;
                skos:definition "A Directive Information Content Entity, about a productive asset, that prescribes the specifications of that asset and the construction codes it must satisfy." .
 
 
-###  http://example.org/apqc#AssetDispositionCapability
+###  https://fandaws.com/ontology/apqc#AssetDispositionCapability
 ex:AssetDispositionCapability rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000568 ;
                               rdfs:comment "Models the 10.4.4 'Manage take-back centers' standing function (R5/R6): a never-ending capacity, not a bounded process. Catalog bridge ex:PCF_12717 -> this capability." ;
@@ -2728,14 +2728,14 @@ ex:AssetDispositionCapability rdf:type owl:Class ;
                               skos:definition "An Organization Capability that is realized in acts of managing the end-of-life disposition of assets, including decommissioning, dismantling, recycling, and abandonment." .
 
 
-###  http://example.org/apqc#AssetExitStrategy
+###  https://fandaws.com/ontology/apqc#AssetExitStrategy
 ex:AssetExitStrategy rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:label "Asset Exit Strategy" ;
                      skos:definition "A Directive Information Content Entity that prescribes an organization's approach for managing the end-of-life exit of its assets." .
 
 
-###  http://example.org/apqc#AssetHandoverDocumentation
+###  https://fandaws.com/ontology/apqc#AssetHandoverDocumentation
 ex:AssetHandoverDocumentation rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000853 ,
                                               [ rdf:type owl:Restriction ;
@@ -2746,7 +2746,7 @@ ex:AssetHandoverDocumentation rdf:type owl:Class ;
                               skos:definition "A Descriptive Information Content Entity, about an asset, that documents the asset's history and current state to enable an orderly handover to a new operator or landowner." .
 
 
-###  http://example.org/apqc#AssetMaintenanceCapability
+###  https://fandaws.com/ontology/apqc#AssetMaintenanceCapability
 ex:AssetMaintenanceCapability rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000568 ,
                                               [ rdf:type owl:Restriction ;
@@ -2766,21 +2766,21 @@ ex:AssetMaintenanceCapability rdf:type owl:Class ;
                               skos:definition "An Organization Capability that is realized in acts of planning, managing, and performing asset maintenance." .
 
 
-###  http://example.org/apqc#AssetManagerRole
+###  https://fandaws.com/ontology/apqc#AssetManagerRole
 ex:AssetManagerRole rdf:type owl:Class ;
                     rdfs:subClassOf obo:BFO_0000023 ;
                     rdfs:label "Asset Manager Role" ;
                     skos:definition "A Role that is borne by an Agent in virtue of being tasked with overseeing the construction, maintenance, and end-of-life of an organization's productive assets." .
 
 
-###  http://example.org/apqc#AssetPart
+###  https://fandaws.com/ontology/apqc#AssetPart
 ex:AssetPart rdf:type owl:Class ;
              rdfs:subClassOf obo:BFO_0000040 ;
              rdfs:label "Asset Part" ;
              skos:definition "A Material Entity that results from dismantling an end-of-life asset and that may follow a disposition such as resale, reuse, recycling, or disposal." .
 
 
-###  http://example.org/apqc#Budget
+###  https://fandaws.com/ontology/apqc#Budget
 ex:Budget rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000965 ;
           rdfs:comment "Has-input to budget-feasibility and capital-program work. Directive (cco:ont00000965): a budget prescribes intended fund allocation, constraining subsequent spending; harmonized to Directive corpus-wide (slices 9.0/12.0). The realized commitment of funds is captured by ex:CapitalInvestmentPlan. (The definition/comment formerly read 'Descriptive', contradicting the harmonized 965 anchor; corrected here.)" ;
@@ -2788,14 +2788,14 @@ ex:Budget rdf:type owl:Class ;
           skos:definition "A Directive Information Content Entity that prescribes the planned allocation of funds for a project or program." .
 
 
-###  http://example.org/apqc#BudgetAnalysis
+###  https://fandaws.com/ontology/apqc#BudgetAnalysis
 ex:BudgetAnalysis rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:label "Budget Analysis" ;
                   skos:definition "A Descriptive Information Content Entity that describes a judgement of the feasibility of a budget prepared for construction or acquisition." .
 
 
-###  http://example.org/apqc#BuildBuyLeaseDecision
+###  https://fandaws.com/ontology/apqc#BuildBuyLeaseDecision
 ex:BuildBuyLeaseDecision rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ,
                                          [ rdf:type owl:Restriction ;
@@ -2807,7 +2807,7 @@ ex:BuildBuyLeaseDecision rdf:type owl:Class ;
                          skos:definition "A Directive Information Content Entity, about a property, that prescribes whether the organization will build, buy, or lease that property." .
 
 
-###  http://example.org/apqc#BusinessStrategy
+###  https://fandaws.com/ontology/apqc#BusinessStrategy
 ex:BusinessStrategy rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000965 ;
                     rdfs:comment "Shared has-input across 10.0 (e.g. confirm property requirements align with business strategy). Directive (cco:ont00000965): harmonized to Directive corpus-wide (cf. slice 2.0) so the shared class stays satisfiable across slices; the further prescriptive strategy artifacts produced within 10.0 are typed separately (e.g. ex:PropertyStrategy, ex:ConstructionStrategy). (The definition/comment formerly read 'Descriptive', contradicting the harmonized 965 anchor; corrected here.)" ;
@@ -2815,7 +2815,7 @@ ex:BusinessStrategy rdf:type owl:Class ;
                     skos:definition "A Directive Information Content Entity that prescribes an organization's overall direction, goals, and competitive positioning, against which asset requirements are aligned." .
 
 
-###  http://example.org/apqc#CapitalInvestmentPlan
+###  https://fandaws.com/ontology/apqc#CapitalInvestmentPlan
 ex:CapitalInvestmentPlan rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ;
                          rdfs:comment "Directive (a plan that prescribes intended investment acts). Output of Act of Planning / Formulation." ;
@@ -2823,7 +2823,7 @@ ex:CapitalInvestmentPlan rdf:type owl:Class ;
                          skos:definition "A Directive Information Content Entity that prescribes what funds will be invested in the construction or acquisition of productive assets in pursuit of established business objectives." .
 
 
-###  http://example.org/apqc#CapitalProgramReport
+###  https://fandaws.com/ontology/apqc#CapitalProgramReport
 ex:CapitalProgramReport rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:comment "Output of monitoring acts (proposed ex:ActOfMonitoring)." ;
@@ -2831,14 +2831,14 @@ ex:CapitalProgramReport rdf:type owl:Class ;
                         skos:definition "A Descriptive Information Content Entity that describes the status, progress, and variances of a capital program against its plan." .
 
 
-###  http://example.org/apqc#ComplianceAuditReport
+###  https://fandaws.com/ontology/apqc#ComplianceAuditReport
 ex:ComplianceAuditReport rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:label "Compliance Audit Report" ;
                          skos:definition "A Descriptive Information Content Entity that describes the findings of an audit of hazardous-material handling, disposal, and reporting practices against regulatory requirements." .
 
 
-###  http://example.org/apqc#ConstructionContractor
+###  https://fandaws.com/ontology/apqc#ConstructionContractor
 ex:ConstructionContractor rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00001017 ,
                                           [ rdf:type owl:Restriction ;
@@ -2850,14 +2850,14 @@ ex:ConstructionContractor rdf:type owl:Class ;
                           skos:definition "An Agent that bears a construction contractor role." .
 
 
-###  http://example.org/apqc#ConstructionContractorRole
+###  https://fandaws.com/ontology/apqc#ConstructionContractorRole
 ex:ConstructionContractorRole rdf:type owl:Class ;
                               rdfs:subClassOf obo:BFO_0000023 ;
                               rdfs:label "Construction Contractor Role" ;
                               skos:definition "A Role that is borne by an Agent in virtue of being engaged to perform or oversee construction work on an organization's assets." .
 
 
-###  http://example.org/apqc#ConstructionFinancing
+###  https://fandaws.com/ontology/apqc#ConstructionFinancing
 ex:ConstructionFinancing rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ;
                          rdfs:comment "Output of an acquisition act (securing financing). Directive because a financing agreement prescribes obligations." ;
@@ -2865,7 +2865,7 @@ ex:ConstructionFinancing rdf:type owl:Class ;
                          skos:definition "A Directive Information Content Entity, such as a loan agreement, that prescribes the terms under which funds are provided to construct necessary assets." .
 
 
-###  http://example.org/apqc#ConstructionPermit
+###  https://fandaws.com/ontology/apqc#ConstructionPermit
 ex:ConstructionPermit rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000965 ;
                       rdfs:comment "Directive: a permit authorizes future action under stated conditions. Obtained via an acquisition act (ex:ActOfAcquisition)." ;
@@ -2873,7 +2873,7 @@ ex:ConstructionPermit rdf:type owl:Class ;
                       skos:definition "A Directive Information Content Entity, issued by a jurisdiction, that authorizes and prescribes conditions for performing construction work on an asset." .
 
 
-###  http://example.org/apqc#ConstructionResource
+###  https://fandaws.com/ontology/apqc#ConstructionResource
 ex:ConstructionResource rdf:type owl:Class ;
                         rdfs:subClassOf obo:BFO_0000040 ;
                         rdfs:comment "Anchored at BFO material entity because resources range over materials and equipment (artifacts) as well as raw materials (non-artifacts)." ;
@@ -2881,14 +2881,14 @@ ex:ConstructionResource rdf:type owl:Class ;
                         skos:definition "A Material Entity, such as materials, equipment, or labor input, that is acquired and consumed or employed in performing construction work." .
 
 
-###  http://example.org/apqc#ConstructionResourcePlan
+###  https://fandaws.com/ontology/apqc#ConstructionResourcePlan
 ex:ConstructionResourcePlan rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000965 ;
                             rdfs:label "Construction Resource Plan" ;
                             skos:definition "A Directive Information Content Entity that prescribes which resources will be acquired for construction, and when, where, how, and for how long they will be used." .
 
 
-###  http://example.org/apqc#ConstructionSchedule
+###  https://fandaws.com/ontology/apqc#ConstructionSchedule
 ex:ConstructionSchedule rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000965 ;
                         rdfs:comment "Directive (a schedule prescribes when intended acts occur)." ;
@@ -2896,7 +2896,7 @@ ex:ConstructionSchedule rdf:type owl:Class ;
                         skos:definition "A Directive Information Content Entity that prescribes a timetable for executing the construction of an asset." .
 
 
-###  http://example.org/apqc#ConstructionStrategy
+###  https://fandaws.com/ontology/apqc#ConstructionStrategy
 ex:ConstructionStrategy rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000965 ;
                         rdfs:comment "Directive (a strategy prescribing intended course of action); output of Act of Formulation." ;
@@ -2904,7 +2904,7 @@ ex:ConstructionStrategy rdf:type owl:Class ;
                         skos:definition "A Directive Information Content Entity that prescribes the approach for performing asset construction so that timelines, regulations, resources, and budget are met." .
 
 
-###  http://example.org/apqc#CostBenefitAnalysis
+###  https://fandaws.com/ontology/apqc#CostBenefitAnalysis
 ex:CostBenefitAnalysis rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ,
                                        [ rdf:type owl:Restriction ;
@@ -2915,7 +2915,7 @@ ex:CostBenefitAnalysis rdf:type owl:Class ;
                        skos:definition "A Descriptive Information Content Entity, about an asset, that describes a comparison of the asset's total lifecycle cost against repair, refurbishment, replacement, and alternative-solution options to inform retention or end-of-life decisions." .
 
 
-###  http://example.org/apqc#DispositionDecision
+###  https://fandaws.com/ontology/apqc#DispositionDecision
 ex:DispositionDecision rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000965 ,
                                        [ rdf:type owl:Restriction ;
@@ -2927,7 +2927,7 @@ ex:DispositionDecision rdf:type owl:Class ;
                        skos:definition "A Directive Information Content Entity, about an asset or part, that prescribes the disposition to be applied to it at end-of-life, such as retention, resale, reuse, recycling, or disposal." .
 
 
-###  http://example.org/apqc#DispositionNeedRegister
+###  https://fandaws.com/ontology/apqc#DispositionNeedRegister
 ex:DispositionNeedRegister rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:label "Disposition Need Register" ;
@@ -2935,21 +2935,21 @@ ex:DispositionNeedRegister rdf:type owl:Class ;
                            skos:example "A flagged list of expired solvents and contaminated rags awaiting a disposal determination." .
 
 
-###  http://example.org/apqc#DispositionRecord
+###  https://fandaws.com/ontology/apqc#DispositionRecord
 ex:DispositionRecord rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:label "Disposition and Disposal Record" ;
                      skos:definition "A Descriptive Information Content Entity that records the disposition, disposal, and reprocessing activities performed on hazardous materials and waste." .
 
 
-###  http://example.org/apqc#ExternalEnvironmentAppraisal
+###  https://fandaws.com/ontology/apqc#ExternalEnvironmentAppraisal
 ex:ExternalEnvironmentAppraisal rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ;
                                 rdfs:label "External Environment Appraisal" ;
                                 skos:definition "A Descriptive Information Content Entity that describes a judgement of the external circumstances, objects, events, and aspects surrounding an organization that affect its asset decisions, including opportunities and risks." .
 
 
-###  http://example.org/apqc#Facility
+###  https://fandaws.com/ontology/apqc#Facility
 ex:Facility rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00000192 ;
             rdfs:comment "Specialization of CCO Facility (ont00000192, 'a building or campus dedicated to some specific purpose') scoped to the managed-asset role in section 10.0." ;
@@ -2957,7 +2957,7 @@ ex:Facility rdf:type owl:Class ;
             skos:definition "A Facility that an organization plans, designs, constructs, modifies, operates, maintains, or disposes of as part of managing its assets." .
 
 
-###  http://example.org/apqc#FacilityDesign
+###  https://fandaws.com/ontology/apqc#FacilityDesign
 ex:FacilityDesign rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000965 ,
                                   [ rdf:type owl:Restriction ;
@@ -2969,7 +2969,7 @@ ex:FacilityDesign rdf:type owl:Class ;
                   skos:definition "A Directive Information Content Entity, about a facility, that prescribes the configuration, layout, and specifications of that facility to be built or modified." .
 
 
-###  http://example.org/apqc#FacilityManagementCapability
+###  https://fandaws.com/ontology/apqc#FacilityManagementCapability
 ex:FacilityManagementCapability rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000568 ,
                                                 [ rdf:type owl:Restriction ;
@@ -2985,7 +2985,7 @@ ex:FacilityManagementCapability rdf:type owl:Class ;
                                 skos:definition "An Organization Capability that is realized in acts of planning, providing, operating, and maintaining facilities and workspaces." .
 
 
-###  http://example.org/apqc#FacilityManagementPersonnel
+###  https://fandaws.com/ontology/apqc#FacilityManagementPersonnel
 ex:FacilityManagementPersonnel rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00001017 ,
                                                [ rdf:type owl:Restriction ;
@@ -2996,14 +2996,14 @@ ex:FacilityManagementPersonnel rdf:type owl:Class ;
                                skos:definition "An Agent that bears a facility manager role." .
 
 
-###  http://example.org/apqc#FacilityManagerRole
+###  https://fandaws.com/ontology/apqc#FacilityManagerRole
 ex:FacilityManagerRole rdf:type owl:Class ;
                        rdfs:subClassOf obo:BFO_0000023 ;
                        rdfs:label "Facility Manager Role" ;
                        skos:definition "A Role that is borne by an Agent in virtue of being tasked with planning, providing, and operating an organization's facilities and workspaces." .
 
 
-###  http://example.org/apqc#FacilityTermsAgreement
+###  https://fandaws.com/ontology/apqc#FacilityTermsAgreement
 ex:FacilityTermsAgreement rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000965 ;
                           rdfs:comment "Directive: a contract/agreement prescribes the obligations of the parties." ;
@@ -3011,28 +3011,28 @@ ex:FacilityTermsAgreement rdf:type owl:Class ;
                           skos:definition "A Directive Information Content Entity that prescribes the negotiated terms and conditions under which a facility is to be occupied or used." .
 
 
-###  http://example.org/apqc#GovernmentReport
+###  https://fandaws.com/ontology/apqc#GovernmentReport
 ex:GovernmentReport rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:label "Government Report" ;
                     skos:definition "A Descriptive Information Content Entity prepared for and distributed to a government authority that describes regulated aspects of an organization's asset and material activities." .
 
 
-###  http://example.org/apqc#HazardousMaterial
+###  https://fandaws.com/ontology/apqc#HazardousMaterial
 ex:HazardousMaterial rdf:type owl:Class ;
                      rdfs:subClassOf obo:BFO_0000040 ;
                      rdfs:label "Hazardous Material" ;
                      skos:definition "A Material Entity that poses a health, safety, or environmental hazard and whose handling, shipment, and disposal are subject to legal and regulatory control." .
 
 
-###  http://example.org/apqc#MaintenancePerformanceReport
+###  https://fandaws.com/ontology/apqc#MaintenancePerformanceReport
 ex:MaintenancePerformanceReport rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ;
                                 rdfs:label "Maintenance Performance Report" ;
                                 skos:definition "A Descriptive Information Content Entity that describes the organization's measured success in meeting maintenance performance targets and contractual obligations." .
 
 
-###  http://example.org/apqc#MaintenancePerformanceTarget
+###  https://fandaws.com/ontology/apqc#MaintenancePerformanceTarget
 ex:MaintenancePerformanceTarget rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000965 ;
                                 rdfs:comment "Directive: a target prescribes an intended state to be achieved (cf. CCO Objective)." ;
@@ -3040,7 +3040,7 @@ ex:MaintenancePerformanceTarget rdf:type owl:Class ;
                                 skos:definition "A Directive Information Content Entity that prescribes the predictive indicators and target levels to be achieved in performing maintenance." .
 
 
-###  http://example.org/apqc#MaintenancePersonnel
+###  https://fandaws.com/ontology/apqc#MaintenancePersonnel
 ex:MaintenancePersonnel rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00001017 ,
                                         [ rdf:type owl:Restriction ;
@@ -3051,7 +3051,7 @@ ex:MaintenancePersonnel rdf:type owl:Class ;
                         skos:definition "An Agent that bears a maintenance technician role." .
 
 
-###  http://example.org/apqc#MaintenancePolicy
+###  https://fandaws.com/ontology/apqc#MaintenancePolicy
 ex:MaintenancePolicy rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:comment "Directive (a policy prescribes required/permitted action)." ;
@@ -3059,7 +3059,7 @@ ex:MaintenancePolicy rdf:type owl:Class ;
                      skos:definition "A Directive Information Content Entity that prescribes the procedures and policies governing how asset maintenance is to be carried out." .
 
 
-###  http://example.org/apqc#MaintenanceRequirementsForecast
+###  https://fandaws.com/ontology/apqc#MaintenanceRequirementsForecast
 ex:MaintenanceRequirementsForecast rdf:type owl:Class ;
                                    rdfs:subClassOf cco:ont00000626 ,
                                                    [ rdf:type owl:Restriction ;
@@ -3071,7 +3071,7 @@ ex:MaintenanceRequirementsForecast rdf:type owl:Class ;
                                    skos:definition "A Predictive Information Content Entity, about an asset, that describes a projection of that asset's uncertain future maintenance requirements based on its present working condition." .
 
 
-###  http://example.org/apqc#MaintenanceResource
+###  https://fandaws.com/ontology/apqc#MaintenanceResource
 ex:MaintenanceResource rdf:type owl:Class ;
                        rdfs:subClassOf obo:BFO_0000040 ;
                        rdfs:comment "Minted (Gate-F) for 10.3.2.2 (ex:P19247) 'Gathering resources needed to complete all maintenance work'. Distinct from ex:AssetPart, whose definition is a part resulting from DISMANTLING an end-of-life asset (a 10.4 disposition concept) -- semantically wrong for spare parts/materials gathered to PERFORM maintenance. Anchored at BFO material entity because maintenance resources span artifacts (spares, tools) and non-artifact materials (consumables)." ;
@@ -3079,7 +3079,7 @@ ex:MaintenanceResource rdf:type owl:Class ;
                        skos:definition "A Material Entity, such as a spare part, consumable, tool, or material, that is gathered and consumed or employed in performing asset-maintenance work." .
 
 
-###  http://example.org/apqc#MaintenanceSafetyAssuranceAct
+###  https://fandaws.com/ontology/apqc#MaintenanceSafetyAssuranceAct
 ex:MaintenanceSafetyAssuranceAct rdf:type owl:Class ;
                                  rdfs:subClassOf ex:ActOfMonitoring ;
                                  rdfs:comment "Minted (Gate-F) as the bounded act in which the standing ex:P19250 (Manage maintenance work safety) capability is realized (R6). The recurring assurance function is the capability; each individual observe-and-record occurrence is one of these acts, producing ex:SafetyComplianceRecord. GOLDEN PRINCIPLE: monitoring -> Descriptive ICE (Safety Compliance Record). (Output recorded here rather than as a has-output restriction so this supporting act is not flagged as a PCF process requiring a pcfID; the PCF anchor for 10.3.2.5 is the capability ex:P19250.)" ;
@@ -3087,28 +3087,28 @@ ex:MaintenanceSafetyAssuranceAct rdf:type owl:Class ;
                                  skos:definition "An Act of Monitoring that observes maintenance work practices against applicable safety laws and regulations and produces a safety compliance record." .
 
 
-###  http://example.org/apqc#MaintenanceSchedule
+###  https://fandaws.com/ontology/apqc#MaintenanceSchedule
 ex:MaintenanceSchedule rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000965 ;
                        rdfs:label "Maintenance Schedule" ;
                        skos:definition "A Directive Information Content Entity that prescribes a timetable for executing the maintenance of an asset." .
 
 
-###  http://example.org/apqc#MaintenanceStrategy
+###  https://fandaws.com/ontology/apqc#MaintenanceStrategy
 ex:MaintenanceStrategy rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000965 ;
                        rdfs:label "Maintenance Strategy" ;
                        skos:definition "A Directive Information Content Entity that prescribes goals and agendas for realizing an organization's asset-maintenance policies." .
 
 
-###  http://example.org/apqc#MaintenanceTechnicianRole
+###  https://fandaws.com/ontology/apqc#MaintenanceTechnicianRole
 ex:MaintenanceTechnicianRole rdf:type owl:Class ;
                              rdfs:subClassOf obo:BFO_0000023 ;
                              rdfs:label "Maintenance Technician Role" ;
                              skos:definition "A Role that is borne by an Agent in virtue of being tasked with performing preventative, routine, corrective, and unplanned maintenance on assets." .
 
 
-###  http://example.org/apqc#ManageBuildingRenovation
+###  https://fandaws.com/ontology/apqc#ManageBuildingRenovation
 ex:ManageBuildingRenovation rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000970 ,
                                             [ rdf:type owl:Restriction ;
@@ -3120,7 +3120,7 @@ ex:ManageBuildingRenovation rdf:type owl:Class ;
                             skos:definition "An Act of Artifact Modification that renovates an existing building on site, changing its qualities or functions according to requirements and demands." .
 
 
-###  http://example.org/apqc#MarketData
+###  https://fandaws.com/ontology/apqc#MarketData
 ex:MarketData rdf:type owl:Class ;
               rdfs:subClassOf cco:ont00000853 ;
               rdfs:comment "Shared input for build/buy/lease and property-selection appraisals across 10.1 and 10.2." ;
@@ -3128,7 +3128,7 @@ ex:MarketData rdf:type owl:Class ;
               skos:definition "A Descriptive Information Content Entity that describes features of a market, such as property prices, construction costs, and supply conditions." .
 
 
-###  http://example.org/apqc#MaterialSafetyDataSheet
+###  https://fandaws.com/ontology/apqc#MaterialSafetyDataSheet
 ex:MaterialSafetyDataSheet rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ,
                                            [ rdf:type owl:Restriction ;
@@ -3141,7 +3141,7 @@ ex:MaterialSafetyDataSheet rdf:type owl:Class ;
                            skos:definition "A Descriptive Information Content Entity, about a hazardous material, that records the safety properties and required handling and disposal information for that material." .
 
 
-###  http://example.org/apqc#P10937
+###  https://fandaws.com/ontology/apqc#P10937
 ex:P10937 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3165,7 +3165,7 @@ ex:P10937 rdf:type owl:Class ;
           skos:example "An organization's end-to-end cycle of strategizing, acquiring, and fitting out a new office building." .
 
 
-###  http://example.org/apqc#P10941
+###  https://fandaws.com/ontology/apqc#P10941
 ex:P10941 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3193,7 +3193,7 @@ ex:P10941 rdf:type owl:Class ;
           skos:example "A real-estate committee drafts a ten-year property strategy for the firm's owned portfolio." .
 
 
-###  http://example.org/apqc#P10943
+###  https://fandaws.com/ontology/apqc#P10943
 ex:P10943 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3225,7 +3225,7 @@ ex:P10943 rdf:type owl:Class ;
           skos:example "A project team turns user requirements into a costed facility proposal for sign-off." .
 
 
-###  http://example.org/apqc#P10944
+###  https://fandaws.com/ontology/apqc#P10944
 ex:P10944 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -3245,7 +3245,7 @@ ex:P10944 rdf:type owl:Class ;
           skos:example "A facilities team stands up a new floor of desks, chairs, and computers ready for occupancy." .
 
 
-###  http://example.org/apqc#P10947
+###  https://fandaws.com/ontology/apqc#P10947
 ex:P10947 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000950 ,
                           [ rdf:type owl:Restriction ;
@@ -3261,7 +3261,7 @@ ex:P10947 rdf:type owl:Class ;
           skos:example "A technician lubricates and calibrates a machine on its scheduled preventive interval." .
 
 
-###  http://example.org/apqc#P10952
+###  https://fandaws.com/ontology/apqc#P10952
 ex:P10952 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3285,7 +3285,7 @@ ex:P10952 rdf:type owl:Class ;
           skos:example "An asset team drafts the multi-year retirement and replacement strategy for an ageing equipment fleet." .
 
 
-###  http://example.org/apqc#P10953
+###  https://fandaws.com/ontology/apqc#P10953
 ex:P10953 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfDisposition ,
                           [ rdf:type owl:Restriction ;
@@ -3305,7 +3305,7 @@ ex:P10953 rdf:type owl:Class ;
           skos:example "A fleet manager sells a retired delivery van to a dealer and records the sale." .
 
 
-###  http://example.org/apqc#P10955
+###  https://fandaws.com/ontology/apqc#P10955
 ex:P10955 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3329,7 +3329,7 @@ ex:P10955 rdf:type owl:Class ;
           skos:example "A portfolio analyst confirms that the requested floor space aligns with the firm's growth strategy." .
 
 
-###  http://example.org/apqc#P10956
+###  https://fandaws.com/ontology/apqc#P10956
 ex:P10956 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3345,7 +3345,7 @@ ex:P10956 rdf:type owl:Class ;
           skos:example "A facilities team appraises regional economic and regulatory conditions before committing to a site." .
 
 
-###  http://example.org/apqc#P10957
+###  https://fandaws.com/ontology/apqc#P10957
 ex:P10957 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -3365,7 +3365,7 @@ ex:P10957 rdf:type owl:Class ;
           skos:example "After studying construction costs and lease rates, management decides to lease rather than build." .
 
 
-###  http://example.org/apqc#P10958
+###  https://fandaws.com/ontology/apqc#P10958
 ex:P10958 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3381,7 +3381,7 @@ ex:P10958 rdf:type owl:Class ;
           skos:example "Architects develop and down-select to a final layout for a new warehouse." .
 
 
-###  http://example.org/apqc#P10959
+###  https://fandaws.com/ontology/apqc#P10959
 ex:P10959 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3401,7 +3401,7 @@ ex:P10959 rdf:type owl:Class ;
           skos:example "A finance analyst tests whether the proposed construction budget covers the design's costs." .
 
 
-###  http://example.org/apqc#P10960
+###  https://fandaws.com/ontology/apqc#P10960
 ex:P10960 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -3421,7 +3421,7 @@ ex:P10960 rdf:type owl:Class ;
           skos:example "A site-selection team reviews three buildings against requirements and commits to one." .
 
 
-###  http://example.org/apqc#P10961
+###  https://fandaws.com/ontology/apqc#P10961
 ex:P10961 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfNegotiation ,
                           [ rdf:type owl:Restriction ;
@@ -3437,7 +3437,7 @@ ex:P10961 rdf:type owl:Class ;
           skos:example "Facilities and a landlord negotiate lease length, rent, and fit-out responsibilities into an agreement." .
 
 
-###  http://example.org/apqc#P10962
+###  https://fandaws.com/ontology/apqc#P10962
 ex:P10962 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000051 ,
                           [ rdf:type owl:Restriction ;
@@ -3461,7 +3461,7 @@ ex:P10962 rdf:type owl:Class ;
           skos:example "A general contractor erects the warehouse shell per the approved design and manages later renovations to it." .
 
 
-###  http://example.org/apqc#P10963
+###  https://fandaws.com/ontology/apqc#P10963
 ex:P10963 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -3477,7 +3477,7 @@ ex:P10963 rdf:type owl:Class ;
           skos:example "Procurement secures a leased floor and furnishes it with the required equipment." .
 
 
-###  http://example.org/apqc#P10964
+###  https://fandaws.com/ontology/apqc#P10964
 ex:P10964 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000970 ,
                           [ rdf:type owl:Restriction ;
@@ -3493,7 +3493,7 @@ ex:P10964 rdf:type owl:Class ;
           skos:example "A facilities crew reconfigures an open-plan floor into team pods with new partitions." .
 
 
-###  http://example.org/apqc#P10965
+###  https://fandaws.com/ontology/apqc#P10965
 ex:P10965 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000065 ,
                           [ rdf:type owl:Restriction ;
@@ -3513,7 +3513,7 @@ ex:P10965 rdf:type owl:Class ;
           skos:example "An HR/facilities team moves a department to a different building floor." .
 
 
-###  http://example.org/apqc#P10966
+###  https://fandaws.com/ontology/apqc#P10966
 ex:P10966 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000065 ,
                           [ rdf:type owl:Restriction ;
@@ -3529,7 +3529,7 @@ ex:P10966 rdf:type owl:Class ;
           skos:example "A logistics crew relocates machine tools and stock to a newly acquired warehouse." .
 
 
-###  http://example.org/apqc#P10967
+###  https://fandaws.com/ontology/apqc#P10967
 ex:P10967 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfForecasting ,
                           [ rdf:type owl:Restriction ;
@@ -3545,7 +3545,7 @@ ex:P10967 rdf:type owl:Class ;
           skos:example "An asset analyst reviews equipment condition data and forecasts the parts and servicing needed next year." .
 
 
-###  http://example.org/apqc#P10968
+###  https://fandaws.com/ontology/apqc#P10968
 ex:P10968 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -3561,7 +3561,7 @@ ex:P10968 rdf:type owl:Class ;
           skos:example "A planner slots preventive servicing into windows when the shared line is idle." .
 
 
-###  http://example.org/apqc#P11276
+###  https://fandaws.com/ontology/apqc#P11276
 ex:P11276 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3577,7 +3577,7 @@ ex:P11276 rdf:type owl:Class ;
           skos:example "A construction manager reviews daily progress against plan and reports performance to the program office." .
 
 
-###  http://example.org/apqc#P12180
+###  https://fandaws.com/ontology/apqc#P12180
 ex:P12180 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -3593,7 +3593,7 @@ ex:P12180 rdf:type owl:Class ;
           skos:example "An EHS specialist compiles the safety data sheet for a newly stocked solvent." .
 
 
-###  http://example.org/apqc#P12181
+###  https://fandaws.com/ontology/apqc#P12181
 ex:P12181 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000151 ,
                           [ rdf:type owl:Restriction ;
@@ -3613,7 +3613,7 @@ ex:P12181 rdf:type owl:Class ;
           skos:example "A compliance lead briefs the disposal team on updated transport rules for corrosives." .
 
 
-###  http://example.org/apqc#P12182
+###  https://fandaws.com/ontology/apqc#P12182
 ex:P12182 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfDisposition ,
                           [ rdf:type owl:Restriction ;
@@ -3629,7 +3629,7 @@ ex:P12182 rdf:type owl:Class ;
           skos:example "A waste coordinator schedules, supervises, and logs the neutralization and disposal of a spent-acid batch." .
 
 
-###  http://example.org/apqc#P12183
+###  https://fandaws.com/ontology/apqc#P12183
 ex:P12183 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3645,7 +3645,7 @@ ex:P12183 rdf:type owl:Class ;
           skos:example "An auditor reviews manifests and storage practices and issues a hazardous-waste compliance audit report." .
 
 
-###  http://example.org/apqc#P12184
+###  https://fandaws.com/ontology/apqc#P12184
 ex:P12184 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3661,7 +3661,7 @@ ex:P12184 rdf:type owl:Class ;
           skos:example "An operator flags a quantity of expired reagent as requiring disposal." .
 
 
-###  http://example.org/apqc#P12185
+###  https://fandaws.com/ontology/apqc#P12185
 ex:P12185 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -3681,7 +3681,7 @@ ex:P12185 rdf:type owl:Class ;
           skos:example "A specialist determines that a contaminated batch must be incinerated rather than landfilled and issues the disposition decision." .
 
 
-###  http://example.org/apqc#P12186
+###  https://fandaws.com/ontology/apqc#P12186
 ex:P12186 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfDisposition ,
                           [ rdf:type owl:Restriction ;
@@ -3697,7 +3697,7 @@ ex:P12186 rdf:type owl:Class ;
           skos:example "A licensed handler incinerates a hazardous batch and reprocesses recoverable solvent." .
 
 
-###  http://example.org/apqc#P12187
+###  https://fandaws.com/ontology/apqc#P12187
 ex:P12187 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000151 ,
                           [ rdf:type owl:Restriction ;
@@ -3717,7 +3717,7 @@ ex:P12187 rdf:type owl:Class ;
           skos:example "A coordinator files the disposal manifests and reprocessing logs for the quarter's hazardous-waste shipments." .
 
 
-###  http://example.org/apqc#P12721
+###  https://fandaws.com/ontology/apqc#P12721
 ex:P12721 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000595 ,
                           [ rdf:type owl:Restriction ;
@@ -3733,7 +3733,7 @@ ex:P12721 rdf:type owl:Class ;
           skos:example "A licensed carrier transports drums of spent solvent from a plant to a treatment facility with manifest tracking." .
 
 
-###  http://example.org/apqc#P12722
+###  https://fandaws.com/ontology/apqc#P12722
 ex:P12722 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000151 ,
                           [ rdf:type owl:Restriction ;
@@ -3753,7 +3753,7 @@ ex:P12722 rdf:type owl:Class ;
           skos:example "An environmental compliance officer files the annual hazardous-waste generation report with the regulator." .
 
 
-###  http://example.org/apqc#P13131
+###  https://fandaws.com/ontology/apqc#P13131
 ex:P13131 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000970 ,
                           [ rdf:type owl:Restriction ;
@@ -3773,7 +3773,7 @@ ex:P13131 rdf:type owl:Class ;
           skos:example "A demolition crew razes a disused warehouse and fences off the rubble." .
 
 
-###  http://example.org/apqc#P13132
+###  https://fandaws.com/ontology/apqc#P13132
 ex:P13132 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfDisposition ,
                           [ rdf:type owl:Restriction ;
@@ -3789,7 +3789,7 @@ ex:P13132 rdf:type owl:Class ;
           skos:example "A remediation contractor removes contaminated soil and re-grades a former tank farm." .
 
 
-###  http://example.org/apqc#P13133
+###  https://fandaws.com/ontology/apqc#P13133
 ex:P13133 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -3805,7 +3805,7 @@ ex:P13133 rdf:type owl:Class ;
           skos:example "A site team assembles as-built drawings, inspection history, and a condition report for the incoming landowner." .
 
 
-###  http://example.org/apqc#P18592
+###  https://fandaws.com/ontology/apqc#P18592
 ex:P18592 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3821,7 +3821,7 @@ ex:P18592 rdf:type owl:Class ;
           skos:example "A reliability engineer tracks a pump against its rated service hours and reports it is approaching end-of-life." .
 
 
-###  http://example.org/apqc#P19209
+###  https://fandaws.com/ontology/apqc#P19209
 ex:P19209 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3849,7 +3849,7 @@ ex:P19209 rdf:type owl:Class ;
           skos:example "A facilities team prepares the investment plan and arranges loans for a new warehouse build." .
 
 
-###  http://example.org/apqc#P19210
+###  https://fandaws.com/ontology/apqc#P19210
 ex:P19210 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3865,7 +3865,7 @@ ex:P19210 rdf:type owl:Class ;
           skos:example "Finance defines a USD 40M capital plan for a new plant." .
 
 
-###  http://example.org/apqc#P19211
+###  https://fandaws.com/ontology/apqc#P19211
 ex:P19211 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -3885,7 +3885,7 @@ ex:P19211 rdf:type owl:Class ;
           skos:example "A program office tracks spend against the capital plan and issues a quarterly status report." .
 
 
-###  http://example.org/apqc#P19212
+###  https://fandaws.com/ontology/apqc#P19212
 ex:P19212 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -3901,7 +3901,7 @@ ex:P19212 rdf:type owl:Class ;
           skos:example "Treasury secures a construction loan facility for the build program." .
 
 
-###  http://example.org/apqc#P19220
+###  https://fandaws.com/ontology/apqc#P19220
 ex:P19220 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3917,7 +3917,7 @@ ex:P19220 rdf:type owl:Class ;
           skos:example "A project lead drafts the construction strategy and delivery approach for a new facility." .
 
 
-###  http://example.org/apqc#P19221
+###  https://fandaws.com/ontology/apqc#P19221
 ex:P19221 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -3937,7 +3937,7 @@ ex:P19221 rdf:type owl:Class ;
           skos:example "A developer obtains building permits from the municipal authority before construction begins." .
 
 
-###  http://example.org/apqc#P19222
+###  https://fandaws.com/ontology/apqc#P19222
 ex:P19222 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3953,7 +3953,7 @@ ex:P19222 rdf:type owl:Class ;
           skos:example "Engineers produce the design and drawings for a new production machine." .
 
 
-###  http://example.org/apqc#P19223
+###  https://fandaws.com/ontology/apqc#P19223
 ex:P19223 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3969,7 +3969,7 @@ ex:P19223 rdf:type owl:Class ;
           skos:example "A planner schedules crews, equipment, and materials for the build." .
 
 
-###  http://example.org/apqc#P19224
+###  https://fandaws.com/ontology/apqc#P19224
 ex:P19224 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3993,7 +3993,7 @@ ex:P19224 rdf:type owl:Class ;
           skos:example "A project office oversees a building project's quality and keeps its construction records." .
 
 
-###  http://example.org/apqc#P19225
+###  https://fandaws.com/ontology/apqc#P19225
 ex:P19225 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4009,7 +4009,7 @@ ex:P19225 rdf:type owl:Class ;
           skos:example "An inspector tracks regulatory compliance and progress and logs a performance report." .
 
 
-###  http://example.org/apqc#P19226
+###  https://fandaws.com/ontology/apqc#P19226
 ex:P19226 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4025,7 +4025,7 @@ ex:P19226 rdf:type owl:Class ;
           skos:example "A QA team inspects completed work and issues a quality control report flagging defects for rework." .
 
 
-###  http://example.org/apqc#P19227
+###  https://fandaws.com/ontology/apqc#P19227
 ex:P19227 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -4041,7 +4041,7 @@ ex:P19227 rdf:type owl:Class ;
           skos:example "A clerk compiles the as-built record documenting all work and issues on the project." .
 
 
-###  http://example.org/apqc#P19228
+###  https://fandaws.com/ontology/apqc#P19228
 ex:P19228 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ;
           ex:apqcSourceText "Ensuring that safety, security, and access is maintained. Provide a workplace that meets and exceeds all local, state, and federal guidelines. Provide security and access to the building site as set forth by safety and organizational guidelines." ;
@@ -4053,7 +4053,7 @@ ex:P19228 rdf:type owl:Class ;
           skos:example "A firm's ongoing site-safety and access-control program covering all its construction sites." .
 
 
-###  http://example.org/apqc#P19229
+###  https://fandaws.com/ontology/apqc#P19229
 ex:P19229 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -4085,7 +4085,7 @@ ex:P19229 rdf:type owl:Class ;
           skos:example "A contractor schedules and executes the erection of a new factory building." .
 
 
-###  http://example.org/apqc#P19230
+###  https://fandaws.com/ontology/apqc#P19230
 ex:P19230 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4101,7 +4101,7 @@ ex:P19230 rdf:type owl:Class ;
           skos:example "A planner sets the construction milestone schedule for the project." .
 
 
-###  http://example.org/apqc#P19231
+###  https://fandaws.com/ontology/apqc#P19231
 ex:P19231 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -4117,7 +4117,7 @@ ex:P19231 rdf:type owl:Class ;
           skos:example "A site manager procures steel, formwork, and a crane for the build." .
 
 
-###  http://example.org/apqc#P19232
+###  https://fandaws.com/ontology/apqc#P19232
 ex:P19232 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000051 ,
                           [ rdf:type owl:Restriction ;
@@ -4137,7 +4137,7 @@ ex:P19232 rdf:type owl:Class ;
           skos:example "A crew erects a new assembly line building on site." .
 
 
-###  http://example.org/apqc#P19233
+###  https://fandaws.com/ontology/apqc#P19233
 ex:P19233 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000970 ,
                           [ rdf:type owl:Restriction ;
@@ -4153,7 +4153,7 @@ ex:P19233 rdf:type owl:Class ;
           skos:example "An engineering team retrofits an existing plant with new automation." .
 
 
-###  http://example.org/apqc#P19234
+###  https://fandaws.com/ontology/apqc#P19234
 ex:P19234 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4169,7 +4169,7 @@ ex:P19234 rdf:type owl:Class ;
           skos:example "After reviewing a machine's condition, an engineer determines it needs replacing and records that finding." .
 
 
-###  http://example.org/apqc#P19239
+###  https://fandaws.com/ontology/apqc#P19239
 ex:P19239 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -4213,7 +4213,7 @@ ex:P19239 rdf:type owl:Class ;
           skos:example "A facilities team's annual maintenance-planning cycle producing the year's strategy, policies, task list, and resource plan." .
 
 
-###  http://example.org/apqc#P19240
+###  https://fandaws.com/ontology/apqc#P19240
 ex:P19240 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4229,7 +4229,7 @@ ex:P19240 rdf:type owl:Class ;
           skos:example "A maintenance manager drafts the multi-year strategy aligning upkeep goals with asset-criticality." .
 
 
-###  http://example.org/apqc#P19241
+###  https://fandaws.com/ontology/apqc#P19241
 ex:P19241 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4245,7 +4245,7 @@ ex:P19241 rdf:type owl:Class ;
           skos:example "A facilities office issues the documented maintenance policy and procedure manual." .
 
 
-###  http://example.org/apqc#P19242
+###  https://fandaws.com/ontology/apqc#P19242
 ex:P19242 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4261,7 +4261,7 @@ ex:P19242 rdf:type owl:Class ;
           skos:example "A supervisor compiles and ranks the work-order tasks for the upcoming maintenance window." .
 
 
-###  http://example.org/apqc#P19243
+###  https://fandaws.com/ontology/apqc#P19243
 ex:P19243 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -4277,7 +4277,7 @@ ex:P19243 rdf:type owl:Class ;
           skos:example "A planner allocates technicians, parts, and budget to the forecasted maintenance workload." .
 
 
-###  http://example.org/apqc#P19244
+###  https://fandaws.com/ontology/apqc#P19244
 ex:P19244 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4293,7 +4293,7 @@ ex:P19244 rdf:type owl:Class ;
           skos:example "A planner writes the step-by-step work plan for servicing a pump assembly." .
 
 
-###  http://example.org/apqc#P19245
+###  https://fandaws.com/ontology/apqc#P19245
 ex:P19245 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -4329,7 +4329,7 @@ ex:P19245 rdf:type owl:Class ;
           skos:example "A maintenance coordinator runs the cycle of scheduling crews, controlling quality, and confirming targets are met for a quarter's work." .
 
 
-###  http://example.org/apqc#P19246
+###  https://fandaws.com/ontology/apqc#P19246
 ex:P19246 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000511 ,
                           [ rdf:type owl:Restriction ;
@@ -4345,7 +4345,7 @@ ex:P19246 rdf:type owl:Class ;
           skos:example "A coordinator sets dates and crews for each scheduled servicing in the work queue." .
 
 
-###  http://example.org/apqc#P19247
+###  https://fandaws.com/ontology/apqc#P19247
 ex:P19247 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -4361,7 +4361,7 @@ ex:P19247 rdf:type owl:Class ;
           skos:example "A storekeeper draws spare parts and consumables for the week's work orders." .
 
 
-###  http://example.org/apqc#P19248
+###  https://fandaws.com/ontology/apqc#P19248
 ex:P19248 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4377,7 +4377,7 @@ ex:P19248 rdf:type owl:Class ;
           skos:example "An inspector checks a completed repair against spec and records pass/fail with required rework." .
 
 
-###  http://example.org/apqc#P19249
+###  https://fandaws.com/ontology/apqc#P19249
 ex:P19249 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -4393,7 +4393,7 @@ ex:P19249 rdf:type owl:Class ;
           skos:example "A technician closes a work order and updates the asset's service history." .
 
 
-###  http://example.org/apqc#P19250
+###  https://fandaws.com/ontology/apqc#P19250
 ex:P19250 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -4409,7 +4409,7 @@ ex:P19250 rdf:type owl:Class ;
           skos:example "A firm's ongoing maintenance-safety assurance program aligning practices with OSHA, EHS, and ISO." .
 
 
-###  http://example.org/apqc#P19251
+###  https://fandaws.com/ontology/apqc#P19251
 ex:P19251 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4425,7 +4425,7 @@ ex:P19251 rdf:type owl:Class ;
           skos:example "A manager sets the target mean-time-to-repair and acceptable unplanned-failure rate." .
 
 
-###  http://example.org/apqc#P19252
+###  https://fandaws.com/ontology/apqc#P19252
 ex:P19252 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4445,7 +4445,7 @@ ex:P19252 rdf:type owl:Class ;
           skos:example "A reliability engineer compares actual downtime against targets and reports variance to management." .
 
 
-###  http://example.org/apqc#P19253
+###  https://fandaws.com/ontology/apqc#P19253
 ex:P19253 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000950 ,
                           [ rdf:type owl:Restriction ;
@@ -4477,7 +4477,7 @@ ex:P19253 rdf:type owl:Class ;
           skos:example "A maintenance crew works through the preventive, routine, and corrective tasks on the plant's equipment." .
 
 
-###  http://example.org/apqc#P19254
+###  https://fandaws.com/ontology/apqc#P19254
 ex:P19254 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000950 ,
                           [ rdf:type owl:Restriction ;
@@ -4493,7 +4493,7 @@ ex:P19254 rdf:type owl:Class ;
           skos:example "A crew performs the routine filter changes and inspections on the HVAC system." .
 
 
-###  http://example.org/apqc#P19255
+###  https://fandaws.com/ontology/apqc#P19255
 ex:P19255 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000950 ,
                           [ rdf:type owl:Restriction ;
@@ -4509,7 +4509,7 @@ ex:P19255 rdf:type owl:Class ;
           skos:example "A technician replaces a failed bearing to return a pump to service." .
 
 
-###  http://example.org/apqc#P19256
+###  https://fandaws.com/ontology/apqc#P19256
 ex:P19256 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ;
           ex:apqcSourceText "Realizing potential or current problems with assets that would require unplanned maintenance. Unplanned maintenance is a repair or change that needs to be made that is not preventative or routine." ;
@@ -4521,7 +4521,7 @@ ex:P19256 rdf:type owl:Class ;
           skos:example "An operator notices abnormal vibration and flags an unplanned-repair requirement." .
 
 
-###  http://example.org/apqc#P19257
+###  https://fandaws.com/ontology/apqc#P19257
 ex:P19257 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000950 ,
                           [ rdf:type owl:Restriction ;
@@ -4537,7 +4537,7 @@ ex:P19257 rdf:type owl:Class ;
           skos:example "A crew is dispatched to fix an unexpected conveyor failure on the line." .
 
 
-###  http://example.org/apqc#P19258
+###  https://fandaws.com/ontology/apqc#P19258
 ex:P19258 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfDisposition ,
                           [ rdf:type owl:Restriction ;
@@ -4553,7 +4553,7 @@ ex:P19258 rdf:type owl:Class ;
           skos:example "A plant decommissions a worn-out compressor, isolating and de-energizing it ahead of removal." .
 
 
-###  http://example.org/apqc#P19465
+###  https://fandaws.com/ontology/apqc#P19465
 ex:P19465 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4569,7 +4569,7 @@ ex:P19465 rdf:type owl:Class ;
           skos:example "For thirty years after closure, a landfill operator monitors groundwater and reports site status to the regulator." .
 
 
-###  http://example.org/apqc#P20139
+###  https://fandaws.com/ontology/apqc#P20139
 ex:P20139 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -4601,7 +4601,7 @@ ex:P20139 rdf:type owl:Class ;
           skos:example "An engineering team produces the plant design, secures permits, and a resource plan before breaking ground." .
 
 
-###  http://example.org/apqc#P21575
+###  https://fandaws.com/ontology/apqc#P21575
 ex:P21575 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -4629,7 +4629,7 @@ ex:P21575 rdf:type owl:Class ;
           skos:example "A manufacturer's program to design, finance, and build a new production plant, ending when the plant is commissioned." .
 
 
-###  http://example.org/apqc#P21576
+###  https://fandaws.com/ontology/apqc#P21576
 ex:P21576 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfDisposition ,
                           [ rdf:type owl:Restriction ;
@@ -4681,7 +4681,7 @@ ex:P21576 rdf:type owl:Class ;
           skos:example "A utility's program to retire and dispose of an obsolete substation, from exit strategy through demolition, recycling, and regulatory reporting." .
 
 
-###  http://example.org/apqc#P21577
+###  https://fandaws.com/ontology/apqc#P21577
 ex:P21577 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4697,7 +4697,7 @@ ex:P21577 rdf:type owl:Class ;
           skos:example "An analyst compares the cost of refurbishing a turbine against replacing it and documents the trade-off." .
 
 
-###  http://example.org/apqc#P21579
+###  https://fandaws.com/ontology/apqc#P21579
 ex:P21579 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000970 ,
                           [ rdf:type owl:Restriction ;
@@ -4717,7 +4717,7 @@ ex:P21579 rdf:type owl:Class ;
           skos:example "A technician disassembles a decommissioned generator into its motor, frame, and copper windings." .
 
 
-###  http://example.org/apqc#P21580
+###  https://fandaws.com/ontology/apqc#P21580
 ex:P21580 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4733,7 +4733,7 @@ ex:P21580 rdf:type owl:Class ;
           skos:example "A disposition coordinator logs each salvaged part's origin asset, chosen disposition, and final destination." .
 
 
-###  http://example.org/apqc#P21581
+###  https://fandaws.com/ontology/apqc#P21581
 ex:P21581 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfDisposition ,
                           [ rdf:type owl:Restriction ;
@@ -4753,7 +4753,7 @@ ex:P21581 rdf:type owl:Class ;
           skos:example "Copper windings stripped from a dismantled motor are sent to a smelter and returned as recovered copper stock." .
 
 
-###  http://example.org/apqc#P21582
+###  https://fandaws.com/ontology/apqc#P21582
 ex:P21582 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfDisposition ,
                           [ rdf:type owl:Restriction ;
@@ -4781,7 +4781,7 @@ ex:P21582 rdf:type owl:Class ;
           skos:example "An operator abandons a depleted well site: plugging, demolishing surface equipment, remediating soil, and handing the land back." .
 
 
-###  http://example.org/apqc#P21583
+###  https://fandaws.com/ontology/apqc#P21583
 ex:P21583 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfDisposition ,
                           [ rdf:type owl:Restriction ;
@@ -4829,7 +4829,7 @@ ex:P21583 rdf:type owl:Class ;
           skos:example "A facility's hazardous-waste program: characterizing, manifesting, shipping, and reporting each waste stream to disposal." .
 
 
-###  http://example.org/apqc#PartTrackingRecord
+###  https://fandaws.com/ontology/apqc#PartTrackingRecord
 ex:PartTrackingRecord rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ,
                                       [ rdf:type owl:Restriction ;
@@ -4840,7 +4840,7 @@ ex:PartTrackingRecord rdf:type owl:Class ;
                       skos:definition "A Descriptive Information Content Entity, about the parts of end-of-life assets, that records each part's source, rationale for disposition, and destination as an audit trail." .
 
 
-###  http://example.org/apqc#ProductiveAsset
+###  https://fandaws.com/ontology/apqc#ProductiveAsset
 ex:ProductiveAsset rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000995 ;
                    rdfs:comment "Central material subject of section 10.0. Anchored at CCO Material Artifact (designed to realize a Function)." ;
@@ -4848,7 +4848,7 @@ ex:ProductiveAsset rdf:type owl:Class ;
                    skos:definition "A Material Artifact, such as a machine, tool, or factory, that an organization constructs, acquires, operates, maintains, and ultimately disposes of in the course of production." .
 
 
-###  http://example.org/apqc#PropertyAlignmentAssessment
+###  https://fandaws.com/ontology/apqc#PropertyAlignmentAssessment
 ex:PropertyAlignmentAssessment rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000853 ;
                                rdfs:comment "Minted because the section-10.0 shared vocabulary has no output ICE for the 'confirm alignment' appraisal (10.1.1.1). Descriptive (not Directive) because it represents a judgement of consistency rather than prescribing an action." ;
@@ -4857,7 +4857,7 @@ ex:PropertyAlignmentAssessment rdf:type owl:Class ;
                                skos:example "A one-page sign-off noting that the requested space matches the firm's expansion plan." .
 
 
-###  http://example.org/apqc#PropertyRequirementsSpecification
+###  https://fandaws.com/ontology/apqc#PropertyRequirementsSpecification
 ex:PropertyRequirementsSpecification rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000965 ;
                                      rdfs:comment "Directive: it states required conditions that candidate properties/facilities must meet, not a description of a portion of reality." ;
@@ -4865,7 +4865,7 @@ ex:PropertyRequirementsSpecification rdf:type owl:Class ;
                                      skos:definition "A Directive Information Content Entity that prescribes the property, facility, and workspace requirements an organization must satisfy." .
 
 
-###  http://example.org/apqc#PropertySelectionDecision
+###  https://fandaws.com/ontology/apqc#PropertySelectionDecision
 ex:PropertySelectionDecision rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000965 ;
                              rdfs:comment "Minted because the section-10.0 shared vocabulary has no output ICE for the 'select property' decision (10.1.2.3). Directive (not Descriptive) because a selection prescribes the chosen option rather than describing it." ;
@@ -4874,7 +4874,7 @@ ex:PropertySelectionDecision rdf:type owl:Class ;
                              skos:example "A documented decision committing the firm to lease Building C." .
 
 
-###  http://example.org/apqc#PropertyStrategy
+###  https://fandaws.com/ontology/apqc#PropertyStrategy
 ex:PropertyStrategy rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000965 ;
                     rdfs:comment "Directive; output of Act of Formulation (develop property strategy and long-term vision)." ;
@@ -4882,14 +4882,14 @@ ex:PropertyStrategy rdf:type owl:Class ;
                     skos:definition "A Directive Information Content Entity that prescribes a long-term vision and approach for managing an organization's purchased and retained properties." .
 
 
-###  http://example.org/apqc#QualityControlReport
+###  https://fandaws.com/ontology/apqc#QualityControlReport
 ex:QualityControlReport rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:label "Quality Control Report" ;
                         skos:definition "A Descriptive Information Content Entity that describes the results of verifying that construction or maintenance work was performed correctly, including any errors found and rework required." .
 
 
-###  http://example.org/apqc#RealProperty
+###  https://fandaws.com/ontology/apqc#RealProperty
 ex:RealProperty rdf:type owl:Class ;
                 rdfs:subClassOf obo:BFO_0000040 ;
                 rdfs:comment "Anchored at BFO material entity rather than Material Artifact because raw land is not an artifact. Subject of property-selection and build/buy/lease decisions." ,
@@ -4898,7 +4898,7 @@ ex:RealProperty rdf:type owl:Class ;
                 skos:definition "A Material Entity, comprising land together with any buildings or fixtures on it, that an organization may build, buy, lease, retain, or dispose of." .
 
 
-###  http://example.org/apqc#RecoveredMaterial
+###  https://fandaws.com/ontology/apqc#RecoveredMaterial
 ex:RecoveredMaterial rdf:type owl:Class ;
                      rdfs:subClassOf obo:BFO_0000040 ;
                      rdfs:comment "Minted locally (10.4). Distinct from ex:WasteMaterial: recovered material re-enters a value stream rather than being discarded." ;
@@ -4906,7 +4906,7 @@ ex:RecoveredMaterial rdf:type owl:Class ;
                      skos:definition "A Material Entity recovered from end-of-life asset parts for reuse or recycling into new material stock." .
 
 
-###  http://example.org/apqc#RegulatoryAuthority
+###  https://fandaws.com/ontology/apqc#RegulatoryAuthority
 ex:RegulatoryAuthority rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001180 ,
                                        [ rdf:type owl:Restriction ;
@@ -4917,7 +4917,7 @@ ex:RegulatoryAuthority rdf:type owl:Class ;
                        skos:definition "An Organization that bears a regulatory authority role in relation to construction, maintenance, or hazardous-material activities." .
 
 
-###  http://example.org/apqc#RegulatoryAuthorityRole
+###  https://fandaws.com/ontology/apqc#RegulatoryAuthorityRole
 ex:RegulatoryAuthorityRole rdf:type owl:Class ;
                            rdfs:subClassOf obo:BFO_0000023 ;
                            rdfs:comment "Borne by the authority Organization, never by the permit or requirements ICE it issues." ;
@@ -4925,7 +4925,7 @@ ex:RegulatoryAuthorityRole rdf:type owl:Class ;
                            skos:definition "A Role that is borne by an Organization in virtue of issuing permits, codes, or requirements and overseeing compliance for construction, maintenance, or hazardous-material activities." .
 
 
-###  http://example.org/apqc#RegulatoryRequirementsBriefing
+###  https://fandaws.com/ontology/apqc#RegulatoryRequirementsBriefing
 ex:RegulatoryRequirementsBriefing rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:comment "Minted (Gate-F) as the DESCRIPTIVE product of the communication act 10.4.11.2 (ex:P12181), which relays externally-authored regulatory requirements. Descriptive (an account/statement given by a reporting act), matching the Act-of-Reporting genus per the GOLDEN PRINCIPLE; the Directive ex:RegulatoryRequirementsStatement is the communicated content (has input), not a product of this act." ;
@@ -4934,7 +4934,7 @@ ex:RegulatoryRequirementsBriefing rdf:type owl:Class ;
                                   skos:example "A briefing note summarizing updated transport rules for corrosives for the disposal team." .
 
 
-###  http://example.org/apqc#RegulatoryRequirementsStatement
+###  https://fandaws.com/ontology/apqc#RegulatoryRequirementsStatement
 ex:RegulatoryRequirementsStatement rdf:type owl:Class ;
                                    rdfs:subClassOf cco:ont00000965 ;
                                    rdfs:comment "Directive: it conveys externally-authored prescriptions that the organization must satisfy and communicate." ,
@@ -4943,7 +4943,7 @@ ex:RegulatoryRequirementsStatement rdf:type owl:Class ;
                                    skos:definition "A Directive Information Content Entity that prescribes the regulatory requirements applicable to hazardous-material handling, disposal, and reporting." .
 
 
-###  http://example.org/apqc#RelocatedPersonnel
+###  https://fandaws.com/ontology/apqc#RelocatedPersonnel
 ex:RelocatedPersonnel rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00001017 ;
                       rdfs:comment "Minted (Gate-F) for 10.1.4.1 'Relocate people': the relocated population is the Object whose location is changed, which is distinct from ex:FacilityManagementPersonnel (the facilities staff who PERFORM the move). CCO Act of Location Change (ont00000065) moves an Object, so the moved employees -- not the facility managers -- are the definitional participant standing in for that Object." ;
@@ -4951,7 +4951,7 @@ ex:RelocatedPersonnel rdf:type owl:Class ;
                       skos:definition "An Agent that is a staff member or employee of an organization moved from one location to another in the course of a relocation act." .
 
 
-###  http://example.org/apqc#ReplacementNeedAssessment
+###  https://fandaws.com/ontology/apqc#ReplacementNeedAssessment
 ex:ReplacementNeedAssessment rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ,
                                              [ rdf:type owl:Restriction ;
@@ -4964,7 +4964,7 @@ ex:ReplacementNeedAssessment rdf:type owl:Class ;
                              skos:example "An engineer's finding that a worn machine has reached the point where replacement is warranted." .
 
 
-###  http://example.org/apqc#ReprocessingRecord
+###  https://fandaws.com/ontology/apqc#ReprocessingRecord
 ex:ReprocessingRecord rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Reprocessing and Disposal Activity Record" ;
@@ -4972,14 +4972,14 @@ ex:ReprocessingRecord rdf:type owl:Class ;
                       skos:example "A logged record of a batch of solvent sent for reprocessing, with quantities, handler, and destination." .
 
 
-###  http://example.org/apqc#ResourcePlan
+###  https://fandaws.com/ontology/apqc#ResourcePlan
 ex:ResourcePlan rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000965 ;
                 rdfs:label "Resource Plan" ;
                 skos:definition "A Directive Information Content Entity that prescribes the resources to be allocated to a body of work in light of analyzed workload needs." .
 
 
-###  http://example.org/apqc#SafetyComplianceRecord
+###  https://fandaws.com/ontology/apqc#SafetyComplianceRecord
 ex:SafetyComplianceRecord rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:comment "Shared across 10.2.4.4 (sites) and 10.3.2.5 (maintenance work safety)." ;
@@ -4987,14 +4987,14 @@ ex:SafetyComplianceRecord rdf:type owl:Class ;
                           skos:definition "A Descriptive Information Content Entity that records that safety, security, and access controls at a work site conform to applicable laws, regulations, and organizational guidelines." .
 
 
-###  http://example.org/apqc#SiteStatusReport
+###  https://fandaws.com/ontology/apqc#SiteStatusReport
 ex:SiteStatusReport rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:label "Site Status Report" ;
                     skos:definition "A Descriptive Information Content Entity that describes the status of an abandoned or remediated site for the duration required by regulators." .
 
 
-###  http://example.org/apqc#UsefulLifeAssessment
+###  https://fandaws.com/ontology/apqc#UsefulLifeAssessment
 ex:UsefulLifeAssessment rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ,
                                         [ rdf:type owl:Restriction ;
@@ -5005,7 +5005,7 @@ ex:UsefulLifeAssessment rdf:type owl:Class ;
                         skos:definition "A Descriptive Information Content Entity, about an asset, that describes the asset's status against its planned useful life using criteria such as age, maintenance history, and capacity." .
 
 
-###  http://example.org/apqc#WasteMaterial
+###  https://fandaws.com/ontology/apqc#WasteMaterial
 ex:WasteMaterial rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000980 ;
                  rdfs:comment "Reuses CCO Portion of Waste Material (ont00000980), verified: 'serves no further use ... such that the Agent wants to dispose of it.'" ;
@@ -5013,7 +5013,7 @@ ex:WasteMaterial rdf:type owl:Class ;
                  skos:definition "A Portion of Waste Material that arises from asset end-of-life activities and is subject to disposition, disposal, or reprocessing under regulatory requirements." .
 
 
-###  http://example.org/apqc#WorkAndAssetRecord
+###  https://fandaws.com/ontology/apqc#WorkAndAssetRecord
 ex:WorkAndAssetRecord rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ,
                                       [ rdf:type owl:Restriction ;
@@ -5025,7 +5025,7 @@ ex:WorkAndAssetRecord rdf:type owl:Class ;
                       skos:definition "A Descriptive Information Content Entity, about an asset, that records the construction or maintenance work performed on it, the assets serviced, and any issues that arose." .
 
 
-###  http://example.org/apqc#WorkPerformanceReport
+###  https://fandaws.com/ontology/apqc#WorkPerformanceReport
 ex:WorkPerformanceReport rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:comment "Shared monitoring output across 10.2 and 10.3." ;
@@ -5033,14 +5033,14 @@ ex:WorkPerformanceReport rdf:type owl:Class ;
                          skos:definition "A Descriptive Information Content Entity that describes the observed timeliness, regulatory compliance, and quality of construction or maintenance work." .
 
 
-###  http://example.org/apqc#WorkPlan
+###  https://fandaws.com/ontology/apqc#WorkPlan
 ex:WorkPlan rdf:type owl:Class ;
             rdfs:subClassOf cco:ont00000965 ;
             rdfs:label "Work Plan" ;
             skos:definition "A Directive Information Content Entity that prescribes the procedures by which productive assets are to be maintained." .
 
 
-###  http://example.org/apqc#WorkTaskList
+###  https://fandaws.com/ontology/apqc#WorkTaskList
 ex:WorkTaskList rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000965 ;
                 rdfs:comment "Directive: a prioritized task list prescribes the acts to be performed and their ordering." ;
@@ -5048,7 +5048,7 @@ ex:WorkTaskList rdf:type owl:Class ;
                 skos:definition "A Directive Information Content Entity that prescribes the prioritized set of tasks required to complete asset-maintenance work." .
 
 
-###  http://example.org/apqc#Workspace
+###  https://fandaws.com/ontology/apqc#Workspace
 ex:Workspace rdf:type owl:Class ;
              rdfs:subClassOf cco:ont00000192 ;
              rdfs:comment "Subject of acquire/change-fit-form-function activities in 10.1.3." ;

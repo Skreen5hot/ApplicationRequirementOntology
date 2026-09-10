@@ -1,5 +1,5 @@
-@prefix : <http://example.org/apqc/slice/13.0#> .
-@prefix ex: <http://example.org/apqc#> .
+@prefix : <https://fandaws.com/ontology/apqc/slice/13.0#> .
+@prefix ex: <https://fandaws.com/ontology/apqc#> .
 @prefix cco: <https://www.commoncoreontologies.org/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
@@ -7,12 +7,12 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix apqc: <http://example.org/apqc/scheme#> .
+@prefix apqc: <https://fandaws.com/ontology/apqc/scheme#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <http://example.org/apqc/slice/13.0> .
+@base <https://fandaws.com/ontology/apqc/slice/13.0> .
 
-<http://example.org/apqc/slice/13.0> rdf:type owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/13.0> rdf:type owl:Ontology ;
                                       dct:source "APQC Process Classification Framework (Cross-Industry)" ;
                                       dct:title "APQC reality-layer slice 13.0: Develop and Manage Business Capabilities" ;
                                       rdfs:comment "Reality-layer module for APQC section 13.0. CCO pin v2.0 (2024-11-06) per ADR-001 (two-layer model, R5 bounded-occurrent test, GOLDEN PRINCIPLE). New recurring genera (ex:ActOfMonitoring, ex:ActOfImplementation, ex:ActOfImprovement) are emitted below as PROPOSE-EXT for human promotion. Self-contained: the shared act genera it uses are inlined from the apqc-ext.ttl registry, so it validates standalone against the pinned CCO/BFO closure with no extension merge." ;
@@ -22,25 +22,25 @@
 #    Annotation properties
 #################################################################
 
-###  http://example.org/apqc#apqcSourceText
+###  https://fandaws.com/ontology/apqc#apqcSourceText
 ex:apqcSourceText rdf:type owl:AnnotationProperty ;
                   rdfs:comment "Verbatim APQC Element Description retained for provenance." ;
                   rdfs:label "APQC source description" .
 
 
-###  http://example.org/apqc#designatesProcessType
+###  https://fandaws.com/ontology/apqc#designatesProcessType
 ex:designatesProcessType rdf:type owl:AnnotationProperty ;
                          rdfs:comment "Bridges a catalog node (ex:PCF_<pcfID>) to its reality-layer class (ex:P<pcfID> or a supporting capability). The catalog nodes themselves are declared and typed (owl:NamedIndividual, cco:ont00000853 Descriptive ICE, skos:Concept) in apqc-catalog.ttl. An ANNOTATION property is used (not an object property) deliberately, to keep the slice in OWL DL and avoid ICE-to-class punning (ADR-001 R4)." ;
                          rdfs:label "designates process type" .
 
 
-###  http://example.org/apqc#hierarchyID
+###  https://fandaws.com/ontology/apqc#hierarchyID
 ex:hierarchyID rdf:type owl:AnnotationProperty ;
                rdfs:comment "Positional dotted-decimal locator. NON-STABLE across PCF versions. Reference only; never for IRI minting or subsumption." ;
                rdfs:label "APQC Hierarchy ID" .
 
 
-###  http://example.org/apqc#pcfID
+###  https://fandaws.com/ontology/apqc#pcfID
 ex:pcfID rdf:type owl:AnnotationProperty ;
          rdfs:comment "Stable APQC identifier. Anchor IRIs to this; it persists across PCF versions." ;
          rdfs:label "APQC PCF ID" .
@@ -2630,7 +2630,7 @@ cco:ont00001773 rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
-###  http://example.org/apqc#ActOfAcquisition
+###  https://fandaws.com/ontology/apqc#ActOfAcquisition
 ex:ActOfAcquisition rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000228 ;
                     rdfs:comment "Local extension (D9). Rejected cco:ont00000950 'Act of Maintenance' (modifying Material Artifacts) and cco:ont00000402 'Act of Communication' (mere ICE transfer). Securing/obtaining a held entity anchors at the generic Planned Act. Expected to recur in procurement/asset-acquisition categories (4.0, 10.0)." ;
@@ -2638,7 +2638,7 @@ ex:ActOfAcquisition rdf:type owl:Class ;
                     skos:definition "A Planned Act in which an Agent obtains from some authority or supplier an entity (such as an authorization, license, or resource) that the Agent did not previously hold." .
 
 
-###  http://example.org/apqc#ActOfAnalysis
+###  https://fandaws.com/ontology/apqc#ActOfAnalysis
 ex:ActOfAnalysis rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00000366 ;
                  rdfs:comment "Local extension (D9). CCO 2.0 has no generic analysis class; analysis is information processing, so it is anchored under cco:ont00000366." ;
@@ -2646,7 +2646,7 @@ ex:ActOfAnalysis rdf:type owl:Class ;
                  skos:definition "An Act of Information Processing in which an Agent examines one or more input Information Content Entities and produces an Information Content Entity that represents an understanding of their subject matter." .
 
 
-###  http://example.org/apqc#ActOfFormulation
+###  https://fandaws.com/ontology/apqc#ActOfFormulation
 ex:ActOfFormulation rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000511 ;
                     rdfs:comment "Local extension (D9). Anchored under cco:ont00000511 (Act of Planning) because formulating a strategy/mission/design is making a plan to achieve an objective; its output is a Directive ICE. Recurs across develop/define/compose-a-directive processes corpus-wide." ;
@@ -2654,7 +2654,7 @@ ex:ActOfFormulation rdf:type owl:Class ;
                     skos:definition "An Act of Planning in which an Agent composes and articulates a Directive Information Content Entity - such as a mission, strategy, objective, design, roadmap, or business model - that prescribes an organization's intended course of action." .
 
 
-###  http://example.org/apqc#ActOfIdentification
+###  https://fandaws.com/ontology/apqc#ActOfIdentification
 ex:ActOfIdentification rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000366 ;
                        rdfs:comment "Local extension (D9). NOT cco:ont00001261 'Act of Identifying' (a communication act). APQC 'Identify ...' denotes discernment, i.e. information processing." ;
@@ -2662,7 +2662,7 @@ ex:ActOfIdentification rdf:type owl:Class ;
                        skos:definition "An Act of Information Processing in which an Agent discerns and enumerates entities of a given kind and produces an Information Content Entity that registers them." .
 
 
-###  http://example.org/apqc#ActOfImplementation
+###  https://fandaws.com/ontology/apqc#ActOfImplementation
 ex:ActOfImplementation rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000228 ;
                        rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000228 (Planned Act): carrying out a Directive ICE is realizing a plan, and its effect is a change in the world rather than a new ICE. Distinct from ex:ActOfFormulation (which composes the plan) and ex:ActOfDeployment (the narrower IT install/configure case). Rejected cco:ont00000950 'Act of Maintenance' (restricted to modifying Material Artifacts). Recurs in execute/deploy/implement processes (13.0)." ;
@@ -2670,7 +2670,7 @@ ex:ActOfImplementation rdf:type owl:Class ;
                        skos:definition "A Planned Act in which an Agent executes, deploys, or puts into operation a previously specified plan, program, methodology, or system so as to bring about the state of affairs it prescribes." .
 
 
-###  http://example.org/apqc#ActOfImprovement
+###  https://fandaws.com/ontology/apqc#ActOfImprovement
 ex:ActOfImprovement rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000228 ;
                     rdfs:comment "PROPOSE-EXT (D9). Anchored under cco:ont00000228 (Planned Act): it alters an existing occurrent-type or system rather than merely processing information or composing a new plan. Distinct from ex:ActOfImplementation (enacts a fixed directive). Rejected cco:ont00000950 'Act of Maintenance' (restores/preserves a Material Artifact's designed Qualities/Functions, whereas improvement raises performance of a process/system). Recurs in improve/reengineer/enhance/sustain processes (13.0)." ;
@@ -2678,7 +2678,7 @@ ex:ActOfImprovement rdf:type owl:Class ;
                     skos:definition "A Planned Act in which an Agent modifies an existing process, system, or capability with the intent of raising its performance, quality, or fitness against stated objectives." .
 
 
-###  http://example.org/apqc#ActOfMonitoring
+###  https://fandaws.com/ontology/apqc#ActOfMonitoring
 ex:ActOfMonitoring rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000366 ;
                    rdfs:comment "PROPOSE-EXT (D9). CCO 2.0 has no generic monitoring/tracking class. Anchored under cco:ont00000366 (Act of Information Processing) because monitoring ingests repeated observations (including electronic records, not only senses) and yields a descriptive status/deviation ICE -- the GOLDEN PRINCIPLE (descriptive output => information-processing genus) holds. Rejected cco:ont00000037 (Act of Observation: a single sense-based acquisition, too narrow -- monitoring also processes ICEs and is sustained); cco:ont00000636 (Act of Appraisal: renders a single bounded value/quality judgement rather than tracking status over time); and cco:ont00000345 (Act of Measuring: a single quantification against a standard at one time -- at most a method sub-step of the monitoring cycle; a node that is purely one quantification, e.g. Calculate performance measures, anchors to cco:ont00000345 directly, not here). Distinct from ex:ActOfAnalysis (one-shot examination of a fixed input set) by its continuous, longitudinal character. A standing 'Manage/Monitor X' function with no natural end is an Organization Capability (cco:ont00000568) realized in such acts, not itself a process. Recurs corpus-wide (slices 3.0/4.0/5.0/6.0/8.0/9.0/10.0/11.0/12.0/13.0). Reconciled from 10 divergent slice restatements to one definition." ;
@@ -2686,7 +2686,7 @@ ex:ActOfMonitoring rdf:type owl:Class ;
                    skos:definition "An Act of Information Processing in which an Agent repeatedly or continuously observes the state, progress, or performance of some process, system, or quantity over time and produces a Descriptive Information Content Entity that represents its tracked status against expected conditions, targets, or requirements." .
 
 
-###  http://example.org/apqc#ActOfReporting
+###  https://fandaws.com/ontology/apqc#ActOfReporting
 ex:ActOfReporting rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000379 ;
                   rdfs:comment "Registry genus (D9) for DISSEMINATE-class reporting acts whose source makes sharing/reporting-to-an-audience definitional (vs COMPILE-class acts that merely create/record/summarize a report ICE, which stay at cco:ont00000366 Act of Information Processing). VERIFIED in vendored CCO: cco:ont00000151 'Act of Reporting' subClassOf cco:ont00000379 (Act of Representative Communication) subClassOf cco:ont00000402 (Act of Communication), def 'performed by giving a detailed account or statement'. Co-asserts cco:ont00000228 because 379 is outside the standalone-SHACL S2 process allowlist {366,636,511,228}." ;
@@ -2694,7 +2694,7 @@ ex:ActOfReporting rdf:type owl:Class ;
                   skos:definition "An Act of Representative Communication in which an Agent gives a detailed account or statement of some subject matter and shares it with a target audience." .
 
 
-###  http://example.org/apqc#ActOfSelection
+###  https://fandaws.com/ontology/apqc#ActOfSelection
 ex:ActOfSelection rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000366 ;
                   rdfs:comment "Local extension (D9). Anchored under cco:ont00000366 (Act of Information Processing): receives candidate-option ICEs and yields a decision ICE. Distinct from Act of Appraisal (judges without committing) and Act of Planning. NOTE: ratifying a single already-settled option is NOT selection (no candidate set) -- anchor such acts at cco:ont00000228 (Planned Act)." ;
@@ -2702,14 +2702,14 @@ ex:ActOfSelection rdf:type owl:Class ;
                   skos:definition "An Act of Information Processing in which an Agent chooses one or more options from a set of candidates and produces a Directive Information Content Entity that prescribes the chosen option(s)." .
 
 
-###  http://example.org/apqc#AnalysisReport
+###  https://fandaws.com/ontology/apqc#AnalysisReport
 ex:AnalysisReport rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:label "Analysis Report" ;
                   skos:definition "A Descriptive Information Content Entity that summarizes and documents the results of data analysis, including graphs and visualizations of numerical findings." .
 
 
-###  http://example.org/apqc#AnalyticsCapability
+###  https://fandaws.com/ontology/apqc#AnalyticsCapability
 ex:AnalyticsCapability rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000568 ,
                                        [ rdf:type owl:Restriction ;
@@ -2761,21 +2761,21 @@ ex:AnalyticsCapability rdf:type owl:Class ;
                        skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to develop, manage, and deliver analytics across its data-management pipeline, realized in its bounded analytics acts." .
 
 
-###  http://example.org/apqc#AnalyticsDataset
+###  https://fandaws.com/ontology/apqc#AnalyticsDataset
 ex:AnalyticsDataset rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000853 ;
                     rdfs:label "Analytics Dataset" ;
                     skos:definition "A Descriptive Information Content Entity consisting of structured and unstructured data gathered, cleaned, and converted to a uniform format for analysis." .
 
 
-###  http://example.org/apqc#AnalyticsProjectScopeStatement
+###  https://fandaws.com/ontology/apqc#AnalyticsProjectScopeStatement
 ex:AnalyticsProjectScopeStatement rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000965 ;
                                   rdfs:label "Analytics Project Scope Statement" ;
                                   skos:definition "A Directive Information Content Entity that prescribes the size and scale of an analytics project based on collected information." .
 
 
-###  http://example.org/apqc#BPMGovernanceLeader
+###  https://fandaws.com/ontology/apqc#BPMGovernanceLeader
 ex:BPMGovernanceLeader rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00001017 ,
                                        [ rdf:type owl:Restriction ;
@@ -2787,7 +2787,7 @@ ex:BPMGovernanceLeader rdf:type owl:Class ;
                        skos:definition "An Agent that bears the BPM Governance Leader Role within an organization's business-process-management governance." .
 
 
-###  http://example.org/apqc#BPMGovernanceLeaderRole
+###  https://fandaws.com/ontology/apqc#BPMGovernanceLeaderRole
 ex:BPMGovernanceLeaderRole rdf:type owl:Class ;
                            rdfs:subClassOf obo:BFO_0000023 ;
                            rdfs:comment "Minted for APQC 13.1.1.1 'Identify BPM governance leaders'." ;
@@ -2795,7 +2795,7 @@ ex:BPMGovernanceLeaderRole rdf:type owl:Class ;
                            skos:definition "A Role that is borne by an Agent in virtue of being designated to set standards and priorities for business-process-management efforts within an Organization." .
 
 
-###  http://example.org/apqc#BPMToolTemplate
+###  https://fandaws.com/ontology/apqc#BPMToolTemplate
 ex:BPMToolTemplate rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:comment "Directive: a template prescribes how a tool is set up. Minted because no shared-vocab ICE covers BPM tool/template artifacts (output of ex:P16381)." ;
@@ -2804,14 +2804,14 @@ ex:BPMToolTemplate rdf:type owl:Class ;
                    skos:example "A pre-built process-engine workflow template instantiated for new processes." .
 
 
-###  http://example.org/apqc#BenchmarkAnalysis
+###  https://fandaws.com/ontology/apqc#BenchmarkAnalysis
 ex:BenchmarkAnalysis rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:label "Benchmark Analysis" ;
                      skos:definition "A Descriptive Information Content Entity that describes a comparison of an Organization's performance internally or against external organizations." .
 
 
-###  http://example.org/apqc#BenchmarkingCapability
+###  https://fandaws.com/ontology/apqc#BenchmarkingCapability
 ex:BenchmarkingCapability rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000568 ,
                                           [ rdf:type owl:Restriction ;
@@ -2823,14 +2823,14 @@ ex:BenchmarkingCapability rdf:type owl:Class ;
                           skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to measure and benchmark the performance of its internal processes and of the organization as a whole against internal or external reference points, realized in its bounded measure-and-benchmark cycles." .
 
 
-###  http://example.org/apqc#BestPracticesRegister
+###  https://fandaws.com/ontology/apqc#BestPracticesRegister
 ex:BestPracticesRegister rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:label "Best Practices Register" ;
                          skos:definition "A Descriptive Information Content Entity that describes the practices and procedures identified as most effective for the success of a business." .
 
 
-###  http://example.org/apqc#BusinessCase
+###  https://fandaws.com/ontology/apqc#BusinessCase
 ex:BusinessCase rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:comment "Descriptive (an argument/justification representing a situation), not Directive; the go/no-go decision it supports is a separate Directive ICE." ;
@@ -2838,7 +2838,7 @@ ex:BusinessCase rdf:type owl:Class ;
                 skos:definition "A Descriptive Information Content Entity that describes a current situation, proposed solution, financial analysis, and conclusion in order to justify a course of action to a decision maker." .
 
 
-###  http://example.org/apqc#BusinessProcess
+###  https://fandaws.com/ontology/apqc#BusinessProcess
 ex:BusinessProcess rdf:type owl:Class ;
                    rdfs:subClassOf obo:BFO_0000015 ;
                    rdfs:comment "Minted as the aboutness referent for descriptive process ICEs (e.g. ex:ProcessAnalysis, ex:ProcessModel). A business process is an occurrent (obo:BFO_0000015), NOT an ICE and NOT the ex:ProcessOwner Agent. S8 (is-about-on-ICE) is subject-only and does not constrain this filler." ;
@@ -2846,7 +2846,7 @@ ex:BusinessProcess rdf:type owl:Class ;
                    skos:definition "A Process consisting of a structured set of related activities and tasks carried out by the participants of one or more Organizations to achieve a business goal." .
 
 
-###  http://example.org/apqc#BusinessProcessManagementCapability
+###  https://fandaws.com/ontology/apqc#BusinessProcessManagementCapability
 ex:BusinessProcessManagementCapability rdf:type owl:Class ;
                                        rdfs:subClassOf cco:ont00000568 ,
                                                        [ rdf:type owl:Restriction ;
@@ -2874,21 +2874,21 @@ ex:BusinessProcessManagementCapability rdf:type owl:Class ;
                                        skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to govern, define, administer, and improve its business processes, realized in the acts of establishing process governance, defining process frameworks, defining processes, managing process performance, and improving processes." .
 
 
-###  http://example.org/apqc#ChangeAdoptionMeasureSpecification
+###  https://fandaws.com/ontology/apqc#ChangeAdoptionMeasureSpecification
 ex:ChangeAdoptionMeasureSpecification rdf:type owl:Class ;
                                       rdfs:subClassOf cco:ont00000965 ;
                                       rdfs:label "Change Adoption Measure Specification" ;
                                       skos:definition "A Directive Information Content Entity that prescribes the measures and standards for assessing the adoption of a change." .
 
 
-###  http://example.org/apqc#ChangeBarrierAnalysis
+###  https://fandaws.com/ontology/apqc#ChangeBarrierAnalysis
 ex:ChangeBarrierAnalysis rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:label "Change Barrier Analysis" ;
                          skos:definition "A Descriptive Information Content Entity that describes the obstacles, resistors, and enablers bearing on an Organization's change." .
 
 
-###  http://example.org/apqc#ChangeChampion
+###  https://fandaws.com/ontology/apqc#ChangeChampion
 ex:ChangeChampion rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00001017 ,
                                   [ rdf:type owl:Restriction ;
@@ -2899,7 +2899,7 @@ ex:ChangeChampion rdf:type owl:Class ;
                   skos:definition "An Agent that bears a change-champion role." .
 
 
-###  http://example.org/apqc#ChangeChampionRole
+###  https://fandaws.com/ontology/apqc#ChangeChampionRole
 ex:ChangeChampionRole rdf:type owl:Class ;
                       rdfs:subClassOf obo:BFO_0000023 ;
                       rdfs:comment "Minted for APQC 13.4.1.3 'Identify change champion(s)' and 13.4.2.5 'Assign change champion(s)'." ;
@@ -2907,14 +2907,14 @@ ex:ChangeChampionRole rdf:type owl:Class ;
                       skos:definition "A Role that is borne by an Agent in virtue of being designated to promote, communicate, and drive the adoption of a change initiative within a division or team of an Organization." .
 
 
-###  http://example.org/apqc#ChangeImpactAssessment
+###  https://fandaws.com/ontology/apqc#ChangeImpactAssessment
 ex:ChangeImpactAssessment rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:label "Change Impact Assessment" ;
                           skos:definition "A Descriptive Information Content Entity that describes which groups and assets are impacted by a change and the degree of that impact." .
 
 
-###  http://example.org/apqc#ChangeManagementCapability
+###  https://fandaws.com/ontology/apqc#ChangeManagementCapability
 ex:ChangeManagementCapability rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000568 ;
                               rdfs:comment "Shared target for the standing-function reading of APQC 13.4 'Manage change'. The 13.4 group node ex:P11074 models a single bounded change-management cycle as a Planned Act; this capability is the standing-function reading." ;
@@ -2922,14 +2922,14 @@ ex:ChangeManagementCapability rdf:type owl:Class ;
                               skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to plan, design, implement, and sustain organizational change." .
 
 
-###  http://example.org/apqc#ChangeManagementPlan
+###  https://fandaws.com/ontology/apqc#ChangeManagementPlan
 ex:ChangeManagementPlan rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000965 ;
                         rdfs:label "Change Management Plan" ;
                         skos:definition "A Directive Information Content Entity that prescribes the reasons, type, scope, team, and communications for managing an Organization's change." .
 
 
-###  http://example.org/apqc#ChangeManager
+###  https://fandaws.com/ontology/apqc#ChangeManager
 ex:ChangeManager rdf:type owl:Class ;
                  rdfs:subClassOf cco:ont00001017 ,
                                  [ rdf:type owl:Restriction ;
@@ -2940,7 +2940,7 @@ ex:ChangeManager rdf:type owl:Class ;
                  skos:definition "An Agent that bears a change-manager role, held accountable for ensuring an Organization's change is managed systematically." .
 
 
-###  http://example.org/apqc#ChangeManagerRole
+###  https://fandaws.com/ontology/apqc#ChangeManagerRole
 ex:ChangeManagerRole rdf:type owl:Class ;
                      rdfs:subClassOf obo:BFO_0000023 ;
                      rdfs:comment "Minted for APQC 13.4.1.12 'Establish accountability for change management'." ;
@@ -2948,7 +2948,7 @@ ex:ChangeManagerRole rdf:type owl:Class ;
                      skos:definition "A Role that is borne by an Agent in virtue of being held accountable for ensuring that an Organization's change is planned, designed, implemented, and sustained systematically." .
 
 
-###  http://example.org/apqc#ChangeNeedStatement
+###  https://fandaws.com/ontology/apqc#ChangeNeedStatement
 ex:ChangeNeedStatement rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000965 ;
                        rdfs:comment "Used by 13.6.2.5 'Establish need for change'; can feed 13.4 change planning." ;
@@ -2956,21 +2956,21 @@ ex:ChangeNeedStatement rdf:type owl:Class ;
                        skos:definition "A Directive Information Content Entity that prescribes the need and rationale for changing an Organization's performance, derived from gap-analysis results." .
 
 
-###  http://example.org/apqc#ChangeReadinessAssessment
+###  https://fandaws.com/ontology/apqc#ChangeReadinessAssessment
 ex:ChangeReadinessAssessment rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:label "Change Readiness Assessment" ;
                              skos:definition "A Descriptive Information Content Entity that describes the preparedness of the conditions, attitudes, and resources at all levels of an Organization for a change to succeed." .
 
 
-###  http://example.org/apqc#ChangeReport
+###  https://fandaws.com/ontology/apqc#ChangeReport
 ex:ChangeReport rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:label "Change Report" ;
                 skos:definition "A Descriptive Information Content Entity that describes the outcome of a change and the impact it had on critical assets." .
 
 
-###  http://example.org/apqc#CommunicationPlan
+###  https://fandaws.com/ontology/apqc#CommunicationPlan
 ex:CommunicationPlan rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:comment "Shared across 13.2.3.3.4, 13.4.2.4, 13.5.1.7." ;
@@ -2978,7 +2978,7 @@ ex:CommunicationPlan rdf:type owl:Class ;
                      skos:definition "A Directive Information Content Entity that prescribes the goals, audiences, and tools for imparting or exchanging information relevant to a project, change, or initiative." .
 
 
-###  http://example.org/apqc#CompetencyRequirementSpecification
+###  https://fandaws.com/ontology/apqc#CompetencyRequirementSpecification
 ex:CompetencyRequirementSpecification rdf:type owl:Class ;
                                       rdfs:subClassOf cco:ont00000965 ;
                                       rdfs:comment "Minted: no competency-requirement directive in the shared vocabulary (output of ex:P17479)." ;
@@ -2986,7 +2986,7 @@ ex:CompetencyRequirementSpecification rdf:type owl:Class ;
                                       skos:definition "A Directive Information Content Entity that prescribes the competencies required to perform a defined set of quality-control activities." .
 
 
-###  http://example.org/apqc#ComplianceCapabilityDemonstration
+###  https://fandaws.com/ontology/apqc#ComplianceCapabilityDemonstration
 ex:ComplianceCapabilityDemonstration rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000853 ;
                                      rdfs:comment "Minted: descriptive evidentiary artifact (SPC, process-capability analysis) of conformance ability (output of ex:P17480)." ;
@@ -2994,7 +2994,7 @@ ex:ComplianceCapabilityDemonstration rdf:type owl:Class ;
                                      skos:definition "A Descriptive Information Content Entity that describes evidence demonstrating an organization's ability to confirm and fulfil its quality requirements before stakeholders." .
 
 
-###  http://example.org/apqc#CorrectiveActionCompletionRecord
+###  https://fandaws.com/ontology/apqc#CorrectiveActionCompletionRecord
 ex:CorrectiveActionCompletionRecord rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000853 ;
                                     rdfs:comment "Descriptive (a completion/effect record), not Directive: it represents what was done and the brought-about state, in contrast to the governing ex:CorrectiveAndPreventiveActionSpecification (the input directive). Output of ex:P17496 'Take corrective or preventative action'." ;
@@ -3003,21 +3003,21 @@ ex:CorrectiveActionCompletionRecord rdf:type owl:Class ;
                                     skos:example "A closed CAPA log entry recording the tooling change implemented and the post-change defect rate observed." .
 
 
-###  http://example.org/apqc#CorrectiveAndPreventiveActionSpecification
+###  https://fandaws.com/ontology/apqc#CorrectiveAndPreventiveActionSpecification
 ex:CorrectiveAndPreventiveActionSpecification rdf:type owl:Class ;
                                               rdfs:subClassOf cco:ont00000965 ;
                                               rdfs:label "Corrective and Preventive Action Specification" ;
                                               skos:definition "A Directive Information Content Entity that prescribes the corrective and preventive actions to eliminate the cause of a detected non-conformity and prevent its recurrence." .
 
 
-###  http://example.org/apqc#CriticalToQualityCharacteristicSpecification
+###  https://fandaws.com/ontology/apqc#CriticalToQualityCharacteristicSpecification
 ex:CriticalToQualityCharacteristicSpecification rdf:type owl:Class ;
                                                 rdfs:subClassOf cco:ont00000965 ;
                                                 rdfs:label "Critical-to-Quality Characteristic Specification" ;
                                                 skos:definition "A Directive Information Content Entity that prescribes the key measurable performance characteristics that products and processes must satisfy to meet customer needs." .
 
 
-###  http://example.org/apqc#CrossFunctionalProcessRegister
+###  https://fandaws.com/ontology/apqc#CrossFunctionalProcessRegister
 ex:CrossFunctionalProcessRegister rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:comment "Descriptive: represents which processes are cross-functional. Minted because no shared-vocab ICE covers this register (output of ex:P16386)." ;
@@ -3026,28 +3026,28 @@ ex:CrossFunctionalProcessRegister rdf:type owl:Class ;
                                   skos:example "A list of order-to-cash processes flagged as cross-functional." .
 
 
-###  http://example.org/apqc#CulturalContextAssessment
+###  https://fandaws.com/ontology/apqc#CulturalContextAssessment
 ex:CulturalContextAssessment rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:label "Cultural Context Assessment" ;
                              skos:definition "A Descriptive Information Content Entity that describes an Organization's culture and the aspirations for it along multiple dimensions." .
 
 
-###  http://example.org/apqc#CurrentStateAssessment
+###  https://fandaws.com/ontology/apqc#CurrentStateAssessment
 ex:CurrentStateAssessment rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:label "Current State Assessment" ;
                           skos:definition "A Descriptive Information Content Entity that describes the existing processes, structures, and culture of an Organization prior to a change." .
 
 
-###  http://example.org/apqc#DataAnalysisResult
+###  https://fandaws.com/ontology/apqc#DataAnalysisResult
 ex:DataAnalysisResult rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Data Analysis Result" ;
                       skos:definition "A Descriptive Information Content Entity that describes the patterns, trends, error rates, and outliers revealed by statistical analysis of data." .
 
 
-###  http://example.org/apqc#DataAnalyst
+###  https://fandaws.com/ontology/apqc#DataAnalyst
 ex:DataAnalyst rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00001017 ,
                                [ rdf:type owl:Restriction ;
@@ -3058,7 +3058,7 @@ ex:DataAnalyst rdf:type owl:Class ;
                skos:definition "An Agent that bears a data-analyst role." .
 
 
-###  http://example.org/apqc#DataAnalystRole
+###  https://fandaws.com/ontology/apqc#DataAnalystRole
 ex:DataAnalystRole rdf:type owl:Class ;
                    rdfs:subClassOf obo:BFO_0000023 ;
                    rdfs:comment "Minted for recurring APQC 13.7 participant ('knowledge engineers, data scientists, and other relevant personnel')." ;
@@ -3066,7 +3066,7 @@ ex:DataAnalystRole rdf:type owl:Class ;
                    skos:definition "A Role that is borne by an Agent in virtue of being tasked with collecting, preparing, analyzing, and modeling data to produce analytical findings for an Organization." .
 
 
-###  http://example.org/apqc#DataModel
+###  https://fandaws.com/ontology/apqc#DataModel
 ex:DataModel rdf:type owl:Class ;
              rdfs:subClassOf cco:ont00000965 ;
              rdfs:comment "Directive: a data model prescribes how data is to be structured and stored (a model/blueprint), per CCO's notion of prescription for Continuants. CAUTION (false friend): this is the Directive (965) design/specification sense of 'model' (a blueprint for structuring data); a statistical, learned, or predictive 'model' that DESCRIBES patterns in data is a separate Descriptive (853) or Predictive (626) ICE, not this class." ;
@@ -3074,21 +3074,21 @@ ex:DataModel rdf:type owl:Class ;
              skos:definition "A Directive Information Content Entity that prescribes the conceptual and physical structure and storage of data." .
 
 
-###  http://example.org/apqc#DataModelReviewRecord
+###  https://fandaws.com/ontology/apqc#DataModelReviewRecord
 ex:DataModelReviewRecord rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:label "Data Model Review Record" ;
                          skos:definition "A Descriptive Information Content Entity that describes the outcome of reviewing data models with stakeholders against the original research question and hypothesis." .
 
 
-###  http://example.org/apqc#EHSAuditReport
+###  https://fandaws.com/ontology/apqc#EHSAuditReport
 ex:EHSAuditReport rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:label "EHS Audit Report" ;
                   skos:definition "A Descriptive Information Content Entity that describes the findings of an inspection verifying compliance with environmental, health, and safety standards." .
 
 
-###  http://example.org/apqc#EHSCostBenefitAssessment
+###  https://fandaws.com/ontology/apqc#EHSCostBenefitAssessment
 ex:EHSCostBenefitAssessment rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:comment "Descriptive (a judgement of cost vs benefit). Output of ex:P11193 'Manage EHS costs and benefits'." ;
@@ -3096,14 +3096,14 @@ ex:EHSCostBenefitAssessment rdf:type owl:Class ;
                             skos:definition "A Descriptive Information Content Entity that describes the evaluated costs and benefits of an environmental, health, and safety program and whether its benefits outweigh its costs." .
 
 
-###  http://example.org/apqc#EHSEventRecord
+###  https://fandaws.com/ontology/apqc#EHSEventRecord
 ex:EHSEventRecord rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000853 ;
                   rdfs:label "EHS Event Record" ;
                   skos:definition "A Descriptive Information Content Entity that describes the events and activities associated with complying with environmental, health, and safety standards." .
 
 
-###  http://example.org/apqc#EHSManagementCapability
+###  https://fandaws.com/ontology/apqc#EHSManagementCapability
 ex:EHSManagementCapability rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000568 ,
                                            [ rdf:type owl:Restriction ;
@@ -3123,7 +3123,7 @@ ex:EHSManagementCapability rdf:type owl:Class ;
                            skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to determine, develop, monitor, and manage its environmental, health, and safety program, realized in its bounded EHS acts." .
 
 
-###  http://example.org/apqc#EHSManagerRole
+###  https://fandaws.com/ontology/apqc#EHSManagerRole
 ex:EHSManagerRole rdf:type owl:Class ;
                   rdfs:subClassOf obo:BFO_0000023 ;
                   rdfs:comment "Minted for recurring APQC 13.8 participant." ;
@@ -3131,21 +3131,21 @@ ex:EHSManagerRole rdf:type owl:Class ;
                   skos:definition "A Role that is borne by an Agent in virtue of being responsible for developing, monitoring, and managing an Organization's environmental, health, and safety program." .
 
 
-###  http://example.org/apqc#EHSPerformanceReport
+###  https://fandaws.com/ontology/apqc#EHSPerformanceReport
 ex:EHSPerformanceReport rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:label "EHS Performance Report" ;
                         skos:definition "A Descriptive Information Content Entity that describes the measured performance of an environmental, health, and safety program against its indicators." .
 
 
-###  http://example.org/apqc#EHSPolicy
+###  https://fandaws.com/ontology/apqc#EHSPolicy
 ex:EHSPolicy rdf:type owl:Class ;
              rdfs:subClassOf cco:ont00000965 ;
              rdfs:label "EHS Policy" ;
              skos:definition "A Directive Information Content Entity that prescribes the minimum requirements, procedures, and tools by which an Organization will manage its environmental, health, and safety impact." .
 
 
-###  http://example.org/apqc#EHSRequirementRegister
+###  https://fandaws.com/ontology/apqc#EHSRequirementRegister
 ex:EHSRequirementRegister rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:comment "Descriptive (a register/record of discerned, externally-set requirements). Output of ex:P11188 'Identify regulatory and stakeholder requirements', restoring Info-Processing -> Descriptive agreement (GOLDEN PRINCIPLE). The externally-authored Directive ex:EHSRequirementSpecification is the has-input it captures." ;
@@ -3153,7 +3153,7 @@ ex:EHSRequirementRegister rdf:type owl:Class ;
                           skos:definition "A Descriptive Information Content Entity that registers the regulatory and stakeholder protocols and standards an Organization has discerned it must comply with for environment, health, and safety." .
 
 
-###  http://example.org/apqc#EHSRequirementSpecification
+###  https://fandaws.com/ontology/apqc#EHSRequirementSpecification
 ex:EHSRequirementSpecification rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000965 ;
                                rdfs:comment "Directive ICE authored externally by regulators/stakeholders, NOT by the discernment act ex:P11188. P11188 consumes it as a has-input and produces the Descriptive ex:EHSRequirementRegister; it does not compose this directive." ;
@@ -3161,21 +3161,21 @@ ex:EHSRequirementSpecification rdf:type owl:Class ;
                                skos:definition "A Directive Information Content Entity that prescribes the regulatory and stakeholder protocols and standards an Organization must comply with for environment, health, and safety." .
 
 
-###  http://example.org/apqc#EHSRiskAndOpportunityAssessment
+###  https://fandaws.com/ontology/apqc#EHSRiskAndOpportunityAssessment
 ex:EHSRiskAndOpportunityAssessment rdf:type owl:Class ;
                                    rdfs:subClassOf cco:ont00000853 ;
                                    rdfs:label "EHS Risk and Opportunity Assessment" ;
                                    skos:definition "A Descriptive Information Content Entity that describes the future risks and opportunities affecting the environmental, health, and safety of products and services." .
 
 
-###  http://example.org/apqc#EQMSPerformanceAssessment
+###  https://fandaws.com/ontology/apqc#EQMSPerformanceAssessment
 ex:EQMSPerformanceAssessment rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:label "EQMS Performance Assessment" ;
                              skos:definition "A Descriptive Information Content Entity that describes the benchmarked performance of an enterprise quality management system and the gaps relative to industry peers." .
 
 
-###  http://example.org/apqc#EQMSScopeAndGoalSpecification
+###  https://fandaws.com/ontology/apqc#EQMSScopeAndGoalSpecification
 ex:EQMSScopeAndGoalSpecification rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000965 ;
                                  rdfs:comment "Minted: distinct from the broader Quality Strategy; fixes the deployable EQMS scope/targets/goals (output of ex:P17498/ex:P17500)." ;
@@ -3183,21 +3183,21 @@ ex:EQMSScopeAndGoalSpecification rdf:type owl:Class ;
                                  skos:definition "A Directive Information Content Entity that prescribes the scope, targets, and goals of an enterprise quality management system." .
 
 
-###  http://example.org/apqc#EmergencyResponseProgram
+###  https://fandaws.com/ontology/apqc#EmergencyResponseProgram
 ex:EmergencyResponseProgram rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000965 ;
                             rdfs:label "Emergency Response Program" ;
                             skos:definition "A Directive Information Content Entity that prescribes how available resources are organized, coordinated, and directed to respond to emergency scenarios." .
 
 
-###  http://example.org/apqc#EnterpriseMeasurementModel
+###  https://fandaws.com/ontology/apqc#EnterpriseMeasurementModel
 ex:EnterpriseMeasurementModel rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:label "Enterprise Measurement Model" ;
                               skos:definition "A Directive Information Content Entity that prescribes which processes to measure, which measures to use, how often to measure, and the measurement targets across an enterprise." .
 
 
-###  http://example.org/apqc#EnterpriseQualityManagementCapability
+###  https://fandaws.com/ontology/apqc#EnterpriseQualityManagementCapability
 ex:EnterpriseQualityManagementCapability rdf:type owl:Class ;
                                          rdfs:subClassOf cco:ont00000568 ;
                                          rdfs:comment "Shared target for the standing-function reading of APQC 13.3 'Manage enterprise quality'. The 13.3 group node ex:P17471 carries the same intent with explicit realized-in restrictions to its child acts." ;
@@ -3205,14 +3205,14 @@ ex:EnterpriseQualityManagementCapability rdf:type owl:Class ;
                                          skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to establish quality requirements, evaluate performance against them, manage non-conformance, and operate an enterprise quality management system." .
 
 
-###  http://example.org/apqc#EnvironmentalImpactAssessment
+###  https://fandaws.com/ontology/apqc#EnvironmentalImpactAssessment
 ex:EnvironmentalImpactAssessment rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000853 ;
                                  rdfs:label "Environmental Impact Assessment" ;
                                  skos:definition "A Descriptive Information Content Entity that describes the environmental impact of an Organization's products, services, and operations over their lifecycle." .
 
 
-###  http://example.org/apqc#FunctionalEmployee
+###  https://fandaws.com/ontology/apqc#FunctionalEmployee
 ex:FunctionalEmployee rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00001017 ,
                                       [ rdf:type owl:Restriction ;
@@ -3224,14 +3224,14 @@ ex:FunctionalEmployee rdf:type owl:Class ;
                       skos:definition "An Agent that bears a trainee role as a functional employee receiving an organization's training -- e.g. environmental, health, and safety training." .
 
 
-###  http://example.org/apqc#FutureStateSpecification
+###  https://fandaws.com/ontology/apqc#FutureStateSpecification
 ex:FutureStateSpecification rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000965 ;
                             rdfs:label "Future State Specification" ;
                             skos:definition "A Directive Information Content Entity that prescribes the target state an Organization intends to reach after implementing a change, including resource requirements." .
 
 
-###  http://example.org/apqc#GapAndNeedsAnalysis
+###  https://fandaws.com/ontology/apqc#GapAndNeedsAnalysis
 ex:GapAndNeedsAnalysis rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:comment "Shared across 13.5.2.3 and the gap-analysis work in 13.6.2.4." ;
@@ -3239,7 +3239,7 @@ ex:GapAndNeedsAnalysis rdf:type owl:Class ;
                        skos:definition "A Descriptive Information Content Entity that describes the gaps and needs identified by comparing actual performance or capability against a desired or standard reference." .
 
 
-###  http://example.org/apqc#Hypothesis
+###  https://fandaws.com/ontology/apqc#Hypothesis
 ex:Hypothesis rdf:type owl:Class ;
               rdfs:subClassOf cco:ont00000853 ;
               rdfs:comment "Descriptive (853): a hypothesis is a proposed explanation -- a candidate account of how reality is -- not a prescription. CAUTION: the study-design / data-collection PLAN that prescribes how to TEST the hypothesis (what to sample, measure, and collect) is a separate Directive (965) ICE; do not conflate the descriptive conjecture with the directive test plan." ;
@@ -3247,7 +3247,7 @@ ex:Hypothesis rdf:type owl:Class ;
               skos:definition "A Descriptive Information Content Entity that describes a proposed explanation of empirical data, used to guide feature selection during data collection." .
 
 
-###  http://example.org/apqc#ITNeedsAssessment
+###  https://fandaws.com/ontology/apqc#ITNeedsAssessment
 ex:ITNeedsAssessment rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:comment "Minted locally: not present in the shared vocabulary list. Descriptive (judges/represents requirements) per the GOLDEN PRINCIPLE; it is the definitional output of ex:P11106." ;
@@ -3255,7 +3255,7 @@ ex:ITNeedsAssessment rdf:type owl:Class ;
                      skos:definition "A Descriptive Information Content Entity that describes the information-technology requirements for building and implementing a knowledge-management strategy." .
 
 
-###  http://example.org/apqc#ITRequirementsStatement
+###  https://fandaws.com/ontology/apqc#ITRequirementsStatement
 ex:ITRequirementsStatement rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:comment "FALSE FRIEND: despite the label 'Requirement', this is a DESCRIPTIVE (853) record of requirements gathered by a discernment act; the directive requirement itself is modeled separately. An enumeration of discerned IT requirements. Output of ex:P11124 'Identify specific IT requirements'." ;
@@ -3263,21 +3263,21 @@ ex:ITRequirementsStatement rdf:type owl:Class ;
                            skos:definition "A Descriptive Information Content Entity that describes the information-technology requirements -- computers and telecommunications equipment to store, retrieve, transmit, and manipulate data -- of a specific project." .
 
 
-###  http://example.org/apqc#ImprovementOpportunityAssessment
+###  https://fandaws.com/ontology/apqc#ImprovementOpportunityAssessment
 ex:ImprovementOpportunityAssessment rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000853 ;
                                     rdfs:label "Improvement Opportunity Assessment" ;
                                     skos:definition "A Descriptive Information Content Entity that describes identified opportunities to improve an existing business process to meet new goals and objectives." .
 
 
-###  http://example.org/apqc#KMApproachEvaluation
+###  https://fandaws.com/ontology/apqc#KMApproachEvaluation
 ex:KMApproachEvaluation rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:label "KM Approach Evaluation" ;
                         skos:definition "A Descriptive Information Content Entity that describes an evaluation of existing knowledge-management procedures, policies, and guidelines against industry best practices." .
 
 
-###  http://example.org/apqc#KMAwarenessCommunication
+###  https://fandaws.com/ontology/apqc#KMAwarenessCommunication
 ex:KMAwarenessCommunication rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:comment "Descriptive: the communicated content disseminated to raise awareness and drive use of knowledge bases. Output of ex:P20970 'Sustain awareness and engagement' (a communication/promotion act)." ;
@@ -3286,28 +3286,28 @@ ex:KMAwarenessCommunication rdf:type owl:Class ;
                             skos:example "An internal campaign message encouraging staff to contribute to and consult the knowledge base." .
 
 
-###  http://example.org/apqc#KMCapabilityMaturityAssessment
+###  https://fandaws.com/ontology/apqc#KMCapabilityMaturityAssessment
 ex:KMCapabilityMaturityAssessment rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:label "KM Capability Maturity Assessment" ;
                                   skos:definition "A Descriptive Information Content Entity that describes the maturity level of existing knowledge-management initiatives." .
 
 
-###  http://example.org/apqc#KMFundingModel
+###  https://fandaws.com/ontology/apqc#KMFundingModel
 ex:KMFundingModel rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00000965 ;
                   rdfs:label "KM Funding Model" ;
                   skos:definition "A Directive Information Content Entity that prescribes the funding approach selected for an Organization's knowledge management program." .
 
 
-###  http://example.org/apqc#KMGovernanceModel
+###  https://fandaws.com/ontology/apqc#KMGovernanceModel
 ex:KMGovernanceModel rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:label "KM Governance Model" ;
                      skos:definition "A Directive Information Content Entity that prescribes the structure, roles, and accountability for governing an Organization's collective knowledge." .
 
 
-###  http://example.org/apqc#KMInitiativeLinkageAnalysis
+###  https://fandaws.com/ontology/apqc#KMInitiativeLinkageAnalysis
 ex:KMInitiativeLinkageAnalysis rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000853 ;
                                rdfs:comment "Minted locally: not present in the shared vocabulary list. Descriptive (represents discovered correlations) per the GOLDEN PRINCIPLE; it is the definitional output of ex:P11104." ;
@@ -3315,7 +3315,7 @@ ex:KMInitiativeLinkageAnalysis rdf:type owl:Class ;
                                skos:definition "A Descriptive Information Content Entity that describes the correlations and dependencies between an organization's knowledge-management strategy and its other functional areas or initiatives." .
 
 
-###  http://example.org/apqc#KMMethodologySpecification
+###  https://fandaws.com/ontology/apqc#KMMethodologySpecification
 ex:KMMethodologySpecification rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:comment "Covers 'KM approaches' (policies, procedures, guidelines) developed and implemented in 13.5.3/13.5.4." ;
@@ -3323,7 +3323,7 @@ ex:KMMethodologySpecification rdf:type owl:Class ;
                               skos:definition "A Directive Information Content Entity that prescribes the core procedures and methodologies for developing, planning, executing, and improving knowledge management." .
 
 
-###  http://example.org/apqc#KMResourceModel
+###  https://fandaws.com/ontology/apqc#KMResourceModel
 ex:KMResourceModel rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:comment "Minted locally: not present in the shared vocabulary list. Directive (prescribes resources/standards/guidelines) per the GOLDEN PRINCIPLE; it is the definitional output of ex:P20966." ;
@@ -3331,14 +3331,14 @@ ex:KMResourceModel rdf:type owl:Class ;
                    skos:definition "A Directive Information Content Entity that prescribes the resources, standards, and guidelines an organization's knowledge-management approaches are to follow." .
 
 
-###  http://example.org/apqc#KMStrategy
+###  https://fandaws.com/ontology/apqc#KMStrategy
 ex:KMStrategy rdf:type owl:Class ;
               rdfs:subClassOf cco:ont00000965 ;
               rdfs:label "KM Strategy" ;
               skos:definition "A Directive Information Content Entity that prescribes an Organization's plan for capturing, maintaining, accessing, and exploiting its knowledge base." .
 
 
-###  http://example.org/apqc#KnowledgeManagementCapability
+###  https://fandaws.com/ontology/apqc#KnowledgeManagementCapability
 ex:KnowledgeManagementCapability rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000568 ,
                                                  [ rdf:type owl:Restriction ;
@@ -3362,7 +3362,7 @@ ex:KnowledgeManagementCapability rdf:type owl:Class ;
                                  skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to develop strategy for, assess, design, implement, and sustain the management of its collective knowledge, realized in the acts of developing KM strategy, assessing KM capabilities, designing and implementing KM capabilities, and evolving and sustaining them." .
 
 
-###  http://example.org/apqc#KnowledgeManagerRole
+###  https://fandaws.com/ontology/apqc#KnowledgeManagerRole
 ex:KnowledgeManagerRole rdf:type owl:Class ;
                         rdfs:subClassOf obo:BFO_0000023 ;
                         rdfs:comment "Minted for recurring APQC 13.5 participant ('KM core group' / specialized KM roles)." ;
@@ -3370,7 +3370,7 @@ ex:KnowledgeManagerRole rdf:type owl:Class ;
                         skos:definition "A Role that is borne by an Agent in virtue of being responsible for governing, capturing, maintaining, and providing access to an Organization's collective knowledge base." .
 
 
-###  http://example.org/apqc#LessonsLearnedRecord
+###  https://fandaws.com/ontology/apqc#LessonsLearnedRecord
 ex:LessonsLearnedRecord rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:comment "Shared across 13.4.4.2 and 13.2.3.4.5 project reviews." ;
@@ -3378,7 +3378,7 @@ ex:LessonsLearnedRecord rdf:type owl:Class ;
                         skos:definition "A Descriptive Information Content Entity that describes the insights and knowledge captured from a completed change or project for reuse." .
 
 
-###  http://example.org/apqc#MeasurementMethodSelection
+###  https://fandaws.com/ontology/apqc#MeasurementMethodSelection
 ex:MeasurementMethodSelection rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:comment "Minted: Directive output of choosing measurement methods from candidate tools (output of ex:P17478)." ;
@@ -3386,7 +3386,7 @@ ex:MeasurementMethodSelection rdf:type owl:Class ;
                               skos:definition "A Directive Information Content Entity that prescribes the tools and methods chosen to measure quality levels." .
 
 
-###  http://example.org/apqc#MetricGapAssessment
+###  https://fandaws.com/ontology/apqc#MetricGapAssessment
 ex:MetricGapAssessment rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:comment "Descriptive (a gap-finding/discernment), not Directive: it represents the NEED for further metrics, not the composition of any new indicator. Output of ex:P20141 'Identify additional metrics as required'. Distinct from ex:PerformanceIndicatorSpecification (the Directive artifact a later formulation act would compose)." ;
@@ -3395,7 +3395,7 @@ ex:MetricGapAssessment rdf:type owl:Class ;
                        skos:example "A note finding that the new on-time-delivery goal is not yet covered by any existing KPI." .
 
 
-###  http://example.org/apqc#MonitoringFrequencySpecification
+###  https://fandaws.com/ontology/apqc#MonitoringFrequencySpecification
 ex:MonitoringFrequencySpecification rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000965 ;
                                     rdfs:comment "Minted for APQC 13.6.3.2 'Establish monitoring frequency'. Directive (not Descriptive) because it prescribes a monitoring cadence rather than describing reality. Distinct from ex:PerformanceIndicatorSpecification (which prescribes what is measured, not how often)." ;
@@ -3403,35 +3403,35 @@ ex:MonitoringFrequencySpecification rdf:type owl:Class ;
                                     skos:definition "A Directive Information Content Entity that prescribes how often performance is to be supervised, measured, and assessed." .
 
 
-###  http://example.org/apqc#NonconformanceImpactAssessment
+###  https://fandaws.com/ontology/apqc#NonconformanceImpactAssessment
 ex:NonconformanceImpactAssessment rdf:type owl:Class ;
                                   rdfs:subClassOf cco:ont00000853 ;
                                   rdfs:label "Nonconformance Impact Assessment" ;
                                   skos:definition "A Descriptive Information Content Entity that describes the potential impact of a non-conformance event and the need for corrective or preventive action." .
 
 
-###  http://example.org/apqc#NonconformanceRecord
+###  https://fandaws.com/ontology/apqc#NonconformanceRecord
 ex:NonconformanceRecord rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000853 ;
                         rdfs:label "Nonconformance Record" ;
                         skos:definition "A Descriptive Information Content Entity that describes a closed non-conformance, including its documented root causes and the corrective and preventive actions taken." .
 
 
-###  http://example.org/apqc#OrganizationalPerformanceStrategy
+###  https://fandaws.com/ontology/apqc#OrganizationalPerformanceStrategy
 ex:OrganizationalPerformanceStrategy rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000965 ;
                                      rdfs:label "Organizational Performance Strategy" ;
                                      skos:definition "A Directive Information Content Entity that prescribes an Organization's approach for measuring, tracking, streamlining, and improving internal performance." .
 
 
-###  http://example.org/apqc#OrganizationalRiskAnalysis
+###  https://fandaws.com/ontology/apqc#OrganizationalRiskAnalysis
 ex:OrganizationalRiskAnalysis rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000853 ;
                               rdfs:label "Organizational Risk Analysis" ;
                               skos:definition "A Descriptive Information Content Entity that describes the impact and probability of threats to an Organization's critical assets." .
 
 
-###  http://example.org/apqc#P10270
+###  https://fandaws.com/ontology/apqc#P10270
 ex:P10270 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3447,7 +3447,7 @@ ex:P10270 rdf:type owl:Class ;
           skos:example "A team defines a set of KPIs and their formulas for the order-fulfillment process." .
 
 
-###  http://example.org/apqc#P10271
+###  https://fandaws.com/ontology/apqc#P10271
 ex:P10271 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3463,7 +3463,7 @@ ex:P10271 rdf:type owl:Class ;
           skos:example "Governance decides KPIs will be reviewed monthly and the dashboard refreshed weekly." .
 
 
-###  http://example.org/apqc#P10272
+###  https://fandaws.com/ontology/apqc#P10272
 ex:P10272 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000345 ,
                           [ rdf:type owl:Restriction ;
@@ -3483,7 +3483,7 @@ ex:P10272 rdf:type owl:Class ;
           skos:example "A scorecard calculates the period's KPI values from the collected data." .
 
 
-###  http://example.org/apqc#P10273
+###  https://fandaws.com/ontology/apqc#P10273
 ex:P10273 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3503,7 +3503,7 @@ ex:P10273 rdf:type owl:Class ;
           skos:example "An analyst plots twelve months of KPI data and identifies a declining-quality trend." .
 
 
-###  http://example.org/apqc#P10274
+###  https://fandaws.com/ontology/apqc#P10274
 ex:P10274 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3523,7 +3523,7 @@ ex:P10274 rdf:type owl:Class ;
           skos:example "An analyst explains why the period's throughput fell short of the benchmark target." .
 
 
-###  http://example.org/apqc#P10275
+###  https://fandaws.com/ontology/apqc#P10275
 ex:P10275 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -3547,7 +3547,7 @@ ex:P10275 rdf:type owl:Class ;
           skos:example "A reporting analyst compiles the quarterly performance report including gaps, trends, and commentary." .
 
 
-###  http://example.org/apqc#P10276
+###  https://fandaws.com/ontology/apqc#P10276
 ex:P10276 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3567,7 +3567,7 @@ ex:P10276 rdf:type owl:Class ;
           skos:example "After analyzing gaps, a team drafts a performance improvement plan with owners and milestones." .
 
 
-###  http://example.org/apqc#P11072
+###  https://fandaws.com/ontology/apqc#P11072
 ex:P11072 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3603,7 +3603,7 @@ ex:P11072 rdf:type owl:Class ;
           skos:example "A benchmarking team compares the firm's order-cycle time against industry peers." .
 
 
-###  http://example.org/apqc#P11074
+###  https://fandaws.com/ontology/apqc#P11074
 ex:P11074 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -3631,7 +3631,7 @@ ex:P11074 rdf:type owl:Class ;
           skos:example "An organization's end-to-end transformation initiative from concept through sustained adoption." .
 
 
-###  http://example.org/apqc#P11075
+###  https://fandaws.com/ontology/apqc#P11075
 ex:P11075 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3647,7 +3647,7 @@ ex:P11075 rdf:type owl:Class ;
           skos:example "A measurement office defines a balanced-scorecard-style enterprise measurement model for a business unit." .
 
 
-###  http://example.org/apqc#P11083
+###  https://fandaws.com/ontology/apqc#P11083
 ex:P11083 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3663,7 +3663,7 @@ ex:P11083 rdf:type owl:Class ;
           skos:example "An analyst measures and records contact-center handle times to support a benchmarking study." .
 
 
-###  http://example.org/apqc#P11084
+###  https://fandaws.com/ontology/apqc#P11084
 ex:P11084 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ;
           ex:apqcSourceText "Improving an organization's ability to compare its performance internally or externally, and maintaining benchmarking relationships with other organizations. Train staff in benchmarking. Develop technological solutions or other materials to aid benchmarking efforts. Consult with external entities to gain knowledge or tools to help benchmark." ;
@@ -3675,7 +3675,7 @@ ex:P11084 rdf:type owl:Class ;
           skos:example "A center of excellence trains analysts and procures a benchmarking platform, strengthening the firm's benchmarking capability." .
 
 
-###  http://example.org/apqc#P11085
+###  https://fandaws.com/ontology/apqc#P11085
 ex:P11085 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3691,7 +3691,7 @@ ex:P11085 rdf:type owl:Class ;
           skos:example "A team benchmarks the firm's procurement cycle both across plants and against a rival." .
 
 
-###  http://example.org/apqc#P11087
+###  https://fandaws.com/ontology/apqc#P11087
 ex:P11087 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -3711,7 +3711,7 @@ ex:P11087 rdf:type owl:Class ;
           skos:example "An analyst computes the percentage improvement in cycle time needed to match the benchmark leader." .
 
 
-###  http://example.org/apqc#P11088
+###  https://fandaws.com/ontology/apqc#P11088
 ex:P11088 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3731,7 +3731,7 @@ ex:P11088 rdf:type owl:Class ;
           skos:example "Following a gap analysis, leadership issues a statement establishing the need to reduce defect rates by 30%." .
 
 
-###  http://example.org/apqc#P11095
+###  https://fandaws.com/ontology/apqc#P11095
 ex:P11095 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3783,7 +3783,7 @@ ex:P11095 rdf:type owl:Class ;
           skos:example "A KM team drafts the enterprise knowledge-management strategy for the coming planning cycle." .
 
 
-###  http://example.org/apqc#P11096
+###  https://fandaws.com/ontology/apqc#P11096
 ex:P11096 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3811,7 +3811,7 @@ ex:P11096 rdf:type owl:Class ;
           skos:example "A KM review board appraises current KM maturity ahead of the next planning cycle." .
 
 
-###  http://example.org/apqc#P11100
+###  https://fandaws.com/ontology/apqc#P11100
 ex:P11100 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3827,7 +3827,7 @@ ex:P11100 rdf:type owl:Class ;
           skos:example "A KM lead defines a governance model assigning knowledge-stewardship roles and usage policies." .
 
 
-###  http://example.org/apqc#P11102
+###  https://fandaws.com/ontology/apqc#P11102
 ex:P11102 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3843,7 +3843,7 @@ ex:P11102 rdf:type owl:Class ;
           skos:example "A KM governance team documents the split of accountabilities between the central KM office and business-unit knowledge owners." .
 
 
-###  http://example.org/apqc#P11103
+###  https://fandaws.com/ontology/apqc#P11103
 ex:P11103 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -3859,7 +3859,7 @@ ex:P11103 rdf:type owl:Class ;
           skos:example "A KM steering group short-lists three funding approaches and selects a chargeback model to adopt." .
 
 
-###  http://example.org/apqc#P11104
+###  https://fandaws.com/ontology/apqc#P11104
 ex:P11104 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -3875,7 +3875,7 @@ ex:P11104 rdf:type owl:Class ;
           skos:example "An analyst maps how the KM roadmap intersects with the data-governance and HR-learning programs." .
 
 
-###  http://example.org/apqc#P11105
+###  https://fandaws.com/ontology/apqc#P11105
 ex:P11105 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3891,7 +3891,7 @@ ex:P11105 rdf:type owl:Class ;
           skos:example "A KM center of excellence documents the standard lifecycle methodology for knowledge projects." .
 
 
-###  http://example.org/apqc#P11106
+###  https://fandaws.com/ontology/apqc#P11106
 ex:P11106 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3907,7 +3907,7 @@ ex:P11106 rdf:type owl:Class ;
           skos:example "A KM architect assesses the hardware and platform requirements and briefs the IT function." .
 
 
-###  http://example.org/apqc#P11107
+###  https://fandaws.com/ontology/apqc#P11107
 ex:P11107 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3927,7 +3927,7 @@ ex:P11107 rdf:type owl:Class ;
           skos:example "A KM team drafts a rollout training curriculum and a stakeholder communication plan." .
 
 
-###  http://example.org/apqc#P11108
+###  https://fandaws.com/ontology/apqc#P11108
 ex:P11108 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3943,7 +3943,7 @@ ex:P11108 rdf:type owl:Class ;
           skos:example "A change lead designs the adoption approach for a new knowledge-sharing platform." .
 
 
-###  http://example.org/apqc#P11109
+###  https://fandaws.com/ontology/apqc#P11109
 ex:P11109 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -3959,7 +3959,7 @@ ex:P11109 rdf:type owl:Class ;
           skos:example "A KM analyst defines KPIs such as knowledge assets created per quarter." .
 
 
-###  http://example.org/apqc#P11110
+###  https://fandaws.com/ontology/apqc#P11110
 ex:P11110 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3975,7 +3975,7 @@ ex:P11110 rdf:type owl:Class ;
           skos:example "An assessor rates each KM initiative from Level 1 to Level 5 on the maturity model." .
 
 
-###  http://example.org/apqc#P11111
+###  https://fandaws.com/ontology/apqc#P11111
 ex:P11111 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -3991,7 +3991,7 @@ ex:P11111 rdf:type owl:Class ;
           skos:example "A KM lead benchmarks current knowledge policies against sector best practice." .
 
 
-###  http://example.org/apqc#P11112
+###  https://fandaws.com/ontology/apqc#P11112
 ex:P11112 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4011,7 +4011,7 @@ ex:P11112 rdf:type owl:Class ;
           skos:example "An analyst compares current KM performance against the target state and lists capability gaps." .
 
 
-###  http://example.org/apqc#P11113
+###  https://fandaws.com/ontology/apqc#P11113
 ex:P11113 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ,
                           [ rdf:type owl:Restriction ;
@@ -4027,7 +4027,7 @@ ex:P11113 rdf:type owl:Class ;
           skos:example "A KM team revises the knowledge-capture workflow to close gaps found in the last capability review." .
 
 
-###  http://example.org/apqc#P11114
+###  https://fandaws.com/ontology/apqc#P11114
 ex:P11114 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4043,7 +4043,7 @@ ex:P11114 rdf:type owl:Class ;
           skos:example "A KM designer drafts a new set of knowledge-capture guidelines." .
 
 
-###  http://example.org/apqc#P11115
+###  https://fandaws.com/ontology/apqc#P11115
 ex:P11115 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -4059,7 +4059,7 @@ ex:P11115 rdf:type owl:Class ;
           skos:example "A KM team rolls out the newly approved knowledge-capture procedures across the operating units." .
 
 
-###  http://example.org/apqc#P11117
+###  https://fandaws.com/ontology/apqc#P11117
 ex:P11117 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4075,7 +4075,7 @@ ex:P11117 rdf:type owl:Class ;
           skos:example "A business analyst defines the required features of the project's deliverables." .
 
 
-###  http://example.org/apqc#P11118
+###  https://fandaws.com/ontology/apqc#P11118
 ex:P11118 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4091,7 +4091,7 @@ ex:P11118 rdf:type owl:Class ;
           skos:example "A PMO surveys readiness for agile adoption before launching a project." .
 
 
-###  http://example.org/apqc#P11119
+###  https://fandaws.com/ontology/apqc#P11119
 ex:P11119 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -4107,7 +4107,7 @@ ex:P11119 rdf:type owl:Class ;
           skos:example "A PMO assesses agile vs feature-driven development and selects the methodology for the project." .
 
 
-###  http://example.org/apqc#P11120
+###  https://fandaws.com/ontology/apqc#P11120
 ex:P11120 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4123,7 +4123,7 @@ ex:P11120 rdf:type owl:Class ;
           skos:example "A sponsor writes the business case making the financial argument to fund the project." .
 
 
-###  http://example.org/apqc#P11121
+###  https://fandaws.com/ontology/apqc#P11121
 ex:P11121 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4139,7 +4139,7 @@ ex:P11121 rdf:type owl:Class ;
           skos:example "A project manager defines the cost, schedule, and quality KPIs for the project." .
 
 
-###  http://example.org/apqc#P11123
+###  https://fandaws.com/ontology/apqc#P11123
 ex:P11123 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4155,7 +4155,7 @@ ex:P11123 rdf:type owl:Class ;
           skos:example "A project manager documents who fills each project role and the resources assigned." .
 
 
-###  http://example.org/apqc#P11124
+###  https://fandaws.com/ontology/apqc#P11124
 ex:P11124 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4171,7 +4171,7 @@ ex:P11124 rdf:type owl:Class ;
           skos:example "A project's IT lead lists the hardware and telecom requirements for the project." .
 
 
-###  http://example.org/apqc#P11125
+###  https://fandaws.com/ontology/apqc#P11125
 ex:P11125 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4191,7 +4191,7 @@ ex:P11125 rdf:type owl:Class ;
           skos:example "A project manager drafts the team training curriculum and the project communication plan." .
 
 
-###  http://example.org/apqc#P11127
+###  https://fandaws.com/ontology/apqc#P11127
 ex:P11127 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4207,7 +4207,7 @@ ex:P11127 rdf:type owl:Class ;
           skos:example "A project manager designs a bonus-and-certificate scheme for outstanding project work." .
 
 
-###  http://example.org/apqc#P11128
+###  https://fandaws.com/ontology/apqc#P11128
 ex:P11128 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4223,7 +4223,7 @@ ex:P11128 rdf:type owl:Class ;
           skos:example "A project manager plans the kickoff timing, audience, and milestones for the launch." .
 
 
-###  http://example.org/apqc#P11129
+###  https://fandaws.com/ontology/apqc#P11129
 ex:P11129 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ;
           ex:apqcSourceText "Putting the project into position by effectively bringing it into action." ;
@@ -4235,7 +4235,7 @@ ex:P11129 rdf:type owl:Class ;
           skos:example "A project manager mobilizes the team and kicks off project execution." .
 
 
-###  http://example.org/apqc#P11131
+###  https://fandaws.com/ontology/apqc#P11131
 ex:P11131 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4251,7 +4251,7 @@ ex:P11131 rdf:type owl:Class ;
           skos:example "A PMO assesses how the chosen PM approach affected delivery outcomes." .
 
 
-###  http://example.org/apqc#P11132
+###  https://fandaws.com/ontology/apqc#P11132
 ex:P11132 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -4267,7 +4267,7 @@ ex:P11132 rdf:type owl:Class ;
           skos:example "A project lead runs engagement activities to keep the team involved through delivery." .
 
 
-###  http://example.org/apqc#P11133
+###  https://fandaws.com/ontology/apqc#P11133
 ex:P11133 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ;
           ex:apqcSourceText "Reorganizing and stimulating the approach and strategy for managing business projects. Make improvements based on the project scope and on findings from Evaluate the impact of project management (strategy and projects) on measures and outcomes [11131]." ;
@@ -4279,7 +4279,7 @@ ex:P11133 rdf:type owl:Class ;
           skos:example "A PMO revises its delivery methodology based on the impact assessment findings." .
 
 
-###  http://example.org/apqc#P11135
+###  https://fandaws.com/ontology/apqc#P11135
 ex:P11135 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4327,7 +4327,7 @@ ex:P11135 rdf:type owl:Class ;
           skos:example "The team produces the suite of plans and metrics that constitute the change design." .
 
 
-###  http://example.org/apqc#P11136
+###  https://fandaws.com/ontology/apqc#P11136
 ex:P11136 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -4359,7 +4359,7 @@ ex:P11136 rdf:type owl:Class ;
           skos:example "The organization rolls out the redesigned processes and support structures for the change." .
 
 
-###  http://example.org/apqc#P11137
+###  https://fandaws.com/ontology/apqc#P11137
 ex:P11137 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ,
                           [ rdf:type owl:Restriction ;
@@ -4383,7 +4383,7 @@ ex:P11137 rdf:type owl:Class ;
           skos:example "After go-live the team tracks the new process, captures lessons, and applies fixes." .
 
 
-###  http://example.org/apqc#P11138
+###  https://fandaws.com/ontology/apqc#P11138
 ex:P11138 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -4399,7 +4399,7 @@ ex:P11138 rdf:type owl:Class ;
           skos:example "A black belt selects Six Sigma over process mapping for a defect-reduction effort." .
 
 
-###  http://example.org/apqc#P11139
+###  https://fandaws.com/ontology/apqc#P11139
 ex:P11139 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4415,7 +4415,7 @@ ex:P11139 rdf:type owl:Class ;
           skos:example "A readiness survey across business units yields a change readiness assessment." .
 
 
-###  http://example.org/apqc#P11140
+###  https://fandaws.com/ontology/apqc#P11140
 ex:P11140 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4435,7 +4435,7 @@ ex:P11140 rdf:type owl:Class ;
           skos:example "A change team enumerates affected departments and external parties and rates their influence." .
 
 
-###  http://example.org/apqc#P11141
+###  https://fandaws.com/ontology/apqc#P11141
 ex:P11141 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4451,7 +4451,7 @@ ex:P11141 rdf:type owl:Class ;
           skos:example "Each division nominates an enthusiastic advocate to serve as its change champion." .
 
 
-###  http://example.org/apqc#P11142
+###  https://fandaws.com/ontology/apqc#P11142
 ex:P11142 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ;
           ex:apqcSourceText "Preparing a design team for implementing change throughout the organization." ;
@@ -4463,7 +4463,7 @@ ex:P11142 rdf:type owl:Class ;
           skos:example "A sponsor convenes a cross-functional design team for the transformation." .
 
 
-###  http://example.org/apqc#P11143
+###  https://fandaws.com/ontology/apqc#P11143
 ex:P11143 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4479,7 +4479,7 @@ ex:P11143 rdf:type owl:Class ;
           skos:example "The team documents which functions, locations, and systems fall inside the change." .
 
 
-###  http://example.org/apqc#P11144
+###  https://fandaws.com/ontology/apqc#P11144
 ex:P11144 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4495,7 +4495,7 @@ ex:P11144 rdf:type owl:Class ;
           skos:example "Analysts chart current process flows and defect Pareto diagrams to characterize the baseline." .
 
 
-###  http://example.org/apqc#P11145
+###  https://fandaws.com/ontology/apqc#P11145
 ex:P11145 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4511,7 +4511,7 @@ ex:P11145 rdf:type owl:Class ;
           skos:example "Leadership specifies the desired post-change operating model and its resource requirements." .
 
 
-###  http://example.org/apqc#P11146
+###  https://fandaws.com/ontology/apqc#P11146
 ex:P11146 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4527,7 +4527,7 @@ ex:P11146 rdf:type owl:Class ;
           skos:example "A risk team scores asset threats by likelihood and impact for the change." .
 
 
-###  http://example.org/apqc#P11147
+###  https://fandaws.com/ontology/apqc#P11147
 ex:P11147 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4543,7 +4543,7 @@ ex:P11147 rdf:type owl:Class ;
           skos:example "A culture survey produces a multidimensional assessment of organizational values." .
 
 
-###  http://example.org/apqc#P11148
+###  https://fandaws.com/ontology/apqc#P11148
 ex:P11148 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -4559,7 +4559,7 @@ ex:P11148 rdf:type owl:Class ;
           skos:example "Each manager is formally made accountable for delivering the change in their unit." .
 
 
-###  http://example.org/apqc#P11149
+###  https://fandaws.com/ontology/apqc#P11149
 ex:P11149 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4575,7 +4575,7 @@ ex:P11149 rdf:type owl:Class ;
           skos:example "The team catalogs integration, resistance, and complexity obstacles to the change." .
 
 
-###  http://example.org/apqc#P11150
+###  https://fandaws.com/ontology/apqc#P11150
 ex:P11150 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ;
           ex:apqcSourceText "Identifying the person(s) or thing(s)responsible for making the change possible. Consider factors such as interdependence of efforts, reward to the integrators, sharing of power and responsibility, and employee understanding of why change is essential." ;
@@ -4587,7 +4587,7 @@ ex:P11150 rdf:type owl:Class ;
           skos:example "The team names the integrators and conditions that will enable the change to succeed." .
 
 
-###  http://example.org/apqc#P11151
+###  https://fandaws.com/ontology/apqc#P11151
 ex:P11151 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4603,7 +4603,7 @@ ex:P11151 rdf:type owl:Class ;
           skos:example "The team budgets the resources and designs adoption campaigns for the change." .
 
 
-###  http://example.org/apqc#P11152
+###  https://fandaws.com/ontology/apqc#P11152
 ex:P11152 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ;
           ex:apqcSourceText "Correlating the change initiative with the other initiatives. Create an alignment between the goals and objectives of the change process and that of the other initiatives." ;
@@ -4615,7 +4615,7 @@ ex:P11152 rdf:type owl:Class ;
           skos:example "The team maps the change's goals against concurrent programs to find overlaps and conflicts." .
 
 
-###  http://example.org/apqc#P11153
+###  https://fandaws.com/ontology/apqc#P11153
 ex:P11153 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4631,7 +4631,7 @@ ex:P11153 rdf:type owl:Class ;
           skos:example "The team drafts the master change management plan covering rationale, type, and scope." .
 
 
-###  http://example.org/apqc#P11154
+###  https://fandaws.com/ontology/apqc#P11154
 ex:P11154 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4647,7 +4647,7 @@ ex:P11154 rdf:type owl:Class ;
           skos:example "The team specifies the courses, trainers, and schedule to equip staff for the change." .
 
 
-###  http://example.org/apqc#P11155
+###  https://fandaws.com/ontology/apqc#P11155
 ex:P11155 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4663,7 +4663,7 @@ ex:P11155 rdf:type owl:Class ;
           skos:example "The team plans the announcements, channels, and cadence for the change rollout." .
 
 
-###  http://example.org/apqc#P11156
+###  https://fandaws.com/ontology/apqc#P11156
 ex:P11156 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4679,7 +4679,7 @@ ex:P11156 rdf:type owl:Class ;
           skos:example "The team designs a bonus-and-recognition scheme for early adopters of the change." .
 
 
-###  http://example.org/apqc#P11157
+###  https://fandaws.com/ontology/apqc#P11157
 ex:P11157 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4695,7 +4695,7 @@ ex:P11157 rdf:type owl:Class ;
           skos:example "The team defines adoption-rate and unique-adopter metrics for the change." .
 
 
-###  http://example.org/apqc#P11158
+###  https://fandaws.com/ontology/apqc#P11158
 ex:P11158 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4711,7 +4711,7 @@ ex:P11158 rdf:type owl:Class ;
           skos:example "The team documents and explains each employee's role under the new operating model." .
 
 
-###  http://example.org/apqc#P11159
+###  https://fandaws.com/ontology/apqc#P11159
 ex:P11159 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ;
           ex:apqcSourceText "Creating a plan of financial outlay for the newly defined roles. Determine the amount of capital the organization is willing to invest in effectuating these new roles, how would the roles be financed, and what would comprise the ROI from these flows. Coordinate personnel responsible for change management and the finance division." ;
@@ -4723,7 +4723,7 @@ ex:P11159 rdf:type owl:Class ;
           skos:example "Finance and change leads set the capital and ROI assumptions for the new roles." .
 
 
-###  http://example.org/apqc#P11160
+###  https://fandaws.com/ontology/apqc#P11160
 ex:P11160 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ;
           ex:apqcSourceText "Kindling an organization wide commitment for effectuating the change. Effectively communicate the advantages of the desired change. Personalize the pitch for change." ;
@@ -4735,7 +4735,7 @@ ex:P11160 rdf:type owl:Class ;
           skos:example "Leaders run a campaign making the case for the change to every team." .
 
 
-###  http://example.org/apqc#P11161
+###  https://fandaws.com/ontology/apqc#P11161
 ex:P11161 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ;
           ex:apqcSourceText "Restructuring, redesigning, repurposing, and/or retrofitting existing business processes, activities, and frameworks in order to effectuate the desired change. Review pertinent processes from the ground up by starting with the desired result. (Build on Select a process improvement methodology [11138] to create business processes that perfectly fit with the road map for change.)" ;
@@ -4747,7 +4747,7 @@ ex:P11161 rdf:type owl:Class ;
           skos:example "The team rebuilds the order-to-cash process from the desired outcome backward." .
 
 
-###  http://example.org/apqc#P11162
+###  https://fandaws.com/ontology/apqc#P11162
 ex:P11162 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ;
           ex:apqcSourceText "Supporting the transition of personnel to new roles and the dismissal of any existing employees, necessitated for the desired change. Create an on-boarding process for seamlessly transitioning personnel to new roles. Offer orientation and training. Address any concerns. Create a structured procedure for the discharge of incumbents from their positions." ;
@@ -4759,7 +4759,7 @@ ex:P11162 rdf:type owl:Class ;
           skos:example "HR onboards staff into new roles and manages structured exits for redundant positions." .
 
 
-###  http://example.org/apqc#P11163
+###  https://fandaws.com/ontology/apqc#P11163
 ex:P11163 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ;
           ex:apqcSourceText "Monitoring activities in the change process in order to assess the performance of individual agents and the process as a whole. Oversee the implementation of activities needed for effectuating the change. Track the pace, impact, enthusiasm, reaction, and feedback over the change process." ;
@@ -4771,7 +4771,7 @@ ex:P11163 rdf:type owl:Class ;
           skos:example "A change office tracks adoption pace and sentiment week by week during rollout." .
 
 
-###  http://example.org/apqc#P11164
+###  https://fandaws.com/ontology/apqc#P11164
 ex:P11164 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -4787,7 +4787,7 @@ ex:P11164 rdf:type owl:Class ;
           skos:example "BPM dashboards track the upgraded process KPIs against targets." .
 
 
-###  http://example.org/apqc#P11165
+###  https://fandaws.com/ontology/apqc#P11165
 ex:P11165 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4803,7 +4803,7 @@ ex:P11165 rdf:type owl:Class ;
           skos:example "The team writes a best-practices guide capturing what worked in the rollout." .
 
 
-###  http://example.org/apqc#P11166
+###  https://fandaws.com/ontology/apqc#P11166
 ex:P11166 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ;
           ex:apqcSourceText "Implement corrective action to adjust the re-engineered processes for maximizing the desired impact. Adjust business processes and systems to implement the desired change." ;
@@ -4815,7 +4815,7 @@ ex:P11166 rdf:type owl:Class ;
           skos:example "Post-launch, the team retunes the new workflow to remove a bottleneck." .
 
 
-###  http://example.org/apqc#P11180
+###  https://fandaws.com/ontology/apqc#P11180
 ex:P11180 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4835,7 +4835,7 @@ ex:P11180 rdf:type owl:Class ;
           skos:example "An EHS team determines the lifecycle environmental and safety impacts of a product line from audit findings." .
 
 
-###  http://example.org/apqc#P11181
+###  https://fandaws.com/ontology/apqc#P11181
 ex:P11181 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4863,7 +4863,7 @@ ex:P11181 rdf:type owl:Class ;
           skos:example "An EHS team develops the program: requirements, risk assessment, and a published EHS policy." .
 
 
-###  http://example.org/apqc#P11182
+###  https://fandaws.com/ontology/apqc#P11182
 ex:P11182 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000234 ,
                           [ rdf:type owl:Restriction ;
@@ -4879,7 +4879,7 @@ ex:P11182 rdf:type owl:Class ;
           skos:example "An EHS trainer runs safety workshops for plant operators." .
 
 
-###  http://example.org/apqc#P11186
+###  https://fandaws.com/ontology/apqc#P11186
 ex:P11186 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -4895,7 +4895,7 @@ ex:P11186 rdf:type owl:Class ;
           skos:example "An analyst computes the carbon footprint across a product's lifecycle." .
 
 
-###  http://example.org/apqc#P11187
+###  https://fandaws.com/ontology/apqc#P11187
 ex:P11187 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4911,7 +4911,7 @@ ex:P11187 rdf:type owl:Class ;
           skos:example "An EHS auditor inspects a facility and issues a compliance audit report." .
 
 
-###  http://example.org/apqc#P11188
+###  https://fandaws.com/ontology/apqc#P11188
 ex:P11188 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -4931,7 +4931,7 @@ ex:P11188 rdf:type owl:Class ;
           skos:example "A compliance officer compiles the EHS regulations and stakeholder standards the firm must meet." .
 
 
-###  http://example.org/apqc#P11189
+###  https://fandaws.com/ontology/apqc#P11189
 ex:P11189 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4947,7 +4947,7 @@ ex:P11189 rdf:type owl:Class ;
           skos:example "An EHS planner runs scenario and cost-benefit analysis to assess emerging safety risks." .
 
 
-###  http://example.org/apqc#P11190
+###  https://fandaws.com/ontology/apqc#P11190
 ex:P11190 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -4963,7 +4963,7 @@ ex:P11190 rdf:type owl:Class ;
           skos:example "An EHS team issues the corporate environmental, health, and safety policy." .
 
 
-###  http://example.org/apqc#P11191
+###  https://fandaws.com/ontology/apqc#P11191
 ex:P11191 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -4979,7 +4979,7 @@ ex:P11191 rdf:type owl:Class ;
           skos:example "An EHS coordinator logs compliance events and activities into the EHS register." .
 
 
-###  http://example.org/apqc#P11193
+###  https://fandaws.com/ontology/apqc#P11193
 ex:P11193 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -4995,7 +4995,7 @@ ex:P11193 rdf:type owl:Class ;
           skos:example "A finance-EHS review judges whether the safety program's benefits exceed its costs." .
 
 
-###  http://example.org/apqc#P11194
+###  https://fandaws.com/ontology/apqc#P11194
 ex:P11194 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000345 ,
                           [ rdf:type owl:Restriction ;
@@ -5015,7 +5015,7 @@ ex:P11194 rdf:type owl:Class ;
           skos:example "An EHS analyst computes audit and incident metrics and issues the EHS performance report." .
 
 
-###  http://example.org/apqc#P11195
+###  https://fandaws.com/ontology/apqc#P11195
 ex:P11195 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -5031,7 +5031,7 @@ ex:P11195 rdf:type owl:Class ;
           skos:example "An EHS-HR function provides safety training, insurance, and leave benefits to staff." .
 
 
-###  http://example.org/apqc#P11196
+###  https://fandaws.com/ontology/apqc#P11196
 ex:P11196 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -5047,7 +5047,7 @@ ex:P11196 rdf:type owl:Class ;
           skos:example "An EHS team stands up and exercises the emergency response program across sites." .
 
 
-###  http://example.org/apqc#P11197
+###  https://fandaws.com/ontology/apqc#P11197
 ex:P11197 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -5063,7 +5063,7 @@ ex:P11197 rdf:type owl:Class ;
           skos:example "An EHS team rolls out the pollution prevention program and facility inspection regime." .
 
 
-###  http://example.org/apqc#P16379
+###  https://fandaws.com/ontology/apqc#P16379
 ex:P16379 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5095,7 +5095,7 @@ ex:P16379 rdf:type owl:Class ;
           skos:example "A BPM office stands up and maintains the charter, tooling, and ownership model that govern process management." .
 
 
-###  http://example.org/apqc#P16380
+###  https://fandaws.com/ontology/apqc#P16380
 ex:P16380 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5115,7 +5115,7 @@ ex:P16380 rdf:type owl:Class ;
           skos:example "A BPM lead documents how BPM standards are set and names the governance leaders and their roles." .
 
 
-###  http://example.org/apqc#P16381
+###  https://fandaws.com/ontology/apqc#P16381
 ex:P16381 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5131,7 +5131,7 @@ ex:P16381 rdf:type owl:Class ;
           skos:example "A team builds and curates reusable process-engine and analytics templates for the BPM toolkit." .
 
 
-###  http://example.org/apqc#P16382
+###  https://fandaws.com/ontology/apqc#P16382
 ex:P16382 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -5151,7 +5151,7 @@ ex:P16382 rdf:type owl:Class ;
           skos:example "A BPM governance board names accountable owners for each end-to-end process." .
 
 
-###  http://example.org/apqc#P16383
+###  https://fandaws.com/ontology/apqc#P16383
 ex:P16383 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -5167,7 +5167,7 @@ ex:P16383 rdf:type owl:Class ;
           skos:example "Governance staff run the recurring review and accountability rituals defined in the BPM charter." .
 
 
-###  http://example.org/apqc#P16384
+###  https://fandaws.com/ontology/apqc#P16384
 ex:P16384 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5191,7 +5191,7 @@ ex:P16384 rdf:type owl:Class ;
           skos:example "An enterprise-architecture team designs the process framework spanning strategy, operations, and enterprise management." .
 
 
-###  http://example.org/apqc#P16385
+###  https://fandaws.com/ontology/apqc#P16385
 ex:P16385 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5207,7 +5207,7 @@ ex:P16385 rdf:type owl:Class ;
           skos:example "Architects publish the canonical process framework that all functions must align to." .
 
 
-###  http://example.org/apqc#P16386
+###  https://fandaws.com/ontology/apqc#P16386
 ex:P16386 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -5223,7 +5223,7 @@ ex:P16386 rdf:type owl:Class ;
           skos:example "An analyst flags which processes require coordination across sales, finance, and operations." .
 
 
-###  http://example.org/apqc#P16387
+###  https://fandaws.com/ontology/apqc#P16387
 ex:P16387 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5255,7 +5255,7 @@ ex:P16387 rdf:type owl:Class ;
           skos:example "A process team scopes, analyzes, models, and publishes the procurement process set." .
 
 
-###  http://example.org/apqc#P16388
+###  https://fandaws.com/ontology/apqc#P16388
 ex:P16388 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5271,7 +5271,7 @@ ex:P16388 rdf:type owl:Class ;
           skos:example "A BPM analyst writes the scope statement bounding the order-to-cash process." .
 
 
-###  http://example.org/apqc#P16389
+###  https://fandaws.com/ontology/apqc#P16389
 ex:P16389 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5295,7 +5295,7 @@ ex:P16389 rdf:type owl:Class ;
           skos:example "An analyst examines the as-is hiring process and produces a process model and analysis." .
 
 
-###  http://example.org/apqc#P16390
+###  https://fandaws.com/ontology/apqc#P16390
 ex:P16390 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -5311,7 +5311,7 @@ ex:P16390 rdf:type owl:Class ;
           skos:example "An analyst interviews participants and maps the procure-to-pay process into a documented model." .
 
 
-###  http://example.org/apqc#P16391
+###  https://fandaws.com/ontology/apqc#P16391
 ex:P16391 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -5331,7 +5331,7 @@ ex:P16391 rdf:type owl:Class ;
           skos:example "A BPM team posts the approved process models to the intranet for all stakeholders." .
 
 
-###  http://example.org/apqc#P16392
+###  https://fandaws.com/ontology/apqc#P16392
 ex:P16392 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -5355,7 +5355,7 @@ ex:P16392 rdf:type owl:Class ;
           skos:example "Each quarter the BPM office trains owners, supports execution, and reports process KPIs." .
 
 
-###  http://example.org/apqc#P16393
+###  https://fandaws.com/ontology/apqc#P16393
 ex:P16393 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000234 ,
                           [ rdf:type owl:Restriction ;
@@ -5371,7 +5371,7 @@ ex:P16393 rdf:type owl:Class ;
           skos:example "The BPM office runs a workshop teaching new owners how to monitor their processes." .
 
 
-###  http://example.org/apqc#P16394
+###  https://fandaws.com/ontology/apqc#P16394
 ex:P16394 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ;
           ex:apqcSourceText "Assisting and executing the business processes. Use business process execution language (BEPL), which is a standard, executable language for specifying actions within the business processes with the use of web services." ;
@@ -5383,7 +5383,7 @@ ex:P16394 rdf:type owl:Class ;
           skos:example "A BPM support team keeps the automated approval workflows running and unblocks exceptions." .
 
 
-###  http://example.org/apqc#P16395
+###  https://fandaws.com/ontology/apqc#P16395
 ex:P16395 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5407,7 +5407,7 @@ ex:P16395 rdf:type owl:Class ;
           skos:example "An analyst publishes a balanced-scorecard report of the hiring process each month." .
 
 
-###  http://example.org/apqc#P16397
+###  https://fandaws.com/ontology/apqc#P16397
 ex:P16397 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -5427,7 +5427,7 @@ ex:P16397 rdf:type owl:Class ;
           skos:example "A facilitator and the process owner surface and rank improvement opportunities for the billing process." .
 
 
-###  http://example.org/apqc#P16398
+###  https://fandaws.com/ontology/apqc#P16398
 ex:P16398 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ;
           ex:apqcSourceText "Developing and implementing a systematic approach to help the organization optimize its underlying processes in order to achieve more efficient results. Systematically gather information to clarify issues or problems. Intervene for improvements. Restructure training programs as appropriate to increase effectiveness." ;
@@ -5439,7 +5439,7 @@ ex:P16398 rdf:type owl:Class ;
           skos:example "A PMO runs a chartered improvement project to streamline the returns process." .
 
 
-###  http://example.org/apqc#P16399
+###  https://fandaws.com/ontology/apqc#P16399
 ex:P16399 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ;
           ex:apqcSourceText "Persistently implementing activities for improving business processes." ;
@@ -5451,7 +5451,7 @@ ex:P16399 rdf:type owl:Class ;
           skos:example "A team runs weekly kaizen cycles trimming waste from the fulfillment process." .
 
 
-###  http://example.org/apqc#P16402
+###  https://fandaws.com/ontology/apqc#P16402
 ex:P16402 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5467,7 +5467,7 @@ ex:P16402 rdf:type owl:Class ;
           skos:example "A portfolio office drafts the strategy governing the firm's brand and investment portfolio." .
 
 
-###  http://example.org/apqc#P16403
+###  https://fandaws.com/ontology/apqc#P16403
 ex:P16403 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5483,7 +5483,7 @@ ex:P16403 rdf:type owl:Class ;
           skos:example "A portfolio board defines the governance rules and health metrics for portfolio components." .
 
 
-###  http://example.org/apqc#P16404
+###  https://fandaws.com/ontology/apqc#P16404
 ex:P16404 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5503,7 +5503,7 @@ ex:P16404 rdf:type owl:Class ;
           skos:example "A portfolio manager tracks investment and brand performance and issues a portfolio status report." .
 
 
-###  http://example.org/apqc#P16406
+###  https://fandaws.com/ontology/apqc#P16406
 ex:P16406 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5519,7 +5519,7 @@ ex:P16406 rdf:type owl:Class ;
           skos:example "A program office defines the governance and assurance framework for a transformation program." .
 
 
-###  http://example.org/apqc#P16407
+###  https://fandaws.com/ontology/apqc#P16407
 ex:P16407 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -5535,7 +5535,7 @@ ex:P16407 rdf:type owl:Class ;
           skos:example "A program manager runs the stakeholder and partner engagement cadence for a program." .
 
 
-###  http://example.org/apqc#P16408
+###  https://fandaws.com/ontology/apqc#P16408
 ex:P16408 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ;
           ex:apqcSourceText "Administering and implementing business programs. Implement and execute programs with the intention of improving an organization's performance. Execute all the individual projects of the program to ensure the desired success." ;
@@ -5547,7 +5547,7 @@ ex:P16408 rdf:type owl:Class ;
           skos:example "A program manager runs the program's constituent projects to completion." .
 
 
-###  http://example.org/apqc#P16409
+###  https://fandaws.com/ontology/apqc#P16409
 ex:P16409 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5563,7 +5563,7 @@ ex:P16409 rdf:type owl:Class ;
           skos:example "A program office issues the quarterly program performance report against goals and cost-effectiveness." .
 
 
-###  http://example.org/apqc#P16411
+###  https://fandaws.com/ontology/apqc#P16411
 ex:P16411 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5603,7 +5603,7 @@ ex:P16411 rdf:type owl:Class ;
           skos:example "A project manager fixes the project's objectives, resourcing, and KPIs in a scope statement." .
 
 
-###  http://example.org/apqc#P16412
+###  https://fandaws.com/ontology/apqc#P16412
 ex:P16412 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -5619,7 +5619,7 @@ ex:P16412 rdf:type owl:Class ;
           skos:example "A project manager lists the skilled staff, capital, and equipment the project needs." .
 
 
-###  http://example.org/apqc#P16413
+###  https://fandaws.com/ontology/apqc#P16413
 ex:P16413 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5663,7 +5663,7 @@ ex:P16413 rdf:type owl:Class ;
           skos:example "A project manager assembles the resourcing, training, and launch plans into the project plan." .
 
 
-###  http://example.org/apqc#P16414
+###  https://fandaws.com/ontology/apqc#P16414
 ex:P16414 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -5703,7 +5703,7 @@ ex:P16414 rdf:type owl:Class ;
           skos:example "A project team runs the project to plan, tracking status and adjusting scope as needed." .
 
 
-###  http://example.org/apqc#P16415
+###  https://fandaws.com/ontology/apqc#P16415
 ex:P16415 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -5719,7 +5719,7 @@ ex:P16415 rdf:type owl:Class ;
           skos:example "A project manager issues the weekly status report of tasks done, pending, and blocked." .
 
 
-###  http://example.org/apqc#P16416
+###  https://fandaws.com/ontology/apqc#P16416
 ex:P16416 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5735,7 +5735,7 @@ ex:P16416 rdf:type owl:Class ;
           skos:example "A project manager keeps the scope statement current as goals and deliverables are confirmed." .
 
 
-###  http://example.org/apqc#P16417
+###  https://fandaws.com/ontology/apqc#P16417
 ex:P16417 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfMonitoring ,
                           [ rdf:type owl:Restriction ;
@@ -5755,7 +5755,7 @@ ex:P16417 rdf:type owl:Class ;
           skos:example "A project manager reports schedule and cost variances against the baseline to stakeholders." .
 
 
-###  http://example.org/apqc#P16418
+###  https://fandaws.com/ontology/apqc#P16418
 ex:P16418 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ;
           ex:apqcSourceText "Settling each contract. Close each contract applicable to the project or project phase. Finalize all activities across all of the process groups in order to formally close the project or a project phase." ;
@@ -5767,7 +5767,7 @@ ex:P16418 rdf:type owl:Class ;
           skos:example "A project manager closes out all contracts and formally ends the project." .
 
 
-###  http://example.org/apqc#P17471
+###  https://fandaws.com/ontology/apqc#P17471
 ex:P17471 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000568 ,
                           [ rdf:type owl:Restriction ;
@@ -5795,7 +5795,7 @@ ex:P17471 rdf:type owl:Class ;
           skos:example "A manufacturer's standing quality-management function spanning requirements, testing, nonconformance handling, and its EQMS." .
 
 
-###  http://example.org/apqc#P17472
+###  https://fandaws.com/ontology/apqc#P17472
 ex:P17472 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5831,7 +5831,7 @@ ex:P17472 rdf:type owl:Class ;
           skos:example "A quality team translates customer needs into critical-to-quality characteristics, controls, and a finalized quality plan." .
 
 
-###  http://example.org/apqc#P17473
+###  https://fandaws.com/ontology/apqc#P17473
 ex:P17473 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5847,7 +5847,7 @@ ex:P17473 rdf:type owl:Class ;
           skos:example "An engineer converts a customer expectation into a measurable tolerance on a key product dimension." .
 
 
-###  http://example.org/apqc#P17474
+###  https://fandaws.com/ontology/apqc#P17474
 ex:P17474 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5863,7 +5863,7 @@ ex:P17474 rdf:type owl:Class ;
           skos:example "A quality engineer documents a preventive inspection regime to close a requirement gap." .
 
 
-###  http://example.org/apqc#P17475
+###  https://fandaws.com/ontology/apqc#P17475
 ex:P17475 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5895,7 +5895,7 @@ ex:P17475 rdf:type owl:Class ;
           skos:example "A quality team defines control steps, a sampling plan, measurement tools, and operator competencies for a production line." .
 
 
-###  http://example.org/apqc#P17476
+###  https://fandaws.com/ontology/apqc#P17476
 ex:P17476 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5911,7 +5911,7 @@ ex:P17476 rdf:type owl:Class ;
           skos:example "A quality lead specifies alpha-test, rework, and beta-test gates as control points." .
 
 
-###  http://example.org/apqc#P17477
+###  https://fandaws.com/ontology/apqc#P17477
 ex:P17477 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5927,7 +5927,7 @@ ex:P17477 rdf:type owl:Class ;
           skos:example "A quality engineer authors a sampling plan fixing sample sizes and inspection timing." .
 
 
-###  http://example.org/apqc#P17478
+###  https://fandaws.com/ontology/apqc#P17478
 ex:P17478 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -5943,7 +5943,7 @@ ex:P17478 rdf:type owl:Class ;
           skos:example "A quality team selects SPC software and gage-calibration tooling for line measurement." .
 
 
-###  http://example.org/apqc#P17479
+###  https://fandaws.com/ontology/apqc#P17479
 ex:P17479 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5959,7 +5959,7 @@ ex:P17479 rdf:type owl:Class ;
           skos:example "A quality manager documents that control operators must hold audit-management and document-control competencies." .
 
 
-###  http://example.org/apqc#P17480
+###  https://fandaws.com/ontology/apqc#P17480
 ex:P17480 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -5975,7 +5975,7 @@ ex:P17480 rdf:type owl:Class ;
           skos:example "A quality team runs a process-capability study and presents the results to a regulator." .
 
 
-###  http://example.org/apqc#P17481
+###  https://fandaws.com/ontology/apqc#P17481
 ex:P17481 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -5991,7 +5991,7 @@ ex:P17481 rdf:type owl:Class ;
           skos:example "A quality manager issues the approved quality plan covering verification criteria and nonconformance response." .
 
 
-###  http://example.org/apqc#P17482
+###  https://fandaws.com/ontology/apqc#P17482
 ex:P17482 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6019,7 +6019,7 @@ ex:P17482 rdf:type owl:Class ;
           skos:example "A quality function tests output against the plan and judges whether requirements were met." .
 
 
-###  http://example.org/apqc#P17483
+###  https://fandaws.com/ontology/apqc#P17483
 ex:P17483 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6051,7 +6051,7 @@ ex:P17483 rdf:type owl:Class ;
           skos:example "An inspector runs tests, logs the data, and assigns a disposition to each result." .
 
 
-###  http://example.org/apqc#P17484
+###  https://fandaws.com/ontology/apqc#P17484
 ex:P17484 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000345 ,
                           [ rdf:type owl:Restriction ;
@@ -6067,7 +6067,7 @@ ex:P17484 rdf:type owl:Class ;
           skos:example "A technician runs a scheduled gauge test and logs the measured values." .
 
 
-###  http://example.org/apqc#P17485
+###  https://fandaws.com/ontology/apqc#P17485
 ex:P17485 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6083,7 +6083,7 @@ ex:P17485 rdf:type owl:Class ;
           skos:example "A quality clerk enters test outcomes into the QMS in the standard template." .
 
 
-###  http://example.org/apqc#P17486
+###  https://fandaws.com/ontology/apqc#P17486
 ex:P17486 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -6103,7 +6103,7 @@ ex:P17486 rdf:type owl:Class ;
           skos:example "A quality engineer selects a quarantine-and-rework disposition for a failing lot." .
 
 
-###  http://example.org/apqc#P17487
+###  https://fandaws.com/ontology/apqc#P17487
 ex:P17487 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6139,7 +6139,7 @@ ex:P17487 rdf:type owl:Class ;
           skos:example "A quality analyst summarizes test outcomes and recommends corrective measures to management." .
 
 
-###  http://example.org/apqc#P17488
+###  https://fandaws.com/ontology/apqc#P17488
 ex:P17488 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6159,7 +6159,7 @@ ex:P17488 rdf:type owl:Class ;
           skos:example "A statistician evaluates whether an inspection sample is representative of a production run." .
 
 
-###  http://example.org/apqc#P17489
+###  https://fandaws.com/ontology/apqc#P17489
 ex:P17489 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6179,7 +6179,7 @@ ex:P17489 rdf:type owl:Class ;
           skos:example "An analyst compiles charts and conclusions into a quality test summary report." .
 
 
-###  http://example.org/apqc#P17490
+###  https://fandaws.com/ontology/apqc#P17490
 ex:P17490 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6199,7 +6199,7 @@ ex:P17490 rdf:type owl:Class ;
           skos:example "A quality lead recommends tightening a control limit based on summarized results." .
 
 
-###  http://example.org/apqc#P17491
+###  https://fandaws.com/ontology/apqc#P17491
 ex:P17491 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -6219,7 +6219,7 @@ ex:P17491 rdf:type owl:Class ;
           skos:example "Management selects which recommended quality measures to implement next quarter and records the decision." .
 
 
-###  http://example.org/apqc#P17492
+###  https://fandaws.com/ontology/apqc#P17492
 ex:P17492 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -6255,7 +6255,7 @@ ex:P17492 rdf:type owl:Class ;
           skos:example "A quality team works a single nonconformance from detection through CAPA to documented closure." .
 
 
-###  http://example.org/apqc#P17493
+###  https://fandaws.com/ontology/apqc#P17493
 ex:P17493 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6275,7 +6275,7 @@ ex:P17493 rdf:type owl:Class ;
           skos:example "An analyst rates the risk exposure of a nonconformity to decide whether CAPA is warranted." .
 
 
-###  http://example.org/apqc#P17494
+###  https://fandaws.com/ontology/apqc#P17494
 ex:P17494 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -6295,7 +6295,7 @@ ex:P17494 rdf:type owl:Class ;
           skos:example "A quality manager selects an immediate containment action for a high-impact nonconformity." .
 
 
-###  http://example.org/apqc#P17495
+###  https://fandaws.com/ontology/apqc#P17495
 ex:P17495 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -6315,7 +6315,7 @@ ex:P17495 rdf:type owl:Class ;
           skos:example "Investigators trace a defect to a miscalibrated tool via documentary evidence and interviews." .
 
 
-###  http://example.org/apqc#P17496
+###  https://fandaws.com/ontology/apqc#P17496
 ex:P17496 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -6335,7 +6335,7 @@ ex:P17496 rdf:type owl:Class ;
           skos:example "A team implements a tooling change and monitors the line for recurrence of the defect, then records completion." .
 
 
-###  http://example.org/apqc#P17497
+###  https://fandaws.com/ontology/apqc#P17497
 ex:P17497 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6356,7 +6356,7 @@ ex:P17497 rdf:type owl:Class ;
           skos:example "A quality clerk finalizes and closes the nonconformance record after CAPA verification." .
 
 
-###  http://example.org/apqc#P17498
+###  https://fandaws.com/ontology/apqc#P17498
 ex:P17498 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -6396,7 +6396,7 @@ ex:P17498 rdf:type owl:Class ;
           skos:example "A quality program stands up an EQMS platform, configures controls, and runs the first performance assessment." .
 
 
-###  http://example.org/apqc#P17499
+###  https://fandaws.com/ontology/apqc#P17499
 ex:P17499 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6412,7 +6412,7 @@ ex:P17499 rdf:type owl:Class ;
           skos:example "A quality director issues the enterprise quality strategy standardizing tools, reporting, and roles." .
 
 
-###  http://example.org/apqc#P17500
+###  https://fandaws.com/ontology/apqc#P17500
 ex:P17500 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -6428,7 +6428,7 @@ ex:P17500 rdf:type owl:Class ;
           skos:example "A program rolls out the EQMS across audit, risk, and SPC modules per the defined scope." .
 
 
-###  http://example.org/apqc#P17501
+###  https://fandaws.com/ontology/apqc#P17501
 ex:P17501 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6448,7 +6448,7 @@ ex:P17501 rdf:type owl:Class ;
           skos:example "A quality architect defines the EQMS controls and the cost-of-quality and OEE metrics to track." .
 
 
-###  http://example.org/apqc#P17502
+###  https://fandaws.com/ontology/apqc#P17502
 ex:P17502 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6464,7 +6464,7 @@ ex:P17502 rdf:type owl:Class ;
           skos:example "A quality team authors the EQMS procedure manual and document hierarchy." .
 
 
-###  http://example.org/apqc#P17503
+###  https://fandaws.com/ontology/apqc#P17503
 ex:P17503 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6480,7 +6480,7 @@ ex:P17503 rdf:type owl:Class ;
           skos:example "A quality lead benchmarks the EQMS against peers and reports the capability gaps." .
 
 
-###  http://example.org/apqc#P17504
+###  https://fandaws.com/ontology/apqc#P17504
 ex:P17504 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ,
                           [ rdf:type owl:Restriction ;
@@ -6516,7 +6516,7 @@ ex:P17504 rdf:type owl:Class ;
           skos:example "A quality program launches recognition awards, supplier partnerships, and training to drive EQMS maturity." .
 
 
-###  http://example.org/apqc#P17505
+###  https://fandaws.com/ontology/apqc#P17505
 ex:P17505 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -6532,7 +6532,7 @@ ex:P17505 rdf:type owl:Class ;
           skos:example "A manager awards gift cards to a team that eliminated a recurring defect." .
 
 
-###  http://example.org/apqc#P17506
+###  https://fandaws.com/ontology/apqc#P17506
 ex:P17506 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -6548,7 +6548,7 @@ ex:P17506 rdf:type owl:Class ;
           skos:example "A quality director establishes a supplier-quality partnership with shared audit rights." .
 
 
-###  http://example.org/apqc#P17507
+###  https://fandaws.com/ontology/apqc#P17507
 ex:P17507 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000234 ,
                           [ rdf:type owl:Restriction ;
@@ -6564,7 +6564,7 @@ ex:P17507 rdf:type owl:Class ;
           skos:example "A quality team runs SPC training to keep operators qualified." .
 
 
-###  http://example.org/apqc#P17508
+###  https://fandaws.com/ontology/apqc#P17508
 ex:P17508 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ;
           ex:apqcSourceText "Assimilating all the communication related to the EQMS into the organization's already established communication channels." ;
@@ -6576,7 +6576,7 @@ ex:P17508 rdf:type owl:Class ;
           skos:example "A quality communications lead adds EQMS updates to the intranet and newsletter." .
 
 
-###  http://example.org/apqc#P17509
+###  https://fandaws.com/ontology/apqc#P17509
 ex:P17509 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ,
                           [ rdf:type owl:Restriction ;
@@ -6596,7 +6596,7 @@ ex:P17509 rdf:type owl:Class ;
           skos:example "An administrator grants EQMS administrative rights only to the designated quality manager." .
 
 
-###  http://example.org/apqc#P17510
+###  https://fandaws.com/ontology/apqc#P17510
 ex:P17510 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6612,7 +6612,7 @@ ex:P17510 rdf:type owl:Class ;
           skos:example "A knowledge lead documents a proven CAPA workflow and shares it across sites." .
 
 
-###  http://example.org/apqc#P20140
+###  https://fandaws.com/ontology/apqc#P20140
 ex:P20140 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -6628,7 +6628,7 @@ ex:P20140 rdf:type owl:Class ;
           skos:example "A center of excellence catalogs proven process practices for reuse." .
 
 
-###  http://example.org/apqc#P20141
+###  https://fandaws.com/ontology/apqc#P20141
 ex:P20141 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -6644,7 +6644,7 @@ ex:P20141 rdf:type owl:Class ;
           skos:example "When a new goal is set, an analyst determines that no current KPI tracks it and records the metric gap." .
 
 
-###  http://example.org/apqc#P20142
+###  https://fandaws.com/ontology/apqc#P20142
 ex:P20142 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ;
           ex:apqcSourceText "Procuring the necessary resources outlined in Define roles and resources [11123]" ;
@@ -6656,7 +6656,7 @@ ex:P20142 rdf:type owl:Class ;
           skos:example "A project manager procures the contractors and equipment the project plan requires." .
 
 
-###  http://example.org/apqc#P20143
+###  https://fandaws.com/ontology/apqc#P20143
 ex:P20143 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -6672,7 +6672,7 @@ ex:P20143 rdf:type owl:Class ;
           skos:example "The team lists the teams and functions touched by the proposed change." .
 
 
-###  http://example.org/apqc#P20144
+###  https://fandaws.com/ontology/apqc#P20144
 ex:P20144 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6688,7 +6688,7 @@ ex:P20144 rdf:type owl:Class ;
           skos:example "Analysts rate how severely each affected asset is impacted by the change." .
 
 
-###  http://example.org/apqc#P20145
+###  https://fandaws.com/ontology/apqc#P20145
 ex:P20145 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -6704,7 +6704,7 @@ ex:P20145 rdf:type owl:Class ;
           skos:example "Each trained champion is formally tasked with driving the change in their division." .
 
 
-###  http://example.org/apqc#P20146
+###  https://fandaws.com/ontology/apqc#P20146
 ex:P20146 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -6720,7 +6720,7 @@ ex:P20146 rdf:type owl:Class ;
           skos:example "The change office issues a closeout report to stakeholders and champions." .
 
 
-###  http://example.org/apqc#P20147
+###  https://fandaws.com/ontology/apqc#P20147
 ex:P20147 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -6768,7 +6768,7 @@ ex:P20147 rdf:type owl:Class ;
           skos:example "A quarterly performance review evaluates KPI results and flags improvement opportunities." .
 
 
-###  http://example.org/apqc#P20148
+###  https://fandaws.com/ontology/apqc#P20148
 ex:P20148 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6784,7 +6784,7 @@ ex:P20148 rdf:type owl:Class ;
           skos:example "A reporting tool consolidates monthly KPI feeds into a single performance dataset." .
 
 
-###  http://example.org/apqc#P20960
+###  https://fandaws.com/ontology/apqc#P20960
 ex:P20960 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -6800,7 +6800,7 @@ ex:P20960 rdf:type owl:Class ;
           skos:example "A data scientist frames a testable hypothesis about which features drive customer churn." .
 
 
-###  http://example.org/apqc#P20961
+###  https://fandaws.com/ontology/apqc#P20961
 ex:P20961 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAcquisition ,
                           [ rdf:type owl:Restriction ;
@@ -6816,7 +6816,7 @@ ex:P20961 rdf:type owl:Class ;
           skos:example "An ETL pipeline pulls and normalizes transaction logs from three source systems." .
 
 
-###  http://example.org/apqc#P20962
+###  https://fandaws.com/ontology/apqc#P20962
 ex:P20962 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfAnalysis ,
                           [ rdf:type owl:Restriction ;
@@ -6836,7 +6836,7 @@ ex:P20962 rdf:type owl:Class ;
           skos:example "A data scientist runs regression and clustering over the prepared data to surface churn drivers." .
 
 
-###  http://example.org/apqc#P20963
+###  https://fandaws.com/ontology/apqc#P20963
 ex:P20963 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -6856,7 +6856,7 @@ ex:P20963 rdf:type owl:Class ;
           skos:example "An analyst compiles the findings into a visual report for the business sponsor." .
 
 
-###  http://example.org/apqc#P20964
+###  https://fandaws.com/ontology/apqc#P20964
 ex:P20964 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6872,7 +6872,7 @@ ex:P20964 rdf:type owl:Class ;
           skos:example "A team specifies the corrective steps to address the data-quality gaps the analysis revealed." .
 
 
-###  http://example.org/apqc#P20965
+###  https://fandaws.com/ontology/apqc#P20965
 ex:P20965 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -6904,7 +6904,7 @@ ex:P20965 rdf:type owl:Class ;
           skos:example "A KM program builds a new expertise repository and rolls it out to a business unit." .
 
 
-###  http://example.org/apqc#P20966
+###  https://fandaws.com/ontology/apqc#P20966
 ex:P20966 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6920,7 +6920,7 @@ ex:P20966 rdf:type owl:Class ;
           skos:example "A KM architect models the staffing, tooling, and content resources required for each KM approach." .
 
 
-###  http://example.org/apqc#P20967
+###  https://fandaws.com/ontology/apqc#P20967
 ex:P20967 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ;
           ex:apqcSourceText "Using existing technologies to improve organization's knowledge management processes. Research available third-party offerings. Develop proprietary solutions. Employ knowledge engineers, data scientists and other relevant personnel." ;
@@ -6932,7 +6932,7 @@ ex:P20967 rdf:type owl:Class ;
           skos:example "A KM engineering team integrates a third-party search platform to speed knowledge retrieval." .
 
 
-###  http://example.org/apqc#P20968
+###  https://fandaws.com/ontology/apqc#P20968
 ex:P20968 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -6948,7 +6948,7 @@ ex:P20968 rdf:type owl:Class ;
           skos:example "A KM analyst defines the measurement scales and precision targets for KM capability metrics." .
 
 
-###  http://example.org/apqc#P20969
+###  https://fandaws.com/ontology/apqc#P20969
 ex:P20969 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -6972,7 +6972,7 @@ ex:P20969 rdf:type owl:Class ;
           skos:example "A KM program runs a continuous-improvement cycle that upgrades repositories and grows usage." .
 
 
-###  http://example.org/apqc#P20970
+###  https://fandaws.com/ontology/apqc#P20970
 ex:P20970 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000402 ,
                           [ rdf:type owl:Restriction ;
@@ -6992,7 +6992,7 @@ ex:P20970 rdf:type owl:Class ;
           skos:example "A KM team runs an internal campaign encouraging staff to contribute to and consult the knowledge base." .
 
 
-###  http://example.org/apqc#P20971
+###  https://fandaws.com/ontology/apqc#P20971
 ex:P20971 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ;
           ex:apqcSourceText "Augmenting available resources to better leverage the offerings of the organization to serve existing clients and to expand the client base." ;
@@ -7004,7 +7004,7 @@ ex:P20971 rdf:type owl:Class ;
           skos:example "A KM operations team adds storage and indexing capacity ahead of a surge in knowledge-base usage." .
 
 
-###  http://example.org/apqc#P21452
+###  https://fandaws.com/ontology/apqc#P21452
 ex:P21452 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7020,7 +7020,7 @@ ex:P21452 rdf:type owl:Class ;
           skos:example "A team designates an approval gate that halts the process until compliance checks pass." .
 
 
-###  http://example.org/apqc#P21453
+###  https://fandaws.com/ontology/apqc#P21453
 ex:P21453 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ,
                           [ rdf:type owl:Restriction ;
@@ -7048,7 +7048,7 @@ ex:P21453 rdf:type owl:Class ;
           skos:example "A continuous-improvement program runs Lean and Six Sigma initiatives across the process portfolio." .
 
 
-###  http://example.org/apqc#P21454
+###  https://fandaws.com/ontology/apqc#P21454
 ex:P21454 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfSelection ,
                           [ rdf:type owl:Restriction ;
@@ -7064,7 +7064,7 @@ ex:P21454 rdf:type owl:Class ;
           skos:example "A portfolio board ranks and selects which projects to fund this cycle." .
 
 
-###  http://example.org/apqc#P21455
+###  https://fandaws.com/ontology/apqc#P21455
 ex:P21455 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -7088,7 +7088,7 @@ ex:P21455 rdf:type owl:Class ;
           skos:example "A team holds an after-action review and records lessons for future projects." .
 
 
-###  http://example.org/apqc#P21456
+###  https://fandaws.com/ontology/apqc#P21456
 ex:P21456 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImprovement ,
                           [ rdf:type owl:Restriction ;
@@ -7108,7 +7108,7 @@ ex:P21456 rdf:type owl:Class ;
           skos:example "A project manager updates the plan and notifies the team after a scope change." .
 
 
-###  http://example.org/apqc#P21457
+###  https://fandaws.com/ontology/apqc#P21457
 ex:P21457 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7184,7 +7184,7 @@ ex:P21457 rdf:type owl:Class ;
           skos:example "A program team scopes a transformation, assesses readiness, and produces the change management plan." .
 
 
-###  http://example.org/apqc#P21459
+###  https://fandaws.com/ontology/apqc#P21459
 ex:P21459 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfIdentification ,
                           [ rdf:type owl:Restriction ;
@@ -7204,7 +7204,7 @@ ex:P21459 rdf:type owl:Class ;
           skos:example "An analytics team interviews business stakeholders and records their information needs." .
 
 
-###  http://example.org/apqc#P21460
+###  https://fandaws.com/ontology/apqc#P21460
 ex:P21460 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7224,7 +7224,7 @@ ex:P21460 rdf:type owl:Class ;
           skos:example "A lead analyst sets the boundaries and resourcing of a churn-analysis project." .
 
 
-###  http://example.org/apqc#P21461
+###  https://fandaws.com/ontology/apqc#P21461
 ex:P21461 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -7244,7 +7244,7 @@ ex:P21461 rdf:type owl:Class ;
           skos:example "A data engineer validates and feature-engineers the collected dataset before modeling." .
 
 
-###  http://example.org/apqc#P21462
+###  https://fandaws.com/ontology/apqc#P21462
 ex:P21462 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7260,7 +7260,7 @@ ex:P21462 rdf:type owl:Class ;
           skos:example "A data architect produces the conceptual and physical schema for the analytics store." .
 
 
-###  http://example.org/apqc#P21463
+###  https://fandaws.com/ontology/apqc#P21463
 ex:P21463 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -7284,7 +7284,7 @@ ex:P21463 rdf:type owl:Class ;
           skos:example "The team confirms with stakeholders that the model captures the hypothesized relationships." .
 
 
-###  http://example.org/apqc#P21464
+###  https://fandaws.com/ontology/apqc#P21464
 ex:P21464 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7304,7 +7304,7 @@ ex:P21464 rdf:type owl:Class ;
           skos:example "The architect updates the schema to address the review findings." .
 
 
-###  http://example.org/apqc#P21584
+###  https://fandaws.com/ontology/apqc#P21584
 ex:P21584 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -7328,7 +7328,7 @@ ex:P21584 rdf:type owl:Class ;
           skos:example "An enterprise's annual performance measurement and benchmarking cycle covering process and organization-level metrics." .
 
 
-###  http://example.org/apqc#P21585
+###  https://fandaws.com/ontology/apqc#P21585
 ex:P21585 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7352,7 +7352,7 @@ ex:P21585 rdf:type owl:Class ;
           skos:example "A performance management office drafts and ratifies the firm's organizational performance strategy for the planning cycle." .
 
 
-###  http://example.org/apqc#P21586
+###  https://fandaws.com/ontology/apqc#P21586
 ex:P21586 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7372,7 +7372,7 @@ ex:P21586 rdf:type owl:Class ;
           skos:example "An annual review updates the enterprise measurement model to reflect new strategic targets." .
 
 
-###  http://example.org/apqc#P21587
+###  https://fandaws.com/ontology/apqc#P21587
 ex:P21587 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -7408,7 +7408,7 @@ ex:P21587 rdf:type owl:Class ;
           skos:example "An EHS office runs the quarterly cycle of measuring, reporting, training, and supporting the EHS program." .
 
 
-###  http://example.org/apqc#P21589
+###  https://fandaws.com/ontology/apqc#P21589
 ex:P21589 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7440,7 +7440,7 @@ ex:P21589 rdf:type owl:Class ;
           skos:example "An ESG office stands up the sustainability program: requirements, goals, policies, measures, and plans." .
 
 
-###  http://example.org/apqc#P21590
+###  https://fandaws.com/ontology/apqc#P21590
 ex:P21590 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7468,7 +7468,7 @@ ex:P21590 rdf:type owl:Class ;
           skos:example "An ESG analyst documents the disclosure, governance, and performance requirements the firm must satisfy." .
 
 
-###  http://example.org/apqc#P21591
+###  https://fandaws.com/ontology/apqc#P21591
 ex:P21591 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7484,7 +7484,7 @@ ex:P21591 rdf:type owl:Class ;
           skos:example "An ESG team specifies the firm's sustainability disclosure obligations and aligns them to financial reporting." .
 
 
-###  http://example.org/apqc#P21592
+###  https://fandaws.com/ontology/apqc#P21592
 ex:P21592 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7500,7 +7500,7 @@ ex:P21592 rdf:type owl:Class ;
           skos:example "An ESG lead specifies the governance structure and roles for the sustainability program." .
 
 
-###  http://example.org/apqc#P21593
+###  https://fandaws.com/ontology/apqc#P21593
 ex:P21593 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7516,7 +7516,7 @@ ex:P21593 rdf:type owl:Class ;
           skos:example "An ESG analyst specifies the functional and performance requirements and roadmap for sustainability efforts." .
 
 
-###  http://example.org/apqc#P21594
+###  https://fandaws.com/ontology/apqc#P21594
 ex:P21594 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7532,7 +7532,7 @@ ex:P21594 rdf:type owl:Class ;
           skos:example "An ESG committee sets organization-wide, measurable sustainability targets." .
 
 
-###  http://example.org/apqc#P21595
+###  https://fandaws.com/ontology/apqc#P21595
 ex:P21595 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7548,7 +7548,7 @@ ex:P21595 rdf:type owl:Class ;
           skos:example "An ESG office issues the corporate sustainability policy and supporting procedures." .
 
 
-###  http://example.org/apqc#P21596
+###  https://fandaws.com/ontology/apqc#P21596
 ex:P21596 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7564,7 +7564,7 @@ ex:P21596 rdf:type owl:Class ;
           skos:example "An ESG analyst defines the organization-wide sustainability metrics and their data-collection and reporting formats." .
 
 
-###  http://example.org/apqc#P21597
+###  https://fandaws.com/ontology/apqc#P21597
 ex:P21597 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfFormulation ,
                           [ rdf:type owl:Restriction ;
@@ -7580,7 +7580,7 @@ ex:P21597 rdf:type owl:Class ;
           skos:example "An ESG team develops the enterprise and functional-unit sustainability plans." .
 
 
-###  http://example.org/apqc#P21598
+###  https://fandaws.com/ontology/apqc#P21598
 ex:P21598 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000228 ,
                           [ rdf:type owl:Restriction ;
@@ -7604,7 +7604,7 @@ ex:P21598 rdf:type owl:Class ;
           skos:example "Each period an ESG office trains, supports, and reports on the distributed sustainability efforts." .
 
 
-###  http://example.org/apqc#P21599
+###  https://fandaws.com/ontology/apqc#P21599
 ex:P21599 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000234 ,
                           [ rdf:type owl:Restriction ;
@@ -7620,7 +7620,7 @@ ex:P21599 rdf:type owl:Class ;
           skos:example "An ESG trainer runs sustainability enablement workshops for functional teams." .
 
 
-###  http://example.org/apqc#P21600
+###  https://fandaws.com/ontology/apqc#P21600
 ex:P21600 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfImplementation ;
           ex:apqcSourceText "Providing support for sustainability activities. Augment functional units and support teams with coaching, mentoring, and SME capacity to perform sustainability projects and activities." ;
@@ -7632,7 +7632,7 @@ ex:P21600 rdf:type owl:Class ;
           skos:example "An ESG center of excellence embeds SMEs to help business units run sustainability initiatives." .
 
 
-###  http://example.org/apqc#P21601
+###  https://fandaws.com/ontology/apqc#P21601
 ex:P21601 rdf:type owl:Class ;
           rdfs:subClassOf ex:ActOfReporting ,
                           [ rdf:type owl:Restriction ;
@@ -7656,7 +7656,7 @@ ex:P21601 rdf:type owl:Class ;
           skos:example "An ESG reporting team consolidates measured sustainability data into the annual statement and reports it across functional units." .
 
 
-###  http://example.org/apqc#P21602
+###  https://fandaws.com/ontology/apqc#P21602
 ex:P21602 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000636 ,
                           [ rdf:type owl:Restriction ;
@@ -7672,7 +7672,7 @@ ex:P21602 rdf:type owl:Class ;
           skos:example "An ESG auditor inspects emissions data, evaluates results against targets, and logs gaps for resolution." .
 
 
-###  http://example.org/apqc#P21603
+###  https://fandaws.com/ontology/apqc#P21603
 ex:P21603 rdf:type owl:Class ;
           rdfs:subClassOf cco:ont00000366 ,
                           [ rdf:type owl:Restriction ;
@@ -7692,28 +7692,28 @@ ex:P21603 rdf:type owl:Class ;
           skos:example "An ESG reporting analyst compiles the validated metrics into the published sustainability statement." .
 
 
-###  http://example.org/apqc#PerformanceAssessment
+###  https://fandaws.com/ontology/apqc#PerformanceAssessment
 ex:PerformanceAssessment rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:label "Performance Assessment" ;
                          skos:definition "A Descriptive Information Content Entity that describes a judgement of the performance of people, processes, or other areas the Organization wants to benchmark or track." .
 
 
-###  http://example.org/apqc#PerformanceData
+###  https://fandaws.com/ontology/apqc#PerformanceData
 ex:PerformanceData rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ;
                    rdfs:label "Performance Data" ;
                    skos:definition "A Descriptive Information Content Entity that describes consolidated metrics and trends collected on the performance of a process, function, or organization." .
 
 
-###  http://example.org/apqc#PerformanceImprovementPlan
+###  https://fandaws.com/ontology/apqc#PerformanceImprovementPlan
 ex:PerformanceImprovementPlan rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:label "Performance Improvement Plan" ;
                               skos:definition "A Directive Information Content Entity that prescribes the actions for bridging identified performance gaps." .
 
 
-###  http://example.org/apqc#PerformanceIndicatorSpecification
+###  https://fandaws.com/ontology/apqc#PerformanceIndicatorSpecification
 ex:PerformanceIndicatorSpecification rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000965 ;
                                      rdfs:comment "Shared across 13.1.4.3, 13.2.3.1.5, 13.6.3.1, 13.8.3.2 -- one definition of 'measures/indicators' as a prescriptive artifact." ;
@@ -7721,7 +7721,7 @@ ex:PerformanceIndicatorSpecification rdf:type owl:Class ;
                                      skos:definition "A Directive Information Content Entity that prescribes the indicators and measures used to evaluate the performance of a process, project, program, or organization." .
 
 
-###  http://example.org/apqc#PerformanceMeasurement
+###  https://fandaws.com/ontology/apqc#PerformanceMeasurement
 ex:PerformanceMeasurement rdf:type owl:Class ;
                           rdfs:subClassOf cco:ont00000853 ;
                           rdfs:comment "Genus is generic Descriptive ICE rather than CCO Measurement ICE leaf, per GOLD house style of anchoring at the descriptive parent." ;
@@ -7729,35 +7729,35 @@ ex:PerformanceMeasurement rdf:type owl:Class ;
                           skos:definition "A Descriptive Information Content Entity that describes the quantified performance of a process or organization relative to defined indicators." .
 
 
-###  http://example.org/apqc#PerformanceReport
+###  https://fandaws.com/ontology/apqc#PerformanceReport
 ex:PerformanceReport rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:label "Performance Report" ;
                      skos:definition "A Descriptive Information Content Entity that describes performance, including performance gaps, trends, and analysis, for the appropriate authority." .
 
 
-###  http://example.org/apqc#PerformanceTrendAnalysis
+###  https://fandaws.com/ontology/apqc#PerformanceTrendAnalysis
 ex:PerformanceTrendAnalysis rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:label "Performance Trend Analysis" ;
                             skos:definition "A Descriptive Information Content Entity that describes the trends discerned in performance results over time." .
 
 
-###  http://example.org/apqc#PollutionPreventionProgram
+###  https://fandaws.com/ontology/apqc#PollutionPreventionProgram
 ex:PollutionPreventionProgram rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:label "Pollution Prevention Program" ;
                               skos:definition "A Directive Information Content Entity that prescribes how an Organization reduces or eliminates the creation of pollutants through increased efficiency in resource use." .
 
 
-###  http://example.org/apqc#PortfolioGovernanceFramework
+###  https://fandaws.com/ontology/apqc#PortfolioGovernanceFramework
 ex:PortfolioGovernanceFramework rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000965 ;
                                 rdfs:label "Portfolio Governance Framework" ;
                                 skos:definition "A Directive Information Content Entity that prescribes the rules, metrics, and procedures for identifying, selecting, prioritizing, and monitoring portfolio components." .
 
 
-###  http://example.org/apqc#PortfolioManagementCapability
+###  https://fandaws.com/ontology/apqc#PortfolioManagementCapability
 ex:PortfolioManagementCapability rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000568 ,
                                                  [ rdf:type owl:Restriction ;
@@ -7777,7 +7777,7 @@ ex:PortfolioManagementCapability rdf:type owl:Class ;
                                  skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to establish strategy for, govern, and monitor its business portfolio of investments, holdings, products, businesses, and brands, realized in its constituent acts." .
 
 
-###  http://example.org/apqc#PortfolioManagerRole
+###  https://fandaws.com/ontology/apqc#PortfolioManagerRole
 ex:PortfolioManagerRole rdf:type owl:Class ;
                         rdfs:subClassOf obo:BFO_0000023 ;
                         rdfs:comment "Minted for recurring APQC 13.2.1 participant." ;
@@ -7785,7 +7785,7 @@ ex:PortfolioManagerRole rdf:type owl:Class ;
                         skos:definition "A Role that is borne by an Agent in virtue of being responsible for governing and monitoring an Organization's business portfolio of investments, holdings, products, businesses, and brands." .
 
 
-###  http://example.org/apqc#PortfolioProgramProjectManagementCapability
+###  https://fandaws.com/ontology/apqc#PortfolioProgramProjectManagementCapability
 ex:PortfolioProgramProjectManagementCapability rdf:type owl:Class ;
                                                rdfs:subClassOf cco:ont00000568 ;
                                                rdfs:comment "Aggregate standing-function reading of APQC group 13.2 'Manage portfolio, program, and project' (PCF 16400). Sits above the three sub-capacities ex:PortfolioManagementCapability / ex:ProgramManagementCapability / ex:ProjectManagementCapability. The catalog node ex:PCF_16400 designates this aggregate. Per D8 the ProcessGroup level gets an aggregate capability node (not a process) consistent with the standing-function reading of its 'Manage X' children. No ex:P16400 process is minted." ;
@@ -7793,21 +7793,21 @@ ex:PortfolioProgramProjectManagementCapability rdf:type owl:Class ;
                                                skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to manage its portfolio of investments and brands, its programs of related projects, and its individual projects." .
 
 
-###  http://example.org/apqc#PortfolioStatusReport
+###  https://fandaws.com/ontology/apqc#PortfolioStatusReport
 ex:PortfolioStatusReport rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:label "Portfolio Status Report" ;
                          skos:definition "A Descriptive Information Content Entity that describes the health and progress of an Organization's business portfolio as observed through monitoring." .
 
 
-###  http://example.org/apqc#PortfolioStrategy
+###  https://fandaws.com/ontology/apqc#PortfolioStrategy
 ex:PortfolioStrategy rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:label "Portfolio Strategy" ;
                      skos:definition "A Directive Information Content Entity that prescribes an Organization's plan for managing its portfolio of investments, holdings, products, businesses, and brands." .
 
 
-###  http://example.org/apqc#PreparedDataset
+###  https://fandaws.com/ontology/apqc#PreparedDataset
 ex:PreparedDataset rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ;
                    rdfs:comment "Descriptive: the validated, analysis-ready dataset. Minted distinct from ex:AnalyticsDataset (the collected/cleaned dataset of 13.7.4) so the parallel pipeline steps 20961 'Collect data' and 21461 'Prepare data' have distinct outputs. Output of ex:P21461." ;
@@ -7815,7 +7815,7 @@ ex:PreparedDataset rdf:type owl:Class ;
                    skos:definition "A Descriptive Information Content Entity consisting of a validated dataset created and verified to be fit for the initiation of analysis." .
 
 
-###  http://example.org/apqc#PreventiveQualityActivitySpecification
+###  https://fandaws.com/ontology/apqc#PreventiveQualityActivitySpecification
 ex:PreventiveQualityActivitySpecification rdf:type owl:Class ;
                                           rdfs:subClassOf cco:ont00000965 ;
                                           rdfs:comment "Minted: distinct from event-triggered Corrective and Preventive Action Specification; this is requirement-gap-driven prevention (output of ex:P17474)." ;
@@ -7823,7 +7823,7 @@ ex:PreventiveQualityActivitySpecification rdf:type owl:Class ;
                                           skos:definition "A Directive Information Content Entity that prescribes preventive quality activities and the standard methodology for designing or conducting them in order to mitigate the risk of not meeting critical-to-quality characteristics." .
 
 
-###  http://example.org/apqc#ProcessAnalysis
+###  https://fandaws.com/ontology/apqc#ProcessAnalysis
 ex:ProcessAnalysis rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000853 ,
                                    [ rdf:type owl:Restriction ;
@@ -7835,28 +7835,28 @@ ex:ProcessAnalysis rdf:type owl:Class ;
                    skos:definition "A Descriptive Information Content Entity that describes how a business process works and how participants from different groups work together to achieve a business goal." .
 
 
-###  http://example.org/apqc#ProcessControlPointSpecification
+###  https://fandaws.com/ontology/apqc#ProcessControlPointSpecification
 ex:ProcessControlPointSpecification rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000965 ;
                                     rdfs:label "Process Control Point Specification" ;
                                     skos:definition "A Directive Information Content Entity that prescribes checkpoints in a business process that prevent its continuation unless stated requirements are satisfied." .
 
 
-###  http://example.org/apqc#ProcessFramework
+###  https://fandaws.com/ontology/apqc#ProcessFramework
 ex:ProcessFramework rdf:type owl:Class ;
                     rdfs:subClassOf cco:ont00000965 ;
                     rdfs:label "Process Framework" ;
                     skos:definition "A Directive Information Content Entity that prescribes the required business processes of an Organization, their key elements, and how they should interact." .
 
 
-###  http://example.org/apqc#ProcessGovernanceFramework
+###  https://fandaws.com/ontology/apqc#ProcessGovernanceFramework
 ex:ProcessGovernanceFramework rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000965 ;
                               rdfs:label "Process Governance Framework" ;
                               skos:definition "A Directive Information Content Entity that prescribes an Organization's approach, standards, and priorities for governing business process management." .
 
 
-###  http://example.org/apqc#ProcessImprovementMethodologySelection
+###  https://fandaws.com/ontology/apqc#ProcessImprovementMethodologySelection
 ex:ProcessImprovementMethodologySelection rdf:type owl:Class ;
                                           rdfs:subClassOf cco:ont00000965 ;
                                           rdfs:comment "Directive: the output of a selection act, prescribing the chosen methodology. Reused as input to 13.4.3.2 reengineering." ;
@@ -7864,7 +7864,7 @@ ex:ProcessImprovementMethodologySelection rdf:type owl:Class ;
                                           skos:definition "A Directive Information Content Entity that prescribes the process-improvement methodology (e.g. Lean, Six Sigma) chosen for an improvement effort." .
 
 
-###  http://example.org/apqc#ProcessModel
+###  https://fandaws.com/ontology/apqc#ProcessModel
 ex:ProcessModel rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000853 ;
                 rdfs:comment "Documentation/representation of an as-is or to-be process (descriptive). Distinct from ex:ProcessFramework, which prescribes the required process set." ;
@@ -7872,7 +7872,7 @@ ex:ProcessModel rdf:type owl:Class ;
                 skos:definition "A Descriptive Information Content Entity that describes what a business entity does, who is responsible, the standard to which a business process should be completed, and how its success is determined." .
 
 
-###  http://example.org/apqc#ProcessOwner
+###  https://fandaws.com/ontology/apqc#ProcessOwner
 ex:ProcessOwner rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00001017 ,
                                 [ rdf:type owl:Restriction ;
@@ -7883,7 +7883,7 @@ ex:ProcessOwner rdf:type owl:Class ;
                 skos:definition "An Agent that bears a process-owner role." .
 
 
-###  http://example.org/apqc#ProcessOwnerRole
+###  https://fandaws.com/ontology/apqc#ProcessOwnerRole
 ex:ProcessOwnerRole rdf:type owl:Class ;
                     rdfs:subClassOf obo:BFO_0000023 ;
                     rdfs:comment "Minted for recurring APQC 13.1 participant 'process owner'. Borne by an independent continuant (the assigned Agent), never by a process or ICE." ;
@@ -7891,21 +7891,21 @@ ex:ProcessOwnerRole rdf:type owl:Class ;
                     skos:definition "A Role that is borne by an Agent in virtue of being assigned accountability for identifying, analyzing, and improving a given business process within an Organization." .
 
 
-###  http://example.org/apqc#ProcessPerformanceReport
+###  https://fandaws.com/ontology/apqc#ProcessPerformanceReport
 ex:ProcessPerformanceReport rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:label "Process Performance Report" ;
                             skos:definition "A Descriptive Information Content Entity that describes the measured performance of business processes against defined performance indicators." .
 
 
-###  http://example.org/apqc#ProcessScopeStatement
+###  https://fandaws.com/ontology/apqc#ProcessScopeStatement
 ex:ProcessScopeStatement rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ;
                          rdfs:label "Process Scope Statement" ;
                          skos:definition "A Directive Information Content Entity that prescribes the extent and limits of a business process in terms of the activities and tasks it comprises." .
 
 
-###  http://example.org/apqc#ProgramManagementCapability
+###  https://fandaws.com/ontology/apqc#ProgramManagementCapability
 ex:ProgramManagementCapability rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000568 ,
                                                [ rdf:type owl:Restriction ;
@@ -7929,7 +7929,7 @@ ex:ProgramManagementCapability rdf:type owl:Class ;
                                skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to establish, execute, and report on business programs comprising related projects, realized in its constituent acts." .
 
 
-###  http://example.org/apqc#ProgramManager
+###  https://fandaws.com/ontology/apqc#ProgramManager
 ex:ProgramManager rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00001017 ,
                                   [ rdf:type owl:Restriction ;
@@ -7940,7 +7940,7 @@ ex:ProgramManager rdf:type owl:Class ;
                   skos:definition "An Agent that bears a program-manager role." .
 
 
-###  http://example.org/apqc#ProgramManagerRole
+###  https://fandaws.com/ontology/apqc#ProgramManagerRole
 ex:ProgramManagerRole rdf:type owl:Class ;
                       rdfs:subClassOf obo:BFO_0000023 ;
                       rdfs:comment "Minted for recurring APQC 13.2.2 participant; also referenced in 13.2.3.4.5 project reviews with program managers." ;
@@ -7948,28 +7948,28 @@ ex:ProgramManagerRole rdf:type owl:Class ;
                       skos:definition "A Role that is borne by an Agent in virtue of being responsible for establishing, executing, and reporting on a business program comprising related projects." .
 
 
-###  http://example.org/apqc#ProgramPerformanceReport
+###  https://fandaws.com/ontology/apqc#ProgramPerformanceReport
 ex:ProgramPerformanceReport rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:label "Program Performance Report" ;
                             skos:definition "A Descriptive Information Content Entity that describes the evaluated performance of a business program against its goals, completion dates, defects, and cost-effectiveness." .
 
 
-###  http://example.org/apqc#ProgramStructureSpecification
+###  https://fandaws.com/ontology/apqc#ProgramStructureSpecification
 ex:ProgramStructureSpecification rdf:type owl:Class ;
                                  rdfs:subClassOf cco:ont00000965 ;
                                  rdfs:label "Program Structure Specification" ;
                                  skos:definition "A Directive Information Content Entity that prescribes the framework and approach for managing a business program, including governance, alignment, assurance, and management." .
 
 
-###  http://example.org/apqc#ProjectLaunchPlan
+###  https://fandaws.com/ontology/apqc#ProjectLaunchPlan
 ex:ProjectLaunchPlan rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000965 ;
                      rdfs:label "Project Launch Plan" ;
                      skos:definition "A Directive Information Content Entity that prescribes when to initiate a project and how to introduce it to its target audience, including team, objectives, timelines, and milestones." .
 
 
-###  http://example.org/apqc#ProjectManagementCapability
+###  https://fandaws.com/ontology/apqc#ProjectManagementCapability
 ex:ProjectManagementCapability rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000568 ,
                                                [ rdf:type owl:Restriction ;
@@ -8001,7 +8001,7 @@ ex:ProjectManagementCapability rdf:type owl:Class ;
                                skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to scope, plan, execute, review, and close business projects, realized in its constituent acts." .
 
 
-###  http://example.org/apqc#ProjectManagementImpactAssessment
+###  https://fandaws.com/ontology/apqc#ProjectManagementImpactAssessment
 ex:ProjectManagementImpactAssessment rdf:type owl:Class ;
                                      rdfs:subClassOf cco:ont00000853 ;
                                      rdfs:comment "Descriptive (an assessment/judgement of impact). Output of ex:P11131 'Evaluate impact of project management on measures and outcomes'." ;
@@ -8009,14 +8009,14 @@ ex:ProjectManagementImpactAssessment rdf:type owl:Class ;
                                      skos:definition "A Descriptive Information Content Entity that describes the assessed impact of project-management strategy and projects on the organization's measures and outcomes." .
 
 
-###  http://example.org/apqc#ProjectManagementMethodologySelection
+###  https://fandaws.com/ontology/apqc#ProjectManagementMethodologySelection
 ex:ProjectManagementMethodologySelection rdf:type owl:Class ;
                                          rdfs:subClassOf cco:ont00000965 ;
                                          rdfs:label "Project Management Methodology Selection" ;
                                          skos:definition "A Directive Information Content Entity that prescribes the project-management methodology chosen for designing, planning, implementing, and achieving project objectives." .
 
 
-###  http://example.org/apqc#ProjectManager
+###  https://fandaws.com/ontology/apqc#ProjectManager
 ex:ProjectManager rdf:type owl:Class ;
                   rdfs:subClassOf cco:ont00001017 ,
                                   [ rdf:type owl:Restriction ;
@@ -8027,7 +8027,7 @@ ex:ProjectManager rdf:type owl:Class ;
                   skos:definition "An Agent that bears a project-manager role." .
 
 
-###  http://example.org/apqc#ProjectManagerRole
+###  https://fandaws.com/ontology/apqc#ProjectManagerRole
 ex:ProjectManagerRole rdf:type owl:Class ;
                       rdfs:subClassOf obo:BFO_0000023 ;
                       rdfs:comment "Minted for recurring APQC 13.2.3 participant." ;
@@ -8035,21 +8035,21 @@ ex:ProjectManagerRole rdf:type owl:Class ;
                       skos:definition "A Role that is borne by an Agent in virtue of being responsible for scoping, planning, executing, reporting on, and closing a business project." .
 
 
-###  http://example.org/apqc#ProjectPerformanceReport
+###  https://fandaws.com/ontology/apqc#ProjectPerformanceReport
 ex:ProjectPerformanceReport rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000853 ;
                             rdfs:label "Project Performance Report" ;
                             skos:definition "A Descriptive Information Content Entity that describes a project's performance against scope, schedule, quality, cost, and risk criteria, including deviations from plan." .
 
 
-###  http://example.org/apqc#ProjectPlan
+###  https://fandaws.com/ontology/apqc#ProjectPlan
 ex:ProjectPlan rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00000965 ;
                rdfs:label "Project Plan" ;
                skos:definition "A Directive Information Content Entity that prescribes the resources, roles, IT requirements, training, communication, reward approaches, and launch for executing a business project." .
 
 
-###  http://example.org/apqc#ProjectPortfolioSelection
+###  https://fandaws.com/ontology/apqc#ProjectPortfolioSelection
 ex:ProjectPortfolioSelection rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000965 ;
                              rdfs:comment "Directive (a selection/prioritization decision). Output of ex:P21454 'Prioritize and select projects for the portfolio'." ;
@@ -8057,14 +8057,14 @@ ex:ProjectPortfolioSelection rdf:type owl:Class ;
                              skos:definition "A Directive Information Content Entity that prescribes which projects are selected and prioritized for the portfolio based on preestablished criteria." .
 
 
-###  http://example.org/apqc#ProjectReadinessAssessment
+###  https://fandaws.com/ontology/apqc#ProjectReadinessAssessment
 ex:ProjectReadinessAssessment rdf:type owl:Class ;
                               rdfs:subClassOf cco:ont00000853 ;
                               rdfs:label "Project Readiness Assessment" ;
                               skos:definition "A Descriptive Information Content Entity that describes the culture and readiness of an organizational environment for adopting a project-management approach." .
 
 
-###  http://example.org/apqc#ProjectRequirementsStatement
+###  https://fandaws.com/ontology/apqc#ProjectRequirementsStatement
 ex:ProjectRequirementsStatement rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ;
                                 rdfs:comment "FALSE FRIEND: despite the label 'Requirement', this is a DESCRIPTIVE (853) record of requirements gathered by a discernment act; the directive requirement itself (deliverables MUST satisfy X) is modeled separately. Parallel to the sibling outputs ex:ProjectResourceRequirementsStatement (853, P16412) and ex:ITRequirementsStatement (853, P11124). Output of ex:P11117 'Identify project requirements and objectives'. Any directive force would be a separate downstream Directive ICE composed by a Formulation act -- mirroring how ex:BusinessCase (P11120) stays descriptive and leaves the go/no-go as a separate Directive -- and is not modeled by this discernment act." ;
@@ -8072,7 +8072,7 @@ ex:ProjectRequirementsStatement rdf:type owl:Class ;
                                 skos:definition "A Descriptive Information Content Entity that describes the discerned capabilities, features, and attributes a project's deliverables are required to have, as recognized and registered by a requirements-discernment act." .
 
 
-###  http://example.org/apqc#ProjectResourceRequirementsStatement
+###  https://fandaws.com/ontology/apqc#ProjectResourceRequirementsStatement
 ex:ProjectResourceRequirementsStatement rdf:type owl:Class ;
                                         rdfs:subClassOf cco:ont00000853 ;
                                         rdfs:comment "FALSE FRIEND: despite the label 'Requirement', this is a DESCRIPTIVE (853) record of requirements gathered by a discernment act; the directive requirement itself is modeled separately. An enumeration of identified resource prerequisites. Output of ex:P16412 'Identify project resource requirements'." ;
@@ -8080,35 +8080,35 @@ ex:ProjectResourceRequirementsStatement rdf:type owl:Class ;
                                         skos:definition "A Descriptive Information Content Entity that describes the people, skills, capital, facilities, equipment, material, and information a project requires." .
 
 
-###  http://example.org/apqc#ProjectReviewRecord
+###  https://fandaws.com/ontology/apqc#ProjectReviewRecord
 ex:ProjectReviewRecord rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:label "Project Review Record" ;
                        skos:definition "A Descriptive Information Content Entity that describes the findings and lessons learned from a post-project or after-action review." .
 
 
-###  http://example.org/apqc#ProjectScopeStatement
+###  https://fandaws.com/ontology/apqc#ProjectScopeStatement
 ex:ProjectScopeStatement rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000965 ;
                          rdfs:label "Project Scope Statement" ;
                          skos:definition "A Directive Information Content Entity that prescribes the goals, deliverables, tasks, costs, deadlines, and boundaries of a business project." .
 
 
-###  http://example.org/apqc#ProjectStatusReport
+###  https://fandaws.com/ontology/apqc#ProjectStatusReport
 ex:ProjectStatusReport rdf:type owl:Class ;
                        rdfs:subClassOf cco:ont00000853 ;
                        rdfs:label "Project Status Report" ;
                        skos:definition "A Descriptive Information Content Entity that describes the current status of a project, including completed, incomplete, and planned tasks and problems faced." .
 
 
-###  http://example.org/apqc#QualityControlSpecification
+###  https://fandaws.com/ontology/apqc#QualityControlSpecification
 ex:QualityControlSpecification rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000965 ;
                                rdfs:label "Quality Control Specification" ;
                                skos:definition "A Directive Information Content Entity that prescribes the process steps, methods, and competencies for controlling enterprise quality." .
 
 
-###  http://example.org/apqc#QualityImprovementActionDecision
+###  https://fandaws.com/ontology/apqc#QualityImprovementActionDecision
 ex:QualityImprovementActionDecision rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000965 ;
                                     rdfs:comment "Directive: a decision selecting and committing to a subset of recommended actions. Minted so that 17490 (produces the recommendation) -> 17491 (decides which recommended actions to adopt, producing this decision) form a non-degenerate input->output chain, rather than 17491 emitting its own input." ;
@@ -8117,7 +8117,7 @@ ex:QualityImprovementActionDecision rdf:type owl:Class ;
                                     skos:example "Management's documented decision to adopt two of the four recommended control-limit changes next quarter." .
 
 
-###  http://example.org/apqc#QualityImprovementRecommendation
+###  https://fandaws.com/ontology/apqc#QualityImprovementRecommendation
 ex:QualityImprovementRecommendation rdf:type owl:Class ;
                                     rdfs:subClassOf cco:ont00000965 ;
                                     rdfs:comment "Directive: a recommendation that prescribes actions for management to consider." ;
@@ -8125,7 +8125,7 @@ ex:QualityImprovementRecommendation rdf:type owl:Class ;
                                     skos:definition "A Directive Information Content Entity that prescribes recommended measures for improving the quality plan based on test results." .
 
 
-###  http://example.org/apqc#QualityManagerRole
+###  https://fandaws.com/ontology/apqc#QualityManagerRole
 ex:QualityManagerRole rdf:type owl:Class ;
                       rdfs:subClassOf obo:BFO_0000023 ;
                       rdfs:comment "Minted for recurring APQC 13.3 participant ('quality management team')." ;
@@ -8133,7 +8133,7 @@ ex:QualityManagerRole rdf:type owl:Class ;
                       skos:definition "A Role that is borne by an Agent in virtue of being responsible for establishing, evaluating, and maintaining enterprise quality requirements and the quality management system." .
 
 
-###  http://example.org/apqc#QualityPartnershipAgreement
+###  https://fandaws.com/ontology/apqc#QualityPartnershipAgreement
 ex:QualityPartnershipAgreement rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000965 ;
                                rdfs:comment "Minted: directive artifact governing an established quality partnership (output of ex:P17506)." ;
@@ -8141,28 +8141,28 @@ ex:QualityPartnershipAgreement rdf:type owl:Class ;
                                skos:definition "A Directive Information Content Entity that prescribes the terms of a partnership with a third party formed to advance quality excellence." .
 
 
-###  http://example.org/apqc#QualityPlan
+###  https://fandaws.com/ontology/apqc#QualityPlan
 ex:QualityPlan rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00000965 ;
                rdfs:label "Quality Plan" ;
                skos:definition "A Directive Information Content Entity that prescribes how critical-to-quality characteristics will be achieved, controlled, ensured, and managed throughout a product or service lifecycle." .
 
 
-###  http://example.org/apqc#QualityStrategy
+###  https://fandaws.com/ontology/apqc#QualityStrategy
 ex:QualityStrategy rdf:type owl:Class ;
                    rdfs:subClassOf cco:ont00000965 ;
                    rdfs:label "Quality Strategy" ;
                    skos:definition "A Directive Information Content Entity that prescribes an Organization's techniques, standards, responsibilities, and procedures for managing enterprise quality." .
 
 
-###  http://example.org/apqc#QualityTestDataRecord
+###  https://fandaws.com/ontology/apqc#QualityTestDataRecord
 ex:QualityTestDataRecord rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:label "Quality Test Data Record" ;
                          skos:definition "A Descriptive Information Content Entity that describes the data and results collected from testing organizational outputs against the quality plan." .
 
 
-###  http://example.org/apqc#QualityTestResultDisposition
+###  https://fandaws.com/ontology/apqc#QualityTestResultDisposition
 ex:QualityTestResultDisposition rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000965 ;
                                 rdfs:comment "Directive: a disposition decision prescribes a course of action on the tested item." ;
@@ -8170,14 +8170,14 @@ ex:QualityTestResultDisposition rdf:type owl:Class ;
                                 skos:definition "A Directive Information Content Entity that prescribes the action to take on a quality test result, such as quarantine, scrap, or rework." .
 
 
-###  http://example.org/apqc#QualityTestSummary
+###  https://fandaws.com/ontology/apqc#QualityTestSummary
 ex:QualityTestSummary rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000853 ;
                       rdfs:label "Quality Test Summary" ;
                       skos:definition "A Descriptive Information Content Entity that describes the major facts, figures, and conclusions of quality test results." .
 
 
-###  http://example.org/apqc#RecognitionAndRewardPlan
+###  https://fandaws.com/ontology/apqc#RecognitionAndRewardPlan
 ex:RecognitionAndRewardPlan rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000965 ;
                             rdfs:comment "Shared across 13.2.3.3.5 and 13.4.2.6." ;
@@ -8185,7 +8185,7 @@ ex:RecognitionAndRewardPlan rdf:type owl:Class ;
                             skos:definition "A Directive Information Content Entity that prescribes incentives, bonuses, and recognition for extraordinary performance within a project or change initiative." .
 
 
-###  http://example.org/apqc#RemedialActionSpecification
+###  https://fandaws.com/ontology/apqc#RemedialActionSpecification
 ex:RemedialActionSpecification rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000965 ;
                                rdfs:comment "Shared between 13.7.11 'Identify remedial actions' and corrective-action work in 13.4.4.3." ;
@@ -8193,14 +8193,14 @@ ex:RemedialActionSpecification rdf:type owl:Class ;
                                skos:definition "A Directive Information Content Entity that prescribes the steps to be taken to correct identified shortcomings." .
 
 
-###  http://example.org/apqc#RewardsAndIncentivesPlan
+###  https://fandaws.com/ontology/apqc#RewardsAndIncentivesPlan
 ex:RewardsAndIncentivesPlan rdf:type owl:Class ;
                             rdfs:subClassOf cco:ont00000965 ;
                             rdfs:label "Rewards and Incentives Plan" ;
                             skos:definition "A Directive Information Content Entity that prescribes the rewards and incentives for employees who exhibit the behavior desired by a change." .
 
 
-###  http://example.org/apqc#RoleDefinitionSpecification
+###  https://fandaws.com/ontology/apqc#RoleDefinitionSpecification
 ex:RoleDefinitionSpecification rdf:type owl:Class ;
                                rdfs:subClassOf cco:ont00000965 ;
                                rdfs:comment "Shared across 13.4.2.8 'Establish/Clarify new roles' and 13.2.3.3.1 'Define roles and resources'." ;
@@ -8208,7 +8208,7 @@ ex:RoleDefinitionSpecification rdf:type owl:Class ;
                                skos:definition "A Directive Information Content Entity that prescribes the new roles and responsibilities to be assigned to personnel." .
 
 
-###  http://example.org/apqc#RootCauseAnalysis
+###  https://fandaws.com/ontology/apqc#RootCauseAnalysis
 ex:RootCauseAnalysis rdf:type owl:Class ;
                      rdfs:subClassOf cco:ont00000853 ;
                      rdfs:comment "Shared with 13.3.3.3; also relevant to risk/root-cause work in 13.4." ;
@@ -8216,21 +8216,21 @@ ex:RootCauseAnalysis rdf:type owl:Class ;
                      skos:definition "A Descriptive Information Content Entity that describes the underlying causes that triggered a non-conformance event or activity." .
 
 
-###  http://example.org/apqc#SampleSignificanceAssessment
+###  https://fandaws.com/ontology/apqc#SampleSignificanceAssessment
 ex:SampleSignificanceAssessment rdf:type owl:Class ;
                                 rdfs:subClassOf cco:ont00000853 ;
                                 rdfs:label "Sample Significance Assessment" ;
                                 skos:definition "A Descriptive Information Content Entity that describes whether a test sample is representative of the larger output and meets acceptance requirements." .
 
 
-###  http://example.org/apqc#SamplingPlan
+###  https://fandaws.com/ontology/apqc#SamplingPlan
 ex:SamplingPlan rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000965 ;
                 rdfs:label "Sampling Plan" ;
                 skos:definition "A Directive Information Content Entity that prescribes which parameters to measure, sample sizes, the sampling scheme, and the roles for taking samples." .
 
 
-###  http://example.org/apqc#Stakeholder
+###  https://fandaws.com/ontology/apqc#Stakeholder
 ex:Stakeholder rdf:type owl:Class ;
                rdfs:subClassOf cco:ont00001017 ,
                                [ rdf:type owl:Restriction ;
@@ -8242,21 +8242,21 @@ ex:Stakeholder rdf:type owl:Class ;
                skos:definition "An Agent that bears a stakeholder role with respect to an Organization's initiative." .
 
 
-###  http://example.org/apqc#StakeholderAssessment
+###  https://fandaws.com/ontology/apqc#StakeholderAssessment
 ex:StakeholderAssessment rdf:type owl:Class ;
                          rdfs:subClassOf cco:ont00000853 ;
                          rdfs:label "Stakeholder Assessment" ;
                          skos:definition "A Descriptive Information Content Entity that describes the internal and external stakeholders affected by a change and the degree of influence the change has on them." .
 
 
-###  http://example.org/apqc#StakeholderNeedsStatement
+###  https://fandaws.com/ontology/apqc#StakeholderNeedsStatement
 ex:StakeholderNeedsStatement rdf:type owl:Class ;
                              rdfs:subClassOf cco:ont00000853 ;
                              rdfs:label "Stakeholder Needs Statement" ;
                              skos:definition "A Descriptive Information Content Entity that describes the needs and requirements gathered from stakeholders prior to conducting analytics." .
 
 
-###  http://example.org/apqc#StakeholderRole
+###  https://fandaws.com/ontology/apqc#StakeholderRole
 ex:StakeholderRole rdf:type owl:Class ;
                    rdfs:subClassOf obo:BFO_0000023 ;
                    rdfs:comment "Minted for the cross-cutting 'stakeholder' participant referenced across 13.2, 13.4, 13.7, 13.8, 13.9." ;
@@ -8264,14 +8264,14 @@ ex:StakeholderRole rdf:type owl:Class ;
                    skos:definition "A Role that is borne by an Agent or Organization in virtue of having an interest in, or being affected by, an Organization's process, program, project, change initiative, or analytics effort." .
 
 
-###  http://example.org/apqc#SustainabilityGoalSpecification
+###  https://fandaws.com/ontology/apqc#SustainabilityGoalSpecification
 ex:SustainabilityGoalSpecification rdf:type owl:Class ;
                                    rdfs:subClassOf cco:ont00000965 ;
                                    rdfs:label "Sustainability Goal Specification" ;
                                    skos:definition "A Directive Information Content Entity that prescribes an Organization's measurable sustainability goals and qualitative and quantitative targets." .
 
 
-###  http://example.org/apqc#SustainabilityManagementCapability
+###  https://fandaws.com/ontology/apqc#SustainabilityManagementCapability
 ex:SustainabilityManagementCapability rdf:type owl:Class ;
                                       rdfs:subClassOf cco:ont00000568 ,
                                                       [ rdf:type owl:Restriction ;
@@ -8287,7 +8287,7 @@ ex:SustainabilityManagementCapability rdf:type owl:Class ;
                                       skos:definition "An Organization Capability that inheres in an Organization in virtue of its capacity to develop and manage its sustainability (ESG) practices, policies, requirements, and reporting, realized in its bounded sustainability acts." .
 
 
-###  http://example.org/apqc#SustainabilityManagerRole
+###  https://fandaws.com/ontology/apqc#SustainabilityManagerRole
 ex:SustainabilityManagerRole rdf:type owl:Class ;
                              rdfs:subClassOf obo:BFO_0000023 ;
                              rdfs:comment "Minted for recurring APQC 13.9 participant." ;
@@ -8295,14 +8295,14 @@ ex:SustainabilityManagerRole rdf:type owl:Class ;
                              skos:definition "A Role that is borne by an Agent in virtue of being responsible for developing and managing an Organization's sustainability (ESG) capability, policies, and reporting." .
 
 
-###  http://example.org/apqc#SustainabilityMeasureSpecification
+###  https://fandaws.com/ontology/apqc#SustainabilityMeasureSpecification
 ex:SustainabilityMeasureSpecification rdf:type owl:Class ;
                                       rdfs:subClassOf cco:ont00000965 ;
                                       rdfs:label "Sustainability Measure Specification" ;
                                       skos:definition "A Directive Information Content Entity that prescribes organization-wide sustainability measures, including data-collection strategies, calculations, analytics, and reporting formats." .
 
 
-###  http://example.org/apqc#SustainabilityPerformanceMeasurement
+###  https://fandaws.com/ontology/apqc#SustainabilityPerformanceMeasurement
 ex:SustainabilityPerformanceMeasurement rdf:type owl:Class ;
                                         rdfs:subClassOf cco:ont00000853 ;
                                         rdfs:comment "Descriptive appraisal record. Output of ex:P21602 'Measure sustainability performance' (an Act of Appraisal) and has-input of ex:P21603." ;
@@ -8310,35 +8310,35 @@ ex:SustainabilityPerformanceMeasurement rdf:type owl:Class ;
                                         skos:definition "A Descriptive Information Content Entity that describes collected and validated sustainability performance data appraised against requirements and targets, including audit findings and identified gaps and variances." .
 
 
-###  http://example.org/apqc#SustainabilityPlan
+###  https://fandaws.com/ontology/apqc#SustainabilityPlan
 ex:SustainabilityPlan rdf:type owl:Class ;
                       rdfs:subClassOf cco:ont00000965 ;
                       rdfs:label "Sustainability Plan" ;
                       skos:definition "A Directive Information Content Entity that prescribes the sustainability actions for an Organization, its functional units, and support services, aligned to requirements, goals, and governance." .
 
 
-###  http://example.org/apqc#SustainabilityPolicy
+###  https://fandaws.com/ontology/apqc#SustainabilityPolicy
 ex:SustainabilityPolicy rdf:type owl:Class ;
                         rdfs:subClassOf cco:ont00000965 ;
                         rdfs:label "Sustainability Policy" ;
                         skos:definition "A Directive Information Content Entity that prescribes the written procedures and supporting tools by which an Organization will meet its sustainability requirements." .
 
 
-###  http://example.org/apqc#SustainabilityRequirementSpecification
+###  https://fandaws.com/ontology/apqc#SustainabilityRequirementSpecification
 ex:SustainabilityRequirementSpecification rdf:type owl:Class ;
                                           rdfs:subClassOf cco:ont00000965 ;
                                           rdfs:label "Sustainability Requirement Specification" ;
                                           skos:definition "A Directive Information Content Entity that prescribes the disclosure, governance, functional, and performance requirements an Organization must satisfy for sustainability (ESG)." .
 
 
-###  http://example.org/apqc#SustainabilityStatement
+###  https://fandaws.com/ontology/apqc#SustainabilityStatement
 ex:SustainabilityStatement rdf:type owl:Class ;
                            rdfs:subClassOf cco:ont00000853 ;
                            rdfs:label "Sustainability Statement" ;
                            skos:definition "A Descriptive Information Content Entity that describes an Organization's sustainability performance prepared for reporting to its audiences." .
 
 
-###  http://example.org/apqc#TraineeRole
+###  https://fandaws.com/ontology/apqc#TraineeRole
 ex:TraineeRole rdf:type owl:Class ;
                rdfs:subClassOf obo:BFO_0000023 ;
                rdfs:comment "Minted for the training-recipient participant of EHS training (13.8.3.5). Distinct from ex:StakeholderRole (an interested/affected party): a trainee is the recipient of the imparted competence." ;
@@ -8346,7 +8346,7 @@ ex:TraineeRole rdf:type owl:Class ;
                skos:definition "A Role that is borne by an Agent in virtue of being a recipient of training -- the Agent to whom knowledge, skills, or values are imparted by an Act of Training." .
 
 
-###  http://example.org/apqc#TrainingPlan
+###  https://fandaws.com/ontology/apqc#TrainingPlan
 ex:TrainingPlan rdf:type owl:Class ;
                 rdfs:subClassOf cco:ont00000965 ;
                 rdfs:comment "Shared across 13.2.3.3.4, 13.4.2.3, 13.5.1.7." ;

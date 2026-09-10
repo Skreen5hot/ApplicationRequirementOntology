@@ -4,7 +4,7 @@
 @prefix obo:   <http://purl.obolibrary.org/obo/> .
 @prefix cco:   <https://www.commoncoreontologies.org/> .
 @prefix dct:   <http://purl.org/dc/terms/> .
-@prefix ex:    <http://example.org/apqc#> .
+@prefix ex:    <https://fandaws.com/ontology/apqc#> .
 
 ####################################################################
 # APQC SHARED EXTENSION MODULE  (inlined)  v0.3.0
@@ -22,7 +22,7 @@
 # CCO pin: v2.0 (2024-11-06).
 ####################################################################
 
-<http://example.org/apqc/ext> a owl:Ontology ;
+<https://fandaws.com/ontology/apqc/ext> a owl:Ontology ;
     dct:title "APQC Shared Extension: recurring local act genera (D9)" ;
     owl:versionInfo "0.3.0" ;
     rdfs:comment "Canonical registry of recurring local act genera (D9); its definitions are inlined (mirrored) into each self-contained reality-layer slice module (slices no longer import it). Anchors local act genera under CCO Act classes." .

@@ -6,8 +6,8 @@
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix obo:   <http://purl.obolibrary.org/obo/> .
 @prefix cco:   <https://www.commoncoreontologies.org/> .
-@prefix ex:    <http://example.org/apqc#> .
-@prefix apqc:  <http://example.org/apqc/scheme#> .
+@prefix ex:    <https://fandaws.com/ontology/apqc#> .
+@prefix apqc:  <https://fandaws.com/ontology/apqc/scheme#> .
 
 ####################################################################
 # APQC PCF -> BFO 2020 / CCO 2.0  REALITY-LAYER MODULE
@@ -35,7 +35,7 @@
 #   ex:ActOfReporting              -> cco:ont00000379 (Act of Representative Communication)
 ####################################################################
 
-<http://example.org/apqc/slice/12.0> a owl:Ontology ;
+<https://fandaws.com/ontology/apqc/slice/12.0> a owl:Ontology ;
     dct:title "APQC reality-layer slice 12.0: Manage External Relationships" ;
     dct:source "APQC Process Classification Framework (Cross-Industry)" ;
     owl:versionInfo "0.3.0" ;

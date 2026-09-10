@@ -1,0 +1,34 @@
+# Pinned dependencies for the checks in this repository.
+#
+# Only what the tools and tests actually import. That is verified the one
+# way it can be: by installing this file into an empty environment and
+# running the suite there. The equivalent file in the project this method
+# came from was wrong twice, and both times the requirements-only gate is
+# what found it.
+#
+# Pinned exactly rather than with a floor. The point of a pinned file is
+# that a clean environment reproduces this one, and ">=" reproduces
+# whatever was newest that day.
+#
+# What each is for:
+#
+#   pytest      the suite
+#   PyYAML      tools/layout.py reads the layout contract; the licensing
+#               tool reads the adjudications
+#   jsonschema  validating structured records against their schemas
+#   rdflib      reading the ontology without a reasoner
+#   pyshacl     the SHACL validation ladder
+#   owlrl       entailment for the reasoner-scope measurements
+#
+# rdflib, pyshacl and owlrl are listed now because the ontology checks are
+# the next thing to arrive, and a requirements file that describes only
+# today's imports has to be edited by whoever adds tomorrow's -- which is
+# how it drifts. If a check for them has not landed by the time this is
+# reviewed, take them out rather than leaving a pin nothing exercises.
+
+pytest==9.1.1
+PyYAML==6.0.3
+jsonschema==4.26.0
+rdflib==7.6.0
+pyshacl==0.40.1
+owlrl==7.6.2

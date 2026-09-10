@@ -1,0 +1,16 @@
+# Build and run artifacts. Nothing generated is committed: a generated
+# file in git is a file that can disagree with its generator, and the
+# disagreement is invisible from either side.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+_site/
+_work/
+
+# Editor and OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

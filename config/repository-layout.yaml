@@ -1,0 +1,187 @@
+# Repository layout contract.
+#
+# One declaration per component, addressed by a logical id. Everything that
+# needs a path asks this file for it, so moving a file is a change here
+# rather than an edit across twenty modules.
+#
+# Ids are stable. That is the point: a scope marker in a query, a group
+# name in a report, or a reference from a test survives relocation
+# untouched.
+#
+# `role` is what a component *is*, and it carries consequences. A
+# `generated-artifact` is not hand-edited. A `third-party-reference` is
+# never redistributed. A `test-fixture` is expected to be invalid on
+# purpose and must not be loaded as if it were part of the ontology.
+#
+# Adding a file to the repository without declaring it here is a test
+# failure, in both directions: an undeclared file has no stated role, and
+# a declared component whose path does not exist is a contract describing
+# something that is not there.
+
+version: 1
+
+components:
+
+  # ---- Authored ontology -------------------------------------------
+
+  - id: ontology.apqc.ext
+    path: APQC_ontology/apqc-ext.ttl
+    role: ontology-module
+    description: >-
+      The shared extension module. Recurring local act genera live here
+      once as the canonical source; slices mirror what they use rather
+      than importing it.
+
+  - id: ontology.apqc.catalog
+    path: APQC_ontology/apqc-catalog.ttl
+    role: ontology-module
+    description: >-
+      The APQC process classification catalog. Large and mostly
+      mechanical; the index exists so nothing has to read it whole.
+
+  - id: ontology.apqc.capabilities-roles
+    path: APQC_ontology/capabilities_roles.ttl
+    role: ontology-module
+    description: Capability and role classes.
+
+  - id: ontology.apqc.capabilities-wiring
+    path: APQC_ontology/capabilities_wiring.ttl
+    role: ontology-module
+    description: >-
+      The Phase-1 bridge wiring processes to required capabilities and
+      roles, and capabilities to what they enable.
+
+  - id: ontology.apqc.delivery-processes
+    path: APQC_ontology/delivery_processes.ttl
+    role: ontology-module
+    description: Delivery process classes.
+
+  - id: ontology.apqc.slices
+    path: APQC_ontology/slices
+    role: ontology-module-set
+    description: >-
+      Thirteen self-contained section slices. Each inlines the genera it
+      uses rather than importing the extension module.
+
+  # ---- Validation ---------------------------------------------------
+
+  - id: validation.apqc-shapes
+    path: APQC_ontology/apqc_shapes.ttl
+    role: ontology-validation
+    description: SHACL constraints over the APQC modules.
+
+  - id: validation.capabilities-roles-shapes
+    path: APQC_ontology/capabilities_roles_shapes.ttl
+    role: ontology-validation
+    description: SHACL constraints over the capability and role layer.
+
+  # ---- Deliberately invalid ------------------------------------------
+
+  - id: fixture.apqc-bad-examples
+    path: APQC_ontology/apqc_bad_examples.ttl
+    role: test-fixture
+    description: >-
+      Graphs that are supposed to fail validation. Declared with its own
+      role so nothing loads it as ontology and reports its defects as
+      corpus defects -- which is exactly what would happen if it were
+      simply another .ttl in the directory.
+
+  # ---- Generated ----------------------------------------------------
+
+  - id: generated.reports
+    path: APQC_ontology/reports
+    role: generated-artifact
+    description: >-
+      Reasoner output and validation gate results. Regenerated, not
+      edited; a hand-edited report is a measurement of nothing.
+
+  - id: generated.reference
+    path: APQC_ontology/reference
+    role: generated-artifact
+    description: Derived reference extracts.
+
+  - id: generated.corpus-index
+    path: APQC_ontology/index/corpus_index.tsv
+    role: generated-artifact
+    description: >-
+      A greppable index of every class and individual across the slices
+      and shared modules, so navigation costs a grep rather than a read.
+
+  - id: docs.corpus-index-guide
+    path: APQC_ontology/index/README.md
+    role: documentation
+    description: How to use the corpus index.
+
+  # ---- Documentation -------------------------------------------------
+
+  - id: docs.specification
+    path: docs/aro-specification-graph-v0.5.md
+    role: documentation
+    description: >-
+      The ARO specification and Specification Graph pipeline, with its
+      own numbered decisions.
+
+  - id: docs.process
+    path: docs/process/PROCESS.md
+    role: documentation
+    description: >-
+      How this repository is built. Carried over from BFO-Aligned
+      ValueNet, where the method was worked out.
+
+  - id: docs.readme
+    path: README.md
+    role: documentation
+    description: The public front door.
+
+  - id: licence.project
+    path: LICENSE
+    role: project-licence
+    description: >-
+      The terms this repository is offered under. Read by the licensing
+      tool rather than assumed: a classifier that hardcoded a licence
+      would happily assert one the repository does not declare.
+
+  # ---- Third-party reference material --------------------------------
+  #
+  # Consulted, cited, and never redistributed. These are declared so the
+  # licensing tool can see them and refuse to treat them as publishable,
+  # rather than leaving that to whoever remembers.
+
+  - id: reference.third-party
+    path: docs/Reference
+    role: third-party-reference
+    redistributable: false
+    description: >-
+      Standards and handbooks used as sources. ISO/IEC/IEEE 29148 is a
+      paid standard and is not ours to publish; the NASA material is US
+      Government work but is still cited rather than claimed.
+
+  # ---- Configuration and tooling --------------------------------------
+
+  - id: config.layout
+    path: config/repository-layout.yaml
+    role: configuration
+    description: This file.
+
+  - id: config.licensing-adjudications
+    path: config/licensing-adjudications.yaml
+    role: configuration
+    description: >-
+      Owner rulings where recorded provenance and current authorship
+      diverge. Each names the evidence it rests on.
+
+  - id: tool.layout
+    path: tools/layout.py
+    role: tool
+    description: >-
+      Resolves component ids to paths. Standalone on purpose: in ValueNet
+      the equivalent lived inside a package whose __init__ loaded an
+      entire agent runtime, so asking where a file lived cost 44 module
+      imports.
+
+  - id: tool.licensing
+    path: tools/licensing/disposition.py
+    role: tool
+    description: >-
+      Exactly one disposition per tracked file, derived from role and
+      adjudication rather than from a list of filenames.

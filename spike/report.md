@@ -25,7 +25,7 @@ Recorded as F-14 (§9); the architect's disposition: "the most valuable output o
 | Projector | **projected the real slice; byte-identical on re-projection** (`spike/projections/project.py --check`, exit 0) |
 | Projections | **produced**: six files in `spike/projections/out/`, one manifest digest `e9ba467b…7340` across all of them (§6) |
 | FX-SEAM-A / B | **re-authored on the real seam, RED**; B now asserts against the real projected tier; guards green; `4 passed, 3 xfailed` |
-| Spike 2 | 11 acts / 28 assertions performed in one sitting; **working rate 1.08 acts/h** over a 10.15 h sitting span, calendar rate 0.75 acts/h; individual act times not kept, recorded transparently on every row (§5) |
+| Spike 2 | 11 acts / 28 assertions performed in one sitting of 1.65 h (05:00–06:39 on 2026-09-11); **working rate 6.67 acts/h**, calendar rate 0.75 acts/h; individual act times not kept, recorded transparently on every row (§5) |
 | Arm 0 | **no result exists**; branch not selectable; capture list handed to OPS (§2) |
 | Handoff to OPS | **ready**: `spike/projections/HANDOFF-TO-OPS.md` carries the package digests and the adjudication's consequence; two OPS confirmations precede any build (same source bytes, same plan) |
 
@@ -67,12 +67,12 @@ Derived by `python spike/measurements/rate.py` over the two logs. The tool refus
 | queue open since | 2026-09-10T16:04:00-04:00 |
 | measured to | 2026-09-11T06:39:00-04:00, the end of the architect's sitting (14.583 h after the queue opened) |
 | calendar acts per hour | 0.754 |
-| sitting | one, 2026-09-10T20:30 to 2026-09-11T06:39 (10.15 h span) |
-| working acts per hour | 1.084 |
+| sitting | one, 2026-09-11T05:00 to 06:39 (1.65 h) |
+| working acts per hour | 6.667 |
 | hours to clear the required acts | 14.58 as it happened |
 | starvation incidents | 2 — `sv-001` (B1, 0.034 h) and `sv-002` (B1+B2, 0.033 h), each closed at a session end with "no act received" |
 
-**Reading it honestly.** The eleven acts are real: the projector verified every one against its record's content address and projected. Their individual times were not kept. The architect's statement, recorded verbatim on every acted row (`actTimesNote`): *"I only know the start time as recorded and end time."* So every row carries `actedAt` = the sitting's end (06:39, the time the architect wrote on the last record) and `sittingStart` = the start as the architect recorded it, 08:30 — which can only precede the end as 20:30 on 2026-09-10; an 08:30 start on the 11th would postdate both the end and the file's save at 06:40. The rows keep the original value in the note, and the date is a one-field correction if wrong. Two consequences: the **working rate is a lower bound** — 1.08 acts per hour spreads eleven acts over a ten-hour span that includes the night, not over attentive time — and the **calendar rate** (0.75) counts the queue's whole open interval. The bundling lever is measured, not assumed: 11 acts carried 28 assertions; had each assertion been its own record the count would have been 28 acts plus the adjudication and the rule. The starvation log records only intervals in which the agent was present and blocked; the queue was open 14.6 h between the last agent session and the acts, with no agent waiting. **For Phase 4's entry condition** (ARO §16, §17.6): at 2.55 assertions per act and 1.08 acts per hour, a real specification's hundreds of records price out at hours to days of operator sittings, and GP-B (batch cadence) and record granularity are the levers — exactly what §16 says to calibrate first if the count demands it.
+**Reading it honestly.** The eleven acts are real: the projector verified every one against its record's content address and projected. Their individual times were not kept. The architect's statements, recorded verbatim on every acted row (`actTimesNote`): *"I only know the start time as recorded and end time,"* then, asked for the start, *"I started at 5am this morning."* So every row carries `actedAt` = the sitting's end (06:39, the time the architect wrote on the last record) and `sittingStart` = 05:00 on 2026-09-11. The note also keeps the field's history: the rows first carried `08:30:00`, the agent's format example, and an interim reading of 20:30 the evening before, both superseded by the architect's correction. Two rates follow: the **working rate**, 6.67 acts per hour over the 1.65 h sitting, which is the number spike 2 exists for; and the **calendar rate**, 0.75, which counts the queue's whole open interval including the night. The bundling lever is measured, not assumed: 11 acts carried 28 assertions (17 per hour of sitting); had each assertion been its own record the count would have been 28 acts plus the adjudication and the rule. The starvation log records only intervals in which the agent was present and blocked; the queue was open 14.6 h between the last agent session and the acts, with no agent waiting. **For Phase 4's entry condition** (ARO §16, §17.6): at 2.55 assertions per act and 6.67 acts per hour, a real specification's hundreds of records price out at tens of hours of operator sittings for the records alone, before the closures each record's underdetermination adds; GP-B (batch cadence) and record granularity are the levers, and this slice's ratio of 19 closures to 10 source assertions is the number to carry into that calibration.
 
 **What is queued, by batch.** B1 (16:04): rq-001 layout convention, rq-002 layout rule (superseded). B2 (18:43): rq-003…rq-007 the five L2 records for 100 % span review; rq-008 the findings-store interface (8 closures); rq-009 the read seam (2); rq-010 module boundaries (8); rq-011 the adjudication; rq-012 the rule re-addressed (supersedes rq-002 because the rule's content changed — a changed rule is a new content address and a new act, ARO §9, D23).
 
@@ -119,7 +119,7 @@ Dispositions from the architect's direction of 2026-09-10 are applied where give
 | F-17 | Graph-author contamination | **resolved** by Amendment 2 (100 % span review; values conferred by the architect; non-graduating) |
 | F-18 | The plan types the store's `cycle` as `number` and author-agent's `cycleId` as a string like `cycle-3`; the read seam cannot be typed without a decision | new; flagged inside rq-009 (`c:seam:cycle-identity`) |
 | F-19 | `Finding`'s field set is stated only by two literal examples; `replay` appears in one | new; `diag:Finding-fields-by-example`, non-blocking, in the L2 graph |
-| F-20 | **Act times were not kept per act.** Ten acted rows carried `2026-09-11T08:30:00-04:00` (the architect's recorded start, which read as a future time on that date); rq-012 carried 06:39:00, the end. The architect: "I only know the start time as recorded and end time." | **resolved transparently** 2026-09-11: every acted row now carries `sittingStart` 2026-09-10T20:30, `actedAt` 2026-09-11T06:39, and the statement and the original value in `actTimesNote`; rq-011's `batchSize` restored; the rate tool reports calendar and working rates separately (§5) |
+| F-20 | **Act times were not kept per act.** Ten acted rows carried `2026-09-11T08:30:00-04:00` (the architect's recorded start, which read as a future time on that date); rq-012 carried 06:39:00, the end. The architect: "I only know the start time as recorded and end time." | **resolved transparently** 2026-09-11: every acted row now carries `sittingStart` 2026-09-11T05:00 (the architect: "I started at 5am this morning"), `actedAt` 2026-09-11T06:39, and the statements and the field's history in `actTimesNote`; rq-011's `batchSize` restored; the rate tool reports calendar and working rates separately (§5) |
 
 ## 10. What was falsified
 
@@ -156,7 +156,7 @@ python tools/layout.py                                # exit 0 (F-10 fixed 2026-
 
 ## 14. What the architect is asked for, in order
 
-1. Confirm the sitting's start date in `actTimesNote` (recorded as 2026-09-10T20:30 from your "08:30"); one field on each row if it is wrong.
+1. Nothing further on the queue: the sitting is recorded as you stated it (05:00–06:39, 2026-09-11).
 2. Optionally record adjudication C as a dated line in the decision record, in the same idiom as GP-D; the queue row is the act, the record is where the operational decisions are read.
 3. OPS: confirm the two preconditions in the handoff note and build; Arm 0 remains theirs.
 4. F-04 and F-06 as spec matters; F-03 and F-09 (delivery of dependencies; the Phase-1 ratification record) as governance matters.

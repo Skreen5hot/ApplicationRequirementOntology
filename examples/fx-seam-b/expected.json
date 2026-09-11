@@ -1,0 +1,14 @@
+{
+  "_what": "What the built-manifest-vs-projected-seam check must find here, and what turns the fixture green.",
+  "onTheseInputs": {
+    "violations": [
+      {"consumer": "author-agent", "module": "panel-findings-store", "symbol": "getFindings", "projectedExports": ["FindingInput", "appendFinding", "getFinding", "listFindings"]}
+    ],
+    "cleanConsumers": [],
+    "_control": "author-agent is the only consumer of the store in the slice, so the control is the discriminate test: renaming its import to a projected export must clear the violation and make author-agent the clean consumer."
+  },
+  "green": {
+    "requires": "Phase 5 composing with the loop's seam gate consuming the projected `declared` tier (INT-2, a CP/SM version bump). ARO alone cannot turn this green (ARO 13, 11.3); the architect's disposition of 2026-09-10 confirms it: B's green is the INT-2 composition milestone.",
+    "_note": "Authored RED at Phase 1.5 and left RED."
+  }
+}

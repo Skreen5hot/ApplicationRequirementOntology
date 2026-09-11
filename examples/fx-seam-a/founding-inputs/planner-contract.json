@@ -1,0 +1,14 @@
+{
+  "_fixture": "FX-SEAM-A founding input 2 of 4: the Planner Contract — the ArchitecturePlan the loop's architect dispatch authors up front from the spec (IntegratedAgent build_loop.author_architecture). REPRESENTATIVE, not captured: no baseline run has been recorded yet, so this document states the drift the Ops manifest names (the store's read member re-proposed as `getFindings`). Arm 0's per-run capture replaces it. Independently derived: a second model reading of the same spec.",
+  "projectionInputManifest": null,
+  "derivedBy": "independent (architect dispatch; representative of the stated failure)",
+  "interfaces": {
+    "contract": {"exports": [{"name": "Finding", "signature": "export interface Finding"}, {"name": "Disposition", "signature": "export interface Disposition"}], "depends_on": [], "forbidden_imports": []},
+    "panel-findings-store": {"exports": [
+        {"name": "appendFinding", "signature": "export function appendFinding(rootDir, cycle, input)"},
+        {"name": "getFindings", "signature": "export function getFindings(rootDir, cycle)"},
+        {"name": "getFinding", "signature": "export function getFinding(rootDir, id)"}
+      ], "depends_on": ["contract"], "forbidden_imports": []},
+    "author-agent": {"exports": [{"name": "proposeRevisions", "signature": "export async function proposeRevisions(input)"}], "depends_on": ["contract", "panel-findings-store"], "forbidden_imports": []}
+  }
+}

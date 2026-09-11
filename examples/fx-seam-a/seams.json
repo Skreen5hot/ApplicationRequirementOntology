@@ -1,0 +1,47 @@
+{
+  "_what": "The seam index for the SRS 3-module slice: for each seam, WHERE each of the four founding inputs states its name. Authored knowledge -- the fixture asserts these locations are the same seam; the check asserts they carry one name. Paths are dotted, with [n] for list indices.",
+  "documents": {
+    "plan": "founding-inputs/plan.json",
+    "plannerContract": "founding-inputs/planner-contract.json",
+    "builderBrief": "founding-inputs/builder-brief.json",
+    "testerContract": "founding-inputs/tester-contract.json"
+  },
+  "seams": [
+    {"id": "panel-findings-store.findings-read", "producer": "panel-findings-store", "consumer": "author-agent", "kind": "function",
+     "class": "the getFindings family (SPIKE.md §1; Ops manifest 2026-09-10): the store declares listFindings / getFinding, the architecture re-proposes getFindings, and the brief and bar downstream of the architecture carry it",
+     "statedAt": {
+       "plan": "units[1].signatures[2].export",
+       "plannerContract": "interfaces.panel-findings-store.exports[1].name",
+       "builderBrief": "briefs.author-agent.callsPerArchitecture[0].symbol",
+       "testerContract": "tests.author-agent.assertsCalls[0].symbol"
+     }},
+    {"id": "panel-findings-store.appendFinding", "producer": "panel-findings-store", "consumer": "panel / attack (out of slice)", "kind": "function",
+     "class": "positive control: a seam the four inputs already agree on",
+     "statedAt": {
+       "plan": "units[1].signatures[0].export",
+       "plannerContract": "interfaces.panel-findings-store.exports[0].name",
+       "builderBrief": "briefs.panel-findings-store.mustExport[0]",
+       "testerContract": "tests.panel-findings-store.assertsExports[0]"
+     }},
+    {"id": "panel-findings-store.getFinding", "producer": "panel-findings-store", "consumer": "author-agent", "kind": "function",
+     "class": "positive control: the by-id read member, agreed everywhere",
+     "statedAt": {
+       "plan": "units[1].signatures[1].export",
+       "plannerContract": "interfaces.panel-findings-store.exports[2].name",
+       "builderBrief": "briefs.panel-findings-store.mustExport[1]",
+       "testerContract": "tests.panel-findings-store.assertsExports[1]"
+     }},
+    {"id": "author-agent.proposeRevisions", "producer": "author-agent", "consumer": "orchestrator (out of slice)", "kind": "function",
+     "class": "positive control: agreed everywhere",
+     "statedAt": {
+       "plan": "units[2].signatures[0].export",
+       "plannerContract": "interfaces.author-agent.exports[0].name",
+       "builderBrief": "briefs.author-agent.mustExport[0]",
+       "testerContract": "tests.author-agent.assertsExports[0]"
+     }}
+  ],
+  "notIndexed": [
+    "The type `Finding` is declared twice in the plan (contract's scope and panel-findings-store's scope): an owner-identity divergence, not a name divergence, so this name-equality index does not see it. Projection removes it by construction (one declared tier, one owner). Recorded here so it is not mistaken for agreement.",
+    "The brief's interfaces block (`imports`) and its architecture section (`callsPerArchitecture`) disagree inside one document; the index points at the architecture section because that is the name the builder followed."
+  ]
+}

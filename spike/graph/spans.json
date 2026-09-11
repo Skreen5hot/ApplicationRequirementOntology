@@ -1,0 +1,20 @@
+{
+  "_what": "The spans of the SRS the slice's L2 graph grounds in. Addressed by line in the normalized text, guarded by a prefix. Minted into fragments by spike/graph/fragments.py; the L2 graph cites the resulting fragment ids.",
+  "doc": "C:/Users/aaron/OneDrive/Documents/SPEC.md",
+  "expectedDigest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450",
+  "registeredAs": "src:srs-spec",
+  "spans": [
+    {"label": "C-S8.header",      "line": 78,  "startsWith": "**C-S8 — revise-propose**", "section": "SRS §3"},
+    {"label": "C-S8.W-CS8-N",     "line": 79,  "startsWith": "- **W-CS8-N (nominal):**", "section": "SRS §3"},
+    {"label": "C-S8.W-CS8-D1",    "line": 80,  "startsWith": "- **W-CS8-Δ1 (one factor: injected instruction", "section": "SRS §3"},
+    {"label": "C-S8.determinism", "line": 81,  "startsWith": "- Determinism note: proposal content varies", "section": "SRS §3"},
+    {"label": "J-S2.chain",       "line": 26,  "startsWith": "**J-S2 — refine (one turn of the loop).**", "section": "SRS §2"},
+    {"label": "S4.records",       "line": 85,  "startsWith": "Records: `Spec {path, rev}`", "section": "SRS §4"},
+    {"label": "W-CS4-N",          "line": 56,  "startsWith": "- **W-CS4-N (nominal):**", "section": "SRS §3"},
+    {"label": "S5.table-header",  "line": 98,  "startsWith": "| Component | Repo home | Serves |", "section": "SRS §5"},
+    {"label": "S5.author-agent",  "line": 107, "startsWith": "| `author-agent` (proposal writer)", "section": "SRS §5"},
+    {"label": "S5.traceable",     "line": 110, "startsWith": "Every component traceable to the capabilities it serves", "section": "SRS §5"},
+    {"label": "S6.S-S4",          "line": 119, "startsWith": "| S-S4 | panel / attack → findings store", "section": "SRS §6"},
+    {"label": "V-S1",             "line": 127, "startsWith": "- **V-S1 — Findings and ledger immutability.**", "section": "SRS §7"}
+  ]
+}

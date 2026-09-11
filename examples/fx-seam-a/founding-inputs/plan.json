@@ -1,0 +1,21 @@
+{
+  "_fixture": "FX-SEAM-A founding input 1 of 4: plan.json, the model-proposed decompose of the SRS 3-module slice as supplied by Ops on 2026-09-10 (spike/inputs/srs-seam-slice-plan.json), reduced to the fields the seam index reads. `scope` is an excerpt of the supplied prose, marked; `signatures` are verbatim, including the truncated `Finding[` return type on listFindings (routed to IA DEV as an external finding). Independently derived: no Projection Input Manifest.",
+  "projectionInputManifest": null,
+  "derivedBy": "independent (decomposer dispatch, coord-j)",
+  "units": [
+    {"id": "contract", "files": ["src/contract.ts"], "depends_on": [], "covers": ["SRS §4", "SRS §6", "SRS-operator §6", "SRS-operator §8"], "kind": "code",
+     "scope": "[excerpt] Module `contract` — src/contract.ts. The single shared type/constant module for the whole system; zero runtime logic. Exports, among others: export interface Finding { id: string; source: string; severity: string; clause: string; text: string; replay?: string; } and export interface Disposition { finding_id: string; kind: DispositionKind; reasons: string[]; }."},
+    {"id": "panel-findings-store", "files": ["src/panel-findings-store.ts"], "depends_on": ["contract"], "covers": ["SRS §3"], "kind": "code",
+     "scope": "[excerpt] Module `panel-findings-store` is the append-only persistence layer for `Finding` records emitted by the panel/attack capabilities (SRS C-S4, C-S5) across the S-S4 seam. Types (exported): export interface Finding { … } — re-declared here as well as in `contract`. Functions (exported): appendFinding(rootDir: string, cycle: number, input: FindingInput): Finding; listFindings(rootDir: string, cycle?: number): Finding[]; getFinding(rootDir: string, id: string): Finding | undefined. No update/delete/rename function exists, by design.",
+     "signatures": [
+       {"export": "appendFinding", "params": [{"name": "rootDir", "type": "string"}, {"name": "cycle", "type": "number"}, {"name": "input", "type": "FindingInput"}], "returns": "Finding"},
+       {"export": "getFinding", "params": [{"name": "rootDir", "type": "string"}, {"name": "id", "type": "string"}], "returns": "Finding | undefined"},
+       {"export": "listFindings", "params": [{"name": "rootDir", "type": "string"}, {"name": "cycle", "type": "number"}], "returns": "Finding["}
+     ]},
+    {"id": "author-agent", "files": ["src/author-agent.ts"], "depends_on": ["contract", "panel-findings-store"], "covers": ["SRS §3"], "kind": "code",
+     "scope": "[excerpt] Module: author-agent — implements SRS §3 capability C-S8 (revise-propose). DEPENDENCIES: `contract`: import the `Finding`, `Disposition`, `DispositionKind` types from it. `panel-findings-store`: use its read API to fetch the findings for a given `cycleId`. Exact call signatures of both dependencies are resolved at build time from their own built contracts — do not guess them. EXPORTS: export async function proposeRevisions(input: ProposeRevisionsInput): Promise<ProposeRevisionsResult>.",
+     "signatures": [
+       {"export": "proposeRevisions", "params": [{"name": "input", "type": "ProposeRevisionsInput"}], "returns": "Promise<ProposeRevisionsResult>"}
+     ]}
+  ]
+}

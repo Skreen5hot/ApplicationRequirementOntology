@@ -86,6 +86,7 @@ read from the licensing tool so the two cannot drift:
 | `ontology-validation` | SHACL shapes; **not** in the reasoner scope |
 | `test-fixture` | expected to be invalid on purpose; must never be loaded as ontology |
 | `generated-artifact` | derived; must name a `generator`, or declare itself `orphaned` with the reason |
+| `spike-artifact` | the Phase-1.5 spike's output, any format; governed by SPIKE.md, non-graduating; project-authored content for licensing (architect's act, 2026-09-11) |
 | `vendored-ontology` | somebody else's, redistributed under their licence, attribution required |
 | `third-party-reference` | somebody else's, **not** redistributable |
 | `documentation`, `configuration`, `tool`, `project-licence` | as they sound |

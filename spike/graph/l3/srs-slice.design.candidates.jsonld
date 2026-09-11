@@ -1,0 +1,129 @@
+{
+  "@context": {
+    "@vocab": "https://fandaws.com/ontology/aro/spike-1.5/vocab#",
+    "_note": "Same flat spike vocabulary as the L2 graph. No BFO/CCO. Non-graduating (Amendment 2 iii)."
+  },
+  "@id": "spike:l3:srs-slice:candidates",
+  "@type": "DesignGraph",
+  "layer": "L3",
+  "status": "candidate",
+  "title": "SRS 3-module slice — closure CANDIDATES (L3), bundled into Specification Records for ratification",
+  "rule": "Amendment 2 (ii): every value below is conferred by the architect from these labeled candidates. Plan-derived knowledge appears only under rationaleSource, never under groundedBy. L3 forbids groundedBy (ARO D17); none appears here.",
+  "facetsDefault": {
+    "origin": {"kind": "transformer", "actRef": "act:aro-dev-agent:2026-09-10:closure-proposals", "label": "model-proposed; confers nothing (ARO 4.2)"},
+    "grounding": "absent (forbidden for L3)",
+    "ratification": "unratified",
+    "_authority": "computed, never stored: not AUTHORITATIVE until the architect's act"
+  },
+  "rationaleSources": {
+    "plan": "spike/inputs/srs-seam-slice-plan.json — the baseline decompose; the thing under test. Citation only.",
+    "loopToolchain": "IntegratedAgent runtime (TypeScript modules imported as ./name.ts; node:test) — the loop's measured toolchain, not a statement in the SRS. Citation only."
+  },
+  "records": [
+    {
+      "@id": "sr:L3:panel-findings-store-interface",
+      "@type": "SpecificationRecord",
+      "title": "The findings-store interface — one record, one act",
+      "kind": "closure-bundle",
+      "closes": ["diag:store-read-interface-unstated", "diag:store-component-unstated"],
+      "addresses": ["sr:L2:S-S4", "sr:L2:Finding"],
+      "dependsOn": ["a:S-S4:seam", "a:Finding:record", "a:Finding:fields"],
+      "standalone": false,
+      "assertions": [
+        {"@id": "c:store:component", "@type": "Closure", "proposed": {"component": "panel-findings-store", "responsibility": "append-only persistence of Finding records; owns the findings/ tree and nothing else (no dispositions, no walk items, no ledger)"},
+         "rationaleSource": [{"cite": "plan#units[1].scope"}, {"cite": "sf:f743e46fcb17bf1038e2560e", "why": "S-S4 names a findings store as consumer; the component realizing it is the closure"}]},
+        {"@id": "c:store:appendFinding", "@type": "Closure", "proposed": {"export": "appendFinding", "signature": "appendFinding(rootDir: string, cycle: number, input: FindingInput): Finding"},
+         "rationaleSource": [{"cite": "plan#units[1].signatures[0]"}, {"cite": "sf:3482babe3032ab57d14942de", "why": "W-CS4-N shows an append into findings/cycle-1/"}]},
+        {"@id": "c:store:getFinding", "@type": "Closure", "proposed": {"export": "getFinding", "signature": "getFinding(rootDir: string, id: string): Finding | undefined"},
+         "rationaleSource": [{"cite": "plan#units[1].signatures[1]"}]},
+        {"@id": "c:store:listFindings", "@type": "Closure", "proposed": {"export": "listFindings", "signature": "listFindings(rootDir: string, cycle?: number): Finding[]", "order": "ascending by numeric id"},
+         "rationaleSource": [{"cite": "plan#units[1].signatures[2]", "note": "the plan's stored return type is the truncated `Finding[`; the candidate states `Finding[]`. The plan defect is routed to IA DEV (spike/report.md F-16), not repaired here."}]},
+        {"@id": "c:store:FindingInput", "@type": "Closure", "proposed": {"type": "FindingInput", "definition": "Omit<Finding, 'id'>", "note": "the store assigns id"},
+         "rationaleSource": [{"cite": "plan#units[1].scope"}, {"cite": "sf:3482babe3032ab57d14942de", "why": "W-CS4-N's appended record carries an id of the form F-<n>"}]},
+        {"@id": "c:store:errors", "@type": "Closure", "proposed": {"classes": ["FindingValidationError", "FindingWriteConflictError", "FindingStoreCorruptionError"], "extend": "Error"},
+         "rationaleSource": [{"cite": "plan#units[1].scope"}]},
+        {"@id": "c:store:no-mutation-api", "@type": "Closure", "proposed": {"rule": "the public API has no update, delete or rename function; the omission is the mechanical guarantee of append-only at the API surface"},
+         "rationaleSource": [{"cite": "sf:590259498f7dac6171526d27", "why": "V-S1: every commit's diff over findings/** is append-only — motivation, not grounding; the API shape is design"}, {"cite": "plan#units[1].scope"}]},
+        {"@id": "c:store:on-disk-layout", "@type": "Closure", "proposed": {"path": "${rootDir}/findings/cycle-${cycle}/${source}-${seq3}.json", "seq3": "3-digit zero-padded, 1-based, scoped to (cycle, source)"},
+         "rationaleSource": [{"cite": "sf:3482babe3032ab57d14942de", "why": "W-CS4-N shows findings/cycle-1/closure-auditor-001.json — one instance; the pattern is a generalization and therefore design"}, {"cite": "plan#units[1].scope"}]}
+      ],
+      "displayDuties": {"fragmentTextBesideAssertions": "the S-S4 row, W-CS4-N and V-S1 are cited as rationale and displayed as such — none grounds", "facetBreakdown": "origin transformer(model-proposed) / grounding absent / ratification unratified", "standaloneFlag": false, "expiryFlag": "n/a (dependent closure; lapses with its declared dependencies)", "vacuityClassFlags": []}
+    },
+    {
+      "@id": "sr:L3:findings-read-seam",
+      "@type": "SpecificationRecord",
+      "title": "The read seam author-agent → panel-findings-store — the one identity projection carries",
+      "kind": "closure-bundle",
+      "closes": ["diag:store-read-interface-unstated"],
+      "addresses": ["sr:L2:C-S8"],
+      "dependsOn": ["a:C-S8:W-CS8-N", "c:store:listFindings", "c:store:getFinding"],
+      "standalone": false,
+      "assertions": [
+        {"@id": "c:seam:author-agent-reads-store", "@type": "Closure",
+         "proposed": {"consumer": "author-agent", "producer": "panel-findings-store", "members": ["listFindings", "getFinding"], "cycleFetch": "listFindings(rootDir, cycle)", "byId": "getFinding(rootDir, id)", "neverCalls": ["appendFinding"], "note": "this is the seam whose name drifts to `getFindings` in the baseline; once ratified it is projected identically into plan.json, the Planner Contract, the Builder Brief and the Tester Contract"},
+         "rationaleSource": [{"cite": "sf:50ca7c6fbd05d737117613fe", "why": "W-CS8-N: 'findings for cycle N in' — the input exists in the source; the call by which it arrives does not"}, {"cite": "plan#units[2].scope"}]},
+        {"@id": "c:seam:cycle-identity", "@type": "Closure",
+         "proposed": {"cycleParameter": "number", "mapping": "author-agent's cycle identifier is parsed to the store's numeric cycle", "flag": "the plan types the store's cycle as number and author-agent's cycleId as a string like 'cycle-3'; the operator decides one type or the mapping"},
+         "rationaleSource": [{"cite": "plan#units[1].signatures[2]"}, {"cite": "plan#units[2].scope"}]}
+      ],
+      "displayDuties": {"fragmentTextBesideAssertions": "W-CS8-N displayed as rationale", "facetBreakdown": "origin transformer(model-proposed) / grounding absent / ratification unratified", "standaloneFlag": false, "expiryFlag": "n/a", "vacuityClassFlags": ["c:seam:cycle-identity carries an unresolved type mismatch in the plan"]}
+    },
+    {
+      "@id": "sr:L3:module-boundaries",
+      "@type": "SpecificationRecord",
+      "title": "Module boundaries for the slice — the shared-types module, author-agent's public interface, the dependency edges",
+      "kind": "closure-bundle",
+      "closes": ["diag:store-component-unstated"],
+      "addresses": ["sr:L2:author-agent", "sr:L2:Finding", "sr:L2:Disposition", "sr:L2:C-S8"],
+      "dependsOn": ["a:author-agent:component", "a:Finding:fields", "a:Disposition:record", "a:C-S8:W-CS8-N", "a:C-S8:W-CS8-D1"],
+      "standalone": false,
+      "assertions": [
+        {"@id": "c:contract:component", "@type": "Closure", "proposed": {"component": "contract", "responsibility": "types-only module owning the shared record types; zero runtime logic; in slice scope it exports Finding, Disposition, DispositionKind, ProposeRevisionsInput, ProposeRevisionsResult, RevisionRefusal"},
+         "rationaleSource": [{"cite": "plan#units[0].scope"}]},
+        {"@id": "c:contract:Finding-single-owner", "@type": "Closure", "proposed": {"rule": "Finding is declared once, in contract; panel-findings-store and author-agent import it", "resolves": "the plan declares Finding in two modules"},
+         "rationaleSource": [{"cite": "plan#units[0].scope"}, {"cite": "plan#units[1].scope"}]},
+        {"@id": "c:contract:ProposeRevisionsInput", "@type": "Closure", "proposed": {"type": "ProposeRevisionsInput", "fields": {"proposalId": "string (/^prop-\\d{3,}$/)", "cycleId": "string", "specPath": "string", "rev": "string"}},
+         "rationaleSource": [{"cite": "plan#units[2].scope"}, {"cite": "sf:50ca7c6fbd05d737117613fe", "why": "W-CS8-N names prop-004 — a proposal identifier exists in the source; its type does not"}]},
+        {"@id": "c:contract:ProposeRevisionsResult", "@type": "Closure", "proposed": {"type": "ProposeRevisionsResult", "fields": {"proposalId": "string", "diffPath": "string", "dispositionsPath": "string", "dispositions": "Disposition[] (exactly one per finding, store order)", "refusals": "RevisionRefusal[]", "specHashBefore": "string (sha256 hex)", "specHashAfter": "string (sha256 hex; must equal specHashBefore)"}},
+         "rationaleSource": [{"cite": "plan#units[2].scope"}, {"cite": "sf:50ca7c6fbd05d737117613fe", "why": "the two outputs and the hash-unchanged property are L2; the result record that reports them is design"}]},
+        {"@id": "c:contract:RevisionRefusal", "@type": "Closure", "proposed": {"type": "RevisionRefusal", "fields": {"finding_id": "string", "code": "\"A-DIRECT-01\""}},
+         "rationaleSource": [{"cite": "sf:e2b36360feaa62fe926f6edc", "why": "W-CS8-Δ1 logs {\"code\": \"A-DIRECT-01\"} — the code is L2; the record type carrying it is design"}, {"cite": "plan#units[2].scope"}]},
+        {"@id": "c:author-agent:interface", "@type": "Closure", "proposed": {"export": "proposeRevisions", "signature": "proposeRevisions(input: ProposeRevisionsInput): Promise<ProposeRevisionsResult>", "alsoExports": ["SpecIntegrityViolationError extends Error"], "artifacts": ["proposals/${proposalId}.diff", "proposals/${proposalId}.dispositions.md"]},
+         "rationaleSource": [{"cite": "plan#units[2].scope"}, {"cite": "sf:50ca7c6fbd05d737117613fe", "why": "the artifact names generalize W-CS8-N's prop-004 instances"}]},
+        {"@id": "c:deps:edges", "@type": "Closure", "proposed": {"depends_on": {"contract": [], "panel-findings-store": ["contract"], "author-agent": ["contract", "panel-findings-store"]}},
+         "rationaleSource": [{"cite": "plan#units[*].depends_on"}]},
+        {"@id": "c:realizes", "@type": "Closure", "proposed": {"realizes": {"contract": ["sr:L2:Finding", "sr:L2:Disposition"], "panel-findings-store": ["sr:L2:S-S4", "sr:L2:Finding"], "author-agent": ["sr:L2:C-S8", "sr:L2:author-agent"]}, "note": "which module realizes which L2 record — design; it drives the projected `covers` and `scope`"},
+         "rationaleSource": [{"cite": "plan#units[*].covers"}]}
+      ],
+      "displayDuties": {"fragmentTextBesideAssertions": "W-CS8-N, W-CS8-Δ1 displayed as rationale", "facetBreakdown": "origin transformer(model-proposed) / grounding absent / ratification unratified", "standaloneFlag": false, "expiryFlag": "n/a", "vacuityClassFlags": []}
+    },
+    {
+      "@id": "sr:L3:layout-convention",
+      "@type": "SpecificationRecord",
+      "title": "The per-project layout convention (standalone, expiring) — already queued as rq-001",
+      "kind": "closure",
+      "artifact": "spike/graph/l3/convention-closure.candidate.json",
+      "standalone": true,
+      "assertions": [{"@id": "c:layout:convention", "@type": "Closure", "see": "spike/graph/l3/convention-closure.candidate.json", "note": "one closure bundling five values (language, sourceRoot, modulePathPattern, testFilePattern, testDiscipline), an operator-attested standalone marker and an explicit expiry"}],
+      "queueRef": "rq-001"
+    }
+  ],
+  "adjudications": [
+    {
+      "@id": "adj:author-agent-repo-home",
+      "@type": "Adjudication",
+      "notACandidate": true,
+      "presentedPer": "Amendment 2 (ii): presented as an adjudication, not a candidate",
+      "conflict": "diag:author-agent-repo-home-vs-plan",
+      "theSourceSays": {"fragment": "sf:2dae2c3e4037400722c3049c", "text": "| `author-agent` (proposal writer) | `.claude/agents/author` | C-S8 |", "layer": "L2", "status": "candidate for acceptance under sr:L2:author-agent"},
+      "thePlanSays": {"cite": "plan#units[2].files", "value": ["src/author-agent.ts"], "layer": "none — model-proposed, confers nothing"},
+      "options": [
+        {"id": "A", "label": "Honor the source", "content": "author-agent is realized as an agent charter at .claude/agents/author; the layout convention carries a per-component override for it; projected files = ['.claude/agents/author'].", "consequenceForTheSpike": "the treatment build has two TypeScript modules and one charter; the seam author-agent → store becomes a prose seam inside a charter, so the baseline's TS2305 class may not be reproducible in the treatment arm at all. The A/B question changes shape and should be re-stated before the builds."},
+        {"id": "B", "label": "Source-amendment request", "content": "record a request to amend SRS §5 so that author-agent's repo home is a built module (e.g. tools/author-agent/ or src/); until the source is amended the L2 assertion stands and any relocating closure is an open conflict, not eligible.", "consequenceForTheSpike": "the treatment arm waits on the SRS author (the operator) amending and re-registering the source; the source digest changes, fragments migrate (ARO 5.2), and the L2 record re-queues."},
+        {"id": "C", "label": "Relocating closure for the spike, conflict left open", "content": "ratify a closure placing author-agent at src/author-agent.ts for this spike only, with diag:author-agent-repo-home-vs-plan left open and blocking full eligibility of author-agent's projected `files`.", "consequenceForTheSpike": "the projection of author-agent's files is PROVISIONAL at best (ARO 11.2); the treatment arm reproduces the baseline's shape exactly, at the cost of building against a known conflict with the source — which is the misreading class ARO exists to surface, knowingly re-enacted."}
+      ],
+      "decision": null,
+      "displayDuties": {"fragmentTextBesideAssertions": "the S5.author-agent row displayed verbatim beside the plan line", "facetBreakdown": "L2 candidate vs. model-proposed artifact", "standaloneFlag": "n/a", "expiryFlag": "n/a", "vacuityClassFlags": ["no option is recommended by the dev agent; the choice changes what the A/B measures"]}
+    }
+  ]
+}

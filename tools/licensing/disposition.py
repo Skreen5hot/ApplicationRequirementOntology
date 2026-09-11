@@ -139,9 +139,17 @@ def licence_of(disposition: str, relative=None):
 ADJUDICATIONS = "config/licensing-adjudications.yaml"
 
 #: Roles whose files this repository authored and may publish as content.
+#:
+#: `spike-artifact` (architect's act, 2026-09-11, docs/decisions): everything
+#: the Phase-1.5 spike produced under spike/ -- fixtures, queue, graph and
+#: closure files, rules, measurements, report -- regardless of format. One
+#: role because the spike is one governed thing (SPIKE.md, under its
+#: precedence rule) and non-graduating (Amendment 2 iii); licensing-wise it
+#: is project-authored content under the project licence, Python included,
+#: which is why it sits in this set rather than in SOFTWARE_ROLES.
 CONTENT_ROLES = {"ontology-module", "ontology-module-set",
                  "ontology-validation", "test-fixture", "documentation",
-                 "generated-artifact"}
+                 "generated-artifact", "spike-artifact"}
 
 #: Roles that are software rather than published content.
 SOFTWARE_ROLES = {"tool", "configuration"}

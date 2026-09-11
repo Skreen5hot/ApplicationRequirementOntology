@@ -1,0 +1,10 @@
+{
+  "_fixture": "FX-SEAM-A founding input 4 of 4: the Tester Contract — what each module's frozen bar asserts about exports and cross-module calls. The author-agent bar, authored against the ArchitecturePlan, expects the re-proposed name. REPRESENTATIVE until Arm 0 captures a real bar.",
+  "projectionInputManifest": null,
+  "derivedBy": "independent (test-author dispatch; representative of the stated failure)",
+  "tests": {
+    "contract": {"assertsExports": ["Finding", "Disposition"]},
+    "panel-findings-store": {"assertsExports": ["appendFinding", "getFinding", "listFindings"]},
+    "author-agent": {"assertsExports": ["proposeRevisions"], "assertsCalls": [{"module": "panel-findings-store", "symbol": "getFindings"}]}
+  }
+}

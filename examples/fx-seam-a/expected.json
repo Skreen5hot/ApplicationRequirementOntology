@@ -1,0 +1,19 @@
+{
+  "_what": "What the check must find on these founding inputs (RED half) and what Phase-5 projection must produce (green half).",
+  "onTheseFoundingInputs": {
+    "divergentSeams": {
+      "panel-findings-store.findings-read": ["getFindings", "listFindings"]
+    },
+    "agreeingSeams": ["author-agent.proposeRevisions", "panel-findings-store.appendFinding", "panel-findings-store.getFinding"],
+    "projectionInputManifestPresent": false
+  },
+  "underSingleGraphProjection": {
+    "divergentSeams": {},
+    "everyFoundingInputCarriesTheSameProjectionInputManifestDigest": true,
+    "_why": "Three consumers reading one field agree by construction (ARO 13: near-tautological by design). This half guards the projection MECHANISM: a compiler bug can still emit divergent names. For this slice the one field is an L3 closure (the SRS names no read interface), projected identically into the plan, the planner contract, the brief and the bar."
+  },
+  "withSingleSourceProjectionDisabled": {
+    "_how": "test-assembled independent derivation only; there is no production disable surface",
+    "divergentSeamsReappear": true
+  }
+}

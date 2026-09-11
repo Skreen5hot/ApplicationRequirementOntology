@@ -1,0 +1,10 @@
+{
+  "_fixture": "FX-SEAM-B input 2 of 2: the built-module manifest as the loop reconciles it after a build (IntegratedAgent build_loop.reconcile_architecture: files plus ACTUAL exported signatures) with each consumer's actual imports (signature_extract.imported_members shape). The projected inputs name the read API `listFindings` / `getFinding`; the builder wrote `getFindings` anyway. This is the IA-CSEAM class: a consumer's built artifact imports a member the contract does not export, and only a check over the BUILT artifact can see it. REPRESENTATIVE until Arm 0 captures the built author-agent's imports.",
+  "modules": {
+    "contract": {"files": ["src/contract.ts"], "exports": ["Finding", "Disposition", "DispositionKind", "ProposeRevisionsInput", "ProposeRevisionsResult", "RevisionRefusal"], "imports": []},
+    "panel-findings-store": {"files": ["src/panel-findings-store.ts"], "exports": ["appendFinding", "getFinding", "listFindings", "FindingValidationError", "FindingWriteConflictError", "FindingStoreCorruptionError"],
+                             "imports": [{"module": "contract", "symbol": "Finding"}]},
+    "author-agent": {"files": ["src/author-agent.ts"], "exports": ["proposeRevisions", "SpecIntegrityViolationError"],
+                     "imports": [{"module": "panel-findings-store", "symbol": "getFindings"}, {"module": "contract", "symbol": "Finding"}, {"module": "contract", "symbol": "Disposition"}]}
+  }
+}

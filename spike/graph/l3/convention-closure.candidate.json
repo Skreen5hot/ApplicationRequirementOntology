@@ -1,0 +1,53 @@
+{
+  "_what": "Arm B step 4 (SPIKE.md section 3; ARO v0.5.2 section 11.3): the ONE per-project convention closure for the SRS-slice build (target substituted RLA -> SRS per Amendment 1, decision record bbdf6bf; the 'rla' token in `id` is a pre-amendment fossil, retained to avoid a mid-flight identity rename), as a ratification CANDIDATE. It is a form the operator authors and ratifies in one act; the dev agent authors none of its values.",
+  "id": "l3:aro-rla:closure:layout-convention",
+  "layer": "L3",
+  "kind": "closure",
+  "status": "candidate",
+  "queueRef": "rq-001",
+  "standalone": true,
+  "standaloneAttestation": "I attest this closure closes no identifiable L2 underdetermination; it supplies project-level defaults for facts the SRS does not state (ARO 5.6). PRECEDENCE: any module home, name, or layout explicitly prescribed by an L2 assertion overrides these defaults; in particular, the author-agent home is governed by the pending adjudication (rq-011), not by this convention. -- Aaron, 2026-09-11",
+  "_standaloneAttestation": "Operator-attested at ratification: this closure closes no identifiable L2 underdetermination (ARO 5.6). Null until the operator attests; the dev agent cannot attest on the operator's behalf.",
+  "expiry": {
+    "kind": "date-or-event",
+    "value": "2026-10-11, or supersession of the SRS source digest pinned by Amendment 1 (bbdf6bf), whichever comes first",
+    "_note": "Set at ratification per ARO 5.6 / section 18 item 4. GP-D initial value (30 days) recorded in the decision record with the rq-001 act; spike finding F-07 resolved by that entry."
+  },
+  "facets": {
+    "origin": {"kind": "transformer", "actRef": "aro-dev-agent session 675f4c87-f66d-4b13-9b01-71a46f18d31c, 2026-09-10", "label": "model-proposed"},
+    "grounding": null,
+    "_grounding": "Forbidden for L3 (ARO D17). Absent, not empty.",
+    "rationaleSource": [],
+    "ratification": "unratified"
+  },
+  "_authority": "Computed, never stored (ARO 3.1). From the facets above: not AUTHORITATIVE; confers nothing.",
+  "closes": [],
+  "addresses": [],
+  "dependsOn": [],
+  "values": {
+    "language": "typescript",
+    "sourceRoot": "src",
+    "modulePathPattern": "{sourceRoot}/{name}.ts",
+    "testFilePattern": "tests/{name}.test.ts",
+    "testDiscipline": "one test file per module, named after it; tests import the module under test by its plan path"
+  },
+  "proposedValues": {
+    "_label": "model-proposed; confers nothing (ARO 4.2: a labeled closure proposal into the L3 queue). The operator may accept, amend, or discard these when authoring `values`.",
+    "_basis": "Motivation, not grounding: the Integrated Agent loop measurably builds TypeScript modules that import one another as './name.ts' and are tested under node:test (IntegratedAgent commits 948e589, ae5dc90; runtime/contract_names.py). That is the loop's toolchain, not a statement in the RLA specification, which is why these are proposals and not values.",
+    "language": "typescript",
+    "sourceRoot": "src",
+    "modulePathPattern": "{sourceRoot}/{name}.ts",
+    "testFilePattern": "tests/{name}.test.ts",
+    "testDiscipline": "one test file per module, named after it; tests import the module under test by its plan path"
+  },
+  "closureDigest": "sha256:c22c90a4194f0f7e9cc55dd2bfc4a64f75eabbc9f5dc551aa9b4a2ac5dc77a6b",
+  "_closureDigest": "Content address over this object once `values` are authored (spike/graph/rules/layout_rule.py: digest()). Null while the values are null: a form has no closure content to address.",
+  "displayDuties": {
+    "_per": "ARO 9 (CP-19 imported)",
+    "fragmentTextBesideAssertions": "none -- standalone closure; there are no grounding fragments to display, and that absence is the point of the standalone marker",
+    "facetBreakdown": "origin transformer / grounding absent / ratification unratified -> not AUTHORITATIVE",
+    "standaloneFlag": true,
+    "expiryFlag": "set at ratification: 2026-10-11 or SRS-digest supersession, whichever first; GP-D = 30 days recorded with the rq-001 act",
+    "vacuityClassFlags": []
+  }
+}

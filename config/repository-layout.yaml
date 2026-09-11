@@ -396,3 +396,47 @@ components:
       directions, recorded verbatim and dated. ARO v0.5.2 section 18 says
       the ratification instrument is recorded here; the Phase-1.5
       amendments of 2026-09-10 are its first entries.
+
+  # ---- Phase 1.5 spike (SPIKE.md) ---------------------------------------
+  #
+  # One role for everything the spike produced, by the architect's act of
+  # 2026-09-11 (docs/decisions/2026-09-10-phase-1.5-amendments.md, "F-11
+  # resolved"): fixtures, queue, graph and closure files, rules,
+  # measurements, report, regardless of format. Governed by SPIKE.md under
+  # its precedence rule; non-graduating per Amendment 2 (iii): nothing here
+  # is ontology and nothing here becomes the Phase-4 reference graph.
+  #
+  # The two FX-SEAM fixtures carry the same role but live under examples/,
+  # their specified location (ARO v0.5.2 section 15; SPIKE.md section 6).
+  # They graduate into the fixture corpus at Phase 5 (ARO section 16) and
+  # are re-roled then; `test-fixture` cannot host them today because that
+  # role means a Turtle graph the SHACL validator loads.
+
+  - id: spike.artifacts
+    path: spike
+    role: spike-artifact
+    description: >-
+      The Phase-1.5 spike, whole: the report; the source register,
+      fragments, L2 graph and L3 candidates; the layout rule and the
+      projector with their self-tests; the ratification queue and the
+      starvation log; the projections and the handoff to OPS; the inputs
+      received from the operator. spike/report.md states what was and was
+      not done.
+
+  - id: fixture.fx-seam-a
+    path: examples/fx-seam-a
+    role: spike-artifact
+    description: >-
+      FX-SEAM-A (ARO 13): the founding-input seam divergence on the SRS
+      slice's real seam, authored RED with green precondition guards in
+      tests/test_fx_seam.py. Not Turtle, so not a `test-fixture`; graduates
+      into the corpus at Phase 5.
+
+  - id: fixture.fx-seam-b
+    path: examples/fx-seam-b
+    role: spike-artifact
+    description: >-
+      FX-SEAM-B (ARO 13): the built artifact against the projected seam,
+      authored RED and left RED; green is the INT-2 composition milestone,
+      which this repository cannot reach alone. Its projected tier is the
+      real projection output.

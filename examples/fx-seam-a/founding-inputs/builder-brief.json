@@ -1,0 +1,14 @@
+{
+  "_fixture": "FX-SEAM-A founding input 3 of 4: the Builder Brief for each module (IntegratedAgent build_loop._unit_work_item). The loop renders the dependencies' interfaces block from one renderer, so `imports` carries the built store's real names; the same brief also carries the architecture section, which carries the ArchitecturePlan's re-proposed name. One document, two names for one seam. REPRESENTATIVE until Arm 0 captures a real brief.",
+  "projectionInputManifest": null,
+  "derivedBy": "independent (per-module brief assembly; representative of the stated failure)",
+  "briefs": {
+    "contract": {"mustExport": ["Finding", "Disposition", "DispositionKind"]},
+    "panel-findings-store": {"mustExport": ["appendFinding", "getFinding", "listFindings"], "imports": [{"module": "contract", "symbol": "Finding"}]},
+    "author-agent": {
+      "mustExport": ["proposeRevisions"],
+      "imports": [{"module": "panel-findings-store", "symbol": "listFindings"}, {"module": "contract", "symbol": "Finding"}, {"module": "contract", "symbol": "Disposition"}],
+      "callsPerArchitecture": [{"module": "panel-findings-store", "symbol": "getFindings"}]
+    }
+  }
+}

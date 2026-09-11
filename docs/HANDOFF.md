@@ -13,7 +13,7 @@ is actually here, what is trustworthy, and what is not.
 not written yet.** What this repository contains today is (a) a working, tested,
 reproducible checking apparatus, (b) a large APQC business-process ontology inherited
 from earlier work that serves as the BFO/CCO-aligned foundation, and (c) a ratified-in-
-draft specification for the ARO itself, `docs/aro-specification-graph-v0.5.md`, whose
+draft specification for the ARO itself, `docs/aro-specification-graph-v0.5.2.md`, whose
 Phase 2 onwards is unstarted. A new team can start building ARO modules on day one and
 the gates will hold them honest. They should not assume the ontology they are inheriting
 is the ARO.
@@ -67,7 +67,7 @@ with the ARO TBox still to be written on top.**
 
 ## 4. Where the specification stands
 
-`docs/aro-specification-graph-v0.5.md` — 380 lines, published at v0.5, with 24 numbered
+`docs/aro-specification-graph-v0.5.2.md` — 391 lines, published at v0.5.2 (amended; v0.5 and v0.5.1 absorbed), with 24 numbered
 foundational decisions (D1–D24), a term map, a module architecture (§15), an eight-phase
 build (§16) and eight watch items (§17).
 
@@ -181,7 +181,7 @@ recorded limit, not an oversight.
 
 ## 7. Suggested first week
 
-1. **Settle Phase 1.** Record the architect's ratification of `aro-specification-graph-v0.5.md`,
+1. **Settle Phase 1.** Record the architect's ratification of `aro-specification-graph-v0.5.2.md`,
    or record what is blocking it. Everything downstream is gated on it.
 2. **Create `docs/adr/` and write ADR-003.** Assertion identity and the fragment locator
    criterion. §17 watch item 2 is the argument for doing it before anything else.
@@ -220,7 +220,7 @@ selecting nothing. It has nine named negative cases and three positive controls 
 |---|---|
 | How is this repository built? | `docs/process/PROCESS.md` |
 | How do I run things? | `docs/DEVELOPMENT.md` |
-| What is the ARO meant to be? | `docs/aro-specification-graph-v0.5.md` |
+| What is the ARO meant to be? | `docs/aro-specification-graph-v0.5.2.md` |
 | Where does file X live, and what is it? | `config/repository-layout.yaml`, `python tools/layout.py` |
 | May this be published? | `python tools/licensing/disposition.py` |
 | What did we take from BFO/CCO? | `config/upstream-extracts.json`, `vendor/NOTICE.md` |

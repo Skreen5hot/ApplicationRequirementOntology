@@ -167,7 +167,7 @@ components:
   # ---- Documentation -------------------------------------------------
 
   - id: docs.specification
-    path: docs/aro-specification-graph-v0.5.md
+    path: docs/aro-specification-graph-v0.5.2.md
     role: documentation
     description: >-
       The ARO specification and Specification Graph pipeline, with its

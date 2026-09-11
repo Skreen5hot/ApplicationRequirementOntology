@@ -58,7 +58,7 @@ other two, and it is short.
 ## 3. The ARO team's sequence
 
 In dependency order. Each exit criterion is quoted from
-`aro-specification-graph-v0.5.md` rather than invented here — where the
+`aro-specification-graph-v0.5.2.md` rather than invented here — where the
 specification is silent, it says so.
 
 ### 3.1 Phase 1 — ratification (blocks everything)

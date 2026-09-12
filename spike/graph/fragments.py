@@ -130,8 +130,23 @@ def verify(fragments_path: Path) -> list[str]:
     data = json.loads(fragments_path.read_text(encoding="utf-8"))
     doc = source_doc(data["source"]["doc"])
     lapsed = []
-    if not doc.is_file() or doc_digest(doc) != data["source"]["digest"]:
-        return ["source digest changed or source missing: every fragment lapses (ARO 5.2)"]
+    # UNREADABLE IS A LAPSE, NOT A CRASH (F5, Ops 2026-09-12). `is_file()` succeeds on an ACL-denied file --
+    # stat is permitted, the read is not -- so `doc_digest` raised PermissionError instead of reporting the
+    # total lapse this branch exists to report. With the path now parameterized, the unset case is exactly
+    # the one an Ops account hits, so it must degrade legibly rather than traceback. A nonexistent path
+    # already degraded (is_file() False); denied-but-present did not.
+    #
+    # I could not reproduce it from this account -- the coord paths read as absent here, not denied, so the
+    # raising branch is unreachable for me. The guard is written to the mechanism Ops measured, and the
+    # distinct wording is so the two causes are never confused in a log.
+    try:
+        if not doc.is_file():
+            return ["source missing: every fragment lapses (ARO 5.2)"]
+        current = doc_digest(doc)
+    except OSError as exc:
+        return ["source unreadable (%s): every fragment lapses (ARO 5.2)" % type(exc).__name__]
+    if current != data["source"]["digest"]:
+        return ["source digest changed: every fragment lapses (ARO 5.2)"]
     norm = normalize(doc.read_text(encoding="utf-8"))
     for f in data["fragments"]:
         start, end = f["locator"]["codepointRange"]

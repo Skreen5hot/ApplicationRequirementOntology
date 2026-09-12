@@ -22,9 +22,31 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 import unicodedata
 from pathlib import Path
+
+# THE SOURCE PATH IS A PARAMETER; THE SOURCE DIGEST IS NOT.
+#
+# The registered `doc` is an absolute path under one account and is ACL-denied to the Ops account that
+# measures all three spike arms -- so fragment verification and re-projection could only be run by the party
+# that authored the package, leaving one half of Arm B's founding-input check self-attested. Arm A's inputs
+# are in-tree and Ops verified them independently (twice catching a real defect); the arms were not equal on
+# that axis.
+#
+# This overrides only WHERE the bytes are read from. The digest comparison in `verify` is untouched, so an
+# override pointed at anything other than the pinned source returns the same total lapse it returns today --
+# the pin remains the authority and this cannot weaken it. The registered `doc` and `digest` are left exactly
+# as minted, and the path reaches no projected output (`project.py` embeds `source.digest`, never the path),
+# so projected bytes are unaffected.
+_SOURCE_ENV = "ARO_SOURCE_DOC"
+
+
+def source_doc(registered: str) -> Path:
+    """The path to read the source bytes from -> Path. `ARO_SOURCE_DOC` wins when set and non-empty."""
+    return Path(os.environ.get(_SOURCE_ENV) or registered)
+
 
 NORMALIZATION_VERSION = "norm-spike-1"      # NFC; CRLF and CR -> LF; nothing else
 ANCHOR_CODEPOINTS = 64
@@ -106,7 +128,7 @@ def extract(spans_path: Path) -> dict:
 def verify(fragments_path: Path) -> list[str]:
     """Every fragment's text hash, recomputed against the source now -> the lapsed ones."""
     data = json.loads(fragments_path.read_text(encoding="utf-8"))
-    doc = Path(data["source"]["doc"])
+    doc = source_doc(data["source"]["doc"])
     lapsed = []
     if not doc.is_file() or doc_digest(doc) != data["source"]["digest"]:
         return ["source digest changed or source missing: every fragment lapses (ARO 5.2)"]

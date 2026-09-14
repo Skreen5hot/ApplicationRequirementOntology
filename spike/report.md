@@ -1,6 +1,6 @@
 # ARO Phase-1.5 spike -- canonical closeout (2026-09-13)
 
-**Status:** the spike is CLOSED. This document is the canonical record. It consolidates Ops' comparative report
+**Status:** the spike is CLOSED and this closeout is ACCEPTED by the architect's closeout act of 2026-09-14 (`docs/decisions/2026-09-14-aro-closeout-act.md`; Addendum B below). This document is the canonical record. It consolidates Ops' comparative report
 (IntegratedAgent `3a13d0f`, `experiments/comms/OPS-2026-09-13-spike-comparative-report.md`) with the verified
 outcomes of F6, F7, F7b and F7c that followed it, and it SUPERSEDES the Arm B report of 2026-09-11, which is kept
 below as Part II, byte-identical, because its findings register (F-01..F-20), its Spike-2 measurement and its
@@ -258,6 +258,28 @@ IntegratedAgent, branch `graph-materialization-build` (the mechanisms in section
 
 ---
 
+## Addendum B -- the closeout act (2026-09-14)
+
+Recorded verbatim, with each act in the GP-D idiom, in `docs/decisions/2026-09-14-aro-closeout-act.md`. In
+summary, and superseding nothing above except where stated:
+
+- **Closeout accepted.** Part I at `80c1c9c` is the accepted record; the spike is CLOSED.
+- **Outcome mapping, first branch, recorded as applied.** Arm A shipped and standing; no seam license claimed
+  for ARO (section 9's first paragraph is now a recorded act, not a recommendation).
+- **Phase-1 ratification of ARO v0.5.2 granted, SCOPED:** the graph, ratification-queue and projection
+  machinery (sections 2-13 of the specification) stand as the specification for ARO's role as the
+  ratified-provenance source for the factory's provenance boundaries -- the program's next measured step.
+  Part II's F-09 is resolved to that scope.
+- **Phases 6-8 deferred, not denied,** behind the three preconditions of section 9; any re-measurement is a
+  new authorization; the spike is closed, no new arm.
+- **The calendar budget (precondition 1) is deferred** until full-program re-authorization is contemplated.
+- **Adjudication C recorded as a dated line** (act of 2026-09-11 on rq-011), as Part II section 14 item 2
+  requested.
+
+Section 9's recommendation is therefore decided as: GO, bounded, on the provenance role; deferred on the full
+program. Nothing else in Part I changes.
+
+---
 # Part II -- the Arm B report as first closed (2026-09-11), kept byte-identical as history
 
 Superseded by Part I where they disagree (section 2 of Part II in particular: Arm 0 has since run). Its

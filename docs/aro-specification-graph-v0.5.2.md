@@ -389,3 +389,5 @@ Amendment basis: the Integrated Agent dev review, dispositioned and architect-di
 6. The ratification instrument carries forward with its reference updated to v0.5.2, now also covering the standalone-expiry addition.
 
 The v0.5 → v0.5.1 log is preserved in the superseded v0.5.1 document. The architect's ratification instrument, once issued, is recorded here and in the repo decision record.
+
+**Phase-1 ratification instrument — issued 2026-09-14, SCOPED.** Recorded verbatim in `docs/decisions/2026-09-14-aro-closeout-act.md`: the graph, ratification-queue and projection machinery (§§2–13) stand as the specification for ARO's role as the ratified-provenance source for the factory's provenance boundaries; Phases 6–8 deferred, not denied, behind the three preconditions of `spike/report.md` §9. The scope is the architect's; this line records it and extends nothing.

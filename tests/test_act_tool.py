@@ -160,3 +160,32 @@ def test_the_cli_survives_a_cp1252_console(repo, monkeypatch):
     assert act.main(["--root", str(repo), "list"]) == 0
     assert act.main(["--root", str(repo), "show", "rq-900"]) == 0
     assert act.main(["--root", str(repo), "--json", "list"]) == 0
+
+
+def test_show_puts_each_statement_above_the_passages_it_cites(repo, capsys):
+    """Found by the operator's dry run (2026-09-29): `show` printed the cited passages but not the statements
+    being accepted, while the item's own instruction is 'review every cited span beside its assertion'."""
+    assert act.main(["--root", str(repo), "show", "rq-004"]) == 0
+    out = capsys.readouterr().out
+    first, second = "Finding is an event record and is append-only.", "A Finding record carries the fields id"
+    assert first in out and second in " ".join(out.split())
+    assert out.index("Finding is an event record") < out.index("[line 85, primary]") < out.index("A Finding record")
+    assert out.count("[line 85, primary]") == 1, "a wrapped passage names its source once"
+
+
+def test_show_lays_out_an_adjudication_s_options_and_consequences(repo, capsys):
+    assert act.main(["--root", str(repo), "show", "rq-011"]) == 0
+    out = capsys.readouterr().out
+    for opt in ("A  Honor the source", "B  Source-amendment request", "C  Relocating closure"):
+        assert opt in out
+    assert "consequence:" in out and "theSourceSays:" in out
+
+
+def test_show_marks_design_rationale_as_not_grounding(repo, capsys):
+    assert act.main(["--root", str(repo), "show", "rq-008"]) == 0
+    assert "rationale (not grounding):" in capsys.readouterr().out
+
+
+def test_show_json_keeps_the_raw_row(repo, capsys):
+    assert act.main(["--root", str(repo), "--json", "show", "rq-004"]) == 0
+    assert json.loads(capsys.readouterr().out)["item"]["record"] == "sr:L2:Finding"

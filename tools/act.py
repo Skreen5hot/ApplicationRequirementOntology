@@ -177,6 +177,85 @@ def act(q: Queue, item_id, verb, actor, decision=None, sitting_start=None, note=
             "confers": mapped in RATIFYING, "decision": decision}
 
 
+def _fragment_texts(q):
+    """fragment id -> (line, text), from every item's display duties: L3 items cite the same source passages
+    the L2 items display, so one index serves both."""
+    out = {}
+    for _, r in q.rows:
+        for f in (r.get("displayDuties") or {}).get("fragmentTextBesideAssertions") or []:
+            if isinstance(f, dict) and f.get("fragment"):
+                out[f["fragment"]] = (f.get("line"), f.get("text") or "")
+    return out
+
+
+def _wrap(text, indent, width=100):
+    import textwrap
+    return textwrap.fill(" ".join(str(text).split()), width=width, initial_indent=indent,
+                         subsequent_indent=" " * len(indent)) if text else indent + "(empty)"
+
+
+def _value(v):
+    return v if isinstance(v, str) else json.dumps(v, ensure_ascii=False)
+
+
+def render_show(q, row):
+    """The item as the operator must see it: what is being asked, then each STATEMENT with the source passages
+    it cites directly beneath it (the display duty 'review every cited span beside its assertion'), then the
+    flags. `--json` keeps the raw row."""
+    frags = _fragment_texts(q)
+    L = ["%s  [%s]  %s" % (row.get("id"), row.get("batch") or "", row.get("title") or row.get("kind") or ""),
+         _wrap(row.get("kind"), "  kind:   "),
+         _wrap(row.get("actRequested"), "  asked:  "), ""]
+    rec = None
+    if row.get("record") and row.get("artifact") and (q.root / row["artifact"]).is_file():
+        rec = _find(json.loads((q.root / row["artifact"]).read_text(encoding="utf-8")), row["record"])
+    for n, a in enumerate((rec or {}).get("assertions") or [], 1):
+        if a.get("statement"):
+            L.append(_wrap(a["statement"], "  %d. " % n))
+            for fld in a.get("fields") or []:
+                L.append(_wrap("%s%s%s" % (fld.get("name"), "  e.g. " + ", ".join(fld.get("examples") or []) if fld.get("examples") else "",
+                                           "  (" + fld["presence"] + ")" if fld.get("presence") else ""), "       - field "))
+            cites = [(g.get("fragment"), g.get("role"), g.get("why")) for g in a.get("groundedBy") or []]
+            head = "     cites:"
+        else:
+            L.append(_wrap("; ".join("%s = %s" % (k, _value(v)) for k, v in (a.get("proposed") or {}).items()),
+                           "  %d. %s: " % (n, a.get("@id"))))
+            cites = [(c.get("cite"), "rationale", c.get("why") or c.get("note")) for c in a.get("rationaleSource") or []]
+            head = "     rationale (not grounding):"
+        L.append(head)
+        for ref, role, why in cites:
+            if ref in frags:
+                line, text = frags[ref]
+                L.append(_wrap(text, "       [line %s, %s] " % (line, role)))
+            else:
+                L.append("       [%s] %s" % (role, ref))
+            if why:
+                L.append(_wrap(why, "         why: "))
+        L.append("")
+    if rec is not None and rec.get("options"):
+        for key in ("conflict", "theSourceSays", "thePlanSays"):
+            if rec.get(key):
+                L.append(_wrap(_value(rec[key]), "  %s: " % key))
+        L.append("  options:")
+        for o in rec["options"]:
+            L.append(_wrap(o.get("label"), "    %s  " % o.get("id")))
+            if o.get("content"):
+                L.append(_wrap(o["content"], "        does: "))
+            if o.get("consequenceForTheSpike"):
+                L.append(_wrap(o["consequenceForTheSpike"], "        consequence: "))
+        L.append("")
+    if rec is None and row.get("record"):
+        L.append("  (record %s not found in %s)" % (row["record"], row.get("artifact")))
+    dd = row.get("displayDuties") or {}
+    for key, val in dd.items():
+        if key != "fragmentTextBesideAssertions" or isinstance(val, str):
+            L.append(_wrap(_value(val), "  %s: " % key))
+    L.append(_wrap(row.get("recordDigest") or row.get("artifactFileDigest"), "  bound to: "))
+    if row.get("actedAt"):
+        L.append("  ACTED: %s by %s at %s" % (row.get("act"), row.get("actor"), row.get("actedAt")))
+    return "\n".join(L)
+
+
 def _summary(row):
     return {k: row.get(k) for k in ("id", "batch", "kind", "record", "title", "queuedAt", "assertions",
                                     "options", "actRequested")}
@@ -213,7 +292,7 @@ def main(argv=None) -> int:
         elif args.cmd == "show":
             _, row = q.get(args.id)
             out = {"item": row}
-            text = json.dumps(row, ensure_ascii=False, indent=2)
+            text = render_show(q, row)
         else:
             out = act(q, args.id, args.verb, args.actor, args.decision, args.sitting_start, args.note)
             text = "%s %s by %s at %s (bound to %s)%s" % (out["id"], out["act"], out["actor"], out["actedAt"],

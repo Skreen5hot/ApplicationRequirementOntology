@@ -3,6 +3,12 @@
 `HANDOFF.md` is **state**: what is in this repository and what can be trusted.
 This is **sequence**: what happens next, in what order, and who owns each piece.
 
+**Status, 2026-09-29: the sequence below is superseded from s3 onward by Plan v1.1**
+(`docs/decisions/2026-09-14-provenance-foundation-phase-plan-v1.1.md`, governing per
+`docs/decisions/2026-09-29-memo-approval-act.md`). Its s2/s10 tables are the sequence and the owners;
+its s7 GP-E is the operator budget; its five-week bound runs from 2026-09-14. s1-s2 here (gates on a
+clean checkout) remain valid and are still the only day-one work.
+
 The division running through all of it: **the checks are infrastructure; the
 answers are ontology.** A tool can prove that two inlined copies of
 `ex:ActOfForecasting` disagree. Deciding which one is right is a judgement about

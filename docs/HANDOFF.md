@@ -14,9 +14,12 @@ not written yet.** What this repository contains today is (a) a working, tested,
 reproducible checking apparatus, (b) a large APQC business-process ontology inherited
 from earlier work that serves as the BFO/CCO-aligned foundation, and (c) a ratified-in-
 draft specification for the ARO itself, `docs/aro-specification-graph-v0.5.2.md`, whose
-Phase 2 onwards is unstarted. A new team can start building ARO modules on day one and
-the gates will hold them honest. They should not assume the ontology they are inheriting
-is the ARO.
+Phase 1 is recorded and scoped (`docs/decisions/2026-09-14-aro-closeout-act.md`). **The governing
+instrument is now `docs/decisions/2026-09-14-provenance-foundation-phase-plan-v1.1.md`** (ratified
+2026-09-14; ruled governing 2026-09-29, `docs/decisions/2026-09-29-memo-approval-act.md`): four
+workstreams WS-1..4 over five calendar weeks, with the SHACL/ontology buildout, ADR-002/003 and
+transformation at scale explicitly OUT. No team should start building ARO modules; read v1.1 first.
+The gates below still hold; the ontology inherited here is still not the ARO.
 
 ---
 
@@ -181,8 +184,9 @@ recorded limit, not an oversight.
 
 ## 7. Suggested first week
 
-1. **Settle Phase 1.** Record the architect's ratification of `aro-specification-graph-v0.5.2.md`,
-   or record what is blocking it. Everything downstream is gated on it.
+1. **Phase 1 is settled** (recorded 2026-09-14, scope amended 2026-09-29 -- see `docs/decisions/`), and
+   **Plan v1.1 governs what happens next**; its Stage A task table (v1.1 s10) replaces this list. The items
+   below predate it and are read as history unless v1.1 names them.
 2. **Create `docs/adr/` and write ADR-003.** Assertion identity and the fragment locator
    criterion. §17 watch item 2 is the argument for doing it before anything else.
 3. **Decide the two remaining orphans** — `APQC_ontology/reports/` and

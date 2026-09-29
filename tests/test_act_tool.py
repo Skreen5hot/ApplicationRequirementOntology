@@ -148,3 +148,15 @@ def test_the_projector_accepts_what_the_tool_records(repo):
     rest = [r for r in queue if r.get("record") != row["record"]]
     hit, why = project.act_for(rest + written, row["record"], row["recordDigest"])
     assert hit is not None and hit["id"] == "rq-900", why
+
+
+def test_the_cli_survives_a_cp1252_console(repo, monkeypatch):
+    """Found by the first live dry run: a Windows console is cp1252 and the queue titles carry arrows and em
+    dashes, so `list` crashed with UnicodeEncodeError. capsys is UTF-8 and hid it; this pin uses cp1252."""
+    import io, sys
+    _fresh_item(repo, title="panel → store — a title with arrows")
+    for name in ("stdout", "stderr"):
+        monkeypatch.setattr(sys, name, io.TextIOWrapper(io.BytesIO(), encoding="cp1252"))
+    assert act.main(["--root", str(repo), "list"]) == 0
+    assert act.main(["--root", str(repo), "show", "rq-900"]) == 0
+    assert act.main(["--root", str(repo), "--json", "list"]) == 0

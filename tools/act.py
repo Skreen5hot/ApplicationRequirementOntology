@@ -194,6 +194,11 @@ def main(argv=None) -> int:
     a.add_argument("--sitting-start", dest="sitting_start"); a.add_argument("--note")
     for p in sub.choices.values():
         p.add_argument("--json", action="store_true", default=argparse.SUPPRESS)
+    for stream in (sys.stdout, sys.stderr):      # a Windows console is cp1252; titles carry arrows and dashes
+        try:
+            stream.reconfigure(errors="replace")
+        except (AttributeError, ValueError):
+            pass
     try:
         args = ap.parse_args(argv)
     except SystemExit as e:
@@ -213,11 +218,11 @@ def main(argv=None) -> int:
             out = act(q, args.id, args.verb, args.actor, args.decision, args.sitting_start, args.note)
             text = "%s %s by %s at %s (bound to %s)%s" % (out["id"], out["act"], out["actor"], out["actedAt"],
                                                          out["actDigest"], "" if out["confers"] else " -- confers nothing")
-        print(json.dumps(out, ensure_ascii=False) if args.json else text)
+        print(json.dumps(out) if args.json else text)   # --json is ASCII-safe on any console
         return 0
     except (Refused, Usage) as e:
         if getattr(args, "json", False):
-            print(json.dumps({"refused" if e.code == 1 else "error": str(e)}, ensure_ascii=False))
+            print(json.dumps({"refused" if e.code == 1 else "error": str(e)}))
         else:
             print(("REFUSED: " if e.code == 1 else "ERROR: ") + str(e), file=sys.stderr)
         return e.code

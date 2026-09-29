@@ -68,3 +68,7 @@ Applied by the ARO dev agent in the commit that carries this entry: this file, a
 `docs/HANDOFF-PLAN.md` pointed at Plan v1.1 as governing. Committed locally on `armb-source-path-parameter` on top of
 `6cbad35`; **not pushed** — the push publishes v1.1 and is the architect's act (row `a4-aro-merge-authorization`).
 No graph, ontology, projection, rule or fixture changed; the layout gate and the spike's tests are the proof.
+
+---
+
+**A4 executed (recorded act, 2026-09-29).** The architect: "authorize the A4 push and merge." Applied by the ARO dev agent in the commit that carries this note: `armb-source-path-parameter` pushed to origin (carrying `6cbad35` Plan v1.1, `1d86a74` this ruling record, `256150c` Candidate 1, `fc199fd` Candidate 2, and this note) and fast-forwarded into `main`, so Plan v1.1's canonical URL resolves and every act since 2026-09-13 is on `main`. IA OPS' s8 step 3 is unblocked from this push. The sentences above that say "not pushed" were true when written and are kept as history.

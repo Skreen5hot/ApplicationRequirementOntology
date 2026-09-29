@@ -379,6 +379,16 @@ components:
       Distinguishes a violation from a shape set that could not be
       evaluated because the vocabulary it reasons over is absent.
 
+  - id: tool.act
+    path: tools/act.py
+    role: tool
+    description: >-
+      The act tool (Provenance Foundation Plan v1.1, A5): the operator's one
+      command for ratification sittings -- list and show pending queue items,
+      and record accept / ratify / decide / amend / diagnostic acts, each bound
+      to the record's content address. Refuses agent or empty actors, stale
+      digests, and acts on acted or superseded items.
+
   - id: tool.licensing
     path: tools/licensing/disposition.py
     role: tool

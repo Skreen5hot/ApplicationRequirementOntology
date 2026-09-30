@@ -36,7 +36,7 @@ import sys
 from pathlib import Path
 
 RULE_REF = "rule:aro-rla:layout-derivation"
-RULE_VERSION = "0.1-draft"
+RULE_VERSION = "0.2-draft"
 #: The convention values the rule reads. All must be authored (non-null) or the rule refuses.
 CONVENTION_VALUES = ("language", "sourceRoot", "modulePathPattern", "testFilePattern",
                      "testDiscipline")
@@ -134,8 +134,12 @@ def derive(components: list, convention: dict) -> dict:
     for c in sorted(components, key=lambda c: c["name"]):       # sorted: never input order
         entry = {
             "moduleId": c["name"],
-            "files": [fill(values["modulePathPattern"], c["name"]),
-                      fill(values["testFilePattern"], c["name"])],
+            # v0.2 (Plan v1.1 WS-2, boundary decision (a)): `files` means DELIVERABLES, by the loop's
+            # documented contract. The test path is derived from the same ratified convention but travels
+            # separately, to the Tester Contract -- in `files` it made the loop type-check a test file as a
+            # deliverable before one existed (spike finding F2, the dominant Arm-B-only stub cause).
+            "files": [fill(values["modulePathPattern"], c["name"])],
+            "testFiles": [fill(values["testFilePattern"], c["name"])],
             "language": values["language"],
             "layer": "L3",
             "kind": "mixed-premise-derivation",

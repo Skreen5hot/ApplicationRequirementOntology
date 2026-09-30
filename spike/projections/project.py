@@ -219,6 +219,7 @@ def project(l2: dict, l3: dict, convention: dict, fragments: dict, queue: list[d
     ]
     layout = layout_rule.derive(components, convention)
     files = {d["moduleId"]: d["files"] for d in layout["derivations"]}
+    test_files = {d["moduleId"]: d.get("testFiles") or [] for d in layout["derivations"]}
     provisional = []
     if decision == "A":
         files["author-agent"] = [assertions["a:author-agent:component"]["attributes"]["repoHome"]]
@@ -302,9 +303,10 @@ def project(l2: dict, l3: dict, convention: dict, fragments: dict, queue: list[d
             "author-agent": {"mustExport": exports["author-agent"], "imports": author_imports, "callsPerArchitecture": tester_calls,
                              "interfacesBlock": {"contract": contract_types, "panel-findings-store": [e["name"] for e in planner_store]}}}},
         "testerContract": {"tests": {
-            "contract": {"assertsExports": contract_types},
-            "panel-findings-store": {"assertsExports": exports["panel-findings-store"]},
-            "author-agent": {"assertsExports": exports["author-agent"], "assertsCalls": tester_calls}}},
+            "contract": {"assertsExports": contract_types, "testFiles": test_files["contract"]},
+            "panel-findings-store": {"assertsExports": exports["panel-findings-store"], "testFiles": test_files["panel-findings-store"]},
+            "author-agent": {"assertsExports": exports["author-agent"], "assertsCalls": tester_calls,
+                             "testFiles": test_files["author-agent"]}}},
     }
 
     fd = file_digests or {}
@@ -454,8 +456,11 @@ def selftest() -> int:
           set(names["brief"]) == set(names["tester"]) and set(names["brief"]) <= set(names["planner"]) <= set(names["plan"]), str(names))
     check("author-agent's files follow adjudication C (relocating closure, provisional)",
           out["plan"]["units"][0]["id"] == "author-agent"
-          and out["plan"]["units"][0]["files"] == ["src/author-agent.ts", "tests/author-agent.test.ts"]
+          and out["plan"]["units"][0]["files"] == ["src/author-agent.ts"]
           and bool(out["manifest"]["provisional"]))
+    check("boundary decision (a): plan files are deliverables only; test paths travel in the Tester Contract",
+          all(not any("test" in f for f in u["files"]) for u in out["plan"]["units"])
+          and out["testerContract"]["tests"]["author-agent"]["testFiles"] == ["tests/author-agent.test.ts"])
 
     ind = run(independent_derivation=True)
     check("test-assembled independent derivation reintroduces the divergence",

@@ -167,11 +167,19 @@ components:
   # ---- Documentation -------------------------------------------------
 
   - id: docs.specification
-    path: docs/aro-specification-graph-v0.5.2.md
+    path: docs/aro-specification-graph-v0.5.3.md
     role: documentation
     description: >-
       The ARO specification and Specification Graph pipeline, with its
-      own numbered decisions.
+      own numbered decisions. v0.5.3 (Plan v1.1 A4): CP/SM re-pinned to
+      v0.4.9, `files` carries deliverables only, F-06 naming.
+
+  - id: docs.specification-v0.5.2
+    path: docs/aro-specification-graph-v0.5.2.md
+    role: documentation
+    description: >-
+      Superseded by v0.5.3; kept as issued. The text the spike, the
+      closeout and the 2026-09-14 Phase-1 ratification were read against.
 
   - id: docs.process
     path: docs/process/PROCESS.md

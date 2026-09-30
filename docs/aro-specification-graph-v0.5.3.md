@@ -1,0 +1,402 @@
+# ARO v0.5.3 — Application Requirements Ontology and the Specification Graph Pipeline (Published, Amended)
+
+**Status:** published candidate · supersedes ARO v0.5.2, which it absorbs · amendment basis: Provenance Foundation Phase Plan v1.1 Stage A task A4 (`docs/decisions/2026-09-14-provenance-foundation-phase-plan-v1.1.md`, as amended by Corrective Amendment 1), citing the A3 re-pin act (`docs/decisions/2026-09-29-a3-repin-act.md`)
+**Content rule:** v0.5.3 = v0.5.2 + exactly three changes, each already decided: (1) the **CP/SM re-pin v0.4.1 → v0.4.9** (A3); (2) the **projector rule** — `files` carries deliverables only, test locations travel in the Tester Contract (§11.3a; boundary decision (a), Plan v1.1 WS-2); (3) **F-06** — the loop-side seam rule is named as shipped, IA-SEAM / IA-CSEAM (§13, §18). No other content moved. Change log: §18.
+**Normative dependencies (delivery rule):** this document is complete only in the company of **CP/SM v0.4.9 (frozen; re-pinned from v0.4.1 by the A3 act of 2026-09-29)** — in particular §1.2 (AUTHORITATIVE), CP-5, CP-14, CP-16, CP-19, CP-21, §9 — and the substrate `runtime/assembly_ledger.py` @ `1b7f3c1`. Definitions are referenced, never copied. "Teams receive only this text" means: this text **plus its declared normative dependencies**.
+**Ratification surface:** this amended document (one act covers v0.5's content and all amendments through v0.5.2); the affirmed grounding commitment (instrument drafted, the architect's to issue); the pre-stated Phase-1.5 outcome mapping including Arm 0.
+**Change log:** §18.
+
+---
+
+## 0. First principle, thesis, and the interpretation boundary
+
+> **A check must verify its own precondition, or it passes vacuously.**
+
+Applied here: every downstream check assumes the graph faithfully represents the source and verifies that assumption nowhere unless this document builds the verification — including the failure channels the transformer cannot self-report (§4.3). An internally coherent graph can be a coherent misreading; the 0.93 scoreboard was internally coherent too.
+
+**Thesis.** Transform human application specifications into faithful, provenance-preserving, machine-checkable **Specification Graphs** that downstream consumers use without reinterpreting the source prose. The general requirements ontology remains the long-term goal; faithful normalization of a real specification is the proving ground.
+
+**The interpretation boundary (D20).** Three kinds of judgment, three homes, no leakage: **source interpretation** only inside the transformation-and-ratification boundary (transformation acts, diagnostic resolution, ratification acts); **design judgment** only as L3 closure acts; **projection deterministic and non-interpretive** — it MUST NOT add, resolve, strengthen, or reinterpret semantic content. Any component that re-reads the prose, fills in the graph, or resolves an ambiguity locally has violated the architecture.
+
+---
+
+## 1. Position in the program, scope, and non-goals
+
+ARO sits upstream of the Integrated Agent loop and upgrades its founding inputs from *model-proposed* to *derived-from-ratified*: `plan.json`, the capability set, and the `declared` contract tier become deterministic projections of a ratified graph. Three named CP/SM holes are filled by construction: an audit-independent seed source for the coverage matrix (§11.3), the `declared` tier populated for the first time since `exports:null`, and mechanical capability seeding from stimulus→observable-response paths and acceptance clauses.
+
+**Non-goals, hard limits.** ARO does not replace Rungs 1–4 — requirements grain is not seam grain; the graph feeds the loop and never substitutes for it. ARO does not unfreeze v0.4.9. MVP scope rule, carried: *new terms SHOULD be deferred unless they directly support faithful transformation, graph validation, traceability, or deterministic compilation.* ARO's build parallelizes with the loop's Phase 0/1.
+
+---
+
+## 2. The four products and the graph rule (D10, D17)
+
+| # | Product | Contains | Authority home |
+|---|---|---|---|
+| **L1** | **ARO TBox** | reusable semantics: Requirement, Acceptance Clause, Source Fragment, Interface Specification, Worked Example, Prescribed Invariant, Diagnostic, Trace Assertion, … | committed ontology modules (§15) |
+| **L2** | **Specification Graph** | what the source **says or prescribes** | candidate: run root · accepted: `oracles/`-class |
+| **L3** | **Design Graph** | **ratified engineering closures** — decisions the source underdetermines. Closure **proposals may originate from an operator or a transformer** (a labeled N1 proposal); **only ratified closures compile.** D24 independently records who proposed. | `oracles/`-class on ratification |
+| **L4** | **Realization & Evidence Projection** | what later **happened** | **a projection of the assembly ledger, never a store** — trace assertions carry ledger coordinates `{specDigest, seq, head}`, never copies |
+
+**The graph rule (D17): membership is decided by semantic nature, boundaries by grounding ancestry under the active environment; citation is free.**
+
+- **L2 membership:** the assertion is **source semantics** — directly grounded in Source Fragments, or rule-derived with a derivation whose complete ancestry terminates in grounded AUTHORITATIVE premises, **under the active ratified derivation environment identified by the semantic dependency manifest** (rule set, ontology modules, profile version). Derivability is decidable within a release; it is never "derivable in principle."
+- **L3 membership:** the assertion's content is an **engineering closure** — neither asserted by nor derivable from registered sources *under that same active environment*.
+- **History never reclassifies:** if a later rule makes closure-content derivable, the old closure keeps its historical membership; the system opens a **`SubsumptionNotice`** (§7) — blocking only on conflict — and the forward path is an operator act superseding or retiring the closure in favor of the new rule-derived L2 assertion. Membership mutates only by supersession, never by environment drift.
+- **Schema enforcement (via D23):** L2 shapes require grounding-or-derivation-ancestry; L3 shapes **forbid `aro:groundedBy`** and **permit `aro:rationaleSource`** — an operator choosing `GET /accounts/{id}` may cite the passage that motivated the choice; motivation is citation, not grounding, and never enters the authority basis.
+
+Why L3 exists (carried): N1 plus a deterministic compiler equals underdetermination — "API required, method unspecified" is faithful and unbuildable; someone decides, N1 rightly bars the transformer from *deciding*, and undocumented limbo is where laundering starts. The compiler consumes **eligible Accepted L2 ⊕ eligible Ratified L3** (§3.2, §11). Why L4 is a projection (carried): a second evidence store with no chain is a second source of truth, and it re-breaks *linked test ≠ executed test*, which only the ledger enforces.
+
+---
+
+## 3. Provenance facets, computed authority, and eligibility (D24, D19)
+
+### 3.1 The four facets (orthogonal, all recorded, none substituting for another)
+
+- **Origin** — the producing act, always by reference: `transformer(actRef)` · `operator(actRef)` · `rule(ruleRef@version, execRef)`. Origin is never a grounding claim, and it never changes.
+- **Grounding** — a bundle of Source Fragments with roles (§5.3): required, directly or through complete derivation ancestry, for L2; forbidden for L3 (rationale citation permitted).
+- **Ratification** — `unratified` | `ratified(actRef)`. Binds to content-addressed assertions (D23); adds status; never alters origin or grounding — true by construction.
+- **Authority** — **computed, never stored**:
+
+  > `AUTHORITATIVE(a)` iff `origin(a)=operator(act)` ∨ `ratified(a)` ∨ (`origin(a)=rule(r,·)` ∧ `r` ratified ∧ every premise AUTHORITATIVE).
+
+  A deterministic, ratified extractor over a registered source is a rule; CP/SM's `spec-derived` lands exactly here. ARO references CP/SM §1.2's class by identity and adds no members.
+
+**Worked example:** `origin: transformer(T-3) · grounding: SP-88 · ratification: R-71 → authority: AUTHORITATIVE` — without pretending ratification changed where the assertion came from. A transformer-proposed closure ratified by act is AUTHORITATIVE with transformer origin; that is the design, not a leak.
+
+### 3.2 Authority is history; eligibility is state
+
+**Authority and gating eligibility are distinct.** Ratification and authorship acts are append-only history: they never un-happen, so AUTHORITATIVE — computed from acts — never disappears when a later dependency lapses. What lapse suspends is **eligibility**, the fold's current view:
+
+> An assertion is **eligible to gate or project at full authority** iff it is AUTHORITATIVE **and** belongs to a currently **effective** Accepted L2 or Ratified L3 graph — one whose semantic dependency manifest has not lapsed — **and** its dependency cone contains no blocking diagnostic **and**, for closures, its declared closure dependencies are current (§5.6). **Provisional eligibility** for machine-clean unratified content is evaluated the same way at its own grade and carries the PROVISIONAL cap.
+>
+> **Lapse suspends eligibility; it does not rewrite historical provenance or erase the ratification act.** This is the substrate's authority ≠ history rule, applied to ARO's own semantics.
+
+All gating language in this document — §9's acceptance, §11's compilation, CP-5 composition — reads **eligible** content. Re-acceptance after lapse is a new anchoring act over the same historical record.
+
+**Fail-closed asymmetry, in facet terms:** non-authoritative content can open diagnostics, block eligibility, and cap dispositions; it can never confer.
+
+---
+
+## 4. The transformation model (D6, D9, D19)
+
+```
+Registered Source(s)  +  Profile  +  Transformer(config)
+      ↓ TransformationAct                        — ledger event
+Candidate Specification Graph + Diagnostics + Facets
+      ↓ validation ladder (§8) · ratification queue (§9)   — ledger events, operator acts
+Accepted Specification Graph                     — oracles/-class, embedding the attested head
+```
+
+Candidates live in the run root; accepted graphs are ratified standards under `oracles/` per authority ≠ history. Candidate generation may be stochastic; authority attaches to content, not to the generator — ratification binds content-addressed assertions, and only eligible AUTHORITATIVE content gates.
+
+**Acceptance identity vs. generation provenance (D19).** Acceptance binds to **graph content** (canonical `graphDigest`, ADR-003) and the **semantic dependency manifest**: registered source digests · profile version · ontology module versions · SHACL shape versions · derivation-rule versions · canonicalization/normalization version. A manifest change **lapses eligibility and requeues** (CP-16's shape; §3.2 governs what lapse means). **Generation provenance** — transformer version, model identity, configuration, prompt, segmentation method — is fully recorded but non-lapsing; a change opens a **`ReevaluationObligation`** (co-reported, backlog-queued, non-blocking). Freshness pressure is a queue; revocation is a human act.
+
+**Defect response is not version churn.** A generation-provenance change **alone** never blocks. But when a defect is subsequently established in a generation-provenance class — *transformer v2.1 misclassified Non-Goal sections as Normative* — an **authoritative defect finding** (`GenerationDefectFinding`, an operator or ratified act) MAY open **blocking** diagnostics against the affected generation-provenance **population**, suspending eligibility through the ordinary cone rule until reviewed. This is defect response, not version-based automatic revocation — and it is why generation provenance is recorded at all: the record is what makes the affected population targetable.
+
+### 4.2 N1 — the Non-Invention Principle (carried verbatim in substance)
+
+A transformation MUST NOT infer unstated: programming language, framework, repository layout, component ownership, runtime environment, deployment model, database, message broker, security mechanism, or implementation approach — unless a registered source states it or a human ratifies it as a closure (→ L3, directly or derived from ratified closures by ratified rules — §5.6, §11.3). **Absence must remain absence.** On underdetermination the transformer's legal outputs are the representable absence, an `UnderdeterminationDiagnostic`, or a **labeled closure proposal** into the L3 queue — `transformer`-origin, `model-proposed`, conferring nothing.
+
+### 4.3 The transformer's honesty boundary (§0 applied; D22)
+
+The transformer can self-report ambiguity, conflict, and underdetermination. It cannot self-report what it failed to see: missed clauses, conflated clauses, misgrounded citations. Those channels get independent detectors (§8.2); FX-MISS is their fixture.
+
+---
+
+## 5. Sources, fragments, identity, closures, supersession (D3, D5, D19, D23)
+
+### 5.1 Source Fragments and fragment identity
+
+The abstract grounding unit is the **Source Fragment**; **Text Span** is its RLA-profile implementation:
+
+```json
+{ "fragmentId": "sf:<content-derived per the identity formula>",
+  "kind": "text-span",
+  "source": { "doc": "rla-spec.md", "digest": "sha256:…" },
+  "locator": { "codepointRange": [4812, 5147] },
+  "normalizationVersion": "norm-1.2",
+  "textHash": "sha256:<normalized span text>",
+  "anchors": { "before": "sha256:<preceding context>", "after": "sha256:<following context>" },
+  "display": { "lines": "142–146" } }
+```
+
+**Fragment identity = source digest + fragment kind + canonical locator + normalization version + normalized-content hash** (ADR-003 acceptance criterion). Identical repeated text — even with repeating anchors — cannot collide: the canonical locator (code-point range for text; representation-specific for future kinds) disambiguates within the immutable digest. `display` is metadata only. Migration to a new source digest is a **`migratedFrom` relationship** between distinct fragments; it never pretends the old and new fragments are the same fragment. Future fragment kinds (PDF region, table cell, JSON pointer, diagram element) implement the same abstract identity. The normalization algorithm is versioned in the manifest — otherwise `textHash` drifts silently.
+
+### 5.2 Supersession and requeue
+
+A source edit yields a new digest; dependent acceptances **lapse eligibility** and requeue (§3.2). The transformer proposes fragment migrations (`textHash` + locator resolution under the new digest → migration proposal; unresolvable → `LapsedGroundingDiagnostic`). Profile, shape, rule, and canonicalization versions lapse identically (manifest members); generation-provenance changes do not (§4).
+
+### 5.3 Grounding bundles
+
+One assertion may require several fragments — *"It shall lock after five failures"* does not ground "it" alone. Grounding is a bundle with roles: **primary** (1..n) · **context** · **definition** · **reference**. L2 requires at least one primary fragment directly or via derivation ancestry.
+
+### 5.4 Identity continuity (D3)
+
+`Requirement` ≠ `Expression` ≠ `Specification Record` ≠ `Revision` ≠ `Fragment`. Continuity across source revisions: **mechanical when rule-derived** — a profile's identity policy over source-declared identifiers is a ratified derivation rule; continuity through it is `rule`-origin and AUTHORITATIVE by the standard chain. **Ratified when inferred** — similarity-based continuity is `transformer`-origin and MUST be ratified. Automatic inferred continuity is an N1 breach.
+
+### 5.5 The round trip
+
+When the build discovers via a ledger finding that a ratified assertion is wrong or ambiguous in practice, a **`RealizationConflictDiagnostic`** opens against the graph, carrying the finding's ledger coordinates. Resolutions: graph supersession (with dependent re-verification), a new closure, or a recorded source-amendment request. Without this edge the graph ossifies while the build learns.
+
+### 5.6 Closure dependencies and lifecycle (D19 extension — the L2→L3 edge)
+
+Closures exist to close L2 underdetermination; their lifecycle must therefore depend on what they close.
+
+- **Declared dependencies (semantic, lapse-bearing).** A closure that resolves an **identifiable** underdetermination MUST declare it: `closes` (the `UnderdeterminationDiagnostic` or the unspecified facet of an L2 assertion), `addresses` (the Specification Record(s)), `dependsOn` (specific L2 assertions). Schema-enforced where identifiable.
+- **Lapse rule.** Supersession or lapse of any declared dependency **requeues the dependent L3 cone**: the closure's eligibility is suspended until an operator re-ratifies, amends, or retires it. *A stale closure MUST NOT remain eligible for projection merely because its original ratification act remains historically valid* — the §3.2 rule, applied to L3. (The reviewer's case: "use GET" closed "method unspecified"; the requirement becomes "state-altering commands shall use POST"; the closure's `closes` target is superseded; the closure suspends.)
+- **Standalone closures** *(authored)*. Some closures — repository layout, framework choice, the N1 list generally — close no identifiable L2 underdetermination. Requiring a dependency edge there would force **fake edges, which is invented grounding one level up**. A free-standing closure instead carries an explicit operator-attested **`standalone`** marker: attested absence of an L2 dependency, honest and visible in the queue display.
+- **Standalone closures are not immortal** *(dev review, finding 4)*. Because a standalone closure declares no lapse-bearing edge, no external event can reach it — the grader-runner shape: a retirement trigger that exists but can never fire. Therefore every standalone-marked closure is ratified **with an explicit expiry** (date or event; default cadence GP-D). Expiry without re-affirmation **suspends eligibility** through the §3.2 machinery — authority and the ratification act remain historical, as always; re-affirmation is a lightweight batch act in the CP-19 queue. Profiles MAY extend the requirement to rationale-only closures. General rule, audited (§17.9): **no eligible-artifact class may lack at least one reachable review or retirement trigger.**
+- **Mixed-premise derivations** *(clarification)*. A ratified derivation whose premises span L2 and L3 — e.g., per-module file layout derived from component prescriptions (L2) and a convention closure (L3) — yields an **L3-resident** assertion: its ancestry does not bottom out in source alone, which is semantically correct, because the derived content is design. It is AUTHORITATIVE by the standard chain and **lapses when any premise lapses or is superseded** — premise IDs are retained precisely so this propagation is mechanical.
+- **Rationale is citation, with a courtesy** *(authored)*. `rationaleSource` remains non-lapse-bearing — motivation is not dependency. But supersession of a cited rationale fragment opens a **non-blocking `ReevaluationObligation`** on the citing closure: citation is free; changed motivation is worth a look. No new machinery — the obligation type already exists.
+- **Honest limit (§0 discipline).** Semantic conflicts between changed L2 content and existing L3 closures **beyond declared dependencies are not mechanically caught**. The backstops are the round trip (§5.5), review, and the ConflictingStatement diagnostic — which spans layers when opened. Claiming an automatic L2↔L3 semantic-conflict detector would assert a check that does not exist; this is recorded as watch item §17.4.
+
+---
+
+## 6. Statement classification and negative information (D8)
+
+- **Role:** `Normative · Informative · Example · Rationale · Note · Open-Question`
+- **Force** (where Normative): `obligation · prohibition · permission`
+- **Scope disposition:** `in-scope · non-goal`
+
+*"Shall not store passwords in plaintext"* → Normative + prohibition. *"Billing is outside this release's scope"* → Normative + non-goal. **Gate rule:** role: Normative gates; `Example` never becomes a requirement (the Docker rule, FX-EXAMPLE) and feeds Worked Example extraction instead.
+
+**Negative information, layered:** graph carries three **semantic** states — `prohibited` · `non-goal` · `unspecified` (the source, where covered, is silent); coverage carries its own axis — `covered` · `not yet covered`. **Projection rule:** projections MUST preserve explicit negative content and MUST accompany it with coverage metadata sufficient to distinguish specification silence from unprocessed source (FX-NEG). Silence is only meaningful where coverage says covered.
+
+---
+
+## 7. Diagnostics and obligations
+
+**Transformer-emitted:** `Ambiguity` (interpretations enumerated, unresolved) · `MissingInformation` · `ConflictingStatement` (spans layers when applicable) · `UnsupportedInference` · `UnresolvedReference` · `Underdetermination`.
+**Audit-emitted (independent channels):** `MissedClause` · `ConflatedClause` · `MisgroundedAssertion`.
+**Build-emitted:** `RealizationConflict` (§5.5).
+**System-emitted:** `LapsedGroundingDiagnostic` (§5.2) · `ReevaluationObligation` (§4, §5.6 — non-blocking, co-reported, expiring by review or supersession) · **`SubsumptionNotice`** (§2 — new derivation overlaps an eligible closure; non-blocking unless conflicting; forward path is an operator supersession/retirement act).
+**Act-opened:** **`GenerationDefectFinding`** (§4 — blocking, population-scoped, opened only by an authoritative act).
+
+**Lifecycle:** `open → resolved-by-act(ratification | closure | source-amendment | retirement) → lapsed(source-change)`. Resolution is always an act. **Gating cone:** an open blocking diagnostic blocks its dependency cone — not the whole graph; cones co-report. Unchosen interpretations of resolved ambiguities are preserved as record.
+
+> Ambiguity produces information *about* ambiguity, never silently resolved information.
+
+---
+
+## 8. Validation ladder and coverage (D14, D18)
+
+### 8.1 The non-implication ladder (typed claims with recorded bases; none implies another)
+
+`Syntactically-Valid` → `Structurally-Conformant` (SHACL) → `Logically-Consistent` (reasoner) → **`Source-Faithfulness-Audited`** `{auditPopulation, sampleSize, samplingMethod, findings, auditRate, auditor}` → `Ratified` → **`Projected`** (deterministic compile succeeded; **basis: re-projection from the same input manifest and compiler version yields a byte-identical contract** *(authored)*) → `Execution-Verified` (ledger-linked, or the claim is not made).
+
+**`Source-Faithful`** is reserved for content under the profile's **complete** review policy; the Phase-4 reference graph receives **100% review** (§0 applied to an oracle's own precondition). *Realizable* remains out.
+
+### 8.2 Coverage — the denominator obeys §0
+
+**Detected-clause coverage** = represented / detected, with independent denominator channels (second segmentation method; normative-marker census; human spot-audit at **GP-A**); channel disagreement above **GP-C** opens `MissedClause`/`ConflatedClause` audits. Invention split: `ungrounded` is zero by schema (a schema property, not an achievement); `misgrounded` is audit-only, reported **with its audit rate**, never a bare zero. Coverage is a completeness control, never a proof of correctness.
+
+---
+
+## 9. Ratification throughput (CP-19 imported)
+
+The ratification unit is the **Specification Record** (Requirement Record is the subtype; Non-Goals, Interface Contracts, Worked Examples, Prescribed Invariants, Journeys bundle identically): fragment text displayed **beside** derived assertions, facet breakdowns, resolved diagnostics, standalone markers, and vacuity-class flags; batched into the CP-19 queue; acts are anchoring operator acts.
+
+**Graded acceptance (D9):** **Provisionally-Accepted** (machine-clean, unratified — consumable downstream under the PROVISIONAL cap, at provisional eligibility) vs. **Accepted** (ratified — full eligibility per §3.2). A ratified derivation rule may confer within its scope, chaining to its ratifying act. The inner loop never blocks on the queue; the acceptance verdict enforces it.
+
+**Derivation rules are a governed authority multiplier:** versioned, content-addressed, scope-bounded, deterministic, tested, ratified, traceable; derived assertions retain `{ruleRef@version, premise IDs, execRef}`; a rule change is a manifest change — its cone lapses and requeues (FX-RULE).
+
+---
+
+## 10. Planned versus existing — ADR-002 gate, interim pin (D21)
+
+> **D21 (interim, frozen).** No profile shape types a specified-X as an instance of X, **and no profile axiom — existential restriction or otherwise — may entail the existence of the prescribed entity from the existence of the requirement.** A requirement relates to a **specification-target description** (a kind reference as an information entity), never to an actual instance and never to a class used as an individual (punning discipline deferred to ADR-002; descriptions, not classes-as-values, in the interim). Realization edges (`is-realization-of`, from ledger-evidenced actuals to the description) live only in L4.
+
+**ADR-002 — Specification Targets and Non-Actual Entities** (grounding-track gate — §16; escalates forward on an interim-pin expressiveness failure): the formal OWL pattern for prescription, the punning decision, the naming ladder (specified / implemented / deployed / running) with identity through the prescription. Direction, non-binding: requirements as CCO Directive Information Content Entities.
+
+---
+
+## 11. The compiler boundary (D12, D15)
+
+```
+BFO / CCO → ARO TBox → Profile → eligible Accepted L2 ⊕ eligible Ratified L3
+                              ↓ deterministic, non-interpretive projection (D20)
+      Planner Contract · Builder Brief · Tester Contract · plan.json · seeds
+```
+
+Consumers never see raw BFO/CCO IRIs. **Facets flow through:** each projected field carries its assertion's authority facet and layer of origin, so downstream dispositions key on it — and an auditor can see that `GET /accounts/{id}` came from a closure, not the source. Negative content projects with its coverage metadata (§6).
+
+**11.1 The Projection Input Manifest (D15, amended).** Every deterministic projection embeds or content-addresses the **complete projection-input manifest**:
+
+```json
+{ "l2": { "graphDigest": "…", "acceptanceHead": {"specDigest":"…","head":"…","seq":…} },
+  "l3": [ { "designGraphDigest": "…", "ratificationHead": {…} } ],
+  "semanticDependencyManifestDigest": "…",
+  "compiler": { "component": "aro-project", "version": "…" } }
+```
+
+The projection carries `projectionInputManifestDigest`; the `ProjectionAct` is a ledger event. Without the L3 entries, closures create an audit hole precisely at the compiler boundary — the manifest closes it. Determinism is checked, not assumed: re-projection from the same manifest and compiler yields a byte-identical contract, and that check is the `Projected` status's recorded basis (§8.1).
+
+**11.2 Composition with the frozen loop — no CP/SM change.** CP-5 forbids model-authored acceptance; therefore boundary oracles compile only from **eligible Accepted** acceptance clauses. Plans, contexts, and briefs may compile from Provisionally-Accepted content at provisional eligibility, and the consuming capability caps at PROVISIONAL under CP/SM v0.4.9 §9's existing rule (carried unchanged from v0.4.1).
+
+**11.3 What ARO projects into the loop.** **plan.json is a projection of eligible L2 ⊕ eligible L3 — never L2 alone** *(dev review, finding 1)*: the loop consumes `unit["files"]`, and file layout and language are N1-forbidden facts no source states. They arrive exclusively through the **layout pattern** — one per-project **convention closure** (standalone-marked, expiring per §5.6: layout conventions, language, test-file discipline) plus one **profile-level ratified layout derivation rule** deriving each module's `files` from the component prescriptions (L2) crossed with the convention (L3). Derived layout assertions are L3-resident mixed-premise derivations (§5.6): AUTHORITATIVE through the rule chain, lapsing with their premises. **Priced:** ≈ two ratification acts per project plus one rule ratification per profile — not one-plus per module; spike Arm B exercises this pattern and spike 2's rate measurement validates the pricing. **Recorded fallbacks** if the pattern fails under the spike: (b) the loop de-authoritizes plan file structure (CP-9 direction; four known call sites); (c) `files` stays loop-side and projection emits all else — conceding part of the thesis, stated as such. Beyond plan.json: interface prescriptions with shape payloads populate the **`declared`** tier; stimulus→response paths and acceptance clauses seed capabilities; **Worked Examples** compile to CapabilityExample sources; **Prescribed Invariants** compile to Rung-4 invariant *sources* (registration remains a ratifying act under CP-14); interface requirements supply an **additive** seam-grain matrix seed in union with plan `depends_on` edges — a discrepancy between the two seeds is itself a diagnostic. **Scope of the flagship claim:** projection makes the *inputs* agree by construction; whether the build *honors* them is the loop's enforcement, fed authoritative inputs — FX-SEAM-B (§13) is the fixture that keeps the larger claim honest.
+
+**11.3a `files` carries deliverables only (v0.5.3; boundary decision (a), Plan v1.1 WS-2).** The layout derivation rule derives, per module, the source path into `unit["files"]` and the test path — from the same ratified convention — into a separate `testFiles` field that projection renders into the **Tester Contract**. `files` means *deliverables* by the loop's documented contract; a test path in it made the loop type-check a test file it never writes, and failed the module gate (spike finding F2). The bar's location travels with the bar, never with the deliverables.
+
+**11.4 Integration items (deferred to a CP/SM version bump; the freeze holds):** INT-1 matrix seed union · INT-2 `declared`-tier ingestion rules · INT-3 RealizationConflict as a recognized finding source in the loop's co-reported ledgers.
+
+---
+
+## 12. Term map — ARO ↔ CP/SM (normative appendix; D16)
+
+| ARO | CP/SM | Note |
+|---|---|---|
+| authority facet (computed) | AUTHORITATIVE (§1.2, by reference) | operator-origin ≙ operator-authored; ratified ≙ ratified; ratified-rule chain ≙ invariant-ratification channel; spec-derived ≙ ratified deterministic extractor over a registered source |
+| **eligibility (§3.2)** | **the fold's current view over append-only acts** | authority ≠ history, applied to ARO's own semantics; lapse suspends, never erases |
+| Candidate content | `model-proposed(unratified)` | never gates |
+| Accepted Graph | ratified standard (`oracles/`-class, attested head) | acceptance = anchoring act |
+| semantic dependency manifest | freeze keys / CP-16 supersession | lapse-and-requeue on manifest change only |
+| **Projection Input Manifest** | attested-head / freeze-key family | complete input identity at the compiler boundary |
+| `ReevaluationObligation` | co-reported debt ledger entry | non-blocking freshness |
+| **`GenerationDefectFinding`** | **escape protocol / defect response** | population-scoped, act-opened, blocking |
+| Transformation / Projection Acts | ledger events | run-root storage |
+| Diagnostic / cone | finding / blocked-cone discipline | lifecycle ≙ finding lifecycle |
+| validation statuses | CP-21 typed bases | `Source-Faithfulness-Audited` carries its sample; `Projected` carries its determinism check |
+| coverage report | graded `(n, k, provenance)` reporting | independent denominator channels |
+| Specification Record + queue | CP-19 unit + queue | display duties imported |
+| Provisionally-Accepted | PROVISIONAL | composes via CP-5 + §9 (§11.2) |
+| L4 Evidence | assembly-ledger projection | coordinates, never copies |
+| reference graph / **constraint set** | **witness / contract** | the founding lesson applied to the reference itself |
+| **Worked Example** / **Prescribed Invariant** | CapabilityExample source / Rung-4 invariant source | runtime **Witness** keeps its meaning: receipts |
+| Acceptance Clause | boundary-oracle source | eligible-Accepted-only per CP-5 |
+
+---
+
+## 13. Fixture corpus — two classes
+
+**Unit class (uniqueness rule):** each fixture fails exactly one check; with that check disabled (test-assembled only; no production disable surface), the suite passes, wrongly.
+
+- **FX-INVENT** — invented framework/path/database → N1 shape gate only.
+- **FX-DROP** — detected normative clause unrepresented → detected-clause coverage only.
+- **FX-MISS** *(the §0 fixture)* — clause the primary segmenter misses; only the independent denominator channel catches it.
+- **FX-CONFLATE** — two clauses merged → audit channel only.
+- **FX-MISGROUND** — cited fragment does not support the assertion; schema-clean → audit/adversarial only.
+- **FX-EXAMPLE** — "for example, Docker" as candidate requirement → role gate only.
+- **FX-AMBIG** — ambiguity → diagnostic with enumerated interpretations + blocked cone; silent resolution fails.
+- **FX-NEG** — projection flattening prohibition/non-goal into `unspecified`, or shipping `unspecified` without coverage state → projection-preservation only.
+- **FX-CLOSURE** *(two branches)* — (a) a closure claiming `groundedBy`, or any groundless assertion in L2 → the graph rule only; (b) a closure citing `rationaleSource` **passes** — citation is free.
+- **FX-LAPSE** *(two branches)* — (a) source edit → fragments lapse, migration proposed, acceptance requeued; a stale acceptance still gating fails; (b) declared-ID continuity flows mechanically under the ratified identity policy while inferred continuity auto-passing fails.
+- **FX-RULE** — derivation-rule supersession lapses exactly its dependency cone.
+- **FX-EQUIV** *(anti-canonization)* — a semantically equivalent alternative structuring passes the constraint oracle; fails only if the Phase-6 oracle over-fits one modeler's representation.
+- **FX-PROJ** *(authored)* — a Builder Brief containing closure-supplied content whose projection-input manifest omits the consumed L3 head → manifest-completeness check only.
+- **FX-STALE** *(authored)* — an L2 assertion a closure `closes` is superseded; the closure's eligibility suspends; a projection still consuming it fails → closure-lifecycle rule only.
+- **FX-RECLASS** *(authored)* — a newly ratified rule derives content overlapping an eligible closure → `SubsumptionNotice` opens; historical membership unchanged; a suite that silently reclassifies the closure to L2 fails.
+- **FX-DEFECT** *(authored, two branches)* — (a) a generation-provenance version change alone stays non-blocking (`ReevaluationObligation`); (b) an act-opened `GenerationDefectFinding` suspends eligibility across exactly the affected population; a suite where (a) blocks or (b) fails to block fails.
+- **FX-SEAM-A** *(the graduated Phase-1.5 spike, scoped honestly — dev review, finding 3)* — the IA-NAMES class reproduced: a plan/contract/brief/tester set in which the same seam carries divergent names within the founding inputs. Under single-graph projection the divergence is unrepresentable — every consumer receives the seam's identity from one eligible graph via one Projection Input Manifest. **Labeled a projection-mechanism regression guard, near-tautological by design**: three consumers reading one field agree by construction, so this fixture guards the mechanism (a compiler bug could still emit divergent names), not the world. With single-source projection disabled (test-assembled independent derivation), the mismatch reappears and the suite passes, wrongly. Authored RED at Phase 1.5; green at Phase 5.
+- **FX-SEAM-B** *(the IA-CSEAM class — the failure projection does not touch)* — a consumer's **built artifact** imports a member the projected contract does not export. The fixture asserts the **built manifest against the projected seam** — the loop-side seam rule already in force (shipped as IA-SEAM / IA-CSEAM; named IA-WIRING in v0.5.2 — F-06), fed the projected `declared` contract instead of a model-proposed one. **A joint fixture at the ARO↔loop boundary**: green requires Phase 5 composing with the loop's seam gate consuming the projected `declared` tier (INT-2). ARO alone cannot turn it green, and that is the point — projection makes inputs agree; this fixture is what verifies the build honors them.
+
+**Integration class (composition rule):** **FX-COMPOSE** — invented framework + misgrounded citation + dropped clause in one candidate: all three detectors fire, cones block correctly, diagnostics co-report with correct precedence, no early-exit masking. Single-fault fixtures prove detector uniqueness; multi-fault fixtures prove composition.
+
+Reference-graph authorship is held out from whoever builds the transformer.
+
+---
+
+## 14. Foundational decisions — D1–D24
+
+- **D1** Reality / specification / design / artifact / activity separated (four products + projection).
+- **D2** Requirement is prescriptive information content (CCO Directive ICE direction; ADR-002).
+- **D3** Identity ≠ expression ≠ record ≠ revision ≠ fragment; continuity mechanical only via a ratified identity policy over source-declared identifiers; inferred continuity is a ratified act.
+- **D4** Need, requirement, design, realization, evidence remain distinct.
+- **D5** Grounding = bundles of Source Fragments with roles, retained through derivation ancestry; Fragment abstract, Text Span its RLA implementation; normalization versioned in the manifest.
+- **D6** Unsupported information remains absent (N1); on absence: representable absence, a diagnostic, or a labeled L3 proposal — never silent completion.
+- **D7** Ambiguity produces diagnostics with enumerated interpretations; unchosen readings preserved.
+- **D8** Role × force × scope disposition, with coverage state on its own axis; only role: Normative gates; the §6 projection rule.
+- **D9** Candidate content never gates; acceptance is graded and composes with loop dispositions via CP-5 + the PROVISIONAL cap, at the eligibility grade claimed.
+- **D10** Evidence is a ledger projection, never a store.
+- **D11** *(amended)* BFO/CCO are the approved ontological dependencies, and **the grounding commitment is affirmed** — a permanently un-grounded ARO would be a second semantic foundation inside one program, the definition-copy drift pattern at the deepest level. Its **landing** is the parallel grounding track (Phase 2b), behind the D12 shield (zero consumer churn by construction), gated by ADR-002; the profile track proceeds without upper-ontology import, kept BFO-compatible by D21. Deferral with a declared landing, not a fork — a lapse of the landing without a superseding act is a defect, not a decision. Prior art (PROV-O, SHACL ValidationReport, ReqIF, OSLC RM, SysML v2) reviewed and mapped adopt-or-justify; any namespace import beyond BFO/CCO is a dependency-policy expansion requiring architect ratification.
+- **D12** ARO shields consumers from raw BFO/CCO identifiers.
+- **D13** Profiles govern application-specific constraints; authority-bearing, version-keyed manifest members.
+- **D14** Validation claims are distinct typed claims with recorded bases; `Source-Faithfulness-Audited` carries its sample; `Source-Faithful` requires complete review; the reference graph gets 100%; *Realizable* is out.
+- **D15** *(amended)* Contracts are deterministic compiled projections that **embed or content-address the complete Projection Input Manifest** — the exact Accepted L2 graph, all Ratified L3 content consumed, their acceptance/ratification heads, the semantic dependency manifest, and the compiler version — with re-projection determinism as the recorded basis of `Projected`.
+- **D16** Substrate unification with declared delivery: one authority class (by reference), one ledger, one anchoring model, one queue discipline; the term map is normative; CP/SM v0.4.9 + `1b7f3c1` are normative accompanying dependencies.
+- **D17** *(amended)* **Membership by semantic nature; derivability bounded by the active environment.** L2 = source semantics (directly grounded, or rule-derived over grounded AUTHORITATIVE premises under the derivation environment identified by the semantic dependency manifest); L3 = engineering closures (not asserted or derivable under that same environment). L3 forbids `groundedBy`, permits `rationaleSource`. History never reclassifies; environment changes act forward through supersession (`SubsumptionNotice`).
+- **D18** Coverage denominators carry independent channels with disclosed rates; invention splits ungrounded (schema-zero) / misgrounded (audit-rated).
+- **D19** *(amended)* Acceptance binds to content + the semantic dependency manifest; manifest changes **lapse eligibility** and requeue; generation provenance is recorded, non-lapsing, opens `ReevaluationObligation`s — with the **defect-finding path**: an authoritative `GenerationDefectFinding` may block an affected population. **Ratified L3 closures retain explicit dependencies on the L2 assertions, records, or diagnostics they close; supersession or lapse of those dependencies requeues the dependent L3 cone; a stale closure MUST NOT remain eligible for projection merely because its ratification act remains historically valid.** Standalone closures carry the attested marker. The round trip (RealizationConflict) runs ledger findings back into graph amendment.
+- **D20** Source interpretation confined to the transformation-and-ratification boundary; design judgment to L3 closure acts; projection deterministic and non-interpretive.
+- **D21** *(amended sequencing)* Interim pin per §10 with the OWL existence-entailment prohibition and interim punning discipline. **ADR-002 gates the grounding track (Phase 2b)**, and an interim-pin expressiveness failure anywhere on the profile track escalates the ADR forward immediately; the pin is the bridge that keeps every profile-track artifact BFO-compatible pending grounding.
+- **D22** The transformer's honesty boundary: channels it cannot self-report get independent detectors with fixtures.
+- **D23** *(amended)* Assertion identity: stable, machine-addressable, sufficient for grounding, derivation, diagnostics, ratification, supersession, and cone membership; the statement-provenance pattern **and canonical graph identity** fixed by ADR-003 before Phase 3; **one canonicalization implementation** for digest, addressing, and diff, versioned in the manifest; **fragment identity = source digest + kind + canonical locator + normalization version + content hash**, with migration as a relationship, never identity.
+- **D24** *(amended)* Orthogonal provenance facets; **authority is computed from append-only acts and is historical — it never disappears on lapse. Eligibility to gate or project is a distinct, fold-computed state predicate (§3.2)**; no facet substitutes for another; no parallel authority class exists.
+
+---
+
+## 15. Module architecture
+
+```
+aro-core.ttl          aro-requirements.ttl     aro-provenance.ttl   (facet model; PROV-O mapping recorded, not imported)
+aro-transformation.ttl aro-traceability.ttl    aro-verification.ttl
+aro-diagnostics.ttl   aro-design.ttl           (L3 shapes: closure dependencies, standalone marker, rationaleSource, no groundedBy)
+rules/                (derivation rules + identity policies: versioned, content-addressed, scope-bounded, tested)
+profiles/  aro-rla-profile.ttl · aro-rla-shapes.ttl · aro-rla-design-shapes.ttl · aro-rla-context.jsonld
+examples/  rla-source.md · rla-hand-authored.jsonld · rla-transformed.jsonld · rla-constraint-set.jsonld
+           fx-invent · fx-drop · fx-miss/ · fx-conflate · fx-misground · fx-example · fx-ambig · fx-neg/
+           fx-closure/ · fx-lapse/ · fx-rule/ · fx-equiv/ · fx-proj/ · fx-stale/ · fx-reclass/ · fx-defect/ · fx-compose/
+later/     aro-stakeholders.ttl · aro-interfaces.ttl · aro-software.ttl   (on demonstrated need)
+```
+
+---
+
+## 16. Phased build
+
+- **Phase 1 — architect ratification** of this amended document (D-set, term map, D21 pin, ADR gates, the Phase-1.5 outcome mapping). Ratification is the architect's act; this document does not pronounce it.
+- **Phase 1.5 — the de-risking spike (Arm 0 precondition + two arms; outcome mapping pre-stated, and binding once stated).** Target: the author-agent seam-flip class (the `getFindings` mismatch family) — the motivating loop failure, which has **two entangled candidate causes**: the plan is model-proposed and non-deterministic, and the three consumer contracts are derived independently.
+  - **Arm 0 — reproduce first** *(precondition; §0 applied to the spike's own mapping — dev review, finding 2)*: on current HEAD, run N decompositions and measure (i) the **seam-name drift rate** — is the flip class live — and (ii) the **suppression signature** — guardrail refusals and retry-burn attributable to seam checks, since the class may be suppressed rather than closed. The arms' kill-interpretation is void unless Arm 0 shows the class live or suppressed.
+  - **Arm A (control, loop-side, no graph):** derive the Planner Contract, Builder Brief, and Tester Contract deterministically from a single source — the *existing model-proposed* `plan.json`. Isolates independent derivation. **Ownership: recommended for conferral to the Integrated Agent dev (volunteered; their code; ≈ one day); the conferral is the architect's act.**
+  - **Arm B (treatment):** hand-author the lightest ratified graph for the RLA — facets and fragments at minimum viable fidelity, honoring D21, **no upper-ontology import** — and deterministically project the same three contracts plus `plan.json` (via the §11.3 layout pattern) and the `declared` tier. **Arm B runs regardless of Arm 0's result**: spike 2 and the layout-pattern validation are independent of the seam metric.
+  - **Outcome mapping (recorded before measurement):** *Class live* — A alone kills → **ship A into the loop immediately, regardless of ARO**; ARO's license rests on the faithfulness/N1/provenance incident class. B kills and A does not → the strongest license; the full program proceeds. Neither → a third cause exists; escape-protocol triage before either investment. *Class suppressed* — the arms run with **retry-burn reduction** as the primary metric in place of flips, same branch logic. *Class dead and unsuppressed* — the seam metric licenses nothing; ARO's license rests, as already written, on the faithfulness/N1/provenance incident class; Arm A becomes optional recurrence-proofing at the dev's and architect's discretion rather than a mapped obligation.
+  - **Spike 2 measures a rate, not a count** *(dev review)*: (i) ratification acts required by Arm B — including the layout pattern's — and (ii) **sustained ratification acts per hour actually achieved**, with queue-starvation incidents recorded. The **Phase-4 entry condition** is required-acts ÷ achieved-rate against the calendar budget: the human is the scarce resource, and a count without a rate extrapolates badly.
+  - The spike graduates into the corpus as **FX-SEAM-A/B** (§13). Duration bound: one–two days; exceeding it is itself a finding.
+- **Phase 2a — profile track (critical path):** the RLA-scoped TBox terms and facet model, defined at application level with **no upper-ontology import required to exit**; prior-art mapping decisions recorded per D11; D21 honored throughout — the pin is what keeps every artifact on this track BFO-compatible pending grounding.
+- **Phase 2b — grounding track (parallel, non-blocking):** BFO/CCO grounding of the TBox, landing **behind the D12 shield** — consumers see application-level fields, so grounding is an internal refactor with zero consumer churn by construction; **gated by ADR-002 on its own schedule**. The grounding commitment stands (architect-affirmed, §18): deferral with a declared landing, not a fork.
+- **ADR-003** — assertion identity + canonical graph identity + **fragment locator criterion**: Phase 3 cannot exit without it.
+- **Phase 3 — RLA profile**: JSON-LD context, SHACL shapes (L2/L3/fragment/classification/closure-dependency), the identity policy as a ratified rule, the single canonicalization component.
+- **ADR-002** — planned-vs-existing formal pattern: **gates the grounding track (2b)**. The D21 interim pin is the bridge that keeps every profile-track artifact — including the Phase-4 reference graph — BFO-compatible pending the ADR; **an interim-pin expressiveness failure anywhere on the profile track escalates the ADR forward immediately** — the hard gate restores itself the moment the bridge can't carry a case.
+- **Phase 4 — reference graph + constraint set**: hand-authored reference graph (held-out author, 100% source-faithfulness review) through the full pipeline manually, ratified alongside the **transformation acceptance constraint set** (required/forbidden assertions keyed to fragments, traceability constraints, coverage and diagnostic expectations, competency-query answers, graph invariants). **Entry condition:** spike-2's ratification-act extrapolation reviewed; GP-B and record granularity calibrated first if the count demands it.
+- **Phase 5 — projection compiler**: contracts + plan.json + seeds, Projection Input Manifests embedded, determinism checks recorded; success gate — **anchored by FX-SEAM-A ∧ FX-SEAM-B** — the RLA pipeline runs against projected contracts and the terminal result is truthful.
+- **Phase 6 — automated transformation.** Oracle = the constraint set (the contract); the reference graph is its first witness. Canonical diff only where the profile prescribes a pattern; elsewhere equivalence under constraints; ambiguous regions yield permitted alternatives or diagnostics, never silently chosen readings. FX-EQUIV is the anti-canonization tripwire.
+- **Phase 7 — adversarial suite**: both fixture classes; audit calibration (GP-A, GP-C); stochasticity policy under the shared canonicalizer.
+- **Phase 8 — generalization**: second profile; broader model per the §1 scope rule.
+
+Exit per phase: its fixtures behave as specified, prior fixtures hold, every acceptance and projection act anchored. **Governance parameters:** GP-A audit sampling (initial 10%; 100% for the reference graph) · GP-B ratification batch cadence · GP-C detection-channel disagreement threshold (initial: any) · GP-D re-evaluation review cadence.
+
+---
+
+## 17. Watch items
+
+1. **ADR-002 depth and the grounding landing** — the OWL existence trap and punning; the D21 pin holds the line meanwhile, and the escalation trigger (§16) restores the hard gate the moment the pin can't express a case. Companion risk, named against this amendment's own recommendation: **a deferred commitment with no schedule pressure is how forks happen silently** — the grounding track carries a declared landing, and its lapse without a superseding act is a defect, not a decision (D11).
+2. **ADR-003 selection pressure** — the statement-provenance pattern shapes every SHACL rule downstream; decide once, early; the fragment-locator criterion is in its acceptance set.
+3. **Oracle-equivalence policy per profile** — prescribed-pattern regions (diff) vs. constraint-equivalence; FX-EQUIV is the tripwire.
+4. **Undeclared L2↔L3 semantic conflicts** — mechanically caught only through declared dependencies; backstops are the round trip, review, and cross-layer ConflictingStatement. A bounded mechanism, stated as such (§5.6).
+5. **Derivation-rule scope creep** — the authority multiplier is governed but attractive; watch rule count and scope per release; `SubsumptionNotice` volume is the early signal.
+6. **Operator load** — hundreds of Specification Records per real spec; **spike 2 (Phase 1.5) is the measurement vehicle, and it measures a rate**: ratification acts required (including the §11.3 layout pattern's) and sustained acts-per-hour achieved, queue-starvation incidents recorded; the Phase-4 entry condition is required ÷ achieved against calendar; calibrate GP-B and record granularity first if the answer demands it.
+7. **Multi-source precedence** — conflicts across registered sources are `ConflictingStatement` diagnostics; precedence is a closure, never an inference.
+8. **INT-1..3** — await a CP/SM version bump; nothing here presumes it. FX-SEAM-B's green is the composition milestone that will exercise INT-2 first.
+9. **Trigger-reachability audit** *(the no-immortal-eligibility rule, §5.6)* — standalone closures are fixed by expiry; audit every other eligible-artifact class (derivation rules, identity policies, profiles, ratified constraint sets) for at least one reachable review or retirement trigger; any class without one is the grader-runner shape waiting to recur.
+
+---
+
+## 18. Change log — v0.5.2 → v0.5.3
+
+1. **CP/SM re-pin v0.4.1 → v0.4.9** at every pin site (the delivery rule, §0 non-goals, §11.2, D16). Basis: the architect's A3 act, 2026-09-29, over IA DEV's consistency attestation (A2) and IA OPS' compatibility record (A2b); residual R-1..R-3 expressly assumed there. Every CP/SM section this document cites keeps its number and title in v0.4.9. **F-04 closed:** v0.4.9 is not the version INT-1..3 await; §11.4 and §17 item 8 stand unchanged.
+2. **§11.3a — `files` carries deliverables only.** Boundary decision (a), ratified with Plan v1.1 on 2026-09-14. Implemented by layout rule v0.2 (queue item rq-013, superseding rq-012; effective only on the architect's act on rq-013). The ratified convention (rq-001) is unchanged.
+3. **F-06 — naming.** The loop-side seam rule is named as shipped (IA-SEAM / IA-CSEAM) in §13 and §18; v0.5.2 called it IA-WIRING, a tag no IntegratedAgent commit carries.
+4. **No other content moved.** v0.5.2 stands as issued and is superseded, not amended.
+
+## 18b. Change log — v0.5.1 → v0.5.2 (published, amended)
+
+Amendment basis: the Integrated Agent dev review, dispositioned and architect-directed. Four findings resolved; two smaller items folded; graph-semantics deltas limited to standalone-closure expiry and the mixed-premise derivation clarification.
+
+1. **The layout pattern (finding 1 — a spec-internal collision, conceded):** §4.2 forbids inferring layout and language; the loop consumes `unit["files"]`, which encodes both. §11.3 now states plainly that **plan.json is a projection of L2 ⊕ L3, never L2 alone**, and prices the dependency: one per-project convention closure (standalone, expiring) + one profile-level ratified layout derivation rule → per-module `files` as L3-resident mixed-premise derivations, AUTHORITATIVE by chain, lapsing with premises (§5.6 clarification). ≈ two acts per project plus one rule per profile — cheaper than the review's cheapest option, using only existing machinery. Fallbacks (b) loop-side de-authoritization of plan file structure and (c) files-stay-loop-side are recorded; Arm B exercises the pattern and spike 2 validates the pricing.
+2. **Arm 0 — reproduce first (finding 2 — a §0 catch on the spike's own mapping, conceded):** the mapping assumed the disease was live and verified it nowhere. Arm 0 measures seam-drift rate and the suppression signature (the reviewer's own steelman) on HEAD; the mapping gains the *suppressed* and *dead-and-unsuppressed* branches; Arm B runs regardless (spike 2 and layout validation are metric-independent); under a dead class, Arm A becomes optional recurrence-proofing and ARO's license rests on the faithfulness/N1/provenance incident class, as already written.
+3. **FX-SEAM split (finding 3 — correct-by-coincidence in the flagship, conceded maximally):** the original fixture asserted a property single-source projection satisfies by construction and called it the reproduction of a failure projection does not touch. Split per the incident record: **FX-SEAM-A** (IA-NAMES class; a projection-mechanism regression guard, labeled near-tautological by design) and **FX-SEAM-B** (IA-CSEAM class; the built manifest verified against the projected seam via the loop-side seam rule (IA-SEAM / IA-CSEAM) fed projected `declared` contracts — a joint fixture ARO alone cannot turn green). Phase-5 gate anchors on **A ∧ B**; the flagship claim is scoped in §11.3: projection makes inputs agree; the loop's enforcement makes the build honor them.
+4. **Standalone-closure expiry (finding 4 — the grader-runner shape, conceded):** a standalone closure declared no lapse-bearing edge and cited nothing, so no event could ever reach it — eligible forever. Every standalone closure is now ratified with an explicit expiry (GP-D default); expiry without re-affirmation suspends eligibility via §3.2; re-affirmation is a batch act. Generalized as the **no-immortal-eligibility rule** with a class-wide trigger-reachability audit (§17.9).
+5. **Spike 2 is a rate** (acts required ÷ sustained acts-per-hour achieved, starvation incidents recorded) — the human is the scarce resource; a count extrapolates badly. **Arm A ownership** recommended for conferral to the Integrated Agent dev, recorded in §16; the conferral is the architect's act.
+6. The ratification instrument carries forward with its reference updated to v0.5.2, now also covering the standalone-expiry addition.
+
+The v0.5 → v0.5.1 log is preserved in the superseded v0.5.1 document. The architect's ratification instrument, once issued, is recorded here and in the repo decision record.
+
+**Phase-1 ratification instrument — issued 2026-09-14, SCOPED.** Recorded verbatim in `docs/decisions/2026-09-14-aro-closeout-act.md`: the graph, ratification-queue and projection machinery (§§2–13) stand as the specification for ARO's role as the ratified-provenance source for the factory's provenance boundaries; Phases 6–8 deferred, not denied, behind the three preconditions of `spike/report.md` §9. The scope is the architect's; this line records it and extends nothing.

@@ -4,16 +4,16 @@
 
 ## Status
 
-**Projected on 2026-09-11** after the architect acted on all eleven records in `spike/measurements/ratification-queue.jsonl` (five L2 records accepted, three L3 bundles and the layout convention ratified, the layout rule ratified at its content address, the adjudication decided **C**). Re-projection is byte-identical; that check is the recorded basis of the `Projected` status (ARO §8.1). The package is in `spike/projections/out/`.
+**Re-projected on 2026-09-30 (Plan v1.1 A7)** under layout rule v0.2 (rq-013) and the Finding field types (rq-014): `files` carries deliverables only, test paths are in the Tester Contract, `Finding` is typed. **First projected on 2026-09-11** after the architect acted on all eleven records in `spike/measurements/ratification-queue.jsonl` (five L2 records accepted, three L3 bundles and the layout convention ratified, the layout rule ratified at its content address, the adjudication decided **C**). Re-projection is byte-identical; that check is the recorded basis of the `Projected` status (ARO §8.1). The package is in `spike/projections/out/`.
 
 | file | sha256 | what it is |
 |---|---|---|
-| `out/plan.json` | `243eef68…4259` | the loop's shape: `units[{id, files, covers, kind, depends_on, scope, signatures, declarations}]`, `capabilities: []`, `oracles: []` |
-| `out/declared.json` | `744667e4…77c7` | the `declared` tier per module; every export carries `layer` (L2 or L3) and the record it came from |
-| `out/planner-contract.json` | `8f731f15…5011` | the ArchitecturePlan shape: per-module exports and `depends_on` |
-| `out/builder-brief.json` | `70af2bed…68e6` | per-module `mustExport`, `imports`, `interfacesBlock`, `callsPerArchitecture` |
-| `out/tester-contract.json` | `7a4e707b…7ed9` | per-module `assertsExports`, `assertsCalls` |
-| `out/projection-input-manifest.json` | `e9ba467b…7340` | the one manifest every file above embeds, with its digest |
+| `out/plan.json` | `8f9496a4…55c9` | the loop's shape: `units[{id, files, covers, kind, depends_on, scope, signatures, declarations}]`, `capabilities: []`, `oracles: []` |
+| `out/declared.json` | `d5f875ac…b3a9` | the `declared` tier per module; every export carries `layer` (L2 or L3) and the record it came from |
+| `out/planner-contract.json` | `ee247cce…76e6` | the ArchitecturePlan shape: per-module exports and `depends_on` |
+| `out/builder-brief.json` | `2842252b…92cd` | per-module `mustExport`, `imports`, `interfacesBlock`, `callsPerArchitecture` |
+| `out/tester-contract.json` | `65685500…56ba` | per-module `assertsExports`, `assertsCalls` |
+| `out/projection-input-manifest.json` | `f487918c…8e44` | the one manifest every file above embeds, with its digest |
 
 Every file carries the same `projectionInputManifestDigest`. If any two differ, the package is not a projection and must not be built. Regenerate at any time with:
 

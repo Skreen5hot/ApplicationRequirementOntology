@@ -218,8 +218,18 @@ def render_show(q, row):
             cites = [(g.get("fragment"), g.get("role"), g.get("why")) for g in a.get("groundedBy") or []]
             head = "     cites:"
         else:
-            L.append(_wrap("; ".join("%s = %s" % (k, _value(v)) for k, v in (a.get("proposed") or {}).items()),
+            proposed = a.get("proposed") or {}
+            listed = {k: v for k, v in proposed.items()
+                      if isinstance(v, list) and v and all(isinstance(x, dict) and x.get("name") for x in v)}
+            flat = {k: v for k, v in proposed.items() if k not in listed}
+            L.append(_wrap("; ".join("%s = %s" % (k, _value(v)) for k, v in flat.items()) or "(values below)",
                            "  %d. %s: " % (n, a.get("@id"))))
+            for key, items in listed.items():      # e.g. field lists: one line each, so each value can be reviewed
+                L.append("       %s:" % key)
+                for x in items:
+                    extra = ", ".join("%s %s" % (k, _value(v)) for k, v in x.items() if k not in ("name", "type", "note"))
+                    L.append(_wrap("%s: %s%s%s" % (x["name"], x.get("type") or "(untyped)", "  [" + extra + "]" if extra else "",
+                                                   "  -- " + x["note"] if x.get("note") else ""), "         - "))
             cites = [(c.get("cite"), "rationale", c.get("why") or c.get("note")) for c in a.get("rationaleSource") or []]
             head = "     rationale (not grounding):"
         L.append(head)

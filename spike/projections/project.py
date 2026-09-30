@@ -248,7 +248,11 @@ def project(l2: dict, l3: dict, convention: dict, fragments: dict, queue: list[d
     disposition_fields = [f["name"] for f in assertions["a:Disposition:record"]["fields"]]
     declarations = {
         "contract": [
-            {"name": "Finding", "fields": finding_fields, "layer": "L2", "record": "sr:L2:Finding"},
+            ({"name": "Finding", "fields": [{"name": f["name"], "type": f["type"] + ("" if not f.get("optional") else " (optional)")}
+                                           for f in closures["c:Finding:field-types"]["proposed"]["fields"]],
+              "layer": "L3", "record": "sr:L3:Finding-field-types"}
+             if "c:Finding:field-types" in closures   # A6: architect-conferred types (F6 remedy a), eligible only once ratified
+             else {"name": "Finding", "fields": finding_fields, "layer": "L2", "record": "sr:L2:Finding"}),
             {"name": "Disposition", "fields": disposition_fields, "layer": "L2", "record": "sr:L2:Disposition"},
             {"name": "DispositionKind", "enumeration": assertions["a:Disposition:record"]["fields"][1]["enumeration"], "layer": "L2", "record": "sr:L2:Disposition"},
             {"name": "ProposeRevisionsInput", "fields": sorted(closures["c:contract:ProposeRevisionsInput"]["proposed"]["fields"]), "layer": "L3", "record": "sr:L3:module-boundaries"},

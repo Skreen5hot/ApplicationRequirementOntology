@@ -145,7 +145,6 @@ RECORDS = [
              "statement": "Entries are bit-stable given payload and chain position; hash fields are the only masks, carried with the chain-verification property.",
              "properties": ["entries bit-stable given payload and chain position", "hash fields are the only masks"],
              "classificationNote": "titled a note, but states a property in the normative register; classified Normative -- the alternative reading (Note) is preserved here",
-             "diagnostic": "diag:C-S7-determinism-beyond-the-acted-region",
              "groundedBy": [g("C-S7.determinism")]},
         ],
     },
@@ -348,12 +347,13 @@ DIAGNOSTICS = [
      "statement": "SRS s5 homes the ledger at ledger/ and .githooks/; the hook half (W-CS7-Δ1: 'hook exit 1') is a git hook, not a module a TypeScript build emits. Like the slice's author-agent, the source is univocal and the conflict is with the factory's realization; it is recorded, not resolved, here.",
      "evidence": ["S5.ledger", "C-S7.W-CS7-D1"],
      "status": "open"},
-    {"@id": "diag:C-S7-determinism-beyond-the-acted-region", "@type": "UnderdeterminationDiagnostic", "blocking": True,
+    {"@id": "diag:C-S7-determinism-beyond-the-acted-region", "@type": "UnderdeterminationDiagnostic", "blocking": False,
      "cone": ["a:C-S7:determinism, and any ratified bar or oracle for C-S7 that would rest on it"],
      "statement": "a:C-S7:determinism is grounded on line 76 (C-S7's determinism note), one line beyond the A9 act's '73–75'. C-S2's and C-S3's determinism notes lie inside the region, so the bound may be a transcription boundary rather than a decision to exclude -- but that is the architect's to say. Either the act's region is amended to 73–76, or the clause leaves the record.",
      "evidence": ["C-S7.determinism", "C-S7.header"],
      "legalOutputs": "an architect act amending A9's region (the clause stays), or a decision at rq-017 to drop the clause (it moves to coverage.notYetCovered); no C-S7 bar or oracle rests on it until then (Ops finding 2026-10-01, bullet 7)",
-     "status": "open"},
+     "status": "closed",
+     "closedBy": "docs/decisions/2026-10-01-a9-region-amendment.md -- the architect: 'amend A9's region to 73–76'"},
 ]
 
 WS3 = {
@@ -371,7 +371,7 @@ COVERAGE = {
     "axis": "covered · not yet covered — separate from the semantic states prohibited · non-goal · unspecified (ARO 6)",
     "covered": {
         "SRS §2": "J-S1 (24), J-S4 (30) and the coverage map (32), as context only",
-        "SRS §3": "C-S2 (43–47), C-S3 (49–53), C-S7 (73–75) -- and line 76, C-S7's determinism note, which lies BEYOND the acted region (ws3.beyondRegion; diag:C-S7-determinism-beyond-the-acted-region)",
+        "SRS §3": "C-S2 (43–47), C-S3 (49–53), C-S7 (73–76; line 76 inside the region since the 2026-10-01 amendment)",
         "SRS §4": "the Records line (85); R-S1, R-S4, R-S5, R-S6 (87, 90–92)",
         "SRS §5": "table header; grader-runner, adjudicator and ledger rows; the traceability sentence",
         "SRS §6": "table header; S-S2, S-S3, S-S6",
@@ -395,7 +395,20 @@ def acted_region(act_path=ACT):
     if not m:
         raise SystemExit("the A9 act record states no 'Region: lines a–b and c–d' -- refusing to guess a region")
     a, b, c, d = map(int, m.groups())
-    return [[a, b], [c, d]]
+    region = [[a, b], [c, d]]
+    # Amendments, in date order: "amend A9's region to x–y" replaces the range that BEGINS at x (2026-10-01:
+    # "amend A9's region to 73–76"). An amendment that matches no range's start is refused, never guessed.
+    for amendment in sorted(act_path.parent.glob("*-a9-region-amendment*.md")):
+        said = "\n".join(l[1:].strip() for l in amendment.read_text(encoding="utf-8").splitlines() if l.startswith(">"))
+        for lo, hi in re.findall(r"region to ([0-9]+)[–-]([0-9]+)", said):
+            hits = [rng for rng in region if rng[0] == int(lo)]
+            if len(hits) != 1:
+                raise SystemExit("%s amends a range starting at %s, which A9 does not have" % (amendment.name, lo))
+            hits[0][1] = int(hi)
+    return region
+
+
+AMENDMENTS = sorted((HERE.parents[2] / "docs" / "decisions").glob("*-a9-region-amendment*.md"))
 
 
 def in_region(line, region):
@@ -417,7 +430,8 @@ def build():
     undisclosed = [b["assertion"] for b in beyond if not b["diagnostic"]]
     if undisclosed:
         raise SystemExit("primary span(s) beyond the acted region with no diagnostic: %s" % undisclosed)
-    ws3 = dict(WS3, target=dict(WS3["target"], regionLines=region, regionSource="the verbatim act record, parsed at build"),
+    ws3 = dict(WS3, target=dict(WS3["target"], regionLines=region, regionSource="the verbatim act record, parsed at build",
+               amendments=[str(a.relative_to(HERE.parents[2])).replace("\\", "/") for a in AMENDMENTS]),
                beyondRegion=beyond)
 
     def resolve(obj):

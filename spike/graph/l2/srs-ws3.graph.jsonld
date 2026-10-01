@@ -53,10 +53,13 @@
         ],
         [
           73,
-          75
+          76
         ]
       ],
-      "regionSource": "the verbatim act record, parsed at build"
+      "regionSource": "the verbatim act record, parsed at build",
+      "amendments": [
+        "docs/decisions/2026-10-01-a9-region-amendment.md"
+      ]
     },
     "demonstrationControlCandidate": {
       "capability": "C-S2",
@@ -68,14 +71,7 @@
       "a C-S5 stub report (W-CS3-Δ2)",
       "a rater-C GradeRecord (W-CS3-N)"
     ],
-    "beyondRegion": [
-      {
-        "assertion": "a:C-S7:determinism",
-        "label": "C-S7.determinism",
-        "line": 76,
-        "diagnostic": "diag:C-S7-determinism-beyond-the-acted-region"
-      }
-    ]
+    "beyondRegion": []
   },
   "records": [
     {
@@ -485,7 +481,6 @@
             "hash fields are the only masks"
           ],
           "classificationNote": "titled a note, but states a property in the normative register; classified Normative -- the alternative reading (Note) is preserved here",
-          "diagnostic": "diag:C-S7-determinism-beyond-the-acted-region",
           "groundedBy": [
             {
               "fragment": "sf:86402b9818af2825c185d8df",
@@ -1304,7 +1299,7 @@
     {
       "@id": "diag:C-S7-determinism-beyond-the-acted-region",
       "@type": "UnderdeterminationDiagnostic",
-      "blocking": true,
+      "blocking": false,
       "cone": [
         "a:C-S7:determinism, and any ratified bar or oracle for C-S7 that would rest on it"
       ],
@@ -1314,14 +1309,15 @@
         "sf:6359cae95790fe178b3ebd78"
       ],
       "legalOutputs": "an architect act amending A9's region (the clause stays), or a decision at rq-017 to drop the clause (it moves to coverage.notYetCovered); no C-S7 bar or oracle rests on it until then (Ops finding 2026-10-01, bullet 7)",
-      "status": "open"
+      "status": "closed",
+      "closedBy": "docs/decisions/2026-10-01-a9-region-amendment.md -- the architect: 'amend A9's region to 73–76'"
     }
   ],
   "coverage": {
     "axis": "covered · not yet covered — separate from the semantic states prohibited · non-goal · unspecified (ARO 6)",
     "covered": {
       "SRS §2": "J-S1 (24), J-S4 (30) and the coverage map (32), as context only",
-      "SRS §3": "C-S2 (43–47), C-S3 (49–53), C-S7 (73–75) -- and line 76, C-S7's determinism note, which lies BEYOND the acted region (ws3.beyondRegion; diag:C-S7-determinism-beyond-the-acted-region)",
+      "SRS §3": "C-S2 (43–47), C-S3 (49–53), C-S7 (73–76; line 76 inside the region since the 2026-10-01 amendment)",
       "SRS §4": "the Records line (85); R-S1, R-S4, R-S5, R-S6 (87, 90–92)",
       "SRS §5": "table header; grader-runner, adjudicator and ledger rows; the traceability sentence",
       "SRS §6": "table header; S-S2, S-S3, S-S6",

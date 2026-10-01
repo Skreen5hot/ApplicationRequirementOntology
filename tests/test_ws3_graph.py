@@ -140,3 +140,20 @@ def test_every_L3_record_and_adjudication_is_queued_once_in_WS3_2():
     assert {r["batch"] for r in queued} == {"WS3-2"}
     for row in queued:
         assert _run("tools/act.py", "show", row["id"]).returncode == 0, row["id"]
+
+
+def test_the_architects_amendment_is_what_moved_the_bound(tmp_path):
+    """2026-10-01: 'amend A9's region to 73–76'. Without the amendment record the parser returns A9's own 73-75;
+    with it, 73-76 -- the bound moves only by an act on the record, never by editing a number in code."""
+    import shutil
+    region, _ = _acted_region()
+    assert region == [[43, 53], [73, 76]]
+    d = tmp_path / "decisions"
+    d.mkdir()
+    shutil.copy(ROOT / "docs" / "decisions" / "2026-10-01-a9-ws3-target-naming-act.md", d)
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ws3_build_l2_b", WS3 / "build_l2.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    assert mod.acted_region(d / "2026-10-01-a9-ws3-target-naming-act.md") == [[43, 53], [73, 75]]
+    assert _graph()["ws3"]["beyondRegion"] == []

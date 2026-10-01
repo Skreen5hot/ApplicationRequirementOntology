@@ -1,0 +1,894 @@
+{
+  "source": {
+    "doc": "C:\\Users\\aaron\\OneDrive\\Documents\\SPEC.md",
+    "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450",
+    "registeredAs": "src:srs-spec"
+  },
+  "normalizationVersion": "norm-spike-1",
+  "fragments": [
+    {
+      "fragmentId": "sf:82a78de8836c7a4b9246b8e2",
+      "label": "J-S1.chain",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          2732,
+          3372
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:5539fe462bb10b9e16a6e3415fa029b31f3701f8b7858d63cfdf0d337d6aabd9",
+      "anchors": {
+        "before": "sha256:183ee89770153233c8655350da96e0b428cac495f712297de19663793a4d5ad3",
+        "after": "sha256:5f0d2dc4084f4b11e1695dff507ec2cb6bcad6defc2e3715626f0f3bcb86c2fa"
+      },
+      "display": {
+        "lines": "24",
+        "section": "SRS §2"
+      },
+      "text": "**J-S1 — first-grade (baseline registration).** Chain example **W-JS1** (carried state in bold): (1) C-S1 lint on `specs/x/spec.md@<SHA>` → conformance pass, `derived/closure.json` emitted for rev **`<SHA>`**; (2) C-S2 twice, isolated, raters A and B, each context-manifest pinned to **`<SHA>`** → two grade records; (3) C-S3 adjudicates the pair → adjudicated report; (4) C-S7 appends the registration to the ledger, `payload.rev =` **`<SHA>`**. Whole-journey outcome: a report with both lines (`Disposition:` / `Acceptance readiness:`) whose vector recomputes from the two committed grade records, registered against the exact rev graded."
+    },
+    {
+      "fragmentId": "sf:51a7633603d61f4e36ca2b60",
+      "label": "J-S4.chain",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          4480,
+          4882
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:b38c498fe8e40af3e68706c6820056fb14ebb9b1656448b82ad03488dbc3970b",
+      "anchors": {
+        "before": "sha256:b97b6d9889d8793c242b1ce09bce4ee46e575360f6cfb31b783148fe38fcb1eb",
+        "after": "sha256:6024432b8e47ff8c6061ba5593a0d783d410ec4a6917d15faae029916aff32e5"
+      },
+      "display": {
+        "lines": "30",
+        "section": "SRS §2"
+      },
+      "text": "**J-S4 — ratify-and-register.** Chain example **W-JS4**: (1) candidate state at rev **`<SHA>`**: zero-free, dual-rated, attack-clean, walks discharged, caps inactive; (2) the registrar ratifies (human act, Part II); (3) C-S7 appends `{kind: \"ratification\", rev: \"<SHA>\"}` and the M3 registration record. Outcome: ratification exists only as a ledger event citing the exact rev; nothing else confers it."
+    },
+    {
+      "fragmentId": "sf:916e4ce811d46a73ee359955",
+      "label": "S2.coverage-map",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          4884,
+          5373
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:0839a37e909f293f896d912d22ecaef285b305255a574372654a161de404db04",
+      "anchors": {
+        "before": "sha256:f7ca785c03aca9bfdc40e088c16365fceb75b8102cc1e972e15ef88ca0aee7dd",
+        "after": "sha256:0f6a4ac406210a409d63189a6065d57c097774138fb0a532cea642ba3cdd5f38"
+      },
+      "display": {
+        "lines": "32",
+        "section": "SRS §2"
+      },
+      "text": "Coverage map (bidirectional): J-S1 → {C-S1, C-S2, C-S3, C-S7} · J-S2 → {C-S4, C-S8, C-S6, C-S1, C-S2, C-S3} · J-S3 → {C-S5, C-S4, C-S3} · J-S4 → {C-S7}. Every capability serves ≥ 1 journey; every journey step is homed — two of them cross-document (J-S2 step 3 merge; J-S4 step 2 ratify), executed by the operator and registrar as declared actors through Part II CV-S0's merge route, via WV-2. Declared, not clean-by-silence. *(Amended by prop-001; method gap MO-1 registered for cycle 5.)*"
+    },
+    {
+      "fragmentId": "sf:3deeb0719e30af97b5379111",
+      "label": "C-S2.header",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          6234,
+          6293
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:73d62281bf04f471c15f2b283f1d174ccdff6175ce91c653ab90ff1b4eb9e562",
+      "anchors": {
+        "before": "sha256:98528f271e96a4dd464ffec81084edba236cbb98e7770fbd8080c0c1c242c127",
+        "after": "sha256:faba3387170a6ef6ee4f495060ded24dd3105eb4dc7acc6b67540fa40407a69c"
+      },
+      "display": {
+        "lines": "43",
+        "section": "SRS §3"
+      },
+      "text": "**C-S2 — grade** *(agentic; one isolated rater invocation)*"
+    },
+    {
+      "fragmentId": "sf:47757633f589803acfb1bb31",
+      "label": "C-S2.W-CS2-N",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          6294,
+          6619
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:8a9cd2835ea7bcbfc242ed7255f58223d8ddc2b42b79a5aa9545b9f3251b5278",
+      "anchors": {
+        "before": "sha256:4cab6ac9adcc7dcb2c8d2d4ac833db6623a51ec4aa302238de4da8d711d541a8",
+        "after": "sha256:7e4d1590e13e59e31d24c94e1e6d3824c32412499bfb5a7558f4a08c1b43cf46"
+      },
+      "display": {
+        "lines": "44",
+        "section": "SRS §3"
+      },
+      "text": "- **W-CS2-N (nominal):** headless invocation with context manifest exactly `{spec@<SHA>, method/v0.4.md, skills/fspec-method}` → grade record `{\"rater\": \"A\", \"model\": \"<M>\", \"manifest_hash\": \"<H>\", \"vector\": {\"P1\": <V>, …}, \"evidence\": {\"P1\": \"spec.md:<L>\", …}, \"disposition\": \"<D>\", \"readiness\": \"<R>\", \"provisional\": true}`"
+    },
+    {
+      "fragmentId": "sf:5dae836de14f6ace5877fd44",
+      "label": "C-S2.determinism",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          6620,
+          7086
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:aa8e97aea8fce31ca275fb8c273d35a66eef84308e61f295b80875631725044a",
+      "anchors": {
+        "before": "sha256:960bc38057fdff601964deed43474ceaf277d83ae03a7c7d752b931e437429ca",
+        "after": "sha256:10c84e479f388e29ac4579749e9ba5bb3876024a120abc9b4afa2e3a82aa000e"
+      },
+      "display": {
+        "lines": "45",
+        "section": "SRS §3"
+      },
+      "text": "- Determinism note — stated plainly: **the vector itself varies across runs**; it is masked with properties, and cross-run stability is precisely what O-03 calibration measures, not what this witness asserts. Properties: every score ∈ {0, 1, 2}; every evidence pointer resolves at the cited rev (checked against `derived/`); `<D>` and `<R>` recompute from the vector per method §6.2; `provisional` = true on every single-rater record; `<H>` = sha256 of the manifest."
+    },
+    {
+      "fragmentId": "sf:db007b6551cf612e2905886a",
+      "label": "C-S2.W-CS2-D1",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          7087,
+          7291
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:7b2a4dfb4433495a8b6dbdb20c47f984d362d454973092ef7ae75e93a73f5f4d",
+      "anchors": {
+        "before": "sha256:4ebd91abec129424e46e41538e79c1e64dbd993c13ddf954fa5f99a00b3e91c9",
+        "after": "sha256:6ee08ec3786f53eea76c33f14bd100bfa21513e858fc869bca82fdd42035539a"
+      },
+      "display": {
+        "lines": "46",
+        "section": "SRS §3"
+      },
+      "text": "- **W-CS2-Δ1 (one factor: unresolvable evidence — negative witness):** record citing `spec.md:9999` → verifier rejects, `{\"code\": \"G-EVID-01\"}`; **no S-S2 crossing occurs** — the absence is the assertion."
+    },
+    {
+      "fragmentId": "sf:13ae423aabfe2f7b13b8ae1e",
+      "label": "C-S2.W-CS2-D2",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          7292,
+          7473
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:a0f0b28a1e1e82041b8609aa3ec2891eb0f022cf593342a4f169237e59983cee",
+      "anchors": {
+        "before": "sha256:9e8a9167b7eabdce043fce275156c3b013345d3cd7b40115b7df63af571ebed3",
+        "after": "sha256:3f535761dd2a15ad5f227f53420db23da2997b7a6541dd0dcea739cd37540cdc"
+      },
+      "display": {
+        "lines": "47",
+        "section": "SRS §3"
+      },
+      "text": "- **W-CS2-Δ2 (one factor: contaminated manifest — witnesses R-S1):** manifest containing `findings/cycle-3/` → rejected, `{\"code\": \"G-ISO-01\"}`; the grade never enters adjudication."
+    },
+    {
+      "fragmentId": "sf:28fc6e4465578b366f300946",
+      "label": "C-S3.header",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          7475,
+          7496
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:42856a20e2752ebaa2eaea43c191e2332c4c14523cf3a6ff7150fb3ec8d56d46",
+      "anchors": {
+        "before": "sha256:bf4634069cd26fc5a2cce5cd4c2399f387768a3482c7d02d6f93ed10e1895c65",
+        "after": "sha256:81bb9e4a02fb995024388af898c0511674f20a84932cae4cb150640ed4e459b2"
+      },
+      "display": {
+        "lines": "49",
+        "section": "SRS §3"
+      },
+      "text": "**C-S3 — adjudicate**"
+    },
+    {
+      "fragmentId": "sf:6205b00ff462d1dad846243a",
+      "label": "C-S3.W-CS3-N",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          7497,
+          7728
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:adf12b7518d8c6dd9f7cc8c19b8ac771fd3e58cf183ab7ab4767c4cb42c4e4dd",
+      "anchors": {
+        "before": "sha256:4da545e7d7e079a560b658756050f7dc1621040e10e99e08295ddda4f98d3e67",
+        "after": "sha256:6dfd71f6ed04f863ca113078ee5eb0ecf89290d7a5a91286f7360fd5caac2b3b"
+      },
+      "display": {
+        "lines": "50",
+        "section": "SRS §3"
+      },
+      "text": "- **W-CS3-N (nominal):** input A with P6 = 2, B with P6 = 1, no zeros elsewhere → `{\"route\": {\"P6\": \"third-rater\"}, \"contested_knockouts\": []}`; after rater C: adjudicated vector with P6 = C's consensus value, `provisional: false`."
+    },
+    {
+      "fragmentId": "sf:6ed6d94913883ea72c51b736",
+      "label": "C-S3.determinism",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          7729,
+          7858
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:fd02de138ab0be300990862e1826b8fd80182f069a8bc9784ef0e1c457beeab2",
+      "anchors": {
+        "before": "sha256:ab9325285d56ebac3220686b7b6111ac4ba676b0de5a688fd2c87d4f83f491f2",
+        "after": "sha256:00b7b628d0befc68d001ab5daa481eed3d8cb8b3ae0245491aab04ed81a6acce"
+      },
+      "display": {
+        "lines": "51",
+        "section": "SRS §3"
+      },
+      "text": "- Determinism note: routing is a pure function of the two committed vectors — bit-stable, recomputable by anyone from the record."
+    },
+    {
+      "fragmentId": "sf:c4e7d8ea368abc0260d818a0",
+      "label": "C-S3.W-CS3-D1",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          7859,
+          8081
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:ee7fabf7f80320277655d9475311ccf140b8affc523738605e546b950688667b",
+      "anchors": {
+        "before": "sha256:ea64f930c12bfb2558302587e8187b6c374fa1c3b07a4f0f59de213e729b6d5b",
+        "after": "sha256:48289aff4bbe2e1f5964bdc254d80841961258e49dcecf4e47a64076631ec23e"
+      },
+      "display": {
+        "lines": "52",
+        "section": "SRS §3"
+      },
+      "text": "- **W-CS3-Δ1 (one factor: either-rater zero):** B scores P3 = 0 → `{\"disposition_line\": \"WITHHELD\", \"contested_knockouts\": [\"P3\"], \"queue\": \"human\"}` — no disposition is printed while a knockout is contested (method §6.3)."
+    },
+    {
+      "fragmentId": "sf:6b8ef108d4bdbe8cae32cb24",
+      "label": "C-S3.W-CS3-D2",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          8082,
+          8321
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:8874db1aa89bf6c11f97781b88ff9313ed15e2b050becb9434712ddf6f8f3f8f",
+      "anchors": {
+        "before": "sha256:006095947c4e08572a2a9b46da7ba57595b51377c110ace39592a930d592a242",
+        "after": "sha256:f6988ea815b16b0051dd9e4ae23682456bbed853bdb74967e1bed0508731f4f9"
+      },
+      "display": {
+        "lines": "53",
+        "section": "SRS §3"
+      },
+      "text": "- **W-CS3-Δ2 (one factor: verified vacuous-pass report present — witnesses R-S5):** zero-free adjudicated vector + replayed stub report on clause `<CL>` → `{\"disposition_line\": \"SUSPENDED\", \"cause\": \"vacuous-pass:<CL>\", \"queue\": \"human\"}`."
+    },
+    {
+      "fragmentId": "sf:6359cae95790fe178b3ebd78",
+      "label": "C-S7.header",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          11182,
+          11260
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:b97c3ea938658d7e52db24bd733e541994562b07389a8e3e4d14b09b217048d1",
+      "anchors": {
+        "before": "sha256:619db8841114bed27b77f86b71432c0b388a0afa33dd628161c1238f5a1ef2f6",
+        "after": "sha256:dca6aa04e392939bd69bdc118c94ea273d6f841a4b3d54c806d3fcd9b0e7e001"
+      },
+      "display": {
+        "lines": "73",
+        "section": "SRS §3"
+      },
+      "text": "**C-S7 — register (ledger)** *(this capability plus its store is method O-02)*"
+    },
+    {
+      "fragmentId": "sf:e36d808c1818fa7be2a81bac",
+      "label": "C-S7.W-CS7-N",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          11261,
+          11529
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:511f632aefe18332f01bf82e80553fde6cd4b8fd9df118e62e5f8ce4a19e664b",
+      "anchors": {
+        "before": "sha256:5e8ba0ea2c172be11869662008a76c3291d41f0e1fd7b50d5e2a1f303d237d83",
+        "after": "sha256:cc1bd22c5a7267c4ffa838ac12fd8bb7a5298ccbd070603a69ebbde0d18fa734"
+      },
+      "display": {
+        "lines": "74",
+        "section": "SRS §3"
+      },
+      "text": "- **W-CS7-N (nominal):** append `{\"seq\": 7, \"prev\": \"<H₆>\", \"kind\": \"registration\", \"payload\": {\"spec\": \"specs/x\", \"rev\": \"<SHA>\", \"vector\": …}, \"hash\": \"<H₇>\"}`; masks: hashes, property — `<H₇>` = sha256(seq ‖ prev ‖ payload) and the full chain verifies from genesis."
+    },
+    {
+      "fragmentId": "sf:9f984223b2621f0b474bb82a",
+      "label": "C-S7.W-CS7-D1",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          11530,
+          11692
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:5d11f1228e603744507119412e02a60419bb68753bc68ad324d945f38b4e1fb3",
+      "anchors": {
+        "before": "sha256:d88ff5d7a0c6962fdcf5691f800c22a4ded43184955c16a5e9bdbfd373c05a94",
+        "after": "sha256:c341d25d85dd2e2f68c573830d05f20bdf474188795a034730f7ece08aa11d15"
+      },
+      "display": {
+        "lines": "75",
+        "section": "SRS §3"
+      },
+      "text": "- **W-CS7-Δ1 (negative witness):** any rewrite of an existing line → hook exit 1, `{\"code\": \"H-LEDGER-01\"}`; chain verification fails loudly on the tampered copy."
+    },
+    {
+      "fragmentId": "sf:86402b9818af2825c185d8df",
+      "label": "C-S7.determinism",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          11693,
+          11843
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:7d635a767eb84ef65f2d143d466166d81244a2f83de4e81870fa902f0040a786",
+      "anchors": {
+        "before": "sha256:7e20595feb3f986e8440f786a96eb222095b948e1dff843e7695b3e4be9dc657",
+        "after": "sha256:457d2b2d187d88bab1a4a78e63424b2d4672edef7a8ac64a7eaa6459994e4f51"
+      },
+      "display": {
+        "lines": "76",
+        "section": "SRS §3"
+      },
+      "text": "- Determinism note: entries bit-stable given payload and chain position; hash fields are the only masks, carried with the chain-verification property."
+    },
+    {
+      "fragmentId": "sf:bbdecf529e21b598e5c59b46",
+      "label": "S4.records",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          12873,
+          13248
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:66a99a505470747088a47d35a510ab2696ea8af646ae9fb1976242a4e5950ee9",
+      "anchors": {
+        "before": "sha256:16874a3b1465cab176ae1e47ded02f745a644a77c36ac9b789f678ac59cbb29b",
+        "after": "sha256:1d249f95658f42e0ffb61892d3352745fc2807144f7074070471a36c2b3ce9d7"
+      },
+      "display": {
+        "lines": "85",
+        "section": "SRS §4"
+      },
+      "text": "Records: `Spec {path, rev}` (state) · `GradeRecord` (event, per W-CS2-N) · `Finding` (event, append-only) · `Disposition {finding_id, kind ∈ resolved | otherwise | deferred | rejected, reasons}` (event) · `WalkItem {citer, cites, status}` (state, derived) · `LedgerEntry` (event, hash-chained) · `ClosureRow {clause, class, falsifier, validation, gate}` (derived, C-S1 only)."
+    },
+    {
+      "fragmentId": "sf:0cc883b9f89ec1148a8ff648",
+      "label": "R-S1",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          13250,
+          13554
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:8ef17a0b2a90c1a58cc202e91fad0a8eba51feb55747b2aa7365c9ab5ea90fbe",
+      "anchors": {
+        "before": "sha256:4e5994963b07bd4669f4c2c29c4dd2e5376c374b3afbc6681b0031d2cd054e7b",
+        "after": "sha256:12f58712449844b32d6e3f03f0d58eb74864ab1d3db5490b9e3521b40bccfe33"
+      },
+      "display": {
+        "lines": "87",
+        "section": "SRS §4"
+      },
+      "text": "- **R-S1 — Grader isolation.** A grading invocation's context MUST contain exactly `{spec@rev, method/v0.4.md, skills/fspec-method}` — no prior grades, findings, scores, or revision intent — and the record MUST carry the manifest hash. Witnesses: W-CS2-N (satisfaction), W-CS2-Δ2 (violation → rejection)."
+    },
+    {
+      "fragmentId": "sf:987099f8fce37300374287eb",
+      "label": "R-S4",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          14260,
+          14463
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:480212e885ce12bf999fb607ae03c0ca3d01b71449129449e7c2d8fab5907d5c",
+      "anchors": {
+        "before": "sha256:766049bed3cf36f1da625d9b1ecf748446aafd97e05cc5e462ba5e2a5bd7483c",
+        "after": "sha256:032c3914a6889016a8cea13d35f1cb3dfb71c8802dfef322192acbb018dcac37"
+      },
+      "display": {
+        "lines": "90",
+        "section": "SRS §4"
+      },
+      "text": "- **R-S4 — Adjudication routing.** Either-rater zero → contested knockout → human queue, disposition withheld. Nonzero disagreement → third rater; a third-rater tie → human. Witnesses: W-CS3-N, W-CS3-Δ1."
+    },
+    {
+      "fragmentId": "sf:f057a2bd775d30f4a73d9b9d",
+      "label": "R-S5",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          14464,
+          14704
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:530d523027640d0e8eb7241258becdb7a28eeca97fe5b4fa56af82e5f6f81f45",
+      "anchors": {
+        "before": "sha256:aec2e180615b5756cfced1b9affefe468526e25505deaf5654056b526a60c5f1",
+        "after": "sha256:1b77a709dafcdc61327e261babeaa982dd143adafaf0aa74e64703aa9cda06ec"
+      },
+      "display": {
+        "lines": "91",
+        "section": "SRS §4"
+      },
+      "text": "- **R-S5 — A verified attack overrides the number.** A replayed vacuous-pass report suspends the disposition of the affected rev regardless of vector, registered as a contested knockout on the clause's dimension. Witnesses: W-CS3-Δ2, W-JS3."
+    },
+    {
+      "fragmentId": "sf:061c635a46fe2630cab542ab",
+      "label": "R-S6",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          14705,
+          14905
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:68d4c079a2b82423567b3ba89b7813b495453f655347eabf74049f153620e033",
+      "anchors": {
+        "before": "sha256:727f13e89a5b594e227bf9d83c060142db8b1127f2bc6e42d07ea5688508bebd",
+        "after": "sha256:6ef0295494e1375a52bbaf766fc77bfc69c7308a1565ed79d9b874e853c1ffa7"
+      },
+      "display": {
+        "lines": "92",
+        "section": "SRS §4"
+      },
+      "text": "- **R-S6 — Provisional is labelled.** Every single-rater record carries `provisional: true`; every rendered report carries both lines (method §6.2.6). Witnesses: W-CS2-N; render side at Part II W-JO1."
+    },
+    {
+      "fragmentId": "sf:6a78e67028f988a49aa9f336",
+      "label": "S5.table-header",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          15378,
+          15412
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:67819a6260b41b89aacbe09fa3f738656a61812644752162cf9e181f8e664f0e",
+      "anchors": {
+        "before": "sha256:fd1d0c0282cd4c052492e83a34964fe3cc527cfd5a6259fa912eaba712054d89",
+        "after": "sha256:b79f34e0c4e2dfdaa8c91cb7fd54d188f2162f17263abb4898fd1ee8707e44b7"
+      },
+      "display": {
+        "lines": "98",
+        "section": "SRS §5"
+      },
+      "text": "| Component | Repo home | Serves |"
+    },
+    {
+      "fragmentId": "sf:f0346097494b52371f29054f",
+      "label": "S5.grader-runner",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          15473,
+          15593
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:e86bb06e43b999dce1f13c8fb20401cfba2d211cfeef698503e67e793bc06e63",
+      "anchors": {
+        "before": "sha256:ebe3c1a2a45217be0f0e12d8527700a1092d73a42c0b987f144f7200ceffacb8",
+        "after": "sha256:645e31f8e7641c5c03405c433c069f65e4d8e8ce269923b7ded84caf49224e6c"
+      },
+      "display": {
+        "lines": "101",
+        "section": "SRS §5"
+      },
+      "text": "| `grader-runner` (headless invocation wrapper + manifest assembler + record verifier) | `tools/grader-runner/` | C-S2 |"
+    },
+    {
+      "fragmentId": "sf:fc11a2828a2a134ddaf16fa3",
+      "label": "S5.adjudicator",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          15594,
+          15684
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:583ffca58f9b8ef7ef8b164633fd32047b9dfaff7bfd9990b1a095ca5a71c05e",
+      "anchors": {
+        "before": "sha256:56c78e49380179c44689b509938980b971fdf97d49374ff7a3ba4b297dbcd663",
+        "after": "sha256:8e25fae0b8f5fc3a41e53254b5b4e9206dba655599436352aaedd0b5bfdfadbd"
+      },
+      "display": {
+        "lines": "102",
+        "section": "SRS §5"
+      },
+      "text": "| `adjudicator` (pure routing fn + third-rater invocation) | `tools/adjudicator/` | C-S3 |"
+    },
+    {
+      "fragmentId": "sf:aedf9db9edc7b5e4f5e56e08",
+      "label": "S5.ledger",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          15937,
+          16027
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:4ddc06b4490b6456278bf7c3afce9d884c60903ac67064c9e78755631d0080f1",
+      "anchors": {
+        "before": "sha256:9022f0eb645a2ff24a93d9a1576bf0f3199c08fd6a62e74a57985ad6bb4cf266",
+        "after": "sha256:bb8317ba0ab20bb4ae3fc060dd6fb2938d0bab136e681d400b6fdabb95c142d2"
+      },
+      "display": {
+        "lines": "106",
+        "section": "SRS §5"
+      },
+      "text": "| `ledger` (append-only JSONL + chain verifier + hooks) | `ledger/`, `.githooks/` | C-S7 |"
+    },
+    {
+      "fragmentId": "sf:0b3c700c6c80dcd0b3992c92",
+      "label": "S5.traceable",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          16219,
+          16304
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:ec5367826dafc63815aa38007811b9c433661ee7215f3c277e8c55f457c15882",
+      "anchors": {
+        "before": "sha256:d04249ffc2131872d6963e2ccf65614aabab41627a525c1e0b422c11e43028ef",
+        "after": "sha256:bb192fe32ae11e83592aafd7d3f7e339c632c705f6c73a5e9f7bff376cdda923"
+      },
+      "display": {
+        "lines": "110",
+        "section": "SRS §5"
+      },
+      "text": "Every component traceable to the capabilities it serves; no component serves nothing."
+    },
+    {
+      "fragmentId": "sf:a7525cc01ee6cac18dc9cc35",
+      "label": "S6.table-header",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          16325,
+          16404
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:974a280c113a58b73321a9448648be43bcaa05319b374652c9d7698ea2105976",
+      "anchors": {
+        "before": "sha256:46d293e4a4d85cfa4ad2850c09b0cbfcff7aef1b7462493910e92b21cc661158",
+        "after": "sha256:9343187e76877fad7284982899c70c735c9bbaf45bddc5b7b69d22dbd9271719"
+      },
+      "display": {
+        "lines": "114",
+        "section": "SRS §6"
+      },
+      "text": "| Seam | Producer → Consumer | Contract | Crossing example (literal) | Status |"
+    },
+    {
+      "fragmentId": "sf:f4c270ddbe30b32ab710802a",
+      "label": "S6.S-S2",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          16568,
+          16852
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:089586651baea3522d6aa25e087ff74886e011e2ba52d29ad2b935d3123d1663",
+      "anchors": {
+        "before": "sha256:5d4ea5e75b088b3af3e444a225b8035a22ff5f4ad1a5636747eabd7d7c07b256",
+        "after": "sha256:acb8ab2c6ceb5ce98c84a2822383edd05a5beefccf146d10981d372101803e4a"
+      },
+      "display": {
+        "lines": "117",
+        "section": "SRS §6"
+      },
+      "text": "| S-S2 | grader-runner → adjudicator | verified GradeRecord | `{\"rater\": \"A\", \"vector\": {\"P1\": 2, \"P2\": 2, \"P3\": 2, \"P4\": 2, \"P5\": 2, \"P6\": 1, \"P7\": 2, \"P8\": 2, \"P9\": 2, \"P10\": 1, \"P11\": 2}, \"evidence\": {\"P6\": \"spec.md:214\"}, \"manifest_hash\": \"9c41…\", \"provisional\": true}` | filled |"
+    },
+    {
+      "fragmentId": "sf:88f847589387e33900fa6a62",
+      "label": "S6.S-S3",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          16853,
+          17065
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:826b9a718ddca8ebc184a7434ec59f2831ee47ae9464436806fcd99b79485bbf",
+      "anchors": {
+        "before": "sha256:dba3846e2eb61a738bb4fc776e0db5c84c4364299b2671f1ec4b6e642afd5155",
+        "after": "sha256:cb757d0e72578aa2adf31ab502d0f6d10413b975e86a3d4343aaabde5b659677"
+      },
+      "display": {
+        "lines": "118",
+        "section": "SRS §6"
+      },
+      "text": "| S-S3 | adjudicator → orchestrator | adjudicated report | `{\"vector\": {…}, \"disposition\": \"D-3 Specification-complete\", \"readiness\": \"BLOCKED — O-04\", \"contested_knockouts\": [], \"provisional\": false}` | filled |"
+    },
+    {
+      "fragmentId": "sf:94787cd76ffd6aebedb51605",
+      "label": "S6.S-S6",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          17425,
+          17499
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:58b2259d0f7e9de91300f98093dd0204a579344b2eb7372ee260d80f16e296f7",
+      "anchors": {
+        "before": "sha256:bd8356ed4549b7eede3e67cb606a315bf9d0ff67648d0fe64b51be3d38e026d3",
+        "after": "sha256:e1655978634f9ca604d124167c03445e01e54ead2b7147391450cb1a8a689512"
+      },
+      "display": {
+        "lines": "121",
+        "section": "SRS §6"
+      },
+      "text": "| S-S6 | orchestrator → ledger | LedgerEntry | the W-CS7-N line | filled |"
+    },
+    {
+      "fragmentId": "sf:590259498f7dac6171526d27",
+      "label": "V-S1",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          18032,
+          18381
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:5009388d3ad9b61447c4742c2a8ec7f1b88cbe50719948dbd1d59a1de5bd0beb",
+      "anchors": {
+        "before": "sha256:199c467329ea2405f809cbbeac233f171f03094c437056175eab6adfc9a4a413",
+        "after": "sha256:3e03c6a38ce73352315ebd8abcf31d9472075cebad6bb428f117b1a8c9060ca0"
+      },
+      "display": {
+        "lines": "127",
+        "section": "SRS §7"
+      },
+      "text": "- **V-S1 — Findings and ledger immutability.** Scope: every commit in the repository history, over `findings/**` and `ledger/**`. Generator: n ≥ 100 pipeline runs plus seeded tamper attempts. Property: every commit's diff over those paths is append-only — no modification, no deletion. Pinned witnesses: W-CS4-N (append), W-CS7-Δ1 (blocked rewrite)."
+    },
+    {
+      "fragmentId": "sf:1e788ea0fcfeb504275c7019",
+      "label": "V-S2",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          18382,
+          18903
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:871c626cf3629c6a498e40dec3566cfa7d46afe523111025dce985395bf92312",
+      "anchors": {
+        "before": "sha256:9c8a059bbe160d528db917f80e57c806cbd06f12cae6475057b528879955b8c4",
+        "after": "sha256:d8b9da08a89143958ccb09cb2fea7432ed28235c24702b32ea71c6debdf1404b"
+      },
+      "display": {
+        "lines": "128",
+        "section": "SRS §7"
+      },
+      "text": "- **V-S2 — Adjudication recomputability.** Scope: every printed disposition and readiness line. Generator: all reports across n ≥ 50 runs, plus seeded corrupted records. Property: the printed lines recompute, by pure function, from the committed GradeRecords per method §6.2 — anyone, later, reaches the same verdict from the same record. (This — not bit-identical model output — is what \"a grade is reproducible\" honestly means; model-output stability is O-03's measurement, not this invariant's claim.) Pinned: W-CS3-N."
+    },
+    {
+      "fragmentId": "sf:bc48bb37af496302d125f52f",
+      "label": "V-S3",
+      "kind": "text-span",
+      "source": {
+        "doc": "SPEC.md",
+        "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      },
+      "locator": {
+        "codepointRange": [
+          18904,
+          19131
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:089740d4d8f45ba97e9a83260991ac4afd7a57a8195b6e55ca44803ff1118aaf",
+      "anchors": {
+        "before": "sha256:349375f72e893495f6cd8f9ac4a76919f2f974da41b4b23335569c9372574cdb",
+        "after": "sha256:87c9be796f6673e2137cd8a9bb2bb72fa0118aa8932e6c52c5655a5bbfd9f607"
+      },
+      "display": {
+        "lines": "129",
+        "section": "SRS §7"
+      },
+      "text": "- **V-S3 — Isolation.** Scope: every grading invocation. Generator: n ≥ 50 runs plus seeded contaminated manifests. Property: manifest ⊆ the R-S1 triple, hash recorded, violations rejected before adjudication. Pinned: W-CS2-Δ2."
+    }
+  ]
+}

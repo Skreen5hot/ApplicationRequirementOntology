@@ -162,6 +162,21 @@ def test_the_cli_survives_a_cp1252_console(repo, monkeypatch):
     assert act.main(["--root", str(repo), "--json", "list"]) == 0
 
 
+def test_show_displays_a_field_example_that_is_not_text(repo, capsys):
+    """Found by the WS-3 queue pin (2026-10-01): a field example that is a JSON boolean or number made `show` raise
+    TypeError on the join, so the operator could not read the item at all."""
+    art = repo / "spike" / "graph" / "l2" / "typed-examples.jsonld"
+    rec = {"@id": "sr:L2:X", "@type": "SpecificationRecord", "title": "X", "assertions": [
+        {"@id": "a:X", "statement": "X carries flag and seq.", "groundedBy": [],
+         "fields": [{"name": "flag", "examples": [True]}, {"name": "seq", "examples": [7, "<n>"]}]}]}
+    art.write_text(json.dumps({"records": [rec]}), encoding="utf-8")
+    _add_item(repo, id="rq-901", batch="BX", queuedAt="2026-10-01T10:00:00-04:00", record="sr:L2:X",
+              artifact="spike/graph/l2/typed-examples.jsonld", recordDigest=act.digest(rec), kind="L2")
+    assert act.main(["--root", str(repo), "show", "rq-901"]) == 0
+    out = " ".join(capsys.readouterr().out.split())
+    assert "flag e.g. true" in out and "seq e.g. 7, <n>" in out
+
+
 def test_show_puts_each_statement_above_the_passages_it_cites(repo, capsys):
     """Found by the operator's dry run (2026-09-29): `show` printed the cited passages but not the statements
     being accepted, while the item's own instruction is 'review every cited span beside its assertion'."""

@@ -213,7 +213,7 @@ def render_show(q, row):
         if a.get("statement"):
             L.append(_wrap(a["statement"], "  %d. " % n))
             for fld in a.get("fields") or []:
-                L.append(_wrap("%s%s%s" % (fld.get("name"), "  e.g. " + ", ".join(fld.get("examples") or []) if fld.get("examples") else "",
+                L.append(_wrap("%s%s%s" % (fld.get("name"), "  e.g. " + ", ".join(_value(x) for x in fld.get("examples") or []) if fld.get("examples") else "",
                                            "  (" + fld["presence"] + ")" if fld.get("presence") else ""), "       - field "))
             cites = [(g.get("fragment"), g.get("role"), g.get("why")) for g in a.get("groundedBy") or []]
             head = "     cites:"

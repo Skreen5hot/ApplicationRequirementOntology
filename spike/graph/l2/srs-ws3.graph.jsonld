@@ -1297,6 +1297,26 @@
       "status": "open"
     },
     {
+      "@id": "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash",
+      "@type": "ConflictingStatement",
+      "blocking": true,
+      "cone": [
+        "c:ledger:hash-encoding (rq-034) and any C-S7 bar or oracle"
+      ],
+      "statement": "W-CS7-N puts kind outside the hash preimage (sha256(seq || prev || payload)); W-CS7-Δ1 says chain verification fails loudly on ANY rewrite of an existing line. A kind-only rewrite keeps every hash, so the two cannot both hold. Source-internal.",
+      "evidence": [
+        "sf:e36d808c1818fa7be2a81bac",
+        "sf:9f984223b2621f0b474bb82a"
+      ],
+      "blocks": [
+        "a:C-S7:W-CS7-N",
+        "a:C-S7:W-CS7-D1"
+      ],
+      "raisedBy": "the architect's diagnostic at rq-034, 2026-10-01 -- recorded here at graph level so the accepted C-S7 record (rq-037) is not rewritten",
+      "legalOutputs": "adj:ledger-hash-kind (A: amend the source; B: design closure against the literal; C: narrow reading of Δ1)",
+      "status": "open"
+    },
+    {
       "@id": "diag:C-S7-determinism-beyond-the-acted-region",
       "@type": "UnderdeterminationDiagnostic",
       "blocking": false,

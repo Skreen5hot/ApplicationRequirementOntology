@@ -132,13 +132,13 @@ def test_L3_never_grounds_and_every_reference_lands_in_the_L2_graph():
     assert refs and [x for x in refs if x not in known] == []
 
 
-def test_every_L3_record_and_adjudication_is_queued_once_in_WS3_2():
+def test_every_L3_record_and_adjudication_has_one_live_row():
     rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
     l3 = json.loads(L3.read_text(encoding="utf-8"))
     ids = [r["@id"] for r in l3["records"]] + [a["@id"] for a in l3["adjudications"]]
-    queued = [r for r in rows if r.get("artifact") == "spike/graph/l3/srs-ws3.design.candidates.jsonld"]
-    assert sorted(r["record"] for r in queued) == sorted(ids)
-    assert {r["batch"] for r in queued} == {"WS3-2"}
+    queued = _live_rows("spike/graph/l3/srs-ws3.design.candidates.jsonld")
+    assert sorted(r["record"] for r in queued) == sorted(ids), "exactly one LIVE row per record"
+    assert {r["batch"] for r in queued} <= {"WS3-2", "WS3-3"}
     for row in queued:
         assert _run("tools/act.py", "show", row["id"]).returncode == 0, row["id"]
 
@@ -169,19 +169,21 @@ def _load(name):
 
 
 def test_an_L3_bundle_resting_on_a_blocked_assertion_must_disclose_it():
-    """Falsification (Ops finding 2026-10-01, bullet 2): mark a:C-S7:determinism beyond the region in a copy of the
-    L2 graph -> the ledger bundle, which depends on it, is refused until it declares the dependency."""
+    """Falsification (Ops finding 2026-10-01, bullet 2), on the state as it stands: the ledger bundle rests on the
+    two C-S7 clauses the architect's rq-034 diagnostic blocks, and discloses them. Remove the disclosure -> refused;
+    lift the block while the disclosure stays -> refused as stale."""
+    import copy
     l3 = _load("build_l3")
     g = _graph()
     assert l3.undisclosed_blocked_dependencies(l3.RECORDS, g) == []
-    g["ws3"]["beyondRegion"] = [{"assertion": "a:C-S7:determinism", "label": "C-S7.determinism", "line": 76,
-                                 "diagnostic": "diag:x"}]
-    bad = dict(l3.undisclosed_blocked_dependencies(l3.RECORDS, g))
-    assert bad == {"sr:L3:ledger-interface": ["a:C-S7:determinism"]}
-    disclosed = [dict(r, blockedDependencies=["a:C-S7:determinism"]) if r["@id"] == "sr:L3:ledger-interface" else r
-                 for r in l3.RECORDS]
-    assert l3.undisclosed_blocked_dependencies(disclosed, g) == []
-    assert dict(l3.undisclosed_blocked_dependencies(disclosed, _graph())) == {"sr:L3:ledger-interface": []},         "a stale disclosure (the block lifted) is refused too"
+    undisclosed = [{k: v for k, v in r.items() if k != "blockedDependencies"} for r in l3.RECORDS]
+    assert dict(l3.undisclosed_blocked_dependencies(undisclosed, g)) == {
+        "sr:L3:ledger-interface": ["a:C-S7:W-CS7-D1", "a:C-S7:W-CS7-N"]}
+    lifted = copy.deepcopy(g)
+    for d in lifted["diagnostics"]:
+        if d["@id"] == "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash":
+            d["status"] = "closed"
+    assert dict(l3.undisclosed_blocked_dependencies(l3.RECORDS, lifted)) == {"sr:L3:ledger-interface": []},         "a stale disclosure (the block lifted) is refused too"
 
 
 def test_section_3_coverage_is_derived_from_the_spans_and_lies_in_the_region():
@@ -190,3 +192,19 @@ def test_section_3_coverage_is_derived_from_the_spans_and_lies_in_the_region():
     text = _graph()["coverage"]["covered"]["SRS §3"]
     ranges = [(int(a), int(b)) for a, b in re.findall(r"\((\d+)–(\d+)\)", text)]
     assert len(ranges) == 3 and all(in_region(a, region) and in_region(b, region) for a, b in ranges), text
+
+
+def test_a_rebuilt_item_supersedes_the_amended_one_and_carries_the_architects_note_verbatim():
+    """An amend confers nothing; the record is rebuilt and re-queued at its new address, superseding the amended
+    row. The rebuilt record quotes the architect's note from the queue (read, not retyped), and a conferred item
+    (ratified / decided) is never re-queued."""
+    rows = {r["id"]: r for r in (json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip())}
+    l3 = json.loads(L3.read_text(encoding="utf-8"))
+    for rec in l3["records"]:
+        for note in rec.get("amendmentNotes", []):
+            assert note["note"] == rows[note["item"]]["actNote"], (rec["@id"], note["item"])
+    live = {r["record"]: r for r in _live_rows("spike/graph/l3/srs-ws3.design.candidates.jsonld")}
+    for amended in ("rq-031", "rq-032", "rq-033", "rq-034"):
+        assert any(r.get("supersedes") == amended for r in live.values()), amended
+    assert live["sr:L3:ws3-module-boundaries"]["id"] == "rq-030"
+    assert live["adj:ledger-hooks-repo-home"]["id"] == "rq-035"

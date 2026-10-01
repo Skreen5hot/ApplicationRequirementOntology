@@ -147,7 +147,7 @@
     {
       "@id": "sr:L3:ws3-field-types",
       "@type": "SpecificationRecord",
-      "title": "WS-3 record types — GradeRecord, AdjudicatedReport, LedgerEntry, the C-S5 report",
+      "title": "WS-3 record types — as amended by the architect at rq-031 (and rq-033 item 4)",
       "kind": "closure-bundle",
       "closes": [
         "diag:GradeRecord-fields-by-example"
@@ -166,6 +166,10 @@
         "a:C-S3:W-CS3-D2"
       ],
       "standalone": false,
+      "amendmentOf": [
+        "rq-031",
+        "rq-033"
+      ],
       "assertions": [
         {
           "@id": "c:ws3:Score-Vector",
@@ -188,7 +192,8 @@
               "label": "S6.S-S2",
               "why": "the crossing example's vector carries P1..P11"
             }
-          ]
+          ],
+          "conferred": "as proposed (rq-031: 'Items 1, 3, 5, 6 as proposed')"
         },
         {
           "@id": "c:ws3:GradeRecord",
@@ -202,8 +207,7 @@
               {
                 "name": "model",
                 "type": "string",
-                "optional": true,
-                "note": "in W-CS2-N, absent from the S-S2 example -- optionality is the architect's decision"
+                "note": "REQUIRED (rq-031 (2)): model identity is provenance; the S-S2 crossing example is an abbreviation and is not a valid GradeRecord as written"
               },
               {
                 "name": "manifest_hash",
@@ -223,13 +227,13 @@
                 "name": "disposition",
                 "type": "string",
                 "optional": true,
-                "note": "as model"
+                "note": "derived value, never trusted from a single rater (rq-031 (2))"
               },
               {
                 "name": "readiness",
                 "type": "string",
                 "optional": true,
-                "note": "as model"
+                "note": "as disposition"
               },
               {
                 "name": "provisional",
@@ -248,7 +252,8 @@
               "label": "S6.S-S2",
               "why": "five of them; model, disposition, readiness absent"
             }
-          ]
+          ],
+          "conferred": "amended at rq-031 (2)"
         },
         {
           "@id": "c:ws3:RouteResult",
@@ -271,73 +276,73 @@
               "label": "C-S3.W-CS3-N",
               "why": "the literal {\"route\": {\"P6\": \"third-rater\"}, \"contested_knockouts\": []}"
             }
-          ]
+          ],
+          "conferred": "as proposed (rq-031)"
         },
         {
           "@id": "c:ws3:AdjudicatedReport",
           "@type": "Closure",
           "proposed": {
-            "fields": [
-              {
-                "name": "vector",
-                "type": "Vector",
-                "optional": true,
-                "note": "absent when the disposition line is WITHHELD"
+            "union": "AdjudicatedReport = Printed | Pending | Withheld | Suspended",
+            "variants": {
+              "Printed": {
+                "vector": "Vector",
+                "disposition?": "string",
+                "readiness?": "string",
+                "contested_knockouts": "[]",
+                "provisional": "false",
+                "note": "disposition and readiness are ABSENT until method s6.2 is registered as a source (rq-033 (4)); the S-S3 crossing example therefore abbreviates"
               },
-              {
-                "name": "disposition",
-                "type": "string",
-                "optional": true
+              "Pending": {
+                "route": "Record<string, \"third-rater\">",
+                "contested_knockouts": "[]",
+                "provisional": "true",
+                "note": "a routed dimension awaits rater C; no disposition (rq-031 (4), rq-033 (2b))"
               },
-              {
-                "name": "readiness",
-                "type": "string",
-                "optional": true
+              "Withheld": {
+                "disposition_line": "\"WITHHELD\"",
+                "contested_knockouts": "[string, ...string[]] -- at least one: an either-rater zero or a third-rater tie",
+                "queue": "\"human\"",
+                "note": "no disposition field (rq-031 (4)); a tie produces this variant (rq-033 (3))"
               },
-              {
-                "name": "disposition_line",
-                "type": "\"WITHHELD\" | \"SUSPENDED\"",
-                "optional": true
-              },
-              {
-                "name": "cause",
-                "type": "string",
-                "optional": true,
-                "note": "vacuous-pass:<CL>"
-              },
-              {
-                "name": "queue",
-                "type": "\"human\"",
-                "optional": true
-              },
-              {
-                "name": "contested_knockouts",
-                "type": "string[]"
-              },
-              {
-                "name": "provisional",
-                "type": "boolean"
+              "Suspended": {
+                "disposition_line": "\"SUSPENDED\"",
+                "cause": "`vacuous-pass:${string}`",
+                "contested_knockouts": "string[] -- includes the attacked clause's dimension (R-S5), alongside any zero-knockouts",
+                "queue": "\"human\""
               }
-            ],
-            "note": "one record covering the three literal outputs the source shows (S-S3, W-CS3-Δ1, W-CS3-Δ2); the alternative -- a tagged union of three shapes -- is equally consistent with the source"
+            },
+            "discriminant": "disposition_line on Withheld and Suspended; Pending is the variant with route and provisional: true; Printed has neither",
+            "precedence": "SUSPENDED > WITHHELD > PENDING > PRINTED (rq-033 (2a)): exactly one variant for every input"
           },
           "rationaleSource": [
             {
               "cite": "sf:88f847589387e33900fa6a62",
               "label": "S6.S-S3",
-              "why": "the adjudicated report"
+              "why": "the adjudicated report (Printed)"
+            },
+            {
+              "cite": "sf:6205b00ff462d1dad846243a",
+              "label": "C-S3.W-CS3-N",
+              "why": "routing, then provisional: false"
             },
             {
               "cite": "sf:c4e7d8ea368abc0260d818a0",
               "label": "C-S3.W-CS3-D1",
-              "why": "WITHHELD output"
+              "why": "WITHHELD"
             },
             {
               "cite": "sf:6b8ef108d4bdbe8cae32cb24",
               "label": "C-S3.W-CS3-D2",
-              "why": "SUSPENDED output"
+              "why": "SUSPENDED"
+            },
+            {
+              "cite": "sf:f057a2bd775d30f4a73d9b9d",
+              "label": "R-S5",
+              "why": "regardless of vector"
             }
-          ]
+          ],
+          "conferred": "amended at rq-031 (4); Printed's disposition/readiness made optional by rq-033 (4)"
         },
         {
           "@id": "c:ws3:VacuousPassReport",
@@ -357,7 +362,7 @@
                 "type": "true"
               }
             ],
-            "note": "the C-S5 report's shape is not stated in the region (diag:W-CS3-D2-needs-a-C-S5-report); this is the minimal shape C-S3 reads -- which clause, which dimension it knocks out (R-S5), and that it replayed. The freeze-2 replay fixture must conform to it."
+            "note": "the minimal shape C-S3 reads; the freeze-2 replay fixture must conform to it"
           },
           "rationaleSource": [
             {
@@ -370,7 +375,8 @@
               "label": "R-S5",
               "why": "registered as a contested knockout on the clause's dimension"
             }
-          ]
+          ],
+          "conferred": "as proposed (rq-031)"
         },
         {
           "@id": "c:ws3:LedgerEntry",
@@ -411,22 +417,40 @@
               "label": "J-S4.chain",
               "why": "kind ratification"
             }
-          ]
+          ],
+          "conferred": "as proposed (rq-031); what the hash covers is adj:ledger-hash-kind's, not this record's"
         }
       ],
       "displayDuties": {
-        "whatRatifyingDoes": "these become the `declarations` of grading-types; typed fields are ENFORCEABLE in the factory (F6 rule), so a producer may reject a wrong-typed value"
-      }
+        "whatRatifyingDoes": "these become grading-types' declarations; the union makes illegal report states unrepresentable, and typed fields are ENFORCEABLE in the factory (F6 rule)"
+      },
+      "amendmentNotes": [
+        {
+          "item": "rq-031",
+          "act": "amended",
+          "actor": "Aaron",
+          "actedAt": "2026-10-01T14:58:07-04:00",
+          "note": "(2) GradeRecord.model required: model identity is provenance; the S-S2 example is abbreviated. disposition and readiness stay optional (derived values, never trusted from a single rater). (4) AdjudicatedReport is a tagged union: PRINTED {vector, disposition, readiness, contested_knockouts: [], provisional: false}; PENDING {route, contested_knockouts: [], provisional: true} while a routed dimension awaits rater C; WITHHELD {disposition_line: WITHHELD, contested_knockouts (at least one: an either-rater zero or a third-rater tie), queue: human, no disposition field}; SUSPENDED {disposition_line: SUSPENDED, cause: vacuous-pass:<CL>, contested_knockouts including the clause's dimension per R-S5, queue: human}. Items 1, 3, 5, 6 as proposed."
+        },
+        {
+          "item": "rq-033",
+          "act": "amended",
+          "actor": "Aaron",
+          "actedAt": "2026-10-01T15:03:23-04:00",
+          "note": "(2a) Attack dimensions are always added to contested_knockouts, alongside any zero-knockouts (R-S5: regardless). Precedence is SUSPENDED > WITHHELD > PENDING > PRINTED: a verified attack outranks a contested score, a contested score outranks an awaited rater; no early exit masks a higher variant. (2b) A routed dimension with no c yields rq-031's PENDING variant. (3) The tie definition is ratified as proposed; a tie produces WITHHELD. (4) adjudicate does not carry caller-supplied disposition or readiness: they are absent until method §6.2 is registered as a source (diag:external-method-artifacts stays open); accordingly rq-031's PRINTED carries disposition and readiness as optional, absent until then. Item 1 as proposed."
+        }
+      ]
     },
     {
       "@id": "sr:L3:grader-runner-interface",
       "@type": "SpecificationRecord",
-      "title": "grader-runner's interface — the rater is injected, every other limb is deterministic",
+      "title": "grader-runner's interface — as amended by the architect at rq-032",
       "kind": "closure-bundle",
       "closes": [],
       "addresses": [
         "sr:L2:C-S2",
         "sr:L2:R-S1",
+        "sr:L2:R-S6",
         "sr:L2:grader-runner"
       ],
       "dependsOn": [
@@ -434,9 +458,13 @@
         "a:C-S2:W-CS2-D1",
         "a:C-S2:W-CS2-D2",
         "a:C-S2:determinism",
-        "a:R-S1:rule"
+        "a:R-S1:rule",
+        "a:R-S6:rule"
       ],
       "standalone": false,
+      "amendmentOf": [
+        "rq-032"
+      ],
       "assertions": [
         {
           "@id": "c:grader-runner:assembleManifest",
@@ -451,14 +479,15 @@
               "label": "R-S1",
               "why": "context MUST contain exactly {spec@rev, method/v0.4.md, skills/fspec-method}"
             }
-          ]
+          ],
+          "conferred": "as proposed (rq-032: 'Items 1 and 3 as proposed')"
         },
         {
           "@id": "c:grader-runner:checkIsolation",
           "@type": "Closure",
           "proposed": {
-            "signature": "checkIsolation(manifest: string[]): { ok: true } | { ok: false; code: \"G-ISO-01\" }",
-            "rule": "ok iff the manifest is exactly the R-S1 triple for some spec@rev (order-insensitive, no extra entries)"
+            "signature": "checkIsolation(manifest: string[], specPath: string, rev: string): { ok: true } | { ok: false; code: \"G-ISO-01\" }",
+            "rule": "ok iff the manifest is exactly the R-S1 triple for THAT spec@rev (order-insensitive, no extra entries); a manifest pinned to any other rev is G-ISO-01"
           },
           "rationaleSource": [
             {
@@ -470,8 +499,14 @@
               "cite": "sf:bc48bb37af496302d125f52f",
               "label": "V-S3",
               "why": "manifest a subset of the R-S1 triple; violations rejected before adjudication"
+            },
+            {
+              "cite": "sf:82a78de8836c7a4b9246b8e2",
+              "label": "J-S1.chain",
+              "why": "each context-manifest pinned to the rev graded"
             }
-          ]
+          ],
+          "conferred": "amended at rq-032 (2)"
         },
         {
           "@id": "c:grader-runner:manifestHash",
@@ -486,15 +521,21 @@
               "label": "C-S2.determinism",
               "why": "<H> = sha256 of the manifest -- the serialization is not stated, so one is proposed"
             }
-          ]
+          ],
+          "conferred": "as proposed (rq-032)"
         },
         {
           "@id": "c:grader-runner:verifyGradeRecord",
           "@type": "Closure",
           "proposed": {
-            "signature": "verifyGradeRecord(record: GradeRecord, resolves: (pointer: string) => boolean): { ok: true } | { ok: false; code: \"G-EVID-01\" | \"G-SCORE-01\" }",
-            "rule": "G-EVID-01 when any evidence pointer does not resolve (resolves is injected: 'checked against derived/' is outside the module); G-SCORE-01 when any score is outside {0, 1, 2}",
-            "note": "G-SCORE-01 is a proposed code: the source states the property but names no code for its violation"
+            "signature": "verifyGradeRecord(record: GradeRecord, resolves: (pointer: string) => boolean): { ok: true } | { ok: false; code: \"G-EVID-01\" | \"G-SCORE-01\" | \"G-PROV-01\" }",
+            "rule": [
+              "G-EVID-01 when any evidence pointer does not resolve (resolves is injected)",
+              "G-SCORE-01 when any score is outside {0, 1, 2}",
+              "G-PROV-01 when provisional is not true (R-S6)",
+              "when several apply, the first of G-EVID-01, G-SCORE-01, G-PROV-01 is returned"
+            ],
+            "note": "G-SCORE-01 and G-PROV-01 are proposed codes: the source states the properties but names no code for their violation"
           },
           "rationaleSource": [
             {
@@ -505,20 +546,26 @@
             {
               "cite": "sf:5dae836de14f6ace5877fd44",
               "label": "C-S2.determinism",
-              "why": "every score in {0, 1, 2}; every evidence pointer resolves at the cited rev"
+              "why": "every score in {0, 1, 2}; every evidence pointer resolves"
+            },
+            {
+              "cite": "sf:061c635a46fe2630cab542ab",
+              "label": "R-S6",
+              "why": "every single-rater record carries provisional: true"
             }
-          ]
+          ],
+          "conferred": "amended at rq-032 (4)"
         },
         {
           "@id": "c:grader-runner:runGrader",
           "@type": "Closure",
           "proposed": {
-            "signature": "runGrader(invoke: RaterInvoker, rater: string, manifest: string[]): Promise<GradeRecord>",
+            "signature": "runGrader(invoke: RaterInvoker, rater: string, manifest: string[], specPath: string, rev: string): Promise<GradeRecord>",
             "alsoExports": [
               "export type RaterInvoker = (manifest: string[]) => Promise<{ model: string; vector: Vector; evidence: Record<string, string>; disposition?: string; readiness?: string }>",
               "export class GradeRejectedError extends Error { code: \"G-ISO-01\" }"
             ],
-            "rule": "checkIsolation first -- a contaminated manifest throws GradeRejectedError(G-ISO-01) and the invoker is NEVER called; otherwise the record is the invoker's output plus rater, manifest_hash = manifestHash(manifest), provisional: true"
+            "rule": "checkIsolation(manifest, specPath, rev) first -- a contaminated or mis-pinned manifest throws GradeRejectedError(G-ISO-01) and the invoker is NEVER called; otherwise the record is the invoker's output plus rater, manifest_hash = manifestHash(manifest), provisional: true"
           },
           "rationaleSource": [
             {
@@ -536,17 +583,27 @@
               "label": "C-S2.W-CS2-D2",
               "why": "the grade never enters adjudication"
             }
-          ]
+          ],
+          "conferred": "amended at rq-032 (5)"
         }
       ],
       "displayDuties": {
-        "whatRatifyingDoes": "fixes grader-runner's signatures; the injected RaterInvoker is what keeps C-S2 testable without a model -- and why C-S2's live bar can honestly stay provisional (the control)"
-      }
+        "whatRatifyingDoes": "fixes grader-runner's signatures. It does NOT designate the demonstration control: that remains the freeze-2 act (rq-032)."
+      },
+      "amendmentNotes": [
+        {
+          "item": "rq-032",
+          "act": "amended",
+          "actor": "Aaron",
+          "actedAt": "2026-10-01T15:00:47-04:00",
+          "note": "(2) checkIsolation(manifest, specPath, rev) binds the intended target: ok iff the manifest is exactly the R-S1 triple for THAT spec@rev; a manifest pinned to any other rev is G-ISO-01. (5) runGrader(invoke, rater, manifest, specPath, rev) passes specPath and rev to checkIsolation; otherwise as proposed. (4) verifyGradeRecord also rejects a record whose provisional is not true (R-S6), proposed code G-PROV-01, marked proposed as with G-SCORE-01; when several apply, it returns the first of G-EVID-01, G-SCORE-01, G-PROV-01. Items 1 and 3 as proposed. Ratifying this interface does not designate the demonstration control; that remains the freeze-2 act."
+        }
+      ]
     },
     {
       "@id": "sr:L3:adjudicator-interface",
       "@type": "SpecificationRecord",
-      "title": "adjudicator's interface — pure routing, third rater and C-S5 reports as parameters",
+      "title": "adjudicator's interface — as amended by the architect at rq-033",
       "kind": "closure-bundle",
       "closes": [
         "diag:third-rater-tie-unwitnessed"
@@ -567,6 +624,9 @@
         "a:V-S2:invariant"
       ],
       "standalone": false,
+      "amendmentOf": [
+        "rq-033"
+      ],
       "assertions": [
         {
           "@id": "c:adjudicator:route",
@@ -591,7 +651,8 @@
               "label": "C-S3.determinism",
               "why": "a pure function of the two committed vectors"
             }
-          ]
+          ],
+          "conferred": "as proposed (rq-033: 'Item 1 as proposed')"
         },
         {
           "@id": "c:adjudicator:adjudicate",
@@ -599,13 +660,14 @@
           "proposed": {
             "signature": "adjudicate(a: GradeRecord, b: GradeRecord, opts?: { c?: GradeRecord; attacks?: VacuousPassReport[] }): AdjudicatedReport",
             "rule": [
-              "contested knockouts -> { disposition_line: \"WITHHELD\", contested_knockouts, queue: \"human\" } (no disposition)",
-              "else a replayed attack -> { disposition_line: \"SUSPENDED\", cause: \"vacuous-pass:<clause>\", queue: \"human\" }, its dimension added to contested_knockouts",
-              "else every routed dimension takes the value at least two of a, b, c share; vector complete -> provisional: false",
-              "a routed dimension with no c -> provisional: true, the dimension listed in route (not decided)",
-              "a routed dimension where a, b and c all differ -> a third-rater tie -> queue: \"human\""
+              "every attacked dimension is added to contested_knockouts, alongside any zero-knockouts (R-S5: regardless)",
+              "precedence SUSPENDED > WITHHELD > PENDING > PRINTED; no early exit masks a higher variant",
+              "SUSPENDED: any replayed attack -> { disposition_line: \"SUSPENDED\", cause: \"vacuous-pass:<clause>\", contested_knockouts, queue: \"human\" }",
+              "WITHHELD: else any zero-knockout or third-rater tie -> { disposition_line: \"WITHHELD\", contested_knockouts, queue: \"human\" }",
+              "PENDING: else a routed dimension with no c -> { route, contested_knockouts: [], provisional: true }",
+              "PRINTED: else every routed dimension takes the value at least two of a, b, c share -> { vector, contested_knockouts: [], provisional: false }"
             ],
-            "note": "the rater C invocation itself is NOT in this module: c is a parameter, so the deterministic limb is testable on a replayed rater-C record (A9's fixture) and the agentic call stays with the caller"
+            "note": "rater C's invocation is not in this module: c is a parameter, so the deterministic limb runs on a replayed rater-C record (A9's fixture)"
           },
           "rationaleSource": [
             {
@@ -626,21 +688,22 @@
             {
               "cite": "sf:f057a2bd775d30f4a73d9b9d",
               "label": "R-S5",
-              "why": "a verified attack overrides the number"
+              "why": "a verified attack overrides the number, regardless of vector"
             },
             {
               "cite": "sf:fc11a2828a2a134ddaf16fa3",
               "label": "S5.adjudicator",
               "why": "pure routing fn + third-rater invocation"
             }
-          ]
+          ],
+          "conferred": "amended at rq-033 (2a), (2b)"
         },
         {
           "@id": "c:adjudicator:tie",
           "@type": "Closure",
           "proposed": {
             "definition": "a third-rater tie is a routed dimension on which a, b and c are pairwise different",
-            "consequence": "queue: \"human\", the dimension in contested_knockouts, no disposition"
+            "consequence": "the WITHHELD variant: the dimension in contested_knockouts, queue: \"human\", no disposition"
           },
           "rationaleSource": [
             {
@@ -648,14 +711,15 @@
               "label": "R-S4",
               "why": "a third-rater tie -> human -- 'tie' is not defined in the source"
             }
-          ]
+          ],
+          "conferred": "ratified as proposed; consequence per rq-033 (3)"
         },
         {
           "@id": "c:adjudicator:disposition-text",
           "@type": "Closure",
           "proposed": {
-            "rule": "adjudicate does not compute disposition or readiness text; it carries them through only when supplied by the caller",
-            "why": "they recompute 'per method s6.2', which is outside the registered source (diag:external-method-artifacts, left open)"
+            "rule": "adjudicate neither computes nor carries disposition or readiness: they are ABSENT from every report until method s6.2 is registered as a source",
+            "why": "they recompute 'per method s6.2', which is outside the registered source; diag:external-method-artifacts stays open"
           },
           "rationaleSource": [
             {
@@ -663,12 +727,22 @@
               "label": "V-S2",
               "why": "the printed lines recompute from the committed GradeRecords per method s6.2"
             }
-          ]
+          ],
+          "conferred": "amended at rq-033 (4)"
         }
       ],
       "displayDuties": {
-        "whatRatifyingDoes": "fixes adjudicator's signatures and the meaning of a third-rater tie; W-CS3-N's second half and W-CS3-Δ2 then run on the two replay fixtures A9 names"
-      }
+        "whatRatifyingDoes": "fixes adjudicator's signatures, the variant precedence and the meaning of a tie; W-CS3-N's second half and W-CS3-Δ2 run on the two replay fixtures A9 names"
+      },
+      "amendmentNotes": [
+        {
+          "item": "rq-033",
+          "act": "amended",
+          "actor": "Aaron",
+          "actedAt": "2026-10-01T15:03:23-04:00",
+          "note": "(2a) Attack dimensions are always added to contested_knockouts, alongside any zero-knockouts (R-S5: regardless). Precedence is SUSPENDED > WITHHELD > PENDING > PRINTED: a verified attack outranks a contested score, a contested score outranks an awaited rater; no early exit masks a higher variant. (2b) A routed dimension with no c yields rq-031's PENDING variant. (3) The tie definition is ratified as proposed; a tie produces WITHHELD. (4) adjudicate does not carry caller-supplied disposition or readiness: they are absent until method §6.2 is registered as a source (diag:external-method-artifacts stays open); accordingly rq-031's PRINTED carries disposition and readiness as optional, absent until then. Item 1 as proposed."
+        }
+      ]
     },
     {
       "@id": "sr:L3:ledger-interface",
@@ -690,6 +764,11 @@
         "a:LedgerEntry:fields"
       ],
       "standalone": false,
+      "blockedDependencies": [
+        "a:C-S7:W-CS7-D1",
+        "a:C-S7:W-CS7-N"
+      ],
+      "awaits": "adj:ledger-hash-kind -- the architect's diagnostic at rq-034; c:ledger:hash-encoding below is rebuilt from that decision",
       "assertions": [
         {
           "@id": "c:ledger:hash-encoding",
@@ -754,6 +833,49 @@
     }
   ],
   "adjudications": [
+    {
+      "@id": "adj:ledger-hash-kind",
+      "@type": "Adjudication",
+      "notACandidate": true,
+      "presentedPer": "Amendment 2 (ii): presented as an adjudication, not a candidate; raised by the architect's diagnostic at rq-034",
+      "conflict": "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash",
+      "theSourceSays": [
+        {
+          "fragment": "sf:e36d808c1818fa7be2a81bac",
+          "label": "C-S7.W-CS7-N",
+          "text": "<H₇> = sha256(seq ‖ prev ‖ payload) -- kind is not in the preimage",
+          "layer": "L2, accepted at rq-037"
+        },
+        {
+          "fragment": "sf:9f984223b2621f0b474bb82a",
+          "label": "C-S7.W-CS7-D1",
+          "text": "any rewrite of an existing line -> hook exit 1 ...; chain verification fails loudly on the tampered copy",
+          "layer": "L2, accepted at rq-037"
+        }
+      ],
+      "theProblem": "a rewrite of kind alone (registration -> ratification) keeps every hash, so chain verification does NOT fail on that tampered copy; the hook's append-only check still refuses it",
+      "options": [
+        {
+          "id": "A",
+          "label": "Amend the source: kind enters the preimage",
+          "content": "the SRS author amends W-CS7-N to hash = sha256(seq || prev || kind || payload); the spec is re-registered; c:ledger:hash-encoding is redrafted on [seq, prev, kind, payload].",
+          "consequence": "the cleanest result, and the most expensive: SPEC.md's digest changes, and every fragment's identity includes the digest, so EVERY grounding in the slice and in WS-3 migrates (ARO 5.2); the A9 act and its amendment name the old digest and are re-stated; every accepted item re-binds. C-S7 waits for all of it."
+        },
+        {
+          "id": "B",
+          "label": "A design closure against the literal: kind enters the preimage at L3",
+          "content": "c:ledger:hash-encoding hashes [seq, prev, kind, payload]; the conflict stays an OPEN diagnostic beside it, naming W-CS7-N's literal formula as departed from.",
+          "consequence": "W-CS7-Δ1 becomes true and C-S7 can verify soon; but the ledger's bar then contradicts W-CS7-N's accepted literal ('sha256(seq || prev || payload)'), so a conforming implementation of the SOURCE would fail the bar. The departure is visible, not hidden."
+        },
+        {
+          "id": "C",
+          "label": "Read Δ1's chain clause narrowly",
+          "content": "record the interpretation that Δ1's 'chain verification fails loudly' covers rewrites of seq, prev or payload, and that a kind-only rewrite is caught by the hook (checkAppendOnly, H-LEDGER-01). The preimage stays as the source states.",
+          "consequence": "nothing is rebuilt and both accepted clauses stand; the C-S7 bar tests kind-tampering through the hook, not the chain. The weaker guarantee for kind is a recorded reading of the source, not a change to it."
+        }
+      ],
+      "decision": null
+    },
     {
       "@id": "adj:ledger-hooks-repo-home",
       "@type": "Adjudication",

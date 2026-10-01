@@ -46,7 +46,17 @@
         "C-S3",
         "C-S7"
       ],
-      "region": "lines 43-53 and 73-75 of the registered digest"
+      "regionLines": [
+        [
+          43,
+          53
+        ],
+        [
+          73,
+          75
+        ]
+      ],
+      "regionSource": "the verbatim act record, parsed at build"
     },
     "demonstrationControlCandidate": {
       "capability": "C-S2",
@@ -57,6 +67,14 @@
     "replayFixturesForFreeze2": [
       "a C-S5 stub report (W-CS3-Δ2)",
       "a rater-C GradeRecord (W-CS3-N)"
+    ],
+    "beyondRegion": [
+      {
+        "assertion": "a:C-S7:determinism",
+        "label": "C-S7.determinism",
+        "line": 76,
+        "diagnostic": "diag:C-S7-determinism-beyond-the-acted-region"
+      }
     ]
   },
   "records": [
@@ -467,6 +485,7 @@
             "hash fields are the only masks"
           ],
           "classificationNote": "titled a note, but states a property in the normative register; classified Normative -- the alternative reading (Note) is preserved here",
+          "diagnostic": "diag:C-S7-determinism-beyond-the-acted-region",
           "groundedBy": [
             {
               "fragment": "sf:86402b9818af2825c185d8df",
@@ -1281,13 +1300,28 @@
         "sf:9f984223b2621f0b474bb82a"
       ],
       "status": "open"
+    },
+    {
+      "@id": "diag:C-S7-determinism-beyond-the-acted-region",
+      "@type": "UnderdeterminationDiagnostic",
+      "blocking": true,
+      "cone": [
+        "a:C-S7:determinism, and any ratified bar or oracle for C-S7 that would rest on it"
+      ],
+      "statement": "a:C-S7:determinism is grounded on line 76 (C-S7's determinism note), one line beyond the A9 act's '73–75'. C-S2's and C-S3's determinism notes lie inside the region, so the bound may be a transcription boundary rather than a decision to exclude -- but that is the architect's to say. Either the act's region is amended to 73–76, or the clause leaves the record.",
+      "evidence": [
+        "sf:86402b9818af2825c185d8df",
+        "sf:6359cae95790fe178b3ebd78"
+      ],
+      "legalOutputs": "an architect act amending A9's region (the clause stays), or a decision at rq-017 to drop the clause (it moves to coverage.notYetCovered); no C-S7 bar or oracle rests on it until then (Ops finding 2026-10-01, bullet 7)",
+      "status": "open"
     }
   ],
   "coverage": {
     "axis": "covered · not yet covered — separate from the semantic states prohibited · non-goal · unspecified (ARO 6)",
     "covered": {
       "SRS §2": "J-S1 (24), J-S4 (30) and the coverage map (32), as context only",
-      "SRS §3": "C-S2 (43–47), C-S3 (49–53), C-S7 (73–76)",
+      "SRS §3": "C-S2 (43–47), C-S3 (49–53), C-S7 (73–75) -- and line 76, C-S7's determinism note, which lies BEYOND the acted region (ws3.beyondRegion; diag:C-S7-determinism-beyond-the-acted-region)",
       "SRS §4": "the Records line (85); R-S1, R-S4, R-S5, R-S6 (87, 90–92)",
       "SRS §5": "table header; grader-runner, adjudicator and ledger rows; the traceability sentence",
       "SRS §6": "table header; S-S2, S-S3, S-S6",

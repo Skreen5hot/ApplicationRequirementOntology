@@ -43,11 +43,18 @@ def rows_for(graph, fragments, existing, now):
     by_id = {f["fragmentId"]: f for f in fragments}
     diag_ids = {d["@id"] for d in graph["diagnostics"]}
     n = max(int(r["id"].split("-")[1]) for r in existing) if existing else 0
-    queued = {r.get("record") for r in existing}
+    dead = {r.get("supersedes") for r in existing if r.get("supersedes")}
+    live = {r.get("record"): r for r in existing if r.get("id") not in dead}
+    region = graph["ws3"]["target"]["regionLines"]
+    beyond = {b["assertion"]: b for b in graph["ws3"].get("beyondRegion", [])}
     out = []
     for rec in graph["records"]:
-        if rec["@id"] in queued:
+        prior = live.get(rec["@id"])
+        if prior and prior.get("recordDigest") == digest(rec):
             continue
+        if prior and prior.get("actedAt"):
+            raise SystemExit("%s changed after %s was acted on -- an acted record is not re-queued by this script"
+                             % (rec["@id"], prior["id"]))
         n += 1
         seen, texts = set(), []
         for a in rec["assertions"]:
@@ -58,6 +65,11 @@ def rows_for(graph, fragments, existing, now):
                     texts.append({"fragment": c["fragment"], "line": f["display"]["lines"], "text": f["text"]})
         flags = [a[k] for a in rec["assertions"] for k in ("classificationNote", "scopeNote", "absence") if a.get(k)]
         flags += ["see %s" % a["diagnostic"] for a in rec["assertions"] if a.get("diagnostic") in diag_ids]
+        flags += ["%s's primary span is line %d, beyond the A9 act's region (%s) -- accepting it needs the act's region "
+                  "amended, or drop the clause" % (a["@id"], beyond[a["@id"]]["line"],
+                                                   ", ".join("%d–%d" % tuple(x) for x in region))
+                  for a in rec["assertions"] if a["@id"] in beyond]
+        row_extra = {"supersedes": prior["id"]} if prior else {}
         out.append({
             "id": "rq-%03d" % n,
             "batch": BATCH[rec["@id"]],
@@ -78,6 +90,7 @@ def rows_for(graph, fragments, existing, now):
             },
             "queuedBy": "aro-dev-agent",
             "workstream": "WS-3 (Plan v1.1 s5; target: docs/decisions/2026-10-01-a9-ws3-target-naming-act.md)",
+            **row_extra,
         })
     return out
 

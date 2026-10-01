@@ -52,20 +52,55 @@ def test_the_capabilities_are_exactly_the_A9_target():
     assert g["ws3"]["demonstrationControlCandidate"]["capability"] == "C-S2"
 
 
-def test_every_capability_primary_span_lies_inside_the_named_region():
-    region = set(range(43, 54)) | set(range(73, 77))   # A9: lines 43-53 and 73-75; 76 is C-S7's own determinism note
+def _acted_region():
+    """The bound is the ACT's, read from the verbatim record by the builder's own parser -- never retyped here
+    (Ops finding 2026-10-01: this test's constant once said 73-77 while its comment said 73-75)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ws3_build_l2", WS3 / "build_l2.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.acted_region(), mod.in_region
+
+
+def test_the_graph_carries_the_acts_region_and_not_another():
+    region, _ = _acted_region()
+    assert _graph()["ws3"]["target"]["regionLines"] == region
+
+
+def test_every_capability_primary_span_lies_inside_the_acted_region_or_is_disclosed_beyond_it():
+    """Inside the region, or listed in ws3.beyondRegion with an OPEN blocking diagnostic -- the gate never decides
+    whether a span beyond the act is admissible; the architect does."""
+    region, in_region = _acted_region()
+    g = _graph()
     by_id = {f["fragmentId"]: f for f in _fragments()}
-    for r in _graph()["records"]:
+    diags = {d["@id"]: d for d in g["diagnostics"]}
+    beyond = {b["assertion"] for b in g["ws3"]["beyondRegion"]}
+    for r in g["records"]:
         if r["@id"] in ("sr:L2:C-S2", "sr:L2:C-S3", "sr:L2:C-S7"):
             for a in r["assertions"]:
                 for c in a["groundedBy"]:
-                    if c["role"] == "primary":
-                        assert int(by_id[c["fragment"]]["display"]["lines"]) in region, (a["@id"], c["label"])
+                    if c["role"] == "primary" and not in_region(int(by_id[c["fragment"]]["display"]["lines"]), region):
+                        assert a["@id"] in beyond, (a["@id"], c["label"])
+                        d = diags[a["diagnostic"]]
+                        assert d["status"] == "open" and d["blocking"] is True, d["@id"]
+
+
+def _live_rows(artifact):
+    """Queue rows for one artifact, minus any row a later row supersedes (tools/act.py's own rule)."""
+    rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
+    dead = {r.get("supersedes") for r in rows if r.get("supersedes")}
+    return [r for r in rows if r.get("artifact") == artifact and r["id"] not in dead]
+
+
+def test_a_span_beyond_the_region_is_flagged_on_its_queue_row_by_line():
+    live = {r["record"]: r for r in _live_rows("spike/graph/l2/srs-ws3.graph.jsonld")}
+    for b in _graph()["ws3"]["beyondRegion"]:
+        row = live["sr:L2:" + b["assertion"].split(":")[1]]
+        assert any("line %d" % b["line"] in f and "beyond" in f for f in row["displayDuties"]["vacuityClassFlags"]), row["id"]
 
 
 def test_every_WS3_record_is_queued_once_and_bound_to_its_current_bytes():
-    rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
-    ws3 = [r for r in rows if r.get("artifact") == "spike/graph/l2/srs-ws3.graph.jsonld"]
+    ws3 = _live_rows("spike/graph/l2/srs-ws3.graph.jsonld")
     recs = [r["@id"] for r in _graph()["records"]]
     assert sorted(r["record"] for r in ws3) == sorted(recs)
     for row in ws3:

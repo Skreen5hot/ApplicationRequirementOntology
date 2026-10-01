@@ -46,7 +46,12 @@ def test_the_tool_and_the_projector_compute_the_same_digest_on_every_live_row():
     would be one the projector refuses. Checked on every live, record-addressed row of the real queue."""
     q = act.Queue(ROOT)
     checked = 0
+    dead = q.superseded()
     for _, row in q.rows:
+        if row["id"] in dead:
+            # A superseded row stays bound to the bytes it was queued against -- that is what superseding means
+            # (rq-012 -> rq-013 after an act; rq-017 -> rq-036 before one). Only live rows must match today's bytes.
+            continue
         if row.get("recordDigest"):
             rec = act._find(json.loads((ROOT / row["artifact"]).read_text(encoding="utf-8")), row["record"])
             assert act.digest(rec) == layout_rule.digest(rec) == row["recordDigest"], row["id"]

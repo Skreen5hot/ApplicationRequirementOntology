@@ -292,7 +292,8 @@ def blocked_assertions(l2):
     region, or one pointing at an OPEN, blocking diagnostic (Ops finding 2026-10-01, the L3 hop of the region
     question)."""
     diags = {d["@id"]: d for d in l2["diagnostics"]}
-    out = {b["assertion"]: "beyond the acted region (line %d)" % b["line"] for b in l2["ws3"].get("beyondRegion", [])}
+    out = {b["assertion"]: "beyond the acted region (line %d; %s)" % (b["line"], b["diagnostic"])
+           for b in l2["ws3"].get("beyondRegion", [])}
     for rec in l2["records"]:
         for a in rec["assertions"]:
             d = diags.get(a.get("diagnostic"))

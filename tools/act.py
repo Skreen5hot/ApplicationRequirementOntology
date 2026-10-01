@@ -111,6 +111,14 @@ class Queue:
         rows = [r for _, r in self.rows if not r.get("actedAt") and r.get("id") not in dead]
         return sorted(rows, key=lambda r: (r.get("queuedAt") or "", r.get("id") or ""))
 
+    def owed(self):
+        """Acted rows whose act left work OWED and that no row supersedes yet: an `amended` row owes a re-queue at
+        its new address (an amend confers nothing); a `diagnostic-opened` row owes a resolution. A sitting's exit
+        state must be readable from the tool, not reconstructed from a commit message (IA Ops finding 2026-10-01)."""
+        dead = self.superseded()
+        return [r for _, r in self.rows
+                if r.get("act") in ("amended", "diagnostic-opened") and r.get("id") not in dead]
+
     def current_digest(self, row):
         """-> (kind, digest now) for the item's content address, or raise Refused if it cannot be read."""
         art = row.get("artifact")
@@ -263,6 +271,10 @@ def render_show(q, row):
     L.append(_wrap(row.get("recordDigest") or row.get("artifactFileDigest"), "  bound to: "))
     if row.get("actedAt"):
         L.append("  ACTED: %s by %s at %s" % (row.get("act"), row.get("actor"), row.get("actedAt")))
+        if row.get("decision"):
+            L.append("  decision: %s" % row["decision"])
+        if row.get("actNote"):
+            L.append(_wrap(row["actNote"], "  note:   "))
     # The reader must not have to attempt an act to learn the item is dead or stale (IA Ops finding 2026-10-01).
     successor = [r.get("id") for _, r in q.rows if r.get("supersedes") == row.get("id")] or \
                 ([row["supersededBy"]] if row.get("supersededBy") else [])
@@ -308,10 +320,16 @@ def main(argv=None) -> int:
     try:
         q = Queue(Path(args.root))
         if args.cmd == "list":
-            out = {"pending": [_summary(r) for r in q.pending()]}
+            owed = q.owed()
+            out = {"pending": [_summary(r) for r in q.pending()],
+                   "owed": [dict(_summary(r), act=r.get("act")) for r in owed]}
             text = "\n".join("%-7s %-4s %s  %s" % (r["id"], r.get("batch") or "", r.get("queuedAt") or "",
                                                     r.get("title") or r.get("kind") or "")
                              for r in q.pending()) or "(no pending items)"
+            if owed:
+                text += "\n\nowed -- acted, but the act left work to do (not actionable here until re-queued):\n" + \
+                        "\n".join("%-7s %-18s %s" % (r["id"], r.get("act"), r.get("title") or r.get("kind") or "")
+                                  for r in owed)
         elif args.cmd == "show":
             _, row = q.get(args.id)
             out = {"item": row}

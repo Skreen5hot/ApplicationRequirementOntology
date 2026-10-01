@@ -208,3 +208,35 @@ def test_a_rebuilt_item_supersedes_the_amended_one_and_carries_the_architects_no
         assert any(r.get("supersedes") == amended for r in live.values()), amended
     assert live["sr:L3:ws3-module-boundaries"]["id"] == "rq-030"
     assert live["adj:ledger-hooks-repo-home"]["id"] == "rq-035"
+
+
+def test_every_amended_row_has_a_successor_bound_to_the_records_current_address():
+    """IA Ops finding 2026-10-01, bullet 2: an amend confers nothing, so it must be followed by a re-queue at the
+    record's new address -- a queue holding an amended row with no live successor fails here."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("aro_act_t", ROOT / "tools" / "act.py")
+    act = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(act)
+    q = act.Queue(ROOT)
+    rows = [r for _, r in q.rows]
+    for amended in (r for r in rows if r.get("act") == "amended"):
+        succ = [r for r in rows if r.get("supersedes") == amended["id"]]
+        assert succ, "%s is amended with no successor" % amended["id"]
+        live = [r for r in succ if r["id"] not in q.superseded()] or succ
+        assert any(q.current_digest(r)[1] == r["recordDigest"] for r in live), amended["id"]
+
+
+def test_the_architects_blocking_diagnostic_is_derived_from_the_act_row():
+    """IA Ops finding 2026-10-01, bullet 1: status and blocking come from rq-034's act, never retyped. Falsified on a
+    copy of the queue: drop BLOCKING from the note -> not blocking; confer a successor -> closed."""
+    b2 = _load("build_l2")
+    g = _graph()
+    d = [x for x in g["diagnostics"] if x["@id"] == "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash"][0]
+    queue = {json.loads(l)["id"]: json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()}
+    assert d["status"] == "open" and d["blocking"] is True and d["actRecord"]["note"] == queue["rq-034"]["actNote"]
+    src = [x for x in b2.DIAGNOSTICS if x["@id"] == d["@id"]][0]
+    soft = dict(queue, **{"rq-034": dict(queue["rq-034"], actNote="kind is outside the preimage")})
+    assert b2.raised_by_act(src, soft)["blocking"] is False
+    succ = [r for r in queue.values() if r.get("supersedes") == "rq-034"][0]
+    done = dict(queue, **{succ["id"]: dict(succ, act="ratified", actor="Aaron")})
+    assert b2.raised_by_act(src, done)["status"] == "closed"

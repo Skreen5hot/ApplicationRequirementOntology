@@ -1299,7 +1299,6 @@
     {
       "@id": "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash",
       "@type": "ConflictingStatement",
-      "blocking": true,
       "cone": [
         "c:ledger:hash-encoding (rq-034) and any C-S7 bar or oracle"
       ],
@@ -1312,9 +1311,16 @@
         "a:C-S7:W-CS7-N",
         "a:C-S7:W-CS7-D1"
       ],
-      "raisedBy": "the architect's diagnostic at rq-034, 2026-10-01 -- recorded here at graph level so the accepted C-S7 record (rq-037) is not rewritten",
+      "raisedByAct": "rq-034",
       "legalOutputs": "adj:ledger-hash-kind (A: amend the source; B: design closure against the literal; C: narrow reading of Δ1)",
-      "status": "open"
+      "status": "open",
+      "blocking": true,
+      "actRecord": {
+        "item": "rq-034",
+        "actor": "Aaron",
+        "actedAt": "2026-10-01T15:04:56-04:00",
+        "note": "BLOCKING for ratification of this closure and any C-S7 bar: kind is outside the hash preimage (W-CS7-N), so a kind-only rewrite (registration -> ratification) passes verifyChain, contradicting W-CS7-D1's 'chain verification fails loudly on the tampered copy'. The source is internally inconsistent. Resolution to be decided by adjudication: (A) source amendment adding kind to the preimage; (B) a design closure including kind, with the conflict left open; (C) read D1's chain clause as covering seq/prev/payload, with kind rewrites caught by checkAppendOnly. Items otherwise acceptable as proposed."
+      }
     },
     {
       "@id": "diag:C-S7-determinism-beyond-the-acted-region",

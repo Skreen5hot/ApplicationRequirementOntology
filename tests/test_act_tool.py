@@ -198,6 +198,28 @@ def test_show_discloses_a_superseded_item_and_a_stale_one(repo, capsys):
     assert "STALE" not in out and "SUPERSEDED" not in out
 
 
+def test_show_renders_the_decision_and_the_note_an_act_recorded(capsys):
+    """IA Ops finding 2026-10-01, bullet 4: `show rq-035` printed neither the letter A nor its conditions."""
+    assert act.main(["--root", str(ROOT), "show", "rq-035"]) == 0
+    out = " ".join(capsys.readouterr().out.split())
+    assert "decision: A" in out and "A with conditions" in out
+    assert act.main(["--root", str(ROOT), "show", "rq-034"]) == 0
+    assert "BLOCKING" in capsys.readouterr().out
+
+
+def test_list_names_what_an_act_left_owed_until_it_is_requeued(repo, capsys):
+    """IA Ops finding 2026-10-01, bullet 3: an amended row owes a re-queue and a diagnostic-opened row a resolution;
+    `list` must not read '(no pending items)' as if the sitting left nothing behind."""
+    _fresh_item(repo, item_id="rq-900", act="amended", actedAt="2026-10-01T15:00:00-04:00", actor="Aaron")
+    assert act.main(["--root", str(repo), "list"]) == 0
+    out = capsys.readouterr().out
+    assert "owed" in out and "rq-900" in out and "amended" in out
+    _fresh_item(repo, item_id="rq-901", supersedes="rq-900")
+    assert act.main(["--root", str(repo), "list"]) == 0
+    out = capsys.readouterr().out
+    assert "rq-901" in out and "owed" not in out, "a re-queued amend is no longer owed"
+
+
 def test_show_puts_each_statement_above_the_passages_it_cites(repo, capsys):
     """Found by the operator's dry run (2026-09-29): `show` printed the cited passages but not the statements
     being accepted, while the item's own instruction is 'review every cited span beside its assertion'."""

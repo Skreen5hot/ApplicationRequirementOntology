@@ -347,14 +347,14 @@ DIAGNOSTICS = [
      "statement": "SRS s5 homes the ledger at ledger/ and .githooks/; the hook half (W-CS7-Δ1: 'hook exit 1') is a git hook, not a module a TypeScript build emits. Like the slice's author-agent, the source is univocal and the conflict is with the factory's realization; it is recorded, not resolved, here.",
      "evidence": ["S5.ledger", "C-S7.W-CS7-D1"],
      "status": "open"},
-    {"@id": "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash", "@type": "ConflictingStatement", "blocking": True,
+    {"@id": "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash", "@type": "ConflictingStatement",
      "cone": ["c:ledger:hash-encoding (rq-034) and any C-S7 bar or oracle"],
      "statement": "W-CS7-N puts kind outside the hash preimage (sha256(seq || prev || payload)); W-CS7-Δ1 says chain verification fails loudly on ANY rewrite of an existing line. A kind-only rewrite keeps every hash, so the two cannot both hold. Source-internal.",
      "evidence": ["C-S7.W-CS7-N", "C-S7.W-CS7-D1"],
      "blocks": ["a:C-S7:W-CS7-N", "a:C-S7:W-CS7-D1"],
-     "raisedBy": "the architect's diagnostic at rq-034, 2026-10-01 -- recorded here at graph level so the accepted C-S7 record (rq-037) is not rewritten",
+     "raisedByAct": "rq-034",
      "legalOutputs": "adj:ledger-hash-kind (A: amend the source; B: design closure against the literal; C: narrow reading of Δ1)",
-     "status": "open"},
+     "status": None},   # status and blocking DERIVED from the act row at build (raised_by_act)
     {"@id": "diag:C-S7-determinism-beyond-the-acted-region", "@type": "UnderdeterminationDiagnostic", "blocking": False,
      "cone": ["a:C-S7:determinism, and any ratified bar or oracle for C-S7 that would rest on it"],
      "statement": "a:C-S7:determinism is grounded on line 76 (C-S7's determinism note), one line beyond the A9 act's '73–75'. C-S2's and C-S3's determinism notes lie inside the region, so the bound may be a transcription boundary rather than a decision to exclude -- but that is the architect's to say. Either the act's region is amended to 73–76, or the clause leaves the record.",
@@ -391,6 +391,23 @@ COVERAGE = {
 
 
 ACT = HERE.parents[2] / "docs" / "decisions" / "2026-10-01-a9-ws3-target-naming-act.md"
+QUEUE = HERE.parents[1] / "measurements" / "ratification-queue.jsonl"
+
+
+def raised_by_act(diag, queue):
+    """A diagnostic the ARCHITECT opened through the act tool is derived from that act row, never retyped (IA Ops
+    finding 2026-10-01): open while the row stands as `diagnostic-opened`, closed once a later row supersedes it
+    and that row is acted; blocking iff the note says BLOCKING. The note is carried verbatim."""
+    row = queue[diag["raisedByAct"]]
+    if row.get("act") != "diagnostic-opened":
+        raise SystemExit("%s names %s, which is not a diagnostic-opened act" % (diag["@id"], row["id"]))
+    rec = {"item": row["id"], "actor": row["actor"], "actedAt": row["actedAt"], "note": row["actNote"]}
+    conferred = [r for r in queue.values() if r.get("supersedes") == row["id"] and r.get("act") in ("accepted", "ratified", "decided")]
+    if conferred:
+        return dict(diag, status="closed", blocking=False, actRecord=rec,
+                    closedBy="%s %s by %s" % (conferred[0]["id"], conferred[0]["act"], conferred[0]["actor"]))
+    return dict(diag, status="open", blocking="BLOCKING" in row["actNote"], actRecord=rec)
+
 CAPABILITY_RECORDS = ("sr:L2:C-S2", "sr:L2:C-S3", "sr:L2:C-S7")
 
 
@@ -430,9 +447,7 @@ def build():
         return by_label[label]["fragmentId"]
 
     region = acted_region()
-
-    def beyond_ok(cap):        # a capability may extend beyond the region only through a disclosed beyondRegion entry
-        return any(b["assertion"].startswith("a:%s:" % cap) for b in beyond)
+    queue = {json.loads(l)["id"]: json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()}
 
     beyond = [{"assertion": a["@id"], "label": c["label"], "line": int(by_label[c["label"]]["display"]["lines"]),
                "diagnostic": a.get("diagnostic")}
@@ -449,9 +464,8 @@ def build():
         if rec["@id"] in CAPABILITY_RECORDS:
             spans[rec["@id"].split(":")[-1]] = [int(by_label[c["label"]]["display"]["lines"])
                                                 for a in rec["assertions"] for c in a["groundedBy"] if c["role"] == "primary"]
-    for cap, lines in spans.items():
-        if not (in_region(min(lines), region) and in_region(max(lines), region)) and not beyond_ok(cap):
-            raise SystemExit("%s covers %d-%d, outside the acted region %s" % (cap, min(lines), max(lines), region))
+    # (no range guard here: every out-of-region primary span is already refused above unless disclosed, and the
+    #  derived range is pinned by test_section_3_coverage_is_derived_... -- Ops showed a guard here was dead code)
     section3 = ", ".join("%s (%d–%d)" % (cap, min(v), max(v)) for cap, v in spans.items())
     ws3 = dict(WS3, target=dict(WS3["target"], regionLines=region, regionSource="the verbatim act record, parsed at build",
                amendments=[str(a.relative_to(HERE.parents[2])).replace("\\", "/") for a in AMENDMENTS]),
@@ -501,7 +515,7 @@ def build():
         "d21": "Every target below is a specification-target description (a kind reference), never an instance; no assertion entails that the described thing exists.",
         "ws3": ws3,
         "records": resolve(RECORDS),
-        "diagnostics": [resolve_evidence(d) for d in DIAGNOSTICS],
+        "diagnostics": [resolve_evidence(raised_by_act(d, queue) if d.get("raisedByAct") else d) for d in DIAGNOSTICS],
         "coverage": dict(COVERAGE, covered=dict(COVERAGE["covered"], **{"SRS §3": section3})),
     }
 

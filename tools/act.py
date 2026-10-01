@@ -263,6 +263,19 @@ def render_show(q, row):
     L.append(_wrap(row.get("recordDigest") or row.get("artifactFileDigest"), "  bound to: "))
     if row.get("actedAt"):
         L.append("  ACTED: %s by %s at %s" % (row.get("act"), row.get("actor"), row.get("actedAt")))
+    # The reader must not have to attempt an act to learn the item is dead or stale (IA Ops finding 2026-10-01).
+    successor = [r.get("id") for _, r in q.rows if r.get("supersedes") == row.get("id")] or \
+                ([row["supersededBy"]] if row.get("supersededBy") else [])
+    if successor:
+        L.append("  SUPERSEDED by %s -- this item cannot be acted on; act on the successor" % ", ".join(successor))
+    elif not row.get("actedAt"):
+        try:
+            _kind, now = q.current_digest(row)
+            if now != (row.get("recordDigest") or row.get("artifactFileDigest")):
+                L.append("  STALE: the record's current address is %s, not the one this item is bound to -- "
+                         "it needs a new item, not an act" % now)
+        except Refused as e:
+            L.append("  STALE: %s" % e)
     return "\n".join(L)
 
 

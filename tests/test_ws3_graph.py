@@ -99,7 +99,8 @@ def test_a_span_beyond_the_region_is_flagged_on_its_queue_row_by_line():
         assert any("line %d" % b["line"] in f and "beyond" in f for f in row["displayDuties"]["vacuityClassFlags"]), row["id"]
 
 
-def test_every_WS3_record_is_queued_once_and_bound_to_its_current_bytes():
+def test_every_WS3_record_has_one_live_row_and_show_renders_it():
+    # the digest property itself is pinned by test_act_tool's every-live-row check (Ops finding 2026-10-01, bullet 6)
     ws3 = _live_rows("spike/graph/l2/srs-ws3.graph.jsonld")
     recs = [r["@id"] for r in _graph()["records"]]
     assert sorted(r["record"] for r in ws3) == sorted(recs)
@@ -157,3 +158,35 @@ def test_the_architects_amendment_is_what_moved_the_bound(tmp_path):
     spec.loader.exec_module(mod)
     assert mod.acted_region(d / "2026-10-01-a9-ws3-target-naming-act.md") == [[43, 53], [73, 75]]
     assert _graph()["ws3"]["beyondRegion"] == []
+
+
+def _load(name):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(name, WS3 / (name + ".py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def test_an_L3_bundle_resting_on_a_blocked_assertion_must_disclose_it():
+    """Falsification (Ops finding 2026-10-01, bullet 2): mark a:C-S7:determinism beyond the region in a copy of the
+    L2 graph -> the ledger bundle, which depends on it, is refused until it declares the dependency."""
+    l3 = _load("build_l3")
+    g = _graph()
+    assert l3.undisclosed_blocked_dependencies(l3.RECORDS, g) == []
+    g["ws3"]["beyondRegion"] = [{"assertion": "a:C-S7:determinism", "label": "C-S7.determinism", "line": 76,
+                                 "diagnostic": "diag:x"}]
+    bad = dict(l3.undisclosed_blocked_dependencies(l3.RECORDS, g))
+    assert bad == {"sr:L3:ledger-interface": ["a:C-S7:determinism"]}
+    disclosed = [dict(r, blockedDependencies=["a:C-S7:determinism"]) if r["@id"] == "sr:L3:ledger-interface" else r
+                 for r in l3.RECORDS]
+    assert l3.undisclosed_blocked_dependencies(disclosed, g) == []
+    assert dict(l3.undisclosed_blocked_dependencies(disclosed, _graph())) == {"sr:L3:ledger-interface": []},         "a stale disclosure (the block lifted) is refused too"
+
+
+def test_section_3_coverage_is_derived_from_the_spans_and_lies_in_the_region():
+    region, in_region = _acted_region()
+    import re
+    text = _graph()["coverage"]["covered"]["SRS §3"]
+    ranges = [(int(a), int(b)) for a, b in re.findall(r"\((\d+)–(\d+)\)", text)]
+    assert len(ranges) == 3 and all(in_region(a, region) and in_region(b, region) for a, b in ranges), text

@@ -182,6 +182,22 @@ def test_show_displays_a_field_example_that_is_not_text(repo, capsys):
     assert "flag e.g. true" in out and "seq e.g. 7, <n>" in out
 
 
+def test_show_discloses_a_superseded_item_and_a_stale_one(repo, capsys):
+    """IA Ops finding 2026-10-01, bullet 3: a reader must not need to attempt an act to learn an item is dead or
+    stale."""
+    _fresh_item(repo, item_id="rq-900")
+    _fresh_item(repo, item_id="rq-901", supersedes="rq-900")
+    assert act.main(["--root", str(repo), "show", "rq-900"]) == 0
+    assert "SUPERSEDED by rq-901" in capsys.readouterr().out
+    _fresh_item(repo, item_id="rq-902", recordDigest="sha256:" + "0" * 64)
+    assert act.main(["--root", str(repo), "show", "rq-902"]) == 0
+    out = capsys.readouterr().out
+    assert "STALE" in out and "SUPERSEDED" not in out
+    assert act.main(["--root", str(repo), "show", "rq-901"]) == 0
+    out = capsys.readouterr().out
+    assert "STALE" not in out and "SUPERSEDED" not in out
+
+
 def test_show_puts_each_statement_above_the_passages_it_cites(repo, capsys):
     """Found by the operator's dry run (2026-09-29): `show` printed the cited passages but not the statements
     being accepted, while the item's own instruction is 'review every cited span beside its assertion'."""

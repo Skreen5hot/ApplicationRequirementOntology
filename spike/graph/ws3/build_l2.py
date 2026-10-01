@@ -371,7 +371,7 @@ COVERAGE = {
     "axis": "covered · not yet covered — separate from the semantic states prohibited · non-goal · unspecified (ARO 6)",
     "covered": {
         "SRS §2": "J-S1 (24), J-S4 (30) and the coverage map (32), as context only",
-        "SRS §3": "C-S2 (43–47), C-S3 (49–53), C-S7 (73–76; line 76 inside the region since the 2026-10-01 amendment)",
+        "SRS §3": None,   # derived at build from the capability records' primary spans, inside the acted region
         "SRS §4": "the Records line (85); R-S1, R-S4, R-S5, R-S6 (87, 90–92)",
         "SRS §5": "table header; grader-runner, adjudicator and ledger rows; the traceability sentence",
         "SRS §6": "table header; S-S2, S-S3, S-S6",
@@ -422,6 +422,10 @@ def build():
         return by_label[label]["fragmentId"]
 
     region = acted_region()
+
+    def beyond_ok(cap):        # a capability may extend beyond the region only through a disclosed beyondRegion entry
+        return any(b["assertion"].startswith("a:%s:" % cap) for b in beyond)
+
     beyond = [{"assertion": a["@id"], "label": c["label"], "line": int(by_label[c["label"]]["display"]["lines"]),
                "diagnostic": a.get("diagnostic")}
               for rec in RECORDS if rec["@id"] in CAPABILITY_RECORDS for a in rec["assertions"]
@@ -430,6 +434,17 @@ def build():
     undisclosed = [b["assertion"] for b in beyond if not b["diagnostic"]]
     if undisclosed:
         raise SystemExit("primary span(s) beyond the acted region with no diagnostic: %s" % undisclosed)
+    # SRS s3 coverage is DERIVED, never retyped (Ops finding 2026-10-01, bullet 4): each capability's covered lines
+    # are the min..max of its primary spans, and each range must lie inside the acted region.
+    spans = {}
+    for rec in RECORDS:
+        if rec["@id"] in CAPABILITY_RECORDS:
+            spans[rec["@id"].split(":")[-1]] = [int(by_label[c["label"]]["display"]["lines"])
+                                                for a in rec["assertions"] for c in a["groundedBy"] if c["role"] == "primary"]
+    for cap, lines in spans.items():
+        if not (in_region(min(lines), region) and in_region(max(lines), region)) and not beyond_ok(cap):
+            raise SystemExit("%s covers %d-%d, outside the acted region %s" % (cap, min(lines), max(lines), region))
+    section3 = ", ".join("%s (%d–%d)" % (cap, min(v), max(v)) for cap, v in spans.items())
     ws3 = dict(WS3, target=dict(WS3["target"], regionLines=region, regionSource="the verbatim act record, parsed at build",
                amendments=[str(a.relative_to(HERE.parents[2])).replace("\\", "/") for a in AMENDMENTS]),
                beyondRegion=beyond)
@@ -479,7 +494,7 @@ def build():
         "ws3": ws3,
         "records": resolve(RECORDS),
         "diagnostics": [resolve_evidence(d) for d in DIAGNOSTICS],
-        "coverage": COVERAGE,
+        "coverage": dict(COVERAGE, covered=dict(COVERAGE["covered"], **{"SRS §3": section3})),
     }
 
 

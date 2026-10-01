@@ -25,6 +25,8 @@ WORKSTREAM = "WS-3 (Plan v1.1 s5; target: docs/decisions/2026-10-01-a9-ws3-targe
 
 
 def rows_for(graph, existing, now):
+    from build_l3 import L2, blocked_assertions
+    blocked = blocked_assertions(json.loads(L2.read_text(encoding="utf-8")))
     n = max(int(r["id"].split("-")[1]) for r in existing) if existing else 0
     queued = {r.get("record") for r in existing}
     out = []
@@ -44,7 +46,8 @@ def rows_for(graph, existing, now):
                 "facetBreakdown": "origin transformer(model-proposed) / grounding absent / ratification unratified",
                 "standaloneFlag": rec["standalone"],
                 "expiryFlag": "n/a (dependent closure; lapses with its declared dependencies)",
-                "vacuityClassFlags": [],
+                "vacuityClassFlags": ["depends on %s, which is %s -- confer this bundle only after that is settled"
+                                      % (x, blocked[x]) for x in rec.get("blockedDependencies", [])],
                 "whatRatifyingDoes": rec["displayDuties"]["whatRatifyingDoes"],
             },
             "queuedBy": "aro-dev-agent", "workstream": WORKSTREAM,

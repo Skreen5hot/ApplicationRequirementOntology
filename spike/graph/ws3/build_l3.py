@@ -233,6 +233,35 @@ ADJUDICATIONS = [
 ]
 
 
+L2 = HERE.parent / "l2" / "srs-ws3.graph.jsonld"
+
+
+def blocked_assertions(l2):
+    """{assertion id: why} for every L2 assertion a bundle must not rest on silently: one listed beyond the acted
+    region, or one pointing at an OPEN, blocking diagnostic (Ops finding 2026-10-01, the L3 hop of the region
+    question)."""
+    diags = {d["@id"]: d for d in l2["diagnostics"]}
+    out = {b["assertion"]: "beyond the acted region (line %d)" % b["line"] for b in l2["ws3"].get("beyondRegion", [])}
+    for rec in l2["records"]:
+        for a in rec["assertions"]:
+            d = diags.get(a.get("diagnostic"))
+            if d and d["status"] == "open" and d.get("blocking"):
+                out.setdefault(a["@id"], "blocked by %s" % d["@id"])
+    return out
+
+
+def undisclosed_blocked_dependencies(records, l2):
+    """[(record, [assertions])] where a bundle depends on a blocked assertion its blockedDependencies does not
+    name -- or names one that is no longer blocked (a stale disclosure is as wrong as a missing one)."""
+    blocked = blocked_assertions(l2)
+    bad = []
+    for rec in records:
+        hit = sorted(x for x in rec["dependsOn"] + rec["closes"] + rec["addresses"] if x in blocked)
+        if hit != sorted(rec.get("blockedDependencies", [])):
+            bad.append((rec["@id"], hit))
+    return bad
+
+
 def build():
     frags = {f["label"]: f["fragmentId"] for f in json.loads(FRAGMENTS.read_text(encoding="utf-8"))["fragments"]}
 
@@ -248,6 +277,10 @@ def build():
             return [resolve(v) for v in obj]
         return obj
 
+    undisclosed = undisclosed_blocked_dependencies(RECORDS, json.loads(L2.read_text(encoding="utf-8")))
+    if undisclosed:
+        raise SystemExit("closure bundle(s) depend on a blocked L2 assertion without disclosing it "
+                         "(declare it in blockedDependencies): %s" % undisclosed)
     cited = {c["cite"] for rec in RECORDS for a in rec["assertions"] for c in a["rationaleSource"]}
     unknown = sorted(c for c in cited if c not in frags and c != "loopToolchain")
     if unknown:

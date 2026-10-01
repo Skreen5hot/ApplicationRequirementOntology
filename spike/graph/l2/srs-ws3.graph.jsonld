@@ -1317,7 +1317,7 @@
     "axis": "covered · not yet covered — separate from the semantic states prohibited · non-goal · unspecified (ARO 6)",
     "covered": {
       "SRS §2": "J-S1 (24), J-S4 (30) and the coverage map (32), as context only",
-      "SRS §3": "C-S2 (43–47), C-S3 (49–53), C-S7 (73–76; line 76 inside the region since the 2026-10-01 amendment)",
+      "SRS §3": "C-S2 (43–47), C-S3 (49–53), C-S7 (73–76)",
       "SRS §4": "the Records line (85); R-S1, R-S4, R-S5, R-S6 (87, 90–92)",
       "SRS §5": "table header; grader-runner, adjudicator and ledger rows; the traceability sentence",
       "SRS §6": "table header; S-S2, S-S3, S-S6",

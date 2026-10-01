@@ -75,3 +75,33 @@ def test_every_WS3_record_is_queued_once_and_bound_to_its_current_bytes():
 def test_the_ratified_slice_projection_is_untouched():
     r = _run("spike/projections/project.py", "--check")
     assert r.returncode == 0 and "byte-identical" in r.stdout, r.stdout + r.stderr
+
+
+L3 = ROOT / "spike" / "graph" / "l3" / "srs-ws3.design.candidates.jsonld"
+
+
+def test_the_L3_candidates_on_disk_are_exactly_what_the_builder_produces():
+    r = _run("spike/graph/ws3/build_l3.py", "--check")
+    assert r.returncode == 0, r.stderr
+
+
+def test_L3_never_grounds_and_every_reference_lands_in_the_L2_graph():
+    l3 = json.loads(L3.read_text(encoding="utf-8"))
+    assert '"groundedBy"' not in L3.read_text(encoding="utf-8"), "L3 forbids groundedBy (ARO D17)"
+    g = _graph()
+    known = ({r["@id"] for r in g["records"]} | {a["@id"] for r in g["records"] for a in r["assertions"]}
+             | {d["@id"] for d in g["diagnostics"]})
+    refs = [x for r in l3["records"] for x in r["dependsOn"] + r["closes"] + r["addresses"]]
+    refs += [a["conflict"] for a in l3["adjudications"]]
+    assert refs and [x for x in refs if x not in known] == []
+
+
+def test_every_L3_record_and_adjudication_is_queued_once_in_WS3_2():
+    rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
+    l3 = json.loads(L3.read_text(encoding="utf-8"))
+    ids = [r["@id"] for r in l3["records"]] + [a["@id"] for a in l3["adjudications"]]
+    queued = [r for r in rows if r.get("artifact") == "spike/graph/l3/srs-ws3.design.candidates.jsonld"]
+    assert sorted(r["record"] for r in queued) == sorted(ids)
+    assert {r["batch"] for r in queued} == {"WS3-2"}
+    for row in queued:
+        assert _run("tools/act.py", "show", row["id"]).returncode == 0, row["id"]

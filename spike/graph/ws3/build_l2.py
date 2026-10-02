@@ -402,7 +402,13 @@ def raised_by_act(diag, queue):
     if row.get("act") != "diagnostic-opened":
         raise SystemExit("%s names %s, which is not a diagnostic-opened act" % (diag["@id"], row["id"]))
     rec = {"item": row["id"], "actor": row["actor"], "actedAt": row["actedAt"], "note": row["actNote"]}
-    conferred = [r for r in queue.values() if r.get("supersedes") == row["id"] and r.get("act") in ("accepted", "ratified", "decided")]
+    # walk the WHOLE supersession chain from the act row (rq-034 -> rq-042 -> ...): a conferred act anywhere along it
+    # settles the block (Ops residual, f9c1256: a one-hop lookup would hold a settled block up after a re-queue)
+    nxt = {r["supersedes"]: r for r in queue.values() if r.get("supersedes")}
+    chain, at = [], row["id"]
+    while at in nxt:
+        chain.append(nxt[at]); at = nxt[at]["id"]
+    conferred = [r for r in chain if r.get("act") in ("accepted", "ratified", "decided")]
     if conferred:
         return dict(diag, status="closed", blocking=False, actRecord=rec,
                     closedBy="%s %s by %s" % (conferred[0]["id"], conferred[0]["act"], conferred[0]["actor"]))

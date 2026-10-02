@@ -250,6 +250,9 @@ def test_the_architects_blocking_diagnostic_is_derived_from_the_act_row():
     succ = [r for r in queue.values() if r.get("supersedes") == "rq-034"][0]
     done = dict(queue, **{succ["id"]: dict(succ, act="ratified", actor="Aaron")})
     assert b2.raised_by_act(src, done)["status"] == "closed"
+    # two hops (Ops residual f9c1256): re-queue the successor once more, ratify the new end -> still closed
+    rq = dict(queue, **{"rq-999": dict(succ, id="rq-999", supersedes=succ["id"], act="ratified", actor="Aaron")})
+    assert b2.raised_by_act(src, rq)["status"] == "closed"
 
 
 def _record_as_acted(row):

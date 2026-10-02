@@ -404,9 +404,14 @@ def raised_by_act(diag, queue):
     rec = {"item": row["id"], "actor": row["actor"], "actedAt": row["actedAt"], "note": row["actNote"]}
     # walk the WHOLE supersession chain from the act row (rq-034 -> rq-042 -> ...): a conferred act anywhere along it
     # settles the block (Ops residual, f9c1256: a one-hop lookup would hold a settled block up after a re-queue)
-    nxt = {r["supersedes"]: r for r in queue.values() if r.get("supersedes")}
-    chain, at = [], row["id"]
-    while at in nxt:
+    succ = [r for r in queue.values() if r.get("supersedes")]
+    forks = sorted({r["supersedes"] for r in succ if sum(x["supersedes"] == r["supersedes"] for x in succ) > 1})
+    if forks:   # two successors of one row: which branch settles the block would depend on file order (Ops 333b392)
+        raise SystemExit("the queue forks at %s -- one successor per row; refusing to guess a branch" % forks)
+    nxt = {r["supersedes"]: r for r in succ}
+    chain, at, seen = [], row["id"], set()
+    while at in nxt and at not in seen:
+        seen.add(at)
         chain.append(nxt[at]); at = nxt[at]["id"]
     conferred = [r for r in chain if r.get("act") in ("accepted", "ratified", "decided")]
     if conferred:

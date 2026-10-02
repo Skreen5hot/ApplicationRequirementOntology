@@ -293,3 +293,19 @@ def test_a_closure_declared_as_proposed_is_byte_identical_to_the_proposal_the_ac
                     assert a["proposed"] == before[a["@id"]]["proposed"], (rec["@id"], a["@id"], item)
                     checked += 1
     assert checked >= 7, checked
+
+
+def test_the_queue_never_forks_and_a_fork_is_refused_not_guessed():
+    """Ops residual 333b392: with two successors of one row, which branch settles a block depended on file order.
+    One successor per row, in the live queue; and the derivation refuses a fork rather than picking a branch."""
+    import pytest
+    rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
+    sup = [r["supersedes"] for r in rows if r.get("supersedes")]
+    assert len(sup) == len(set(sup)), "a row is superseded twice"
+    b2 = _load("build_l2")
+    queue = {r["id"]: r for r in rows}
+    src = [x for x in b2.DIAGNOSTICS if x.get("raisedByAct")][0]
+    end = _live_end(rows, "rq-034")
+    forked = dict(queue, **{"rq-998": dict(queue[end], id="rq-998", supersedes=queue[end].get("supersedes"))})
+    with pytest.raises(SystemExit, match="forks"):
+        b2.raised_by_act(src, forked)

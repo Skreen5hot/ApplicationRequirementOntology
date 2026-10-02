@@ -362,7 +362,7 @@
                 "type": "true"
               }
             ],
-            "note": "the minimal shape C-S3 reads; the freeze-2 replay fixture must conform to it"
+            "note": "the C-S5 report's shape is not stated in the region (diag:W-CS3-D2-needs-a-C-S5-report); this is the minimal shape C-S3 reads -- which clause, which dimension it knocks out (R-S5), and that it replayed. The freeze-2 replay fixture must conform to it."
           },
           "rationaleSource": [
             {
@@ -712,7 +712,7 @@
               "why": "a third-rater tie -> human -- 'tie' is not defined in the source"
             }
           ],
-          "conferred": "ratified as proposed; consequence per rq-033 (3)"
+          "conferred": "amended at rq-033 (3): the definition as proposed; the consequence is the WITHHELD variant"
         },
         {
           "@id": "c:adjudicator:disposition-text",

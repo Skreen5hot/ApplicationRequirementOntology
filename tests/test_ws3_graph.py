@@ -85,6 +85,14 @@ def test_every_capability_primary_span_lies_inside_the_acted_region_or_is_disclo
                         assert d["status"] == "open" and d["blocking"] is True, d["@id"]
 
 
+def _live_end(rows, item_id):
+    """Follow `supersedes` forward from an item to the live end of its chain (rq-031 -> rq-039 -> rq-043)."""
+    nxt = {r["supersedes"]: r["id"] for r in rows if r.get("supersedes")}
+    while item_id in nxt:
+        item_id = nxt[item_id]
+    return item_id
+
+
 def _live_rows(artifact):
     """Queue rows for one artifact, minus any row a later row supersedes (tools/act.py's own rule)."""
     rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
@@ -204,8 +212,10 @@ def test_a_rebuilt_item_supersedes_the_amended_one_and_carries_the_architects_no
         for note in rec.get("amendmentNotes", []):
             assert note["note"] == rows[note["item"]]["actNote"], (rec["@id"], note["item"])
     live = {r["record"]: r for r in _live_rows("spike/graph/l3/srs-ws3.design.candidates.jsonld")}
+    rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
     for amended in ("rq-031", "rq-032", "rq-033", "rq-034"):
-        assert any(r.get("supersedes") == amended for r in live.values()), amended
+        end = _live_end(rows, amended)
+        assert end != amended and end in {r["id"] for r in live.values()}, (amended, end)
     assert live["sr:L3:ws3-module-boundaries"]["id"] == "rq-030"
     assert live["adj:ledger-hooks-repo-home"]["id"] == "rq-035"
 
@@ -219,11 +229,11 @@ def test_every_amended_row_has_a_successor_bound_to_the_records_current_address(
     spec.loader.exec_module(act)
     q = act.Queue(ROOT)
     rows = [r for _, r in q.rows]
+    by_id = {r["id"]: r for r in rows}
     for amended in (r for r in rows if r.get("act") == "amended"):
-        succ = [r for r in rows if r.get("supersedes") == amended["id"]]
-        assert succ, "%s is amended with no successor" % amended["id"]
-        live = [r for r in succ if r["id"] not in q.superseded()] or succ
-        assert any(q.current_digest(r)[1] == r["recordDigest"] for r in live), amended["id"]
+        end = _live_end(rows, amended["id"])
+        assert end != amended["id"], "%s is amended with no successor" % amended["id"]
+        assert q.current_digest(by_id[end])[1] == by_id[end]["recordDigest"], (amended["id"], end)
 
 
 def test_the_architects_blocking_diagnostic_is_derived_from_the_act_row():
@@ -240,3 +250,43 @@ def test_the_architects_blocking_diagnostic_is_derived_from_the_act_row():
     succ = [r for r in queue.values() if r.get("supersedes") == "rq-034"][0]
     done = dict(queue, **{succ["id"]: dict(succ, act="ratified", actor="Aaron")})
     assert b2.raised_by_act(src, done)["status"] == "closed"
+
+
+def _record_as_acted(row):
+    """The record bytes an act was bound to: the version of its artifact, in git history, whose record digest equals
+    the row's recordDigest. Never reconstructed -- found."""
+    import hashlib
+    import subprocess
+    shas = subprocess.run(["git", "log", "--format=%H", "--", row["artifact"]], cwd=ROOT,
+                          capture_output=True, text=True).stdout.split()
+    for sha in shas:
+        text = subprocess.run(["git", "show", "%s:%s" % (sha, row["artifact"])], cwd=ROOT,
+                              capture_output=True, encoding="utf-8").stdout
+        try:
+            g = json.loads(text)
+        except ValueError:
+            continue
+        for rec in g.get("records", []) + g.get("adjudications", []):
+            if rec["@id"] == row["record"]:
+                canon = json.dumps(rec, sort_keys=True, separators=(",", ":"), ensure_ascii=False) + "\n"
+                if "sha256:" + hashlib.sha256(canon.encode("utf-8")).hexdigest() == row["recordDigest"]:
+                    return rec
+    raise AssertionError("no version of %s in history matches %s" % (row["artifact"], row["id"]))
+
+
+def test_a_closure_declared_as_proposed_is_byte_identical_to_the_proposal_the_act_bound():
+    """Ops finding 2026-10-01 (c:ws3:VacuousPassReport): a closure whose `conferred` says 'as proposed' carried a
+    rewritten note. For every rebuilt record, each closure declared 'as proposed' must equal, byte for byte, the
+    closure in the record the architect's amend was bound to."""
+    rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
+    by_id = {r["id"]: r for r in rows}
+    l3 = json.loads(L3.read_text(encoding="utf-8"))
+    checked = 0
+    for rec in l3["records"]:
+        for item in rec.get("amendmentOf", []):
+            before = {a["@id"]: a for a in _record_as_acted(by_id[item])["assertions"]}
+            for a in rec["assertions"]:
+                if str(a.get("conferred", "")).startswith("as proposed") and a["@id"] in before:
+                    assert a["proposed"] == before[a["@id"]]["proposed"], (rec["@id"], a["@id"], item)
+                    checked += 1
+    assert checked >= 7, checked

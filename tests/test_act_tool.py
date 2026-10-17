@@ -273,15 +273,41 @@ def test_show_prints_every_field_of_an_adjudication_not_a_whitelist(repo, capsys
         assert hidden not in out, hidden
 
 
+# Acted before act.py recorded `actDigest` (2026-09-11, the operator's own hand): the row's artifactFileDigest is the
+# only binding, and it is still checked against the file's current bytes above. Any OTHER acted row lacking it is red.
+ACTED_BEFORE_ACT_DIGEST = {"rq-001"}
+
+
 def test_every_live_file_item_is_bound_to_its_files_current_bytes():
     """The digest-agreement pin covers record-addressed rows; this one covers file-addressed rows (bars, oracles,
-    hooks, rules). Counted, never vacuous."""
+    hooks, rules). Counted, never vacuous -- and INDEPENDENT of whether a row is acted (IA Ops finding 2026-10-17, "the
+    file-binding gate counts unacted rows and goes red when WS3-5 is ratified"): it used to examine unacted rows only,
+    so ratifying WS3-5 would have emptied its subject. An ACTED row is the more important case: the file must still be
+    the bytes the act bound, or the ratification no longer describes what is in the tree."""
     q = act.Queue(ROOT)
     dead = q.superseded()
-    live = [r for _, r in q.rows if r.get("artifactFileDigest") and r["id"] not in dead and not r.get("actedAt")]
+    live = [r for _, r in q.rows if r.get("artifactFileDigest") and r["id"] not in dead]
     for r in live:
         assert q.current_digest(r)[1] == r["artifactFileDigest"], r["id"]
-    assert len(live) >= 6, "examined %d unacted file rows (WS3-5 queues six)" % len(live)
+        if r.get("actedAt") and r["id"] not in ACTED_BEFORE_ACT_DIGEST:
+            assert r.get("actDigest") == r["artifactFileDigest"], "%s: the act bound other bytes" % r["id"]
+    assert len(live) >= 8, "examined %d live file rows (rq-001, rq-013 and WS3-5's six), acted or not" % len(live)
+
+
+def test_the_file_binding_gate_survives_a_drained_queue(repo):
+    """Ops' acceptance bullet 2, seeded: with every pending file row marked acted, the same rule still examines them
+    all and still catches a file edited after its act."""
+    import hashlib
+    f = repo / "spike" / "bar.test.mjs"
+    f.write_text("export const bar = 1;\n", encoding="utf-8")
+    d = "sha256:" + hashlib.sha256(f.read_bytes()).hexdigest()
+    _add_item(repo, id="rq-920", batch="BX", queuedAt="2026-10-17T00:00:00-04:00", kind="bar", artifact="spike/bar.test.mjs",
+              artifactFileDigest=d, actedAt="2026-10-17T01:00:00-04:00", act="ratified", actor="Seeded", actDigest=d)
+    q = act.Queue(repo)
+    rows = [r for _, r in q.rows if r.get("artifactFileDigest") and r["id"] not in q.superseded()]
+    assert [r["id"] for r in rows if r.get("actedAt")] and all(q.current_digest(r)[1] == r["artifactFileDigest"] for r in rows)
+    f.write_text("export const bar = 2;   // edited after the act\n", encoding="utf-8")
+    assert q.current_digest(next(r for r in rows if r["id"] == "rq-920"))[1] != d
 
 
 def test_show_puts_each_statement_above_the_passages_it_cites(repo, capsys):

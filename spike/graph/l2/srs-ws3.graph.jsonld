@@ -1340,14 +1340,15 @@
       ],
       "blocks": [],
       "raisedByAct": "rq-044",
-      "status": "open",
-      "blocking": true,
+      "status": "closed",
+      "blocking": false,
       "actRecord": {
         "item": "rq-044",
         "actor": "Aaron",
         "actedAt": "2026-10-17T03:38:48-04:00",
         "note": "OPEN BLOCKING DIAGNOSTIC on rq-044: diag:adjudicator-not-total-over-declared-inputs.\r\nrq-044 accurately reproduces my amendments at rq-033, but the resulting interface is not yet total and deterministic over its declared inputs.\r\nVector = Record<string, Score> does not close the dimension set, and adjudicate accepts arbitrary GradeRecord values plus attacks?: VacuousPassReport[]. The closure does not specify:\r\n1. The required relationship among the dimension-key sets of A, B, and C, or the result when a dimension is missing.\r\n2. How dimensions on which A and B already agree are copied into the complete PRINTED vector.\r\n3. A canonical ordering for route keys and contested_knockouts.\r\n4. Which cause is emitted when more than one replayed attack names a different clause, even though the output permits only one cause.\r\nConsequently, permitted inputs can have no defined output or more than one conforming output, contrary to the claimed purity, recomputability, and “exactly one variant for every input.”\r\nThis diagnostic blocks ratification of rq-044 and its implementation bar. Resolve it either by narrowing the accepted input types with explicit validation and failure behavior, or by conferring complete canonical semantics for these cases. Do not let the implementation choose silently."
-      }
+      },
+      "closedBy": "rq-066 ratified by Aaron"
     },
     {
       "@id": "diag:C-S7-determinism-beyond-the-acted-region",

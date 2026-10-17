@@ -19,13 +19,47 @@ act = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(act)
 
 # Named, dated, and checked to still be TRUE: an exception that no longer fails the rule is itself red (stale).
+# The warrant is STRUCTURED and RESOLVED, never prose (IA Ops finding 2026-10-17, "the exception that carries the
+# affirmation cites a record no gate resolves"): test_the_exception_warrant_resolves checks every field against the
+# queue row and the affirmation record, so deleting the record or drifting a digest is red by name.
 EXCEPTIONS = {
-    "adj:ledger-hash-kind": "rq-038, decided A 2026-10-17T03:25:58-04:00 on a paraphrase (one passage carries the dev "
-                            "agent's gloss '-- kind is not in the preimage'; the other elides H-LEDGER-01 to '...'). "
-                            "Its bound bytes are left as acted; act.py show prints both cited fragments' verbatim bytes "
-                            "beneath each passage, flagged NOT VERBATIM. The architect AFFIRMED A on the verbatim text "
-                            "('stands'): docs/decisions/2026-10-17-rq-038-affirmed-on-the-verbatim-source.md.",
+    "adj:ledger-hash-kind": {
+        "row": "rq-038", "act": "decided", "decision": "A", "actedAt": "2026-10-17T03:25:58-04:00",
+        "digest": "sha256:86cb35d5730a94fb0ca2ffc0c0b7003a4cd661f1e84932995e36d93b2e68b9ff",
+        "affirmedBy": "docs/decisions/2026-10-17-rq-038-affirmed-on-the-verbatim-source.md",
+        "why": "decided on a paraphrase (the gloss '-- kind is not in the preimage'; H-LEDGER-01 elided to '...'); "
+               "bound bytes left as acted; show prints the verbatim fragments beneath; the architect affirmed A ('stands')",
+    },
 }
+QUEUE = ROOT / "spike" / "measurements" / "ratification-queue.jsonl"
+
+
+def warrant_problems(exceptions, rows, root):
+    """[why] for every exception whose structured warrant does not resolve -> []. One line per broken field."""
+    by_id = {r["id"]: r for r in rows}
+    out = []
+    for adj, w in exceptions.items():
+        r = by_id.get(w["row"])
+        if r is None:
+            out.append("%s: row %s is not in the queue" % (adj, w["row"]))
+            continue
+        for k in ("act", "decision", "actedAt"):
+            if r.get(k) != w[k]:
+                out.append("%s: %s.%s is %r, the warrant says %r" % (adj, w["row"], k, r.get(k), w[k]))
+        if r.get("record") != adj:
+            out.append("%s: %s binds %s" % (adj, w["row"], r.get("record")))
+        for k in ("recordDigest", "actDigest"):
+            if r.get(k) != w["digest"]:
+                out.append("%s: %s.%s is %s, the warrant says %s" % (adj, w["row"], k, r.get(k), w["digest"]))
+        doc = root / w["affirmedBy"]
+        if not doc.is_file():
+            out.append("%s: affirmedBy %s does not exist" % (adj, w["affirmedBy"]))
+            continue
+        text = doc.read_text(encoding="utf-8")
+        for needle in (w["digest"], w["row"], adj):
+            if needle not in text:
+                out.append("%s: %s does not name %s" % (adj, w["affirmedBy"], needle))
+    return out
 
 
 def _fragments():
@@ -62,6 +96,41 @@ def test_every_shown_source_passage_is_its_fragments_own_bytes_save_the_named_ex
     problems = passage_problems(adjs, _fragments())
     assert sorted({a for a, _, _ in problems}) == sorted(EXCEPTIONS), problems
     assert sorted(l for a, l, _ in problems) == ["C-S7.W-CS7-D1", "C-S7.W-CS7-N"], "the exception is exactly rq-038's two"
+
+
+def _rows():
+    return [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
+
+
+def test_the_exception_warrant_resolves():
+    """Bullets 1-4: every field of each exception's warrant is checked against the queue row and the affirmation
+    record. Counted: 1 exception resolved today."""
+    assert len(EXCEPTIONS) == 1, "resolved %d exception(s)" % len(EXCEPTIONS)
+    assert warrant_problems(EXCEPTIONS, _rows(), ROOT) == []
+
+
+@pytest.mark.parametrize("break_it", ["record-renamed", "warrant-digest", "row-digest", "record-digest", "actedAt"])
+def test_a_broken_warrant_is_red_by_name(break_it, tmp_path):
+    w = copy.deepcopy(EXCEPTIONS)
+    rows = copy.deepcopy(_rows())
+    root = ROOT
+    if break_it == "record-renamed":
+        w["adj:ledger-hash-kind"]["affirmedBy"] = "docs/decisions/renamed.md"
+    elif break_it == "warrant-digest":
+        w["adj:ledger-hash-kind"]["digest"] = w["adj:ledger-hash-kind"]["digest"][:-1] + "0"
+    elif break_it == "row-digest":
+        r = next(x for x in rows if x["id"] == "rq-038")
+        r["actDigest"] = r["actDigest"][:-1] + "0"
+    elif break_it == "record-digest":   # the affirmation record itself names another digest
+        root = tmp_path
+        doc = root / w["adj:ledger-hash-kind"]["affirmedBy"]
+        doc.parent.mkdir(parents=True)
+        src = (ROOT / w["adj:ledger-hash-kind"]["affirmedBy"]).read_text(encoding="utf-8")
+        doc.write_text(src.replace(w["adj:ledger-hash-kind"]["digest"], w["adj:ledger-hash-kind"]["digest"][:-1] + "0"), encoding="utf-8")
+    else:
+        w["adj:ledger-hash-kind"]["actedAt"] = "2026-10-17T03:25:59-04:00"
+    problems = warrant_problems(w, rows, root)
+    assert problems and all(p.startswith("adj:ledger-hash-kind: ") for p in problems), problems
 
 
 @pytest.mark.parametrize("target", ["adj:ledger-hooks-repo-home", "adj:ws3-module-homes"])

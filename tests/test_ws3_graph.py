@@ -241,24 +241,27 @@ def test_every_amended_row_has_a_successor_bound_to_the_records_current_address(
 
 
 def test_the_architects_blocking_diagnostic_is_derived_from_the_act_row():
-    """IA Ops finding 2026-10-01, bullet 1: status and blocking come from the architect's act row, never retyped.
-    rq-044's diagnostic is open and blocking from its act; rq-034's is closed by the 2026-10-17 source-amendment record.
-    Falsified on a copy of the queue: drop BLOCKING -> not blocking; confer a successor (one or two hops) -> closed."""
+    """IA Ops finding 2026-10-01, bullet 1: status and blocking come from the architect's act rows, never retyped.
+    Today rq-044's diagnostic is CLOSED (rq-044 -> rq-063 -> rq-066, ratified 2026-10-17) and rq-034's is closed by the
+    source-amendment record. Falsified on a copy of the queue: un-act the ratification -> open and blocking again;
+    drop BLOCKING from the note -> not blocking; a two-hop conferral still closes it."""
     b2 = _load("build_l2")
     g = {d["@id"]: d for d in _graph()["diagnostics"]}
-    queue = {json.loads(l)["id"]: json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()}
+    rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
+    queue = {r["id"]: r for r in rows}
     d = g["diag:adjudicator-not-total-over-declared-inputs"]
-    assert d["status"] == "open" and d["blocking"] is True and d["actRecord"]["note"] == queue["rq-044"]["actNote"]
+    end = _live_end(rows, "rq-044")
+    assert d["status"] == "closed" and d["actRecord"]["note"] == queue["rq-044"]["actNote"] and end in d["closedBy"]
     k = g["diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash"]
     assert k["status"] == "closed" and k["closedBy"].endswith("2026-10-17-srs-source-amendment-and-registration.md")
     src = [x for x in b2.DIAGNOSTICS if x["@id"] == d["@id"]][0]
-    soft = dict(queue, **{"rq-044": dict(queue["rq-044"], actNote="adjudicate is not total")})
+    unacted = dict(queue, **{end: {k2: v for k2, v in queue[end].items() if k2 not in ("act", "actor", "actedAt")}})
+    reopened = b2.raised_by_act(src, unacted)
+    assert reopened["status"] == "open" and reopened["blocking"] is True
+    soft = dict(unacted, **{"rq-044": dict(queue["rq-044"], actNote="adjudicate is not total")})
     assert b2.raised_by_act(src, soft)["blocking"] is False
-    succ = queue[_live_end(list(queue.values()), "rq-044")]     # the live end of rq-044's chain
-    done = dict(queue, **{succ["id"]: dict(succ, act="ratified", actor="Aaron")})
-    assert b2.raised_by_act(src, done)["status"] == "closed"
-    rq = dict(queue, **{"rq-999": dict(succ, id="rq-999", supersedes=succ["id"], act="ratified", actor="Aaron")})
-    assert b2.raised_by_act(src, rq)["status"] == "closed"
+    hop2 = dict(unacted, **{"rq-999": dict(queue[end], id="rq-999", supersedes=end, act="ratified", actor="Aaron")})
+    assert b2.raised_by_act(src, hop2)["status"] == "closed"
 
 
 def _record_as_acted(row):

@@ -45,8 +45,20 @@ def _row(root, item_id):
 
 
 def _first_pending(root, adjudication):
+    """A pending item of the wanted kind in the COPY. The live queue may have none (every item acted), so the test
+    supplies one: a real live row re-queued unacted, still bound to its record's current bytes."""
     q = ui.A.Queue(root)
-    return next(r["id"] for r in q.pending() if bool(r.get("options")) == adjudication)
+    hit = next((r["id"] for r in q.pending() if bool(r.get("options")) == adjudication), None)
+    if hit:
+        return hit
+    dead = q.superseded()
+    src = next(r for _, r in q.rows if r["id"] not in dead and r.get("recordDigest") and bool(r.get("options")) == adjudication
+               and q.current_digest(r)[1] == r["recordDigest"])
+    fresh = {k: v for k, v in src.items() if k not in ("actedAt", "act", "actor", "actDigest", "decision", "actNote", "sittingStart")}
+    fresh.update(id="rq-98%d" % (1 if adjudication else 0), queuedAt="2026-10-17T00:00:00-04:00")
+    path = root / "spike" / "measurements" / "ratification-queue.jsonl"
+    path.write_text(path.read_text(encoding="utf-8") + json.dumps(fresh, ensure_ascii=False) + chr(10), encoding="utf-8")
+    return fresh["id"]
 
 
 def test_the_list_and_an_item_render_what_act_show_prints(site):

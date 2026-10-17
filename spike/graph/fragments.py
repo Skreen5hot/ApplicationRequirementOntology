@@ -23,6 +23,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sys
 import unicodedata
 from pathlib import Path
@@ -88,7 +89,13 @@ def line_range(norm: str, first: int, last: int) -> tuple[int, int]:
     return start, end
 
 
-def fragment(doc: Path, norm: str, digest: str, spec: dict) -> dict:
+def registered_name(registered: str) -> str:
+    """The registered source's file name, from the REGISTERED path string, whichever separator it uses -> str.
+    Never from the path actually read: a verifier binds its own copy under any name (IA Ops finding 2026-10-17)."""
+    return re.split(r"[\\/]", registered)[-1]
+
+
+def fragment(doc: Path, norm: str, digest: str, spec: dict, name: str | None = None) -> dict:
     first = spec.get("line") or spec["lines"][0]
     last = spec.get("line") or spec["lines"][1]
     start, end = line_range(norm, first, last)
@@ -103,7 +110,7 @@ def fragment(doc: Path, norm: str, digest: str, spec: dict) -> dict:
         "fragmentId": "sf:" + hashlib.sha256(identity.encode("utf-8")).hexdigest()[:24],
         "label": spec["label"],
         "kind": "text-span",
-        "source": {"doc": doc.name, "digest": digest},
+        "source": {"doc": name or doc.name, "digest": digest},
         "locator": {"codepointRange": [start, end]},
         "normalizationVersion": NORMALIZATION_VERSION,
         "textHash": text_hash,
@@ -130,11 +137,13 @@ def extract(spans_path: Path) -> dict:
         raise Refused("source digest %s is not the registered %s; the source changed and every "
                       "fragment below would be minted against the wrong revision" % (digest, expected))
     norm = normalize(doc.read_text(encoding="utf-8"))
-    fragments = [fragment(doc, norm, digest, s) for s in spec["spans"]]
+    # NO field written below derives from the RESOLVED path `doc` -- only from the registered `spec["doc"]` -- so a
+    # verifier minting from its own copy (any name, any separator) reproduces the committed bytes exactly.
+    fragments = [fragment(doc, norm, digest, s, registered_name(spec["doc"])) for s in spec["spans"]]
     labels = [f["label"] for f in fragments]
     if len(set(labels)) != len(labels):
         raise Refused("duplicate span labels: %s" % sorted(l for l in labels if labels.count(l) > 1))
-    return {"source": {"doc": spec["doc"] if doc != Path(spec["doc"]) else str(doc), "digest": digest,
+    return {"source": {"doc": spec["doc"], "digest": digest,
                        "registeredAs": spec.get("registeredAs")},
             "normalizationVersion": NORMALIZATION_VERSION,
             "fragments": fragments}

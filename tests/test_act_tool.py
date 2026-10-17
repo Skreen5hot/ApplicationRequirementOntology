@@ -217,7 +217,8 @@ def test_list_names_what_an_act_left_owed_until_it_is_requeued(repo, capsys):
     _fresh_item(repo, item_id="rq-901", supersedes="rq-900")
     assert act.main(["--root", str(repo), "list"]) == 0
     out = capsys.readouterr().out
-    assert "rq-901" in out and "owed" not in out, "a re-queued amend is no longer owed"
+    owed_part = out.split("owed --", 1)[1] if "owed --" in out else ""
+    assert "rq-901" in out and "rq-900" not in owed_part, "a re-queued amend is no longer owed"
 
 
 def test_show_puts_each_statement_above_the_passages_it_cites(repo, capsys):

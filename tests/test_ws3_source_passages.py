@@ -23,7 +23,8 @@ EXCEPTIONS = {
     "adj:ledger-hash-kind": "rq-038, decided A 2026-10-17T03:25:58-04:00 on a paraphrase (one passage carries the dev "
                             "agent's gloss '-- kind is not in the preimage'; the other elides H-LEDGER-01 to '...'). "
                             "Its bound bytes are left as acted; act.py show prints both cited fragments' verbatim bytes "
-                            "beneath each passage, flagged NOT VERBATIM, and the architect was told (IA ledger).",
+                            "beneath each passage, flagged NOT VERBATIM. The architect AFFIRMED A on the verbatim text "
+                            "('stands'): docs/decisions/2026-10-17-rq-038-affirmed-on-the-verbatim-source.md.",
 }
 
 

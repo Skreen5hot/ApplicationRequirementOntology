@@ -33,7 +33,13 @@ ADJ = {
     "adj:ledger-hash-kind": {
         "title": "the ledger hash leaves kind out (W-CS7-N) yet chain verification must catch any rewrite (W-CS7-Δ1): A, B or C",
         "beside": "W-CS7-N and W-CS7-Δ1 displayed verbatim, side by side", "facets": "two accepted L2 clauses in conflict"},
+    "adj:ws3-module-homes": {
+        "title": "grader-runner and adjudicator homes: the source says tools/<name>/; the factory builds src/<module>.ts (the ledger was settled at rq-035)",
+        "beside": "the S5.grader-runner and S5.adjudicator rows displayed verbatim (copied from the minted fragments) beside the toolchain fact and the two precedents",
+        "facets": "accepted L2 repo homes vs. toolchain fact"},
 }
+# Rows queued from here on go to the batch being assembled; WS3-2 and WS3-4 rows are history and are never re-emitted.
+BATCH = "WS3-5"
 
 
 def _prior(existing, record_id):
@@ -76,7 +82,7 @@ def rows_for(graph, existing, now):
         n += 1
         meta = ADJ[adj["@id"]]
         row = {
-            "id": "rq-%03d" % n, "batch": "WS3-4", "queuedAt": now, "sourceDigest": source_now,
+            "id": "rq-%03d" % n, "batch": BATCH, "queuedAt": now, "sourceDigest": source_now,
             "kind": "Adjudication -- its own item, not a candidate (Amendment 2 ii)",
             "record": adj["@id"], "title": meta["title"], "artifact": ART, "recordDigest": digest(adj), "assertions": 0,
             "options": ["%s: %s" % (o["id"], o["label"]) for o in adj["options"]],
@@ -106,7 +112,7 @@ def rows_for(graph, existing, now):
                             "rationale citations moved to the re-minted fragments -- the conferred values are unchanged"
                             % (prior["id"], prior["act"]))
         row = {
-            "id": "rq-%03d" % n, "batch": "WS3-4", "queuedAt": now, "sourceDigest": source_now,
+            "id": "rq-%03d" % n, "batch": BATCH, "queuedAt": now, "sourceDigest": source_now,
             "kind": "L3 Specification Record -- closure bundle (Amendment 2 ii: values conferred by the architect from labeled candidates)",
             "record": rec["@id"], "title": rec["title"], "artifact": ART, "recordDigest": digest(rec),
             "assertions": len(rec["assertions"]), "closes": rec["closes"], "dependsOn": rec["dependsOn"],

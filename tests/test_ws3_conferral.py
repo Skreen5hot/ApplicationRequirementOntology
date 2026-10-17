@@ -143,7 +143,7 @@ BLOCKING = {   # the author's declaration for diagnostics not raised by an act -
     "diag:W-CS3-N-third-rater-is-agentic": False, "diag:W-CS3-D2-needs-a-C-S5-report": False,
     "diag:hash-preimage-encoding-unstated": False, "diag:third-rater-tie-unwitnessed": False,
     "diag:GradeRecord-fields-by-example": False, "diag:out-of-region-endpoints": False,
-    "diag:external-method-artifacts": False, "diag:ledger-hooks-repo-home": False,
+    "diag:external-method-artifacts": False, "diag:ledger-hooks-repo-home": False, "diag:ws3-module-homes": False,
     "diag:C-S7-determinism-beyond-the-acted-region": False,
 }
 

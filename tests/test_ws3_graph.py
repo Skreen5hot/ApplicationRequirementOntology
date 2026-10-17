@@ -169,7 +169,7 @@ def test_every_L3_record_and_adjudication_has_one_live_row():
     ids = [r["@id"] for r in l3["records"]] + [a["@id"] for a in l3["adjudications"]]
     queued = _live_rows("spike/graph/l3/srs-ws3.design.candidates.jsonld")
     assert sorted(r["record"] for r in queued) == sorted(ids), "exactly one LIVE row per record"
-    assert {r["batch"] for r in queued} <= {"WS3-2", "WS3-3", "WS3-4"}
+    assert {r["batch"] for r in queued} <= {"WS3-2", "WS3-3", "WS3-4", "WS3-5"}
     for row in queued:
         assert _run("tools/act.py", "show", row["id"]).returncode == 0, row["id"]
 

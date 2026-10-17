@@ -206,6 +206,9 @@ def _value(v):
     return v if isinstance(v, str) else json.dumps(v, ensure_ascii=False)
 
 
+ADJ_STRUCTURAL = ("@id", "@type", "options", "decision", "notACandidate", "citesCurrentSource")
+
+
 def render_show(q, row):
     """The item as the operator must see it: what is being asked, then each STATEMENT with the source passages
     it cites directly beneath it (the display duty 'review every cited span beside its assertion'), then the
@@ -251,9 +254,12 @@ def render_show(q, row):
                 L.append(_wrap(why, "         why: "))
         L.append("")
     if rec is not None and rec.get("options"):
-        for key in ("conflict", "theSourceSays", "thePlanSays"):
-            if rec.get(key):
-                L.append(_wrap(_value(rec[key]), "  %s: " % key))
+        # EVERY field of an adjudication is shown except the structural ones named here. It used to be a whitelist
+        # (conflict, theSourceSays, thePlanSays), which silently dropped any other field: rq-035 was decided with
+        # theFactorySays -- one side of its own conflict -- never printed. A new field must be seen by default.
+        for key, val in rec.items():
+            if key not in ADJ_STRUCTURAL and val not in (None, "", [], {}):
+                L.append(_wrap(_value(val), "  %s: " % key))
         L.append("  options:")
         for o in rec["options"]:
             L.append(_wrap(o.get("label"), "    %s  " % o.get("id")))

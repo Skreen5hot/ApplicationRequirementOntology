@@ -252,6 +252,26 @@ def test_show_prints_a_file_items_text_and_every_options_consequence(repo, capsy
     assert "the WS-3 key" in out and "the slice key" in out
 
 
+def test_show_prints_every_field_of_an_adjudication_not_a_whitelist(repo, capsys):
+    """2026-10-17: `show` printed an adjudication's fields from a whitelist (conflict, theSourceSays, thePlanSays), so
+    rq-035 was decided with theFactorySays -- one side of its own conflict -- never printed. Every field is shown
+    unless it is one of the named structural keys; a field nobody has thought of yet is shown by default."""
+    art = repo / "spike" / "adj2.jsonld"
+    adj = {"@id": "adj:y", "@type": "Adjudication", "notACandidate": True, "conflict": "diag:y",
+           "theFactorySays": {"value": "FACTORY-SIDE-ZQ"}, "precedents": ["PRECEDENT-ZQ"],
+           "aFieldNobodyNamedYet": "UNNAMED-ZQ", "decision": None,
+           "options": [{"id": "A", "label": "one", "consequence": "c"}]}
+    art.write_text(json.dumps({"adjudications": [adj]}), encoding="utf-8")
+    _add_item(repo, id="rq-912", batch="BX", queuedAt="2026-10-17T00:00:00-04:00", kind="Adjudication", record="adj:y",
+              artifact="spike/adj2.jsonld", recordDigest=act.digest(adj), options=["A: one"])
+    assert act.main(["--root", str(repo), "show", "rq-912"]) == 0
+    out = capsys.readouterr().out
+    for shown in ("theFactorySays:", "FACTORY-SIDE-ZQ", "precedents:", "PRECEDENT-ZQ", "aFieldNobodyNamedYet:", "UNNAMED-ZQ"):
+        assert shown in out, shown
+    for hidden in ("notACandidate:", "@type:", "decision:"):
+        assert hidden not in out, hidden
+
+
 def test_every_live_file_item_is_bound_to_its_files_current_bytes():
     """The digest-agreement pin covers record-addressed rows; this one covers file-addressed rows (bars, oracles,
     hooks, rules). Counted, never vacuous."""

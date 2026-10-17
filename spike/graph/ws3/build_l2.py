@@ -347,6 +347,12 @@ DIAGNOSTICS = [
      "statement": "SRS s5 homes the ledger at ledger/ and .githooks/; the hook half (W-CS7-Δ1: 'hook exit 1') is a git hook, not a module a TypeScript build emits. Like the slice's author-agent, the source is univocal and the conflict is with the factory's realization; it is recorded, not resolved, here.",
      "evidence": ["S5.ledger", "C-S7.W-CS7-D1"],
      "status": None},   # DERIVED at build (derive_status)
+    {"@id": "diag:ws3-module-homes", "@type": "ConflictingStatement", "spansLayers": True, "blocking": False,
+     "cone": ["projection of grader-runner's and adjudicator's files, and the bars and oracles that import them"],
+     "statement": "SRS s5 homes grader-runner at tools/grader-runner/ and adjudicator at tools/adjudicator/; the factory builds one TypeScript module per unit at src/<module>.ts. The slice's layout convention (rq-001), which might have settled this, expired on 2026-10-11 and was bound to the superseded source. The source is univocal; the conflict is with the factory's realization, as for the ledger (rq-035). Recorded, not resolved, here.",
+     "evidence": ["S5.grader-runner", "S5.adjudicator"],
+     "legalOutputs": "adj:ws3-module-homes (A: factory layout; B: honour the L2 homes; C: source-amendment request)",
+     "status": None},   # DERIVED at build (derive_status)
     {"@id": "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash", "@type": "ConflictingStatement",
      "cone": ["c:ledger:hash-encoding (rq-034) and any C-S7 bar or oracle"],
      "statement": "W-CS7-N puts kind outside the hash preimage (sha256(seq || prev || payload)); W-CS7-Δ1 says chain verification fails loudly on ANY rewrite of an existing line. A kind-only rewrite keeps every hash, so the two cannot both hold. Source-internal.",

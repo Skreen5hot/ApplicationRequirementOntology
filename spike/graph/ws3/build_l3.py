@@ -310,6 +310,32 @@ ADJUDICATIONS = [
         ],
         "decision": None,
     },
+    {
+        "@id": "adj:ws3-module-homes", "@type": "Adjudication", "notACandidate": True,
+        "presentedPer": "Amendment 2 (ii): presented as an adjudication, not a candidate. Found while projecting WS-3: "
+                        "the slice's layout convention (rq-001) expired on 2026-10-11 and was bound to the superseded "
+                        "source, so nothing ratified says where these three modules' files go",
+        "citesCurrentSource": True,     # decided on src:srs-spec@2, so it cites the CURRENT fragments, with their text
+        "conflict": "diag:ws3-module-homes",
+        "theSourceSays": [{"label": "S5.grader-runner", "layer": "L2, accepted (repoHome tools/grader-runner/)"},
+                          {"label": "S5.adjudicator", "layer": "L2, accepted (repoHome tools/adjudicator/)"}],
+        "theFactorySays": {"cite": "loopToolchain", "value": "one TypeScript module per unit at src/<module>.ts; a bar at test/<module>.test.mjs imports ../src/<module>.ts", "layer": "none — a toolchain fact, confers nothing"},
+        "precedents": ["the slice: adj:author-agent-repo-home was decided A -- the accepted L2 home was honoured",
+                       "WS-3: adj:ledger-hooks-repo-home was decided A at rq-035 -- the ledger unit is src/ledger.ts, departing from the source's ledger/"],
+        "notInQuestion": "grading-types has no L2 home (it is an L3 module, rq-061), so it is src/grading-types.ts under every option; the ledger stays src/ledger.ts (rq-035)",
+        "options": [
+            {"id": "A", "label": "Factory layout, as rq-035 did for the ledger",
+             "content": "grader-runner is src/grader-runner.ts and adjudicator is src/adjudicator.ts. The accepted homes tools/grader-runner/ and tools/adjudicator/ are listed in plan.json as departed from, by this decision.",
+             "consequence": "the queued bars and oracles (rq-067..rq-072) stand as written and WS-3 can project once they are acted. The built tree does not follow s5's layout for these two components; the departure is recorded in the plan, not hidden."},
+            {"id": "B", "label": "Honour the accepted L2 homes",
+             "content": "grader-runner is tools/grader-runner/grader-runner.ts and adjudicator is tools/adjudicator/adjudicator.ts (the file name inside each home is model-proposed; the home is the source's).",
+             "consequence": "the built tree follows s5 for both. The adjudicator bar (rq-067) and the C-S3 oracle (rq-069) import ../src/adjudicator.ts, so both are rewritten and re-queued: Ops re-verifies them and C-S3's acts move to a later sitting."},
+            {"id": "C", "label": "Source-amendment request",
+             "content": "ask the SRS author to restate s5's homes for the build.",
+             "consequence": "the source digest changes again and every fragment migrates, as on 2026-10-17; nothing in WS-3 projects until the amended source is registered."},
+        ],
+        "decision": None,
+    },
 ]
 
 
@@ -349,7 +375,9 @@ def undisclosed_blocked_dependencies(records, l2):
 
 
 def build():
-    frags = {f["label"]: f["fragmentId"] for f in json.loads(FRAGMENTS.read_text(encoding="utf-8"))["fragments"]}
+    minted = json.loads(FRAGMENTS.read_text(encoding="utf-8"))["fragments"]
+    frags = {f["label"]: f["fragmentId"] for f in minted}
+    texts = {f["label"]: f["text"] for f in minted}
     # DECIDED adjudications are historical decisions about the source as it stood: they keep citing the fragments
     # they were decided on (the pre-amendment set), so their bytes -- and the architect's decisions -- stay bound.
     pinned = {f["label"]: f["fragmentId"] for f in json.loads(FRAGMENTS_2428.read_text(encoding="utf-8"))["fragments"]}
@@ -396,8 +424,17 @@ def build():
                              "loopToolchain": "IntegratedAgent runtime (TypeScript modules imported as ./name.ts; node:test) -- a toolchain fact, not a statement in the SRS. Citation only.",
                              "design": "IntegratedAgent experiments/comms/DEV-2026-10-01-d8-part2-design.md"},
         "records": resolve(RECORDS),
-        "adjudications": [resolve(a, pinned) for a in ADJUDICATIONS],
+        "adjudications": [resolve(with_source_text(a, texts), frags) if a.get("citesCurrentSource")
+                          else resolve(a, pinned) for a in ADJUDICATIONS],
     }
+
+
+def with_source_text(adj, texts):
+    """The source passages an adjudication puts beside the factory fact, copied from the minted fragments -- never
+    retyped, so the text the architect reads is the text whose hash the fragment carries."""
+    out = dict(adj)
+    out["theSourceSays"] = [dict(s, text=texts[s["label"]]) for s in adj["theSourceSays"]]
+    return out
 
 
 def render(graph):

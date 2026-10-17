@@ -193,7 +193,50 @@ def _fragment_texts(q):
         for f in (r.get("displayDuties") or {}).get("fragmentTextBesideAssertions") or []:
             if isinstance(f, dict) and f.get("fragment"):
                 out[f["fragment"]] = (f.get("line"), f.get("text") or "")
+    # The MINTED fragment sets are the authority -- their bytes are what each textHash covers. A queue row's copy is
+    # only a copy (IA Ops finding 2026-10-17: a decided adjudication showed a paraphrase as the source).
+    graph = q.root / "spike" / "graph"
+    for p in sorted(graph.rglob("fragments*.json")) if graph.is_dir() else []:
+        try:
+            minted = json.loads(p.read_text(encoding="utf-8")).get("fragments") or []
+        except (OSError, ValueError, AttributeError):
+            continue
+        for f in minted:
+            if isinstance(f, dict) and f.get("fragmentId") and "text" in f:
+                out[f["fragmentId"]] = ((f.get("display") or {}).get("lines"), f["text"])
     return out
+
+
+def _passages(val):
+    """theSourceSays as a list of passages, or None when it is not that shape."""
+    items = val if isinstance(val, list) else [val]
+    return items if items and all(isinstance(x, dict) and "text" in x for x in items) else None
+
+
+def render_passages(key, val, frags):
+    """Each cited source passage on its own, labelled; beneath it, the cited fragment's OWN bytes whenever the shown
+    text is not a verbatim excerpt of them -- so a paraphrase can never stand alone in the 'what the source says'
+    slot (IA Ops finding 2026-10-17, bullets 5-6)."""
+    L = []
+    for p in _passages(val):
+        L.append("  %s [%s%s]:" % (key, p.get("label") or "?", ", " + p["layer"] if p.get("layer") else ""))
+        L.append(_wrap(p["text"], "      "))
+        ref = frags.get(p.get("fragment"))
+        if ref is None:
+            L.append("      (cites %s, which no minted fragment set holds)" % p.get("fragment"))
+        elif is_verbatim_excerpt(p["text"], ref[1]):
+            L.append("      (verbatim from %s, line %s)" % (p["fragment"], ref[0]))
+        else:
+            L.append("      NOT VERBATIM. The cited fragment %s (line %s) says:" % (p["fragment"], ref[0]))
+            L.append(_wrap(ref[1], "        "))
+    return L
+
+
+def is_verbatim_excerpt(shown, fragment_text):
+    """True iff `shown` is a contiguous excerpt of the fragment's text (whitespace-normalised). An elision mark the
+    source does not itself contain at that point makes it not an excerpt, so a bare '...' standing for dropped bytes
+    fails here without a separate rule (the source's own '…' passes, where it stands)."""
+    return bool(shown.strip()) and " ".join(shown.split()) in " ".join(fragment_text.split())
 
 
 def _wrap(text, indent, width=100):
@@ -259,7 +302,10 @@ def render_show(q, row):
         # theFactorySays -- one side of its own conflict -- never printed. A new field must be seen by default.
         for key, val in rec.items():
             if key not in ADJ_STRUCTURAL and val not in (None, "", [], {}):
-                L.append(_wrap(_value(val), "  %s: " % key))
+                if key == "theSourceSays" and _passages(val):
+                    L.extend(render_passages(key, val, frags))
+                else:
+                    L.append(_wrap(_value(val), "  %s: " % key))
         L.append("  options:")
         for o in rec["options"]:
             L.append(_wrap(o.get("label"), "    %s  " % o.get("id")))

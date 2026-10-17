@@ -300,7 +300,7 @@ def test_show_lays_out_an_adjudication_s_options_and_consequences(repo, capsys):
     out = capsys.readouterr().out
     for opt in ("A  Honor the source", "B  Source-amendment request", "C  Relocating closure"):
         assert opt in out
-    assert "consequence:" in out and "theSourceSays:" in out
+    assert "consequence:" in out and "theSourceSays" in out
 
 
 def test_show_marks_design_rationale_as_not_grounding(repo, capsys):

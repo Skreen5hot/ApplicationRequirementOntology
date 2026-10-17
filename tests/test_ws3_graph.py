@@ -254,7 +254,7 @@ def test_the_architects_blocking_diagnostic_is_derived_from_the_act_row():
     src = [x for x in b2.DIAGNOSTICS if x["@id"] == d["@id"]][0]
     soft = dict(queue, **{"rq-044": dict(queue["rq-044"], actNote="adjudicate is not total")})
     assert b2.raised_by_act(src, soft)["blocking"] is False
-    succ = [r for r in queue.values() if r.get("supersedes") == "rq-044"][0]
+    succ = queue[_live_end(list(queue.values()), "rq-044")]     # the live end of rq-044's chain
     done = dict(queue, **{succ["id"]: dict(succ, act="ratified", actor="Aaron")})
     assert b2.raised_by_act(src, done)["status"] == "closed"
     rq = dict(queue, **{"rq-999": dict(succ, id="rq-999", supersedes=succ["id"], act="ratified", actor="Aaron")})

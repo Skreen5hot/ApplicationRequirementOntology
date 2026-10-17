@@ -259,8 +259,9 @@ def render_show(q, row):
             L.append(_wrap(o.get("label"), "    %s  " % o.get("id")))
             if o.get("content"):
                 L.append(_wrap(o["content"], "        does: "))
-            if o.get("consequenceForTheSpike"):
-                L.append(_wrap(o["consequenceForTheSpike"], "        consequence: "))
+            for ck in ("consequenceForTheSpike", "consequence"):     # the slice and WS-3 adjudications name it differently
+                if o.get(ck):
+                    L.append(_wrap(o[ck], "        consequence: "))
         L.append("")
     if rec is None and row.get("record"):
         L.append("  (record %s not found in %s)" % (row["record"], row.get("artifact")))
@@ -268,6 +269,14 @@ def render_show(q, row):
     for key, val in dd.items():
         if key != "fragmentTextBesideAssertions" or isinstance(val, str):
             L.append(_wrap(_value(val), "  %s: " % key))
+    # A file-addressed item (a test bar, an oracle, a hook) IS its text: reviewing it means reading it, so the file is
+    # shown in full beneath its metadata -- the same bytes the act binds to.
+    if row.get("artifactFileDigest") and row.get("artifact"):
+        path = q.root / row["artifact"]
+        if path.is_file() and path.suffix in (".mjs", ".js", ".ts", ".py", ".md", ".json", "") and path.stat().st_size < 200_000:
+            L.append("  ---- %s ----" % row["artifact"])
+            L.extend("  | " + line for line in path.read_text(encoding="utf-8").splitlines())
+            L.append("  ---- end ----")
     L.append(_wrap(row.get("recordDigest") or row.get("artifactFileDigest"), "  bound to: "))
     if row.get("actedAt"):
         L.append("  ACTED: %s by %s at %s" % (row.get("act"), row.get("actor"), row.get("actedAt")))

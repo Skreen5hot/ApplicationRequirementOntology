@@ -229,6 +229,40 @@ def test_list_names_what_an_act_left_owed_until_it_is_requeued(repo, capsys):
     assert "rq-901" in out and "rq-900" not in owed_part, "a re-queued amend is no longer owed"
 
 
+def test_show_prints_a_file_items_text_and_every_options_consequence(repo, capsys):
+    """2026-10-17: a bar/oracle/hook IS its text, so `show` prints the file it binds to; and an adjudication's
+    options show their consequence whichever key holds it (`consequence` in WS-3, `consequenceForTheSpike` in the
+    slice) -- rq-038 was decided while the page showed none."""
+    import hashlib
+    f = repo / "spike" / "x.test.mjs"
+    f.write_text("import test from 'node:test';\ntest('a seeded bar', () => {});\n", encoding="utf-8")
+    _add_item(repo, id="rq-910", batch="BX", queuedAt="2026-10-17T00:00:00-04:00", kind="bar", artifact="spike/x.test.mjs",
+              artifactFileDigest="sha256:" + hashlib.sha256(f.read_bytes()).hexdigest())
+    assert act.main(["--root", str(repo), "show", "rq-910"]) == 0
+    assert "| test('a seeded bar', () => {});" in capsys.readouterr().out
+    art = repo / "spike" / "adj.jsonld"
+    adj = {"@id": "adj:x", "@type": "Adjudication", "conflict": "diag:x",
+           "options": [{"id": "A", "label": "one", "consequence": "the WS-3 key"},
+                       {"id": "B", "label": "two", "consequenceForTheSpike": "the slice key"}]}
+    art.write_text(json.dumps({"adjudications": [adj]}), encoding="utf-8")
+    _add_item(repo, id="rq-911", batch="BX", queuedAt="2026-10-17T00:00:00-04:00", kind="Adjudication", record="adj:x",
+              artifact="spike/adj.jsonld", recordDigest=act.digest(adj), options=["A: one", "B: two"])
+    assert act.main(["--root", str(repo), "show", "rq-911"]) == 0
+    out = capsys.readouterr().out
+    assert "the WS-3 key" in out and "the slice key" in out
+
+
+def test_every_live_file_item_is_bound_to_its_files_current_bytes():
+    """The digest-agreement pin covers record-addressed rows; this one covers file-addressed rows (bars, oracles,
+    hooks, rules). Counted, never vacuous."""
+    q = act.Queue(ROOT)
+    dead = q.superseded()
+    live = [r for _, r in q.rows if r.get("artifactFileDigest") and r["id"] not in dead and not r.get("actedAt")]
+    for r in live:
+        assert q.current_digest(r)[1] == r["artifactFileDigest"], r["id"]
+    assert len(live) >= 6, "examined %d unacted file rows (WS3-5 queues six)" % len(live)
+
+
 def test_show_puts_each_statement_above_the_passages_it_cites(repo, capsys):
     """Found by the operator's dry run (2026-09-29): `show` printed the cited passages but not the statements
     being accepted, while the item's own instruction is 'review every cited span beside its assertion'."""

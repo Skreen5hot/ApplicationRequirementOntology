@@ -1,0 +1,4 @@
+#!/bin/sh
+# C-S7 ledger hook (SRS s5: ledger/ + .githooks/). A NON-BUILT deliverable (rq-035 = A, condition 2): the decision is
+# checkAppendOnly in src/ledger.ts; this wrapper only runs it on every staged ledger file and exits 1 on H-LEDGER-01.
+exec node "$(git rev-parse --show-toplevel)/.githooks/check-ledger.mjs"

@@ -23,6 +23,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 FRAGMENTS = HERE / "fragments.json"
+FRAGMENTS_2428 = HERE / "fragments-2428b115.json"   # the pre-amendment fragments (src:srs-spec, 2428b115)
 OUT = HERE.parent / "l3" / "srs-ws3.design.candidates.jsonld"
 
 
@@ -132,7 +133,7 @@ RECORDS = [
         "addresses": ["sr:L2:C-S2", "sr:L2:R-S1", "sr:L2:R-S6", "sr:L2:grader-runner"],
         "dependsOn": ["a:C-S2:W-CS2-N", "a:C-S2:W-CS2-D1", "a:C-S2:W-CS2-D2", "a:C-S2:determinism", "a:R-S1:rule", "a:R-S6:rule"],
         "standalone": False,
-        "amendmentOf": ["rq-032"],
+        "amendmentOf": ["rq-032", "rq-040"],
         "assertions": [
             {"@id": "c:grader-runner:assembleManifest", "@type": "Closure",
              "proposed": {"signature": "assembleManifest(specPath: string, rev: string): string[]",
@@ -146,9 +147,10 @@ RECORDS = [
              "conferred": "amended at rq-032 (2)"},
             {"@id": "c:grader-runner:manifestHash", "@type": "Closure",
              "proposed": {"signature": "manifestHash(manifest: string[]): string",
-                          "rule": "sha256 hex of the UTF-8 canonical JSON of the manifest sorted ascending"},
-             "rationaleSource": [r("C-S2.determinism", "<H> = sha256 of the manifest -- the serialization is not stated, so one is proposed")],
-             "conferred": "as proposed (rq-032)"},
+                          "rule": ["canonicalManifest = [...manifest].sort() -- ECMAScript's default lexicographic UTF-16 code-unit ordering, without mutating the caller's array",
+                                   "returns the lowercase SHA-256 hexadecimal digest of the UTF-8 bytes of JSON.stringify(canonicalManifest), with no added whitespace"]},
+             "rationaleSource": [r("C-S2.determinism", "<H> = sha256 of the manifest -- the serialization is not stated, so one is conferred")],
+             "conferred": "amended at rq-040 (3)"},
             {"@id": "c:grader-runner:verifyGradeRecord", "@type": "Closure",
              "proposed": {"signature": "verifyGradeRecord(record: GradeRecord, resolves: (pointer: string) => boolean): { ok: true } | { ok: false; code: \"G-EVID-01\" | \"G-SCORE-01\" | \"G-PROV-01\" }",
                           "rule": ["G-EVID-01 when any evidence pointer does not resolve (resolves is injected)",
@@ -162,9 +164,11 @@ RECORDS = [
              "proposed": {"signature": "runGrader(invoke: RaterInvoker, rater: string, manifest: string[], specPath: string, rev: string): Promise<GradeRecord>",
                           "alsoExports": ["export type RaterInvoker = (manifest: string[]) => Promise<{ model: string; vector: Vector; evidence: Record<string, string>; disposition?: string; readiness?: string }>",
                                           "export class GradeRejectedError extends Error { code: \"G-ISO-01\" }"],
-                          "rule": "checkIsolation(manifest, specPath, rev) first -- a contaminated or mis-pinned manifest throws GradeRejectedError(G-ISO-01) and the invoker is NEVER called; otherwise the record is the invoker's output plus rater, manifest_hash = manifestHash(manifest), provisional: true"},
+                          "rule": ["checkIsolation(manifest, specPath, rev) first -- a contaminated or mis-pinned manifest throws GradeRejectedError(G-ISO-01) and the invoker is NEVER called",
+                                   "after isolation succeeds, runGrader computes canonicalManifest (as manifestHash defines it) ONCE, passes that exact canonical array to invoke, and computes manifest_hash from that same array; the caller-supplied ordering is never passed to the rater",
+                                   "the record is the invoker's output plus rater, manifest_hash, provisional: true"]},
              "rationaleSource": [r("C-S2.W-CS2-N", "headless invocation -> grade record with provisional: true"), r("R-S6", "every single-rater record carries provisional: true"), r("C-S2.W-CS2-D2", "the grade never enters adjudication")],
-             "conferred": "amended at rq-032 (5)"},
+             "conferred": "amended at rq-032 (5) and rq-040 (5)"},
         ],
         "displayDuties": {"whatRatifyingDoes": "fixes grader-runner's signatures. It does NOT designate the demonstration control: that remains the freeze-2 act (rq-032)."},
     },
@@ -172,11 +176,11 @@ RECORDS = [
         "@id": "sr:L3:adjudicator-interface", "@type": "SpecificationRecord",
         "title": "adjudicator's interface — as amended by the architect at rq-033",
         "kind": "closure-bundle",
-        "closes": ["diag:third-rater-tie-unwitnessed"],
+        "closes": ["diag:third-rater-tie-unwitnessed", "diag:adjudicator-not-total-over-declared-inputs"],
         "addresses": ["sr:L2:C-S3", "sr:L2:R-S4", "sr:L2:R-S5", "sr:L2:adjudicator"],
         "dependsOn": ["a:C-S3:W-CS3-N", "a:C-S3:W-CS3-D1", "a:C-S3:W-CS3-D2", "a:C-S3:determinism", "a:R-S4:rule", "a:R-S5:rule", "a:V-S2:invariant"],
         "standalone": False,
-        "amendmentOf": ["rq-033"],
+        "amendmentOf": ["rq-033", "rq-044"],
         "assertions": [
             {"@id": "c:adjudicator:route", "@type": "Closure",
              "proposed": {"signature": "route(a: GradeRecord, b: GradeRecord): RouteResult",
@@ -204,8 +208,30 @@ RECORDS = [
                           "why": "they recompute 'per method s6.2', which is outside the registered source; diag:external-method-artifacts stays open"},
              "rationaleSource": [r("V-S2", "the printed lines recompute from the committed GradeRecords per method s6.2")],
              "conferred": "amended at rq-033 (4)"},
+            {"@id": "c:adjudicator:input-domain", "@type": "Closure",
+             "proposed": {"rule": ["a and b must carry identical vector key sets; c, when given, must carry that same key set",
+                                   "every attack's dimension must be one of those keys",
+                                   "otherwise adjudicate throws AdjudicationInputError { code: \"A-DIM-01\" } and produces NO report -- a missing dimension is never guessed or skipped"],
+                          "note": "the narrowing route your rq-044 note offered ('narrowing the accepted input types with explicit validation and failure behavior'); A-DIM-01 is a proposed code, as G-SCORE-01 and G-PROV-01 were"},
+             "rationaleSource": [r("C-S3.determinism", "a pure function of the two committed vectors -- defined only if the vectors share their dimensions")],
+             "conferred": "PROPOSED to resolve rq-044 point 1 -- confer, amend, or replace"},
+            {"@id": "c:adjudicator:agreed-dimensions", "@type": "Closure",
+             "proposed": {"rule": "a dimension on which a and b agree (and neither is 0) takes that value unchanged in the PRINTED vector; c's score on it is ignored. c decides only the routed dimensions"},
+             "rationaleSource": [r("R-S4", "only nonzero disagreement goes to the third rater")],
+             "conferred": "PROPOSED to resolve rq-044 point 2 -- confer, amend, or replace"},
+            {"@id": "c:adjudicator:canonical-order", "@type": "Closure",
+             "proposed": {"rule": "route keys, contested_knockouts and PRINTED vector keys are emitted in ascending ECMAScript default sort order (UTF-16 code units) -- the same rule rq-040 conferred for the canonical manifest; contested_knockouts carries no duplicates",
+                          "note": "under this rule P10 sorts before P2; a numeric-aware order would be a different value to confer"},
+             "rationaleSource": [r("C-S3.determinism", "bit-stable, recomputable by anyone from the record -- requires one ordering")],
+             "conferred": "PROPOSED to resolve rq-044 point 3 -- confer, amend, or replace"},
+            {"@id": "c:adjudicator:attack-cause", "@type": "Closure",
+             "proposed": {"rule": ["with several replayed attacks, cause names the clause that sorts first (the same canonical order); every attacked dimension still enters contested_knockouts",
+                                   "two reports on the same clause count once"],
+                          "note": "the ratified union (rq-043) gives Suspended a single cause: string; reporting every clause would need that ratified type amended, so it is not proposed here"},
+             "rationaleSource": [r("C-S3.W-CS3-D2", "cause: vacuous-pass:<CL> -- one clause"), r("R-S5", "registered as a contested knockout on the clause's dimension")],
+             "conferred": "PROPOSED to resolve rq-044 point 4 -- confer, amend, or replace"},
         ],
-        "displayDuties": {"whatRatifyingDoes": "fixes adjudicator's signatures, the variant precedence and the meaning of a tie; W-CS3-N's second half and W-CS3-Δ2 run on the two replay fixtures A9 names"},
+        "displayDuties": {"whatRatifyingDoes": "fixes adjudicator's signatures, the variant precedence, the meaning of a tie, and -- with the four PROPOSED closures -- a single defined output for every permitted input (your rq-044 diagnostic)"},
     },
     {
         "@id": "sr:L3:ledger-interface", "@type": "SpecificationRecord",
@@ -215,24 +241,26 @@ RECORDS = [
         "addresses": ["sr:L2:C-S7", "sr:L2:LedgerEntry", "sr:L2:ledger"],
         "dependsOn": ["a:C-S7:W-CS7-N", "a:C-S7:W-CS7-D1", "a:C-S7:determinism", "a:LedgerEntry:fields"],
         "standalone": False,
-        "blockedDependencies": ["a:C-S7:W-CS7-D1", "a:C-S7:W-CS7-N"],
-        "awaits": "adj:ledger-hash-kind -- the architect's diagnostic at rq-034; c:ledger:hash-encoding below is rebuilt from that decision",
+        "amendmentOf": ["rq-034", "rq-042"],
         "assertions": [
             {"@id": "c:ledger:hash-encoding", "@type": "Closure",
-             "proposed": {"rule": "hash = sha256 hex of the UTF-8 canonical JSON of [seq, prev, payload] (keys sorted, compact separators); kind is NOT in the preimage, as the source states",
+             "proposed": {"rule": "hash = sha256 hex of the UTF-8 canonical JSON of [seq, prev, kind, payload] (keys sorted, compact separators) -- the amended source's four-field preimage",
                           "genesis": "the first entry has seq 1 and prev = 64 zeros",
-                          "note": "kind outside the preimage means a rewrite of kind alone keeps the hash; checkAppendOnly still refuses it"},
-             "rationaleSource": [r("C-S7.W-CS7-N", "<H7> = sha256(seq || prev || payload); the chain verifies from genesis -- encoding and genesis unstated")]},
+                          "consequence": "a rewrite of kind alone changes the hash, so verifyChain fails on the tampered copy (W-CS7-Δ1 holds for every field)"},
+             "rationaleSource": [r("C-S7.W-CS7-N", "<H7> = sha256(seq || prev || kind || payload) in the amended source; encoding and genesis unstated")],
+             "conferred": "amended at rq-042 (1), on the source as amended by the architect (rq-038 = A)"},
             {"@id": "c:ledger:functions", "@type": "Closure",
-             "proposed": {"signatures": ["entryHash(seq: number, prev: string, payload: unknown): string",
+             "proposed": {"signatures": ["entryHash(seq: number, prev: string, kind: string, payload: unknown): string",
                                          "nextEntry(chain: LedgerEntry[], kind: string, payload: unknown): LedgerEntry",
                                          "verifyChain(chain: LedgerEntry[]): { ok: true } | { ok: false; seq: number }",
                                          "checkAppendOnly(before: string, after: string): { ok: true } | { ok: false; code: \"H-LEDGER-01\" }",
                                          "appendEntry(ledgerPath: string, kind: string, payload: unknown): LedgerEntry"],
-                          "rules": ["nextEntry is pure: seq = last seq + 1, prev = last hash (or genesis)",
+                          "rules": ["nextEntry and verifyChain use the same four-field preimage as entryHash; a kind-only rewrite fails verifyChain",
+                                    "nextEntry is pure: seq = last seq + 1, prev = last hash (or genesis)",
                                     "checkAppendOnly: ok iff `after` begins with `before` byte for byte and adds whole JSONL lines",
                                     "appendEntry reads the JSONL file, appends nextEntry as one line, and never rewrites"]},
-             "rationaleSource": [r("C-S7.W-CS7-N", "append; the full chain verifies"), r("C-S7.W-CS7-D1", "any rewrite -> exit 1, H-LEDGER-01; verification fails on the tampered copy"), r("S5.ledger", "append-only JSONL + chain verifier + hooks"), r("C-S7.determinism", "bit-stable given payload and chain position")]},
+             "rationaleSource": [r("C-S7.W-CS7-N", "append; the full chain verifies"), r("C-S7.W-CS7-D1", "any rewrite -> exit 1, H-LEDGER-01; verification fails on the tampered copy"), r("S5.ledger", "append-only JSONL + chain verifier + hooks"), r("C-S7.determinism", "bit-stable given payload and chain position")],
+             "conferred": "amended at rq-042 (2)-(4): entryHash takes kind; checkAppendOnly and appendEntry as proposed"},
         ],
         "displayDuties": {"whatRatifyingDoes": "fixes the ledger's functions and the hash encoding two implementations must agree on; the hook's decision is checkAppendOnly, so it is built and tested here"},
     },
@@ -320,17 +348,20 @@ def undisclosed_blocked_dependencies(records, l2):
 
 def build():
     frags = {f["label"]: f["fragmentId"] for f in json.loads(FRAGMENTS.read_text(encoding="utf-8"))["fragments"]}
+    # DECIDED adjudications are historical decisions about the source as it stood: they keep citing the fragments
+    # they were decided on (the pre-amendment set), so their bytes -- and the architect's decisions -- stay bound.
+    pinned = {f["label"]: f["fragmentId"] for f in json.loads(FRAGMENTS_2428.read_text(encoding="utf-8"))["fragments"]}
 
-    def resolve(obj):
+    def resolve(obj, frags=frags):
         if isinstance(obj, dict):
-            out = {k: resolve(v) for k, v in obj.items()}
+            out = {k: resolve(v, frags) for k, v in obj.items()}
             if "cite" in obj and obj["cite"] in frags:
                 out = {"cite": frags[obj["cite"]], "label": obj["cite"], **{k: v for k, v in out.items() if k != "cite"}}
             if obj.get("label") in frags and "text" in obj and "fragment" not in obj:
                 out = {"fragment": frags[obj["label"]], **out}
             return out
         if isinstance(obj, list):
-            return [resolve(v) for v in obj]
+            return [resolve(v, frags) for v in obj]
         return obj
 
     undisclosed = undisclosed_blocked_dependencies(RECORDS, json.loads(L2.read_text(encoding="utf-8")))
@@ -363,7 +394,7 @@ def build():
                              "loopToolchain": "IntegratedAgent runtime (TypeScript modules imported as ./name.ts; node:test) -- a toolchain fact, not a statement in the SRS. Citation only.",
                              "design": "IntegratedAgent experiments/comms/DEV-2026-10-01-d8-part2-design.md"},
         "records": resolve(RECORDS),
-        "adjudications": resolve(ADJUDICATIONS),
+        "adjudications": [resolve(a, pinned) for a in ADJUDICATIONS],
     }
 
 

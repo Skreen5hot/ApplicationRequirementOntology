@@ -79,7 +79,12 @@ def test_an_amend_without_a_note_records_nothing(site):
 
 def test_a_decide_records_the_letter_and_an_agent_actor_is_refused(site):
     base, root = site
-    item = _first_pending(root, adjudication=True)
+    q = root / "spike" / "measurements" / "ratification-queue.jsonl"
+    src = _row(root, "rq-038")      # a real adjudication, re-queued unacted in the COPY so a decide can be exercised
+    fresh = {k: v for k, v in src.items() if k not in ("actedAt", "act", "actor", "actDigest", "decision", "actNote", "sittingStart")}
+    fresh.update(id="rq-990", queuedAt="2026-10-17T00:00:00-04:00")
+    q.write_text(q.read_text(encoding="utf-8") + json.dumps(fresh, ensure_ascii=False) + chr(10), encoding="utf-8")
+    item = "rq-990"
     ui.STATE["actor"] = "claude"
     page = _post(base + "/act/" + item, decision="C", note="")
     assert "REFUSED" in page and not _row(root, item).get("actedAt")

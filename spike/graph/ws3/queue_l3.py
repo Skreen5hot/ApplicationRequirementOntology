@@ -25,6 +25,7 @@ WORKSTREAM = "WS-3 (Plan v1.1 s5; target: docs/decisions/2026-10-01-a9-ws3-targe
 
 
 RATIFYING = {"accepted", "ratified", "decided"}
+PRE_AMENDMENT = "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
 ADJ = {
     "adj:ledger-hooks-repo-home": {
         "title": "ledger repo home: the source says ledger/ + .githooks/; the factory builds one TypeScript module per unit",
@@ -52,14 +53,20 @@ def rows_for(graph, existing, now):
     n = max(int(r["id"].split("-")[1]) for r in existing) if existing else 0
     out = []
 
+    source_now = json.loads(L2.read_text(encoding="utf-8"))["source"]["digest"]
+
     def pending(item):
         prior = _prior(existing, item["@id"])
         if prior and prior.get("recordDigest") == digest(item):
             return None, False
         if prior and prior.get("act") in RATIFYING:
-            raise SystemExit("%s changed after %s was %s -- refusing to re-queue a conferred item"
-                             % (item["@id"], prior["id"], prior["act"]))
+            if prior.get("sourceDigest", PRE_AMENDMENT) == source_now:
+                raise SystemExit("%s changed after %s was %s -- refusing to re-queue a conferred item"
+                                 % (item["@id"], prior["id"], prior["act"]))
+            lapsed.add(item["@id"])     # the source under it was amended: re-ratification after lapse (ARO 5.6)
         return prior, True
+
+    lapsed = set()
 
     # adjudications first: an open adjudication is decided before the bundles that await it
     for adj in graph["adjudications"]:
@@ -69,7 +76,7 @@ def rows_for(graph, existing, now):
         n += 1
         meta = ADJ[adj["@id"]]
         row = {
-            "id": "rq-%03d" % n, "batch": "WS3-3", "queuedAt": now,
+            "id": "rq-%03d" % n, "batch": "WS3-4", "queuedAt": now, "sourceDigest": source_now,
             "kind": "Adjudication -- its own item, not a candidate (Amendment 2 ii)",
             "record": adj["@id"], "title": meta["title"], "artifact": ART, "recordDigest": digest(adj), "assertions": 0,
             "options": ["%s: %s" % (o["id"], o["label"]) for o in adj["options"]],
@@ -94,8 +101,12 @@ def rows_for(graph, existing, now):
             flags.append("awaits " + rec["awaits"])
         flags += ["rebuilt from the architect's %s at %s: \"%s\"" % (a["act"], a["item"], a["note"])
                   for a in rec.get("amendmentNotes", [])]
+        if rec["@id"] in lapsed:
+            flags.insert(0, "RE-RATIFICATION after the source amendment (src:srs-spec@2, ARO 5.6): %s was %s; only its "
+                            "rationale citations moved to the re-minted fragments -- the conferred values are unchanged"
+                            % (prior["id"], prior["act"]))
         row = {
-            "id": "rq-%03d" % n, "batch": "WS3-3", "queuedAt": now,
+            "id": "rq-%03d" % n, "batch": "WS3-4", "queuedAt": now, "sourceDigest": source_now,
             "kind": "L3 Specification Record -- closure bundle (Amendment 2 ii: values conferred by the architect from labeled candidates)",
             "record": rec["@id"], "title": rec["title"], "artifact": ART, "recordDigest": digest(rec),
             "assertions": len(rec["assertions"]), "closes": rec["closes"], "dependsOn": rec["dependsOn"],

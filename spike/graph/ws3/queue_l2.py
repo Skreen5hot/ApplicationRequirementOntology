@@ -24,6 +24,8 @@ ROOT = HERE.parents[2]
 QUEUE = ROOT / "spike" / "measurements" / "ratification-queue.jsonl"
 GRAPH_REL = "spike/graph/l2/srs-ws3.graph.jsonld"
 
+PRE_AMENDMENT = "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"   # rows queued before sourceDigest existed
+
 BATCH = {
     "sr:L2:C-S2": "WS3-1", "sr:L2:C-S3": "WS3-1", "sr:L2:C-S7": "WS3-1",
     "sr:L2:R-S1": "WS3-1", "sr:L2:R-S4": "WS3-1", "sr:L2:R-S5": "WS3-1", "sr:L2:R-S6": "WS3-1",
@@ -52,7 +54,9 @@ def rows_for(graph, fragments, existing, now):
         prior = live.get(rec["@id"])
         if prior and prior.get("recordDigest") == digest(rec):
             continue
-        if prior and prior.get("actedAt"):
+        lapsed = bool(prior and prior.get("actedAt")
+                      and prior.get("sourceDigest", PRE_AMENDMENT) != graph["source"]["digest"])
+        if prior and prior.get("actedAt") and not lapsed:
             raise SystemExit("%s changed after %s was acted on -- an acted record is not re-queued by this script"
                              % (rec["@id"], prior["id"]))
         n += 1
@@ -62,19 +66,29 @@ def rows_for(graph, fragments, existing, now):
                 if c["fragment"] not in seen:
                     seen.add(c["fragment"])
                     f = by_id[c["fragment"]]
-                    texts.append({"fragment": c["fragment"], "line": f["display"]["lines"], "text": f["text"]})
+                    t = {"fragment": c["fragment"], "line": f["display"]["lines"], "text": f["text"]}
+                    if f.get("migratedFrom"):
+                        t["migratedFrom"] = f["migratedFrom"]
+                    texts.append(t)
         flags = [a[k] for a in rec["assertions"] for k in ("classificationNote", "scopeNote", "absence") if a.get(k)]
         flags += ["see %s" % a["diagnostic"] for a in rec["assertions"] if a.get("diagnostic") in diag_ids]
         flags += ["%s's primary span is line %d, beyond the A9 act's region (%s) -- accepting it needs the act's region "
                   "amended, or drop the clause" % (a["@id"], beyond[a["@id"]]["line"],
                                                    ", ".join("%d–%d" % tuple(x) for x in region))
                   for a in rec["assertions"] if a["@id"] in beyond]
+        if lapsed:
+            changed = [t["line"] for t in texts if (t.get("migratedFrom") or {}).get("text") == "CHANGED"]
+            flags.insert(0, "RE-ACCEPTANCE after the source amendment (src:srs-spec@2, ARO 3.2/5.2): %s was %s on the "
+                            "pre-amendment source; %d of %d cited spans are unchanged text%s" % (
+                                prior["id"], prior["act"], len(texts) - len(changed), len(texts),
+                                ("; CHANGED text at line(s) %s -- read those" % ", ".join(changed)) if changed else ""))
         row_extra = {"supersedes": prior["id"]} if prior else {}
         out.append({
             "id": "rq-%03d" % n,
-            "batch": BATCH[rec["@id"]],
+            "batch": "WS3-4" if lapsed else BATCH[rec["@id"]],
             "queuedAt": now,
-            "kind": "L2 Specification Record -- acceptance (Amendment 2 i: 100% span review)",
+            "kind": ("L2 Specification Record -- RE-ACCEPTANCE after source lapse (ARO 3.2, 5.2)" if lapsed else
+                     "L2 Specification Record -- acceptance (Amendment 2 i: 100% span review)"),
             "record": rec["@id"],
             "title": rec["title"],
             "artifact": GRAPH_REL,
@@ -89,6 +103,7 @@ def rows_for(graph, fragments, existing, now):
                 "vacuityClassFlags": flags,
             },
             "queuedBy": "aro-dev-agent",
+            "sourceDigest": graph["source"]["digest"],
             "workstream": "WS-3 (Plan v1.1 s5; target: docs/decisions/2026-10-01-a9-ws3-target-naming-act.md)",
             **row_extra,
         })

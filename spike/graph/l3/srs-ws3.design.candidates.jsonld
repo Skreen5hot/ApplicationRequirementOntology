@@ -59,12 +59,12 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:6a78e67028f988a49aa9f336",
+              "cite": "sf:43d2987a1c7d11e9408f4a98",
               "label": "S5.table-header",
               "why": "s5 lists no shared-types component; three seams (S-S2, S-S3, S-S6) carry records between different components, so a single owner prevents divergent copies"
             },
             {
-              "cite": "sf:bbdecf529e21b598e5c59b46",
+              "cite": "sf:162a750732338b20a7226ba7",
               "label": "S4.records",
               "why": "GradeRecord and LedgerEntry are named s4 records"
             }
@@ -89,12 +89,12 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:f4c270ddbe30b32ab710802a",
+              "cite": "sf:40bd771b2bdf17c828339bf4",
               "label": "S6.S-S2",
               "why": "grader-runner -> adjudicator crosses as a GradeRecord VALUE; neither imports the other"
             },
             {
-              "cite": "sf:94787cd76ffd6aebedb51605",
+              "cite": "sf:d5b460da140fcc69d980506d",
               "label": "S6.S-S6",
               "why": "the ledger's producer is the orchestrator, outside the region; the ledger imports no capability module"
             }
@@ -123,17 +123,17 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:f0346097494b52371f29054f",
+              "cite": "sf:75e1066eb97d2e7b2407e0d9",
               "label": "S5.grader-runner",
               "why": "serves C-S2"
             },
             {
-              "cite": "sf:fc11a2828a2a134ddaf16fa3",
+              "cite": "sf:67479c23437989d6f316d343",
               "label": "S5.adjudicator",
               "why": "serves C-S3"
             },
             {
-              "cite": "sf:aedf9db9edc7b5e4f5e56e08",
+              "cite": "sf:71860f494bb3520e8cc9d2d2",
               "label": "S5.ledger",
               "why": "serves C-S7"
             }
@@ -183,12 +183,12 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:5dae836de14f6ace5877fd44",
+              "cite": "sf:e475eb00698748edcce05cf5",
               "label": "C-S2.determinism",
               "why": "every score in {0, 1, 2}"
             },
             {
-              "cite": "sf:f4c270ddbe30b32ab710802a",
+              "cite": "sf:40bd771b2bdf17c828339bf4",
               "label": "S6.S-S2",
               "why": "the crossing example's vector carries P1..P11"
             }
@@ -243,12 +243,12 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:47757633f589803acfb1bb31",
+              "cite": "sf:dfe6866dede0da326e203052",
               "label": "C-S2.W-CS2-N",
               "why": "eight fields"
             },
             {
-              "cite": "sf:f4c270ddbe30b32ab710802a",
+              "cite": "sf:40bd771b2bdf17c828339bf4",
               "label": "S6.S-S2",
               "why": "five of them; model, disposition, readiness absent"
             }
@@ -272,7 +272,7 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:6205b00ff462d1dad846243a",
+              "cite": "sf:3db581d9f8478263003ecd15",
               "label": "C-S3.W-CS3-N",
               "why": "the literal {\"route\": {\"P6\": \"third-rater\"}, \"contested_knockouts\": []}"
             }
@@ -317,27 +317,27 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:88f847589387e33900fa6a62",
+              "cite": "sf:199a750ba67e459664b75b25",
               "label": "S6.S-S3",
               "why": "the adjudicated report (Printed)"
             },
             {
-              "cite": "sf:6205b00ff462d1dad846243a",
+              "cite": "sf:3db581d9f8478263003ecd15",
               "label": "C-S3.W-CS3-N",
               "why": "routing, then provisional: false"
             },
             {
-              "cite": "sf:c4e7d8ea368abc0260d818a0",
+              "cite": "sf:dc8a98167d56ae8b3156e7c0",
               "label": "C-S3.W-CS3-D1",
               "why": "WITHHELD"
             },
             {
-              "cite": "sf:6b8ef108d4bdbe8cae32cb24",
+              "cite": "sf:9fee81af3700873cd1fe4c62",
               "label": "C-S3.W-CS3-D2",
               "why": "SUSPENDED"
             },
             {
-              "cite": "sf:f057a2bd775d30f4a73d9b9d",
+              "cite": "sf:2e84200d55392b0cd9eea6b2",
               "label": "R-S5",
               "why": "regardless of vector"
             }
@@ -366,12 +366,12 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:6b8ef108d4bdbe8cae32cb24",
+              "cite": "sf:9fee81af3700873cd1fe4c62",
               "label": "C-S3.W-CS3-D2",
               "why": "a replayed stub report on clause <CL>"
             },
             {
-              "cite": "sf:f057a2bd775d30f4a73d9b9d",
+              "cite": "sf:2e84200d55392b0cd9eea6b2",
               "label": "R-S5",
               "why": "registered as a contested knockout on the clause's dimension"
             }
@@ -408,12 +408,12 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:e36d808c1818fa7be2a81bac",
+              "cite": "sf:e3f7e5ee1e5d9d00765f72c5",
               "label": "C-S7.W-CS7-N",
               "why": "the literal entry"
             },
             {
-              "cite": "sf:51a7633603d61f4e36ca2b60",
+              "cite": "sf:ee62881e7dab71a1e4801135",
               "label": "J-S4.chain",
               "why": "kind ratification"
             }
@@ -463,7 +463,8 @@
       ],
       "standalone": false,
       "amendmentOf": [
-        "rq-032"
+        "rq-032",
+        "rq-040"
       ],
       "assertions": [
         {
@@ -475,7 +476,7 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:0cc883b9f89ec1148a8ff648",
+              "cite": "sf:53b4206bf6efea98fe70a917",
               "label": "R-S1",
               "why": "context MUST contain exactly {spec@rev, method/v0.4.md, skills/fspec-method}"
             }
@@ -491,17 +492,17 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:13ae423aabfe2f7b13b8ae1e",
+              "cite": "sf:e3d29ca8c7e181f74e759a35",
               "label": "C-S2.W-CS2-D2",
               "why": "manifest containing findings/cycle-3/ -> rejected, G-ISO-01"
             },
             {
-              "cite": "sf:bc48bb37af496302d125f52f",
+              "cite": "sf:b5487b545ab6fd5b3148f742",
               "label": "V-S3",
               "why": "manifest a subset of the R-S1 triple; violations rejected before adjudication"
             },
             {
-              "cite": "sf:82a78de8836c7a4b9246b8e2",
+              "cite": "sf:f2c0e12e5cc28c983c524711",
               "label": "J-S1.chain",
               "why": "each context-manifest pinned to the rev graded"
             }
@@ -513,16 +514,19 @@
           "@type": "Closure",
           "proposed": {
             "signature": "manifestHash(manifest: string[]): string",
-            "rule": "sha256 hex of the UTF-8 canonical JSON of the manifest sorted ascending"
+            "rule": [
+              "canonicalManifest = [...manifest].sort() -- ECMAScript's default lexicographic UTF-16 code-unit ordering, without mutating the caller's array",
+              "returns the lowercase SHA-256 hexadecimal digest of the UTF-8 bytes of JSON.stringify(canonicalManifest), with no added whitespace"
+            ]
           },
           "rationaleSource": [
             {
-              "cite": "sf:5dae836de14f6ace5877fd44",
+              "cite": "sf:e475eb00698748edcce05cf5",
               "label": "C-S2.determinism",
-              "why": "<H> = sha256 of the manifest -- the serialization is not stated, so one is proposed"
+              "why": "<H> = sha256 of the manifest -- the serialization is not stated, so one is conferred"
             }
           ],
-          "conferred": "as proposed (rq-032)"
+          "conferred": "amended at rq-040 (3)"
         },
         {
           "@id": "c:grader-runner:verifyGradeRecord",
@@ -539,17 +543,17 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:db007b6551cf612e2905886a",
+              "cite": "sf:e0301a7286aab08a2f80adc8",
               "label": "C-S2.W-CS2-D1",
               "why": "spec.md:9999 -> verifier rejects, G-EVID-01"
             },
             {
-              "cite": "sf:5dae836de14f6ace5877fd44",
+              "cite": "sf:e475eb00698748edcce05cf5",
               "label": "C-S2.determinism",
               "why": "every score in {0, 1, 2}; every evidence pointer resolves"
             },
             {
-              "cite": "sf:061c635a46fe2630cab542ab",
+              "cite": "sf:08d077c6d8ccb27967768865",
               "label": "R-S6",
               "why": "every single-rater record carries provisional: true"
             }
@@ -565,26 +569,30 @@
               "export type RaterInvoker = (manifest: string[]) => Promise<{ model: string; vector: Vector; evidence: Record<string, string>; disposition?: string; readiness?: string }>",
               "export class GradeRejectedError extends Error { code: \"G-ISO-01\" }"
             ],
-            "rule": "checkIsolation(manifest, specPath, rev) first -- a contaminated or mis-pinned manifest throws GradeRejectedError(G-ISO-01) and the invoker is NEVER called; otherwise the record is the invoker's output plus rater, manifest_hash = manifestHash(manifest), provisional: true"
+            "rule": [
+              "checkIsolation(manifest, specPath, rev) first -- a contaminated or mis-pinned manifest throws GradeRejectedError(G-ISO-01) and the invoker is NEVER called",
+              "after isolation succeeds, runGrader computes canonicalManifest (as manifestHash defines it) ONCE, passes that exact canonical array to invoke, and computes manifest_hash from that same array; the caller-supplied ordering is never passed to the rater",
+              "the record is the invoker's output plus rater, manifest_hash, provisional: true"
+            ]
           },
           "rationaleSource": [
             {
-              "cite": "sf:47757633f589803acfb1bb31",
+              "cite": "sf:dfe6866dede0da326e203052",
               "label": "C-S2.W-CS2-N",
               "why": "headless invocation -> grade record with provisional: true"
             },
             {
-              "cite": "sf:061c635a46fe2630cab542ab",
+              "cite": "sf:08d077c6d8ccb27967768865",
               "label": "R-S6",
               "why": "every single-rater record carries provisional: true"
             },
             {
-              "cite": "sf:13ae423aabfe2f7b13b8ae1e",
+              "cite": "sf:e3d29ca8c7e181f74e759a35",
               "label": "C-S2.W-CS2-D2",
               "why": "the grade never enters adjudication"
             }
           ],
-          "conferred": "amended at rq-032 (5)"
+          "conferred": "amended at rq-032 (5) and rq-040 (5)"
         }
       ],
       "displayDuties": {
@@ -597,6 +605,13 @@
           "actor": "Aaron",
           "actedAt": "2026-10-01T15:00:47-04:00",
           "note": "(2) checkIsolation(manifest, specPath, rev) binds the intended target: ok iff the manifest is exactly the R-S1 triple for THAT spec@rev; a manifest pinned to any other rev is G-ISO-01. (5) runGrader(invoke, rater, manifest, specPath, rev) passes specPath and rev to checkIsolation; otherwise as proposed. (4) verifyGradeRecord also rejects a record whose provisional is not true (R-S6), proposed code G-PROV-01, marked proposed as with G-SCORE-01; when several apply, it returns the first of G-EVID-01, G-SCORE-01, G-PROV-01. Items 1 and 3 as proposed. Ratifying this interface does not designate the demonstration control; that remains the freeze-2 act."
+        },
+        {
+          "item": "rq-040",
+          "act": "amended",
+          "actor": "Aaron",
+          "actedAt": "2026-10-17T03:33:04-04:00",
+          "note": "AMEND rq-040. Items 1, 2, and 4 remain as rebuilt from rq-032. Items 3 and 5 are amended together:\r\n(3) manifestHash first creates canonicalManifest = [...manifest].sort() using ECMAScript’s default lexicographic UTF-16 code-unit ordering without mutating the caller’s array. It returns the lowercase SHA-256 hexadecimal digest of the UTF-8 bytes of JSON.stringify(canonicalManifest), with no added whitespace.\r\n(5) After checkIsolation(manifest, specPath, rev) succeeds, runGrader computes that same canonicalManifest once, passes that exact canonical array to invoke, and computes manifest_hash from that same array. The caller-supplied ordering is never passed to the rater. Isolation rejection behavior, record construction, and provisional: true remain as proposed.\r\nReason: the isolation rule and hash treat the manifest as order-insensitive, but the current interface passes the original order to the rater. Without canonicalizing before both invocation and hashing, materially different ordered contexts can share the same recorded hash.\r\nRatifying the rebuilt interface still does not designate the demonstration control; that remains the Freeze 2 act. All other values are confirmed as conferred."
         }
       ]
     },
@@ -606,7 +621,8 @@
       "title": "adjudicator's interface — as amended by the architect at rq-033",
       "kind": "closure-bundle",
       "closes": [
-        "diag:third-rater-tie-unwitnessed"
+        "diag:third-rater-tie-unwitnessed",
+        "diag:adjudicator-not-total-over-declared-inputs"
       ],
       "addresses": [
         "sr:L2:C-S3",
@@ -625,7 +641,8 @@
       ],
       "standalone": false,
       "amendmentOf": [
-        "rq-033"
+        "rq-033",
+        "rq-044"
       ],
       "assertions": [
         {
@@ -637,17 +654,17 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:987099f8fce37300374287eb",
+              "cite": "sf:561d9f98cc508540ac309440",
               "label": "R-S4",
               "why": "either-rater zero -> contested knockout; nonzero disagreement -> third rater"
             },
             {
-              "cite": "sf:6205b00ff462d1dad846243a",
+              "cite": "sf:3db581d9f8478263003ecd15",
               "label": "C-S3.W-CS3-N",
               "why": "P6 2 vs 1 -> third-rater"
             },
             {
-              "cite": "sf:6ed6d94913883ea72c51b736",
+              "cite": "sf:dbbb33ba1cf02d1c33737ba5",
               "label": "C-S3.determinism",
               "why": "a pure function of the two committed vectors"
             }
@@ -671,27 +688,27 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:6205b00ff462d1dad846243a",
+              "cite": "sf:3db581d9f8478263003ecd15",
               "label": "C-S3.W-CS3-N",
               "why": "after rater C: P6 = C's consensus value, provisional: false"
             },
             {
-              "cite": "sf:c4e7d8ea368abc0260d818a0",
+              "cite": "sf:dc8a98167d56ae8b3156e7c0",
               "label": "C-S3.W-CS3-D1",
               "why": "WITHHELD, queue human"
             },
             {
-              "cite": "sf:6b8ef108d4bdbe8cae32cb24",
+              "cite": "sf:9fee81af3700873cd1fe4c62",
               "label": "C-S3.W-CS3-D2",
               "why": "SUSPENDED, cause vacuous-pass:<CL>"
             },
             {
-              "cite": "sf:f057a2bd775d30f4a73d9b9d",
+              "cite": "sf:2e84200d55392b0cd9eea6b2",
               "label": "R-S5",
               "why": "a verified attack overrides the number, regardless of vector"
             },
             {
-              "cite": "sf:fc11a2828a2a134ddaf16fa3",
+              "cite": "sf:67479c23437989d6f316d343",
               "label": "S5.adjudicator",
               "why": "pure routing fn + third-rater invocation"
             }
@@ -707,7 +724,7 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:987099f8fce37300374287eb",
+              "cite": "sf:561d9f98cc508540ac309440",
               "label": "R-S4",
               "why": "a third-rater tie -> human -- 'tie' is not defined in the source"
             }
@@ -723,16 +740,91 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:1e788ea0fcfeb504275c7019",
+              "cite": "sf:4e154e3a843ea34f9b55e150",
               "label": "V-S2",
               "why": "the printed lines recompute from the committed GradeRecords per method s6.2"
             }
           ],
           "conferred": "amended at rq-033 (4)"
+        },
+        {
+          "@id": "c:adjudicator:input-domain",
+          "@type": "Closure",
+          "proposed": {
+            "rule": [
+              "a and b must carry identical vector key sets; c, when given, must carry that same key set",
+              "every attack's dimension must be one of those keys",
+              "otherwise adjudicate throws AdjudicationInputError { code: \"A-DIM-01\" } and produces NO report -- a missing dimension is never guessed or skipped"
+            ],
+            "note": "the narrowing route your rq-044 note offered ('narrowing the accepted input types with explicit validation and failure behavior'); A-DIM-01 is a proposed code, as G-SCORE-01 and G-PROV-01 were"
+          },
+          "rationaleSource": [
+            {
+              "cite": "sf:dbbb33ba1cf02d1c33737ba5",
+              "label": "C-S3.determinism",
+              "why": "a pure function of the two committed vectors -- defined only if the vectors share their dimensions"
+            }
+          ],
+          "conferred": "PROPOSED to resolve rq-044 point 1 -- confer, amend, or replace"
+        },
+        {
+          "@id": "c:adjudicator:agreed-dimensions",
+          "@type": "Closure",
+          "proposed": {
+            "rule": "a dimension on which a and b agree (and neither is 0) takes that value unchanged in the PRINTED vector; c's score on it is ignored. c decides only the routed dimensions"
+          },
+          "rationaleSource": [
+            {
+              "cite": "sf:561d9f98cc508540ac309440",
+              "label": "R-S4",
+              "why": "only nonzero disagreement goes to the third rater"
+            }
+          ],
+          "conferred": "PROPOSED to resolve rq-044 point 2 -- confer, amend, or replace"
+        },
+        {
+          "@id": "c:adjudicator:canonical-order",
+          "@type": "Closure",
+          "proposed": {
+            "rule": "route keys, contested_knockouts and PRINTED vector keys are emitted in ascending ECMAScript default sort order (UTF-16 code units) -- the same rule rq-040 conferred for the canonical manifest; contested_knockouts carries no duplicates",
+            "note": "under this rule P10 sorts before P2; a numeric-aware order would be a different value to confer"
+          },
+          "rationaleSource": [
+            {
+              "cite": "sf:dbbb33ba1cf02d1c33737ba5",
+              "label": "C-S3.determinism",
+              "why": "bit-stable, recomputable by anyone from the record -- requires one ordering"
+            }
+          ],
+          "conferred": "PROPOSED to resolve rq-044 point 3 -- confer, amend, or replace"
+        },
+        {
+          "@id": "c:adjudicator:attack-cause",
+          "@type": "Closure",
+          "proposed": {
+            "rule": [
+              "with several replayed attacks, cause names the clause that sorts first (the same canonical order); every attacked dimension still enters contested_knockouts",
+              "two reports on the same clause count once"
+            ],
+            "note": "the ratified union (rq-043) gives Suspended a single cause: string; reporting every clause would need that ratified type amended, so it is not proposed here"
+          },
+          "rationaleSource": [
+            {
+              "cite": "sf:9fee81af3700873cd1fe4c62",
+              "label": "C-S3.W-CS3-D2",
+              "why": "cause: vacuous-pass:<CL> -- one clause"
+            },
+            {
+              "cite": "sf:2e84200d55392b0cd9eea6b2",
+              "label": "R-S5",
+              "why": "registered as a contested knockout on the clause's dimension"
+            }
+          ],
+          "conferred": "PROPOSED to resolve rq-044 point 4 -- confer, amend, or replace"
         }
       ],
       "displayDuties": {
-        "whatRatifyingDoes": "fixes adjudicator's signatures, the variant precedence and the meaning of a tie; W-CS3-N's second half and W-CS3-Δ2 run on the two replay fixtures A9 names"
+        "whatRatifyingDoes": "fixes adjudicator's signatures, the variant precedence, the meaning of a tie, and -- with the four PROPOSED closures -- a single defined output for every permitted input (your rq-044 diagnostic)"
       },
       "amendmentNotes": [
         {
@@ -741,6 +833,13 @@
           "actor": "Aaron",
           "actedAt": "2026-10-01T15:03:23-04:00",
           "note": "(2a) Attack dimensions are always added to contested_knockouts, alongside any zero-knockouts (R-S5: regardless). Precedence is SUSPENDED > WITHHELD > PENDING > PRINTED: a verified attack outranks a contested score, a contested score outranks an awaited rater; no early exit masks a higher variant. (2b) A routed dimension with no c yields rq-031's PENDING variant. (3) The tie definition is ratified as proposed; a tie produces WITHHELD. (4) adjudicate does not carry caller-supplied disposition or readiness: they are absent until method §6.2 is registered as a source (diag:external-method-artifacts stays open); accordingly rq-031's PRINTED carries disposition and readiness as optional, absent until then. Item 1 as proposed."
+        },
+        {
+          "item": "rq-044",
+          "act": "diagnostic-opened",
+          "actor": "Aaron",
+          "actedAt": "2026-10-17T03:38:48-04:00",
+          "note": "OPEN BLOCKING DIAGNOSTIC on rq-044: diag:adjudicator-not-total-over-declared-inputs.\r\nrq-044 accurately reproduces my amendments at rq-033, but the resulting interface is not yet total and deterministic over its declared inputs.\r\nVector = Record<string, Score> does not close the dimension set, and adjudicate accepts arbitrary GradeRecord values plus attacks?: VacuousPassReport[]. The closure does not specify:\r\n1. The required relationship among the dimension-key sets of A, B, and C, or the result when a dimension is missing.\r\n2. How dimensions on which A and B already agree are copied into the complete PRINTED vector.\r\n3. A canonical ordering for route keys and contested_knockouts.\r\n4. Which cause is emitted when more than one replayed attack names a different clause, even though the output permits only one cause.\r\nConsequently, permitted inputs can have no defined output or more than one conforming output, contrary to the claimed purity, recomputability, and “exactly one variant for every input.”\r\nThis diagnostic blocks ratification of rq-044 and its implementation bar. Resolve it either by narrowing the accepted input types with explicit validation and failure behavior, or by conferring complete canonical semantics for these cases. Do not let the implementation choose silently."
         }
       ]
     },
@@ -764,40 +863,41 @@
         "a:LedgerEntry:fields"
       ],
       "standalone": false,
-      "blockedDependencies": [
-        "a:C-S7:W-CS7-D1",
-        "a:C-S7:W-CS7-N"
+      "amendmentOf": [
+        "rq-034",
+        "rq-042"
       ],
-      "awaits": "adj:ledger-hash-kind -- the architect's diagnostic at rq-034; c:ledger:hash-encoding below is rebuilt from that decision",
       "assertions": [
         {
           "@id": "c:ledger:hash-encoding",
           "@type": "Closure",
           "proposed": {
-            "rule": "hash = sha256 hex of the UTF-8 canonical JSON of [seq, prev, payload] (keys sorted, compact separators); kind is NOT in the preimage, as the source states",
+            "rule": "hash = sha256 hex of the UTF-8 canonical JSON of [seq, prev, kind, payload] (keys sorted, compact separators) -- the amended source's four-field preimage",
             "genesis": "the first entry has seq 1 and prev = 64 zeros",
-            "note": "kind outside the preimage means a rewrite of kind alone keeps the hash; checkAppendOnly still refuses it"
+            "consequence": "a rewrite of kind alone changes the hash, so verifyChain fails on the tampered copy (W-CS7-Δ1 holds for every field)"
           },
           "rationaleSource": [
             {
-              "cite": "sf:e36d808c1818fa7be2a81bac",
+              "cite": "sf:e3f7e5ee1e5d9d00765f72c5",
               "label": "C-S7.W-CS7-N",
-              "why": "<H7> = sha256(seq || prev || payload); the chain verifies from genesis -- encoding and genesis unstated"
+              "why": "<H7> = sha256(seq || prev || kind || payload) in the amended source; encoding and genesis unstated"
             }
-          ]
+          ],
+          "conferred": "amended at rq-042 (1), on the source as amended by the architect (rq-038 = A)"
         },
         {
           "@id": "c:ledger:functions",
           "@type": "Closure",
           "proposed": {
             "signatures": [
-              "entryHash(seq: number, prev: string, payload: unknown): string",
+              "entryHash(seq: number, prev: string, kind: string, payload: unknown): string",
               "nextEntry(chain: LedgerEntry[], kind: string, payload: unknown): LedgerEntry",
               "verifyChain(chain: LedgerEntry[]): { ok: true } | { ok: false; seq: number }",
               "checkAppendOnly(before: string, after: string): { ok: true } | { ok: false; code: \"H-LEDGER-01\" }",
               "appendEntry(ledgerPath: string, kind: string, payload: unknown): LedgerEntry"
             ],
             "rules": [
+              "nextEntry and verifyChain use the same four-field preimage as entryHash; a kind-only rewrite fails verifyChain",
               "nextEntry is pure: seq = last seq + 1, prev = last hash (or genesis)",
               "checkAppendOnly: ok iff `after` begins with `before` byte for byte and adds whole JSONL lines",
               "appendEntry reads the JSONL file, appends nextEntry as one line, and never rewrites"
@@ -805,31 +905,48 @@
           },
           "rationaleSource": [
             {
-              "cite": "sf:e36d808c1818fa7be2a81bac",
+              "cite": "sf:e3f7e5ee1e5d9d00765f72c5",
               "label": "C-S7.W-CS7-N",
               "why": "append; the full chain verifies"
             },
             {
-              "cite": "sf:9f984223b2621f0b474bb82a",
+              "cite": "sf:62aa4a4581e469231c1d9473",
               "label": "C-S7.W-CS7-D1",
               "why": "any rewrite -> exit 1, H-LEDGER-01; verification fails on the tampered copy"
             },
             {
-              "cite": "sf:aedf9db9edc7b5e4f5e56e08",
+              "cite": "sf:71860f494bb3520e8cc9d2d2",
               "label": "S5.ledger",
               "why": "append-only JSONL + chain verifier + hooks"
             },
             {
-              "cite": "sf:86402b9818af2825c185d8df",
+              "cite": "sf:c609b548cba8656f1d99e5c0",
               "label": "C-S7.determinism",
               "why": "bit-stable given payload and chain position"
             }
-          ]
+          ],
+          "conferred": "amended at rq-042 (2)-(4): entryHash takes kind; checkAppendOnly and appendEntry as proposed"
         }
       ],
       "displayDuties": {
         "whatRatifyingDoes": "fixes the ledger's functions and the hash encoding two implementations must agree on; the hook's decision is checkAppendOnly, so it is built and tested here"
-      }
+      },
+      "amendmentNotes": [
+        {
+          "item": "rq-034",
+          "act": "diagnostic-opened",
+          "actor": "Aaron",
+          "actedAt": "2026-10-01T15:04:56-04:00",
+          "note": "BLOCKING for ratification of this closure and any C-S7 bar: kind is outside the hash preimage (W-CS7-N), so a kind-only rewrite (registration -> ratification) passes verifyChain, contradicting W-CS7-D1's 'chain verification fails loudly on the tampered copy'. The source is internally inconsistent. Resolution to be decided by adjudication: (A) source amendment adding kind to the preimage; (B) a design closure including kind, with the conflict left open; (C) read D1's chain clause as covering seq/prev/payload, with kind rewrites caught by checkAppendOnly. Items otherwise acceptable as proposed."
+        },
+        {
+          "item": "rq-042",
+          "act": "amended",
+          "actor": "Aaron",
+          "actedAt": "2026-10-17T03:34:49-04:00",
+          "note": "AMEND rq-042. This bundle does not implement my adjudication at rq-038. I selected Option A—amend the source so that kind enters the hash preimage—but rq-042 retains [seq, prev, payload] and an entryHash signature without kind. That is Option C.\r\nAmend and re-register the source as required by Option A, migrate the affected source fragments and dependent records to the new source digest, and rebuild this closure with:\r\n1. hash = sha256 hex of the UTF-8 canonical JSON of [seq, prev, kind, payload], using the previously accepted canonicalization rules.\r\n2. entryHash(seq: number, prev: string, kind: string, payload: unknown): string.\r\n3. nextEntry and verifyChain must use that same four-field preimage. A kind-only rewrite must therefore fail verifyChain.\r\n4. The proposed checkAppendOnly and appendEntry behavior otherwise remains accepted.\r\nThe rebuilt record must bind to the amended source and its new content addresses. Do not carry forward dependencies or fragment identities from the pre-amendment source.\r\nThis is not a new diagnostic. It is a failure to apply the already-decided adjudication. Present the rebuilt, newly addressed record for ratification."
+        }
+      ]
     }
   ],
   "adjudications": [

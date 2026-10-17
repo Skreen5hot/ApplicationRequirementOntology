@@ -9,7 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 WS3 = ROOT / "spike" / "graph" / "ws3"
 GRAPH = ROOT / "spike" / "graph" / "l2" / "srs-ws3.graph.jsonld"
 QUEUE = ROOT / "spike" / "measurements" / "ratification-queue.jsonl"
-DIGEST = "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+REGISTER = ROOT / "spike" / "graph" / "source-register.json"
+DIGEST = next(s["digest"] for s in json.loads(REGISTER.read_text(encoding="utf-8"))["registeredSources"]
+              if s["id"] == "src:srs-spec@2")   # the source WS-3 now binds (2026-10-17 amendment)
 
 
 def _run(*args):
@@ -146,7 +148,7 @@ def test_every_L3_record_and_adjudication_has_one_live_row():
     ids = [r["@id"] for r in l3["records"]] + [a["@id"] for a in l3["adjudications"]]
     queued = _live_rows("spike/graph/l3/srs-ws3.design.candidates.jsonld")
     assert sorted(r["record"] for r in queued) == sorted(ids), "exactly one LIVE row per record"
-    assert {r["batch"] for r in queued} <= {"WS3-2", "WS3-3"}
+    assert {r["batch"] for r in queued} <= {"WS3-2", "WS3-3", "WS3-4"}
     for row in queued:
         assert _run("tools/act.py", "show", row["id"]).returncode == 0, row["id"]
 
@@ -177,21 +179,22 @@ def _load(name):
 
 
 def test_an_L3_bundle_resting_on_a_blocked_assertion_must_disclose_it():
-    """Falsification (Ops finding 2026-10-01, bullet 2), on the state as it stands: the ledger bundle rests on the
-    two C-S7 clauses the architect's rq-034 diagnostic blocks, and discloses them. Remove the disclosure -> refused;
-    lift the block while the disclosure stays -> refused as stale."""
+    """Falsification (Ops finding 2026-10-01, bullet 2). Today nothing the bundles rest on is blocked (the C-S7
+    conflict was resolved by the 2026-10-17 source amendment). Re-open a block on a copy of the L2 graph -> the
+    ledger bundle is refused until it discloses it; disclose with no block -> refused as stale."""
     import copy
     l3 = _load("build_l3")
     g = _graph()
     assert l3.undisclosed_blocked_dependencies(l3.RECORDS, g) == []
-    undisclosed = [{k: v for k, v in r.items() if k != "blockedDependencies"} for r in l3.RECORDS]
-    assert dict(l3.undisclosed_blocked_dependencies(undisclosed, g)) == {
-        "sr:L3:ledger-interface": ["a:C-S7:W-CS7-D1", "a:C-S7:W-CS7-N"]}
-    lifted = copy.deepcopy(g)
-    for d in lifted["diagnostics"]:
+    blocked = copy.deepcopy(g)
+    for d in blocked["diagnostics"]:
         if d["@id"] == "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash":
-            d["status"] = "closed"
-    assert dict(l3.undisclosed_blocked_dependencies(l3.RECORDS, lifted)) == {"sr:L3:ledger-interface": []},         "a stale disclosure (the block lifted) is refused too"
+            d["status"], d["blocking"] = "open", True
+    assert dict(l3.undisclosed_blocked_dependencies(l3.RECORDS, blocked)) == {
+        "sr:L3:ledger-interface": ["a:C-S7:W-CS7-D1", "a:C-S7:W-CS7-N"]}
+    stale = [dict(r, blockedDependencies=["a:C-S7:W-CS7-N"]) if r["@id"] == "sr:L3:ledger-interface" else r
+             for r in l3.RECORDS]
+    assert dict(l3.undisclosed_blocked_dependencies(stale, g)) == {"sr:L3:ledger-interface": []},         "a stale disclosure (no block) is refused too"
 
 
 def test_section_3_coverage_is_derived_from_the_spans_and_lies_in_the_region():
@@ -216,8 +219,9 @@ def test_a_rebuilt_item_supersedes_the_amended_one_and_carries_the_architects_no
     for amended in ("rq-031", "rq-032", "rq-033", "rq-034"):
         end = _live_end(rows, amended)
         assert end != amended and end in {r["id"] for r in live.values()}, (amended, end)
-    assert live["sr:L3:ws3-module-boundaries"]["id"] == "rq-030"
-    assert live["adj:ledger-hooks-repo-home"]["id"] == "rq-035"
+    mb = live["sr:L3:ws3-module-boundaries"]
+    assert mb["supersedes"] == "rq-030" and "RE-RATIFICATION" in mb["displayDuties"]["vacuityClassFlags"][0],         "a conferred item is re-queued only by the source lapse"
+    assert live["adj:ledger-hooks-repo-home"]["id"] == "rq-035" and live["adj:ledger-hash-kind"]["id"] == "rq-038",         "decided adjudications stay bound to the fragments they were decided on"
 
 
 def test_every_amended_row_has_a_successor_bound_to_the_records_current_address():
@@ -237,20 +241,22 @@ def test_every_amended_row_has_a_successor_bound_to_the_records_current_address(
 
 
 def test_the_architects_blocking_diagnostic_is_derived_from_the_act_row():
-    """IA Ops finding 2026-10-01, bullet 1: status and blocking come from rq-034's act, never retyped. Falsified on a
-    copy of the queue: drop BLOCKING from the note -> not blocking; confer a successor -> closed."""
+    """IA Ops finding 2026-10-01, bullet 1: status and blocking come from the architect's act row, never retyped.
+    rq-044's diagnostic is open and blocking from its act; rq-034's is closed by the 2026-10-17 source-amendment record.
+    Falsified on a copy of the queue: drop BLOCKING -> not blocking; confer a successor (one or two hops) -> closed."""
     b2 = _load("build_l2")
-    g = _graph()
-    d = [x for x in g["diagnostics"] if x["@id"] == "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash"][0]
+    g = {d["@id"]: d for d in _graph()["diagnostics"]}
     queue = {json.loads(l)["id"]: json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()}
-    assert d["status"] == "open" and d["blocking"] is True and d["actRecord"]["note"] == queue["rq-034"]["actNote"]
+    d = g["diag:adjudicator-not-total-over-declared-inputs"]
+    assert d["status"] == "open" and d["blocking"] is True and d["actRecord"]["note"] == queue["rq-044"]["actNote"]
+    k = g["diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash"]
+    assert k["status"] == "closed" and k["closedBy"].endswith("2026-10-17-srs-source-amendment-and-registration.md")
     src = [x for x in b2.DIAGNOSTICS if x["@id"] == d["@id"]][0]
-    soft = dict(queue, **{"rq-034": dict(queue["rq-034"], actNote="kind is outside the preimage")})
+    soft = dict(queue, **{"rq-044": dict(queue["rq-044"], actNote="adjudicate is not total")})
     assert b2.raised_by_act(src, soft)["blocking"] is False
-    succ = [r for r in queue.values() if r.get("supersedes") == "rq-034"][0]
+    succ = [r for r in queue.values() if r.get("supersedes") == "rq-044"][0]
     done = dict(queue, **{succ["id"]: dict(succ, act="ratified", actor="Aaron")})
     assert b2.raised_by_act(src, done)["status"] == "closed"
-    # two hops (Ops residual f9c1256): re-queue the successor once more, ratify the new end -> still closed
     rq = dict(queue, **{"rq-999": dict(succ, id="rq-999", supersedes=succ["id"], act="ratified", actor="Aaron")})
     assert b2.raised_by_act(src, rq)["status"] == "closed"
 
@@ -304,8 +310,8 @@ def test_the_queue_never_forks_and_a_fork_is_refused_not_guessed():
     assert len(sup) == len(set(sup)), "a row is superseded twice"
     b2 = _load("build_l2")
     queue = {r["id"]: r for r in rows}
-    src = [x for x in b2.DIAGNOSTICS if x.get("raisedByAct")][0]
-    end = _live_end(rows, "rq-034")
+    src = [x for x in b2.DIAGNOSTICS if x.get("raisedByAct") == "rq-044"][0]
+    end = _live_end(rows, "rq-044")
     forked = dict(queue, **{"rq-998": dict(queue[end], id="rq-998", supersedes=queue[end].get("supersedes"))})
     with pytest.raises(SystemExit, match="forks"):
         b2.raised_by_act(src, forked)

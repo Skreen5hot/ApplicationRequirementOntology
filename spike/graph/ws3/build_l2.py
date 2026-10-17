@@ -23,7 +23,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 FRAGMENTS = HERE / "fragments.json"
 OUT = HERE.parent / "l2" / "srs-ws3.graph.jsonld"
-DIGEST = "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+DIGEST = "sha256:109e1b5026845a573dad17a9fd2ad2e603a2d46175ba2b6d77f17cb18115c614"   # src:srs-spec@2 (2026-10-17 amendment)
 
 N = {"role": "Normative", "force": "obligation", "scope": "in-scope"}
 
@@ -128,10 +128,10 @@ RECORDS = [
                             g("J-S4.chain", "context", "C-S7 appends the ratification event; ratification exists only as a ledger event citing the exact rev"),
                             g("S2.coverage-map", "context", "C-S7 serves J-S1 and J-S4")]},
             {"@id": "a:C-S7:W-CS7-N", "@type": "AcceptanceClause", "witness": "W-CS7-N (nominal)", **N,
-             "statement": "Appending {\"seq\": 7, \"prev\": \"<H6>\", \"kind\": \"registration\", \"payload\": {\"spec\", \"rev\", \"vector\"}, \"hash\": \"<H7>\"} yields an entry where <H7> = sha256(seq || prev || payload) and the full chain verifies from genesis; hashes are masked.",
+             "statement": "Appending {\"seq\": 7, \"prev\": \"<H6>\", \"kind\": \"registration\", \"payload\": {\"spec\", \"rev\", \"vector\"}, \"hash\": \"<H7>\"} yields an entry where <H7> = sha256(seq || prev || kind || payload) and the full chain verifies from genesis; hashes are masked.",
              "input": "a registration payload {spec, rev, vector} at chain position 7",
              "outputs": ["ledger line {seq, prev, kind: \"registration\", payload, hash}"],
-             "properties": ["hash = sha256(seq || prev || payload)", "the full chain verifies from genesis"],
+             "properties": ["hash = sha256(seq || prev || kind || payload)", "the full chain verifies from genesis"],
              "masks": ["prev", "hash"],
              "diagnostic": "diag:hash-preimage-encoding-unstated",
              "groundedBy": [g("C-S7.W-CS7-N")]},
@@ -233,7 +233,7 @@ RECORDS = [
                  {"name": "prev", "examples": ["<H6>"], "groundedIn": ["C-S7.W-CS7-N"]},
                  {"name": "kind", "examples": ["registration", "ratification"], "groundedIn": ["C-S7.W-CS7-N", "J-S4.chain"], "presence": "the value set is not stated as closed"},
                  {"name": "payload", "form": "for a registration: {spec, rev, vector}", "groundedIn": ["C-S7.W-CS7-N", "J-S1.chain"]},
-                 {"name": "hash", "form": "sha256(seq || prev || payload)", "groundedIn": ["C-S7.W-CS7-N"]},
+                 {"name": "hash", "form": "sha256(seq || prev || kind || payload)", "groundedIn": ["C-S7.W-CS7-N"]},
              ],
              "shapeStatedBy": "example only",
              "groundedBy": [g("C-S7.W-CS7-N"), g("J-S4.chain", "context", "the second kind value, ratification")]},
@@ -321,7 +321,7 @@ DIAGNOSTICS = [
      "legalOutputs": "this diagnostic; a replay fixture recorded at freeze 2 (A9 act: 'a C-S5 report')",
      "status": "open"},
     {"@id": "diag:hash-preimage-encoding-unstated", "@type": "MissingInformation", "blocking": False,
-     "statement": "W-CS7-N defines hash = sha256(seq || prev || payload) but does not state how seq and payload are encoded before concatenation (serialization, separator, key order). Two conforming implementations can disagree on every hash.",
+     "statement": "W-CS7-N defines hash = sha256(seq || prev || kind || payload) but does not state how seq, kind and payload are encoded before concatenation (serialization, separator, key order). Two conforming implementations can disagree on every hash.",
      "evidence": ["C-S7.W-CS7-N", "C-S7.determinism"],
      "legalOutputs": "this diagnostic; a labeled closure proposal at L3 for the architect to confer",
      "status": "open"},
@@ -353,7 +353,15 @@ DIAGNOSTICS = [
      "evidence": ["C-S7.W-CS7-N", "C-S7.W-CS7-D1"],
      "blocks": ["a:C-S7:W-CS7-N", "a:C-S7:W-CS7-D1"],
      "raisedByAct": "rq-034",
+     "resolvedByRecord": "docs/decisions/2026-10-17-srs-source-amendment-and-registration.md",
      "legalOutputs": "adj:ledger-hash-kind (A: amend the source; B: design closure against the literal; C: narrow reading of Δ1)",
+     "status": None},   # status and blocking DERIVED from the act row at build (raised_by_act)
+    {"@id": "diag:adjudicator-not-total-over-declared-inputs", "@type": "UnderdeterminationDiagnostic",
+     "cone": ["sr:L3:adjudicator-interface and its implementation bar"],
+     "statement": "adjudicate is not total and deterministic over its declared inputs: the dimension-key relation among a, b and c, how agreed dimensions enter a PRINTED vector, the canonical order of route keys and contested_knockouts, and which cause is emitted when attacks name different clauses are all unstated.",
+     "evidence": ["C-S3.W-CS3-N", "C-S3.determinism", "C-S3.W-CS3-D2", "R-S4"],
+     "blocks": [],
+     "raisedByAct": "rq-044",
      "status": None},   # status and blocking DERIVED from the act row at build (raised_by_act)
     {"@id": "diag:C-S7-determinism-beyond-the-acted-region", "@type": "UnderdeterminationDiagnostic", "blocking": False,
      "cone": ["a:C-S7:determinism, and any ratified bar or oracle for C-S7 that would rest on it"],
@@ -413,6 +421,9 @@ def raised_by_act(diag, queue):
     while at in nxt and at not in seen:
         seen.add(at)
         chain.append(nxt[at]); at = nxt[at]["id"]
+    resolved = diag.get("resolvedByRecord")
+    if resolved and (HERE.parents[2] / resolved).is_file():   # resolution is always an act (ARO s7 lifecycle): here, a source amendment
+        return dict(diag, status="closed", blocking=False, actRecord=rec, closedBy=resolved)
     conferred = [r for r in chain if r.get("act") in ("accepted", "ratified", "decided")]
     if conferred:
         return dict(diag, status="closed", blocking=False, actRecord=rec,
@@ -511,7 +522,7 @@ def build():
         "status": "candidate",
         "title": "SRS adjudication and registration core (WS-3) — what the source says (L2), at capability grain",
         "authoredUnder": "docs/decisions/2026-09-10-phase-1.5-amendments.md — Amendment 2 (the dev agent authors; the architect performs 100% span review; non-graduating); target named by docs/decisions/2026-10-01-a9-ws3-target-naming-act.md",
-        "source": {"registeredAs": "src:srs-spec", "doc": "SPEC.md", "digest": DIGEST, "fragments": "spike/graph/ws3/fragments.json"},
+        "source": {"registeredAs": "src:srs-spec@2", "doc": "SPEC.md", "digest": DIGEST, "fragments": "spike/graph/ws3/fragments.json"},
         "semanticDependencyManifest": {
             "registeredSourceDigests": [DIGEST], "profileVersion": "none — spike, minimum viable fidelity",
             "ontologyModuleVersions": [], "shaclShapeVersions": [], "derivationRuleVersions": [],

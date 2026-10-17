@@ -11,14 +11,14 @@
   "title": "SRS adjudication and registration core (WS-3) — what the source says (L2), at capability grain",
   "authoredUnder": "docs/decisions/2026-09-10-phase-1.5-amendments.md — Amendment 2 (the dev agent authors; the architect performs 100% span review; non-graduating); target named by docs/decisions/2026-10-01-a9-ws3-target-naming-act.md",
   "source": {
-    "registeredAs": "src:srs-spec",
+    "registeredAs": "src:srs-spec@2",
     "doc": "SPEC.md",
-    "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450",
+    "digest": "sha256:109e1b5026845a573dad17a9fd2ad2e603a2d46175ba2b6d77f17cb18115c614",
     "fragments": "spike/graph/ws3/fragments.json"
   },
   "semanticDependencyManifest": {
     "registeredSourceDigests": [
-      "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450"
+      "sha256:109e1b5026845a573dad17a9fd2ad2e603a2d46175ba2b6d77f17cb18115c614"
     ],
     "profileVersion": "none — spike, minimum viable fidelity",
     "ontologyModuleVersions": [],
@@ -94,18 +94,18 @@
           "statement": "The system provides capability C-S2, grade: an agentic capability consisting of one isolated rater invocation.",
           "groundedBy": [
             {
-              "fragment": "sf:3deeb0719e30af97b5379111",
+              "fragment": "sf:ada4bceddd29dc114d0cb0d9",
               "label": "C-S2.header",
               "role": "primary"
             },
             {
-              "fragment": "sf:82a78de8836c7a4b9246b8e2",
+              "fragment": "sf:f2c0e12e5cc28c983c524711",
               "label": "J-S1.chain",
               "role": "context",
               "why": "places C-S2 as step 2 of first-grade: run twice, isolated, raters A and B, each manifest pinned to the rev"
             },
             {
-              "fragment": "sf:916e4ce811d46a73ee359955",
+              "fragment": "sf:2b4b487cea3239884c7c48f7",
               "label": "S2.coverage-map",
               "role": "context",
               "why": "C-S2 serves J-S1 and J-S2"
@@ -126,7 +126,7 @@
           ],
           "groundedBy": [
             {
-              "fragment": "sf:47757633f589803acfb1bb31",
+              "fragment": "sf:dfe6866dede0da326e203052",
               "label": "C-S2.W-CS2-N",
               "role": "primary"
             }
@@ -154,7 +154,7 @@
           "classificationNote": "titled a note, but states properties in the normative register; classified Normative as the slice classified C-S8's note -- the alternative reading (Note) is preserved here",
           "groundedBy": [
             {
-              "fragment": "sf:5dae836de14f6ace5877fd44",
+              "fragment": "sf:e475eb00698748edcce05cf5",
               "label": "C-S2.determinism",
               "role": "primary"
             }
@@ -177,7 +177,7 @@
           ],
           "groundedBy": [
             {
-              "fragment": "sf:db007b6551cf612e2905886a",
+              "fragment": "sf:e0301a7286aab08a2f80adc8",
               "label": "C-S2.W-CS2-D1",
               "role": "primary"
             }
@@ -200,12 +200,12 @@
           ],
           "groundedBy": [
             {
-              "fragment": "sf:13ae423aabfe2f7b13b8ae1e",
+              "fragment": "sf:e3d29ca8c7e181f74e759a35",
               "label": "C-S2.W-CS2-D2",
               "role": "primary"
             },
             {
-              "fragment": "sf:0cc883b9f89ec1148a8ff648",
+              "fragment": "sf:53b4206bf6efea98fe70a917",
               "label": "R-S1",
               "role": "context",
               "why": "the rule this negative witness enforces"
@@ -234,18 +234,18 @@
           "statement": "The system provides capability C-S3, adjudicate.",
           "groundedBy": [
             {
-              "fragment": "sf:28fc6e4465578b366f300946",
+              "fragment": "sf:c4caac33629704e6ce227834",
               "label": "C-S3.header",
               "role": "primary"
             },
             {
-              "fragment": "sf:82a78de8836c7a4b9246b8e2",
+              "fragment": "sf:f2c0e12e5cc28c983c524711",
               "label": "J-S1.chain",
               "role": "context",
               "why": "places C-S3 as step 3 of first-grade: adjudicates the two grade records into an adjudicated report"
             },
             {
-              "fragment": "sf:916e4ce811d46a73ee359955",
+              "fragment": "sf:2b4b487cea3239884c7c48f7",
               "label": "S2.coverage-map",
               "role": "context",
               "why": "C-S3 serves J-S1, J-S2 and J-S3"
@@ -268,12 +268,12 @@
           "diagnostic": "diag:W-CS3-N-third-rater-is-agentic",
           "groundedBy": [
             {
-              "fragment": "sf:6205b00ff462d1dad846243a",
+              "fragment": "sf:3db581d9f8478263003ecd15",
               "label": "C-S3.W-CS3-N",
               "role": "primary"
             },
             {
-              "fragment": "sf:987099f8fce37300374287eb",
+              "fragment": "sf:561d9f98cc508540ac309440",
               "label": "R-S4",
               "role": "context",
               "why": "the routing rule this witness satisfies"
@@ -296,12 +296,12 @@
           "classificationNote": "titled a note, but states a property in the normative register; classified Normative -- the alternative reading (Note) is preserved here",
           "groundedBy": [
             {
-              "fragment": "sf:6ed6d94913883ea72c51b736",
+              "fragment": "sf:dbbb33ba1cf02d1c33737ba5",
               "label": "C-S3.determinism",
               "role": "primary"
             },
             {
-              "fragment": "sf:1e788ea0fcfeb504275c7019",
+              "fragment": "sf:4e154e3a843ea34f9b55e150",
               "label": "V-S2",
               "role": "context",
               "why": "the invariant that pins this property at the report level"
@@ -325,12 +325,12 @@
           ],
           "groundedBy": [
             {
-              "fragment": "sf:c4e7d8ea368abc0260d818a0",
+              "fragment": "sf:dc8a98167d56ae8b3156e7c0",
               "label": "C-S3.W-CS3-D1",
               "role": "primary"
             },
             {
-              "fragment": "sf:987099f8fce37300374287eb",
+              "fragment": "sf:561d9f98cc508540ac309440",
               "label": "R-S4",
               "role": "context",
               "why": "either-rater zero -> contested knockout -> human queue"
@@ -352,12 +352,12 @@
           "diagnostic": "diag:W-CS3-D2-needs-a-C-S5-report",
           "groundedBy": [
             {
-              "fragment": "sf:6b8ef108d4bdbe8cae32cb24",
+              "fragment": "sf:9fee81af3700873cd1fe4c62",
               "label": "C-S3.W-CS3-D2",
               "role": "primary"
             },
             {
-              "fragment": "sf:f057a2bd775d30f4a73d9b9d",
+              "fragment": "sf:2e84200d55392b0cd9eea6b2",
               "label": "R-S5",
               "role": "context",
               "why": "the rule this witness satisfies"
@@ -386,24 +386,24 @@
           "statement": "The system provides capability C-S7, register (ledger); this capability plus its store is method O-02.",
           "groundedBy": [
             {
-              "fragment": "sf:6359cae95790fe178b3ebd78",
+              "fragment": "sf:1ae83822a0b8f53660112004",
               "label": "C-S7.header",
               "role": "primary"
             },
             {
-              "fragment": "sf:82a78de8836c7a4b9246b8e2",
+              "fragment": "sf:f2c0e12e5cc28c983c524711",
               "label": "J-S1.chain",
               "role": "context",
               "why": "places C-S7 as step 4 of first-grade: appends the registration with payload.rev = the rev graded"
             },
             {
-              "fragment": "sf:51a7633603d61f4e36ca2b60",
+              "fragment": "sf:ee62881e7dab71a1e4801135",
               "label": "J-S4.chain",
               "role": "context",
               "why": "C-S7 appends the ratification event; ratification exists only as a ledger event citing the exact rev"
             },
             {
-              "fragment": "sf:916e4ce811d46a73ee359955",
+              "fragment": "sf:2b4b487cea3239884c7c48f7",
               "label": "S2.coverage-map",
               "role": "context",
               "why": "C-S7 serves J-S1 and J-S4"
@@ -417,13 +417,13 @@
           "role": "Normative",
           "force": "obligation",
           "scope": "in-scope",
-          "statement": "Appending {\"seq\": 7, \"prev\": \"<H6>\", \"kind\": \"registration\", \"payload\": {\"spec\", \"rev\", \"vector\"}, \"hash\": \"<H7>\"} yields an entry where <H7> = sha256(seq || prev || payload) and the full chain verifies from genesis; hashes are masked.",
+          "statement": "Appending {\"seq\": 7, \"prev\": \"<H6>\", \"kind\": \"registration\", \"payload\": {\"spec\", \"rev\", \"vector\"}, \"hash\": \"<H7>\"} yields an entry where <H7> = sha256(seq || prev || kind || payload) and the full chain verifies from genesis; hashes are masked.",
           "input": "a registration payload {spec, rev, vector} at chain position 7",
           "outputs": [
             "ledger line {seq, prev, kind: \"registration\", payload, hash}"
           ],
           "properties": [
-            "hash = sha256(seq || prev || payload)",
+            "hash = sha256(seq || prev || kind || payload)",
             "the full chain verifies from genesis"
           ],
           "masks": [
@@ -433,7 +433,7 @@
           "diagnostic": "diag:hash-preimage-encoding-unstated",
           "groundedBy": [
             {
-              "fragment": "sf:e36d808c1818fa7be2a81bac",
+              "fragment": "sf:e3f7e5ee1e5d9d00765f72c5",
               "label": "C-S7.W-CS7-N",
               "role": "primary"
             }
@@ -456,12 +456,12 @@
           ],
           "groundedBy": [
             {
-              "fragment": "sf:9f984223b2621f0b474bb82a",
+              "fragment": "sf:62aa4a4581e469231c1d9473",
               "label": "C-S7.W-CS7-D1",
               "role": "primary"
             },
             {
-              "fragment": "sf:590259498f7dac6171526d27",
+              "fragment": "sf:3a92ed602072ec5fbf509b75",
               "label": "V-S1",
               "role": "context",
               "why": "append-only over ledger/** is the invariant this witness defends"
@@ -483,7 +483,7 @@
           "classificationNote": "titled a note, but states a property in the normative register; classified Normative -- the alternative reading (Note) is preserved here",
           "groundedBy": [
             {
-              "fragment": "sf:86402b9818af2825c185d8df",
+              "fragment": "sf:c609b548cba8656f1d99e5c0",
               "label": "C-S7.determinism",
               "role": "primary"
             }
@@ -515,7 +515,7 @@
           ],
           "groundedBy": [
             {
-              "fragment": "sf:0cc883b9f89ec1148a8ff648",
+              "fragment": "sf:53b4206bf6efea98fe70a917",
               "label": "R-S1",
               "role": "primary"
             }
@@ -532,7 +532,7 @@
           "pinnedBy": "a:C-S2:W-CS2-D2",
           "groundedBy": [
             {
-              "fragment": "sf:bc48bb37af496302d125f52f",
+              "fragment": "sf:b5487b545ab6fd5b3148f742",
               "label": "V-S3",
               "role": "primary"
             }
@@ -565,7 +565,7 @@
           "absence": "the third-rater-tie branch (-> human) has no witness in the source -- see diag:third-rater-tie-unwitnessed",
           "groundedBy": [
             {
-              "fragment": "sf:987099f8fce37300374287eb",
+              "fragment": "sf:561d9f98cc508540ac309440",
               "label": "R-S4",
               "role": "primary"
             }
@@ -583,7 +583,7 @@
           "sourceNote": "this, not bit-identical model output, is what 'a grade is reproducible' means; model-output stability is O-03's measurement (source's own words)",
           "groundedBy": [
             {
-              "fragment": "sf:1e788ea0fcfeb504275c7019",
+              "fragment": "sf:4e154e3a843ea34f9b55e150",
               "label": "V-S2",
               "role": "primary"
             }
@@ -614,7 +614,7 @@
           ],
           "groundedBy": [
             {
-              "fragment": "sf:f057a2bd775d30f4a73d9b9d",
+              "fragment": "sf:2e84200d55392b0cd9eea6b2",
               "label": "R-S5",
               "role": "primary"
             }
@@ -646,7 +646,7 @@
           "scopeNote": "the render side is witnessed at Part II W-JO1, outside the A9 region; only the single-rater limb is in scope here",
           "groundedBy": [
             {
-              "fragment": "sf:061c635a46fe2630cab542ab",
+              "fragment": "sf:08d077c6d8ccb27967768865",
               "label": "R-S6",
               "role": "primary"
             }
@@ -673,7 +673,7 @@
           "statement": "GradeRecord is an event record, per W-CS2-N.",
           "groundedBy": [
             {
-              "fragment": "sf:bbdecf529e21b598e5c59b46",
+              "fragment": "sf:162a750732338b20a7226ba7",
               "label": "S4.records",
               "role": "primary"
             }
@@ -779,12 +779,12 @@
           "diagnostic": "diag:GradeRecord-fields-by-example",
           "groundedBy": [
             {
-              "fragment": "sf:47757633f589803acfb1bb31",
+              "fragment": "sf:dfe6866dede0da326e203052",
               "label": "C-S2.W-CS2-N",
               "role": "primary"
             },
             {
-              "fragment": "sf:f4c270ddbe30b32ab710802a",
+              "fragment": "sf:40bd771b2bdf17c828339bf4",
               "label": "S6.S-S2",
               "role": "primary"
             }
@@ -811,12 +811,12 @@
           "statement": "LedgerEntry is an event record and is hash-chained.",
           "groundedBy": [
             {
-              "fragment": "sf:bbdecf529e21b598e5c59b46",
+              "fragment": "sf:162a750732338b20a7226ba7",
               "label": "S4.records",
               "role": "primary"
             },
             {
-              "fragment": "sf:590259498f7dac6171526d27",
+              "fragment": "sf:3a92ed602072ec5fbf509b75",
               "label": "V-S1",
               "role": "context",
               "why": "append-only over ledger/** is the invariant the record's classification points at"
@@ -876,7 +876,7 @@
             },
             {
               "name": "hash",
-              "form": "sha256(seq || prev || payload)",
+              "form": "sha256(seq || prev || kind || payload)",
               "groundedIn": [
                 "C-S7.W-CS7-N"
               ]
@@ -885,12 +885,12 @@
           "shapeStatedBy": "example only",
           "groundedBy": [
             {
-              "fragment": "sf:e36d808c1818fa7be2a81bac",
+              "fragment": "sf:e3f7e5ee1e5d9d00765f72c5",
               "label": "C-S7.W-CS7-N",
               "role": "primary"
             },
             {
-              "fragment": "sf:51a7633603d61f4e36ca2b60",
+              "fragment": "sf:ee62881e7dab71a1e4801135",
               "label": "J-S4.chain",
               "role": "context",
               "why": "the second kind value, ratification"
@@ -925,12 +925,12 @@
           },
           "groundedBy": [
             {
-              "fragment": "sf:f0346097494b52371f29054f",
+              "fragment": "sf:75e1066eb97d2e7b2407e0d9",
               "label": "S5.grader-runner",
               "role": "primary"
             },
             {
-              "fragment": "sf:6a78e67028f988a49aa9f336",
+              "fragment": "sf:43d2987a1c7d11e9408f4a98",
               "label": "S5.table-header",
               "role": "definition",
               "why": "names the columns: Component, Repo home, Serves"
@@ -965,12 +965,12 @@
           },
           "groundedBy": [
             {
-              "fragment": "sf:fc11a2828a2a134ddaf16fa3",
+              "fragment": "sf:67479c23437989d6f316d343",
               "label": "S5.adjudicator",
               "role": "primary"
             },
             {
-              "fragment": "sf:6a78e67028f988a49aa9f336",
+              "fragment": "sf:43d2987a1c7d11e9408f4a98",
               "label": "S5.table-header",
               "role": "definition",
               "why": "names the columns: Component, Repo home, Serves"
@@ -1008,12 +1008,12 @@
           },
           "groundedBy": [
             {
-              "fragment": "sf:aedf9db9edc7b5e4f5e56e08",
+              "fragment": "sf:71860f494bb3520e8cc9d2d2",
               "label": "S5.ledger",
               "role": "primary"
             },
             {
-              "fragment": "sf:6a78e67028f988a49aa9f336",
+              "fragment": "sf:43d2987a1c7d11e9408f4a98",
               "label": "S5.table-header",
               "role": "definition",
               "why": "names the columns: Component, Repo home, Serves"
@@ -1029,7 +1029,7 @@
           "statement": "Every component is traceable to the capabilities it serves; no component serves nothing.",
           "groundedBy": [
             {
-              "fragment": "sf:0b3c700c6c80dcd0b3992c92",
+              "fragment": "sf:12624c8e95a21671e43533b4",
               "label": "S5.traceable",
               "role": "primary"
             }
@@ -1083,12 +1083,12 @@
           },
           "groundedBy": [
             {
-              "fragment": "sf:f4c270ddbe30b32ab710802a",
+              "fragment": "sf:40bd771b2bdf17c828339bf4",
               "label": "S6.S-S2",
               "role": "primary"
             },
             {
-              "fragment": "sf:a7525cc01ee6cac18dc9cc35",
+              "fragment": "sf:37fe50e745b2852d4de4df77",
               "label": "S6.table-header",
               "role": "definition",
               "why": "names the columns: Seam, Producer → Consumer, Contract, Crossing example, Status"
@@ -1130,12 +1130,12 @@
           "absence": "the consumer, orchestrator, is outside the A9 region -- see diag:out-of-region-endpoints",
           "groundedBy": [
             {
-              "fragment": "sf:88f847589387e33900fa6a62",
+              "fragment": "sf:199a750ba67e459664b75b25",
               "label": "S6.S-S3",
               "role": "primary"
             },
             {
-              "fragment": "sf:a7525cc01ee6cac18dc9cc35",
+              "fragment": "sf:37fe50e745b2852d4de4df77",
               "label": "S6.table-header",
               "role": "definition",
               "why": "names the columns"
@@ -1171,12 +1171,12 @@
           "absence": "the producer, orchestrator, is outside the A9 region -- see diag:out-of-region-endpoints",
           "groundedBy": [
             {
-              "fragment": "sf:94787cd76ffd6aebedb51605",
+              "fragment": "sf:d5b460da140fcc69d980506d",
               "label": "S6.S-S6",
               "role": "primary"
             },
             {
-              "fragment": "sf:e36d808c1818fa7be2a81bac",
+              "fragment": "sf:e3f7e5ee1e5d9d00765f72c5",
               "label": "C-S7.W-CS7-N",
               "role": "definition",
               "why": "the crossing example the seam row points to"
@@ -1196,8 +1196,8 @@
       ],
       "statement": "C-S3's routing limb is a pure function, but W-CS3-N's second half runs rater C -- the adjudicator component is 'pure routing fn + third-rater invocation'. A live acceptance test of the whole witness depends on an agentic invocation; a deterministic one needs a replayed rater-C record.",
       "evidence": [
-        "sf:6205b00ff462d1dad846243a",
-        "sf:fc11a2828a2a134ddaf16fa3"
+        "sf:3db581d9f8478263003ecd15",
+        "sf:67479c23437989d6f316d343"
       ],
       "legalOutputs": "this diagnostic; a replay fixture recorded at freeze 2 (A9 act: 'a third-rater record')",
       "status": "open"
@@ -1211,8 +1211,8 @@
       ],
       "statement": "W-CS3-Δ2's input includes a replayed stub report from C-S5 (attack), which is outside the A9 region. The source does not state the report's shape in the region.",
       "evidence": [
-        "sf:6b8ef108d4bdbe8cae32cb24",
-        "sf:f057a2bd775d30f4a73d9b9d"
+        "sf:9fee81af3700873cd1fe4c62",
+        "sf:2e84200d55392b0cd9eea6b2"
       ],
       "legalOutputs": "this diagnostic; a replay fixture recorded at freeze 2 (A9 act: 'a C-S5 report')",
       "status": "open"
@@ -1221,10 +1221,10 @@
       "@id": "diag:hash-preimage-encoding-unstated",
       "@type": "MissingInformation",
       "blocking": false,
-      "statement": "W-CS7-N defines hash = sha256(seq || prev || payload) but does not state how seq and payload are encoded before concatenation (serialization, separator, key order). Two conforming implementations can disagree on every hash.",
+      "statement": "W-CS7-N defines hash = sha256(seq || prev || kind || payload) but does not state how seq, kind and payload are encoded before concatenation (serialization, separator, key order). Two conforming implementations can disagree on every hash.",
       "evidence": [
-        "sf:e36d808c1818fa7be2a81bac",
-        "sf:86402b9818af2825c185d8df"
+        "sf:e3f7e5ee1e5d9d00765f72c5",
+        "sf:c609b548cba8656f1d99e5c0"
       ],
       "legalOutputs": "this diagnostic; a labeled closure proposal at L3 for the architect to confer",
       "status": "open"
@@ -1235,9 +1235,9 @@
       "blocking": false,
       "statement": "R-S4's branch 'a third-rater tie -> human' has no witness; neither W-CS3-N nor W-CS3-Δ1 exercises it, and the source does not define a tie among three raters.",
       "evidence": [
-        "sf:987099f8fce37300374287eb",
-        "sf:6205b00ff462d1dad846243a",
-        "sf:c4e7d8ea368abc0260d818a0"
+        "sf:561d9f98cc508540ac309440",
+        "sf:3db581d9f8478263003ecd15",
+        "sf:dc8a98167d56ae8b3156e7c0"
       ],
       "status": "open"
     },
@@ -1247,9 +1247,9 @@
       "blocking": false,
       "statement": "GradeRecord's fields are stated only through two literal examples, which differ: model, disposition and readiness appear in W-CS2-N but not in the S-S2 crossing example. Whether they are optional, and whether the field set is closed, is not stated.",
       "evidence": [
-        "sf:bbdecf529e21b598e5c59b46",
-        "sf:47757633f589803acfb1bb31",
-        "sf:f4c270ddbe30b32ab710802a"
+        "sf:162a750732338b20a7226ba7",
+        "sf:dfe6866dede0da326e203052",
+        "sf:40bd771b2bdf17c828339bf4"
       ],
       "status": "open"
     },
@@ -1262,9 +1262,9 @@
       ],
       "statement": "The orchestrator (SRS s5, 'state machine over J-S1-J-S4') is the consumer of S-S3 and the producer of S-S6 but is not in the A9 region. The region's seams therefore have one in-region endpoint each; FX-SEAM-B over them is partial by construction unless a harness stands in for the orchestrator.",
       "evidence": [
-        "sf:88f847589387e33900fa6a62",
-        "sf:94787cd76ffd6aebedb51605",
-        "sf:0b3c700c6c80dcd0b3992c92"
+        "sf:199a750ba67e459664b75b25",
+        "sf:d5b460da140fcc69d980506d",
+        "sf:12624c8e95a21671e43533b4"
       ],
       "status": "open"
     },
@@ -1274,10 +1274,10 @@
       "blocking": false,
       "statement": "W-CS2-N's manifest, R-S1 and the C-S2 determinism note cite method/v0.4.md, skills/fspec-method and method s6.2 / s6.3, none of which is in the registered source. What 'recompute per method s6.2' computes is therefore not stated in the region.",
       "evidence": [
-        "sf:47757633f589803acfb1bb31",
-        "sf:5dae836de14f6ace5877fd44",
-        "sf:0cc883b9f89ec1148a8ff648",
-        "sf:c4e7d8ea368abc0260d818a0"
+        "sf:dfe6866dede0da326e203052",
+        "sf:e475eb00698748edcce05cf5",
+        "sf:53b4206bf6efea98fe70a917",
+        "sf:dc8a98167d56ae8b3156e7c0"
       ],
       "status": "open"
     },
@@ -1291,8 +1291,8 @@
       ],
       "statement": "SRS s5 homes the ledger at ledger/ and .githooks/; the hook half (W-CS7-Δ1: 'hook exit 1') is a git hook, not a module a TypeScript build emits. Like the slice's author-agent, the source is univocal and the conflict is with the factory's realization; it is recorded, not resolved, here.",
       "evidence": [
-        "sf:aedf9db9edc7b5e4f5e56e08",
-        "sf:9f984223b2621f0b474bb82a"
+        "sf:71860f494bb3520e8cc9d2d2",
+        "sf:62aa4a4581e469231c1d9473"
       ],
       "status": "open"
     },
@@ -1304,22 +1304,48 @@
       ],
       "statement": "W-CS7-N puts kind outside the hash preimage (sha256(seq || prev || payload)); W-CS7-Δ1 says chain verification fails loudly on ANY rewrite of an existing line. A kind-only rewrite keeps every hash, so the two cannot both hold. Source-internal.",
       "evidence": [
-        "sf:e36d808c1818fa7be2a81bac",
-        "sf:9f984223b2621f0b474bb82a"
+        "sf:e3f7e5ee1e5d9d00765f72c5",
+        "sf:62aa4a4581e469231c1d9473"
       ],
       "blocks": [
         "a:C-S7:W-CS7-N",
         "a:C-S7:W-CS7-D1"
       ],
       "raisedByAct": "rq-034",
+      "resolvedByRecord": "docs/decisions/2026-10-17-srs-source-amendment-and-registration.md",
       "legalOutputs": "adj:ledger-hash-kind (A: amend the source; B: design closure against the literal; C: narrow reading of Δ1)",
-      "status": "open",
-      "blocking": true,
+      "status": "closed",
+      "blocking": false,
       "actRecord": {
         "item": "rq-034",
         "actor": "Aaron",
         "actedAt": "2026-10-01T15:04:56-04:00",
         "note": "BLOCKING for ratification of this closure and any C-S7 bar: kind is outside the hash preimage (W-CS7-N), so a kind-only rewrite (registration -> ratification) passes verifyChain, contradicting W-CS7-D1's 'chain verification fails loudly on the tampered copy'. The source is internally inconsistent. Resolution to be decided by adjudication: (A) source amendment adding kind to the preimage; (B) a design closure including kind, with the conflict left open; (C) read D1's chain clause as covering seq/prev/payload, with kind rewrites caught by checkAppendOnly. Items otherwise acceptable as proposed."
+      },
+      "closedBy": "docs/decisions/2026-10-17-srs-source-amendment-and-registration.md"
+    },
+    {
+      "@id": "diag:adjudicator-not-total-over-declared-inputs",
+      "@type": "UnderdeterminationDiagnostic",
+      "cone": [
+        "sr:L3:adjudicator-interface and its implementation bar"
+      ],
+      "statement": "adjudicate is not total and deterministic over its declared inputs: the dimension-key relation among a, b and c, how agreed dimensions enter a PRINTED vector, the canonical order of route keys and contested_knockouts, and which cause is emitted when attacks name different clauses are all unstated.",
+      "evidence": [
+        "sf:3db581d9f8478263003ecd15",
+        "sf:dbbb33ba1cf02d1c33737ba5",
+        "sf:9fee81af3700873cd1fe4c62",
+        "sf:561d9f98cc508540ac309440"
+      ],
+      "blocks": [],
+      "raisedByAct": "rq-044",
+      "status": "open",
+      "blocking": true,
+      "actRecord": {
+        "item": "rq-044",
+        "actor": "Aaron",
+        "actedAt": "2026-10-17T03:38:48-04:00",
+        "note": "OPEN BLOCKING DIAGNOSTIC on rq-044: diag:adjudicator-not-total-over-declared-inputs.\r\nrq-044 accurately reproduces my amendments at rq-033, but the resulting interface is not yet total and deterministic over its declared inputs.\r\nVector = Record<string, Score> does not close the dimension set, and adjudicate accepts arbitrary GradeRecord values plus attacks?: VacuousPassReport[]. The closure does not specify:\r\n1. The required relationship among the dimension-key sets of A, B, and C, or the result when a dimension is missing.\r\n2. How dimensions on which A and B already agree are copied into the complete PRINTED vector.\r\n3. A canonical ordering for route keys and contested_knockouts.\r\n4. Which cause is emitted when more than one replayed attack names a different clause, even though the output permits only one cause.\r\nConsequently, permitted inputs can have no defined output or more than one conforming output, contrary to the claimed purity, recomputability, and “exactly one variant for every input.”\r\nThis diagnostic blocks ratification of rq-044 and its implementation bar. Resolve it either by narrowing the accepted input types with explicit validation and failure behavior, or by conferring complete canonical semantics for these cases. Do not let the implementation choose silently."
       }
     },
     {
@@ -1331,8 +1357,8 @@
       ],
       "statement": "a:C-S7:determinism is grounded on line 76 (C-S7's determinism note), one line beyond the A9 act's '73–75'. C-S2's and C-S3's determinism notes lie inside the region, so the bound may be a transcription boundary rather than a decision to exclude -- but that is the architect's to say. Either the act's region is amended to 73–76, or the clause leaves the record.",
       "evidence": [
-        "sf:86402b9818af2825c185d8df",
-        "sf:6359cae95790fe178b3ebd78"
+        "sf:c609b548cba8656f1d99e5c0",
+        "sf:1ae83822a0b8f53660112004"
       ],
       "legalOutputs": "an architect act amending A9's region (the clause stays), or a decision at rq-017 to drop the clause (it moves to coverage.notYetCovered); no C-S7 bar or oracle rests on it until then (Ops finding 2026-10-01, bullet 7)",
       "status": "closed",

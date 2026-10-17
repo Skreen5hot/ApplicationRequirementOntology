@@ -268,6 +268,11 @@ def render_show(q, row):
             for ck in ("consequenceForTheSpike", "consequence"):     # the slice and WS-3 adjudications name it differently
                 if o.get(ck):
                     L.append(_wrap(o[ck], "        consequence: "))
+            # the same rule one level down: any other key an option carries (e.g. the `files` a decision fixes) is
+            # bound by the act, so it is shown
+            for key, val in o.items():
+                if key not in ("id", "label", "content", "consequence", "consequenceForTheSpike") and val not in (None, "", [], {}):
+                    L.append(_wrap(_value(val), "        %s: " % key))
         L.append("")
     if rec is None and row.get("record"):
         L.append("  (record %s not found in %s)" % (row["record"], row.get("artifact")))

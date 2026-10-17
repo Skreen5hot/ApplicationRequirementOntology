@@ -326,9 +326,11 @@ ADJUDICATIONS = [
         "options": [
             {"id": "A", "label": "Factory layout, as rq-035 did for the ledger",
              "content": "grader-runner is src/grader-runner.ts and adjudicator is src/adjudicator.ts. The accepted homes tools/grader-runner/ and tools/adjudicator/ are listed in plan.json as departed from, by this decision.",
+             "files": {"grading-types": "src/grading-types.ts", "grader-runner": "src/grader-runner.ts", "adjudicator": "src/adjudicator.ts"},
              "consequence": "the queued bars and oracles (rq-067..rq-072) stand as written and WS-3 can project once they are acted. The built tree does not follow s5's layout for these two components; the departure is recorded in the plan, not hidden."},
             {"id": "B", "label": "Honour the accepted L2 homes",
              "content": "grader-runner is tools/grader-runner/grader-runner.ts and adjudicator is tools/adjudicator/adjudicator.ts (the file name inside each home is model-proposed; the home is the source's).",
+             "files": {"grading-types": "src/grading-types.ts", "grader-runner": "tools/grader-runner/grader-runner.ts", "adjudicator": "tools/adjudicator/adjudicator.ts"},
              "consequence": "the built tree follows s5 for both. The adjudicator bar (rq-067) and the C-S3 oracle (rq-069) import ../src/adjudicator.ts, so both are rewritten and re-queued: Ops re-verifies them and C-S3's acts move to a later sitting."},
             {"id": "C", "label": "Source-amendment request",
              "content": "ask the SRS author to restate s5's homes for the build.",

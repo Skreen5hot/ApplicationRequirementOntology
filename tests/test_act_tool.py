@@ -260,13 +260,14 @@ def test_show_prints_every_field_of_an_adjudication_not_a_whitelist(repo, capsys
     adj = {"@id": "adj:y", "@type": "Adjudication", "notACandidate": True, "conflict": "diag:y",
            "theFactorySays": {"value": "FACTORY-SIDE-ZQ"}, "precedents": ["PRECEDENT-ZQ"],
            "aFieldNobodyNamedYet": "UNNAMED-ZQ", "decision": None,
-           "options": [{"id": "A", "label": "one", "consequence": "c"}]}
+           "options": [{"id": "A", "label": "one", "consequence": "c", "files": {"m": "OPTION-FILE-ZQ.ts"}}]}
     art.write_text(json.dumps({"adjudications": [adj]}), encoding="utf-8")
     _add_item(repo, id="rq-912", batch="BX", queuedAt="2026-10-17T00:00:00-04:00", kind="Adjudication", record="adj:y",
               artifact="spike/adj2.jsonld", recordDigest=act.digest(adj), options=["A: one"])
     assert act.main(["--root", str(repo), "show", "rq-912"]) == 0
     out = capsys.readouterr().out
-    for shown in ("theFactorySays:", "FACTORY-SIDE-ZQ", "precedents:", "PRECEDENT-ZQ", "aFieldNobodyNamedYet:", "UNNAMED-ZQ"):
+    for shown in ("theFactorySays:", "FACTORY-SIDE-ZQ", "precedents:", "PRECEDENT-ZQ", "aFieldNobodyNamedYet:", "UNNAMED-ZQ",
+                  "files:", "OPTION-FILE-ZQ.ts"):     # an option's own extra keys too (the files a decision fixes)
         assert shown in out, shown
     for hidden in ("notACandidate:", "@type:", "decision:"):
         assert hidden not in out, hidden

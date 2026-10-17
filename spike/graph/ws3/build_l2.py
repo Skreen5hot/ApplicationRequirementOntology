@@ -490,7 +490,8 @@ def build():
     #  derived range is pinned by test_section_3_coverage_is_derived_... -- Ops showed a guard here was dead code)
     section3 = ", ".join("%s (%d–%d)" % (cap, min(v), max(v)) for cap, v in spans.items())
     ws3 = dict(WS3, target=dict(WS3["target"], regionLines=region, regionSource="the verbatim act record, parsed at build",
-               amendments=[str(a.relative_to(HERE.parents[2])).replace("\\", "/") for a in AMENDMENTS]),
+               amendments=[str(a.relative_to(HERE.parents[2])).replace("\\", "/") for a in AMENDMENTS],
+               restatedBy="docs/decisions/2026-10-17-a9-restatement.md"),
                beyondRegion=beyond)
 
     def resolve(obj):

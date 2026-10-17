@@ -315,3 +315,16 @@ def test_the_queue_never_forks_and_a_fork_is_refused_not_guessed():
     forked = dict(queue, **{"rq-998": dict(queue[end], id="rq-998", supersedes=queue[end].get("supersedes"))})
     with pytest.raises(SystemExit, match="forks"):
         b2.raised_by_act(src, forked)
+
+
+def test_the_A9_restatement_names_the_region_and_digest_the_graph_uses():
+    """2026-10-17: the architect re-anchored A9 to src:srs-spec@2. The restatement's quoted region and digest must be
+    the ones the graph carries -- read from the record, never retyped."""
+    import re
+    g = _graph()
+    rec = ROOT / g["ws3"]["target"]["restatedBy"]
+    quoted = " ".join(l[1:].strip() for l in rec.read_text(encoding="utf-8").splitlines() if l.startswith(">"))
+    m = re.search(r"lines (\d+)[–-](\d+) and (\d+)[–-](\d+)", quoted)
+    a, b, c, d = map(int, m.groups())
+    assert [[a, b], [c, d]] == g["ws3"]["target"]["regionLines"]
+    assert ("sha256:" + re.search(r"sha256 ([0-9a-f]{64})", quoted).group(1)) == g["source"]["digest"] == DIGEST

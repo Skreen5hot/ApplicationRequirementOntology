@@ -59,7 +59,8 @@
       "regionSource": "the verbatim act record, parsed at build",
       "amendments": [
         "docs/decisions/2026-10-01-a9-region-amendment.md"
-      ]
+      ],
+      "restatedBy": "docs/decisions/2026-10-17-a9-restatement.md"
     },
     "demonstrationControlCandidate": {
       "capability": "C-S2",

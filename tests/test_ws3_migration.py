@@ -106,29 +106,26 @@ def test_the_set_re_mints_byte_for_byte():
     assert r.returncode == 0, r.stderr + r.stdout
 
 
-def test_minting_honours_the_per_source_override_and_an_unreadable_source_is_a_legible_lapse(tmp_path):
+def test_minting_honours_the_per_source_override_and_an_unreadable_source_is_a_legible_lapse(tmp_path, bound_source):
     sys.path.insert(0, str(ROOT / "spike" / "graph"))
     import fragments as F
     spans = _load(WS3 / "spans.json")
+    digest = spans["expectedDigest"]
     copy_of_source = tmp_path / "amended.md"
     # seeded THROUGH source_doc (the verifier's binding), never by reading the registered path itself
-    copy_of_source.write_bytes(F.source_doc(spans["doc"], spans["expectedDigest"]).read_bytes())
-    key = "ARO_SOURCE_DOC_" + spans["expectedDigest"].split(":")[-1][:8].upper()
+    copy_of_source.write_bytes(F.source_doc(spans["doc"], digest).read_bytes())
     alt = tmp_path / "spans.json"
     alt.write_text(json.dumps(dict(spans, doc=str(tmp_path / "nowhere" / "SPEC.md"))), encoding="utf-8")
-    env_before = dict(os.environ)
-    try:
-        os.environ.pop("ARO_SOURCE_DOC", None)
-        os.environ.pop(key, None)                           # neither override: the registered path alone is read
-        with pytest.raises(F.Refused, match="every fragment lapses"):
-            F.extract(alt)                                  # the registered path is unreadable -> legible, no traceback
-        os.environ[key] = str(copy_of_source)
-        minted = F.extract(alt)                             # the per-source override binds this generation only
-        assert minted["source"]["digest"] == spans["expectedDigest"]
-        assert F.source_doc("anything", "sha256:2428b115" + "0" * 56) == Path("anything"), "other generations unaffected"
-    finally:
-        os.environ.clear()
-        os.environ.update(env_before)
+    bound_source.unbind_global()
+    bound_source.unbind(digest)                             # neither override: the registered path alone is read
+    with pytest.raises(F.Refused, match="every fragment lapses"):
+        F.extract(alt)                                      # the registered path is unreadable -> legible, no traceback
+    bound_source.bind(digest, copy_of_source)
+    minted = F.extract(alt)                                 # the per-source override binds this generation only
+    assert minted["source"]["digest"] == digest
+    # isolation, asserted against a digest NO runner binds -- never against the absence of a sibling override the
+    # runner may legitimately hold (ARO_SOURCE_DOC_2428B115 binds the slice; IA Ops finding 2026-10-17, bullet 4)
+    assert F.source_doc("anything", "sha256:" + "0" * 64) == Path("anything"), "other generations unaffected"
 
 
 def _bound_copy(tmp_path, name):
@@ -138,40 +135,36 @@ def _bound_copy(tmp_path, name):
     spans = _load(WS3 / "spans.json")
     p = tmp_path / name
     p.write_bytes(F.source_doc(spans["doc"], spans["expectedDigest"]).read_bytes())
-    return p, "ARO_SOURCE_DOC_" + spans["expectedDigest"].split(":")[-1][:8].upper()
+    return p, spans["expectedDigest"]
 
 
-def test_mint_check_passes_under_any_override_file_name(tmp_path):
+def test_mint_check_passes_under_any_override_file_name(tmp_path, bound_source):
     """IA Ops finding 2026-10-17 bullets 1-2: the re-mint reproduces the committed file byte for byte whatever the
-    override copy is called -- minted twice under two different names, and the outputs compared."""
-    outs = []
-    for name in ("SRS-SPEC-109e1b50.md", "a different name.txt"):
-        p, key = _bound_copy(tmp_path, name)
-        env = dict(os.environ, **{key: str(p)})
-        env.pop("ARO_SOURCE_DOC", None)
-        r = subprocess.run([sys.executable, "spike/graph/ws3/mint.py", "--check"], cwd=ROOT, env=env,
-                           capture_output=True, text=True)
-        assert r.returncode == 0, (name, r.stderr + r.stdout)
-        sys.path.insert(0, str(WS3))
-        import mint
-        os.environ[key] = str(p)
-        try:
-            outs.append(mint.render(mint.mint()))
-        finally:
-            os.environ.pop(key, None)
-    assert outs[0] == outs[1]
-
-
-def test_no_minted_field_derives_from_the_resolved_source_path(tmp_path):
-    """Bullet 6, the rule stated once: nothing written into fragments.json comes from the path actually READ."""
-    p, key = _bound_copy(tmp_path, "ZZQ-resolved-marker-copy.md")
+    override copy is called -- minted twice under two different names, and the outputs compared. Every binding change
+    goes through `bound_source`, so the runner's own binding is restored, not deleted (successor finding, bullet 3)."""
+    copies = [_bound_copy(tmp_path, name) for name in ("SRS-SPEC-109e1b50.md", "a different name.txt")]
     sys.path.insert(0, str(WS3))
     import mint
-    os.environ[key] = str(p)
-    try:
-        text = mint.render(mint.mint())
-    finally:
-        os.environ.pop(key, None)
+    outs = []
+    for p, digest in copies:
+        bound_source.unbind_global()
+        bound_source.bind(digest, p)
+        env = dict(os.environ)                              # a copy for the child; the runner's env is not written
+        r = subprocess.run([sys.executable, "spike/graph/ws3/mint.py", "--check"], cwd=ROOT, env=env,
+                           capture_output=True, text=True)
+        assert r.returncode == 0, (p.name, r.stderr + r.stdout)
+        outs.append(mint.render(mint.mint()))
+    assert len(outs) == 2 and outs[0] == outs[1]
+
+
+def test_no_minted_field_derives_from_the_resolved_source_path(tmp_path, bound_source):
+    """Bullet 6, the rule stated once: nothing written into fragments.json comes from the path actually READ."""
+    p, digest = _bound_copy(tmp_path, "ZZQ-resolved-marker-copy.md")
+    sys.path.insert(0, str(WS3))
+    import mint
+    bound_source.unbind_global()
+    bound_source.bind(digest, p)
+    text = mint.render(mint.mint())
     assert "ZZQ-resolved-marker-copy" not in text and str(tmp_path) not in text
 
 

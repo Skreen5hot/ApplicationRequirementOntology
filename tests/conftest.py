@@ -79,11 +79,26 @@ def bound_source(monkeypatch) -> SourceBinder:
     return SourceBinder(monkeypatch)
 
 
-@pytest.fixture(autouse=True)
-def _source_bindings_left_as_found():
-    """Every test leaves the runner's source bindings exactly as it found them -- a leak is an ERROR on the leaking
-    test, by name, not a red on whichever later test happens to need the binding."""
-    before = _source_bindings()
-    yield
-    after = _source_bindings()
-    assert after == before, "this test changed the runner's source bindings: before %r, after %r" % (before, after)
+# THE LEAK GUARD OWNS THE MOMENT IT LOOKS (IA Ops finding 2026-10-17, "the leak guard asserts the environment at a
+# point in the teardown chain it does not control"). It was an autouse FIXTURE, so its check ran wherever pytest's
+# reverse-setup order put it: under a parent conftest whose autouse fixture requests monkeypatch, monkeypatch was set
+# up first and finalised LAST, so the guard looked before bound_source's restore and indicted the honest binder (and
+# missed a raw pop, which monkeypatch then repaired). Now the snapshot is taken before ANY fixture is set up and
+# compared after EVERY finaliser has run, by wrapping the setup and teardown hooks themselves. An exception raised
+# after the teardown hook is reported by pytest as that test's teardown ERROR -- by name, as before.
+_BEFORE = pytest.StashKey[dict]()
+
+
+@pytest.hookimpl(wrapper=True)
+def pytest_runtest_setup(item):
+    item.stash[_BEFORE] = _source_bindings()
+    return (yield)
+
+
+@pytest.hookimpl(wrapper=True)
+def pytest_runtest_teardown(item, nextitem):
+    result = yield
+    before, after = item.stash.get(_BEFORE, None), _source_bindings()
+    if before is not None and after != before:
+        raise AssertionError("this test changed the runner's source bindings: before %r, after %r" % (before, after))
+    return result

@@ -82,15 +82,42 @@ def test_restores(bound_source):
 '''
 
 
-def test_the_conftest_guard_names_the_leaking_test_and_spares_the_restoring_one(tmp_path):
+OUTER_CONFTEST = '''
+from pathlib import Path
+import pytest
+
+@pytest.fixture(autouse=True)
+def _outer(monkeypatch):      # requests monkeypatch: set up BEFORE ARO's fixtures, so finalised AFTER them
+    yield
+    (Path(__file__).parent / "outer-fixture-ran").write_text("yes")
+'''
+
+
+@pytest.mark.parametrize("position", ["standalone", "nested"])
+def test_the_conftest_guard_names_the_leaking_test_and_spares_the_restoring_one(tmp_path, position):
     """Falsified on demand: a test that pops the runner's binding errors BY NAME; one that changes bindings through
-    the fixture passes. Run in a child pytest so the leak cannot reach this session."""
-    shutil.copy(TESTS / "conftest.py", tmp_path / "conftest.py")
-    (tmp_path / "test_leak.py").write_text(LEAK, encoding="utf-8")
+    the fixture passes. Run in a child pytest so the leak cannot reach this session -- and in BOTH positions Ops
+    measured (finding 2026-10-17, "the leak guard asserts the environment at a point in the teardown chain it does not
+    control"): standalone, and nested under a parent conftest whose autouse fixture requests monkeypatch. Before the
+    guard moved into the setup/teardown hooks, the nested position inverted the verdict: the leaker passed and the
+    honest binder errored."""
+    top = tmp_path
+    if position == "nested":
+        (top / "pytest.ini").write_text("[pytest]\n", encoding="utf-8")
+        (top / "conftest.py").write_text(OUTER_CONFTEST, encoding="utf-8")
+        inner = top / "aro-checkout"
+        inner.mkdir()
+    else:
+        inner = top
+        (inner / "pytest.ini").write_text("[pytest]\n", encoding="utf-8")
+    shutil.copy(TESTS / "conftest.py", inner / "conftest.py")
+    (inner / "test_leak.py").write_text(LEAK, encoding="utf-8")
     env = dict(os.environ)                  # a copy for the child
     env["ARO_SOURCE_DOC_109E1B50"] = "runner-binding.md"
     r = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "-p", "no:randomly",
-                        str(tmp_path / "test_leak.py")], cwd=tmp_path, env=env, capture_output=True, text=True)
+                        str(inner / "test_leak.py")], cwd=top, env=env, capture_output=True, text=True)
+    if position == "nested":     # the precondition, verified: the outer monkeypatch-requesting fixture really ran
+        assert (top / "outer-fixture-ran").is_file(), r.stdout
     out = r.stdout + r.stderr
     assert r.returncode != 0, out
     assert "ERROR at teardown of test_leaks" in out and "changed the runner's source bindings" in out, out

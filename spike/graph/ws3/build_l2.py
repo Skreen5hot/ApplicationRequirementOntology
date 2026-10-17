@@ -313,40 +313,40 @@ DIAGNOSTICS = [
      "statement": "C-S3's routing limb is a pure function, but W-CS3-N's second half runs rater C -- the adjudicator component is 'pure routing fn + third-rater invocation'. A live acceptance test of the whole witness depends on an agentic invocation; a deterministic one needs a replayed rater-C record.",
      "evidence": ["C-S3.W-CS3-N", "S5.adjudicator"],
      "legalOutputs": "this diagnostic; a replay fixture recorded at freeze 2 (A9 act: 'a third-rater record')",
-     "status": "open"},
+     "status": None},   # DERIVED at build (derive_status)
     {"@id": "diag:W-CS3-D2-needs-a-C-S5-report", "@type": "UnderdeterminationDiagnostic", "blocking": False,
      "cone": ["W-CS3-Δ2's input"],
      "statement": "W-CS3-Δ2's input includes a replayed stub report from C-S5 (attack), which is outside the A9 region. The source does not state the report's shape in the region.",
      "evidence": ["C-S3.W-CS3-D2", "R-S5"],
      "legalOutputs": "this diagnostic; a replay fixture recorded at freeze 2 (A9 act: 'a C-S5 report')",
-     "status": "open"},
+     "status": None},   # DERIVED at build (derive_status)
     {"@id": "diag:hash-preimage-encoding-unstated", "@type": "MissingInformation", "blocking": False,
      "statement": "W-CS7-N defines hash = sha256(seq || prev || kind || payload) but does not state how seq, kind and payload are encoded before concatenation (serialization, separator, key order). Two conforming implementations can disagree on every hash.",
      "evidence": ["C-S7.W-CS7-N", "C-S7.determinism"],
      "legalOutputs": "this diagnostic; a labeled closure proposal at L3 for the architect to confer",
-     "status": "open"},
+     "status": None},   # DERIVED at build (derive_status)
     {"@id": "diag:third-rater-tie-unwitnessed", "@type": "MissingInformation", "blocking": False,
      "statement": "R-S4's branch 'a third-rater tie -> human' has no witness; neither W-CS3-N nor W-CS3-Δ1 exercises it, and the source does not define a tie among three raters.",
      "evidence": ["R-S4", "C-S3.W-CS3-N", "C-S3.W-CS3-D1"],
-     "status": "open"},
+     "status": None},   # DERIVED at build (derive_status)
     {"@id": "diag:GradeRecord-fields-by-example", "@type": "MissingInformation", "blocking": False,
      "statement": "GradeRecord's fields are stated only through two literal examples, which differ: model, disposition and readiness appear in W-CS2-N but not in the S-S2 crossing example. Whether they are optional, and whether the field set is closed, is not stated.",
      "evidence": ["S4.records", "C-S2.W-CS2-N", "S6.S-S2"],
-     "status": "open"},
+     "status": None},   # DERIVED at build (derive_status)
     {"@id": "diag:out-of-region-endpoints", "@type": "UnderdeterminationDiagnostic", "blocking": False,
      "cone": ["S-S3's consumer and S-S6's producer"],
      "statement": "The orchestrator (SRS s5, 'state machine over J-S1-J-S4') is the consumer of S-S3 and the producer of S-S6 but is not in the A9 region. The region's seams therefore have one in-region endpoint each; FX-SEAM-B over them is partial by construction unless a harness stands in for the orchestrator.",
      "evidence": ["S6.S-S3", "S6.S-S6", "S5.traceable"],
-     "status": "open"},
+     "status": None},   # DERIVED at build (derive_status)
     {"@id": "diag:external-method-artifacts", "@type": "MissingInformation", "blocking": False,
      "statement": "W-CS2-N's manifest, R-S1 and the C-S2 determinism note cite method/v0.4.md, skills/fspec-method and method s6.2 / s6.3, none of which is in the registered source. What 'recompute per method s6.2' computes is therefore not stated in the region.",
      "evidence": ["C-S2.W-CS2-N", "C-S2.determinism", "R-S1", "C-S3.W-CS3-D1"],
-     "status": "open"},
+     "status": None},   # DERIVED at build (derive_status)
     {"@id": "diag:ledger-hooks-repo-home", "@type": "ConflictingStatement", "spansLayers": True, "blocking": False,
      "cone": ["projection of the ledger component's files"],
      "statement": "SRS s5 homes the ledger at ledger/ and .githooks/; the hook half (W-CS7-Δ1: 'hook exit 1') is a git hook, not a module a TypeScript build emits. Like the slice's author-agent, the source is univocal and the conflict is with the factory's realization; it is recorded, not resolved, here.",
      "evidence": ["S5.ledger", "C-S7.W-CS7-D1"],
-     "status": "open"},
+     "status": None},   # DERIVED at build (derive_status)
     {"@id": "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash", "@type": "ConflictingStatement",
      "cone": ["c:ledger:hash-encoding (rq-034) and any C-S7 bar or oracle"],
      "statement": "W-CS7-N puts kind outside the hash preimage (sha256(seq || prev || payload)); W-CS7-Δ1 says chain verification fails loudly on ANY rewrite of an existing line. A kind-only rewrite keeps every hash, so the two cannot both hold. Source-internal.",
@@ -368,8 +368,8 @@ DIAGNOSTICS = [
      "statement": "a:C-S7:determinism is grounded on line 76 (C-S7's determinism note), one line beyond the A9 act's '73–75'. C-S2's and C-S3's determinism notes lie inside the region, so the bound may be a transcription boundary rather than a decision to exclude -- but that is the architect's to say. Either the act's region is amended to 73–76, or the clause leaves the record.",
      "evidence": ["C-S7.determinism", "C-S7.header"],
      "legalOutputs": "an architect act amending A9's region (the clause stays), or a decision at rq-017 to drop the clause (it moves to coverage.notYetCovered); no C-S7 bar or oracle rests on it until then (Ops finding 2026-10-01, bullet 7)",
-     "status": "closed",
-     "closedBy": "docs/decisions/2026-10-01-a9-region-amendment.md -- the architect: 'amend A9's region to 73–76'"},
+     "resolvedByRecord": "docs/decisions/2026-10-01-a9-region-amendment.md",   # the architect: 'amend A9's region to 73–76'
+     "status": None},   # DERIVED at build (derive_status)
 ]
 
 WS3 = {
@@ -458,6 +458,26 @@ def acted_region(act_path=ACT):
 AMENDMENTS = sorted((HERE.parents[2] / "docs" / "decisions").glob("*-a9-region-amendment*.md"))
 
 
+def derive_status(diag, queue):
+    """A diagnostic's status is never a literal (IA Ops finding 2026-10-17, "...each held by one literal path").
+    Resolution is always an act (ARO s7 lifecycle), so a diagnostic is CLOSED only by:
+      - its own act chain (raisedByAct: rq-044 -> rq-063 -> rq-066 ...), via raised_by_act;
+      - a resolving decision record in the tree (resolvedByRecord), e.g. the 2026-10-17 source amendment;
+      - a RATIFIED live L3 queue row whose `closes` names it (the architect conferring the closure);
+    and OPEN otherwise. `blocking` stays the author's declaration, pinned by a named test."""
+    if diag.get("raisedByAct"):
+        return raised_by_act(diag, queue)
+    resolved = diag.get("resolvedByRecord")
+    if resolved and (HERE.parents[2] / resolved).is_file():
+        return dict(diag, status="closed", closedBy=resolved)
+    dead = {r.get("supersedes") for r in queue.values() if r.get("supersedes")}
+    closers = [r for r in queue.values() if r["id"] not in dead and r.get("act") == "ratified"
+               and diag["@id"] in (r.get("closes") or [])]
+    if closers:
+        return dict(diag, status="closed", closedBy="%s ratified by %s" % (closers[0]["id"], closers[0]["actor"]))
+    return dict(diag, status="open")
+
+
 def in_region(line, region):
     return any(lo <= line <= hi for lo, hi in region)
 
@@ -538,7 +558,7 @@ def build():
         "d21": "Every target below is a specification-target description (a kind reference), never an instance; no assertion entails that the described thing exists.",
         "ws3": ws3,
         "records": resolve(RECORDS),
-        "diagnostics": [resolve_evidence(raised_by_act(d, queue) if d.get("raisedByAct") else d) for d in DIAGNOSTICS],
+        "diagnostics": [resolve_evidence(derive_status(d, queue)) for d in DIAGNOSTICS],
         "coverage": dict(COVERAGE, covered=dict(COVERAGE["covered"], **{"SRS §3": section3})),
     }
 

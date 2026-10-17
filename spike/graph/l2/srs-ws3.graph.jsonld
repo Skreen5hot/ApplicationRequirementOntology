@@ -1228,7 +1228,8 @@
         "sf:c609b548cba8656f1d99e5c0"
       ],
       "legalOutputs": "this diagnostic; a labeled closure proposal at L3 for the architect to confer",
-      "status": "open"
+      "status": "closed",
+      "closedBy": "rq-064 ratified by Aaron"
     },
     {
       "@id": "diag:third-rater-tie-unwitnessed",
@@ -1240,7 +1241,8 @@
         "sf:3db581d9f8478263003ecd15",
         "sf:dc8a98167d56ae8b3156e7c0"
       ],
-      "status": "open"
+      "status": "closed",
+      "closedBy": "rq-066 ratified by Aaron"
     },
     {
       "@id": "diag:GradeRecord-fields-by-example",
@@ -1252,7 +1254,8 @@
         "sf:dfe6866dede0da326e203052",
         "sf:40bd771b2bdf17c828339bf4"
       ],
-      "status": "open"
+      "status": "closed",
+      "closedBy": "rq-061 ratified by Aaron"
     },
     {
       "@id": "diag:out-of-region-endpoints",
@@ -1363,8 +1366,9 @@
         "sf:1ae83822a0b8f53660112004"
       ],
       "legalOutputs": "an architect act amending A9's region (the clause stays), or a decision at rq-017 to drop the clause (it moves to coverage.notYetCovered); no C-S7 bar or oracle rests on it until then (Ops finding 2026-10-01, bullet 7)",
+      "resolvedByRecord": "docs/decisions/2026-10-01-a9-region-amendment.md",
       "status": "closed",
-      "closedBy": "docs/decisions/2026-10-01-a9-region-amendment.md -- the architect: 'amend A9's region to 73–76'"
+      "closedBy": "docs/decisions/2026-10-01-a9-region-amendment.md"
     }
   ],
   "coverage": {

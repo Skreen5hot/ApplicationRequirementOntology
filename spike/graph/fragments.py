@@ -43,8 +43,18 @@ from pathlib import Path
 _SOURCE_ENV = "ARO_SOURCE_DOC"
 
 
-def source_doc(registered: str) -> Path:
-    """The path to read the source bytes from -> Path. `ARO_SOURCE_DOC` wins when set and non-empty."""
+def source_doc(registered: str, digest: str | None = None) -> Path:
+    """The path to read the source bytes from -> Path.
+
+    Precedence: a PER-SOURCE override `ARO_SOURCE_DOC_<first 8 hex of the digest, upper case>` (e.g.
+    ARO_SOURCE_DOC_109E1B50), then the global `ARO_SOURCE_DOC`, then the registered path. The per-source form exists
+    because two source generations are live at once since 2026-10-17 (the slice on 2428b115, WS-3 on 109e1b50): a
+    single global override can bind only one of them, so a verifier holding neither registered path could not run
+    the whole suite in one invocation (IA Ops finding 2026-10-17, bullet 8). The digest check is untouched."""
+    if digest:
+        keyed = os.environ.get("%s_%s" % (_SOURCE_ENV, digest.split(":")[-1][:8].upper()))
+        if keyed:
+            return Path(keyed)
     return Path(os.environ.get(_SOURCE_ENV) or registered)
 
 
@@ -107,10 +117,14 @@ def fragment(doc: Path, norm: str, digest: str, spec: dict) -> dict:
 
 def extract(spans_path: Path) -> dict:
     spec = json.loads(spans_path.read_text(encoding="utf-8"))
-    doc = Path(spec["doc"])
-    if not doc.is_file():
-        raise Refused("source %s is not a file; nothing can be registered" % doc)
-    digest = doc_digest(doc)
+    doc = source_doc(spec["doc"], spec.get("expectedDigest"))      # minting honours the override, as verify does
+    try:
+        if not doc.is_file():
+            raise Refused("source %s is not a file; nothing can be minted (every fragment lapses, ARO 5.2)" % doc)
+        digest = doc_digest(doc)
+    except OSError as exc:      # ACL-denied but present: a legible lapse, never a traceback (Ops finding 2026-10-17)
+        raise Refused("source %s is unreadable (%s); nothing can be minted (every fragment lapses, ARO 5.2)"
+                      % (doc, type(exc).__name__))
     expected = spec.get("expectedDigest")
     if expected and expected != digest:
         raise Refused("source digest %s is not the registered %s; the source changed and every "
@@ -120,7 +134,8 @@ def extract(spans_path: Path) -> dict:
     labels = [f["label"] for f in fragments]
     if len(set(labels)) != len(labels):
         raise Refused("duplicate span labels: %s" % sorted(l for l in labels if labels.count(l) > 1))
-    return {"source": {"doc": str(doc), "digest": digest, "registeredAs": spec.get("registeredAs")},
+    return {"source": {"doc": spec["doc"] if doc != Path(spec["doc"]) else str(doc), "digest": digest,
+                       "registeredAs": spec.get("registeredAs")},
             "normalizationVersion": NORMALIZATION_VERSION,
             "fragments": fragments}
 
@@ -128,7 +143,7 @@ def extract(spans_path: Path) -> dict:
 def verify(fragments_path: Path) -> list[str]:
     """Every fragment's text hash, recomputed against the source now -> the lapsed ones."""
     data = json.loads(fragments_path.read_text(encoding="utf-8"))
-    doc = source_doc(data["source"]["doc"])
+    doc = source_doc(data["source"]["doc"], data["source"].get("digest"))
     lapsed = []
     # UNREADABLE IS A LAPSE, NOT A CRASH (F5, Ops 2026-09-12). `is_file()` succeeds on an ACL-denied file --
     # stat is permitted, the read is not -- so `doc_digest` raised PermissionError instead of reporting the

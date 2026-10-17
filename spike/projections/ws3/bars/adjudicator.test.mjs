@@ -83,6 +83,20 @@ test('K is the deduplicated union of zeros, ties and attacks, in canonical order
   assert.deepEqual(r.contested_knockouts, ['P10', 'P2', 'P6']);
 });
 
+// --- precedence below SUSPENDED (c:adjudicator:adjudicate: "no early exit masks a higher variant") ---
+// The Δ1 fixture's only disagreeing dimension IS the zero, so it never reaches PENDING; these two cases put a routed
+// dimension BESIDE the zero, where WITHHELD > PENDING and the completeness of K under WITHHELD are decided.
+test('WITHHELD > PENDING: a zero beside a routed dimension with no c -> WITHHELD, not PENDING', () => {
+  const r = adj.adjudicate(rec('A', { P6: 2 }), rec('B', { P3: 0, P6: 1 }));
+  assert.deepEqual(r, { disposition_line: 'WITHHELD', contested_knockouts: ['P3'], queue: 'human' },
+    'a routed dimension still awaiting C is not in K; the zero is, and it outranks the wait');
+});
+
+test('WITHHELD carries the COMPLETE K: a zero AND a third-rater tie -> both, in canonical order', () => {
+  const r = adj.adjudicate(rec('A', { P6: 2 }), rec('B', { P3: 0, P6: 1 }), { c: rec('C', { P6: 0 }) });
+  assert.deepEqual(r, { disposition_line: 'WITHHELD', contested_knockouts: ['P3', 'P6'], queue: 'human' });
+});
+
 // --- several attacks (c:adjudicator:attack-cause) ---
 test('several attacks: cause names the clause that sorts first; every attacked dimension enters K; duplicates once', () => {
   const r = adj.adjudicate(rec('A'), rec('B'), { attacks: [
@@ -106,6 +120,18 @@ test('agreed dimensions are copied unchanged; C decides only the routed ones', (
 test('A-DIM-01: route refuses mismatched key sets and produces no result', () => {
   const short = rec('B'); delete short.vector.P11;
   assert.equal(codeOf(() => adj.route(rec('A'), short)), 'A-DIM-01');
+});
+
+test('A-DIM-01: adjudicate ITSELF refuses a and b with different key sets -- no report, nothing guessed', () => {
+  // route's refusal does not discharge adjudicate's: an adjudicate that routes inline must validate a against b too
+  const short = rec('B', { P6: 1 }); delete short.vector.P11;
+  const longer = rec('B', { P6: 1 }); longer.vector.P12 = 2;
+  for (const b of [short, longer]) {
+    let report;
+    const code = codeOf(() => { report = adj.adjudicate(rec('A', { P6: 2 }), b); });
+    assert.equal(code, 'A-DIM-01');
+    assert.equal(report, undefined, 'no report is produced');
+  }
 });
 
 test('A-DIM-01: adjudicate refuses a c with a different key set, and an attack on an unknown dimension', () => {

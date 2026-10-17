@@ -61,8 +61,30 @@ test('nextEntry is pure: seq = last + 1, prev = last hash, the chain is not muta
   assert.deepEqual(ledger.nextEntry(chain, 'registration', PAYLOAD), e);
 });
 
+test('nextEntry: seq = the LAST entry\'s seq + 1, not the chain length + 1', () => {
+  // build() always yields seq == position, so it cannot tell the two readings apart; this entry is placed by hand
+  const last = { seq: 7, prev: 'f'.repeat(64), kind: 'registration', payload: PAYLOAD,
+                 hash: expectHash(7, 'f'.repeat(64), 'registration', PAYLOAD) };
+  const e = ledger.nextEntry([last], 'ratification', { rev: 'abc123' });
+  assert.equal(e.seq, 8);
+  assert.equal(e.prev, last.hash);
+  assert.equal(e.hash, expectHash(8, last.hash, 'ratification', { rev: 'abc123' }));
+});
+
 test('W-CS7-N: the full chain verifies from genesis', () => {
   assert.deepEqual(ledger.verifyChain(build(5)), { ok: true });
+});
+
+test('W-CS7-N: a chain NOT rooted at genesis fails, even when every hash is internally consistent', () => {
+  // "verifies from genesis" (W-CS7-N) + genesis "seq 1 and prev = 64 zeros" (rq-064): a re-rooted or truncated chain,
+  // re-hashed over its own fields, must not verify
+  const rooted = (seq, prev) => [{ seq, prev, kind: 'registration', payload: PAYLOAD, hash: expectHash(seq, prev, 'registration', PAYLOAD) }];
+  const reRooted = ledger.verifyChain(rooted(1, 'f'.repeat(64)));
+  assert.equal(reRooted.ok, false, 'prev of the first entry is not the 64 zeros');
+  assert.equal(reRooted.seq, 1);
+  assert.equal(ledger.verifyChain(rooted(5, GENESIS)).ok, false, 'the first entry does not carry seq 1');
+  const truncated = build(4).slice(2);
+  assert.equal(ledger.verifyChain(truncated).ok, false, 'a chain with its first entries cut off');
 });
 
 test('W-CS7-Δ1: a rewrite of any hashed field fails verification at that entry -- kind alone included', () => {

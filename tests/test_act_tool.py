@@ -60,8 +60,16 @@ def test_the_tool_and_the_projector_compute_the_same_digest_on_every_live_row():
 
 
 def test_list_is_read_only_and_excludes_acted_and_superseded(repo):
+    """Asserts the POSITIVE on a seeded queue (IA Ops finding 2026-10-17, HIGH, bullet 4): an implementation
+    returning [] unconditionally fails here."""
+    _fresh_item(repo, item_id="rq-900")                                          # unacted, live -> listed
+    _fresh_item(repo, item_id="rq-901", act="accepted", actedAt="2026-10-17T00:00:00-04:00", actor="Aaron")
+    _fresh_item(repo, item_id="rq-902")                                          # superseded by rq-903 -> not listed
+    _fresh_item(repo, item_id="rq-903", supersedes="rq-902")                     # unacted, live -> listed
     before = (repo / act.QUEUE_REL).read_bytes()
     ids = [r["id"] for r in act.Queue(repo).pending()]
+    assert {"rq-900", "rq-903"} <= set(ids), ids
+    assert not {"rq-901", "rq-902"} & set(ids), ids
     assert "rq-002" not in ids, "superseded by rq-012"
     assert not any(i in ids for i in ("rq-003", "rq-011")), "already acted"
     assert (repo / act.QUEUE_REL).read_bytes() == before

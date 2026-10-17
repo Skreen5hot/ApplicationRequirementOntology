@@ -1,6 +1,8 @@
 """WS-3 (Plan v1.1 s5): the capability-grain L2 graph for the A9 target is reproducible, fully grounded, inside the
 named region, and queued for 100% span review without disturbing the ratified slice."""
 import json
+
+import pytest
 import subprocess
 import sys
 from pathlib import Path
@@ -67,6 +69,25 @@ def _acted_region():
 def test_the_graph_carries_the_acts_region_and_not_another():
     region, _ = _acted_region()
     assert _graph()["ws3"]["target"]["regionLines"] == region
+
+
+def test_today_no_capability_span_lies_beyond_the_region_and_a_seeded_one_is_refused_or_disclosed(monkeypatch):
+    """IA Ops finding 2026-10-17 (HIGH) bullet 5: say which case is measured. Today beyondRegion is EMPTY (the region
+    was amended to 73-76). A seeded primary span outside the region is refused undisclosed and listed disclosed."""
+    import copy
+    assert _graph()["ws3"]["beyondRegion"] == []
+    b2 = _load("build_l2")
+    seeded = copy.deepcopy(b2.RECORDS)
+    cap = next(r for r in seeded if r["@id"] == "sr:L2:C-S7")
+    det = next(x for x in cap["assertions"] if x["@id"] == "a:C-S7:determinism")
+    det["groundedBy"] = [b2.g("R-S1")]                                   # line 87: outside 43-53 / 73-76
+    det.pop("diagnostic", None)
+    monkeypatch.setattr(b2, "RECORDS", seeded)
+    with pytest.raises(SystemExit, match="beyond the acted region with no diagnostic"):
+        b2.build()
+    det["diagnostic"] = "diag:seeded"
+    beyond = b2.build()["ws3"]["beyondRegion"]
+    assert [x["assertion"] for x in beyond] == ["a:C-S7:determinism"] and beyond[0]["line"] == 87
 
 
 def test_every_capability_primary_span_lies_inside_the_acted_region_or_is_disclosed_beyond_it():
@@ -234,34 +255,51 @@ def test_every_amended_row_has_a_successor_bound_to_the_records_current_address(
     q = act.Queue(ROOT)
     rows = [r for _, r in q.rows]
     by_id = {r["id"]: r for r in rows}
-    for amended in (r for r in rows if r.get("act") == "amended"):
+    amended_rows = [r for r in rows if r.get("act") == "amended"]
+    assert len(amended_rows) >= 6, "examined %d amended rows" % len(amended_rows)   # rq-031..034, rq-040, rq-042, rq-063
+    for amended in amended_rows:
         end = _live_end(rows, amended["id"])
         assert end != amended["id"], "%s is amended with no successor" % amended["id"]
         assert q.current_digest(by_id[end])[1] == by_id[end]["recordDigest"], (amended["id"], end)
 
 
-def test_the_architects_blocking_diagnostic_is_derived_from_the_act_row():
-    """IA Ops finding 2026-10-01, bullet 1: status and blocking come from the architect's act rows, never retyped.
-    Today rq-044's diagnostic is CLOSED (rq-044 -> rq-063 -> rq-066, ratified 2026-10-17) and rq-034's is closed by the
-    source-amendment record. Falsified on a copy of the queue: un-act the ratification -> open and blocking again;
-    drop BLOCKING from the note -> not blocking; a two-hop conferral still closes it."""
-    b2 = _load("build_l2")
-    g = {d["@id"]: d for d in _graph()["diagnostics"]}
+def _unsettled_rq044_chain():
+    """A copy of the queue in which rq-044's chain ends at an AMENDED row (rq-063), as it stood before rq-066:
+    every row past rq-063 on that chain is dropped. Built here so the arms below never ride on the live state."""
     rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()]
     queue = {r["id"]: r for r in rows}
-    d = g["diag:adjudicator-not-total-over-declared-inputs"]
-    end = _live_end(rows, "rq-044")
-    assert d["status"] == "closed" and d["actRecord"]["note"] == queue["rq-044"]["actNote"] and end in d["closedBy"]
-    k = g["diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash"]
+    at, drop = "rq-063", set()
+    nxt = {r["supersedes"]: r["id"] for r in rows if r.get("supersedes")}
+    while at in nxt:
+        at = nxt[at]
+        drop.add(at)
+    q = {k: v for k, v in queue.items() if k not in drop}
+    assert q["rq-063"]["act"] == "amended" and q["rq-044"]["act"] == "diagnostic-opened"
+    return q
+
+
+def test_the_architects_blocking_diagnostic_is_derived_from_the_act_row():
+    """IA Ops findings 2026-10-01 bullet 1 and 2026-10-17 (HIGH) bullet 2. The live subject is taken from the rule;
+    every falsification arm runs on an UNSETTLED chain, so none is vacuous whatever the live queue holds."""
+    b2 = _load("build_l2")
+    src = [x for x in b2.DIAGNOSTICS if x["@id"] == "diag:adjudicator-not-total-over-declared-inputs"][0]
+    live = {d["@id"]: d for d in _graph()["diagnostics"]}[src["@id"]]
+    rows_live = {json.loads(l)["id"]: json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()}
+    assert live["status"] == b2.raised_by_act(src, rows_live)["status"]          # the subject, from the rule
+    unsettled = _unsettled_rq044_chain()
+    a_ = b2.raised_by_act(src, unsettled)                                        # (a) only an amended successor
+    assert a_["status"] == "open"
+    settled = dict(unsettled, **{"rq-063": dict(unsettled["rq-063"], act="ratified")})
+    b_ = b2.raised_by_act(src, settled)                                          # (b) that successor ratified
+    assert b_["status"] == "closed" and "rq-063" in b_["closedBy"]
+    soft = dict(unsettled, **{"rq-044": dict(unsettled["rq-044"], actNote="adjudicate is not total")})
+    assert b2.raised_by_act(src, soft)["blocking"] is False                      # (c) no BLOCKING, unsettled
+    hard = dict(unsettled, **{"rq-044": dict(unsettled["rq-044"], actNote="BLOCKING: adjudicate is not total")})
+    assert b2.raised_by_act(src, hard)["blocking"] is True                       # (d) BLOCKING, unsettled
+    hop2 = dict(unsettled, **{"rq-999": dict(unsettled["rq-063"], id="rq-999", supersedes="rq-063", act="ratified")})
+    assert b2.raised_by_act(src, hop2)["status"] == "closed"                     # two hops
+    k = {d["@id"]: d for d in _graph()["diagnostics"]}["diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash"]
     assert k["status"] == "closed" and k["closedBy"].endswith("2026-10-17-srs-source-amendment-and-registration.md")
-    src = [x for x in b2.DIAGNOSTICS if x["@id"] == d["@id"]][0]
-    unacted = dict(queue, **{end: {k2: v for k2, v in queue[end].items() if k2 not in ("act", "actor", "actedAt")}})
-    reopened = b2.raised_by_act(src, unacted)
-    assert reopened["status"] == "open" and reopened["blocking"] is True
-    soft = dict(unacted, **{"rq-044": dict(queue["rq-044"], actNote="adjudicate is not total")})
-    assert b2.raised_by_act(src, soft)["blocking"] is False
-    hop2 = dict(unacted, **{"rq-999": dict(queue[end], id="rq-999", supersedes=end, act="ratified", actor="Aaron")})
-    assert b2.raised_by_act(src, hop2)["status"] == "closed"
 
 
 def _record_as_acted(row):

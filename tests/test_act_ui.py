@@ -47,10 +47,7 @@ def _row(root, item_id):
 def _first_pending(root, adjudication):
     """A pending item of the wanted kind in the COPY. The live queue may have none (every item acted), so the test
     supplies one: a real live row re-queued unacted, still bound to its record's current bytes."""
-    q = ui.A.Queue(root)
-    hit = next((r["id"] for r in q.pending() if bool(r.get("options")) == adjudication), None)
-    if hit:
-        return hit
+    q = ui.A.Queue(root)      # ALWAYS seeded: never the live queue's pending rows (IA Ops finding 2026-10-17, HIGH)
     dead = q.superseded()
     src = next(r for _, r in q.rows if r["id"] not in dead and r.get("recordDigest") and bool(r.get("options")) == adjudication
                and q.current_digest(r)[1] == r["recordDigest"])

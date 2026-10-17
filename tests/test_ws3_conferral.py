@@ -195,6 +195,7 @@ def test_every_ws3_rows_bind_is_retrievable_from_history():
     """Bullet 7 (offered): a queued row whose bound bytes no party can retrieve is a defect. The one known case is
     named here with its reason; any new one goes red."""
     rows = _rows()
-    missing = sorted(r["id"] for r in rows.values()
-                     if "srs-ws3" in r.get("artifact", "") and r.get("recordDigest") and bound_record(r) is None)
+    examined = [r for r in rows.values() if "srs-ws3" in r.get("artifact", "") and r.get("recordDigest")]
+    assert len(examined) >= 50, "examined %d rows" % len(examined)
+    missing = sorted(r["id"] for r in examined if bound_record(r) is None)
     assert missing == sorted(UNRETRIEVABLE), missing

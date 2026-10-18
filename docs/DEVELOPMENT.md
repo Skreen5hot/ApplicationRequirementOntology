@@ -87,6 +87,7 @@ read from the licensing tool so the two cannot drift:
 | `test-fixture` | expected to be invalid on purpose; must never be loaded as ontology |
 | `generated-artifact` | derived; must name a `generator`, or declare itself `orphaned` with the reason |
 | `spike-artifact` | the Phase-1.5 spike's output, any format; governed by SPIKE.md, non-graduating; project-authored content for licensing (architect's act, 2026-09-11) |
+| `registered-source` | a specification the graphs are grounded in, vendored byte-for-byte at its pinned digest under `sources/<name>/<8 hex>/`; the operator's own document, so project-authored content for licensing; a source by anyone else needs its own role |
 | `vendored-ontology` | somebody else's, redistributed under their licence, attribution required |
 | `third-party-reference` | somebody else's, **not** redistributable |
 | `documentation`, `configuration`, `tool`, `project-licence` | as they sound |

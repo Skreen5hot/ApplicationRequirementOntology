@@ -122,9 +122,22 @@ def fragment(doc: Path, norm: str, digest: str, spec: dict, name: str | None = N
     }
 
 
+#: The repository root: registered paths are REPOSITORY-RELATIVE since 2026-10-18, when the two source
+#: snapshots were vendored under sources/srs/<8 hex>/ so that a runner with no account on the operator's
+#: machine (GitHub Actions, every push since 2026-10-01) can read them. `source_doc` is left pure -- it
+#: returns the registered string or the override as given -- and the two readers resolve a relative
+#: result here, so the tools work from any working directory and the override tests' contract holds.
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
+
+def resolve_registered(doc: Path) -> Path:
+    """A relative registered path is relative to the repository root, never to the working directory."""
+    return doc if doc.is_absolute() else REPO_ROOT / doc
+
+
 def extract(spans_path: Path) -> dict:
     spec = json.loads(spans_path.read_text(encoding="utf-8"))
-    doc = source_doc(spec["doc"], spec.get("expectedDigest"))      # minting honours the override, as verify does
+    doc = resolve_registered(source_doc(spec["doc"], spec.get("expectedDigest")))   # override honoured, as in verify
     try:
         if not doc.is_file():
             raise Refused("source %s is not a file; nothing can be minted (every fragment lapses, ARO 5.2)" % doc)
@@ -152,7 +165,7 @@ def extract(spans_path: Path) -> dict:
 def verify(fragments_path: Path) -> list[str]:
     """Every fragment's text hash, recomputed against the source now -> the lapsed ones."""
     data = json.loads(fragments_path.read_text(encoding="utf-8"))
-    doc = source_doc(data["source"]["doc"], data["source"].get("digest"))
+    doc = resolve_registered(source_doc(data["source"]["doc"], data["source"].get("digest")))
     lapsed = []
     # UNREADABLE IS A LAPSE, NOT A CRASH (F5, Ops 2026-09-12). `is_file()` succeeds on an ACL-denied file --
     # stat is permitted, the read is not -- so `doc_digest` raised PermissionError instead of reporting the

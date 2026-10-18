@@ -1,6 +1,6 @@
 {
   "_what": "The spans of the SRS the slice's L2 graph grounds in. Addressed by line in the normalized text, guarded by a prefix. Minted into fragments by spike/graph/fragments.py; the L2 graph cites the resulting fragment ids.",
-  "doc": "C:/Users/aaron/OneDrive/Documents/SPEC-2428b115.md",
+  "doc": "sources/srs/2428b115/SPEC.md",
   "expectedDigest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450",
   "registeredAs": "src:srs-spec",
   "spans": [

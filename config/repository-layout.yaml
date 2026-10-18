@@ -458,3 +458,25 @@ components:
       authored RED and left RED; green is the INT-2 composition milestone,
       which this repository cannot reach alone. Its projected tier is the
       real projection output.
+
+  # ---- Registered sources ------------------------------------------------
+  #
+  # The specifications the spike's graphs are grounded in, vendored as
+  # byte-identical snapshots at their pinned digests. Until 2026-10-18 the
+  # registered paths pointed at the operator's own machine, and every GitHub
+  # Actions run since 2026-10-01 failed six tests with "source missing: every
+  # fragment lapses" -- a check whose result was a function of whose account
+  # ran it (docs/process/PROCESS.md section 1). One directory per source
+  # generation, named by the first eight hex of the digest, holding the file
+  # under its registered name; the digest check in spike/graph/fragments.py
+  # is what makes the copy trustworthy, not the directory name.
+
+  - id: sources.srs
+    path: sources/srs
+    role: registered-source
+    description: >-
+      The SRS (Specification Refinement System, the operator's own
+      specification) at the two digests the graphs are registered against:
+      2428b115 (the Phase-1.5 slice, Amendment 1) and 109e1b50 (WS-3, the
+      A9 target). Both contain no carriage returns, so the repository-wide
+      LF rule stores them unchanged; re-digest either file to confirm.

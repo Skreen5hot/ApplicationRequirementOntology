@@ -145,7 +145,13 @@ def project(l2, l3, fragments, queue_rows, files, *, verify_fragments=None, inpu
         raise Refused("L2 cites fragments that do not exist: %s" % sorted(cited - set(frags)))
     lapsed = verify_fragments() if verify_fragments else []
     if lapsed:
-        raise Refused("grounding lapsed (ARO 5.2): %s" % lapsed)
+        # A lapse is a refusal like any other and must be as legible: it names what it awaits, so a runner that
+        # cannot read the source (the GitHub Actions class, 2026-10-01..18) prints an `awaiting:` line rather than
+        # a bare REFUSED (test_the_live_check_refuses_legibly_or_projects_never_crashes).
+        raise Refused("grounding lapsed (ARO 5.2): %s" % lapsed,
+                      ["a readable copy of the registered source at its pinned digest (%s) -- the registered path "
+                       "under sources/srs/, or an ARO_SOURCE_DOC_<8 hex> override; lapsed: %s"
+                       % (fragments["source"].get("digest"), "; ".join(lapsed))])
 
     acts, awaiting = eligibility(l2, l3, queue_rows, files)
     blocking, known_limits = blocking_open(l2, queue_rows)

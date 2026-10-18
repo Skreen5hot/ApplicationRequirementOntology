@@ -4,7 +4,7 @@
   {
    "id": "src:srs-spec",
    "role": "the Phase-1.5 source per Amendment 1 (docs/decisions/2026-09-10-phase-1.5-amendments.md): the SRS, of which the 3-module slice (C-S8, findings store, author-agent) is the target",
-   "doc": "C:/Users/aaron/OneDrive/Documents/SPEC-2428b115.md",
+   "doc": "sources/srs/2428b115/SPEC.md",
    "docName": "SPEC.md",
    "bytes": 42702,
    "digest": "sha256:2428b115bafe685044b88f97ac11f6ba28e1179c45989ee1b596b72ae3c89450",
@@ -15,12 +15,15 @@
    "fragments": "spike/graph/fragments.json (12 spans, minted by spike/graph/fragments.py; --verify re-checks them against this digest)",
    "provenanceGap": "This is a copy under the aaron account, dated 2026-08-19. The loop builds against C:/Users/coord/Specification-Refinement-System/SPEC.md, whose digest is unknown here. Amendment 1 pins the target to THIS digest; Ops must confirm the coord-side file matches it before any arm builds, or the two arms read different sources.",
    "supersededBy": "src:srs-spec@2 (sha256:109e1b50...) for WS-3, by the architect's act of 2026-10-17",
-   "stillBinds": "the Stage A slice (scope (b)): spike/graph/spans.json and fragments.json read this pinned copy, byte-identical to the registered digest"
+   "stillBinds": "the Stage A slice (scope (b)): spike/graph/spans.json and fragments.json read this pinned copy, byte-identical to the registered digest",
+   "operatorOriginal": "C:/Users/aaron/OneDrive/Documents/SPEC-2428b115.md",
+   "vendoredOn": "2026-10-18",
+   "vendoredWhy": "The registered path was an absolute path on the operator's machine, so every GitHub Actions run since 2026-10-01 failed six tests with 'source missing: every fragment lapses'. The snapshot now lives in the repository at its pinned digest, byte-identical (no CR bytes, so the LF rule changes nothing). Fragment identity is digest-based and unaffected; the ARO_SOURCE_DOC overrides still apply."
   },
   {
    "id": "src:srs-spec@2",
    "role": "the SRS as amended by its author for WS-3: rq-038 decided A (kind enters the ledger hash preimage)",
-   "doc": "C:/Users/aaron/OneDrive/Documents/SPEC.md",
+   "doc": "sources/srs/109e1b50/SPEC.md",
    "docName": "SPEC.md",
    "bytes": 42711,
    "digest": "sha256:109e1b5026845a573dad17a9fd2ad2e603a2d46175ba2b6d77f17cb18115c614",
@@ -31,7 +34,10 @@
    "change": "line 74 (W-CS7-N) only: 'sha256(seq ‖ prev ‖ payload)' -> 'sha256(seq ‖ prev ‖ kind ‖ payload)'; +9 bytes; no line shifts",
    "fragmentKind": "text-span",
    "normalizationVersion": "norm-spike-1",
-   "fragments": "spike/graph/ws3/fragments.json, re-minted under this digest with migratedFrom links (WS-3 only)"
+   "fragments": "spike/graph/ws3/fragments.json, re-minted under this digest with migratedFrom links (WS-3 only)",
+   "operatorOriginal": "C:/Users/aaron/OneDrive/Documents/SPEC.md",
+   "vendoredOn": "2026-10-18",
+   "vendoredWhy": "The registered path was an absolute path on the operator's machine, so every GitHub Actions run since 2026-10-01 failed six tests with 'source missing: every fragment lapses'. The snapshot now lives in the repository at its pinned digest, byte-identical (no CR bytes, so the LF rule changes nothing). Fragment identity is digest-based and unaffected; the ARO_SOURCE_DOC overrides still apply."
   }
  ],
  "unregistered": [

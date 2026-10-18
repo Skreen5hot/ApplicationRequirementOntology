@@ -147,9 +147,16 @@ ADJUDICATIONS = "config/licensing-adjudications.yaml"
 #: precedence rule) and non-graduating (Amendment 2 iii); licensing-wise it
 #: is project-authored content under the project licence, Python included,
 #: which is why it sits in this set rather than in SOFTWARE_ROLES.
+#:
+#: `registered-source` (2026-10-18): a specification registered as a source of
+#: the spike's graphs, vendored as a byte-identical snapshot at its pinned
+#: digest under sources/. The one here is the operator's own document (the
+#: SRS; author of record: the operator), so it is project-authored content
+#: under the project licence. A source somebody else wrote would need its own
+#: role and rule, as the vendored ontologies and the cited standards do.
 CONTENT_ROLES = {"ontology-module", "ontology-module-set",
                  "ontology-validation", "test-fixture", "documentation",
-                 "generated-artifact", "spike-artifact"}
+                 "generated-artifact", "spike-artifact", "registered-source"}
 
 #: Roles that are software rather than published content.
 SOFTWARE_ROLES = {"tool", "configuration"}

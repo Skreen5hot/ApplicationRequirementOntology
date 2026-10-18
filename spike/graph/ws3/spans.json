@@ -1,6 +1,6 @@
 {
   "_what": "WS-3 (Plan v1.1 s5): the spans of the SRS that the capability-grain graph for the A9 target grounds in -- C-S2 grade, C-S3 adjudicate, C-S7 register, with their supporting rules, components, seams, invariants and journeys. Named by the architect's A9 act (docs/decisions/2026-10-01-a9-ws3-target-naming-act.md). Kept apart from the slice's spike/graph/spans.json so every ratified slice artifact stays byte-identical. Minted by spike/graph/fragments.py.",
-  "doc": "C:/Users/aaron/OneDrive/Documents/SPEC.md",
+  "doc": "sources/srs/109e1b50/SPEC.md",
   "expectedDigest": "sha256:109e1b5026845a573dad17a9fd2ad2e603a2d46175ba2b6d77f17cb18115c614",
   "registeredAs": "src:srs-spec@2",
   "spans": [

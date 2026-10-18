@@ -188,6 +188,8 @@ def project(l2, l3, fragments, queue_rows, files, *, verify_fragments=None, inpu
         elif item["kind"] == "capability oracle":
             want = sorted(files_of[m] for m in realizes[item["capability"]])
             got = [p for p in _imports(text, ACCEPTANCE_DIR) if not p.startswith("node:")]
+        elif item["kind"] == "non-built delivery descriptor":
+            continue                                       # a record about files, not code: checked below
         else:   # non-built: the wrapper runs the script and imports nothing; whatever .ts the script loads must be built
             got = [p for p in _imports(text, ".") if p.endswith(".ts")]
             want = [p for p in got if p in files_of.values()]
@@ -248,6 +250,18 @@ def project(l2, l3, fragments, queue_rows, files, *, verify_fragments=None, inpu
     spec12 = l2["source"]["digest"].split(":")[-1][:12]
     std_dir = "oracles/%s" % spec12
     standards, oracles, nonbuilt, out_files = [], [], [], {}
+    # THE DELIVERY DESCRIPTOR (rq-071, 2026-10-18): a file digest binds bytes, not mode or install path, so every
+    # non-built file is delivered only as the acted descriptor states it -- and the descriptor must name each file at
+    # the very bytes its own act bound.
+    desc_item = next(i for i in ITEMS if i["kind"] == "non-built delivery descriptor")
+    delivery = json.loads(files[desc_item["file"]].decode("utf-8"))
+    by_source = {d["source"]: d for d in delivery["deliverables"]}
+    hook_items = [i for i in ITEMS if i["kind"] == "non-built deliverable"]
+    stale = ["%s: the descriptor says %s, the acted file is %s" % (i["file"], (by_source.get(i["file"]) or {}).get("sha256"),
+                                                                  file_digest(files[i["file"]]))
+             for i in hook_items if (by_source.get(i["file"]) or {}).get("sha256") != file_digest(files[i["file"]])]
+    if stale or set(by_source) != {i["file"] for i in hook_items}:
+        raise Refused("the non-built delivery descriptor does not describe the acted hook files", stale or sorted(by_source))
     for item in ITEMS:
         row, data = acts[item["file"]], files[item["file"]]
         name = item["file"].rsplit("/", 1)[-1]
@@ -261,11 +275,14 @@ def project(l2, l3, fragments, queue_rows, files, *, verify_fragments=None, inpu
                             "ratified_by": ratified_by(row), "ratified_at": row["actedAt"], "actRef": act_ref(row),
                             "sha256": file_digest(data)})
             out_files["%s/%s" % (ACCEPTANCE_DIR, name)] = data
-        else:
-            rel = item["file"].split("/nonbuilt/", 1)[1]
-            nonbuilt.append({"path": rel, "sha256": file_digest(data), "ratified_by": ratified_by(row), "actRef": act_ref(row),
+        elif item["kind"] == "non-built deliverable":
+            d = by_source[item["file"]]
+            drow = acts[desc_item["file"]]
+            nonbuilt.append({"path": d["installAt"], "sha256": file_digest(data), "mode": d["mode"],
+                             "ratified_by": ratified_by(row), "actRef": act_ref(row),
+                             "deliveryRatifiedBy": ratified_by(drow), "deliveryActRef": act_ref(drow),
                              "placement": "placed by Ops in the build workspace before the C-S7 oracle runs (%s, condition 2)" % acts[HOOKS]["id"]})
-            out_files["nonbuilt/%s" % rel] = data
+            out_files["nonbuilt/%s" % d["installAt"]] = data
     planned = {f for u in units for f in u["files"]}
     if planned & {n["path"] for n in nonbuilt}:
         raise Refused("a non-built deliverable is in plan.json files (%s, condition 2)" % acts[HOOKS]["id"])
@@ -306,7 +323,10 @@ def project(l2, l3, fragments, queue_rows, files, *, verify_fragments=None, inpu
            "%s/standards.json" % std_dir: canonical({"schema": "coord-standards/1",
                                                       "standards": sorted(standards, key=lambda s: s["module"]),
                                                       "projectionInputManifestDigest": md}),
-           "nonbuilt/manifest.json": canonical({"deliverables": nonbuilt, "projectionInputManifestDigest": md})}
+           "nonbuilt/manifest.json": canonical({"deliverables": nonbuilt,
+                                                "repositoryRequirement": delivery["repositoryRequirement"],
+                                                "failClosed": delivery["failClosed"],
+                                                "projectionInputManifestDigest": md})}
     out.update(out_files)
     return out
 

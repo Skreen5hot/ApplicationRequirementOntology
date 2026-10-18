@@ -260,7 +260,9 @@ def test_every_amended_row_has_a_successor_bound_to_the_records_current_address(
     for amended in amended_rows:
         end = _live_end(rows, amended["id"])
         assert end != amended["id"], "%s is amended with no successor" % amended["id"]
-        assert q.current_digest(by_id[end])[1] == by_id[end]["recordDigest"], (amended["id"], end)
+        # record rows bind recordDigest; file rows (bars, oracles, hooks -- amended since 2026-10-18) bind artifactFileDigest
+        bound = by_id[end].get("recordDigest") or by_id[end]["artifactFileDigest"]
+        assert q.current_digest(by_id[end])[1] == bound, (amended["id"], end)
 
 
 def _unsettled_rq044_chain():

@@ -1,4 +1,5 @@
-// Ratification-bound bar for src/adjudicator.ts -- capability C-S3 adjudicate (WS-3, Plan v1.1 s5).
+// Ratification-bound bar for tools/adjudicator/adjudicator.ts -- capability C-S3 adjudicate (WS-3, Plan v1.1 s5).
+// The module's home is the accepted L2 home tools/adjudicator/ (adj:ws3-module-homes decided B at rq-074).
 // Source: SRS src:srs-spec@2, sha256 109e1b5026845a573dad17a9fd2ad2e603a2d46175ba2b6d77f17cb18115c614.
 // Written against the architect's ratified records only: L2 sr:L2:C-S3 (rq-046), sr:L2:R-S4 (rq-049),
 // sr:L2:R-S5 (rq-050); L3 sr:L3:adjudicator-interface (rq-066), sr:L3:ws3-field-types (rq-061).
@@ -7,7 +8,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import * as adj from '../src/adjudicator.ts';
+import * as adj from '../tools/adjudicator/adjudicator.ts';
 
 const DIMS = ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P10', 'P11'];
 const sorted = (xs) => [...xs].sort();                          // ECMAScript default sort (rq-066 canonical order)
@@ -141,7 +142,7 @@ test('A-DIM-01: adjudicate refuses a c with a different key set, and an attack o
     { attacks: [{ clause: 'CL-1', dimension: 'P99', replayed: true }] })), 'A-DIM-01');
 });
 
-// --- determinism (C-S3 determinism note; V-S2) ---
+// --- determinism (C-S3 determinism note) ---
 test('route and adjudicate are pure: same inputs, same output, inputs untouched', () => {
   const a = rec('A', { P6: 2 }), b = rec('B', { P6: 1 });
   const before = JSON.stringify([a, b, RATER_C]);

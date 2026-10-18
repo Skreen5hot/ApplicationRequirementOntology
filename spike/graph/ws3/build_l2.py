@@ -352,6 +352,7 @@ DIAGNOSTICS = [
      "statement": "SRS s5 homes grader-runner at tools/grader-runner/ and adjudicator at tools/adjudicator/; the factory builds one TypeScript module per unit at src/<module>.ts. The slice's layout convention (rq-001), which might have settled this, expired on 2026-10-11 and was bound to the superseded source. The source is univocal; the conflict is with the factory's realization, as for the ledger (rq-035). Recorded, not resolved, here.",
      "evidence": ["S5.grader-runner", "S5.adjudicator"],
      "legalOutputs": "adj:ws3-module-homes (A: factory layout; B: honour the L2 homes; C: source-amendment request)",
+     "resolvedByDecision": "adj:ws3-module-homes",   # the architect's rq-074 note: "This closes diag:ws3-module-homes"
      "status": None},   # DERIVED at build (derive_status)
     {"@id": "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash", "@type": "ConflictingStatement",
      "cone": ["c:ledger:hash-encoding (rq-034) and any C-S7 bar or oracle"],
@@ -477,6 +478,13 @@ def derive_status(diag, queue):
     if resolved and (HERE.parents[2] / resolved).is_file():
         return dict(diag, status="closed", closedBy=resolved)
     dead = {r.get("supersedes") for r in queue.values() if r.get("supersedes")}
+    # a conflict the architect DECIDED: closed by the live, decided row of the named adjudication (2026-10-18, rq-074)
+    adj = diag.get("resolvedByDecision")
+    deciders = [r for r in queue.values() if adj and r["id"] not in dead and r.get("record") == adj
+                and r.get("act") == "decided" and r.get("decision")]
+    if deciders:
+        r = deciders[-1]
+        return dict(diag, status="closed", closedBy="%s decided %s by %s" % (r["id"], r["decision"], r["actor"]))
     closers = [r for r in queue.values() if r["id"] not in dead and r.get("act") == "ratified"
                and diag["@id"] in (r.get("closes") or [])]
     if closers:

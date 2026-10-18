@@ -31,7 +31,7 @@ def seeded(homes=None, actor=SEEDED, files_override=None, act="ratified"):
     dead = {r.get("supersedes") for r in rows if r.get("supersedes")}
     rows = copy.deepcopy(rows)
     targets = [r for r in rows if r["id"] not in dead and (r.get("record") == P.HOMES or r.get("artifact") in WS35)]
-    assert len(targets) == 7, "seeded %d rows (WS3-5: rq-067..rq-072 and the module-homes adjudication)" % len(targets)
+    assert len(targets) == len(WS35) + 1, "seeded %d rows (the WS3-5 files and the module-homes adjudication)" % len(targets)
     for r in targets:
         _strip(r)
         if homes is None:
@@ -55,16 +55,17 @@ def test_unacted_it_refuses_and_lists_exactly_the_ws3_5_items():
     with pytest.raises(P.Refused) as e:
         run()
     awaiting = e.value.awaiting
-    assert len(awaiting) == 7, awaiting
+    assert len(awaiting) == len(WS35) + 1, awaiting
     assert sum(P.HOMES in w for w in awaiting) == 1 and all(any(f in w for w in awaiting) for f in WS35)
 
 
-def test_decided_A_it_projects_deterministically_with_capabilities_and_oracles():
-    out, again = run("A"), run("A")
+def test_decided_B_it_projects_deterministically_with_capabilities_and_oracles():
+    """rq-074 decided B: the accepted L2 homes govern; only the ledger (rq-035) departs."""
+    out, again = run("B"), run("B")
     assert out == again, "two projections of the same inputs differ"
     plan = json.loads(out["plan.json"])
     assert {u["id"]: u["files"] for u in plan["units"]} == {
-        "adjudicator": ["src/adjudicator.ts"], "grader-runner": ["src/grader-runner.ts"],
+        "adjudicator": ["tools/adjudicator/adjudicator.ts"], "grader-runner": ["tools/grader-runner/grader-runner.ts"],
         "grading-types": ["src/grading-types.ts"], "ledger": ["src/ledger.ts"]}
     assert {u["id"]: u["depends_on"] for u in plan["units"]}["adjudicator"] == ["grading-types"]
     assert [(c["capability"], c["path"], c["modules"]) for c in plan["capabilities"]] == [
@@ -75,11 +76,11 @@ def test_decided_A_it_projects_deterministically_with_capabilities_and_oracles()
         assert o["ratified_by"] == "%s via %s (%s)" % (SEEDED, o["actRef"]["queueRow"], o["actRef"]["actDigest"])
         assert o["actRef"]["bound"] == o["sha256"]
     assert plan["provisional"] and plan["provisional"][0].startswith("C-S2 (grade): no ratified bar or oracle")
-    assert sorted(d["module"] for d in plan["departures"]) == ["adjudicator", "grader-runner", "ledger"]
+    assert [d["module"] for d in plan["departures"]] == ["ledger"], "the accepted homes are not departures (rq-074, 1)"
 
 
 def test_the_bundle_carries_the_ratified_bytes_and_the_act_beside_each():
-    out = run("A")
+    out = run("B")
     _, _, _, _, files = P.load_real()
     std_dir = next(k for k in out if k.endswith("/standards.json")).rsplit("/", 1)[0]
     assert std_dir == "oracles/109e1b502684"
@@ -95,32 +96,37 @@ def test_the_bundle_carries_the_ratified_bytes_and_the_act_beside_each():
     assert md == std["projectionInputManifestDigest"] == json.loads(out["nonbuilt/manifest.json"])["projectionInputManifestDigest"]
 
 
-def test_the_hook_travels_only_in_the_non_built_channel():
-    out = run("A")
-    nb = json.loads(out["nonbuilt/manifest.json"])["deliverables"]
+def test_the_hook_travels_only_in_the_non_built_channel_with_the_mode_the_descriptor_binds():
+    out = run("B")
+    manifest = json.loads(out["nonbuilt/manifest.json"])
+    nb = manifest["deliverables"]
     assert sorted(d["path"] for d in nb) == [".githooks/check-ledger.mjs", ".githooks/pre-commit"]
+    assert {d["path"]: d["mode"] for d in nb} == {".githooks/pre-commit": "100755", ".githooks/check-ledger.mjs": "100644"}
+    assert manifest["repositoryRequirement"]["core.hooksPath"] == ".githooks" and "never" in manifest["failClosed"]
+    desc = P.file_digest(P.load_real()[4]["spike/projections/ws3/nonbuilt/delivery.json"])
+    assert all(d["deliveryActRef"]["bound"] == desc for d in nb)
     planned = {f for u in json.loads(out["plan.json"])["units"] for f in u["files"]}
     assert not any(".githooks" in f for f in planned)
     assert all(("nonbuilt/" + d["path"]) in out for d in nb)
 
 
-def test_decided_B_refuses_until_the_bar_and_oracle_import_the_decided_homes():
+def test_decided_A_refuses_because_the_bar_and_oracle_import_the_accepted_homes():
     with pytest.raises(P.Refused) as e:
-        run("B")
+        run("A")
     assert len(e.value.awaiting) == 2, e.value.awaiting
     assert any("bars/adjudicator.test.mjs" in w for w in e.value.awaiting)
     assert any("acceptance/C-S3.test.mjs" in w for w in e.value.awaiting)
 
 
-def test_decided_B_with_rewritten_tests_projects_and_only_the_ledger_departs():
+def test_decided_A_with_tests_rewritten_to_src_projects_and_three_modules_depart():
     _, _, _, _, files = P.load_real()
     bar, oracle = "spike/projections/ws3/bars/adjudicator.test.mjs", "spike/projections/ws3/acceptance/C-S3.test.mjs"
-    rewritten = {bar: files[bar].replace(b"'../src/adjudicator.ts'", b"'../tools/adjudicator/adjudicator.ts'"),
-                 oracle: files[oracle].replace(b"'../../src/adjudicator.ts'", b"'../../tools/adjudicator/adjudicator.ts'")}
+    rewritten = {bar: files[bar].replace(b"'../tools/adjudicator/adjudicator.ts'", b"'../src/adjudicator.ts'"),
+                 oracle: files[oracle].replace(b"'../../tools/adjudicator/adjudicator.ts'", b"'../../src/adjudicator.ts'")}
     assert all(rewritten[k] != files[k] for k in rewritten)
-    plan = json.loads(run("B", files_override=rewritten)["plan.json"])
-    assert {u["id"]: u["files"] for u in plan["units"]}["adjudicator"] == ["tools/adjudicator/adjudicator.ts"]
-    assert [d["module"] for d in plan["departures"]] == ["ledger"]
+    plan = json.loads(run("A", files_override=rewritten)["plan.json"])
+    assert {u["id"]: u["files"] for u in plan["units"]}["adjudicator"] == ["src/adjudicator.ts"]
+    assert sorted(d["module"] for d in plan["departures"]) == ["adjudicator", "grader-runner", "ledger"]
 
 
 def test_a_hook_script_loading_an_unbuilt_module_refuses():
@@ -129,17 +135,17 @@ def test_a_hook_script_loading_an_unbuilt_module_refuses():
     moved = {hook: files[hook].replace(b"'src', 'ledger.ts'", b"'src', 'ledger-v2.ts'")}
     assert moved[hook] != files[hook]
     with pytest.raises(P.Refused) as e:
-        run("A", files_override=moved)
-    assert e.value.awaiting == ["%s imports ['src/ledger-v2.ts']; the plan builds []" % hook]
+        run("B", files_override=moved)
+    assert e.value.awaiting[0] == "%s imports ['src/ledger-v2.ts']; the plan builds []" % hook
 
 
 def test_a_decision_placing_a_hook_among_the_built_files_refuses():
     """rq-035 condition 2: the wrapper is NEVER in plan.json files. Seeded: option A's files put grading-types at the
     hook's path, and the seeded act is re-bound to that changed record (else the act check would refuse first)."""
-    l2, l3, fragments, rows, files = seeded("A")
+    l2, l3, fragments, rows, files = seeded("B")
     l3 = copy.deepcopy(l3)
     adj = next(a for a in l3["adjudications"] if a["@id"] == P.HOMES)
-    next(o for o in adj["options"] if o["id"] == "A")["files"]["grading-types"] = ".githooks/check-ledger.mjs"
+    next(o for o in adj["options"] if o["id"] == "B")["files"]["grading-types"] = ".githooks/check-ledger.mjs"
     row = next(r for r in rows if r.get("record") == P.HOMES and r.get("actedAt"))
     row["recordDigest"] = row["actDigest"] = P.digest(adj)
     with pytest.raises(P.Refused, match="non-built deliverable is in plan.json files"):
@@ -153,17 +159,17 @@ def test_decided_C_refuses_awaiting_the_source_amendment():
 
 def test_an_agent_act_voids_rather_than_projects():
     with pytest.raises(P.Refused, match="simulated a ratification act"):
-        run("A", actor="claude")
+        run("B", actor="claude")
 
 
 def test_an_amend_is_not_a_ratification():
     with pytest.raises(P.Refused) as e:
-        run("A", act="amended")
-    assert len([w for w in e.value.awaiting if "no act yet" in w]) == 6, e.value.awaiting
+        run("B", act="amended")
+    assert len([w for w in e.value.awaiting if "no act yet" in w]) == len(WS35), e.value.awaiting
 
 
 def test_bytes_changed_after_the_act_need_a_new_act():
-    l2, l3, fragments, rows, files = seeded("A")
+    l2, l3, fragments, rows, files = seeded("B")
     bar = "spike/projections/ws3/bars/ledger.test.mjs"
     files = dict(files, **{bar: files[bar] + b"\n// edited after the act\n"})
     with pytest.raises(P.Refused) as e:
@@ -177,12 +183,23 @@ def test_an_open_blocking_diagnostic_refuses(monkeypatch):
     d["blocking"] = True
     monkeypatch.setattr(P.build_l2, "DIAGNOSTICS", diags)
     with pytest.raises(P.Refused) as e:
-        run("A")
+        run("B")
     assert e.value.awaiting == ["diag:external-method-artifacts is OPEN and BLOCKING"]
 
 
+def test_a_descriptor_that_does_not_name_the_acted_hook_bytes_refuses():
+    """rq-071: the delivery record must describe the very bytes each hook row's act binds."""
+    _, _, _, _, files = P.load_real()
+    desc = "spike/projections/ws3/nonbuilt/delivery.json"
+    d = json.loads(files[desc])
+    d["deliverables"][1]["sha256"] = "sha256:" + "0" * 64
+    with pytest.raises(P.Refused, match="delivery descriptor does not describe the acted hook files") as e:
+        run("B", files_override={desc: json.dumps(d).encode("utf-8")})
+    assert len(e.value.awaiting) == 1 and "check-ledger.mjs" in e.value.awaiting[0]
+
+
 def test_the_control_may_not_carry_a_ratified_bar():
-    l2, l3, fragments, rows, files = seeded("A")
+    l2, l3, fragments, rows, files = seeded("B")
     l2 = copy.deepcopy(l2)
     l2["ws3"]["demonstrationControlCandidate"]["capability"] = "C-S3"
     with pytest.raises(P.Refused, match="demonstration control C-S3 has a ratified bar"):

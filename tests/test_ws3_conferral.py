@@ -199,3 +199,16 @@ def test_every_ws3_rows_bind_is_retrievable_from_history():
     assert len(examined) >= 50, "examined %d rows" % len(examined)
     missing = sorted(r["id"] for r in examined if bound_record(r) is None)
     assert missing == sorted(UNRETRIEVABLE), missing
+
+
+def test_a_decided_adjudication_closes_the_conflict_it_resolves_and_only_a_live_decided_row_does():
+    """2026-10-18, rq-074: "This closes diag:ws3-module-homes". Seeded rows, never the live queue."""
+    d = next(x for x in b2.DIAGNOSTICS if x["@id"] == "diag:ws3-module-homes")
+    assert d["resolvedByDecision"] == "adj:ws3-module-homes"
+    row = {"id": "rq-900", "record": "adj:ws3-module-homes", "act": "decided", "decision": "B", "actor": "Seeded"}
+    assert b2.derive_status(d, {"rq-900": row})["status"] == "closed"
+    assert b2.derive_status(d, {})["status"] == "open", "no decision, still open"
+    amended = dict(row, act="amended", decision=None)
+    assert b2.derive_status(d, {"rq-900": amended})["status"] == "open", "an amend confers nothing"
+    dead = {"rq-900": row, "rq-901": {"id": "rq-901", "record": "adj:ws3-module-homes", "supersedes": "rq-900"}}
+    assert b2.derive_status(d, dead)["status"] == "open", "a superseded decision does not close it"

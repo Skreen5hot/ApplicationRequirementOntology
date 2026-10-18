@@ -1314,7 +1314,9 @@
         "sf:67479c23437989d6f316d343"
       ],
       "legalOutputs": "adj:ws3-module-homes (A: factory layout; B: honour the L2 homes; C: source-amendment request)",
-      "status": "open"
+      "resolvedByDecision": "adj:ws3-module-homes",
+      "status": "closed",
+      "closedBy": "rq-074 decided B by Aaron"
     },
     {
       "@id": "diag:W-CS7-N-vs-W-CS7-D1-kind-outside-the-hash",

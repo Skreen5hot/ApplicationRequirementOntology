@@ -42,8 +42,13 @@ test('rq-038 = A: kind is IN the preimage -- changing kind alone changes the has
   assert.notEqual(ledger.entryHash(7, GENESIS, 'registration', PAYLOAD), ledger.entryHash(7, GENESIS, 'ratification', PAYLOAD));
 });
 
-test('canonical: payload key order does not change the hash', () => {
+test('canonical: payload key order does not change the hash -- at every depth, not only the outermost', () => {
   assert.equal(ledger.entryHash(2, GENESIS, 'registration', { b: 1, a: 2 }), ledger.entryHash(2, GENESIS, 'registration', { a: 2, b: 1 }));
+  // rq-077 (1): the ratified encoding sorts keys throughout the canonical JSON value
+  const nestedAB = { spec: 'specs/x', vector: { P6: 1, P1: 2, sub: { z: [{ y: 1, x: 2 }], a: 0 } } };
+  const nestedBA = { vector: { sub: { a: 0, z: [{ x: 2, y: 1 }] }, P1: 2, P6: 1 }, spec: 'specs/x' };
+  assert.equal(ledger.entryHash(3, GENESIS, 'registration', nestedAB), ledger.entryHash(3, GENESIS, 'registration', nestedBA));
+  assert.equal(ledger.entryHash(3, GENESIS, 'registration', nestedAB), expectHash(3, GENESIS, 'registration', nestedBA));
 });
 
 test('genesis: the first entry has seq 1 and prev = 64 zeros', () => {
@@ -112,17 +117,30 @@ test('W-CS7-Δ1: any rewrite of an existing line -> H-LEDGER-01', () => {
   assert.deepEqual(ledger.checkAppendOnly(before, before + '{"seq":3}'), { ok: false, code: 'H-LEDGER-01' }, 'a partial line is not whole');
 });
 
-test('appendEntry: appends one line per call to the JSONL file and never rewrites', () => {
+test('appendEntry: appends exactly the requested next entry, one complete line per call, and never rewrites', () => {
   const dir = mkdtempSync(join(tmpdir(), 'ledger-bar-'));
   const path = join(dir, 'ledger.jsonl');
   writeFileSync(path, '');
+  // rq-077 (2): the expected entries are built HERE from the ratified encoding -- never by calling nextEntry, so two
+  // cooperating defects (in nextEntry and appendEntry) cannot pass together
+  const RAT = { rev: 'abc123' };
+  const want1 = { seq: 1, prev: GENESIS, kind: 'registration', payload: PAYLOAD, hash: expectHash(1, GENESIS, 'registration', PAYLOAD) };
+  const want2 = { seq: 2, prev: want1.hash, kind: 'ratification', payload: RAT, hash: expectHash(2, want1.hash, 'ratification', RAT) };
+  // rq-077 (3): after each call the file ends with \n and holds exactly one more complete JSONL line
+  const completeLines = (text) => {
+    assert.ok(text.endsWith('\n'), 'the file ends with a newline: the appended line is whole');
+    return text.slice(0, -1).split('\n');
+  };
   const e1 = ledger.appendEntry(path, 'registration', PAYLOAD);
   const first = readFileSync(path, 'utf8');
-  const e2 = ledger.appendEntry(path, 'ratification', { rev: 'abc123' });
+  assert.equal(completeLines(first).length, 1);
+  const e2 = ledger.appendEntry(path, 'ratification', RAT);
   const text = readFileSync(path, 'utf8');
   assert.ok(text.startsWith(first), 'the first line is untouched');
-  const lines = text.trimEnd().split('\n').map((l) => JSON.parse(l));
-  assert.deepEqual(lines, [e1, e2]);
-  assert.equal(e2.prev, e1.hash);
-  assert.deepEqual(ledger.verifyChain(lines), { ok: true });
+  const raw = completeLines(text);
+  assert.equal(raw.length, 2, 'exactly one additional line');
+  assert.deepEqual(e1, want1, 'the returned registration entry');
+  assert.deepEqual(e2, want2, 'the returned ratification entry');
+  assert.deepEqual(raw.map((l) => JSON.parse(l)), [want1, want2], 'the persisted entries');
+  assert.deepEqual(ledger.verifyChain([want1, want2]), { ok: true });
 });

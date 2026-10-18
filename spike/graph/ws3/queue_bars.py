@@ -59,8 +59,32 @@ def file_digest(rel):
     return "sha256:" + hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()
 
 
-def test_titles(rel):
-    return re.findall(r"^test\('([^']+)'", (ROOT / rel).read_text(encoding="utf-8"), re.M)
+# A test title is a JavaScript STRING LITERAL, so it is parsed as one: either quote style, escapes resolved (IA Ops
+# finding 2026-10-17, "the queue row publishes a truncated test title and would drop a double-quoted one" -- the old
+# pattern `^test\('([^']+)'` stopped at an escaped apostrophe and matched no double-quoted title at all).
+_TITLE = re.compile(r"""^test\(\s*(['"])((?:\\.|(?!\1)[^\\\n])*)\1""", re.M)
+_ESCAPES = {"n": "\n", "t": "\t", "r": "\r", "b": "\b", "f": "\f", "v": "\v", "0": "\0"}
+
+
+def _unescape(body):
+    return re.sub(r"\\(.)", lambda m: _ESCAPES.get(m.group(1), m.group(1)), body)
+
+
+def test_titles(rel, text=None):
+    """Every top-level test(...) title, in order -> [str]. REFUSES when a declaration's title is not a plain string
+    literal (e.g. a template literal), rather than silently publishing fewer duties than the file asserts."""
+    text = (ROOT / rel).read_text(encoding="utf-8") if text is None else text
+    titles = [_unescape(m.group(2)) for m in _TITLE.finditer(text)]
+    declared = len(re.findall(r"^test\(", text, re.M))
+    if declared != len(titles):
+        raise SystemExit("%s declares %d test(...) but %d titles parse as string literals -- refusing to publish a short "
+                         "list" % (rel, declared, len(titles)))
+    return titles
+
+
+def published_duties(rel):
+    titles = test_titles(rel)
+    return titles or "n/a (not a test file)", len(titles)
 
 
 def rows_for(existing, now):
@@ -71,10 +95,15 @@ def rows_for(existing, now):
         live = [r for r in existing if r.get("artifact") == it["file"] and r["id"] not in dead]
         prior = live[-1] if live else None
         d = file_digest(it["file"])
-        if prior and prior.get("artifactFileDigest") == d:
+        tests, count = published_duties(it["file"])
+        # a row is current only if its BYTES and its PUBLISHED DUTIES both match: a corrected title list re-queues the
+        # row at the same digest (the duty list is part of what ratification confers over)
+        same_duties = prior and (prior.get("displayDuties") or {}).get("tests") == tests and prior.get("assertions") == count
+        if prior and prior.get("artifactFileDigest") == d and same_duties:
             continue
         if prior and prior.get("actedAt"):
-            raise SystemExit("%s changed after %s was acted on -- not re-queued here" % (it["file"], prior["id"]))
+            raise SystemExit("%s (or its published duties) changed after %s was acted on -- not re-queued here"
+                             % (it["file"], prior["id"]))
         n += 1
         titles = test_titles(it["file"])
         row = {

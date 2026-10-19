@@ -14,6 +14,13 @@ verdict shape, which the extension reads from the ledger rather than trusts):
     {"capabilities": {"<cap>": {"status": "VERIFIED" | "built_unverified" | ...,
                                 "barProvenance": [{"module", "provisional", "source", "ratified_by", "actRef"?}]}}}
 
+RECONCILED 2026-10-19 to the extension's EMITTED shape (IA experiments/ops/ledger_reader.py, ops-ledger-reader-1,
+calibration record OPS-2026-10-19-b1-ledger-reader-calibration-record.md): capability status is VERIFIED | BLOCKED, and
+each module's derived state is in `derived` (verified | built_unverified | authority_not_demonstrated | stub |
+inherited_debt | absent). So "the control reads built_unverified -- never VERIFIED" is: status BLOCKED, and every control
+module derived built_unverified (the oracle gap) -- not a stub, not inherited debt, not a provenance failure, not absent,
+any of which would mean the control failed for a reason other than its held bar.
+
     check(extension_output, plan, standards, queue_rows, control) -> [failure]   # [] means both assertions hold
 """
 from __future__ import annotations
@@ -32,9 +39,12 @@ def check(extension_output: dict, plan: dict, standards: dict, queue_rows: list,
         status = caps[c].get("status")
         if status == "VERIFIED":
             out.append("(i) the control %s reads VERIFIED; a provisional-bar capability must never verify" % c)
-        elif status != "built_unverified":
-            out.append("(i) the control %s reads %r, not built_unverified" % (c, status))
-        if any(not b.get("provisional") for b in caps[c].get("barProvenance") or []):
+        derived = caps[c].get("derived") or {}
+        for m in control["modules"]:
+            if derived.get(m) != "built_unverified":
+                out.append("(i) the control %s: module %s derives %r, not built_unverified (its held bar is not "
+                           "what blocks it)" % (c, m, derived.get(m)))
+        if any(b.get("provisional") is False for b in caps[c].get("barProvenance") or []):
             out.append("(i) the control %s carries a non-provisional bar" % c)
     # (ii) every ratified-bar capability: VERIFIED with the chain intact
     by_module = {s["module"]: s for s in standards.get("standards") or []}
@@ -54,6 +64,8 @@ def check(extension_output: dict, plan: dict, standards: dict, queue_rows: list,
             out.append("(ii) %s reads %r, not VERIFIED" % (name, v.get("status")))
         prov = {b.get("module"): b for b in v.get("barProvenance") or []}
         for m in x["modules"]:
+            if (v.get("derived") or {}).get(m) != "verified":
+                out.append("(ii) %s: module %s derives %r, not verified" % (name, m, (v.get("derived") or {}).get(m)))
             want, got = by_module[m], prov.get(m)
             if got is None:
                 out.append("(ii) %s: no barProvenance for module %s" % (name, m))

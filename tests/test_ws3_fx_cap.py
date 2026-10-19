@@ -20,10 +20,15 @@ STANDARDS = {"standards": [
     {"module": "ledger", "provisional": False, "sha256": D_LED, "ratified_by": "Seeded via rq-902 (%s)" % D_LED, "actRef": {"queueRow": "rq-902"}}]}
 ROWS = [{"id": "rq-901", "act": "ratified", "artifactFileDigest": D_ADJ, "actDigest": D_ADJ},
         {"id": "rq-902", "act": "ratified", "artifactFileDigest": D_LED, "actDigest": D_LED}]
-GOOD = {"capabilities": {
-    "C-S2": {"status": "built_unverified", "barProvenance": [{"module": "grader-runner", "provisional": True, "source": "model"}]},
-    "C-S3": {"status": "VERIFIED", "barProvenance": [{"module": "adjudicator", "provisional": False, "ratified_by": STANDARDS["standards"][0]["ratified_by"]}]},
-    "C-S7": {"status": "VERIFIED", "barProvenance": [{"module": "ledger", "provisional": False, "ratified_by": STANDARDS["standards"][1]["ratified_by"]}]}}}
+# the EMITTED shape of the OPS extension (ops-ledger-reader-1): status VERIFIED | BLOCKED, module states in `derived`
+GOOD = {"reader": "ops-ledger-reader-1", "capabilities": {
+    "C-S2": {"status": "BLOCKED", "derived": {"grader-runner": "built_unverified"},
+             "reasons": ["grader-runner: oracle_gap (built_unverified)"],
+             "barProvenance": [{"module": "grader-runner", "provisional": True, "ratified_by": None, "source": "model"}]},
+    "C-S3": {"status": "VERIFIED", "derived": {"adjudicator": "verified"}, "reasons": [],
+             "barProvenance": [{"module": "adjudicator", "provisional": False, "source": "spec", "ratified_by": STANDARDS["standards"][0]["ratified_by"]}]},
+    "C-S7": {"status": "VERIFIED", "derived": {"ledger": "verified"}, "reasons": [],
+             "barProvenance": [{"module": "ledger", "provisional": False, "source": "spec", "ratified_by": STANDARDS["standards"][1]["ratified_by"]}]}}}
 
 
 def run(ext=GOOD, rows=ROWS, standards=STANDARDS):
@@ -50,8 +55,18 @@ def test_i_an_absent_control_is_red_not_vacuously_green():
 
 
 def test_ii_a_ratified_capability_not_verified_is_red():
-    bad = copy.deepcopy(GOOD); bad["capabilities"]["C-S7"]["status"] = "built_unverified"
-    assert run(bad) == ["(ii) C-S7 reads 'built_unverified', not VERIFIED"]
+    bad = copy.deepcopy(GOOD)
+    bad["capabilities"]["C-S7"].update(status="BLOCKED", derived={"ledger": "stub"})
+    assert run(bad) == ["(ii) C-S7 reads 'BLOCKED', not VERIFIED", "(ii) C-S7: module ledger derives 'stub', not verified"]
+
+
+def test_i_a_control_blocked_for_the_wrong_reason_is_red():
+    """BLOCKED is not enough: the control must be blocked BY its held bar (built_unverified), not by a stub,
+    inherited debt, a provenance failure or absence -- each of those is a control that failed for another reason."""
+    for wrong in ("stub", "inherited_debt", "authority_not_demonstrated", "absent", None):
+        bad = copy.deepcopy(GOOD); bad["capabilities"]["C-S2"]["derived"] = {"grader-runner": wrong} if wrong else {}
+        assert run(bad) == ["(i) the control C-S2: module grader-runner derives %r, not built_unverified (its held bar is "
+                            "not what blocks it)" % wrong], wrong
 
 
 def test_ii_a_broken_chain_is_red():

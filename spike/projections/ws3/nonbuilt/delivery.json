@@ -1,5 +1,9 @@
 {
   "what": "The content-addressed delivery record for WS-3's non-built deliverables (rq-035 = A, condition 2; rq-071 as amended by the architect 2026-10-18). A file's SHA-256 addresses its bytes, not its executable mode or where it is installed, so both are bound HERE; ratifying this file binds them.",
+  "dependsOn": {
+    "wrapper": "rq-082 -- spike/projections/ws3/nonbuilt/.githooks/pre-commit, RATIFIED 2026-10-19 at sha256:8a915d8f6e8a3abe9e2287c615eb86bb2c34db8614a5c62c3b9bd8f084720342",
+    "script": "rq-085 -- spike/projections/ws3/nonbuilt/.githooks/check-ledger.mjs, the successor to rq-083 (amended 2026-10-19: the line-terminator path bypass), queued at sha256:72527039ce71314fab43bf4c30a339809b61c3c5ac4c928fcde8e864ad3897f9; this descriptor is to be ratified only after rq-085 is"
+  },
   "repositoryRequirement": {
     "core.hooksPath": ".githooks",
     "appliesTo": "the verification repository in which the C-S7 oracle's real commit runs"
@@ -16,7 +20,7 @@
     {
       "source": "spike/projections/ws3/nonbuilt/.githooks/check-ledger.mjs",
       "installAt": ".githooks/check-ledger.mjs",
-      "sha256": "sha256:18bac1a079d29c37268fc59adb01b41a8c9c2847e49485b3ed27b3d36179bac7",
+      "sha256": "sha256:72527039ce71314fab43bf4c30a339809b61c3c5ac4c928fcde8e864ad3897f9",
       "mode": "100644",
       "role": "Git/index plumbing only; the append-only decision is the BUILT checkAppendOnly (src/ledger.ts)"
     }

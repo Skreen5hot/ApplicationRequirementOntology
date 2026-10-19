@@ -46,11 +46,6 @@ ITEMS = [
      "rests": "sr:L2:C-S3 (rq-046), sr:L3:adjudicator-interface (rq-066), adj:ws3-module-homes = B (rq-074)",
      "fixtures": "the rater-C record, inline; A and B are committed GradeRecord fixtures (this oracle does not prove grader isolation)",
      "amendedBy": "rq-069 (2026-10-18): V-S2 overclaim removed (V-S2 stays pending under diag:external-method-artifacts); purity snapshot before the first call, re-run from fresh clones; the complete PRINTED variant asserted; import from tools/adjudicator/"},
-    {"file": BASE + "/acceptance/C-S7.test.mjs", "kind": "capability oracle", "unit": None, "capability": "C-S7",
-     "title": "acceptance oracle for C-S7 register -- J-S1 step 4 + J-S4 step 3 (each event exact), and W-CS7-Δ1 through a REAL git commit: rewrite, deletion and read failures refused",
-     "rests": "sr:L2:C-S7 (rq-047), sr:L2:LedgerEntry (rq-053), sr:L3:ledger-interface (rq-064), rq-035 = A with conditions",
-     "fixtures": "none; PRECONDITION provisioned not detected: git, the non-built .githooks/ and (on POSIX) the wrapper's executable mode -- missing any FAILS, never skips",
-     "amendedBy": "rq-070 (2026-10-18): seq/prev/kind/payload of both events, the persisted lines exactly, and the committed final entry; plus rq-072's coverage: a staged deletion and induced index and blob-read failures"},
     {"file": BASE + "/nonbuilt/.githooks/pre-commit", "kind": "non-built deliverable", "unit": None, "capability": "C-S7",
      "title": "the ledger hook wrapper (.githooks/pre-commit) -- runs check-ledger.mjs; holds no logic (rq-035 = A, condition 2); bytes unchanged, mode now 100755",
      "rests": "sr:L2:ledger (rq-056), rq-035 = A with conditions", "fixtures": "n/a",
@@ -58,11 +53,18 @@ ITEMS = [
     {"file": BASE + "/nonbuilt/.githooks/check-ledger.mjs", "kind": "non-built deliverable", "unit": None, "capability": "C-S7",
      "title": "the hook's script (.githooks/check-ledger.mjs) -- Git/index plumbing only, fail-closed; the decision is the BUILT checkAppendOnly",
      "rests": "sr:L3:ledger-interface (rq-064), rq-035 = A with conditions", "fixtures": "n/a",
-     "amendedBy": "rq-072 (2026-10-18): no catch-all (exit 2 on any git/index/blob failure); deletion and rename refused (H-LEDGER-01); -z parsing; staged blobs from the index; empty predecessor only for status A; malformed content fails closed"},
+     "amendedBy": "rq-072 (2026-10-18): no catch-all (exit 2 on any git/index/blob failure); deletion and rename refused (H-LEDGER-01); -z parsing; staged blobs from the index; empty predecessor only for status A; malformed content fails closed. rq-083 (2026-10-19): the ledger-path predicate is startsWith('ledger/') && endsWith('.jsonl') -- the regex .* let a line-terminator pathname bypass checking; selection and decision exported so tests/test_ws3_hook_script.py proves such a path selected and its rewrite and deletion refused (red against the previous .*)"},
     {"file": BASE + "/nonbuilt/delivery.json", "kind": "non-built delivery descriptor", "unit": None, "capability": "C-S7",
      "title": "the non-built delivery record -- both hook files' digests, modes (pre-commit 100755), install paths, core.hooksPath, fail-not-skip",
      "rests": "rq-035 = A, condition 2; rq-071 (2026-10-18)", "fixtures": "n/a",
-     "amendedBy": "new, per rq-071: 'the complete content-addressed deliverable record must change'"},
+     "amendedBy": "rq-084 (2026-10-19): the script entry re-pinned to the corrected script's digest; wrapper entry, paths, modes and core.hooksPath preserved; explicit dependsOn on ratified rq-082 and on rq-083's successor",
+     "requires": [BASE + "/nonbuilt/.githooks/pre-commit", BASE + "/nonbuilt/.githooks/check-ledger.mjs"]},
+    {"file": BASE + "/acceptance/C-S7.test.mjs", "kind": "capability oracle", "unit": None, "capability": "C-S7",
+     "title": "acceptance oracle for C-S7 register -- J-S1 step 4 + J-S4 step 3 (each event exact), and W-CS7-Δ1 through a REAL git commit: a rewrite, a deletion, and the seeded corrupt-index and malformed-staged-blob failures refused",
+     "rests": "sr:L2:C-S7 (rq-047), sr:L2:LedgerEntry (rq-053), sr:L3:ledger-interface (rq-064), rq-035 = A with conditions",
+     "fixtures": "none; PRECONDITION provisioned not detected: git, and the non-built .githooks/ at the PINNED ratified digests (wrapper rq-082, script and descriptor below) -- missing or different FAILS, never skips",
+     "amendedBy": "rq-070 (2026-10-18): each event exact and the committed final entry; rq-072's deletion and failure cases. rq-081 (2026-10-19): failures assert only a nonzero status (no exit 2, no message text); the title names the two seeded failures instead of 'any read failure'; bound to the non-built delivery set by pinned digests",
+     "requires": [BASE + "/nonbuilt/.githooks/pre-commit", BASE + "/nonbuilt/.githooks/check-ledger.mjs", BASE + "/nonbuilt/delivery.json"]},
 ]
 
 
@@ -149,6 +151,14 @@ def rows_for(existing, now):
             "queuedBy": "aro-dev-agent", "sourceDigest": SOURCE,
             "workstream": "WS-3 (Plan v1.1 s5; D-8 part 2b: bars and oracles)",
         }
+        if it.get("requires"):
+            # ratifying this row is refused by act.py until each of these rows is ratified (the architect's rq-081 and
+            # rq-084: the oracle and the descriptor are re-presented AFTER their non-built dependencies are ratified)
+            pending = existing + out
+            gone = {r.get("supersedes") for r in pending if r.get("supersedes")}
+            row["requiresRatified"] = [[r for r in pending if r.get("artifact") == f and r["id"] not in gone][-1]["id"]
+                                       for f in it["requires"]]
+            row["displayDuties"]["actOrder"] = "ratify only after %s" % ", ".join(row["requiresRatified"])
         if prior:
             row["supersedes"] = prior["id"]
         out.append(row)

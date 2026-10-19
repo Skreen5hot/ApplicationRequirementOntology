@@ -337,3 +337,23 @@ def test_show_marks_design_rationale_as_not_grounding(repo, capsys):
 def test_show_json_keeps_the_raw_row(repo, capsys):
     assert act.main(["--root", str(repo), "--json", "show", "rq-004"]) == 0
     assert json.loads(capsys.readouterr().out)["item"]["record"] == "sr:L2:Finding"
+
+
+def test_an_item_resting_on_others_is_ratified_only_after_them(repo):
+    """2026-10-19, the architect's rq-081 and rq-084: the oracle and the descriptor are re-presented AFTER their non-built
+    dependencies are ratified. The rule lives inside act() -- the one door -- so the page and the CLI both obey it.
+    Seeded rows: a dependency, and an item resting on it."""
+    _fresh_item(repo, "rq-930")
+    _fresh_item(repo, "rq-931", requiresRatified=["rq-930"])
+    q = act.Queue(repo)
+    with pytest.raises(act.Refused, match="rests on rq-930, which is not ratified yet"):
+        act.act(q, "rq-931", "ratify", "Seeded Architect")
+    assert act.act(act.Queue(repo), "rq-931", "amend", "Seeded Architect", note="an amend needs nothing settled first")["act"] == "amended"
+    _fresh_item(repo, "rq-932", requiresRatified=["rq-930"])
+    act.act(act.Queue(repo), "rq-930", "amend", "Seeded Architect", note="amended, not ratified")
+    with pytest.raises(act.Refused, match="rests on rq-930"):
+        act.act(act.Queue(repo), "rq-932", "ratify", "Seeded Architect")
+    _fresh_item(repo, "rq-933")
+    _fresh_item(repo, "rq-934", requiresRatified=["rq-933"])
+    act.act(act.Queue(repo), "rq-933", "ratify", "Seeded Architect")
+    assert act.act(act.Queue(repo), "rq-934", "ratify", "Seeded Architect")["confers"] is True

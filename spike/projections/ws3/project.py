@@ -268,6 +268,17 @@ def project(l2, l3, fragments, queue_rows, files, *, verify_fragments=None, inpu
              for i in hook_items if (by_source.get(i["file"]) or {}).get("sha256") != file_digest(files[i["file"]])]
     if stale or set(by_source) != {i["file"] for i in hook_items}:
         raise Refused("the non-built delivery descriptor does not describe the acted hook files", stale or sorted(by_source))
+    # rq-081 (2026-10-19): the C-S7 oracle is BOUND to the ratified non-built set by the digests it pins; each pin must
+    # be the acted bytes of the wrapper, the script and the descriptor, or the oracle would vouch for a different set.
+    c_s7 = next(i for i in ITEMS if i["kind"] == "capability oracle" and i["capability"] == "C-S7")
+    pins = dict(re.findall(r"const PINNED_(WRAPPER|SCRIPT|DELIVERY) = '(sha256:[0-9a-f]{64})'", files[c_s7["file"]].decode("utf-8")))
+    wanted = {"WRAPPER": next(i["file"] for i in hook_items if i["file"].endswith("/pre-commit")),
+              "SCRIPT": next(i["file"] for i in hook_items if i["file"].endswith("/check-ledger.mjs")),
+              "DELIVERY": desc_item["file"]}
+    unpinned = ["%s pins %s = %s; the acted file is %s" % (c_s7["file"], k, pins.get(k), file_digest(files[f]))
+                for k, f in sorted(wanted.items()) if pins.get(k) != file_digest(files[f])]
+    if unpinned:
+        raise Refused("the C-S7 oracle is not bound to the acted non-built delivery set", unpinned)
     for item in ITEMS:
         row, data = acts[item["file"]], files[item["file"]]
         name = item["file"].rsplit("/", 1)[-1]

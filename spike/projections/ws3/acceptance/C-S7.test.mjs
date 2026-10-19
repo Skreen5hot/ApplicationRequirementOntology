@@ -7,6 +7,9 @@
 // oracle FAILS -- it is never skipped (rq-035 condition 3).
 // Source: src:srs-spec@2 (109e1b50...c614). Ratified: sr:L2:C-S7 (rq-047), sr:L2:LedgerEntry (rq-053),
 // sr:L3:ledger-interface (rq-064). Every value asserted below is already conferred there (rq-070, 2026-10-18).
+// BOUND TO THE RATIFIED NON-BUILT DELIVERY SET (rq-081, 2026-10-19): the wrapper (rq-082), the hook script (rq-085) and
+// the delivery descriptor (rq-086) at the digests pinned below; the provisioned hook files must be exactly those bytes,
+// or this oracle FAILS. The descriptor binds their modes, install paths and core.hooksPath.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -20,6 +23,10 @@ import { appendEntry, verifyChain } from '../../src/ledger.ts';
 
 const WORKSPACE = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const GENESIS = '0'.repeat(64);
+const PINNED_WRAPPER = 'sha256:8a915d8f6e8a3abe9e2287c615eb86bb2c34db8614a5c62c3b9bd8f084720342';    // rq-082
+const PINNED_SCRIPT = 'sha256:72527039ce71314fab43bf4c30a339809b61c3c5ac4c928fcde8e864ad3897f9';     // rq-085
+const PINNED_DELIVERY = 'sha256:ac3fe658047509395f827b22253c2823e5a4932b1a4d687d30fd03e80a25e7a2';   // rq-086
+const fileSha = (p) => 'sha256:' + createHash('sha256').update(readFileSync(p)).digest('hex');
 const canon = (v) => Array.isArray(v) ? '[' + v.map(canon).join(',') + ']'
   : (v && typeof v === 'object') ? '{' + Object.keys(v).sort().map((k) => JSON.stringify(k) + ':' + canon(v[k])).join(',') + '}'
   : JSON.stringify(v);
@@ -46,10 +53,12 @@ test('J-S1 step 4 + J-S4 step 3: registration then ratification -- each event ex
   assert.deepEqual(verifyChain(chain), { ok: true });
 });
 
-test('W-CS7-Δ1 through a real commit: the hook refuses a rewrite, a deletion and any read failure; it admits the intended append', () => {
+test('W-CS7-Δ1 through a real commit: the hook refuses a rewrite, a deletion, and the seeded corrupt-index and malformed-staged-blob failures; it admits the intended append', () => {
   const hooks = join(WORKSPACE, '.githooks');
   assert.ok(existsSync(join(hooks, 'pre-commit')) && existsSync(join(hooks, 'check-ledger.mjs')),
     'PRECONDITION: the non-built .githooks/ wrapper must be provisioned in the workspace (rq-035 condition 3)');
+  assert.equal(fileSha(join(hooks, 'pre-commit')), PINNED_WRAPPER, 'PRECONDITION: the provisioned wrapper is the ratified rq-082 bytes');
+  assert.equal(fileSha(join(hooks, 'check-ledger.mjs')), PINNED_SCRIPT, 'PRECONDITION: the provisioned hook script is the rq-085 bytes');
   assert.equal(spawnSync('git', ['--version']).status, 0, 'PRECONDITION: git must be provisioned (rq-035 condition 3)');
   if (process.platform !== 'win32')
     assert.ok(statSync(join(hooks, 'pre-commit')).mode & 0o111, 'PRECONDITION: the wrapper is provisioned executable (rq-071)');
@@ -87,20 +96,19 @@ test('W-CS7-Δ1 through a real commit: the hook refuses a rewrite, a deletion an
   git('reset', '-q', '--', 'ledger/ledger.jsonl');
   execFileSync('git', ['checkout', '--', 'ledger/ledger.jsonl'], { cwd: repo });
 
-  // an induced git/index failure fails CLOSED (rq-072 (1)): the hook script run against a corrupt index exits 2
+  // a seeded git/index failure fails CLOSED (rq-072 (1)): the hook script run against a corrupt index exits NONZERO
+  // (rq-081: nonzero is what rq-072 confers; no particular status or message is asserted)
   const corrupt = join(repo, 'corrupt-index');
   writeFileSync(corrupt, 'not an index');
   const broken = spawnSync('node', [join('.githooks', 'check-ledger.mjs')], { cwd: repo, encoding: 'utf8',
     env: { ...process.env, GIT_INDEX_FILE: corrupt } });
-  assert.equal(broken.status, 2, 'an operational failure is a nonzero refusal, never a pass: ' + broken.stderr);
-  assert.match(broken.stderr, /operational failure/);
+  assert.notEqual(broken.status, 0, 'a corrupt index is a refusal, never a pass: ' + broken.stderr);
 
-  // a staged blob that cannot be read as the function's input (rq-072 (7)): an append of invalid UTF-8 exits 2
+  // a seeded staged blob that cannot be read as the function's input (rq-072 (7)): an append of invalid UTF-8
   writeFileSync(path, Buffer.concat([readFileSync(path), Buffer.from([0xff, 0xfe, 0x0a])]));
   git('add', '-A');
   const malformed = git('commit', '-q', '-m', 'malformed');
   assert.notEqual(malformed.status, 0, 'malformed ledger content is refused');
-  assert.match(malformed.stderr + malformed.stdout, /operational failure/);
   restore();
 
   // the intended append still commits -- and what was committed is that ratification event (rq-070 (4))

@@ -214,3 +214,16 @@ def test_the_live_check_refuses_legibly_or_projects_never_crashes():
                        capture_output=True, text=True, encoding="utf-8")
     assert r.returncode in (0, 3), r.stdout + r.stderr
     assert ("REFUSED" in r.stdout and "awaiting:" in r.stdout) if r.returncode == 3 else "plan.json" in r.stdout
+
+
+def test_the_c_s7_oracle_must_pin_the_acted_non_built_set():
+    """rq-081 (2026-10-19): the oracle is bound to the wrapper, the script and the descriptor by the digests it pins."""
+    _, _, _, _, files = P.load_real()
+    oracle = "spike/projections/ws3/acceptance/C-S7.test.mjs"
+    text = files[oracle].decode("utf-8")
+    import re as _re
+    pin = _re.search(r"const PINNED_SCRIPT = '(sha256:[0-9a-f]{64})'", text).group(1)
+    moved = {oracle: text.replace(pin, "sha256:" + "0" * 64).encode("utf-8")}
+    with pytest.raises(P.Refused, match="not bound to the acted non-built delivery set") as e:
+        run("B", files_override=moved)
+    assert len(e.value.awaiting) == 1 and "pins SCRIPT" in e.value.awaiting[0]

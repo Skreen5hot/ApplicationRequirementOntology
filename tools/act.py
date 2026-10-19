@@ -172,6 +172,16 @@ def act(q: Queue, item_id, verb, actor, decision=None, sitting_start=None, note=
             raise Refused("decision %r is not one of this item's options %s" % (decision, opts))
     elif decision:
         raise Refused("--decision is only meaningful with decide")
+    # An item that RESTS ON other items is ratified only after them (the architect's rq-081 and rq-084, 2026-10-19:
+    # the C-S7 oracle and the delivery descriptor are re-presented after their non-built dependencies are ratified).
+    # Amend and diagnostic stay open -- they confer nothing, so they never need a dependency settled first.
+    if mapped in RATIFYING and row.get("requiresRatified"):
+        rows = {r.get("id"): r for _, r in q.rows}
+        unmet = [d for d in row["requiresRatified"]
+                 if d in q.superseded() or (rows.get(d) or {}).get("act") not in RATIFYING]
+        if unmet:
+            raise Refused("%s rests on %s, which %s not ratified yet; ratify %s first (or amend this item)"
+                          % (item_id, ", ".join(unmet), "is" if len(unmet) == 1 else "are", ", ".join(unmet)))
     stamp = (now or dt.datetime.now().astimezone()).isoformat(timespec="seconds")
     row.update({"actedAt": stamp, "act": mapped, "actor": who, "actDigest": now_digest})
     if sitting_start:

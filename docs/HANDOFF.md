@@ -7,6 +7,40 @@ is actually here, what is trustworthy, and what is not.
 
 ---
 
+## 0. Current state (2026-10-20) — read this first
+
+The sections below are the 2026-09-10 handoff (updated 2026-09-29) and remain accurate about the repository's
+foundations. What has happened since, under the governing plan:
+
+**Plan v1.1 as amended.** `docs/decisions/2026-09-14-provenance-foundation-phase-plan-v1.1.md` still governs. It has
+been amended by dated acts, never edited:
+- the duration bound, overrun on 2026-10-19, is extended to **2026-11-16**
+  (`docs/decisions/2026-10-20-plan-v1.1-bound-extended-to-2026-11-16.md`);
+- GPE-1 allows **three** operator sittings per week from 2026-10-20; GP-E stays 4 h/week, sittings ≤ 2 h
+  (`docs/decisions/2026-10-20-gpe-1-three-sittings-per-week.md`);
+- the SRS was amended and re-registered as `src:srs-spec@2` (`109e1b50…c614`), and the A9 WS-3 target restated against
+  it (`docs/decisions/2026-10-17-*`).
+
+**Stage A** is complete. **Stage B (WS-3 — the capability grain)** is at freeze 2:
+
+| item | state |
+|---|---|
+| WS-3 L2 graph + L3 design (`spike/graph/ws3/`, `spike/graph/l2|l3/srs-ws3.*`) | every record accepted / ratified by the architect; diagnostic status is DERIVED from acts, never typed |
+| bars + oracles + non-built hook (`spike/projections/ws3/`) | ratified: adjudicator bar rq-078, ledger bar rq-079, C-S3 oracle rq-080, C-S7 oracle rq-087, hook wrapper rq-082, hook script rq-085, delivery descriptor rq-086 |
+| module homes | rq-074 = B: grader-runner and adjudicator in `tools/<name>/`; grading-types and ledger in `src/` |
+| WS-3 projector (`spike/projections/ws3/project.py`) | PROJECTS, deterministically: plan.json with capabilities + oracles, the standards bundle `oracles/109e1b502684/`, the non-built channel |
+| demonstration control | **C-S2 designated** before results (rq-089): expected BLOCKED, grader-runner built_unverified |
+| FX-CAP checks (`spike/projections/ws3/freeze2/fx_cap.py`) | both assertions executable against the OPS ledger reader's output |
+| OPS instrument extension (IA `experiments/ops/ledger_reader.py`) | built independently, calibrated 13/13, Dev-approved |
+| **next** | Ops: freeze 2 → capability build → FX-CAP demonstration. Then the architect's B6 act: dispose of the C-S2 control (ratify its bar or retire it). Then Stage C (transformer probe) and Stage D (closeout). |
+
+**How work moves.** Acts go through `tools/act.py` (CLI) or `tools/act_ui.py` (local page) — the one door; it binds
+every act to a content address and refuses an act whose dependencies are unratified. Dev and Ops exchange work through
+commits and the IA ledger (`IntegratedAgent: experiments/comms/OBLIGATIONS.md`); Ops verifies every Dev claim
+independently. Restart `act_ui.py` per sitting (it stamps the sitting start when launched).
+
+---
+
 ## 1. The one-paragraph version
 
 **The method and the infrastructure are ready. The Application Requirement Ontology is

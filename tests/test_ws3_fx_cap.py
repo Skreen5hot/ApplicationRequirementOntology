@@ -80,3 +80,11 @@ def test_ii_a_broken_chain_is_red():
 
 def test_ii_with_no_ratified_bar_capability_is_red_not_vacuously_green():
     assert run(standards={"standards": []})[-1] == "(ii) no ratified-bar capability in the plan -- an empty domain proves nothing"
+
+
+def test_i_the_control_must_read_exactly_blocked_not_merely_not_verified():
+    """rq-088 (2026-10-20): the designation states the exact observable outcome; any status other than BLOCKED is red."""
+    assert CONTROL["expectedObservation"]["capability"]["status"] == "BLOCKED"
+    assert CONTROL["expectedObservation"]["modules"]["grader-runner"]["derived"] == "built_unverified"
+    bad = copy.deepcopy(GOOD); bad["capabilities"]["C-S2"]["status"] = "PROVISIONAL"
+    assert run(bad) == ["(i) the control C-S2 reads 'PROVISIONAL', not BLOCKED"]

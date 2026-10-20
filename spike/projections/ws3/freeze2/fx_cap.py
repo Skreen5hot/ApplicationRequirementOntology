@@ -37,8 +37,11 @@ def check(extension_output: dict, plan: dict, standards: dict, queue_rows: list,
         out.append("(i) the control %s is absent from the extension's output -- an empty domain proves nothing" % c)
     else:
         status = caps[c].get("status")
+        want = (control.get("expectedObservation") or {}).get("capability", {}).get("status", "BLOCKED")
         if status == "VERIFIED":
             out.append("(i) the control %s reads VERIFIED; a provisional-bar capability must never verify" % c)
+        elif status != want:     # rq-088: the EXACT status, not merely "anything but VERIFIED"
+            out.append("(i) the control %s reads %r, not %s" % (c, status, want))
         derived = caps[c].get("derived") or {}
         for m in control["modules"]:
             if derived.get(m) != "built_unverified":

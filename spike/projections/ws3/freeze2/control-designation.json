@@ -5,7 +5,15 @@
   "modules": ["grader-runner"],
   "why": "C-S2 is agentic (one isolated rater invocation) and its vector is masked; holding its bar provisional is natural, not staged (proposed in the accepted WS-3 L2 graph, ws3.demonstrationControlCandidate). Without a provisional-bar capability in the live build, FX-CAP assertion (i) would pass over an empty domain -- the FX-VAC class.",
   "bar": "PROVISIONAL by design: no ratified module bar and no capability oracle exist for C-S2 (none was queued); the factory's own model-authored bar grades grader-runner and stays provisional.",
-  "expectedVerdict": "built_unverified -- never VERIFIED (FX-CAP assertion (i)).",
+  "expectedVerdict": "built_unverified -- never VERIFIED (FX-CAP assertion (i)); its exact observable outcome under the OPS ledger reader's vocabulary (ops-ledger-reader-1) is stated in expectedObservation (rq-088, 2026-10-20).",
+  "expectedObservation": {
+    "reader": "ops-ledger-reader-1",
+    "capability": {"id": "C-S2", "present": true, "status": "BLOCKED", "mustNotRead": ["VERIFIED"]},
+    "modules": {"grader-runner": {"derived": "built_unverified",
+                                  "mustNotRead": ["verified", "authority_not_demonstrated", "stub", "inherited_debt", "absent"]}},
+    "authority": "no non-provisional bar or oracle supplies authority for C-S2",
+    "meaning": "the precise meaning of Plan v1.1's phrase 'built_unverified -- never VERIFIED'"
+  },
   "disclosure": "a demonstration CONTROL, not debt: the closeout reports it as control, so the scoreboard's built_unverified line is legible; it is designated and disclosed, never withheld to stage a failure.",
   "lifecycle": "after the demonstration, the architect disposes of it BY ACT within the phase (Plan v1.1 B6): the C-S2 bar is ratified, or the capability is retired. It never becomes an immortal provisional (the no-immortal-eligibility rule).",
   "rests": "Plan v1.1 (ratified 2026-09-14, Act 2); the A9 target act (docs/decisions/2026-10-01-a9-ws3-target-naming-act.md, restated 2026-10-17 against src:srs-spec@2); the accepted L2 record sr:L2:C-S2."

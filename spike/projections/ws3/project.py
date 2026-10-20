@@ -69,6 +69,9 @@ HOOKS = "adj:ledger-hooks-repo-home"
 # against the act's own note below, so a different decision or note refuses instead of projecting this literal.
 LEDGER_FILE = "src/ledger.ts"
 BAR_DIR, ACCEPTANCE_DIR = "test", "test/acceptance"     # where the factory runs a bar and an oracle (loopToolchain)
+# a function declaration names itself before its first '('; a non-function export names itself after its keyword
+FUNCTION_DECL = re.compile(r"^\s*([A-Za-z_$][\w$]*)\s*\(")
+NAMED_DECL = re.compile(r"^\s*export\s+(?:declare\s+)?(?:type|class|interface|enum|const)\s+([A-Za-z_$][\w$]*)")
 
 
 def file_digest(data: bytes) -> str:
@@ -229,15 +232,34 @@ def project(l2, l3, fragments, queue_rows, files, *, verify_fragments=None, inpu
                        for g in l2_assertions[aid].get("groundedBy", [])
                        if frags[g["fragment"]]["display"].get("section")})
 
-    def signatures(module):
-        out = []
-        for cid, val in sorted(_closures(records[MODULE_RECORD[module]]).items()):
+    def exports(module):
+        """The unit's ratified exports -> (signatures, declarations), in the factory's ingestion shape (IA Ops finding
+        2026-10-20, "the WS-3 projected plan is refused at ingestion: no signature entry carries an export name").
+        A FUNCTION declaration becomes {export, signature, closure, record}: `export` is the identifier before its
+        first '(' -- read byte for byte out of the ratified string, never authored. Anything else a closure exports (a
+        type alias, a class, from `alsoExports`) is not a signature; it goes to `declarations` as {name, declaration,
+        closure, record, layer}. A string of neither shape is REFUSED rather than guessed at."""
+        sigs, decls, bad = [], [], []
+        record = MODULE_RECORD[module]
+        for cid, val in sorted(_closures(records[record]).items()):
             for s in ([val["signature"]] if val.get("signature") else []) + list(val.get("signatures") or []) + list(val.get("alsoExports") or []):
-                out.append({"signature": s, "closure": cid, "record": MODULE_RECORD[module]})
-        return out
+                fn = FUNCTION_DECL.match(s)
+                other = NAMED_DECL.match(s)
+                if fn and not other:
+                    sigs.append({"export": fn.group(1), "signature": s, "closure": cid, "record": record})
+                elif other:
+                    decls.append({"name": other.group(1), "declaration": s, "closure": cid, "record": record, "layer": "L3"})
+                else:
+                    bad.append("%s %s: %r is neither a function nor a named declaration" % (module, cid, s))
+        if bad:
+            raise Refused("a ratified export cannot be read into the ingestion shape", bad)
+        return sigs, decls
 
-    units = [{"id": m, "files": [files_of[m]], "covers": covers(m), "kind": "code", "depends_on": sorted(edges[m]),
-              "scope": scope(m), "signatures": signatures(m)} for m in sorted(edges)]
+    units = []
+    for m in sorted(edges):
+        sigs, decls = exports(m)
+        units.append({"id": m, "files": [files_of[m]], "covers": covers(m), "kind": "code", "depends_on": sorted(edges[m]),
+                      "scope": scope(m), "signatures": sigs, "declarations": decls})
 
     # DEPARTURES -- computed from the accepted homes and the decided files, never asserted.
     departures = []

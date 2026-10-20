@@ -227,3 +227,37 @@ def test_the_c_s7_oracle_must_pin_the_acted_non_built_set():
     with pytest.raises(P.Refused, match="not bound to the acted non-built delivery set") as e:
         run("B", files_override=moved)
     assert len(e.value.awaiting) == 1 and "pins SCRIPT" in e.value.awaiting[0]
+
+
+def test_every_emitted_signature_carries_the_export_name_read_from_its_own_ratified_string():
+    """IA Ops finding 2026-10-20 ("the WS-3 projected plan is refused at ingestion: no signature entry carries an
+    export name"): the factory's single ingestion door refuses a signature entry without `export`, and its completion
+    reads params/returns only when `export` equals the identifier before the signature's first '('. So every entry
+    carries `export`, byte-identical to that identifier (read, never authored), with its closure/record provenance
+    kept; and a non-function export (a type alias, a class) travels as a declaration, never as a signature."""
+    import re as _re
+    plan = json.loads(run("B")["plan.json"])
+    sigs = [(u["id"], s) for u in plan["units"] for s in u["signatures"]]
+    decls = [(u["id"], d) for u in plan["units"] for d in u["declarations"]]
+    assert len(sigs) == 12 and len(decls) == 2, (len(sigs), len(decls))
+    for unit, s in sigs:
+        m = _re.match(r"\s*([A-Za-z_$][\w$]*)\s*\(", s["signature"])
+        assert m and s.get("export") == m.group(1), (unit, s)
+        assert s["closure"].startswith("c:") and s["record"].startswith("sr:L3:"), (unit, s)
+    assert sorted(d["name"] for _, d in decls) == ["GradeRejectedError", "RaterInvoker"]
+    assert all(_re.match(r"\s*export\s+(type|class)\s", d["declaration"]) and d["record"] for _, d in decls)
+    assert not any(_re.match(r"\s*export\s", s["signature"]) for _, s in sigs), "no declaration rides in signatures"
+
+
+def test_a_ratified_export_of_neither_shape_refuses_rather_than_guessing():
+    l2, l3, fragments, rows, files = seeded("B")
+    l3 = copy.deepcopy(l3)
+    rec = next(r for r in l3["records"] if r["@id"] == "sr:L3:ledger-interface")
+    fn = next(a for a in rec["assertions"] if a["@id"] == "c:ledger:functions")
+    fn["proposed"]["signatures"].append("a sentence, not a declaration")
+    row = next(r for r in rows if r.get("record") == "sr:L3:ledger-interface" and r.get("actedAt") and r["id"] not in
+               {x.get("supersedes") for x in rows if x.get("supersedes")})
+    row["recordDigest"] = row["actDigest"] = P.digest(rec)
+    with pytest.raises(P.Refused, match="cannot be read into the ingestion shape") as e:
+        P.project(l2, l3, fragments, rows, files)
+    assert e.value.awaiting == ["ledger c:ledger:functions: 'a sentence, not a declaration' is neither a function nor a named declaration"]

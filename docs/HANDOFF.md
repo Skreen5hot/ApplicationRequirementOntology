@@ -7,7 +7,7 @@ is actually here, what is trustworthy, and what is not.
 
 ---
 
-## 0. Current state (2026-10-20) — read this first
+## 0. Current state (2026-10-22) — read this first
 
 The sections below are the 2026-09-10 handoff (updated 2026-09-29) and remain accurate about the repository's
 foundations. What has happened since, under the governing plan:
@@ -21,7 +21,7 @@ been amended by dated acts, never edited:
 - the SRS was amended and re-registered as `src:srs-spec@2` (`109e1b50…c614`), and the A9 WS-3 target restated against
   it (`docs/decisions/2026-10-17-*`).
 
-**Stage A** is complete. **Stage B (WS-3 — the capability grain)** is at freeze 2:
+**Stage A** is complete. **Stage B (WS-3 — the capability grain)** is complete (2026-10-22):
 
 | item | state |
 |---|---|
@@ -29,10 +29,11 @@ been amended by dated acts, never edited:
 | bars + oracles + non-built hook (`spike/projections/ws3/`) | ratified: adjudicator bar rq-078, ledger bar rq-079, C-S3 oracle rq-080, C-S7 oracle rq-087, hook wrapper rq-082, hook script rq-085, delivery descriptor rq-086 |
 | module homes | rq-074 = B: grader-runner and adjudicator in `tools/<name>/`; grading-types and ledger in `src/` |
 | WS-3 projector (`spike/projections/ws3/project.py`) | PROJECTS, deterministically: plan.json with capabilities + oracles, the standards bundle `oracles/109e1b502684/`, the non-built channel |
-| demonstration control | **C-S2 designated** before results (rq-089): expected BLOCKED, grader-runner built_unverified |
+| demonstration control | **C-S2 designated** before results (rq-089), observed exactly as predicted, then **retired** by rq-090 (`docs/decisions/2026-10-22-b6-c-s2-control-retired.md`) |
+| FX-CAP demonstration (B5) | **PASSED** 2026-10-22, `fx_cap.check == []` (IA `a4fd46e`, `OPS-2026-10-22-freeze2-demonstration-passes.md`): C-S3, C-S7 VERIFIED with ratified_by carried |
 | FX-CAP checks (`spike/projections/ws3/freeze2/fx_cap.py`) | both assertions executable against the OPS ledger reader's output |
 | OPS instrument extension (IA `experiments/ops/ledger_reader.py`) | built independently, calibrated 13/13, Dev-approved |
-| **next** | Ops: freeze 2 → capability build → FX-CAP demonstration. Then the architect's B6 act: dispose of the C-S2 control (ratify its bar or retire it). Then Stage C (transformer probe) and Stage D (closeout). |
+| **next** | Stage C (transformer probe), then Stage D (closeout). The WS-3 capability target is now C-S3 + C-S7. |
 
 **How work moves.** Acts go through `tools/act.py` (CLI) or `tools/act_ui.py` (local page) — the one door; it binds
 every act to a content address and refuses an act whose dependencies are unratified. Dev and Ops exchange work through

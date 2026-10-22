@@ -1,0 +1,18 @@
+{
+  "act": "B6 -- disposition of the demonstration control (Plan v1.1 s3 'the demonstration control', PF-OPS-2; task table B6)",
+  "control": {
+    "capability": "C-S2",
+    "path": "grade",
+    "module": "grader-runner",
+    "designatedBy": "rq-089 (ratified 2026-10-20, before results)"
+  },
+  "demonstration": {
+    "record": "IntegratedAgent experiments/comms/OPS-2026-10-22-freeze2-demonstration-passes.md (IA a4fd46e)",
+    "result": "fx_cap.check == []: C-S2 BLOCKED with grader-runner built_unverified (provisional, model-authored bar); C-S3 and C-S7 VERIFIED with ratified_by carried from rq-078 / rq-079",
+    "freeze": "OPS-2026-10-20-freeze2-record-0ab82b0.md (sha256 0bd73f8d...ee67)"
+  },
+  "disposition": "retire",
+  "whatRetiringMeans": "C-S2 leaves the WS-3 capability target for the rest of this phase. The Stage D closeout reports it as the disclosed demonstration control, retired by this act: not debt, not a failure, and no score is claimed for it. Nothing is deleted -- its built code and the model-authored provisional bar remain as unratified artifacts of the run.",
+  "whyNotRatify": "Ratifying grader-runner's bar would lift rung 1 only. C-S2 has no ratified acceptance oracle, so the capability would still read BLOCKED at rung 3 ('no boundary oracle') until a second artifact was authored, reviewed and ratified and the build re-run. Plan v1.1's claim boundary also rules out ratifying a bar to recover a score; a bar ratified here would be authored after the result, for that purpose.",
+  "returnPath": "Grading may return in a later phase as a new capability, with a spec-authored bar and a spec-authored acceptance oracle, each ratified on its own act, under a new freeze."
+}

@@ -1,0 +1,79 @@
+{
+  "results": [
+    {
+      "id": "obligation-register",
+      "kind": "covered",
+      "ok": true,
+      "knownLimit": false,
+      "detail": "1 assertion(s) grounded on line 7"
+    },
+    {
+      "id": "permission-limit",
+      "kind": "covered",
+      "ok": true,
+      "knownLimit": false,
+      "detail": "1 assertion(s) grounded on line 8"
+    },
+    {
+      "id": "no-delete",
+      "kind": "covered",
+      "ok": true,
+      "knownLimit": false,
+      "detail": "1 assertion(s) grounded on line 22"
+    },
+    {
+      "id": "drop-two-obligations",
+      "kind": "split",
+      "ok": true,
+      "knownLimit": false,
+      "detail": "2 assertion(s) on line 13 (need >= 2)"
+    },
+    {
+      "id": "invent-storage",
+      "kind": "no-invention",
+      "ok": true,
+      "knownLimit": false,
+      "detail": "no forbidden term in 2 assertion(s)"
+    },
+    {
+      "id": "example-not-requirement",
+      "kind": "not-normative",
+      "ok": true,
+      "knownLimit": false,
+      "detail": "no obligation drawn from the example"
+    },
+    {
+      "id": "ambiguous-grouping",
+      "kind": "diagnostic",
+      "ok": true,
+      "knownLimit": false,
+      "detail": "1 matching diagnostic(s)"
+    },
+    {
+      "id": "unquantified",
+      "kind": "diagnostic",
+      "ok": true,
+      "knownLimit": false,
+      "detail": "1 matching diagnostic(s)"
+    },
+    {
+      "id": "dangling-annex",
+      "kind": "diagnostic",
+      "ok": true,
+      "knownLimit": false,
+      "detail": "1 matching diagnostic(s)"
+    },
+    {
+      "id": "cross-section-conflict",
+      "kind": "diagnostic",
+      "ok": false,
+      "knownLimit": true,
+      "detail": "0 matching diagnostic(s)"
+    }
+  ],
+  "failed": 0,
+  "passed": 9,
+  "knownLimitsMissed": [
+    "cross-section-conflict"
+  ]
+}

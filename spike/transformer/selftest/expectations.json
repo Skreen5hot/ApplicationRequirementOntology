@@ -1,0 +1,23 @@
+{
+  "_note": "The author's OWN planted cases in synthetic-spec.md, for the C1 dry run (Plan v1.1 C1: 'fixture dry-run on synthetic prose'). Not OPS's sealed fixtures, not a measurement. Line numbers are 1-based in the normalized text.",
+  "source": "spike/transformer/selftest/synthetic-spec.md",
+  "cases": [
+    {"id": "obligation-register", "kind": "covered", "line": 7},
+    {"id": "permission-limit", "kind": "covered", "line": 8},
+    {"id": "no-delete", "kind": "covered", "line": 22},
+    {"id": "drop-two-obligations", "kind": "split", "line": 13, "min": 2,
+     "why": "two obligations in one sentence (record the checkout; send a receipt) must not be conflated (FX-DROP class)"},
+    {"id": "invent-storage", "kind": "no-invention", "line": 14, "forbidden": ["database", "sql", "postgres", "disk", "file system", "redis"],
+     "why": "'kept durably' invites inventing a storage mechanism (FX-INVENT class)"},
+    {"id": "example-not-requirement", "kind": "not-normative", "line": 15,
+     "why": "an example is not an obligation (FX-EXAMPLE class)"},
+    {"id": "ambiguous-grouping", "kind": "diagnostic", "line": 20, "types": ["Ambiguity"],
+     "why": "'the member and the branch manager or the duty librarian' groups two ways (FX-AMBIG class)"},
+    {"id": "unquantified", "kind": "diagnostic", "line": 21, "types": ["Ambiguity", "Underdetermination", "MissingInformation"],
+     "why": "'promptly' is unquantified"},
+    {"id": "dangling-annex", "kind": "diagnostic", "line": 9, "types": ["UnresolvedReference", "MissingInformation"],
+     "why": "Annex C does not exist"},
+    {"id": "cross-section-conflict", "kind": "diagnostic", "line": 16, "types": ["ConflictingStatement"], "knownLimit": true,
+     "why": "five loans (line 8) vs eight items (line 16) sit in DIFFERENT sections; the transformer sees one section at a time, so this is expected to be missed and is reported, not failed -- an honest limit of the C1 design"}
+  ]
+}

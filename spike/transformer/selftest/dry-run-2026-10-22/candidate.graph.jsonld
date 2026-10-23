@@ -1,0 +1,344 @@
+{
+  "@context": {
+    "@vocab": "https://fandaws.com/ontology/aro/spike-1.5/vocab#"
+  },
+  "@id": "spike:l2:candidate:4cbad7932710",
+  "@type": "SpecificationGraph",
+  "layer": "L2",
+  "status": "candidate",
+  "source": {
+    "registeredAs": "src:synthetic-c1-selftest",
+    "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a",
+    "fragments": "fragments.json"
+  },
+  "facetsDefault": {
+    "origin": {
+      "kind": "transformer",
+      "actRef": "act:transformer:transformer-c1-0.1:4cbad7932710"
+    },
+    "ratification": "unratified",
+    "_authority": "computed, never stored (ARO 3.1): candidate content, never gates (D9)"
+  },
+  "records": [
+    {
+      "@id": "sr:L2:t:1",
+      "@type": "SpecificationRecord",
+      "title": "# Branch Lending Service — Requirements (synthetic self-test text)",
+      "lines": "1-4",
+      "assertions": [
+        {
+          "@id": "a:t:1",
+          "@type": "Definition",
+          "role": "Informative",
+          "force": "statement",
+          "statement": "This document is synthetic and does not describe any real system.",
+          "groundedBy": [
+            {
+              "fragment": "sf:0cfc0846d182df9b1432d691",
+              "label": "L3@0",
+              "role": "primary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "sr:L2:t:2",
+      "@type": "SpecificationRecord",
+      "title": "# 1. Members",
+      "lines": "5-10",
+      "assertions": [
+        {
+          "@id": "a:t:2",
+          "@type": "Requirement",
+          "role": "Normative",
+          "force": "obligation",
+          "statement": "The service must register a member with both a name and a contact address.",
+          "groundedBy": [
+            {
+              "fragment": "sf:542d41b37a63505ace82d9f5",
+              "label": "L7@0",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "@id": "a:t:3",
+          "@type": "Constraint",
+          "role": "Normative",
+          "force": "prohibition",
+          "statement": "A member is prohibited from holding more than five loans at any one time.",
+          "groundedBy": [
+            {
+              "fragment": "sf:3cece84900befdfb78d57490",
+              "label": "L8@0",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "@id": "a:t:4",
+          "@type": "Requirement",
+          "role": "Normative",
+          "force": "statement",
+          "statement": "Membership numbers are assigned according to the rules defined in Annex C.",
+          "groundedBy": [
+            {
+              "fragment": "sf:e95b1f6a1c0b1358d4242c00",
+              "label": "L9@0",
+              "role": "primary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "sr:L2:t:3",
+      "@type": "SpecificationRecord",
+      "title": "# 2. Loans",
+      "lines": "11-17",
+      "assertions": [
+        {
+          "@id": "a:t:5",
+          "@type": "Requirement",
+          "role": "Normative",
+          "force": "obligation",
+          "statement": "The service shall record every checkout.",
+          "groundedBy": [
+            {
+              "fragment": "sf:03f42d05c4113ef37665822e",
+              "label": "L13@12",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "@id": "a:t:6",
+          "@type": "Requirement",
+          "role": "Normative",
+          "force": "obligation",
+          "statement": "The service shall send the member a receipt.",
+          "groundedBy": [
+            {
+              "fragment": "sf:46b9527656b4e67f407130ee",
+              "label": "L13@44",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "@id": "a:t:7",
+          "@type": "Requirement",
+          "role": "Normative",
+          "force": "statement",
+          "statement": "Loan records are kept durably.",
+          "groundedBy": [
+            {
+              "fragment": "sf:4b1de2c68b55d0d0b7e01e41",
+              "label": "L14@0",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "@id": "a:t:8",
+          "@type": "Requirement",
+          "role": "Normative",
+          "force": "obligation",
+          "statement": "Loan records must survive a restart of the service.",
+          "groundedBy": [
+            {
+              "fragment": "sf:ae8fcd033bf75c2d6341f07d",
+              "label": "L14@34",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "@id": "a:t:9",
+          "@type": "Constraint",
+          "role": "Normative",
+          "force": "permission",
+          "statement": "Members may borrow up to eight items at a time.",
+          "groundedBy": [
+            {
+              "fragment": "sf:d5f73136eab9efb6613ad0fe",
+              "label": "L16@0",
+              "role": "primary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "sr:L2:t:4",
+      "@type": "SpecificationRecord",
+      "title": "# 3. Notices",
+      "lines": "18-23",
+      "assertions": [
+        {
+          "@id": "a:t:10",
+          "@type": "Requirement",
+          "role": "Normative",
+          "force": "statement",
+          "statement": "Overdue notices are sent to the member and to the branch manager or the duty librarian.",
+          "groundedBy": [
+            {
+              "fragment": "sf:79d88611e7ef84f6db61c19b",
+              "label": "L20@0",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "@id": "a:t:11",
+          "@type": "Requirement",
+          "role": "Normative",
+          "force": "obligation",
+          "statement": "The service shall show catalogue search results promptly.",
+          "groundedBy": [
+            {
+              "fragment": "sf:e7dbd02b33bce11e92a5fca1",
+              "label": "L21@0",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "@id": "a:t:12",
+          "@type": "Constraint",
+          "role": "Normative",
+          "force": "prohibition",
+          "statement": "The service shall not delete a loan record while the loan is open.",
+          "groundedBy": [
+            {
+              "fragment": "sf:7eaac600e209435c4b66ce57",
+              "label": "L22@0",
+              "role": "primary"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "@id": "diag:t:1",
+      "@type": "MissingInformation",
+      "blocking": true,
+      "statement": "The section contains no normative statements (shall, must, will, required, may not, should) and no plain statements of system behaviour; there are therefore no obligations, prohibitions, permissions, or recommendations that can be asserted as Requirements, AcceptanceClauses, or Constraints.",
+      "evidence": [
+        "sf:0cfc0846d182df9b1432d691"
+      ],
+      "status": "open",
+      "raisedBy": "transformer"
+    },
+    {
+      "@id": "diag:t:2",
+      "@type": "Ambiguity",
+      "blocking": true,
+      "statement": "The word 'may' in line 8 is ambiguous between a deontic reading (permission with an upper bound) and an alethic reading (a factual statement about system capacity).",
+      "evidence": [
+        "sf:3cece84900befdfb78d57490"
+      ],
+      "status": "open",
+      "raisedBy": "transformer",
+      "interpretations": [
+        "A member is permitted to hold up to five loans at any one time, making holding more than five a prohibited action (deontic permission with a ceiling).",
+        "The system is factually capable of associating at most five loans with a member at any one time (a description of a natural or technical limit, not a rule)."
+      ]
+    },
+    {
+      "@id": "diag:t:3",
+      "@type": "UnresolvedReference",
+      "blocking": true,
+      "statement": "The complete rules governing assignment of membership numbers are delegated to Annex C, which is not present in this section; the actual assignment logic cannot be asserted from the text supplied.",
+      "evidence": [
+        "sf:658a9996d6424f3b7d7b5933"
+      ],
+      "status": "open",
+      "raisedBy": "transformer"
+    },
+    {
+      "@id": "diag:t:4",
+      "@type": "Ambiguity",
+      "blocking": true,
+      "statement": "It is unclear whether loan records must survive only a single restart event or must survive every restart of the service.",
+      "evidence": [
+        "sf:ae8fcd033bf75c2d6341f07d"
+      ],
+      "status": "open",
+      "raisedBy": "transformer",
+      "interpretations": [
+        "Loan records must survive at least one restart of the service (a single occurrence is sufficient).",
+        "Loan records must survive any and every restart of the service (all occurrences)."
+      ]
+    },
+    {
+      "@id": "diag:t:5",
+      "@type": "Ambiguity",
+      "blocking": true,
+      "statement": "It is unclear whether 'may borrow up to eight items at a time' states a member entitlement only, or also requires the system to detect and prevent members from exceeding eight items.",
+      "evidence": [
+        "sf:d5f73136eab9efb6613ad0fe"
+      ],
+      "status": "open",
+      "raisedBy": "transformer",
+      "interpretations": [
+        "Members are granted permission to borrow up to eight items; the text does not require the system to enforce or block attempts to exceed that number.",
+        "The system must enforce a hard upper limit of eight concurrent loans per member and must refuse any checkout that would cause a member to exceed it."
+      ]
+    },
+    {
+      "@id": "diag:t:6",
+      "@type": "Underdetermination",
+      "blocking": true,
+      "statement": "The term 'durably' is not defined; the text specifies only that records must survive a restart, leaving unresolved what other failure scenarios or storage guarantees are required.",
+      "evidence": [
+        "sf:4b1de2c68b55d0d0b7e01e41"
+      ],
+      "status": "open",
+      "raisedBy": "transformer"
+    },
+    {
+      "@id": "diag:t:7",
+      "@type": "MissingInformation",
+      "blocking": true,
+      "statement": "The text does not specify the channel or mechanism by which a receipt is sent to the member.",
+      "evidence": [
+        "sf:46b9527656b4e67f407130ee"
+      ],
+      "status": "open",
+      "raisedBy": "transformer"
+    },
+    {
+      "@id": "diag:t:8",
+      "@type": "Ambiguity",
+      "blocking": true,
+      "statement": "It is unclear whether overdue notices are sent to both the branch manager and the duty librarian simultaneously, or to exactly one of them, and if exactly one, by what criterion the recipient is selected.",
+      "evidence": [
+        "sf:048fbdffe76a942eb4506678"
+      ],
+      "status": "open",
+      "raisedBy": "transformer",
+      "interpretations": [
+        "Overdue notices are sent to the member and to both the branch manager and the duty librarian (inclusive reading of 'or').",
+        "Overdue notices are sent to the member and to exactly one of either the branch manager or the duty librarian, with no selection criterion specified."
+      ]
+    },
+    {
+      "@id": "diag:t:9",
+      "@type": "Underdetermination",
+      "blocking": true,
+      "statement": "No measurable time threshold or performance criterion is defined for 'promptly'; it is underdetermined what latency would satisfy this requirement.",
+      "evidence": [
+        "sf:5620eac82018833d78fb23c3"
+      ],
+      "status": "open",
+      "raisedBy": "transformer"
+    }
+  ],
+  "coverage": {
+    "detectedClauseCoverage": "not computed by the transformer: independent channels (ARO 8.2; Plan v1.1 s6 -- OPS)"
+  }
+}

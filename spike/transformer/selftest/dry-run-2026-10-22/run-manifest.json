@@ -1,0 +1,78 @@
+{
+  "transformer": "transformer-c1-0.1",
+  "transformerFiles": {
+    "transform.py": "sha256:d6d713602c6c8dc269c8e2534302269888fba2af0e7189ac82305065c269f41c"
+  },
+  "systemPromptDigest": "sha256:d9b3ff867c9a66cf5c1282ed1f7d792f9c05f910d5b21b4cba5ea6d7413afae6",
+  "model": "sonnet",
+  "source": {
+    "registeredAs": "src:synthetic-c1-selftest",
+    "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+  },
+  "normalizationVersion": "norm-spike-1",
+  "sections": [
+    {
+      "index": 1,
+      "lines": [
+        1,
+        4
+      ],
+      "title": "# Branch Lending Service — Requirements (synthetic self-test text)",
+      "promptDigest": "sha256:c8b257f644f581fc0180e0b514123259372b383cd9bf2a47bbacfad6cdb52917",
+      "outputDigest": "sha256:92475671965faf9333041a5ada021011eb8468bfec220230a491c644525ebbe2",
+      "kept": {
+        "assertions": 1,
+        "diagnostics": 1
+      }
+    },
+    {
+      "index": 2,
+      "lines": [
+        5,
+        10
+      ],
+      "title": "# 1. Members",
+      "promptDigest": "sha256:2791a77d97fbb143f93a0e532cccc4dfe1bd574ddbd28891b6d2f5345d8d0e2f",
+      "outputDigest": "sha256:8e8b25dceaf738c53f23dafaa28292bc355c6b9a57f6ea9d622a0d63211c7f2a",
+      "kept": {
+        "assertions": 3,
+        "diagnostics": 2
+      }
+    },
+    {
+      "index": 3,
+      "lines": [
+        11,
+        17
+      ],
+      "title": "# 2. Loans",
+      "promptDigest": "sha256:a13266e5537eb23371a1dcefe4bbe6b1894a4b3c64feff152f187c94c399a67c",
+      "outputDigest": "sha256:f061af612c80d9ac155e6ec0d8e75b937255c867a831418994b6738853112531",
+      "kept": {
+        "assertions": 5,
+        "diagnostics": 4
+      }
+    },
+    {
+      "index": 4,
+      "lines": [
+        18,
+        23
+      ],
+      "title": "# 3. Notices",
+      "promptDigest": "sha256:97ef490ba303731f03e93e3fb7fe571f8a64fa6e77c87eaf6a6a2479167f6d67",
+      "outputDigest": "sha256:1978bf7c5b49a1294a6497e6f8fc770c8336ce600f3c7d2f1ab76ac3afc0cfc6",
+      "kept": {
+        "assertions": 3,
+        "diagnostics": 2
+      }
+    }
+  ],
+  "counts": {
+    "assertions": 12,
+    "diagnostics": 9,
+    "fragments": 15,
+    "gateEvents": 0
+  },
+  "gateLog": []
+}

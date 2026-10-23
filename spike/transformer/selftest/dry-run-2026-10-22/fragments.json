@@ -1,0 +1,399 @@
+{
+  "source": {
+    "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a",
+    "registeredAs": "src:synthetic-c1-selftest"
+  },
+  "normalizationVersion": "norm-spike-1",
+  "fragments": [
+    {
+      "fragmentId": "sf:0cfc0846d182df9b1432d691",
+      "label": "L3@0",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          68,
+          173
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:550258f15685e1879d473099bd6b10dcdd5d3677a2e7e4c87962375c995dfb26",
+      "anchors": {
+        "before": "sha256:ca0a7bf3bef9358e1340b690d43a11e42b7f6b5c76e5621bb2da4b956bd79560",
+        "after": "sha256:623ffb200568fd63ba32d35d0daa6376f213181d004160aef0178a96b45d59c2"
+      },
+      "display": {
+        "lines": "3",
+        "section": "# Branch Lending Service — Requirements (synthetic self-test text)"
+      },
+      "text": "This document is synthetic. It was written for the C1 transformer self-test and describes no real system."
+    },
+    {
+      "fragmentId": "sf:542d41b37a63505ace82d9f5",
+      "label": "L7@0",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          189,
+          258
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:7514dba8915e5f26f3dccb673a7bdade964e23816ddc9f622d165d79b1f54b23",
+      "anchors": {
+        "before": "sha256:b1b08fb866f3fd9fb9e6a7a125fa19a4d180c718e2f677ee9b6f60bcc38eb8bc",
+        "after": "sha256:6bcefb4d86b1c316b97043d21f246daf6a9b79f184916ce0b980695231422bc4"
+      },
+      "display": {
+        "lines": "7",
+        "section": "# 1. Members"
+      },
+      "text": "The service shall register a member with a name and a contact address"
+    },
+    {
+      "fragmentId": "sf:3cece84900befdfb78d57490",
+      "label": "L8@0",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          260,
+          312
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:ccc3729de44650a90fe96c5a667379fb34c3cad47fd39a4368e87842eeea84d4",
+      "anchors": {
+        "before": "sha256:4844a241dd7493786aa76fd115da8929dd045b2dce4f959365c2477279d1edbe",
+        "after": "sha256:e2c611f0873010fb3de772babeee79691c9ad784f527102de4d8d4418633f44a"
+      },
+      "display": {
+        "lines": "8",
+        "section": "# 1. Members"
+      },
+      "text": "A member may hold at most five loans at any one time"
+    },
+    {
+      "fragmentId": "sf:e95b1f6a1c0b1358d4242c00",
+      "label": "L9@0",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          314,
+          367
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:9b28576ea3900dc5aa3914e678bc98daf2d3a0beb42899f3cb1bc033e4ee65da",
+      "anchors": {
+        "before": "sha256:6d1032c05ea9ed5e8301352ede836c80ed45bff2dd36e2c840f09daf137ab0d3",
+        "after": "sha256:3927d4a1a648ee88f7125012a4fd454eecb92b51c86cfc7ceb8d472b14b68b7f"
+      },
+      "display": {
+        "lines": "9",
+        "section": "# 1. Members"
+      },
+      "text": "Membership numbers are assigned as defined in Annex C"
+    },
+    {
+      "fragmentId": "sf:658a9996d6424f3b7d7b5933",
+      "label": "L9@32",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          346,
+          367
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:5f213153547f890b0d9d815c5a8285f2a2f6d0477e30cf64bb006dc8dbbf2522",
+      "anchors": {
+        "before": "sha256:5815c041845f9913ce5b45f6ab641380b8f261d3e8321d921dec9a6bddaaa895",
+        "after": "sha256:3927d4a1a648ee88f7125012a4fd454eecb92b51c86cfc7ceb8d472b14b68b7f"
+      },
+      "display": {
+        "lines": "9",
+        "section": "# 1. Members"
+      },
+      "text": "as defined in Annex C"
+    },
+    {
+      "fragmentId": "sf:03f42d05c4113ef37665822e",
+      "label": "L13@12",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          394,
+          421
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:9783d726d028faaa3f16aff269ee86efb1d50b2185e149f37c5b70a1eb39ea0a",
+      "anchors": {
+        "before": "sha256:2f10affd31b25fe56a6b8bcffbfa03b9d3783c30be7728e36ca5643cbf0b5e33",
+        "after": "sha256:e3a9101ac47cfa70664e7dcc1645c6837cad038a150985fbe679261405c0a376"
+      },
+      "display": {
+        "lines": "13",
+        "section": "# 2. Loans"
+      },
+      "text": "shall record every checkout"
+    },
+    {
+      "fragmentId": "sf:46b9527656b4e67f407130ee",
+      "label": "L13@44",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          426,
+          457
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:5f06bde6d778fede33162cd975eb997d9ad08064e0a698efdc9198b944a183fa",
+      "anchors": {
+        "before": "sha256:b268fc79ae06de69dbc9d7b9c01bcaa40b54a08865cce7355b099374beacf96a",
+        "after": "sha256:a226a8b44c24bc2fc7251ccedcd3b20c5a6b45bb06b7840194f1e2b22916da6a"
+      },
+      "display": {
+        "lines": "13",
+        "section": "# 2. Loans"
+      },
+      "text": "shall send the member a receipt"
+    },
+    {
+      "fragmentId": "sf:4b1de2c68b55d0d0b7e01e41",
+      "label": "L14@0",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          459,
+          488
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:d5133ba0833292197e3f04890f247605c2702c8f739925aeace14cced4865ed1",
+      "anchors": {
+        "before": "sha256:303a629ab02102a60c66caf5beee5ff97490d8937e30a21b0f113b688f45d1f7",
+        "after": "sha256:91a573a8d166709e856330f8c5ba8019fafbf662be130d9d88811f274247c182"
+      },
+      "display": {
+        "lines": "14",
+        "section": "# 2. Loans"
+      },
+      "text": "Loan records are kept durably"
+    },
+    {
+      "fragmentId": "sf:ae8fcd033bf75c2d6341f07d",
+      "label": "L14@34",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          493,
+          530
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:08734127e7e3376793b11a4ea24cf779468354f7fe977f24aab6efa2771e9e8a",
+      "anchors": {
+        "before": "sha256:2e0c06337f93e2967ba72d5a71b6911ca32aad56259901339d7ecf7dfa98e8e7",
+        "after": "sha256:d40215d18e927f1aea778736dde279e7f8b88edc99bb2790418ec5b9346eea3c"
+      },
+      "display": {
+        "lines": "14",
+        "section": "# 2. Loans"
+      },
+      "text": "must survive a restart of the service"
+    },
+    {
+      "fragmentId": "sf:d5f73136eab9efb6613ad0fe",
+      "label": "L16@0",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          621,
+          667
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:5b22a83217e484df37724ca413a7c9a20ec5b5ebd8611db7b57a1b64572ad57e",
+      "anchors": {
+        "before": "sha256:3636b506d725b260f5f92d045717a49736307ef4a9e52af1c0d8554f120168bb",
+        "after": "sha256:b216cdc199918e04be680556cd0d9ed9d3c84dfd01b2f6309b427dd0883063a5"
+      },
+      "display": {
+        "lines": "16",
+        "section": "# 2. Loans"
+      },
+      "text": "Members may borrow up to eight items at a time"
+    },
+    {
+      "fragmentId": "sf:79d88611e7ef84f6db61c19b",
+      "label": "L20@0",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          684,
+          768
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:2fab9e3053c57b12cb30aa8f7eb96f0f8b6b51920e4e879a43c91bab8c62568a",
+      "anchors": {
+        "before": "sha256:b7547ca4d75e7c55782f7ba5477fe23720b833fff722d649d2d7aaa1e98d8400",
+        "after": "sha256:5030a95d17abe284847927e0a9e964f544740c67a1ac10e9074caad5a4282302"
+      },
+      "display": {
+        "lines": "20",
+        "section": "# 3. Notices"
+      },
+      "text": "Overdue notices are sent to the member and the branch manager or the duty librarian."
+    },
+    {
+      "fragmentId": "sf:048fbdffe76a942eb4506678",
+      "label": "L20@43",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          727,
+          767
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:61698a11dc8be14db2ae74570ae1fa1699e2e1d9b878933a38a76986ad4e120e",
+      "anchors": {
+        "before": "sha256:5e2fcdcd9f6dd096efe4092d84679463bfc02576f31cf56786f5522d364ef3e7",
+        "after": "sha256:08bf1c6e007fe5010639786cc09ccad59ec52ae83162dbc6ee76264b310c4630"
+      },
+      "display": {
+        "lines": "20",
+        "section": "# 3. Notices"
+      },
+      "text": "the branch manager or the duty librarian"
+    },
+    {
+      "fragmentId": "sf:e7dbd02b33bce11e92a5fca1",
+      "label": "L21@0",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          769,
+          830
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:0c2557484c362558a78ae4c66d642bf23f8acbf905a9d7a4e45d2e9f13e21b90",
+      "anchors": {
+        "before": "sha256:802cabbed55a1d6a8f6c8c3f843441f7249a0d89b011fb57249582bb326d824f",
+        "after": "sha256:17fc13d27740e5ae54c07af1070f418475cf304751874bae5734fa73e43e70ac"
+      },
+      "display": {
+        "lines": "21",
+        "section": "# 3. Notices"
+      },
+      "text": "The service shall show the catalogue search results promptly."
+    },
+    {
+      "fragmentId": "sf:5620eac82018833d78fb23c3",
+      "label": "L21@52",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          821,
+          829
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:abfaf122ceb07d0564a99a95189a6a5b5cd2177e96dfa32460219ea4b0bd67a8",
+      "anchors": {
+        "before": "sha256:e16d54b669f4070b668e9906e26e76971f061198a42386f519f0b9d865b01e78",
+        "after": "sha256:e473371a2241a682f8c112ca4f332abf2e2d532a7c15360ba2c63f3809c24429"
+      },
+      "display": {
+        "lines": "21",
+        "section": "# 3. Notices"
+      },
+      "text": "promptly"
+    },
+    {
+      "fragmentId": "sf:7eaac600e209435c4b66ce57",
+      "label": "L22@0",
+      "kind": "text-span",
+      "source": {
+        "doc": "synthetic-spec.md",
+        "digest": "sha256:4cbad7932710c2328670054cd40a9e1a925ce6818a1558637154a758d2e5322a"
+      },
+      "locator": {
+        "codepointRange": [
+          831,
+          897
+        ]
+      },
+      "normalizationVersion": "norm-spike-1",
+      "textHash": "sha256:bd5f39697da1cbc059de681105dda9ddef420b1f2f0d4671ff9462ed8c1f0fab",
+      "anchors": {
+        "before": "sha256:08bf1c6e007fe5010639786cc09ccad59ec52ae83162dbc6ee76264b310c4630",
+        "after": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      "display": {
+        "lines": "22",
+        "section": "# 3. Notices"
+      },
+      "text": "The service shall not delete a loan record while the loan is open."
+    }
+  ]
+}
